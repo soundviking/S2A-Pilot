@@ -1,0 +1,25 @@
+{
+  "name": "ShowCue by S2A Production",
+  "short_name": "ShowCue",
+  "description": "Préparation et conduite autonome de tops audio/vidéo pour spectacle.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0b0f14",
+  "theme_color": "#0b0f14",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "./icons/showcue-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icons/showcue-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+SHOWCUE — PUSH GITHUB COMPLET
+
+Ce kit contient :
+- PWA V1.1.16
+- ShowCue for QLab V1.1 (sources macOS)
+
+La méthode recommandée clone d'abord le dépôt distant afin de préserver son historique,
+puis copie ce kit dedans et pousse un nouveau commit.
+
+Utiliser la commande fournie par ChatGPT avec ce kit.
+Aucun --force n'est nécessaire.
