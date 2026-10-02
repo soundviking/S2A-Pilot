@@ -3,7 +3,7 @@ import AppKit
 import Foundation
 
 struct ShowCueProject: Codable {
-    struct Media: Codable {
+    struct LegacyMedia: Codable {
         let fileName: String
         let originalFileName: String?
         let mimeType: String?
@@ -13,12 +13,43 @@ struct ShowCueProject: Codable {
         let mutedOutput: Bool?
     }
 
+    struct MediaAction: Codable, Identifiable {
+        let id: String?
+        let kind: String
+        let name: String?
+        let mime: String?
+        let size: Int?
+        let duration: Double?
+        let path: String?
+        let inPoint: Double?
+        let outPoint: Double?
+        let loop: Bool?
+        let transition: String?
+        let fadeDuration: Double?
+        let muted: Bool?
+
+        var stableID: String { id ?? UUID().uuidString }
+        var isStopAll: Bool { kind == "stopAll" }
+        var isVideo: Bool { kind == "video" }
+        var isAudio: Bool { kind == "audio" }
+        var start: Double { max(0, inPoint ?? 0) }
+        var end: Double? {
+            if let outPoint, outPoint > start { return outPoint }
+            if let duration, duration > start { return duration }
+            return nil
+        }
+        var fadeSeconds: Double { max(0.1, fadeDuration ?? 3) }
+    }
+
     struct Cue: Codable, Identifiable {
         let index: Int
         let time: Double
-        let type: String
+        let type: String?
         let name: String
+        let description: String?
+        let isBase: Bool?
         let imagePath: String?
+        let mediaActions: [MediaAction]?
 
         var id: Int { index }
 
@@ -41,17 +72,43 @@ struct ShowCueProject: Codable {
     let version: Int
     let title: String
     let qlabGroupName: String?
-    let audio: Media?
-    let video: Media?
+    let showDuration: Double?
+    let showDurationOverride: Double?
+    let audio: LegacyMedia?
+    let video: LegacyMedia?
     let primaryMedia: String?
     let cues: [Cue]
 
-    var resolvedMedia: (kind: String, media: Media)? {
+    var isMultimedia: Bool {
+        format == "showcue-multimedia-package" || version >= 4 || cues.contains { !($0.mediaActions ?? []).isEmpty }
+    }
+
+    var multimediaActionCount: Int {
+        cues.reduce(0) { partial, cue in
+            partial + (cue.mediaActions ?? []).filter { !$0.isStopAll }.count
+        }
+    }
+
+    var resolvedLegacyMedia: (kind: String, media: LegacyMedia)? {
         if primaryMedia == "video", let video { return ("video", video) }
         if primaryMedia == "audio", let audio { return ("audio", audio) }
         if let audio { return ("audio", audio) }
         if let video { return ("video", video) }
         return nil
+    }
+
+    var resolvedShowDuration: Double {
+        if let showDuration, showDuration > 0 { return showDuration }
+        if let showDurationOverride, showDurationOverride > 0 { return showDurationOverride }
+        var lastFinite = cues.map(\.time).max() ?? 0
+        for cue in cues {
+            for action in cue.mediaActions ?? [] where !action.isStopAll && action.loop != true {
+                let end = action.end ?? action.duration ?? 0
+                let segment = max(0, end - action.start)
+                lastFinite = max(lastFinite, cue.time + segment)
+            }
+        }
+        return max(10, lastFinite + 10)
     }
 }
 
@@ -107,7 +164,7 @@ enum ShowCueError: LocalizedError {
 final class AppModel: ObservableObject {
     @Published var packages: [QueuedShowCuePackage] = []
     @Published var workspace: WorkspaceInfo?
-    @Published var status = "Choisis un package ShowCue."
+    @Published var status = "Choisis un package S2A Pilot."
     @Published var isBusy = false
     @Published var errorMessage: String?
 
@@ -115,7 +172,7 @@ final class AppModel: ObservableObject {
     @Published var activeShow: SavedShowCue?
     @Published var visualElapsed: Double = 0
     @Published var visualRunning = false
-    @Published var visualStatus = "En attente d’un numéro ShowCue"
+    @Published var visualStatus = "En attente d’un numéro S2A Pilot"
     @Published var visualAlwaysOnTop = true
 
     private var monitorTimer: Timer?
@@ -133,7 +190,7 @@ final class AppModel: ObservableObject {
 
     func choosePackage() {
         let panel = NSOpenPanel()
-        panel.title = "Choisir un ou plusieurs packages ShowCue"
+        panel.title = "Choisir un ou plusieurs packages S2A Pilot"
         panel.allowedContentTypes = []
         panel.allowsMultipleSelection = true
         panel.canChooseDirectories = false
@@ -190,7 +247,7 @@ final class AppModel: ObservableObject {
         guard let index = packages.firstIndex(where: { $0.id == id }) else { return }
         let item = packages.remove(at: index)
         try? FileManager.default.removeItem(at: item.extractedURL)
-        status = packages.isEmpty ? "Choisis un ou plusieurs packages ShowCue." : "\(packages.count) package\(packages.count > 1 ? "s" : "") prêt\(packages.count > 1 ? "s" : "") à importer."
+        status = packages.isEmpty ? "Choisis un ou plusieurs packages S2A Pilot." : "\(packages.count) package\(packages.count > 1 ? "s" : "") prêt\(packages.count > 1 ? "s" : "") à importer."
     }
 
     func clearPackages() {
@@ -198,7 +255,7 @@ final class AppModel: ObservableObject {
             try? FileManager.default.removeItem(at: item.extractedURL)
         }
         packages.removeAll()
-        status = "Choisis un ou plusieurs packages ShowCue."
+        status = "Choisis un ou plusieurs packages S2A Pilot."
     }
 
     func loadPackage(_ url: URL) {
@@ -238,7 +295,7 @@ final class AppModel: ObservableObject {
                     let alert = NSAlert()
                     alert.messageText = self.packages.count == 1
                         ? "Importer « \(self.packages[0].project.title) » ?"
-                        : "Importer \(self.packages.count) ShowCues ?"
+                        : "Importer \(self.packages.count) conduites S2A Pilot ?"
                     alert.informativeText = """
                     Workspace QLab :
                     \(initial.name)
@@ -297,9 +354,9 @@ final class AppModel: ObservableObject {
                                 self.loadSavedShows(for: current)
                                 self.visualElapsed = 0
                                 self.visualRunning = false
-                                self.visualStatus = "En attente d’un numéro ShowCue"
+                                self.visualStatus = "En attente d’un numéro S2A Pilot"
                                 self.startVisualMonitor()
-                                self.status = "\(importedCount) ShowCue\(importedCount > 1 ? "s" : "") importé\(importedCount > 1 ? "s" : "") dans « \(current.name) »."
+                                self.status = "\(importedCount) conduite\(importedCount > 1 ? "s" : "") S2A Pilot importée\(importedCount > 1 ? "s" : "") dans « \(current.name) »."
 
                                 // Successful batch import clears the queue.
                                 self.clearPackages()
@@ -327,17 +384,13 @@ final class AppModel: ObservableObject {
         cleanup()
 
         let fm = FileManager.default
-        let temp = fm.temporaryDirectory
-            .appendingPathComponent("ShowCue-\(UUID().uuidString)", isDirectory: true)
+        let temp = fm.temporaryDirectory.appendingPathComponent("S2APilot-\(UUID().uuidString)", isDirectory: true)
         try fm.createDirectory(at: temp, withIntermediateDirectories: true)
 
-        let ext = url.pathExtension.lowercased()
-        if ext == "zip" {
-            try run("/usr/bin/ditto", ["-x", "-k", url.path, temp.path])
-        } else if fm.fileExists(atPath: url.path, isDirectory: nil) {
-            // Allow selecting an already-unzipped folder later if needed.
-            throw ShowCueError.invalidPackage("Le prototype 0.1 attend un fichier .showcue.zip ou .zip.")
+        guard url.pathExtension.lowercased() == "zip" else {
+            throw ShowCueError.invalidPackage("S2A Copilote attend un fichier .s2apilot.zip, .showcue.zip ou .zip.")
         }
+        try run("/usr/bin/ditto", ["-x", "-k", url.path, temp.path])
 
         let manifest = temp.appendingPathComponent("conduite.json")
         guard fm.fileExists(atPath: manifest.path) else {
@@ -345,22 +398,32 @@ final class AppModel: ObservableObject {
         }
 
         let data = try Data(contentsOf: manifest)
-        let decoder = JSONDecoder()
-        let project = try decoder.decode(ShowCueProject.self, from: data)
+        let project = try JSONDecoder().decode(ShowCueProject.self, from: data)
+        let acceptedFormats = ["showcue-multimedia-package", "show-cue-prep-package"]
+        guard acceptedFormats.contains(project.format) || project.version >= 4 else {
+            throw ShowCueError.invalidPackage("Format de package S2A Pilot non reconnu.")
+        }
 
-        guard project.format == "show-cue-prep-package" else {
-            throw ShowCueError.invalidPackage("Format de package ShowCue non reconnu.")
-        }
-        guard let resolved = project.resolvedMedia else {
-            throw ShowCueError.invalidPackage("Le package ne contient ni média audio ni média vidéo exploitable.")
-        }
-        let mediaURL = temp.appendingPathComponent(resolved.media.path).standardizedFileURL
-        let tempRoot = temp.standardizedFileURL.path + "/"
-        guard mediaURL.path.hasPrefix(tempRoot) else {
-            throw ShowCueError.invalidPackage("Le chemin du média dans le package est invalide.")
-        }
-        guard fm.fileExists(atPath: mediaURL.path) else {
-            throw ShowCueError.invalidPackage("Le fichier \(resolved.kind == "video" ? "vidéo" : "audio") du package est introuvable : \(resolved.media.path)")
+        let root = temp.standardizedFileURL.path + "/"
+        if project.isMultimedia {
+            for cue in project.cues {
+                for action in cue.mediaActions ?? [] where !action.isStopAll {
+                    guard let path = action.path, !path.isEmpty else {
+                        throw ShowCueError.invalidPackage("Un média de la Cue \(cue.index) n’a pas de chemin dans le package.")
+                    }
+                    let fileURL = temp.appendingPathComponent(path).standardizedFileURL
+                    guard fileURL.path.hasPrefix(root), fm.fileExists(atPath: fileURL.path) else {
+                        throw ShowCueError.invalidPackage("Média introuvable : \(path)")
+                    }
+                }
+            }
+        } else if let resolved = project.resolvedLegacyMedia {
+            let fileURL = temp.appendingPathComponent(resolved.media.path).standardizedFileURL
+            guard fileURL.path.hasPrefix(root), fm.fileExists(atPath: fileURL.path) else {
+                throw ShowCueError.invalidPackage("Le média principal est introuvable : \(resolved.media.path)")
+            }
+        } else {
+            throw ShowCueError.invalidPackage("Le package ne contient aucun média exploitable.")
         }
 
         return (temp, project)
@@ -419,58 +482,56 @@ final class AppModel: ObservableObject {
         )
     }
 
-    private func performImport(project: ShowCueProject, folder: URL, workspaceID: String) throws -> (groupID: String, mediaID: String, imageURLs: [Int: URL]) {
+    private func performImport(project: ShowCueProject, folder: URL, workspaceID: String) throws -> (groupID: String, mediaID: String?, imageURLs: [Int: URL]) {
         let current = try qlabFrontWorkspace()
-        guard current.id == workspaceID else {
-            throw ShowCueError.commandFailed("Le workspace QLab au premier plan a changé.")
-        }
-        guard let projectFolder = current.projectFolder else {
-            throw ShowCueError.commandFailed("Le workspace QLab doit être enregistré avant l’import.")
-        }
-        guard let resolved = project.resolvedMedia else {
-            throw ShowCueError.invalidPackage("Le package ne contient aucun média principal exploitable.")
-        }
+        guard current.id == workspaceID else { throw ShowCueError.commandFailed("Le workspace QLab au premier plan a changé.") }
+        guard let projectFolder = current.projectFolder else { throw ShowCueError.commandFailed("Le workspace QLab doit être enregistré avant l’import.") }
 
         let fm = FileManager.default
-        let mediaFolderName = resolved.kind == "video" ? "video" : "audio"
-        let mediaFolder = projectFolder.appendingPathComponent(mediaFolderName, isDirectory: true)
-        let imageFolder = projectFolder
-            .appendingPathComponent("images", isDirectory: true)
-            .appendingPathComponent(safeFileName(project.title), isDirectory: true)
-
+        let packageRoot = folder.standardizedFileURL.path + "/"
+        let mediaFolder = projectFolder.appendingPathComponent("S2A Pilot Media", isDirectory: true).appendingPathComponent(safeFileName(project.title), isDirectory: true)
+        let imageFolder = projectFolder.appendingPathComponent("images", isDirectory: true).appendingPathComponent(safeFileName(project.title), isDirectory: true)
         try fm.createDirectory(at: mediaFolder, withIntermediateDirectories: true)
         try fm.createDirectory(at: imageFolder, withIntermediateDirectories: true)
-
-        let sourceMedia = folder.appendingPathComponent(resolved.media.path).standardizedFileURL
-        let packageRoot = folder.standardizedFileURL.path + "/"
-        guard sourceMedia.path.hasPrefix(packageRoot), fm.fileExists(atPath: sourceMedia.path) else {
-            throw ShowCueError.invalidPackage("Le fichier média principal du package est introuvable ou son chemin est invalide.")
-        }
-
-        let mediaBaseName = safeFileName(resolved.media.originalFileName ?? resolved.media.fileName)
-        let destinationMedia = mediaFolder.appendingPathComponent(
-            safeFileName(project.title) + " - " + mediaBaseName
-        )
-        try copyReplacing(sourceMedia, to: destinationMedia)
 
         var imageDestinations: [Int: URL] = [:]
         for cue in project.cues {
             guard let imagePath = cue.imagePath, !imagePath.isEmpty else { continue }
-            let sourceImage = folder.appendingPathComponent(imagePath).standardizedFileURL
-            guard sourceImage.path.hasPrefix(packageRoot), fm.fileExists(atPath: sourceImage.path) else { continue }
-
-            let imageName = safeFileName(sourceImage.lastPathComponent)
-            let destinationImage = imageFolder.appendingPathComponent(imageName)
-            try copyReplacing(sourceImage, to: destinationImage)
-            imageDestinations[cue.index] = destinationImage
+            let source = folder.appendingPathComponent(imagePath).standardizedFileURL
+            guard source.path.hasPrefix(packageRoot), fm.fileExists(atPath: source.path) else { continue }
+            let destination = imageFolder.appendingPathComponent(String(format: "%02d-", cue.index) + safeFileName(source.lastPathComponent))
+            try copyReplacing(source, to: destination)
+            imageDestinations[cue.index] = destination
         }
 
-        let qlabCueType = resolved.kind == "video" ? "Video" : "Audio"
-        let cuePrefix = resolved.kind == "video" ? "VIDÉO" : "MUSIQUE"
+        var destinationForAction: [String: URL] = [:]
+        if project.isMultimedia {
+            for cue in project.cues {
+                for (offset, action) in (cue.mediaActions ?? []).enumerated() where !action.isStopAll {
+                    guard let path = action.path else { continue }
+                    let source = folder.appendingPathComponent(path).standardizedFileURL
+                    guard source.path.hasPrefix(packageRoot), fm.fileExists(atPath: source.path) else {
+                        throw ShowCueError.invalidPackage("Média introuvable : \(path)")
+                    }
+                    let key = action.id ?? "cue\(cue.index)-\(offset)"
+                    if destinationForAction[key] == nil {
+                        let name = safeFileName(action.name ?? source.lastPathComponent)
+                        let destination = mediaFolder.appendingPathComponent(String(format: "%02d-", cue.index) + name)
+                        try copyReplacing(source, to: destination)
+                        destinationForAction[key] = destination
+                    }
+                }
+            }
+        }
+
+        if !project.isMultimedia, let legacy = project.resolvedLegacyMedia {
+            let source = folder.appendingPathComponent(legacy.media.path).standardizedFileURL
+            let destination = mediaFolder.appendingPathComponent(safeFileName(legacy.media.originalFileName ?? legacy.media.fileName))
+            try copyReplacing(source, to: destination)
+            destinationForAction["legacy"] = destination
+        }
 
         var lines: [String] = []
-        lines.append("on run argv")
-        lines.append("set mediaPath to item 1 of argv")
         lines.append("tell application id \"com.figure53.QLab.5\"")
         lines.append("if (count of workspaces) is 0 then error \"Aucun workspace QLab n’est ouvert.\"")
         lines.append("set targetWorkspace to front workspace")
@@ -478,50 +539,208 @@ final class AppModel: ObservableObject {
         lines.append("make targetWorkspace type \"Group\"")
         lines.append("set showGroup to last item of (selected of targetWorkspace as list)")
         lines.append("set q name of showGroup to \(asAppleString(project.title))")
-        lines.append("set mode of showGroup to start_first")
-        lines.append("make targetWorkspace type \(asAppleString(qlabCueType))")
-        lines.append("set mediaCue to last item of (selected of targetWorkspace as list)")
-        lines.append("set q name of mediaCue to \(asAppleString("\(cuePrefix) — \(project.title)"))")
-        lines.append("set file target of mediaCue to (POSIX file mediaPath as alias)")
-        lines.append("set pre wait of mediaCue to 0")
-        lines.append("move mediaCue to end of showGroup")
+        lines.append("set mode of showGroup to timeline")
 
-        for cue in project.cues.sorted(by: { $0.time < $1.time }) {
-            lines.append("make targetWorkspace type \"Memo\"")
-            lines.append("set memoCue to last item of (selected of targetWorkspace as list)")
-            lines.append("set q name of memoCue to \(asAppleString(cue.qlabDisplayName))")
-            lines.append("move memoCue to end of showGroup")
+        var firstMediaVariable: String? = nil
+        var mediaCounter = 0
+        var utilityCounter = 0
+        var priorAudioVariables: [String] = []
+        var priorVideoVariables: [String] = []
+
+        func qlabTime(_ value: Double) -> String { String(format: "%.3f", value) }
+        func appendStop(target: String, at time: Double, label: String) {
+            utilityCounter += 1
+            let variable = "stopCue\(utilityCounter)"
+            lines.append("make targetWorkspace type \(asAppleString("Stop"))")
+            lines.append("set \(variable) to last item of (selected of targetWorkspace as list)")
+            lines.append("set q name of \(variable) to \(asAppleString(label))")
+            lines.append("set cue target of \(variable) to \(target)")
+            lines.append("set pre wait of \(variable) to \(qlabTime(time))")
+            lines.append("move \(variable) to end of showGroup")
+        }
+        func appendAudioFade(target: String, at time: Double, duration: Double, toDB: Double, stopWhenDone: Bool, label: String) {
+            utilityCounter += 1
+            let variable = "fadeCue\(utilityCounter)"
+            lines.append("make targetWorkspace type \(asAppleString("Fade"))")
+            lines.append("set \(variable) to last item of (selected of targetWorkspace as list)")
+            lines.append("set q name of \(variable) to \(asAppleString(label))")
+            lines.append("set cue target of \(variable) to \(target)")
+            lines.append("set pre wait of \(variable) to \(qlabTime(time))")
+            lines.append("set temp duration of \(variable) to \(qlabTime(duration))")
+            lines.append("setLevel \(variable) row 0 column 0 db \(qlabTime(toDB))")
+            if stopWhenDone { lines.append("set stop target when done of \(variable) to true") }
+            lines.append("move \(variable) to end of showGroup")
+        }
+        func appendVideoFade(target: String, at time: Double, duration: Double, stopWhenDone: Bool, label: String) {
+            utilityCounter += 1
+            let variable = "fadeCue\(utilityCounter)"
+            lines.append("make targetWorkspace type \(asAppleString("Fade"))")
+            lines.append("set \(variable) to last item of (selected of targetWorkspace as list)")
+            lines.append("set q name of \(variable) to \(asAppleString(label))")
+            lines.append("set cue target of \(variable) to \(target)")
+            lines.append("set pre wait of \(variable) to \(qlabTime(time))")
+            lines.append("set temp duration of \(variable) to \(qlabTime(duration))")
+            lines.append("set do opacity of \(variable) to true")
+            lines.append("set opacity of \(variable) to 0")
+            if stopWhenDone { lines.append("set stop target when done of \(variable) to true") }
+            lines.append("move \(variable) to end of showGroup")
         }
 
-        lines.append("return (uniqueID of showGroup as text) & tab & (uniqueID of mediaCue as text)")
+        if project.isMultimedia {
+            for cue in project.cues.sorted(by: { $0.time < $1.time }) {
+                let cueTime = qlabTime(cue.time)
+                lines.append("make targetWorkspace type \(asAppleString("Memo"))")
+                lines.append("set cueMemo to last item of (selected of targetWorkspace as list)")
+                lines.append("set q name of cueMemo to \(asAppleString(cue.qlabDisplayName))")
+                lines.append("set pre wait of cueMemo to \(cueTime)")
+                if let description = cue.description, !description.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                    lines.append("set notes of cueMemo to \(asAppleString(description))")
+                }
+                lines.append("move cueMemo to end of showGroup")
+
+                for action in (cue.mediaActions ?? []).filter({ $0.isStopAll }) {
+                    if action.transition == "fade" {
+                        let d = action.fadeSeconds
+                        for target in priorAudioVariables {
+                            appendAudioFade(target: target, at: cue.time, duration: d, toDB: -120, stopWhenDone: true, label: "FONDU GLOBAL — AUDIO")
+                        }
+                        for target in priorVideoVariables {
+                            appendVideoFade(target: target, at: cue.time, duration: d, stopWhenDone: true, label: "FONDU GLOBAL — VIDÉO")
+                        }
+                    } else {
+                        for target in priorAudioVariables {
+                            appendStop(target: target, at: cue.time, label: "STOP GLOBAL — AUDIO")
+                        }
+                        for target in priorVideoVariables {
+                            appendStop(target: target, at: cue.time, label: "STOP GLOBAL — VIDÉO")
+                        }
+                    }
+                    // Après un arrêt/fondu global, aucun média antérieur ne doit être
+                    // considéré comme encore actif pour les CUT/FONDU suivants.
+                    priorAudioVariables.removeAll()
+                    priorVideoVariables.removeAll()
+                }
+
+                for (offset, action) in (cue.mediaActions ?? []).enumerated() where !action.isStopAll {
+                    let key = action.id ?? "cue\(cue.index)-\(offset)"
+                    guard let destination = destinationForAction[key] else { continue }
+                    mediaCounter += 1
+                    let variable = "mediaCue\(mediaCounter)"
+                    if firstMediaVariable == nil { firstMediaVariable = variable }
+                    let cueType = action.isVideo ? "Video" : "Audio"
+                    let prefix = action.isVideo ? "VIDÉO" : "AUDIO"
+                    let mediaName = "\(prefix) — \(cue.name) — \(action.name ?? destination.lastPathComponent)"
+
+                    if action.isAudio {
+                        if action.transition == "fade" {
+                            for target in priorAudioVariables {
+                                appendAudioFade(target: target, at: cue.time, duration: action.fadeSeconds, toDB: -120, stopWhenDone: true, label: "FONDU SORTIE — \(cue.name)")
+                            }
+                        } else {
+                            for target in priorAudioVariables { appendStop(target: target, at: cue.time, label: "CUT AUDIO — \(cue.name)") }
+                        }
+                        priorAudioVariables.removeAll()
+                    } else if action.isVideo {
+                        for target in priorVideoVariables { appendStop(target: target, at: cue.time, label: "CUT VIDÉO — \(cue.name)") }
+                        priorVideoVariables.removeAll()
+                    }
+
+                    lines.append("make targetWorkspace type \(asAppleString(cueType))")
+                    lines.append("set \(variable) to last item of (selected of targetWorkspace as list)")
+                    lines.append("set q name of \(variable) to \(asAppleString(mediaName))")
+                    lines.append("set file target of \(variable) to (POSIX file \(asAppleString(destination.path)) as alias)")
+                    lines.append("set pre wait of \(variable) to \(cueTime)")
+                    lines.append("set start time of \(variable) to \(qlabTime(action.start))")
+                    if let actionEnd = action.end { lines.append("set end time of \(variable) to \(qlabTime(actionEnd))") }
+                    lines.append("set infinite loop of \(variable) to \(action.loop == true ? "true" : "false")")
+                    if action.isVideo && action.muted == true {
+                        // Une vidéo déclarée muette dans S2A Pilot doit rester muette dans QLab.
+                        // La méthode la plus robuste consiste à dépatcher sa sortie audio (0 = none).
+                        // On garde deux fallbacks non bloquants pour les configurations particulières.
+                        lines.append("try")
+                        lines.append("set audio output patch number of \(variable) to 0")
+                        lines.append("on error")
+                        lines.append("try")
+                        lines.append("setLevel \(variable) row 0 column 0 db -120")
+                        lines.append("end try")
+                        lines.append("try")
+                        lines.append("setMute \(variable) output 0 mute true")
+                        lines.append("end try")
+                        lines.append("end try")
+                    }
+                    if action.isAudio && action.transition == "fade" {
+                        lines.append("setLevel \(variable) row 0 column 0 db -120")
+                    }
+                    lines.append("move \(variable) to end of showGroup")
+
+                    if action.isAudio && action.transition == "fade" {
+                        appendAudioFade(target: variable, at: cue.time, duration: action.fadeSeconds, toDB: 0, stopWhenDone: false, label: "FONDU ENTRÉE — \(cue.name)")
+                    }
+                    if action.isAudio { priorAudioVariables.append(variable) }
+                    if action.isVideo { priorVideoVariables.append(variable) }
+                }
+            }
+
+            lines.append("make targetWorkspace type \(asAppleString("Memo"))")
+            lines.append("set endMemo to last item of (selected of targetWorkspace as list)")
+            lines.append("set q name of endMemo to \(asAppleString("FIN DE CONDUITE S2A PILOT"))")
+            lines.append("set pre wait of endMemo to \(qlabTime(project.resolvedShowDuration))")
+            lines.append("move endMemo to end of showGroup")
+        } else if let legacy = project.resolvedLegacyMedia, let destination = destinationForAction["legacy"] {
+            let cueType = legacy.kind == "video" ? "Video" : "Audio"
+            lines.append("make targetWorkspace type \(asAppleString(cueType))")
+            lines.append("set legacyCue to last item of (selected of targetWorkspace as list)")
+            lines.append("set q name of legacyCue to \(asAppleString(project.title))")
+            lines.append("set file target of legacyCue to (POSIX file \(asAppleString(destination.path)) as alias)")
+            if legacy.kind == "video" && legacy.media.mutedOutput == true {
+                lines.append("try")
+                lines.append("set audio output patch number of legacyCue to 0")
+                lines.append("on error")
+                lines.append("try")
+                lines.append("setLevel legacyCue row 0 column 0 db -120")
+                lines.append("end try")
+                lines.append("try")
+                lines.append("setMute legacyCue output 0 mute true")
+                lines.append("end try")
+                lines.append("end try")
+            }
+            lines.append("move legacyCue to end of showGroup")
+            firstMediaVariable = "legacyCue"
+            for cue in project.cues.sorted(by: { $0.time < $1.time }) {
+                lines.append("make targetWorkspace type \"Memo\"")
+                lines.append("set cueMemo to last item of (selected of targetWorkspace as list)")
+                lines.append("set q name of cueMemo to \(asAppleString(cue.qlabDisplayName))")
+                lines.append("set pre wait of cueMemo to \(String(format: "%.3f", cue.time))")
+                lines.append("move cueMemo to end of showGroup")
+            }
+        }
+
+        if let firstMediaVariable {
+            lines.append("return (uniqueID of showGroup as text) & tab & (uniqueID of \(firstMediaVariable) as text)")
+        } else {
+            lines.append("return (uniqueID of showGroup as text) & tab & \"\"")
+        }
         lines.append("end tell")
-        lines.append("end run")
 
-        let script = lines.joined(separator: "\n")
-        let importIDs = try run("/usr/bin/osascript", ["-", destinationMedia.path], stdin: script)
-            .trimmingCharacters(in: .whitespacesAndNewlines)
-            .split(separator: "\t", omittingEmptySubsequences: false)
-            .map(String.init)
-
-        guard importIDs.count >= 2, !importIDs[0].isEmpty, !importIDs[1].isEmpty else {
-            throw ShowCueError.commandFailed("QLab n’a pas renvoyé les identifiants du Group cue et du média importé.")
-        }
-
-        return (importIDs[0], importIDs[1], imageDestinations)
+        let output = try run("/usr/bin/osascript", ["-e", lines.joined(separator: "\n")])
+        let ids = output.split(separator: "\t", omittingEmptySubsequences: false).map(String.init)
+        guard let groupID = ids.first, !groupID.isEmpty else { throw ShowCueError.commandFailed("QLab n’a pas renvoyé l’identifiant du Group cue importé.") }
+        let mediaID = ids.count > 1 && !ids[1].isEmpty ? ids[1] : nil
+        return (groupID, project.isMultimedia ? nil : mediaID, imageDestinations)
     }
 
     private func showCueDirectory(for workspace: WorkspaceInfo) throws -> URL {
         guard let projectFolder = workspace.projectFolder else {
             throw ShowCueError.commandFailed("Le workspace QLab doit être enregistré.")
         }
-        return projectFolder.appendingPathComponent("ShowCue", isDirectory: true)
+        return projectFolder.appendingPathComponent("S2A Pilot", isDirectory: true)
     }
 
     private func indexURL(for workspace: WorkspaceInfo) throws -> URL {
         try showCueDirectory(for: workspace).appendingPathComponent("index.json")
     }
 
-    private func makeSavedShowRecord(project: ShowCueProject, groupID: String, mediaID: String, imageURLs: [Int: URL], workspace: WorkspaceInfo) throws -> SavedShowCue {
+    private func makeSavedShowRecord(project: ShowCueProject, groupID: String, mediaID: String?, imageURLs: [Int: URL], workspace: WorkspaceInfo) throws -> SavedShowCue {
         guard let projectFolder = workspace.projectFolder else {
             throw ShowCueError.commandFailed("Le workspace QLab doit être enregistré.")
         }
@@ -535,7 +754,7 @@ final class AppModel: ObservableObject {
                 relativeImages[String(cueIndex)] = fullPath
             }
         }
-        return SavedShowCue(groupID: groupID, mediaID: mediaID, audioID: project.resolvedMedia?.kind == "audio" ? mediaID : nil, title: project.title, cues: project.cues.sorted(by: { $0.time < $1.time }), imagePaths: relativeImages, importedAt: Date())
+        return SavedShowCue(groupID: groupID, mediaID: mediaID, audioID: project.resolvedLegacyMedia?.kind == "audio" ? mediaID : nil, title: project.title, cues: project.cues.sorted(by: { $0.time < $1.time }), imagePaths: relativeImages, importedAt: Date())
     }
 
     private func loadIndexData(for workspace: WorkspaceInfo) throws -> SavedShowCueIndex {
@@ -574,7 +793,7 @@ final class AppModel: ObservableObject {
         } catch {
             savedShows = []
             activeShow = nil
-            errorMessage = "Impossible de lire l’index ShowCue : \(error.localizedDescription)"
+            errorMessage = "Impossible de lire l’index S2A Pilot : \(error.localizedDescription)"
         }
     }
 
@@ -591,7 +810,7 @@ final class AppModel: ObservableObject {
             activeShow = nil
             visualRunning = false
             visualElapsed = 0
-            visualStatus = "En attente d’un numéro ShowCue"
+            visualStatus = "En attente d’un numéro S2A Pilot"
             return
         }
         monitorTimer = Timer.scheduledTimer(withTimeInterval: 0.25, repeats: true) { [weak self] _ in self?.pollVisualMonitor() }
@@ -659,7 +878,7 @@ final class AppModel: ObservableObject {
 
                 DispatchQueue.main.async {
                     guard let selected, let show=showsSnapshot.first(where:{$0.groupID==selected.id}) else {
-                        self.activeShow=nil; self.visualRunning=false; self.visualElapsed=0; self.visualStatus="En attente d’un numéro ShowCue"; return
+                        self.activeShow=nil; self.visualRunning=false; self.visualElapsed=0; self.visualStatus="En attente d’un numéro S2A Pilot"; return
                     }
                     self.activeShow=show
                     self.visualElapsed=max(0,selected.elapsed)
@@ -674,7 +893,7 @@ final class AppModel: ObservableObject {
 
     var nextVisualCue: ShowCueProject.Cue? {
         guard let activeShow else { return nil }
-        return activeShow.cues.sorted(by:{$0.time < $1.time}).first(where:{$0.time >= visualElapsed - 0.02})
+        return activeShow.cues.sorted(by:{$0.time < $1.time}).first(where:{$0.time > visualElapsed + 0.02})
     }
 
     var nextVisualImageURL: URL? {
@@ -769,9 +988,9 @@ struct ContentView: View {
         VStack(spacing: 18) {
             HStack(alignment: .center, spacing: 12) {
                 VStack(alignment: .leading, spacing: 3) {
-                    Text("ShowCue for QLab")
+                    Text("S2A Copilote")
                         .font(.system(size: 20, weight: .semibold))
-                    Text("Import de conduites dans QLab 5")
+                    Text("Import de conduites S2A Pilot V5 dans QLab 5 — S2A Copilote 1.2.2")
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                 }
@@ -791,7 +1010,7 @@ struct ContentView: View {
                         .foregroundStyle(.secondary)
 
                     VStack(alignment: .leading, spacing: 2) {
-                        Text("Package ShowCue")
+                        Text("Package S2A Pilot")
                             .font(.headline)
                         Text(model.packages.isEmpty ? "Aucun package sélectionné" : "\(model.packages.count) package\(model.packages.count > 1 ? "s" : "") sélectionné\(model.packages.count > 1 ? "s" : "")")
                             .font(.caption)
@@ -820,7 +1039,7 @@ struct ContentView: View {
                                 VStack(alignment: .leading, spacing: 2) {
                                     Text(item.project.title)
                                         .fontWeight(.medium)
-                                    Text("\(item.project.resolvedMedia?.media.originalFileName ?? item.project.resolvedMedia?.media.fileName ?? "Média inconnu") • \(item.project.cues.count) TOP\(item.project.cues.count > 1 ? "S" : "")")
+                                    Text("\(item.project.multimediaActionCount) média\(item.project.multimediaActionCount > 1 ? "s" : "") • \(item.project.cues.count) Cue\(item.project.cues.count > 1 ? "s" : "")")
                                         .font(.caption)
                                         .foregroundStyle(.secondary)
                                         .lineLimit(1)
@@ -874,7 +1093,7 @@ struct ContentView: View {
                                     .foregroundStyle(.secondary)
                                     .lineLimit(1)
                                     .truncationMode(.middle)
-                                Text(model.savedShows.count == 1 ? "1 ShowCue associé" : "\(model.savedShows.count) ShowCues associés")
+                                Text(model.savedShows.count == 1 ? "1 conduite S2A Pilot associée" : "\(model.savedShows.count) conduites S2A Pilot associées")
                                     .font(.caption2)
                                     .foregroundStyle(.secondary)
                             } else {
@@ -906,7 +1125,7 @@ struct ContentView: View {
                     Button {
                         model.importIntoQLab()
                     } label: {
-                        Label(model.packages.count > 1 ? "Importer les ShowCues" : "Importer dans QLab", systemImage: "square.and.arrow.down")
+                        Label(model.packages.count > 1 ? "Importer les conduites" : "Importer dans QLab", systemImage: "square.and.arrow.down")
                     }
                     .buttonStyle(.borderedProminent)
                     .controlSize(.large)
@@ -929,24 +1148,16 @@ struct ContentView: View {
 
             if let error = model.errorMessage {
                 HStack(alignment: .top, spacing: 10) {
-                    Image(systemName: "exclamationmark.triangle.fill")
-                        .foregroundStyle(.red)
-                    Text(error)
-                        .font(.callout)
-                        .textSelection(.enabled)
+                    Image(systemName: "exclamationmark.triangle.fill").foregroundStyle(.red)
+                    Text(error).font(.callout).textSelection(.enabled)
                     Spacer()
+                    Button { model.errorMessage = nil } label: { Image(systemName: "xmark.circle.fill") }
+                        .buttonStyle(.plain)
+                        .foregroundStyle(.secondary)
+                        .help("Masquer le message")
                 }
                 .padding(12)
                 .background(.red.opacity(0.08), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
-            } else {
-                HStack(spacing: 8) {
-                    Image(systemName: "info.circle")
-                        .foregroundStyle(.secondary)
-                    Text(model.status)
-                        .font(.callout)
-                        .foregroundStyle(.secondary)
-                    Spacer()
-                }
             }
         }
         .padding(18)
@@ -984,7 +1195,7 @@ struct VisualMonitorView: View {
                     .frame(width: 9, height: 9)
 
                 VStack(alignment: .leading, spacing: 1) {
-                    Text(model.activeShow?.title ?? "ShowCue")
+                    Text(model.activeShow?.title ?? "S2A Pilot")
                         .font(.headline)
                     Text(model.visualStatus)
                         .font(.caption)
@@ -1006,7 +1217,7 @@ struct VisualMonitorView: View {
             if let cue = model.nextVisualCue {
                 HStack(alignment: .top, spacing: 18) {
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("PROCHAIN TOP")
+                        Text("PROCHAINE CUE")
                             .font(.caption2)
                             .fontWeight(.semibold)
                             .foregroundStyle(.secondary)
@@ -1022,7 +1233,7 @@ struct VisualMonitorView: View {
                                 .foregroundStyle(countdown <= 10.0 ? Color.red : Color.primary)
                         }
 
-                        Text("Top à \(cue.timeText)")
+                        Text("Cue à \(cue.timeText)")
                             .font(.callout)
                             .foregroundStyle(.secondary)
 
@@ -1059,7 +1270,7 @@ struct VisualMonitorView: View {
                         .font(.system(size: 42))
                         .foregroundStyle(.secondary)
 
-                    Text(model.activeShow == nil ? "En attente d’un numéro ShowCue" : "Fin de conduite")
+                    Text(model.activeShow == nil ? "En attente d’un numéro S2A Pilot" : "Fin de conduite")
                         .font(.title3)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -1106,7 +1317,7 @@ struct ShowCueForQLabApp: App {
         }
         .windowResizability(.contentSize)
 
-        WindowGroup("Visualiseur ShowCue", id: "visual-monitor") {
+        WindowGroup("Visualiseur S2A Copilote", id: "visual-monitor") {
             VisualMonitorView(model: model)
         }
         .defaultSize(width: 565, height: 330)

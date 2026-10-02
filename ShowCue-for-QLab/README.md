@@ -1,130 +1,72 @@
-# ShowCue for QLab 1.1
+# S2A Copilote 1.2.2
 
-## Nouveautés
+Companion macOS pour importer un package S2A Pilot dans QLab 5 et afficher le visualiseur de conduite.
 
-### Plusieurs ShowCues dans un workspace
+## Compatibilité S2A Pilot actuelle
 
-Chaque import est enregistré dans :
+La version 1.2.2 accepte les packages multimédias S2A Pilot V4/V5 et conserve l'import des anciens packages à média principal.
 
-`ShowCue/index.json`
+Lors d'un import multimédia, elle crée un **Group cue en mode Timeline** et traduit la conduite en cues QLab :
 
-à l’intérieur du dossier du workspace QLab.
+- Memo cue pour chaque Cue S2A Pilot, avec Pre-Wait correspondant à son horaire ;
+- Audio / Video cues pour les médias associés ;
+- points **IN / OUT** via Start Time / End Time ;
+- **Loop** via Infinite Loop ;
+- vidéo muette via la sortie audio coupée ;
+- remplacement vidéo par Stop cues ;
+- audio **CUT** par Stop cues ;
+- audio **FONDU** par Fade cues de sortie et d'entrée ;
+- **ARRÊT / FONDU TOUS LES MÉDIAS** traduit en Stop ou Fade cues ciblant les médias précédents ;
+- marqueur `FIN DE CONDUITE SHOWCUE` à la durée totale exportée par S2A Pilot.
 
-L’index mémorise :
-- le Group cue QLab associé ;
-- le nom du numéro ;
-- les TOPS ;
-- les chemins des visuels ;
-- la date d’import.
+Les médias et les visuels de conduite sont copiés dans le dossier du workspace QLab. Les descriptions de Cue sont conservées dans les notes des Memo cues.
 
-ShowCue for QLab recharge automatiquement cet index quand le workspace est détecté.
 
-### Visualiseur automatique
+## Correctif 1.2.1
 
-Le visualiseur surveille tous les Group cues ShowCue connus dans le workspace.
+- Les Video Cues muettes n'interrompent plus l'import lorsqu'un fichier vidéo ne possède aucune piste audio ou aucune matrice audio exploitable dans QLab. Le mute de la sortie principale est maintenant appliqué comme réglage optionnel et isolé dans un bloc `try`.
+- Le même correctif est appliqué aux anciens packages à média vidéo principal.
+- Le bouton **Visualiseur** redevient disponible après un import réussi : dans la 1.2, l'erreur de mute interrompait l'import avant l'enregistrement de la conduite dans l'index local, ce qui laissait ce bouton grisé.
 
-- Aucun Group ShowCue en lecture → `En attente d’un numéro ShowCue`
-- Un Group démarre → le visualiseur bascule automatiquement dessus
-- Un autre Group démarre plus tard → bascule automatique sur ce nouveau numéro
-- Pause → le visualiseur indique `Pause`
+## Visualiseur
 
-Aucune sélection manuelle de numéro n’est nécessaire.
+Le visualiseur reste intégré au companion :
 
-### Visualiseur compact
+- suivi automatique du S2A Pilot en cours ;
+- prochaine Cue, compte à rebours et visuel ;
+- compte à rebours rouge dans les 10 dernières secondes ;
+- fenêtre compacte et option « Toujours au premier plan » ;
+- absence de visuel gérée sans image cassée.
 
-- fenêtre réduite pour moins masquer QLab ;
-- toujours au premier plan par défaut ;
-- option pour désactiver le premier plan ;
-- prochain TOP, compte à rebours et visuel conservés.
+Pour les packages multimédias, le visualiseur suit le temps du **Group Timeline**, ce qui permet de rester synchronisé avec une conduite contenant plusieurs médias simultanés.
 
-### Import QLab
+## Interface
 
-Toujours identique à la branche robuste :
-- Group Timeline ;
-- Audio cue ;
-- Memo cues avec Pre-Wait exact ;
-- aucune image collée dans QLab ;
-- aucune permission Accessibilité.
+La ligne permanente de statut/erreur en bas de la fenêtre n'est plus affichée. Un bandeau rouge apparaît uniquement lorsqu'une véritable erreur doit être signalée et peut être fermé.
 
-## Build
+## Build macOS
+
+Nécessite macOS avec Xcode / Command Line Tools :
 
 ```bash
 chmod +x build.sh && ./build.sh
 ```
 
-Signature ad hoc, sans abonnement Apple Developer.
+Le script produit `build/S2A Copilote.app`, signé ad hoc. Aucun abonnement Apple Developer n'est requis pour ce build local.
+
+## Limitation de l'archive fournie avec S2A Pilot Web
+
+Le package source peut être inclus dans un export S2A Pilot. Une application `.app` installable doit toutefois être compilée sur macOS ; elle ne peut pas être produite depuis un environnement Linux sans le SDK macOS.
 
 
-## 0.8.1
+## Compatibilité
 
-- Corrige l’erreur de compilation Swift du libellé comptant les ShowCues associés au workspace.
-
-
-## 0.8.2
-
-- Le compte à rebours du visualiseur passe en rouge pendant les 10 dernières secondes avant le prochain TOP.
-
-## 0.8.3
-
-- Sélection de plusieurs packages `.showcue.zip` en une seule fois.
-- File d’attente visible dans l’application.
-- Possibilité de retirer un package ou de vider toute la file.
-- Import en lot dans le workspace QLab au premier plan.
-- Chaque package crée son propre Group Timeline.
-- Confirmation unique avant l’import du lot.
-- Le visualiseur multi-ShowCue continue ensuite à suivre automatiquement le numéro en lecture.
-
-## 0.8.4
-
-- Corrige deux chaînes Swift mal générées dans l'import multi-package.
-- Les séparateurs de lignes utilisent désormais explicitement `\n`.
-
-## 0.8.5
-
-- Le décompte du visualiseur n'affiche plus les dixièmes.
-- Affichage en secondes entières, ou en `m:ss` au-delà d'une minute.
-- Le passage en rouge reste actif pendant les 10 dernières secondes.
-
-## 0.8.6
-
-- Le Group cue importé est désormais en mode **Start First** au lieu de Timeline.
-- Les Memo cues n'utilisent plus de **Pre-Wait**.
-- Le temps du TOP reste dans le nom du Memo cue uniquement comme repère visuel.
-- Le visualiseur externe conserve son propre décompte.
-
-## 0.8.7
-
-- Corrige le mode AppleScript du Group cue : `start_first`.
-- Le Group cue est bien créé en mode **Start First**.
-- Les Memo cues restent sans Pre-Wait.
-
-## 0.8.8
-
-- Le visualiseur suit désormais l'**Audio cue** importé, pas le temps du Group cue.
-- Un déplacement dans la lecture audio de QLab doit donc recaler immédiatement le visualiseur.
-- `audioID` est conservé dans `ShowCue/index.json`.
-- Les anciens index restent lisibles : sans `audioID`, l'app retombe sur le suivi du Group cue.
-- Première proposition d'icône ShowCue for QLab intégrée au build.
-
-## Version 1.0
-
-Version définitive basée sur la branche validée.
-
-Fonctions conservées :
-- import de plusieurs packages ShowCue ;
-- Group cue en mode **Start First** ;
-- Memo cues sans **Pre-Wait** ;
-- temps du TOP conservé dans le nom du Memo comme repère visuel ;
-- visualiseur multi-ShowCue ;
-- suivi du temps réel de l’**Audio cue** ;
-- recalage du visualiseur quand la position audio change dans QLab ;
-- compte à rebours en secondes entières ;
-- passage du compte à rebours en rouge pendant les 10 dernières secondes ;
-- index persistant par workspace ;
-- icône ShowCue intégrée ;
-- aucune permission Accessibilité requise.
+S2A Copilote 1.2.2 accepte les packages S2A Pilot V4/V5 et conserve la compatibilité avec les anciens packages `.showcue.zip`.
 
 
-## Version 1.1
+## Correctif 1.2.2
 
-Ajoute la compatibilité des packages ShowCue avec média principal vidéo : import en Video cue QLab, suivi du timecode du média vidéo et compatibilité conservée avec les anciens packages audio.
+- État des médias actifs fiabilisé : un STOP/FONDU global vide la liste des médias actifs.
+- Suppression des CUT AUDIO/VIDÉO inutiles après un arrêt global déjà exécuté.
+- Les Stops globaux sont nommés explicitement AUDIO / VIDÉO dans QLab.
+- Vidéo muette : la sortie audio de la Video Cue est dépatchée (`audio output patch number = 0`), avec fallbacks non bloquants.

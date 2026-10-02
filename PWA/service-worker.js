@@ -1,10 +1,11 @@
-const CACHE_NAME='showcue-v1-1-16-app-shell';
+const CACHE_NAME='s2a-pilot-v1-4-1-app-shell';
 const APP_SHELL=[
   './',
   './index.html',
   './manifest.webmanifest',
-  './icons/showcue-192.png',
-  './icons/showcue-512.png'
+  './companion-archive.js',
+  './icons/s2a-pilot-192.png',
+  './icons/s2a-pilot-512.png'
 ];
 
 self.addEventListener('install',(event)=>{
