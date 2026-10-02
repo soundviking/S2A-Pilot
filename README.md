@@ -1,68 +1,83 @@
 # S2A Pilot
 
-<p align="center">
-  <img src="PWA/icons/s2a-pilot-512.png" width="220" alt="S2A Pilot">
-</p>
+**S2A Pilot** est une solution de prÃ©paration et de conduite de spectacle multimÃ©dia dÃ©veloppÃ©e par **S2A Production**.
 
-**S2A Pilot** est un outil de prÃ©paration et de conduite de spectacle multimÃ©dia dÃ©veloppÃ© par **S2A Production**.
+Elle comprend deux outils complÃ©mentaires :
 
-Il permet Ã  un artiste ou Ã  un technicien de prÃ©parer simplement une conduite contenant des **Cues**, des fichiers audio, des vidÃ©os, des visuels et des transitions, puis :
+- **S2A Pilot 1.4.1** â€” application web/PWA de prÃ©paration et de conduite.
+- **S2A Copilote 1.2.2** â€” companion macOS pour importer une conduite S2A Pilot dans **QLab 5**.
 
-- de l'exploiter directement dans **S2A Pilot** ;
-- ou de la transfÃ©rer dans **QLab 5** grÃ¢ce Ã  **S2A Sopilote** pour macOS.
+## S2A Pilot 1.4.1
 
-## Versions actuelles
+Fonctions principales :
 
-- **S2A Pilot 1.4.1** â€” application web / PWA
-- **S2A Copilote 1.2.2** â€” companion macOS pour QLab 5
-
-## S2A Pilot
-
-S2A Pilot est une application web installable conÃ§ue pour fonctionner notamment sur :
-
-- iPad / iPadOS
-- macOS
-- Windows
-- Android
-
-L'application fonctionne localement et permet de prÃ©parer une conduite sans dÃ©pendre d'une application native spÃ©cifique.
-
-### Fonctions principales
-
-- Cues positionnÃ©es au dixiÃ¨me de seconde
-- Mode **Ã‰dition**
-- Mode **Show**
-- Audio et vidÃ©o
-- Plusieurs mÃ©dias indÃ©pendants dans une mÃªme conduite
-- Points **IN / OUT**
-- Waveform pour les fichiers audio
-- RepÃ©rage visuel des vidÃ©os
-- Lecture en **Loop**
-- Transition audio **CUT**
-- Fondus rÃ©glables
-- ArrÃªt / fondu de tous les mÃ©dias
-- VidÃ©o avec son ou vidÃ©o muette
-- PrÃ©chargement des mÃ©dias avant le spectacle
-- Sortie vidÃ©o externe prÃ©parÃ©e au noir
-- DÃ©placement dans la timeline pendant la lecture
-- Resynchronisation des mÃ©dias aprÃ¨s dÃ©placement
-- DurÃ©e de conduite automatique ou manuelle
-- DÃ©compte avant la prochaine Cue avec alerte rouge sous 10 secondes
-- Visuel associÃ© Ã  chaque Cue
-- Mise en Ã©vidence de la Cue sÃ©lectionnÃ©e sur la timeline
-- Sauvegarde locale
+- modes **Ã‰dition** et **Show**
+- Cues au dixiÃ¨me de seconde
+- audio et vidÃ©o
+- plusieurs mÃ©dias dans une mÃªme conduite
+- points **IN / OUT**
+- waveform audio
+- aperÃ§u vidÃ©o
+- Loop
+- CUT
+- fondus
+- arrÃªt / fondu global
+- vidÃ©o muette ou sonore
+- prÃ©chargement des mÃ©dias
+- sortie vidÃ©o externe sur noir
+- seek pendant la lecture sans pause
+- resynchronisation des mÃ©dias
+- durÃ©e de conduite automatique ou manuelle
+- **Auto +10 s**
+- dÃ©compte de la prochaine Cue, rouge sous 10 secondes
+- visuel associÃ© Ã  la Cue
+- sauvegarde locale
 - Undo / Redo
-- GÃ©nÃ©ration d'une **fiche technique PDF**
+- fiche technique PDF
+- export portable `.s2apilot.zip`
 
-## Format de projet
+### Interface Ã‰dition
 
-Les projets portables utilisent l'extension :
+Zone projet :
 
-```text
-.s2apilot.zip
-```
+**Nouveau â†’ Ouvrir â†’ Enregistrer â†’ Enregistrer sousâ€¦ â†’ Fiche technique PDF**
 
-Le package peut contenir :
+La restauration de la derniÃ¨re sauvegarde est automatique.
+
+La zone **PRÃ‰PARATION DU SHOW** contient les commandes de transport, la timeline et la durÃ©e de conduite avec **Auto +10 s**.
+
+Depuis la version **1.4.1** :
+
+- sÃ©lectionner une Cue dans la liste met son marqueur en surbrillance sur la timeline ;
+- cliquer sur un marqueur de timeline sÃ©lectionne et ouvre la Cue correspondante.
+
+### Interface Show
+
+Le mode Show affiche principalement :
+
+- **CUE ACTIVE**
+- **PROCHAINE CUE**
+- dÃ©compte rouge sous 10 secondes
+- **TIMELINE**
+
+## Calcul Auto +10 s
+
+La durÃ©e automatique correspond Ã  :
+
+**fin effective la plus tardive de tous les mÃ©dias + 10 secondes**
+
+Le calcul doit tenir compte :
+
+- du temps de dÃ©part de la Cue ;
+- des points IN / OUT ;
+- des mÃ©dias qui continuent aprÃ¨s le lancement dâ€™une Cue suivante ;
+- des CUT ;
+- des STOP / FONDU globaux ;
+- des Loops arrÃªtÃ©s ultÃ©rieurement.
+
+## Export `.s2apilot.zip`
+
+Un package peut contenir :
 
 ```text
 conduite.json
@@ -73,88 +88,92 @@ companion/
 LISEZ-MOI-Technicien.txt
 ```
 
-Le but est que l'artiste puisse remettre **un seul package** au technicien.
+La fiche technique PDF est gÃ©nÃ©rÃ©e lors de **Enregistrer sousâ€¦** et peut Ãªtre incluse dans le package.
 
-Les anciens packages ShowCue restent pris en charge lorsque cela est possible.
+La compatibilitÃ© avec lâ€™ancien format `.showcue.zip` est conservÃ©e lorsque cela est possible.
 
-## S2A Copilote
+## S2A Copilote 1.2.2
 
-<p align="center">
-  <img src="S2A-Copilote/Resources/S2ACopiloteIcon.png" width="180" alt="S2ACopilote">
-</p>
+S2A Copilote traduit une conduite S2A Pilot en structure exploitable dans **QLab 5**.
 
-**S2A Copilote** est l'application macOS chargÃ©e de traduire une conduite S2A Pilot en vÃ©ritable workspace **QLab 5**.
+Ã‰lÃ©ments pris en charge :
 
-Elle transforme les informations simples prÃ©parÃ©es par l'artiste en Cues techniques QLab.
-
-### Traduction vers QLab
-
-S2ACopilote peut notamment crÃ©er :
-
-- Group Cues en mode Timeline
-- Audio Cues
-- Video Cues
-- Memo Cues
-- Stop Cues
-- Fade Cues
-- points IN / OUT
-- Loops
+- Group Timeline
+- Audio Cue
+- Video Cue
+- Memo Cue
+- Stop Cue
+- Fade Cue
+- IN / OUT
+- Loop
 - CUT audio
-- fondus audio
-- arrÃªts globaux audio / vidÃ©o
-- vidÃ©os muettes
-- dÃ©clenchements simultanÃ©s
+- fondus
+- vidÃ©o muette
+- mÃ©dias simultanÃ©s
+- arrÃªt global audio / vidÃ©o
 - marqueur de fin de conduite
 
-Une Cue S2A Pilot peut donc produire plusieurs Cues techniques dans QLab.
+### Changements 1.2.2
 
-## Visualiseur
+- tentative de mise en silence des Video Cues via **audio output patch number = 0** ;
+- STOP globaux renommÃ©s :
+  - `STOP GLOBAL â€” AUDIO`
+  - `STOP GLOBAL â€” VIDÃ‰O`
+- nettoyage de la liste des mÃ©dias actifs aprÃ¨s STOP / FONDU global afin dâ€™Ã©viter les `CUT AUDIO` inutiles sur les Cues suivantes.
 
-S2A Copilote dispose Ã©galement d'un visualiseur destinÃ© au suivi de conduite.
+Ces points doivent encore Ãªtre validÃ©s en conditions rÃ©elles dans QLab 5.
 
-Il permet notamment d'afficher :
+## Visualiseur S2A Copilote
 
-- la Cue active ;
-- la prochaine Cue ;
-- le visuel associÃ© ;
-- le dÃ©compte avant la prochaine Cue ;
-- l'alerte rouge dans les derniÃ¨res secondes.
+Le visualiseur intÃ©grÃ© affiche :
 
-## Workflow
+- Cue active
+- prochaine Cue
+- visuel
+- dÃ©compte
+- affichage rouge sous 10 secondes
 
-```text
-ARTISTE
-  â†“
-S2A Pilot
-  â†“
-PrÃ©paration des Cues
-  â†“
-Audio / VidÃ©o / IN / OUT / Loop / Fondus
-  â†“
-Enregistrer sousâ€¦ 
-  â†“
-Projet .s2apilot.zip
-  â†“
-RÃ‰GISSEUR
-  â†“
-S2A Copilote
-  â†“
-Import dans QLab 5
-  â†“
-Conduite QLab prÃªte Ã  Ãªtre exploitÃ©e
-```
+Les messages dâ€™erreur permanents ont Ã©tÃ© supprimÃ©s : une erreur nâ€™est affichÃ©e que lorsquâ€™une erreur rÃ©elle est dÃ©tectÃ©e.
 
 ## Structure du dÃ©pÃ´t
 
 ```text
 S2A-Pilot/
-â”œâ”€ PWA/                  S2A Pilot
-â”œâ”€ S2A-Copilote/        Application macOS / QLab
-â”œâ”€ README.md
-âˆ”â€” SESSION-2026-10-02.md
+â”œâ”€â”€ PWA/
+â”œâ”€â”€ S2A-Copilote/
+â”œâ”€â”€ README.md
+â””â”€â”€ SESSION-2026-10-02.md
 ```
 
-## Construction de S2A Copilote
+## Compilation de S2A Copilote
 
-Sur un Mac Ã©quipé des outils de dÃ©qÙ•±½ÁÁ•µ•¹Ğ·¥•ÍÍ…¥É•Ì€è()‰…Í )LÉµ½Á¥±½Ñ”)¡µ½€­à‰Õ¥±¹Í (¸½‰Õ¥±¹Í )€()0…ÁÁ±¥…Ñ¥½¸Ÿ¥»¥Ë¥”•ÍĞ€è()Ñ•áĞ)‰Õ¥±½LÉ½Á¥±½Ñ”¹…ÁÀ)€()1”‰Õ¥±…ÑÕ•°ÕÑ¥±¥Í”Õ¹”Í¥¹…ÑÕÉ”±½…±”€¼…¡½Œ•Ğ¹”»¥•ÍÍ¥Ñ”Á…Ì‘”ÁÕ‰±¥…Ñ¥½¸ÍÕÈ±”5…ŒÁÀMÑ½É”¸((ŒŒA¡¥±½Í½Á¡¥”‘ÔÁÉ½©•Ğ()LÉA¥±½Ğ‘½¥ĞÉ•ÍÑ•ÈÍÕ™™¥Í…µµ•¹ĞÍ¥µÁ±”Á½ÕÈƒ
-ÑÉ”ÕÑ¥±¥Ï¤Á…ÈÕ¸…ÉÑ¥ÍÑ”ÅÕ¤¹”½¹¹‡¹ĞÁ…ÌE1…ˆ¸()1„½µÁ±•á¥Ó¤Ñ•¡¹¥ÅÕ”•ÍĞÁÉ¥Í”•¸¡…É”…Ôµ½µ•¹Ğ‘”°¥µÁ½ÉĞÁ…ÈLÉ½Á¥±½Ñ”¸()0½‰©•Ñ¥˜•ÍĞ‘½¹Œ€è((ø€¨©ÁË¥Á…É•ÈÍ¥µÁ±•µ•¹ĞÑÓ¤…ÉÑ¥ÍÑ”°•áÁ±½¥Ñ•ÈÁÉ½ÁÉ•µ•¹ĞÑÓ¤Ë¥¥”¸¨¨((ŒŒ¥Ù•±½ÁÁ•µ•¹Ğ()AÉ½©•Ğ“¥Ù•±½ÁÃ¤Á½ÕÈ€¨©LÉAÉ½‘ÕÑ¥½¸¨¨¸()LÉA¥±½Ğ•ĞLÉ½Á¥±½Ñ”Í½¹Ğ…ÑÕ•±±•µ•¹Ğ•¸“¥Ù•±½ÁÁ•µ•¹Ğ…Ñ¥˜¸(
+```bash
+cd S2A-Copilote
+chmod +x build.sh
+./build.sh
+```
+
+Lâ€™application produite est :
+
+`S2A Copilote.app`
+
+Les versions de test peuvent utiliser une signature ad hoc.
+
+## Workflow
+
+1. PrÃ©parer la conduite dans **S2A Pilot**.
+2. Ajouter mÃ©dias, visuels et Cues.
+3. Tester la conduite en mode Show.
+4. Exporter le package `.s2apilot.zip`.
+5. Ouvrir le package avec **S2A Copilote**.
+6. Importer la conduite dans **QLab 5**.
+7. VÃ©rifier la conduite QLab avant exploitation.
+
+## Versions actuelles
+
+- **S2A Pilot : 1.4.1**
+- **S2A Copilote : 1.2.2**
+
+---
+
+**S2A Production**
