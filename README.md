@@ -1,314 +1,160 @@
-# ShowCue by S2A Production
+# S2A Pilot
 
-**ShowCue** est un outil de conduite de spectacle conÃ§u pour prÃ©parer des TOPS prÃ©cisÃ©ment synchronisÃ©s Ã  un mÃ©dia audio ou vidÃ©o.
+<p align="center">
+  <img src="PWA/icons/s2a-pilot-512.png" width="220" alt="S2A Pilot">
+</p>
 
-Le projet regroupe deux applications complÃ©mentaires :
+**S2A Pilot** est un outil de prÃ©paration et de conduite de spectacle multimÃ©dia dÃ©veloppÃ© par **S2A Production**.
 
-- **ShowCue PWA V1.1.16** : application autonome et installable pour iPad, Mac, PC et Android.
-- **ShowCue for QLab V1.1** : application macOS permettant d'intÃ©grer une conduite ShowCue dans **QLab 5**.
+Il permet Ã  un artiste ou Ã  un technicien de prÃ©parer simplement une conduite contenant des **Cues**, des fichiers audio, des vidÃ©os, des visuels et des transitions, puis :
 
-L'objectif est de pouvoir prÃ©parer une conduite simplement, l'exploiter directement avec ShowCue ou la transfÃ©rer vers QLab selon les besoins du spectacle.
+- de l'exploiter directement dans **S2A Pilot** ;
+- ou de la transfÃ©rer dans **QLab 5** grÃ¢ce Ã  **S2A Sopilote** pour macOS.
 
----
+## Versions actuelles
 
-## Fonctionnement gÃ©nÃ©ral
+- **S2A Pilot 1.4.1** â€” application web / PWA
+- **S2A Copilote 1.2.2** â€” companion macOS pour QLab 5
 
-Le workflow principal est :
+## S2A Pilot
 
-```text
-MÃ©dia audio ou vidÃ©o
-        â†“
-CrÃ©ation des TOPS dans ShowCue
-        â†“
-Ajout Ã©ventuel de visuels aux TOPS
-        â†“
-Test et exploitation en mode Show
-        â†“
-Export du projet .showcue.zip
-        â†“
-Sauvegarde / transfert vers une autre machine
-        â†“
-Import possible dans ShowCue for QLab
-        â†“
-CrÃ©ation de la conduite dans QLab 5
-```
+S2A Pilot est une application web installable conÃ§ue pour fonctionner notamment sur :
 
----
+- iPad / iPadOS
+- macOS
+- Windows
+- Android
 
-# 1. ShowCue PWA â€” V1.1.16
+L'application fonctionne localement et permet de prÃ©parer une conduite sans dÃ©pendre d'une application native spÃ©cifique.
 
-La PWA constitue la version autonome de ShowCue.
+### Fonctions principales
 
-Elle fonctionne dans un navigateur compatible et peut Ãªtre installÃ©e comme une application. Une fois les ressources nÃ©cessaires mises en cache, elle est conÃ§ue pour pouvoir Ãªtre utilisÃ©e hors ligne.
+- Cues positionnÃ©es au dixiÃ¨me de seconde
+- Mode **Ã‰dition**
+- Mode **Show**
+- Audio et vidÃ©o
+- Plusieurs mÃ©dias indÃ©pendants dans une mÃªme conduite
+- Points **IN / OUT**
+- Waveform pour les fichiers audio
+- RepÃ©rage visuel des vidÃ©os
+- Lecture en **Loop**
+- Transition audio **CUT**
+- Fondus rÃ©glables
+- ArrÃªt / fondu de tous les mÃ©dias
+- VidÃ©o avec son ou vidÃ©o muette
+- PrÃ©chargement des mÃ©dias avant le spectacle
+- Sortie vidÃ©o externe prÃ©parÃ©e au noir
+- DÃ©placement dans la timeline pendant la lecture
+- Resynchronisation des mÃ©dias aprÃ¨s dÃ©placement
+- DurÃ©e de conduite automatique ou manuelle
+- DÃ©compte avant la prochaine Cue avec alerte rouge sous 10 secondes
+- Visuel associÃ© Ã  chaque Cue
+- Mise en Ã©vidence de la Cue sÃ©lectionnÃ©e sur la timeline
+- Sauvegarde locale
+- Undo / Redo
+- GÃ©nÃ©ration d'une **fiche technique PDF**
 
-## Fonctions principales
+## Format de projet
 
-- chargement d'un **mÃ©dia audio ou vidÃ©o** ;
-- lecture, pause et dÃ©placement dans le mÃ©dia ;
-- crÃ©ation de **TOPS horodatÃ©s** ;
-- modification prÃ©cise du temps d'un TOP ;
-- dÃ©placement des TOPS sur la timeline ;
-- titre du spectacle / de la conduite ;
-- ajout facultatif d'une image Ã  un TOP ;
-- affichage du **prochain TOP** ;
-- mode **Ã‰dition** pour prÃ©parer la conduite ;
-- mode **Show** pour l'exploitation ;
-- monitor vidÃ©o intÃ©grÃ© lorsqu'un fichier vidÃ©o est utilisÃ© ;
-- sortie vidÃ©o externe sur les plateformes compatibles ;
-- sauvegarde automatique locale ;
-- export et rÃ©ouverture d'un projet complet au format `.showcue.zip`.
-
-## Mode Ã‰dition
-
-Le mode Ã‰dition permet de construire la conduite.
-
-1. Choisir un mÃ©dia audio ou vidÃ©o.
-2. Lire le mÃ©dia ou se positionner au moment souhaitÃ©.
-3. Ajouter un TOP.
-4. Nommer et ajuster le TOP si nÃ©cessaire.
-5. Ajouter Ã©ventuellement un visuel.
-6. RÃ©pÃ©ter l'opÃ©ration pour l'ensemble de la conduite.
-
-Les marqueurs de la timeline peuvent Ãªtre dÃ©placÃ©s afin d'ajuster leur position temporelle.
-
-## Mode Show
-
-Le mode Show simplifie l'interface pour l'exploitation.
-
-Il met notamment en avant :
-
-- le **PROCHAIN TOP** ;
-- la timeline ;
-- les TOPS de la conduite ;
-- le **MONITOR VIDÃ‰O** lorsqu'un mÃ©dia vidÃ©o est utilisÃ©.
-
-Les Ã©lÃ©ments rÃ©servÃ©s Ã  la prÃ©paration sont masquÃ©s afin de limiter les modifications accidentelles pendant le spectacle.
-
-## Audio et vidÃ©o
-
-ShowCue accepte un mÃ©dia principal :
-
-- **audio**, ou
-- **vidÃ©o**.
-
-Avec une vidÃ©o, l'image apparaÃ®t dans le monitor intÃ©grÃ© tandis que le son du mÃ©dia reste utilisable pour la conduite.
-
-La compatibilitÃ© exacte des formats dÃ©pend Ã©galement des formats multimÃ©dias pris en charge par le navigateur et le systÃ¨me utilisÃ©s.
-
-## Monitor vidÃ©o et sortie externe
-
-Lorsqu'une vidÃ©o est chargÃ©e, ShowCue affiche un **MONITOR VIDÃ‰O**.
-
-### Mac / PC
-
-Sur les navigateurs compatibles, ShowCue peut ouvrir une sortie vidÃ©o sÃ©parÃ©e destinÃ©e Ã  un autre Ã©cran.
-
-La sortie externe est volontairement muette afin d'Ã©viter un doublage du son avec l'interface principale.
-
-### iPad
-
-Le monitor vidÃ©o local reste disponible.
-
-La PWA ne garantit pas le ciblage indÃ©pendant d'un Ã©cran externe comme le ferait une application native. Le bouton de sortie vidÃ©o externe est donc dÃ©sactivÃ© sur iPad et ShowCue indique :
-
-> Sortie vidÃ©o externe indisponible sur iPad â€” monitoring local actif.
-
----
-
-# 2. Sauvegarde des projets
-
-ShowCue utilise deux mÃ©canismes diffÃ©rents.
-
-## Sauvegarde automatique locale
-
-L'Ã©tat de travail est enregistrÃ© localement dans le navigateur grÃ¢ce Ã  **IndexedDB**.
-
-Cette sauvegarde est pratique pour reprendre une prÃ©paration sur le mÃªme appareil et dans le mÃªme navigateur.
-
-Elle ne doit toutefois pas Ãªtre considÃ©rÃ©e comme une sauvegarde portable : les donnÃ©es du navigateur peuvent Ãªtre supprimÃ©es si les donnÃ©es du site sont effacÃ©es.
-
-## Export `.showcue.zip`
-
-Pour conserver, archiver ou transfÃ©rer une conduite, utiliser l'export ShowCue.
-
-Le fichier `.showcue.zip` regroupe le projet et ses mÃ©dias nÃ©cessaires.
-
-Il peut ensuite Ãªtre :
-
-- conservÃ© comme sauvegarde ;
-- transfÃ©rÃ© sur une autre machine ;
-- rouvert dans ShowCue ;
-- utilisÃ© avec **ShowCue for QLab**.
-
-Pour une conduite importante, l'export `.showcue.zip` est la sauvegarde recommandÃ©e.
-
----
-
-# 3. Installation de la PWA
-
-Les fichiers de la version web se trouvent dans :
+Les projets portables utilisent l'extension :
 
 ```text
-PWA/
+.s2apilot.zip
 ```
 
-La PWA doit Ãªtre servie depuis un serveur web adaptÃ©, idÃ©alement en **HTTPS**, pour bÃ©nÃ©ficier correctement des fonctions d'installation et de cache hors ligne.
-
-## iPad / iPhone
-
-Avec Safari :
-
-1. ouvrir l'adresse de ShowCue ;
-2. utiliser le menu de partage ;
-3. choisir **Sur l'Ã©cran d'accueil** ;
-4. lancer ensuite ShowCue depuis son icÃ´ne.
-
-## Mac / PC / Android
-
-Sur un navigateur prenant en charge l'installation des PWA, utiliser la fonction **Installer** proposÃ©e par ShowCue ou par le navigateur.
-
-L'interface contient Ã©galement une aide d'installation lors de la premiÃ¨re utilisation.
-
----
-
-# 4. ShowCue for QLab â€” V1.1
-
-**ShowCue for QLab** est l'application macOS complÃ©mentaire destinÃ©e Ã  **QLab 5**.
-
-Elle permet de transformer une conduite prÃ©parÃ©e avec ShowCue en Ã©lÃ©ments exploitables dans un workspace QLab.
-
-Les sources se trouvent dans :
+Le package peut contenir :
 
 ```text
-ShowCue-for-QLab/
+conduite.json
+media/
+visuals/
+fiche-technique.pdf
+companion/
+LISEZ-MOI-Technicien.txt
 ```
 
-## Fonctions principales
+Le but est que l'artiste puisse remettre **un seul package** au technicien.
 
-- ouverture/import d'un package ShowCue ;
-- prise en charge d'un mÃ©dia principal audio ou vidÃ©o ;
-- crÃ©ation des Ã©lÃ©ments QLab associÃ©s Ã  la conduite ;
-- crÃ©ation d'un Group cue pour organiser le ShowCue importÃ© ;
-- import de plusieurs packages ShowCue ;
-- visualiseur externe des prochains TOPS ;
-- suivi du timecode du mÃ©dia dans QLab ;
-- conservation d'un index des ShowCues associÃ©s au workspace.
+Les anciens packages ShowCue restent pris en charge lorsque cela est possible.
 
-## Workflow ShowCue â†’ QLab
+## S2A Copilote
+
+<p align="center">
+  <img src="S2A-Copilote/Resources/S2ACopiloteIcon.png" width="180" alt="S2ACopilote">
+</p>
+
+**S2A Copilote** est l'application macOS chargÃ©e de traduire une conduite S2A Pilot en vÃ©ritable workspace **QLab 5**.
+
+Elle transforme les informations simples prÃ©parÃ©es par l'artiste en Cues techniques QLab.
+
+### Traduction vers QLab
+
+S2ACopilote peut notamment crÃ©er :
+
+- Group Cues en mode Timeline
+- Audio Cues
+- Video Cues
+- Memo Cues
+- Stop Cues
+- Fade Cues
+- points IN / OUT
+- Loops
+- CUT audio
+- fondus audio
+- arrÃªts globaux audio / vidÃ©o
+- vidÃ©os muettes
+- dÃ©clenchements simultanÃ©s
+- marqueur de fin de conduite
+
+Une Cue S2A Pilot peut donc produire plusieurs Cues techniques dans QLab.
+
+## Visualiseur
+
+S2A Copilote dispose Ã©galement d'un visualiseur destinÃ© au suivi de conduite.
+
+Il permet notamment d'afficher :
+
+- la Cue active ;
+- la prochaine Cue ;
+- le visuel associÃ© ;
+- le dÃ©compte avant la prochaine Cue ;
+- l'alerte rouge dans les derniÃ¨res secondes.
+
+## Workflow
 
 ```text
-ShowCue PWA
-   â†“
-PrÃ©paration de la conduite
-   â†“
-Export .showcue.zip
-   â†“
-ShowCue for QLab
-   â†“
-Import du package
-   â†“
-CrÃ©ation des cues dans QLab 5
+ARTISTE
+  â†“
+S2A Pilot
+  â†“
+PrÃ©paration des Cues
+  â†“
+Audio / VidÃ©o / IN / OUT / Loop / Fondus
+  â†“
+Enregistrer sousâ€¦ 
+  â†“
+Projet .s2apilot.zip
+  â†“
+RÃ‰GISSEUR
+  â†“
+S2A Copilote
+  â†“
+Import dans QLab 5
+  â†“
+Conduite QLab prÃªte Ã  Ãªtre exploitÃ©e
 ```
 
-Cela permet de prÃ©parer une conduite avec l'interface simple de ShowCue, puis de poursuivre l'exploitation dans l'environnement QLab lorsqu'un spectacle nÃ©cessite une rÃ©gie plus complÃ¨te.
-
----
-
-# 5. Compilation de ShowCue for QLab
-
-La version macOS est fournie sous forme de sources dans ce dÃ©pÃ´t.
-
-PrÃ©requis de compilation :
-
-- macOS ;
-- outils de dÃ©veloppement Apple nÃ©cessaires Ã  la compilation Swift ;
-- QLab 5 pour l'utilisation finale.
-
-Depuis le Terminal :
-
-```bash
-cd ShowCue-for-QLab
-chmod +x build.sh
-./build.sh
-```
-
-Le script construit l'application et applique une signature locale **ad hoc**.
-
-Cette signature permet les tests et l'utilisation locale sans nÃ©cessiter la publication de l'application sur le Mac App Store.
-
----
-
-# 6. CompatibilitÃ©
-
-| Fonction | iPad | Mac | PC | Android | Mac + QLab 5 |
-|---|:---:|:---:|:---:|:---:|:---:|
-| ShowCue PWA | âœ“ | âœ“ | âœ“ | âœ“ | âœ“ |
-| MÃ©dia audio | âœ“ | âœ“ | âœ“ | âœ“ | âœ“ |
-| MÃ©dia vidÃ©o | âœ“ | âœ“ | âœ“ | âœ“ | âœ“ |
-| CrÃ©ation / Ã©dition des TOPS | âœ“ | âœ“ | âœ“ | âœ“ | âœ“ |
-| Mode Show | âœ“ | âœ“ | âœ“ | âœ“ | âœ“ |
-| Monitor vidÃ©o local | âœ“ | âœ“ | âœ“ | âœ“ | âœ“ |
-| Sortie vidÃ©o externe ShowCue | â€” | Selon navigateur | Selon navigateur | Selon navigateur | Selon navigateur |
-| Export `.showcue.zip` | âœ“ | âœ“ | âœ“ | âœ“ | âœ“ |
-| ShowCue for QLab | â€” | â€” | â€” | â€” | âœ“ |
-
-`â€”` signifie que cette fonction n'est pas proposÃ©e sur cette plateforme.
-
----
-
-# 7. Limites Ã  connaÃ®tre
-
-### DonnÃ©es locales
-
-La sauvegarde automatique reste liÃ©e au navigateur et Ã  l'appareil. Pour dÃ©placer ou archiver un spectacle, utiliser un fichier `.showcue.zip`.
-
-### Sortie vidÃ©o sur iPad
-
-La version PWA conserve le monitoring local mais ne garantit pas une sortie indÃ©pendante vers un Ã©cran externe.
-
-### Formats multimÃ©dias
-
-La lecture dÃ©pend en partie des codecs et formats acceptÃ©s par le navigateur et le systÃ¨me d'exploitation.
-
-### ShowCue for QLab
-
-L'application QLab est spÃ©cifique Ã  macOS et Ã  QLab 5. Elle ne remplace pas QLab : elle sert de passerelle entre un projet ShowCue et un workspace QLab.
-
----
-
-# 8. Structure du dÃ©pÃ´t
+## Structure du dÃ©pÃ´t
 
 ```text
-ShowCue-by-S2A-Production/
-â”œâ”€â”€ README.md
-â”œâ”€â”€ PWA/
-â”‚   â”œâ”€â”€ README.md
-â”‚   â”œâ”€â”€ index.html
-â”‚   â”œâ”€â”€ manifest.webmanifest
-â”‚   â”œâ”€â”€ service-worker.js
-â”‚   â””â”€â”€ icons/
-â””â”€â”€ ShowCue-for-QLab/
-    â”œâ”€â”€ README.md
-    â”œâ”€â”€ Sources/
-    â”‚   â””â”€â”€ ShowCueForQLab.swift
-    â”œâ”€â”€ Resources/
-    â”‚   â””â”€â”€ ShowCueIcon.png
-    â””â”€â”€ build.sh
+S2A-Pilot/
+â”œâ”€ PWA/                  S2A Pilot
+â”œâ”€ S2A-Copilote/        Application macOS / QLab
+â”œâ”€ README.md
+âˆ”â€” SESSION-2026-10-02.md
 ```
 
----
+## Construction de S2A Copilote
 
-# 9. Versions
-
-| Composant | Version |
-|---|---:|
-| ShowCue PWA | **1.1.16** |
-| ShowCue for QLab | **1.1** |
-
----
-
-## S2A Production
-
-ShowCue est dÃ©veloppÃ© pour les besoins de prÃ©paration et d'exploitation de conduites de spectacle par **S2A Production**.
-
-Le projet est en dÃ©veloppement actif.
+Sur un Mac Ã©quipé des outils de dÃ©qÙ•±½ÁÁ•µ•¹Ğ·¥•ÍÍ…¥É•Ì€è()‰…Í )LÉµ½Á¥±½Ñ”)¡µ½€­à‰Õ¥±¹Í (¸½‰Õ¥±¹Í )€()0…ÁÁ±¥…Ñ¥½¸Ÿ¥»¥Ë¥”•ÍĞ€è()Ñ•áĞ)‰Õ¥±½LÉ½Á¥±½Ñ”¹…ÁÀ)€()1”‰Õ¥±…ÑÕ•°ÕÑ¥±¥Í”Õ¹”Í¥¹…ÑÕÉ”±½…±”€¼…¡½Œ•Ğ¹”»¥•ÍÍ¥Ñ”Á…Ì‘”ÁÕ‰±¥…Ñ¥½¸ÍÕÈ±”5…ŒÁÀMÑ½É”¸((ŒŒA¡¥±½Í½Á¡¥”‘ÔÁÉ½©•Ğ()LÉA¥±½Ğ‘½¥ĞÉ•ÍÑ•ÈÍÕ™™¥Í…µµ•¹ĞÍ¥µÁ±”Á½ÕÈƒ
+ÑÉ”ÕÑ¥±¥Ï¤Á…ÈÕ¸…ÉÑ¥ÍÑ”ÅÕ¤¹”½¹¹‡¹ĞÁ…ÌE1…ˆ¸()1„½µÁ±•á¥Ó¤Ñ•¡¹¥ÅÕ”•ÍĞÁÉ¥Í”•¸¡…É”…Ôµ½µ•¹Ğ‘”°¥µÁ½ÉĞÁ…ÈLÉ½Á¥±½Ñ”¸()0½‰©•Ñ¥˜•ÍĞ‘½¹Œ€è((ø€¨©ÁË¥Á…É•ÈÍ¥µÁ±•µ•¹ĞÑÓ¤…ÉÑ¥ÍÑ”°•áÁ±½¥Ñ•ÈÁÉ½ÁÉ•µ•¹ĞÑÓ¤Ë¥¥”¸¨¨((ŒŒ¥Ù•±½ÁÁ•µ•¹Ğ()AÉ½©•Ğ“¥Ù•±½ÁÃ¤Á½ÕÈ€¨©LÉAÉ½‘ÕÑ¥½¸¨¨¸()LÉA¥±½Ğ•ĞLÉ½Á¥±½Ñ”Í½¹Ğ…ÑÕ•±±•µ•¹Ğ•¸“¥Ù•±½ÁÁ•µ•¹Ğ…Ñ¥˜¸(
