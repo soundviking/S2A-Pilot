@@ -1,6 +1,6 @@
 # S2A Pilot 1.4.18
 
-Pastille VIDÉO violette : fond translucide, texte clair et bordure assortis à la bande vidéo de la timeline. Les erreurs restent signalées en rouge.
+Pastille VIDÉO violette : fond translucide, texte clair et bordure assortis à la bande vidéo de la timeline. Les erreurs restent signalées en rouge. Les Cues sans média n’affichent aucune pastille.
 
 # S2A Pilot 1.4.17
 

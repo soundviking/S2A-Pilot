@@ -1,4 +1,4 @@
-const CACHE_NAME='s2a-pilot-v1-4-18-app-shell';
+const CACHE_NAME='s2a-pilot-v1-4-18b-app-shell';
 const APP_SHELL=[
   './',
   './index.html',

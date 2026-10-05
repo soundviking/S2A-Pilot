@@ -1,6 +1,6 @@
 ## Version 1.4.18
 
-Pastille VIDÉO violette, assortie aux bandes vidéo de la timeline.
+Pastille VIDÉO violette, assortie aux bandes vidéo de la timeline. Les Cues sans média n’affichent aucune pastille.
 
 [Télécharger la PWA 1.4.18](downloads/S2A-Pilot-V1.4.18-PWA.zip)
 
