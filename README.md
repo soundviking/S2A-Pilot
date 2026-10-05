@@ -1,5 +1,7 @@
 # S2A Pilot 1.4.35 / S2A Copilote 1.2.6
 
+🇫🇷 **Français** | 🇬🇧 [English](README.en.md)
+
 ![S2A Pilot](assets/social-preview.jpg)
 
 [PWA 1.4.35](downloads/S2A-Pilot-V1.4.35-PWA.zip) · [Copilote 1.2.6 — Intel / Apple Silicon](downloads/S2A-Copilote-1.2.6-macOS-Universel.zip)
@@ -7,8 +9,6 @@
 # S2A Pilot — Guide utilisateur
 
 Les droits sur S2A Pilot et S2A Copilote appartiennent à la société S2A Production. Ces applications ont été développées par Antoine CLOPIER, avec l’aide de ChatGPT.
-
-[English user guide](README.en.md)
 
 S2A Pilot prépare et joue des conduites multimédias. S2A Copilote importe leurs packages dans QLab 5.
 
