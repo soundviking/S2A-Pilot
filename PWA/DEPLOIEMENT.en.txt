@@ -1,7 +1,7 @@
-DEPLOYMENT — S2A Pilot 1.4.37
+DEPLOYMENT — S2A Pilot 1.4.38
 
-Replace the complete /qlab/ folder contents, including hidden .htaccess, i18n.js, manifest.en.webmanifest and companion/S2A-Copilote-1.2.6-app.zip. Purge Cloudflare’s cache and remove long-cache rules for HTML, JavaScript, JSON, manifests and service workers. Open actualiser.html afterward; local IndexedDB projects are preserved. Do not clear site data.
+Replace the complete /qlab/ folder contents, including hidden .htaccess, i18n.js, manifest.en.webmanifest and companion/S2A-Copilote-1.2.7-app.zip. Purge Cloudflare’s cache and remove long-cache rules for HTML, JavaScript, JSON, manifests and service workers. Open actualiser.html afterward; local IndexedDB projects are preserved. Do not clear site data.
 
-Check version 1.4.37, FR / EN, New, + Cue, + Music / Video, PDF and package export. Copilote 1.2.6 is already compiled for Intel and Apple Silicon. Video output is unavailable on iPad / iPhone. Safari Mac opens a manually positioned window; Chrome places it on an automatically detected extended display.
+Check version 1.4.38, FR / EN, New, + Cue, + Music / Video, PDF and package export. Copilote 1.2.7 is already compiled for Intel and Apple Silicon. Video output is unavailable on iPad / iPhone. Safari Mac opens a manually positioned window; Chrome places it on an automatically detected extended display.
 
 Chrome tests cover languages, preserving project text, PDF, exported notices, offline assets and simulated Mac/iPad output. Real Safari/iPad, real monitors and live QLab imports remain to be verified.

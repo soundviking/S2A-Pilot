@@ -1,4 +1,4 @@
-# S2A Copilote 1.2.6
+# S2A Copilote 1.2.7
 
 The rights to S2A Pilot and S2A Copilote belong to the company S2A Production. These applications were developed by Antoine CLOPIER with assistance from ChatGPT.
 
@@ -6,7 +6,7 @@ The rights to S2A Pilot and S2A Copilote belong to the company S2A Production. T
 
 Universal macOS app: Intel and Apple Silicon, macOS 13 or later. Uses the system language initially; the Français / English header switch remembers a manual preference. User-authored project titles, Cue names and descriptions are preserved.
 
-S2A COPILOTE 1.2.6 — MAC INSTALLATION
+S2A COPILOTE 1.2.7 — MAC INSTALLATION
 
 Intel and Apple Silicon Macs — macOS 13 or later. No compilation required. Locally signed; not notarized by Apple.
 
@@ -50,3 +50,6 @@ Run `zsh build.sh` with Xcode command-line tools installed. The script builds bo
 ## License
 
 Use is permitted; redistribution, publication or hosting for third parties requires prior written permission from S2A Production. See [the license](LICENSE).
+
+
+Version 1.2.7: fixed clipped label behind the language selector.

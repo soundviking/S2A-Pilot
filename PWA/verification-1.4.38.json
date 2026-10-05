@@ -1,0 +1,11 @@
+{
+  "pilot": "1.4.38",
+  "copilote": "1.2.7",
+  "change": "Hide native language picker label; retain accessible label and fixed width",
+  "validated": [
+    "Both native architectures compiled",
+    "Universal binary signature",
+    "ZIP integrity and embedded companion manifest"
+  ],
+  "limitation": "Native window rendering not visually inspected"
+}

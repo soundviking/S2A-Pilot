@@ -1,4 +1,4 @@
-S2A COPILOTE 1.2.6 — MAC INSTALLATION
+S2A COPILOTE 1.2.7 — MAC INSTALLATION
 
 Intel and Apple Silicon Macs — macOS 13 or later. No compilation required. Locally signed; not notarized by Apple.
 

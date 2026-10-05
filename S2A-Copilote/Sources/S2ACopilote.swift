@@ -230,7 +230,7 @@ private func L(_ text: String) -> String {
     " prêt": " ready",
     " échec": " failure",
     "dans ": "in ",
-    "Import de conduites S2A Pilot V5 dans QLab 5 — S2A Copilote 1.2.6": "Import S2A Pilot V5 shows into QLab 5 — S2A Copilote 1.2.6"
+    "Import de conduites S2A Pilot V5 dans QLab 5 — S2A Copilote 1.2.7": "Import S2A Pilot V5 shows into QLab 5 — S2A Copilote 1.2.7"
     ]
     if language != "en" { return catalog.first(where: { $0.value == text })?.key ?? text }
     if let value = catalog[text] { return value }
@@ -1301,7 +1301,7 @@ struct ContentView: View {
                 VStack(alignment: .leading, spacing: 3) {
                     Text("S2A Copilote")
                         .font(.system(size: 20, weight: .semibold))
-                    Text(L("Import de conduites S2A Pilot V5 dans QLab 5 — S2A Copilote 1.2.6"))
+                    Text(L("Import de conduites S2A Pilot V5 dans QLab 5 — S2A Copilote 1.2.7"))
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                 }
@@ -1310,7 +1310,7 @@ struct ContentView: View {
                 Picker("Language / Langue", selection: $interfaceLanguage) {
                     Text("Français").tag("fr")
                     Text("English").tag("en")
-                }.pickerStyle(.segmented).frame(width: 155).disabled(model.isBusy)
+                }.pickerStyle(.segmented).labelsHidden().accessibilityLabel(isEnglish ? "Language" : "Langue").frame(width: 155).fixedSize(horizontal: true, vertical: false).disabled(model.isBusy)
                 if model.isBusy {
                     ProgressView()
                         .controlSize(.small)

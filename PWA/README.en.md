@@ -82,7 +82,7 @@ Use is permitted; redistribution, publication or hosting for third parties requi
 
 ## iPad display
 
-Version 1.4.37 matches the PWA background and reserves status-bar safe areas. Any blur added by iPadOS needs validation on a physical iPad; complete removal is not guaranteed.
+Version 1.4.38 matches the PWA background and reserves status-bar safe areas. Any blur added by iPadOS needs validation on a physical iPad; complete removal is not guaranteed.
 
 
-Version 1.4.37: stronger blue glow around the active Cue in Show, with soft inner and outer light and no animation.
+Version 1.4.38: stronger blue glow around the active Cue in Show, with soft inner and outer light and no animation.
