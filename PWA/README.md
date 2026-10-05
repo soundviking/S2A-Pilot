@@ -1,3 +1,11 @@
+# Version 1.4.30 — Prochaine Cue en mode Show
+
+## Mode Show 1.4.30
+
+La prochaine Cue affiche son titre à gauche et le compte à rebours à droite. La description occupe toute la largeur en dessous ; le visuel est centré sous ces informations au format 16/9. Les titres longs passent sur plusieurs lignes, les descriptions restent intégrales et la box grandit si nécessaire. À 600 px et moins, le temps repasse sous le titre.
+
+Disposition vérifiée dans Chrome à 1366, 1024, 600 et 390 px, avec titre long et dix lignes de description. La timeline reste visible dans le cas standard testé à 1366 × 768. Vérification Safari iPad réel à poursuivre après déploiement.
+
 # Version 1.4.29 — Lecture / Pause au clavier
 
 ## Raccourci clavier 1.4.29
