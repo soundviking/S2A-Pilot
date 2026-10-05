@@ -1,3 +1,9 @@
+# Version 1.4.34 — Libellé Show simplifié
+
+## Prochaine Cue 1.4.34
+
+Suppression de la mention redondante « À VENIR » dans la box Prochaine Cue. Le halo bleu de la Cue active est conservé.
+
 # Version 1.4.33 — Cue active mise en évidence
 
 ## Cue active 1.4.33

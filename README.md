@@ -19,8 +19,12 @@ Application de préparation et de conduite de spectacles multimédias, développ
 
 ## Versions actuelles et téléchargements
 
-- **[S2A Pilot 1.4.33 — PWA](downloads/S2A-Pilot-V1.4.33-PWA.zip)**
+- **[S2A Pilot 1.4.34 — PWA](downloads/S2A-Pilot-V1.4.34-PWA.zip)**
 - **[S2A Copilote 1.2.5 — application macOS universelle](downloads/S2A-Copilote-1.2.5-macOS-Universel.zip)** : Intel et Apple Silicon, macOS 13 minimum.
+
+## Prochaine Cue 1.4.34
+
+Suppression de la mention redondante « À VENIR » dans la box Prochaine Cue. Le halo bleu de la Cue active est conservé.
 
 ## Cue active 1.4.33
 
