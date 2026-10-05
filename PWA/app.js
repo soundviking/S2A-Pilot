@@ -786,7 +786,7 @@ document.addEventListener('touchmove',e=>{if(e.touches.length>1)e.preventDefault
 document.addEventListener('wheel',e=>{if(e.ctrlKey)e.preventDefault();},{passive:false});
 
 // This manifest is requested from the network, outside the service-worker cache.
-const APP_VERSION='1.4.26';let lastVersionCheck=0,versionCheckRunning=false;
+const APP_VERSION='1.4.27';document.querySelector('.appVersion').textContent='Version '+APP_VERSION;let lastVersionCheck=0,versionCheckRunning=false;
 const updateNotice=document.createElement('div');updateNotice.id='updateNotice';updateNotice.hidden=true;updateNotice.setAttribute('role','status');const updateText=document.createElement('span'),updateButton=document.createElement('button');updateButton.type='button';updateButton.textContent='Ouvrir la nouvelle version';updateNotice.append(updateText,updateButton);document.querySelector('main').prepend(updateNotice);
 function updateVersionButton(){const b=document.getElementById('updateNotice')?.querySelector('button');if(!b)return;b.disabled=locked||transportPlaying;b.title=b.disabled?'Quitter le mode Show et mettre la lecture en pause pour actualiser.':'';}
 function versionIsNewer(a,b){const x=a.split('.').map(Number),y=b.split('.').map(Number);for(let i=0;i<3;i++){if(x[i]!==y[i])return x[i]>y[i];}return false;}
@@ -795,5 +795,7 @@ updateButton.onclick=async()=>{if(locked||transportPlaying)return;try{await writ
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)checkAppVersion();});window.addEventListener('online',()=>checkAppVersion(true));setInterval(()=>{updateVersionButton();checkAppVersion();},300000);setTimeout(()=>checkAppVersion(true),1200);
 
 const classicScriptLoads=new Map();
-function loadClassicScript(path){if(classicScriptLoads.has(path))return classicScriptLoads.get(path);const promise=new Promise((resolve,reject)=>{const script=document.createElement('script');script.src=path;script.onload=resolve;script.onerror=()=>{classicScriptLoads.delete(path);script.remove();reject(new Error('Fichier de l’application indisponible : '+path));};document.head.append(script);});classicScriptLoads.set(path,promise);return promise;}
+function loadClassicScript(path){if(classicScriptLoads.has(path))return classicScriptLoads.get(path);const promise=new Promise((resolve,reject)=>{const script=document.createElement('script');script.src=path+(path.includes('?')?'&':'?')+'v='+APP_VERSION;script.onload=resolve;script.onerror=()=>{classicScriptLoads.delete(path);script.remove();reject(new Error('Fichier de l’application indisponible : '+path));};document.head.append(script);});classicScriptLoads.set(path,promise);return promise;}
 async function loadTechnicalPreview(){if(!window.S2ATechnicalPreview)await loadClassicScript('./technical-preview.js');return window.S2ATechnicalPreview;}
+
+window.s2aBootReady=true;

@@ -1,13 +1,14 @@
-const CACHE_NAME='s2a-pilot-v1-4-26-app-shell';
+const CACHE_NAME='s2a-pilot-v1-4-27-app-shell';
 const APP_SHELL=[
   './',
   './index.html',
-  './app.js',
-  './technical-preview.js',
+  './app.js?v=1.4.27',
+  './technical-preview.js?v=1.4.27',
+  './technical-header-data.js?v=1.4.27',
   './assets/conduite-header.webp',
-  './icons/s2a-pilot-180.png?v=1.4.26',
-  './icons/s2a-pilot-192.png?v=1.4.26',
-  './icons/s2a-pilot-512.png?v=1.4.26',
+  './icons/s2a-pilot-180.png?v=1.4.27',
+  './icons/s2a-pilot-192.png?v=1.4.27',
+  './icons/s2a-pilot-512.png?v=1.4.27',
   './manifest.webmanifest',
   './companion/S2A-Copilote-1.2.5-app.zip',
   './companion/app-files.json',
@@ -18,7 +19,7 @@ const APP_SHELL=[
 self.addEventListener('install',(event)=>{
   event.waitUntil(
     caches.open(CACHE_NAME)
-      .then((cache)=>cache.addAll(APP_SHELL))
+      .then((cache)=>cache.addAll(APP_SHELL.map(path=>new Request(path,{cache:'reload'}))))
       .then(()=>self.skipWaiting())
   );
 });
@@ -36,8 +37,11 @@ self.addEventListener('activate',(event)=>{
 self.addEventListener('fetch',(event)=>{
   if(event.request.method!=='GET') return;
   if(new URL(event.request.url).pathname.endsWith('/version.json')){event.respondWith(fetch(event.request,{cache:'no-store'}));return;}
+  if(event.request.mode==='navigate'){
+    event.respondWith(fetch(event.request,{cache:'no-store'}).then(response=>{if(!response.ok)throw new Error('Page indisponible');return response;}).catch(()=>caches.open(CACHE_NAME).then(cache=>cache.match('./index.html'))));return;
+  }
   event.respondWith(
-    caches.match(event.request).then((cached)=>{
+    caches.open(CACHE_NAME).then(cache=>cache.match(event.request)).then((cached)=>{
       if(cached) return cached;
       return fetch(event.request)
         .then((response)=>{

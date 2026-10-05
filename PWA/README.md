@@ -1,3 +1,7 @@
+# Version 1.4.27 — Cohérence des mises à jour
+
+Chargement de app.js et des modules PDF avec numéro de version, affichage du numéro du programme exécuté, navigation réseau avec repli hors ligne, précache sans ancien cache HTTP, diagnostic de démarrage et sortie vidéo masquée dès le HTML. Lire DEPLOIEMENT.txt pour la purge Cloudflare nécessaire sur le serveur actuel.
+
 # Version 1.4.26 — Cue sélectionnée plus visible
 
 Une poignée à gauche permet de déplacer les Cues dans la liste. Le temps est ajusté entre les Cues voisines ; un placement avant la première Cue donne 00:00.0. L’ordre reste chronologique, les médias restent attachés à leur Cue et le déplacement peut être annulé. Alt + flèches permet également de déplacer une Cue au clavier. Le geste tactile reste à confirmer sur iPad réel.

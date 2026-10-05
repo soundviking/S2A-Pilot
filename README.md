@@ -19,8 +19,16 @@ Application de préparation et de conduite de spectacles multimédias, développ
 
 ## Versions actuelles et téléchargements
 
-- **[S2A Pilot 1.4.26 — PWA](downloads/S2A-Pilot-V1.4.26-PWA.zip)**
+- **[S2A Pilot 1.4.27 — PWA](downloads/S2A-Pilot-V1.4.27-PWA.zip)**
 - **[S2A Copilote 1.2.5 — application macOS universelle](downloads/S2A-Copilote-1.2.5-macOS-Universel.zip)** : Intel et Apple Silicon, macOS 13 minimum.
+
+## Actualisation et démarrage 1.4.27
+
+Le programme et les modules PDF se chargent avec une URL liée à leur version. Le numéro affiché correspond au programme exécuté. Les pages utilisent le réseau avec repli hors ligne ; le service worker ne mélange plus les caches d’autres versions et son précache ignore les anciens fichiers HTTP. Un diagnostic apparaît si le démarrage échoue. La sortie vidéo est masquée dès le HTML.
+
+**Déploiement : remplacer tous les fichiers, inclure `.htaccess` et purger le cache Cloudflare de `/qlab/`.** Le 5 octobre, les URLs habituelles de ce serveur servaient encore 1.4.20, avec un cache de 31 jours. Lire [DEPLOIEMENT.txt](PWA/DEPLOIEMENT.txt). Ne pas supprimer les données du site : `actualiser.html` conserve les projets locaux.
+
+Version identique/supérieure, boutons Cue/PDF, sortie vidéo masquée, panne de chargement, PDF hors ligne et projet conservé après actualisation vérifiés dans Chrome. Safari iPad réel reste à confirmer après le remplacement des anciens fichiers sur le serveur.
 
 ## Édition des Cues 1.4.26
 

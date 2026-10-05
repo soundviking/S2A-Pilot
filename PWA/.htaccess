@@ -1,0 +1,9 @@
+# S2A Pilot: keep entry points and code coherent after deployment.
+<IfModule mod_headers.c>
+  <FilesMatch "\.(html|js|json|webmanifest)$">
+    Header always set Cache-Control "no-store, max-age=0"
+    Header always set Pragma "no-cache"
+    Header always set Expires "0"
+  </FilesMatch>
+</IfModule>
+DirectoryIndex index.html
