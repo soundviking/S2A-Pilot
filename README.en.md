@@ -1,10 +1,10 @@
-# S2A Pilot 1.4.41 / S2A Copilote 1.2.9
+# S2A Pilot 1.4.42 / S2A Copilote 1.2.10
 
 🇫🇷 [Français](README.md) | 🇬🇧 **English**
 
 ![S2A Pilot](assets/social-preview.jpg)
 
-[PWA 1.4.41](downloads/S2A-Pilot-V1.4.41-PWA.zip) · [Copilote 1.2.9 — Intel / Apple Silicon](downloads/S2A-Copilote-1.2.9-macOS-Universel.zip)
+[PWA 1.4.42](downloads/S2A-Pilot-V1.4.42-PWA.zip) · [Copilote 1.2.10 — Intel / Apple Silicon](downloads/S2A-Copilote-1.2.10-macOS-Universel.zip)
 
 # S2A Pilot — User guide
 

@@ -230,7 +230,7 @@ private func L(_ text: String) -> String {
     " prêt": " ready",
     " échec": " failure",
     "dans ": "in ",
-    "Import de conduites S2A Pilot V5 dans QLab 5 — S2A Copilote 1.2.9": "Import S2A Pilot V5 shows into QLab 5 — S2A Copilote 1.2.9"
+    "Import de conduites S2A Pilot V5 dans QLab 5 — S2A Copilote 1.2.10": "Import S2A Pilot V5 shows into QLab 5 — S2A Copilote 1.2.10"
     ]
     if language != "en" { return catalog.first(where: { $0.value == text })?.key ?? text }
     if let value = catalog[text] { return value }
@@ -1329,7 +1329,7 @@ struct ContentView: View {
                 VStack(alignment: .leading, spacing: 3) {
                     Text("S2A Copilote")
                         .font(.system(size: 20, weight: .semibold))
-                    Text(L("Import de conduites S2A Pilot V5 dans QLab 5 — S2A Copilote 1.2.9"))
+                    Text(L("Import de conduites S2A Pilot V5 dans QLab 5 — S2A Copilote 1.2.10"))
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                 }
@@ -1532,11 +1532,11 @@ struct UpcomingCueWarningGlow: View {
 
     var body: some View {
         RoundedRectangle(cornerRadius: 14, style: .continuous)
-            .stroke(Color.red.opacity(0.9), lineWidth: 2)
-            .shadow(color: .red.opacity(0.7), radius: 5)
-            .shadow(color: .red.opacity(0.45), radius: 12)
-            .shadow(color: .red.opacity(0.25), radius: 20)
-            .opacity(reduceMotion || bright ? 1 : 0.12)
+            .stroke(Color.red, lineWidth: 4)
+            .shadow(color: .red.opacity(0.9), radius: 8)
+            .shadow(color: .red.opacity(0.65), radius: 18)
+            .shadow(color: .red.opacity(0.4), radius: 28)
+            .opacity(reduceMotion || bright ? 1 : 0.18)
             .allowsHitTesting(false)
             .accessibilityHidden(true)
             .onAppear { startPulse() }

@@ -5,7 +5,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" name="viewport"/>
 <title>S2A Pilot</title>
-<link href="./icons/s2a-pilot-192.png?v=1.4.41" rel="icon" type="image/png"/>
+<link href="./icons/s2a-pilot-192.png?v=1.4.42" rel="icon" type="image/png"/>
 <style>
 :root{
   font-family: system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
@@ -622,7 +622,7 @@ body.locked .activeCueCard>h2,body.locked .nextTopCard>h2,body.locked .showVideo
 html,body{overscroll-behavior-y:none;}
 .activeCueImage[hidden],.nextImage[hidden]{display:none!important;}
 
-/* V1.4.41 — sélection Cue ↔ timeline + companion 1.2.2 */
+/* V1.4.42 — sélection Cue ↔ timeline + companion 1.2.2 */
 .showOnly{display:none}
 body.locked .showOnly{display:flex}
 .preflightIntegrated{display:grid;gap:12px;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid #2b3240}
@@ -631,7 +631,7 @@ body.locked .showOnly{display:flex}
 body.locked .timelineCard{display:block}
 
 
-/* 1.4.41 : mêmes libellés et disposition adaptable */
+/* 1.4.42 : mêmes libellés et disposition adaptable */
 [hidden]{display:none!important}
 .timeline .tick:first-of-type{transform:none}.timeline .tick:last-of-type{transform:translateX(-100%)}
 .showVideoMonitor{display:none;grid-column:1/-1;order:100}
@@ -644,14 +644,14 @@ button{white-space:normal;touch-action:manipulation}
 @media(max-width:900px){main.spectaclePriorityLayout{display:flex!important;flex-direction:column!important;padding:12px!important}.card{width:100%;box-sizing:border-box}.appTopBar{flex-wrap:wrap;gap:12px}.row{flex-wrap:wrap}.nextWrap{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
 @media(max-width:480px){main.spectaclePriorityLayout{padding:8px!important}.card{padding:12px!important}.cueEditGrid{grid-template-columns:1fr}.cueEditGrid .imageControls,.cueEditGrid>.danger{grid-column:1}.mediaAction{display:flex;flex-wrap:wrap}.mediaEditor{width:100%;min-width:0}.nextWrap{display:flex;flex-direction:column}.nextImageWrap{width:100%}.nextCountdown{font-size:clamp(2rem,12vw,4rem)!important}.row button{flex:1 1 120px}.time{font-size:clamp(1.6rem,10vw,3rem)}.cueSummary{grid-template-columns:45px 70px minmax(0,1fr) 24px}.projectActions{width:100%}.appIdentity{min-width:0}.outputPrep{flex-wrap:wrap}input,textarea,select{max-width:100%;box-sizing:border-box}}
 
-/* 1.4.41 : visuels Show remplis sans déformation, dimensions stables */
+/* 1.4.42 : visuels Show remplis sans déformation, dimensions stables */
 body.locked .activeCueImage{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
 body.locked .nextTopCard .nextWrap{grid-template-columns:minmax(0,1fr) minmax(153.9px,226.8px)}
 body.locked .nextTopCard .nextImageWrap{width:100%;max-width:226.8px;aspect-ratio:16/9;align-self:center;justify-self:center}
 body.locked .nextTopCard .nextImage{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
 @media(max-width:760px){body.locked .nextTopCard .nextWrap{grid-template-columns:1fr}body.locked .nextTopCard .nextImageWrap{width:min(90%,252px);max-width:252px;align-self:center;justify-self:center;margin-inline:auto}}
 
-/* 1.4.41 : audition et aperçu indépendants de la conduite */
+/* 1.4.42 : audition et aperçu indépendants de la conduite */
 .mediaEditorTop .mediaPreviewToggle{padding:6px 9px;font-size:.76rem;min-width:96px;white-space:nowrap}
 .mediaEditorField input[type=text]{min-width:0;width:78px}
 .mediaEditorMain{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;align-items:center}
@@ -685,7 +685,7 @@ body.locked .nextTopCard .nextImage{position:absolute;inset:0;width:100%;height:
 @media(max-width:480px){.modeSwitchBtn{min-width:50px;padding:8px 9px}}
 @media(prefers-reduced-motion:reduce){.modeSwitchBtn{transition:none}}
 
-/* 1.4.41 : zoom des médias et sortie vidéo uniquement dans l’en-tête Show */
+/* 1.4.42 : zoom des médias et sortie vidéo uniquement dans l’en-tête Show */
 .fileLabel.addMediaBtn{background:#246fd1;border-color:#2b7de7;color:#fff}.fileLabel.addMediaBtn:hover{background:#2d7bdf}
 .mediaEditorTimeline .mediaVisual{overflow-x:auto;overflow-y:hidden;scrollbar-width:thin;scrollbar-color:#5b7192 #11151d}
 .mediaVisualContent{position:relative;height:100%;min-width:100%;user-select:none;touch-action:none}
@@ -702,7 +702,7 @@ body.locked .nextTopCard .nextImage{position:absolute;inset:0;width:100%;height:
 .pdfPreviewDialog{width:min(1000px,94vw);height:90dvh;max-width:94vw;max-height:94dvh;padding:14px;border:1px solid #45536a;border-radius:14px;background:#111722;color:#fff}.pdfPreviewDialog::backdrop{background:#000a}.pdfPreviewLayout{height:100%;display:flex;flex-direction:column;gap:12px}.pdfPreviewToolbar{display:flex;align-items:center;flex-wrap:wrap;gap:10px}.pdfPreviewToolbar strong{flex:1;min-width:150px}.pdfPreviewToolbar a{display:inline-flex;align-items:center;padding:10px 12px;border-radius:8px;background:#246fd1;color:white;text-decoration:none}
 .pdfPreviewPages{flex:1;min-height:0;overflow:auto;display:flex;flex-direction:column;align-items:flex-start;gap:16px;background:#252f40;border-radius:8px;padding:12px;box-sizing:border-box;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}.pdfPreviewPage{flex-shrink:0;margin:0 auto;background:white;border-radius:4px;box-shadow:0 3px 12px #0006;overflow:hidden}.pdfPreviewPage svg{display:block;width:100%;height:auto}.pdfPreviewZoom{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.pdfPreviewZoom button{min-height:40px}.pdfPreviewZoom span{min-width:48px;text-align:center;font-size:.85rem}.pdfPreviewToolbar strong{overflow-wrap:anywhere}@media(max-width:480px){.pdfPreviewDialog{padding:9px}.pdfPreviewToolbar{gap:7px}.pdfPreviewToolbar strong{flex-basis:100%}.pdfPreviewPages{padding:8px}.pdfPreviewZoom{gap:6px}.pdfPreviewZoom button{padding:8px 10px}}
 
-/* 1.4.41 : repères et médias distincts ; aperçu global en Edit. */
+/* 1.4.42 : repères et médias distincts ; aperçu global en Edit. */
 #projectWaveform{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.8}
 #projectMediaTracks{position:absolute;inset:5px 0 22px;display:flex;flex-direction:column;gap:3px;min-height:0;overflow:hidden;pointer-events:none;z-index:1}
 .projectMediaBar{position:relative;flex-shrink:0;box-sizing:border-box;min-width:3px;height:20px;border-radius:5px;background:rgba(42,153,89,.28);border:1px solid rgba(101,210,142,.4);color:#d0f5df;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:2px 5px}
@@ -769,7 +769,7 @@ body.locked.nextCueUrgent .nextTopCard::before{animation:nextCueGlow 1s ease-in-
 <meta content="yes" name="apple-mobile-web-app-capable"/>
 <meta content="black" name="apple-mobile-web-app-status-bar-style"/>
 <meta content="S2A Pilot" name="apple-mobile-web-app-title"/>
-<link href="./icons/s2a-pilot-180.png?v=1.4.41" rel="apple-touch-icon"/>
+<link href="./icons/s2a-pilot-180.png?v=1.4.42" rel="apple-touch-icon"/>
 </head>
 <body>
 <main class="spectaclePriorityLayout">
@@ -778,7 +778,7 @@ body.locked.nextCueUrgent .nextTopCard::before{animation:nextCueGlow 1s ease-in-
 <div class="appIdentity">
   <strong>S2A Pilot</strong>
   <span class="appAttribution">(by S2A Production)</span>
-  <span class="appVersion">Version 1.4.41</span>
+  <span class="appVersion">Version 1.4.42</span>
 </div>
 <div class="headerActions"><select id="languageSelect" aria-label="Language / Langue"><option value="fr">FR</option><option value="en">EN</option></select>
 <div class="headerVideoOutput showOnly" hidden>
@@ -890,7 +890,7 @@ window.s2aBootReady=false;
 window.s2aReportBootError=function(message){if(window.s2aBootReady)return;var box=document.getElementById('startupError');if(!box){box=document.createElement('div');box.id='startupError';box.setAttribute('role','alert');box.style.cssText='padding:14px;border:1px solid #ff9ca4;border-radius:10px;background:#44232c;color:#fff;white-space:pre-wrap';document.querySelector('main').prepend(box);}var en=(navigator.language||'en').indexOf('fr')!==0;try{en=(localStorage.getItem('s2a-language')||(en?'en':'fr'))==='en';}catch{}box.textContent=(en?'S2A Pilot could not finish starting. Your local projects are preserved.\n':'Le démarrage de S2A Pilot est interrompu. Vos projets locaux sont conservés.\n')+message+'\n';var link=document.createElement('a');link.href='./actualiser.html?repair='+Date.now();link.textContent=en?'Refresh application files':'Actualiser les fichiers de l’application';link.style.color='#a9d2ff';box.appendChild(link);};
 window.addEventListener('error',function(e){window.s2aReportBootError((e.message||'Chargement impossible')+' — '+(e.filename||'')+':'+(e.lineno||''));});
 </script>
-<script src="./i18n.js?v=1.4.41"></script>
-<script src="./app.js?v=1.4.41" onerror="window.s2aReportBootError('Impossible de charger le programme 1.4.41.')"></script>
+<script src="./i18n.js?v=1.4.42"></script>
+<script src="./app.js?v=1.4.42" onerror="window.s2aReportBootError('Impossible de charger le programme 1.4.42.')"></script>
 </body>
 </html>

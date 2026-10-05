@@ -1,0 +1,11 @@
+{
+  "pilot": "1.4.42",
+  "copilote": "1.2.10",
+  "change": "Thicker and brighter red next-action halo; existing one-second pulse unchanged",
+  "validated": [
+    "Both native architectures compiled",
+    "Universal binary signature",
+    "ZIP integrity and embedded companion manifest"
+  ],
+  "limitation": "Updated native glow rendering to verify on a real Mac"
+}

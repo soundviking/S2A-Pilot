@@ -48,9 +48,9 @@ cat > "$APP/Contents/Info.plist" <<'PLIST'
   <key>CFBundleIdentifier</key>
   <string>fr.s2aproduction.copilote</string>
   <key>CFBundleVersion</key>
-  <string>11</string>
+  <string>12</string>
   <key>CFBundleShortVersionString</key>
-  <string>1.2.9</string>
+  <string>1.2.10</string>
   <key>CFBundleExecutable</key>
   <string>S2A Copilote</string>
   <key>CFBundleIconFile</key>

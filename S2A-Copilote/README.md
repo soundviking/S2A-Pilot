@@ -1,4 +1,4 @@
-# S2A Copilote 1.2.9
+# S2A Copilote 1.2.10
 
 Les droits sur S2A Pilot et S2A Copilote appartiennent à la société S2A Production. Ces applications ont été développées par Antoine CLOPIER, avec l’aide de ChatGPT.
 
@@ -6,7 +6,7 @@ Les droits sur S2A Pilot et S2A Copilote appartiennent à la société S2A Produ
 
 Application macOS universelle Intel et Apple Silicon, macOS 13 minimum. Langue du système détectée au premier lancement ; bascule Français / English mémorisée. Les titres, noms de Cues et descriptions de projets ne sont pas traduits.
 
-S2A COPILOTE 1.2.9 — INSTALLATION SUR MAC
+S2A COPILOTE 1.2.10 — INSTALLATION SUR MAC
 
 Mac Intel et Apple Silicon — macOS 13 ou plus récent.
 Aucune compilation nécessaire. Application signée localement, non notariée par Apple.
@@ -62,10 +62,13 @@ Tests Chrome : création, édition, sauvegarde, langues, préservation des conte
 Utilisation autorisée ; redistribution, publication ou hébergement pour des tiers soumis à un accord écrit préalable de S2A Production. Voir [la licence](LICENSE).
 
 
-Version 1.2.9 : correction du libellé tronqué derrière le sélecteur de langue.
+Version 1.2.10 : correction du libellé tronqué derrière le sélecteur de langue.
 
 
-Version 1.2.9 : les conduites affichées sont vérifiées dans le workspace QLab ouvert toutes les 3 secondes. Les groupes absents ne sont plus comptés ni proposés au visualiseur. L’index et les médias sont conservés ; une conduite restaurée peut réapparaître. Ce contrôle ne répercute pas les modifications de titres ou de contenu faites dans QLab et ne sauvegarde pas QLab automatiquement.
+Version 1.2.10 : les conduites affichées sont vérifiées dans le workspace QLab ouvert toutes les 3 secondes. Les groupes absents ne sont plus comptés ni proposés au visualiseur. L’index et les médias sont conservés ; une conduite restaurée peut réapparaître. Ce contrôle ne répercute pas les modifications de titres ou de contenu faites dans QLab et ne sauvegarde pas QLab automatiquement.
 
 
-Version 1.2.9 : halo rouge pulsant en fondu une fois par seconde autour du bloc prochaine action du visualiseur, à dix secondes de son déclenchement. Aucun halo bleu ni nouvelle box d’action active. L’effet disparaît lorsque la prochaine action est plus éloignée ou en fin de conduite. En réduction des animations, le rouge reste fixe.
+Version 1.2.10 : halo rouge pulsant en fondu une fois par seconde autour du bloc prochaine action du visualiseur, à dix secondes de son déclenchement. Aucun halo bleu ni nouvelle box d’action active. L’effet disparaît lorsque la prochaine action est plus éloignée ou en fin de conduite. En réduction des animations, le rouge reste fixe.
+
+
+Version 1.2.10 : contour rouge du visualiseur épaissi de 2 à 4 points, halo plus large et plus lumineux. La pulsation en fondu reste d’une seconde.

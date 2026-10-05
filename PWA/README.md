@@ -74,10 +74,10 @@ Utilisation autorisée ; redistribution, publication ou hébergement pour des ti
 
 ## Affichage sur iPad
 
-La version 1.4.41 harmonise le fond de la PWA et réserve les zones de sécurité de la barre d’état. Le flou éventuellement ajouté par iPadOS doit être contrôlé sur un iPad réel ; sa suppression complète n’est pas garantie.
+La version 1.4.42 harmonise le fond de la PWA et réserve les zones de sécurité de la barre d’état. Le flou éventuellement ajouté par iPadOS doit être contrôlé sur un iPad réel ; sa suppression complète n’est pas garantie.
 
 
-Version 1.4.41 : halo lumineux bleu renforcé autour de la Cue active en mode Show, avec lumière diffuse intérieure et extérieure, sans animation.
+Version 1.4.42 : halo lumineux bleu renforcé autour de la Cue active en mode Show, avec lumière diffuse intérieure et extérieure, sans animation.
 
 
-Version 1.4.41 : à dix secondes de la prochaine Cue, son halo rouge pulse en fondu toutes les secondes et le halo bleu de la Cue active s’éteint en fondu. Hors de cette zone, le halo bleu revient. En réduction des animations, le rouge reste fixe.
+Version 1.4.42 : à dix secondes de la prochaine Cue, son halo rouge pulse en fondu toutes les secondes et le halo bleu de la Cue active s’éteint en fondu. Hors de cette zone, le halo bleu revient. En réduction des animations, le rouge reste fixe.
