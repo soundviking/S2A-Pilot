@@ -412,5 +412,45 @@
       "CPU/mémoire avec médias réels",
       "QLab et Mac Intel"
     ]
+  },
+  "pilot1415": {
+    "checks": [
+      "Départ vide",
+      "+ C sans média",
+      "Temps 02.41 sans limite de durée",
+      "Autosave dès la saisie, restauration au rechargement",
+      "+ Média crée sa Cue et waveform",
+      "Cut à zéro, fondu ultérieur",
+      "Show paysage côte à côte et timeline visible sans scroll 1366x768",
+      "Timeline Show verrouillée, waveform visible",
+      "Geste Safari annulé, défilement conservé",
+      "Largeurs tablette et téléphone sans débordement"
+    ],
+    "errors": [],
+    "bounds": {
+      "active": {
+        "x": 18,
+        "y": 65.1875,
+        "w": 659,
+        "bottom": 467
+      },
+      "next": {
+        "x": 689,
+        "y": 65.1875,
+        "w": 659,
+        "bottom": 467
+      },
+      "timeline": {
+        "x": 18,
+        "y": 479,
+        "w": 1330,
+        "bottom": 701.8125
+      }
+    },
+    "changes": [
+      "+ Cue",
+      "Bandes translucides dans timeline, 20 px",
+      "Mention waveform supprimée"
+    ]
   }
 }

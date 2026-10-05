@@ -1,3 +1,13 @@
+# S2A Pilot 1.4.15
+
+- Bouton **+ Cue**.
+- Bandes des médias directement dans la timeline, hauteur 20 px conservée, fond translucide et waveform visible. Elles ne bloquent ni les marqueurs ni le déplacement en Edit. La timeline reste verrouillée en Show.
+- Mention « Waveform combinée des médias audibles » supprimée. Les erreurs de décodage restent indiquées si nécessaire.
+
+Les parcours de création, sauvegarde, édition média et Show ont été vérifiés automatiquement ; la disposition a été inspectée visuellement.
+
+## Historique
+
 # S2A Pilot 1.4.14 — version de test
 
 ## Changements 1.4.14

@@ -753,7 +753,7 @@ async function renderTimelineMedia(){
    sums[x]+=(peaks[index]||0)*gain;
   }
  }
- if(generation!==timelineMediaGeneration)return;const max=Math.max(1,...sums);drawWaveform(canvas,Array.from(sums,x=>x/max));status.textContent=unavailable?'Waveform combinée · '+unavailable+' média(s) sans waveform décodable':'Waveform combinée des médias audibles';
+ if(generation!==timelineMediaGeneration)return;const max=Math.max(1,...sums);drawWaveform(canvas,Array.from(sums,x=>x/max));status.textContent=unavailable?'Waveform combinée · '+unavailable+' média(s) sans waveform décodable':'';
 }
 new ResizeObserver(()=>{timelineMediaSignature='';scheduleTimelineMedia();}).observe(timeline);
 
