@@ -1,0 +1,8 @@
+{
+  "version": "1.4.37",
+  "change": "Brighter static blue inner and outer glow on active Show Cue",
+  "validated": [
+    "Chrome rendering at 1280x900 and visual screenshot inspection"
+  ],
+  "limitation": "Physical iPad rendering not verified"
+}

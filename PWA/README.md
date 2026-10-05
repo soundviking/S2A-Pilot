@@ -74,4 +74,7 @@ Utilisation autorisée ; redistribution, publication ou hébergement pour des ti
 
 ## Affichage sur iPad
 
-La version 1.4.36 harmonise le fond de la PWA et réserve les zones de sécurité de la barre d’état. Le flou éventuellement ajouté par iPadOS doit être contrôlé sur un iPad réel ; sa suppression complète n’est pas garantie.
+La version 1.4.37 harmonise le fond de la PWA et réserve les zones de sécurité de la barre d’état. Le flou éventuellement ajouté par iPadOS doit être contrôlé sur un iPad réel ; sa suppression complète n’est pas garantie.
+
+
+Version 1.4.37 : halo lumineux bleu renforcé autour de la Cue active en mode Show, avec lumière diffuse intérieure et extérieure, sans animation.
