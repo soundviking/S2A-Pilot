@@ -6,7 +6,7 @@ Application de préparation et de conduite de spectacles multimédias, développ
 
 ## Versions actuelles et téléchargements
 
-- **[S2A Pilot 1.4.23 — PWA](downloads/S2A-Pilot-V1.4.23-PWA.zip)**
+- **[S2A Pilot 1.4.24 — PWA](downloads/S2A-Pilot-V1.4.24-PWA.zip)**
 - **[S2A Copilote 1.2.5 — application macOS universelle](downloads/S2A-Copilote-1.2.5-macOS-Universel.zip)** : Intel et Apple Silicon, macOS 13 minimum.
 
 ## Correctif de démarrage 1.4.21
@@ -23,7 +23,7 @@ L’aperçu et la photo d’en-tête fonctionnent aussi lors d’une ouverture d
 
 ## Préparer une conduite
 
-Un nouveau projet commence sans Cue imposée. **+ Cue** crée un repère avec titre, description et visuel. **+ Média** importe une musique ou une vidéo dans une nouvelle Cue, au temps courant. Toutes les Cues peuvent être déplacées ou supprimées, y compris celles à zéro.
+Un nouveau projet commence sans Cue imposée. **+ Cue** crée un repère avec titre, description et visuel. **+ Musique / Vidéo** importe une musique ou une vidéo dans une nouvelle Cue, au temps courant. Toutes les Cues peuvent être déplacées ou supprimées, y compris celles à zéro.
 
 Les médias disposent de points IN / OUT, Loop, waveform, aperçu vidéo, lecture indépendante et zoom. La saisie `02.41` ou `02,41` correspond à 2 minutes 41 secondes. Une Cue placée au-delà de la durée actuelle prolonge la timeline. Le premier média audio d’une Cue à zéro utilise Cut par défaut ; les autres nouveaux médias audio utilisent un fondu de trois secondes. Les réglages des projets importés sont conservés.
 

@@ -1,3 +1,9 @@
+# S2A Pilot 1.4.24
+
+Le bouton de création d’une Cue média est nommé **+ Musique / Vidéo**. Il conserve le choix d’un fichier audio ou vidéo et la création d’une nouvelle Cue. Tous les correctifs de la 1.4.23 sont inclus.
+
+## Historique
+
 # S2A Pilot 1.4.23 — aperçu PDF en ouverture locale
 
 L’aperçu PDF charge désormais un script classique à la demande, au lieu d’un import de module bloqué en file://. La photo d’en-tête dispose d’un fichier de données chargé uniquement en ouverture directe pour éviter les restrictions canvas sur fichiers locaux. Les ressources restent chargées à la demande ; sur serveur, la photo d’origine et le cache hors ligne sont conservés.
