@@ -9,6 +9,10 @@ Application de préparation et de conduite de spectacles multimédias, développ
 - **[S2A Pilot 1.4.24 — PWA](downloads/S2A-Pilot-V1.4.24-PWA.zip)**
 - **[S2A Copilote 1.2.5 — application macOS universelle](downloads/S2A-Copilote-1.2.5-macOS-Universel.zip)** : Intel et Apple Silicon, macOS 13 minimum.
 
+## Libellé 1.4.24
+
+Le bouton **+ Musique / Vidéo** importe un fichier audio ou vidéo et crée une nouvelle Cue. **+ Cue** crée un repère avec titre, description et visuel.
+
 ## Correctif de démarrage 1.4.21
 
 La vérification de permission d’écran non prise en charge ne bloque plus l’initialisation. L’API est interrogée uniquement lorsqu’un affichage étendu peut être détecté. Compatibilité renforcée pour Array.at, ResizeObserver et AbortSignal.timeout. Blocage reproduit et correctif validé avec API indisponible simulée dans Chrome : Nouveau, + Cue et PDF fonctionnels. À confirmer dans Safari sur iPad réel.
@@ -45,7 +49,7 @@ Aperçu intégré avec téléchargement explicite, en-tête photographique, bloc
 
 ## Installation et mises à jour
 
-Déployer **tout le contenu de PWA/** sur HTTPS : `index.html`, `app.js`, `manifest.webmanifest`, `service-worker.js`, `version.json`, `actualiser.html`, `technical-preview.js`, `assets/`, `icons/` et `companion/`. Le serveur doit ouvrir index.html comme page d’accueil du dossier ; partager une adresse telle que `/s2a-pilot/`, sans ajouter index.html.
+Déployer **tout le contenu de PWA/** sur HTTPS : `index.html`, `app.js`, `manifest.webmanifest`, `service-worker.js`, `version.json`, `actualiser.html`, `technical-preview.js`, `technical-header-data.js`, `assets/`, `icons/` et `companion/`. Le serveur doit ouvrir index.html comme page d’accueil du dossier ; partager une adresse telle que `/s2a-pilot/`, sans ajouter index.html.
 
 Depuis la 1.4.19, l’application vérifie la version publiée sur le serveur au démarrage, au retour dans l’application et toutes les cinq minutes lorsqu’elle est visible. Une version plus récente est proposée sans actualisation forcée pendant Show ou lecture. La sauvegarde locale précède l’actualisation ; les projets IndexedDB sont conservés. Sans réseau, la version du serveur n’est pas confirmée et l’utilisation hors ligne reste disponible. Publier l’ensemble des fichiers de la même version avant de la rendre disponible.
 
