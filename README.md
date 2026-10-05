@@ -1,13 +1,15 @@
+Correctif 1.4.16 : cache du service worker versionné correctement ; lanceur local avec actualisation des fichiers, sans suppression des projets IndexedDB.
+
 # S2A Pilot
 
 S2A Pilot, développé par S2A Production, prépare et conduit des spectacles multimédias. S2A Copilote importe les projets dans QLab 5.
 
 ## Versions actuelles
 
-- **S2A Pilot 1.4.15** : application web installable, modes Edit et Show.
+- **S2A Pilot 1.4.16** : application web installable, modes Edit et Show.
 - **S2A Copilote 1.2.5** : application macOS universelle Intel et Apple Silicon, macOS 13 minimum.
 
-## Nouveautés Pilot 1.4.15
+## Nouveautés Pilot 1.4.16
 
 Les bandes médias sont intégrées à la timeline avec un fond translucide. La mention de waveform sous la timeline est supprimée.
 
@@ -20,7 +22,7 @@ Les bandes médias sont intégrées à la timeline avec un fond translucide. La 
 - Zoom par pincement bloqué ; défilement et boutons de zoom des éditeurs conservés.
 - PDF : temps écoulé et temps restant entre parenthèses, calculé jusqu’à la fin de la conduite.
 
-[Télécharger la PWA 1.4.15](downloads/S2A-Pilot-V1.4.15-PWA.zip)
+[Télécharger la PWA 1.4.16](downloads/S2A-Pilot-V1.4.16-PWA.zip)
 
 Tests automatisés Chrome, restauration locale, anciens projets, export hors ligne et mise en page PDF validés. Le blocage du pincement Safari / PWA reste à confirmer sur iPad réel.
 

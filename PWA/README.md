@@ -1,3 +1,7 @@
+# Correctif 1.4.16 : actualisation du cache
+
+Le service worker possède désormais un cache distinct pour la version 1.4.16. Le lanceur local ouvre actualiser.html : seuls les caches de fichiers S2A Pilot et son service worker sont renouvelés. IndexedDB et les projets sauvegardés restent intacts. Fermer les anciennes fenêtres de S2A Pilot avant de lancer le dossier.
+
 # S2A Pilot 1.4.15
 
 - Bouton **+ Cue**.
