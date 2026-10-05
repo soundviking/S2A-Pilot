@@ -1,3 +1,9 @@
+# Version 1.4.33 — Cue active mise en évidence
+
+## Cue active 1.4.33
+
+En Show, la box Cue active bénéficie d’un contour et d’un repère latéral bleus, accompagnés d’un halo discret. La prochaine Cue conserve son contour neutre.
+
 # Version 1.4.32 — Exemple du nom du numéro
 
 ## Exemple du nom du numéro 1.4.32

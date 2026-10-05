@@ -19,8 +19,12 @@ Application de préparation et de conduite de spectacles multimédias, développ
 
 ## Versions actuelles et téléchargements
 
-- **[S2A Pilot 1.4.32 — PWA](downloads/S2A-Pilot-V1.4.32-PWA.zip)**
+- **[S2A Pilot 1.4.33 — PWA](downloads/S2A-Pilot-V1.4.33-PWA.zip)**
 - **[S2A Copilote 1.2.5 — application macOS universelle](downloads/S2A-Copilote-1.2.5-macOS-Universel.zip)** : Intel et Apple Silicon, macOS 13 minimum.
+
+## Cue active 1.4.33
+
+En Show, la box Cue active bénéficie d’un contour et d’un repère latéral bleus, accompagnés d’un halo discret. La prochaine Cue conserve son contour neutre.
 
 ## Exemple du nom du numéro 1.4.32
 
