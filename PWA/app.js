@@ -486,7 +486,20 @@ async function loadWorkspace(saved){showTitle.value=saved.title||'';showDuration
 function startNewProject(){pauseTransport();stopAllAudio();stopVideoRuntime();showTitle.value='';showDurationOverride=null;cues=[];workspaceCommitted=false;currentProjectName=null;transportTime=0;expandedCueId=null;invalidatePreflight();resetHistory();renderCues();scheduleAutosave();}
 async function startup(){try{startupSaved=await readAutosave();}catch(e){console.warn(e);}if(startupSaved&&Array.isArray(startupSaved.cues)){const title=startupSaved.title?.trim()||'Projet sans nom';startupProjectInfo.textContent=`Dernière sauvegarde : « ${title} » — ${formatSavedAt(startupSaved.savedAt)}.`;try{await loadWorkspace(startupSaved);}catch(e){console.warn(e);startNewProject();}}else{startupProjectInfo.textContent='Aucune sauvegarde locale détectée.';startNewProject();}}
 
-playBtn.addEventListener('click',()=>transportPlaying?pauseTransport():playTransport());restartBtn.addEventListener('click',()=>{pauseTransport();stopAllRuntimeMedia();transportTime=transportBase=lastTransportTime=0;for(const p of preparedMedia.values())try{p.el.pause();p.el.currentTime=Number(p.item.action.inPoint)||0;}catch{}updateTransport();});addCueBtn.addEventListener('click',()=>{if(locked)return;pushHistory();const c={id:uuid(),time:Math.max(0,roundTenth(currentTransportTime())),name:`Cue ${cues.length+1}`,description:'',imageDataUrl:null,imageName:null,isBase:false,mediaActions:[]};cues.push(c);expandedCueId=c.id;renderCues();scheduleAutosave();});
+playBtn.addEventListener('click',()=>transportPlaying?pauseTransport():playTransport());
+let spaceTransportPending=false;
+document.addEventListener('keydown',e=>{
+ if(e.code!=='Space'&&e.key!==' ')return;
+ if(e.defaultPrevented||e.isComposing||e.ctrlKey||e.metaKey||e.altKey||e.shiftKey)return;
+ const target=e.target instanceof Element?e.target:document.activeElement;
+ if(target?.isContentEditable||target?.closest('input,textarea,select,[contenteditable]:not([contenteditable="false"]),[role="textbox"],[role="slider"]'))return;
+ if(document.querySelector('dialog[open]'))return;
+ const control=target?.closest('button,a,label,[role="button"]');if(control&&control!==playBtn)return;
+ e.preventDefault();if(e.repeat||spaceTransportPending||playBtn.disabled)return;
+ if(transportPlaying){pauseTransport();return;}
+ spaceTransportPending=true;Promise.resolve(playTransport()).catch(console.warn).finally(()=>{spaceTransportPending=false;});
+});
+restartBtn.addEventListener('click',()=>{pauseTransport();stopAllRuntimeMedia();transportTime=transportBase=lastTransportTime=0;for(const p of preparedMedia.values())try{p.el.pause();p.el.currentTime=Number(p.item.action.inPoint)||0;}catch{}updateTransport();});addCueBtn.addEventListener('click',()=>{if(locked)return;pushHistory();const c={id:uuid(),time:Math.max(0,roundTenth(currentTransportTime())),name:`Cue ${cues.length+1}`,description:'',imageDataUrl:null,imageName:null,isBase:false,mediaActions:[]};cues.push(c);expandedCueId=c.id;renderCues();scheduleAutosave();});
 timeline.addEventListener('pointerdown',e=>{if(locked||e.target.closest('.marker'))return;const r=timeline.getBoundingClientRect();seekTransport((e.clientX-r.left)/r.width*projectDuration()).catch(console.warn);});
 editModeBtn.addEventListener('click',()=>{if(locked){locked=false;applyLockState();}});showModeBtn.addEventListener('click',()=>{if(!locked){locked=true;applyLockState();}});undoBtn.addEventListener('click',undoEdit);redoBtn.addEventListener('click',redoEdit);document.addEventListener('keydown',e=>{const mod=e.metaKey||e.ctrlKey;if(!mod||e.key.toLowerCase()!=='z'||locked)return;e.preventDefault();e.shiftKey?redoEdit():undoEdit();});
 showTitle.addEventListener('input',()=>{scheduleAutosave();});videoOutputBtn.addEventListener('click',()=>videoOutputWindow&&!videoOutputWindow.closed?closeVideoOutput():openVideoOutput());
@@ -823,7 +836,7 @@ document.addEventListener('touchmove',e=>{if(e.touches.length>1)e.preventDefault
 document.addEventListener('wheel',e=>{if(e.ctrlKey)e.preventDefault();},{passive:false});
 
 // This manifest is requested from the network, outside the service-worker cache.
-const APP_VERSION='1.4.28';document.querySelector('.appVersion').textContent='Version '+APP_VERSION;let lastVersionCheck=0,versionCheckRunning=false;
+const APP_VERSION='1.4.29';document.querySelector('.appVersion').textContent='Version '+APP_VERSION;let lastVersionCheck=0,versionCheckRunning=false;
 const updateNotice=document.createElement('div');updateNotice.id='updateNotice';updateNotice.hidden=true;updateNotice.setAttribute('role','status');const updateText=document.createElement('span'),updateButton=document.createElement('button');updateButton.type='button';updateButton.textContent='Ouvrir la nouvelle version';updateNotice.append(updateText,updateButton);document.querySelector('main').prepend(updateNotice);
 function updateVersionButton(){const b=document.getElementById('updateNotice')?.querySelector('button');if(!b)return;b.disabled=locked||transportPlaying;b.title=b.disabled?'Quitter le mode Show et mettre la lecture en pause pour actualiser.':'';}
 function versionIsNewer(a,b){const x=a.split('.').map(Number),y=b.split('.').map(Number);for(let i=0;i<3;i++){if(x[i]!==y[i])return x[i]>y[i];}return false;}

@@ -1,3 +1,9 @@
+# Version 1.4.29 — Lecture / Pause au clavier
+
+## Raccourci clavier 1.4.29
+
+**Espace** bascule entre Lecture et Pause de la timeline générale, en Edit et Show. Le raccourci est ignoré pendant la saisie, dans les fenêtres de dialogue et sur les autres commandes ayant leur propre action clavier. Maintenir la touche ne provoque pas de bascules répétées. Les aperçus médias conservent leurs commandes indépendantes.
+
 # Version 1.4.28 — Déplacement en direct et duplication
 
 ## Édition des Cues 1.4.28

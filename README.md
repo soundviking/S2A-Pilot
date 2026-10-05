@@ -19,8 +19,12 @@ Application de préparation et de conduite de spectacles multimédias, développ
 
 ## Versions actuelles et téléchargements
 
-- **[S2A Pilot 1.4.28 — PWA](downloads/S2A-Pilot-V1.4.28-PWA.zip)**
+- **[S2A Pilot 1.4.29 — PWA](downloads/S2A-Pilot-V1.4.29-PWA.zip)**
 - **[S2A Copilote 1.2.5 — application macOS universelle](downloads/S2A-Copilote-1.2.5-macOS-Universel.zip)** : Intel et Apple Silicon, macOS 13 minimum.
+
+## Raccourci clavier 1.4.29
+
+**Espace** bascule entre Lecture et Pause de la timeline générale, en Edit et Show. Le raccourci est ignoré pendant la saisie, dans les fenêtres de dialogue et sur les autres commandes ayant leur propre action clavier. Maintenir la touche ne provoque pas de bascules répétées. Les aperçus médias conservent leurs commandes indépendantes.
 
 ## Édition des Cues 1.4.28
 
