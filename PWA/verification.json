@@ -348,5 +348,69 @@
     },
     "extractedApp": "Fichiers identiques, permissions exécutables et signature toutes architectures vérifiées",
     "remaining": "Import QLab réel et Mac Intel physique à essayer"
+  },
+  "pilot1414": {
+    "ui": {
+      "checks": [
+        "Départ vide",
+        "+ C sans média",
+        "Temps 02.41 sans limite de durée",
+        "Autosave dès la saisie, restauration au rechargement",
+        "+ Média crée sa Cue et waveform",
+        "Cut à zéro, fondu ultérieur",
+        "Show paysage côte à côte et timeline visible sans scroll 1366x768",
+        "Timeline Show verrouillée, waveform visible",
+        "Geste Safari annulé, défilement conservé",
+        "Largeurs tablette et téléphone sans débordement"
+      ],
+      "errors": [],
+      "bounds": {
+        "active": {
+          "x": 18,
+          "y": 65.1875,
+          "w": 659,
+          "bottom": 467
+        },
+        "next": {
+          "x": 689,
+          "y": 65.1875,
+          "w": 659,
+          "bottom": 467
+        },
+        "timeline": {
+          "x": 18,
+          "y": 479,
+          "w": 1330,
+          "bottom": 727.8125
+        }
+      }
+    },
+    "pdf": {
+      "checks": [
+        "Aperçu SVG intégré, sans iframe ni téléchargement automatique ; PDF explicite, compteurs dédupliqués audio/vidéo, zoom et nettoyage",
+        "Dix Cues, deux pages intégrées défilables et fermeture Échap",
+        "ipad : pages ajustées, zoom et défilement interne sans débordement de l’application",
+        "iphone : pages ajustées, zoom et défilement interne sans débordement de l’application",
+        "small : pages ajustées, zoom et défilement interne sans débordement de l’application",
+        "Rechargement et premier aperçu hors ligne : module local disponible, aucune dépendance au lecteur PDF natif",
+        "Descriptions longues conservées, aucune mention vidéo en l’absence de vidéo"
+      ],
+      "errors": [],
+      "moduleBytes": 4826
+    },
+    "package": {
+      "checks": [
+        "Projet généré par la PWA avec application .app directe et sans ancien ZIP de sources",
+        "ZIP incluant le compagnon généré également hors ligne",
+        "Package incluant .app toujours réimportable dans la PWA"
+      ],
+      "errors": []
+    },
+    "pdfTimes": "Écoulé + (restant jusqu’à projectDuration), rendu inspecté",
+    "physicalTestsPending": [
+      "Safari et PWA iPad : pincement",
+      "CPU/mémoire avec médias réels",
+      "QLab et Mac Intel"
+    ]
   }
 }

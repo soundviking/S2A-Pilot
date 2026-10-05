@@ -1,3 +1,31 @@
+# S2A Pilot 1.4.14 — version de test
+
+## Changements 1.4.14
+
+- Nouvelle conduite vide, aucune Cue permanente imposée. Toutes les Cues, y compris celles à zéro dans les anciens projets, peuvent être déplacées et supprimées.
+- **+ C** crée un repère avec titre, description et visuel, sans zone d’ajout de média.
+- **+ Média** ouvre le choix d’un fichier audio ou vidéo puis crée une nouvelle Cue portant son nom, au temps courant. Annuler le choix ne crée rien. Les éditeurs IN / OUT, waveform, aperçu, lecture indépendante, Loop et zoom sont conservés. Les anciens projets avec plusieurs médias par Cue restent lisibles.
+- Show paysage sur ordinateur : Cue active à gauche, prochaine Cue à droite, timeline en dessous. Les commandes restent visibles aux dimensions testées 1366 × 768 et 1280 × 720. Le moniteur vidéo reste disponible en dessous lorsque nécessaire.
+- Timeline Show en lecture seule : clics et marqueurs ne déplacent plus la lecture. Lecture / Pause et Retour au début restent actifs.
+- Waveform combinée et bandes de position des médias visibles en Edit **et** Show. Les enveloppes audio sont additionnées en tenant compte du montage, des loops, cuts et fondus ; la vidéo muette apparaît comme bande sans contribuer au son. Les fichiers sont décodés et mis en cache, sans recalcul à chaque image de lecture. Si le navigateur ne décode pas la piste audio d’une vidéo, sa bande reste visible et une indication signale la waveform indisponible.
+- Zoom de page par pincement bloqué, tout en conservant le défilement tactile et les boutons de zoom dédiés aux fichiers et au PDF.
+- Sauvegarde locale automatique dès la première modification, y compris pendant la saisie du titre et de la description. Le bouton Enregistrer est supprimé ; **Enregistrer sous…** exporte le package portable. La sauvegarde reste sur cet appareil et dans cette installation de l’application.
+- PDF : temps écoulé, puis temps restant jusqu’à la fin de la conduite entre parenthèses, par exemple **02:41.0 (-03:19.0)**. Une légende précise le calcul. L’aperçu intégré affiche les mêmes informations. Cinq Cues standards par page sont conservées.
+
+## Vérifications de cette version
+
+Création, déplacements, restauration locale après rechargement, changement d’options après autosave, déverrouillage d’une ancienne Cue permanente, suppression de la dernière Cue et annulation vérifiés. Layout Show paysage, verrouillage du seek, waveform et largeurs téléphone/tablette vérifiés dans Chrome. PDF cinq/dix Cues et longues descriptions, aperçu et export hors ligne vérifiés. Le rendu PDF a été inspecté visuellement.
+
+À tester sur matériel réel : pincement Safari et PWA installée sur iPad, fluidité avec les médias du spectacle, vidéo et écran étendu. Copilote 1.2.5 universel Intel / Apple Silicon reste inclus dans les packages.
+
+## Installation sur serveur
+
+Déployer tout le contenu du dossier sur HTTPS, y compris companion/, assets/, icons/ et technical-preview.js. Partager l’adresse du dossier avec une barre finale ; index.html reste l’entrée interne du serveur. Le cache de service worker est versionné 1.4.14.
+
+## Historique des versions précédentes
+
+Les notes ci-dessous décrivent les versions antérieures et leur état lors des tests ; les changements ci-dessus prévalent.
+
 ## Mise à jour Copilote 1.2.5 / Pilot 1.4.13
 
 Le logo bleu et orange de Copilote est restauré. Dans la fenêtre, ses angles sont arrondis. Pour les prochains imports QLab, le groupe conserve son numéro (par exemple 5) et les étapes internes sont numérotées 5.1, 5.2, 5.3, etc. Les numéros déjà utilisés ailleurs sont évités ; les anciennes conduites ne sont pas modifiées.

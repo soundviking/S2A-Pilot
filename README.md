@@ -4,10 +4,23 @@ S2A Pilot, développé par S2A Production, prépare et conduit des spectacles mu
 
 ## Versions actuelles
 
-- **S2A Pilot 1.4.13** : application web installable, modes Edit et Show.
+- **S2A Pilot 1.4.14** : application web installable, modes Edit et Show.
 - **S2A Copilote 1.2.5** : application macOS universelle Intel et Apple Silicon, macOS 13 minimum.
 
-## Dernières modifications
+## Nouveautés Pilot 1.4.14
+
+- Départ sans Cue imposée. **+ C** crée un repère ; **+ Média** crée une Cue audio ou vidéo.
+- Sauvegarde locale automatique dès la saisie ; bouton Enregistrer supprimé, export via Enregistrer sous… conservé.
+- Show paysage : Cue active et prochaine Cue côte à côte, timeline en dessous et déplacements temporels verrouillés.
+- Waveform combinée et position des médias en Edit et Show ; cache réutilisé, aucun recalcul à chaque frame.
+- Zoom par pincement bloqué ; défilement et boutons de zoom des éditeurs conservés.
+- PDF : temps écoulé et temps restant entre parenthèses, calculé jusqu’à la fin de la conduite.
+
+[Télécharger la PWA 1.4.14](downloads/S2A-Pilot-V1.4.14-PWA.zip)
+
+Tests automatisés Chrome, restauration locale, anciens projets, export hors ligne et mise en page PDF validés. Le blocage du pincement Safari / PWA reste à confirmer sur iPad réel.
+
+## Modifications précédentes
 
 - Logo bleu et orange de Copilote restauré et arrondi dans la fenêtre.
 - Numéros QLab hiérarchiques pour les nouveaux imports : groupe 5, étapes 5.1, 5.2, 5.3… Les collisions sont évitées sans modifier les autres cues.
