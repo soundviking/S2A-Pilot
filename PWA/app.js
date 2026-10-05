@@ -529,7 +529,8 @@ function technicalMediaCounts(ordered){
  return {audio:files.audio.size,video:files.video.size};
 }
 let technicalHeaderImagePromise=null;
-function loadTechnicalHeaderImage(){
+async function loadTechnicalHeaderImage(){if(location.protocol==='file:'&&!window.S2ATechnicalHeader)await loadClassicScript('./technical-header-data.js');return loadTechnicalHeaderImageFromSource();}
+function loadTechnicalHeaderImageFromSource(){
  if(!technicalHeaderImagePromise)technicalHeaderImagePromise=new Promise((resolve,reject)=>{
   const image=new Image();image.onload=()=>{try{
    const canvas=document.createElement('canvas');canvas.width=1190;canvas.height=200;
@@ -541,7 +542,7 @@ function loadTechnicalHeaderImage(){
    const bottom=ctx.createLinearGradient(0,120,0,200);bottom.addColorStop(0,'rgba(2,8,24,0)');bottom.addColorStop(1,'rgba(2,8,24,.45)');ctx.fillStyle=bottom;ctx.fillRect(0,120,canvas.width,80);
    const binary=atob(canvas.toDataURL('image/jpeg',.9).split(',')[1]),bytes=Uint8Array.from(binary,c=>c.charCodeAt(0));resolve({bytes,width:canvas.width,height:canvas.height});
   }catch(error){technicalHeaderImagePromise=null;reject(error);}};
-  image.onerror=()=>{technicalHeaderImagePromise=null;reject(new Error('Le visuel de l’en-tête est indisponible.'));};image.src='./assets/conduite-header.webp';
+  image.onerror=()=>{technicalHeaderImagePromise=null;reject(new Error('Le visuel de l’en-tête est indisponible.'));};image.src=location.protocol==='file:'?window.S2ATechnicalHeader:'./assets/conduite-header.webp';
  });return technicalHeaderImagePromise;
 }
 function pdfPageHeader(page,title,ordered,pageIndex,headerImage){
@@ -621,7 +622,7 @@ function closePdfPreview(){
 async function generateTechnicalPdf(){
  const old=pdfTechBtn.textContent,generation=++pdfPreviewGeneration;pdfTechBtn.disabled=true;pdfTechBtn.textContent='Création de la conduite…';
  try{
-  const [{bytes,title,pages},preview]=await Promise.all([buildTechnicalPdfBytes(),import('./technical-preview.js')]);
+  const [{bytes,title,pages},preview]=await Promise.all([buildTechnicalPdfBytes(),loadTechnicalPreview()]);
   if(generation!==pdfPreviewGeneration)return;
   if(pdfPreviewDispose)pdfPreviewDispose();if(pdfPreviewUrl)URL.revokeObjectURL(pdfPreviewUrl);
   pdfPreviewUrl=URL.createObjectURL(new Blob([bytes],{type:'application/pdf'}));
@@ -763,10 +764,14 @@ document.addEventListener('touchmove',e=>{if(e.touches.length>1)e.preventDefault
 document.addEventListener('wheel',e=>{if(e.ctrlKey)e.preventDefault();},{passive:false});
 
 // This manifest is requested from the network, outside the service-worker cache.
-const APP_VERSION='1.4.22';let lastVersionCheck=0,versionCheckRunning=false;
+const APP_VERSION='1.4.23';let lastVersionCheck=0,versionCheckRunning=false;
 const updateNotice=document.createElement('div');updateNotice.id='updateNotice';updateNotice.hidden=true;updateNotice.setAttribute('role','status');const updateText=document.createElement('span'),updateButton=document.createElement('button');updateButton.type='button';updateButton.textContent='Ouvrir la nouvelle version';updateNotice.append(updateText,updateButton);document.querySelector('main').prepend(updateNotice);
 function updateVersionButton(){const b=document.getElementById('updateNotice')?.querySelector('button');if(!b)return;b.disabled=locked||transportPlaying;b.title=b.disabled?'Quitter le mode Show et mettre la lecture en pause pour actualiser.':'';}
 function versionIsNewer(a,b){const x=a.split('.').map(Number),y=b.split('.').map(Number);for(let i=0;i<3;i++){if(x[i]!==y[i])return x[i]>y[i];}return false;}
 async function checkAppVersion(force=false){if(versionCheckRunning||(!force&&Date.now()-lastVersionCheck<30000)||document.hidden)return;versionCheckRunning=true;lastVersionCheck=Date.now();const label=document.querySelector('.appVersion');try{const response=await fetch('./version.json?check='+Date.now(),{cache:'no-store',signal:typeof AbortSignal.timeout==='function'?AbortSignal.timeout(8000):undefined});if(!response.ok)throw new Error('Vérification indisponible');const data=await response.json();if(!/^\d+\.\d+\.\d+$/.test(data.version))throw new Error('Version invalide');const newer=versionIsNewer(data.version,APP_VERSION);updateNotice.hidden=!newer;if(newer){updateText.textContent='Nouvelle version '+data.version+' disponible. Quittez le mode Show pour actualiser.';updateVersionButton();}label.title=newer?'Version plus récente disponible sur le serveur':'Version vérifiée sur le serveur';}catch{label.title='Version du serveur non vérifiée : connexion indisponible.';}finally{versionCheckRunning=false;}}
 updateButton.onclick=async()=>{if(locked||transportPlaying)return;try{await writeAutosave();location.assign('./actualiser.html?update='+Date.now());}catch(e){updateText.textContent='Actualisation annulée : la sauvegarde locale a échoué.';}};
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)checkAppVersion();});window.addEventListener('online',()=>checkAppVersion(true));setInterval(()=>{updateVersionButton();checkAppVersion();},300000);setTimeout(()=>checkAppVersion(true),1200);
+
+const classicScriptLoads=new Map();
+function loadClassicScript(path){if(classicScriptLoads.has(path))return classicScriptLoads.get(path);const promise=new Promise((resolve,reject)=>{const script=document.createElement('script');script.src=path;script.onload=resolve;script.onerror=()=>{classicScriptLoads.delete(path);script.remove();reject(new Error('Fichier de l’application indisponible : '+path));};document.head.append(script);});classicScriptLoads.set(path,promise);return promise;}
+async function loadTechnicalPreview(){if(!window.S2ATechnicalPreview)await loadClassicScript('./technical-preview.js');return window.S2ATechnicalPreview;}

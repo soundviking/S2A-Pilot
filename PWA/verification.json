@@ -497,5 +497,9 @@
   "pilot1422": {
     "videoOutput": "Sans vidéo masqué ; avec vidéo visible en Show et grisé sans écran étendu ; masqué en Edit et après suppression",
     "test": "Chrome automatisé"
+  },
+  "pilot1423": {
+    "file": "Ouverture directe index.html : aperçu SVG et génération PDF avec photo d’en-tête réussis",
+    "preview": "Script classique différé au lieu du module dynamique"
   }
 }

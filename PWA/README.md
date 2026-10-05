@@ -1,3 +1,11 @@
+# S2A Pilot 1.4.23 — aperçu PDF en ouverture locale
+
+L’aperçu PDF charge désormais un script classique à la demande, au lieu d’un import de module bloqué en file://. La photo d’en-tête dispose d’un fichier de données chargé uniquement en ouverture directe pour éviter les restrictions canvas sur fichiers locaux. Les ressources restent chargées à la demande ; sur serveur, la photo d’origine et le cache hors ligne sont conservés.
+
+Test Chrome : index.html ouvert directement, + Cue, aperçu et photo d’en-tête validés. Les correctifs Safari 1.4.21 et visibilité conditionnelle Sortie vidéo 1.4.22 sont inclus. Pour utiliser l’ensemble des fonctions PWA et l’export du compagnon, privilégier le lanceur local ou un serveur HTTPS.
+
+## Historique
+
 # S2A Pilot 1.4.22
 
 En mode Show, le bouton Sortie vidéo et son statut sont visibles uniquement si la conduite contient une vidéo. Ils disparaissent après suppression de la dernière vidéo et restent masqués en Edit. Sans écran étendu, le bouton visible reste grisé. Le correctif de démarrage Safari 1.4.21 est inclus.

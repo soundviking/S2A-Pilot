@@ -1,3 +1,4 @@
+window.S2ATechnicalPreview=(()=>{
 // Lightweight preview for this application's own drawing instructions.
 // The PDF download and the SVG pages use the same page layout, text and JPEGs.
 const escapeXml=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&apos;'}[c]));
@@ -35,7 +36,7 @@ function svgPage(page,index,title){
  }
  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 595 842" width="595" height="842" role="img" aria-label="${escapeXml(`Page ${index+1} sur ${page.totalPages} — ${title}`)}"><title>${escapeXml(`Conduite technique — ${title} — page ${index+1}`)}</title><rect width="595" height="842" fill="white"/><g transform="translate(0 842) scale(1 -1)">${drawing.join('')}</g></svg>`;
 }
-export function mountTechnicalPreview(pages,title,controls){
+function mountTechnicalPreview(pages,title,controls){
  const {container,minus,plus,label,fit}=controls;let zoom=1,disposed=false;
  const fragment=document.createDocumentFragment(),elements=[];
  pages.forEach((page,index)=>{const element=document.createElement('article');element.className='pdfPreviewPage';element.setAttribute('aria-label',`Page ${index+1} sur ${pages.length}`);element.innerHTML=svgPage({...page,totalPages:pages.length},index,title);elements.push(element);fragment.append(element);});
@@ -47,3 +48,5 @@ export function mountTechnicalPreview(pages,title,controls){
  const observer=new ResizeObserver(layout);observer.observe(container);layout();
  return()=>{disposed=true;observer.disconnect();minus.removeEventListener('click',zoomOut);plus.removeEventListener('click',zoomIn);fit.removeEventListener('click',fitPage);container.replaceChildren();elements.length=0;};
 }
+
+return {mountTechnicalPreview};})();
