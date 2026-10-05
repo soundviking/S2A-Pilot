@@ -736,7 +736,7 @@ $('globalMediaFile').addEventListener('change',async()=>{const input=$('globalMe
 function scheduleTimelineMedia(){clearTimeout(timelineMediaTimer);timelineMediaTimer=setTimeout(renderTimelineMedia,80);}
 async function renderTimelineMedia(){
  const canvas=$('projectWaveform'),tracks=$('projectMediaTracks'),status=$('projectWaveformStatus');if(!canvas)return;
- const items=allMediaActions(),d=projectDuration(),width=Math.min(2048,Math.max(300,Math.round(timeline.clientWidth*(Math.min(2,devicePixelRatio||1)))));
+ const items=allMediaActions(),d=projectDuration();const visibleCount=items.filter(i=>mediaSegmentDuration(i.action)>0&&Math.min(d,effectiveMediaEnd(i)??d)>i.start).length;timeline.style.height=Math.max(86,30+visibleCount*23)+'px';const width=Math.min(2048,Math.max(300,Math.round(timeline.clientWidth*(Math.min(2,devicePixelRatio||1)))));
  const signature=JSON.stringify([width,d,items.map(i=>[i.action.id,i.start,i.action.inPoint,i.action.outPoint,i.action.loop,i.action.transition,i.action.fadeDuration,i.action.muted])]);
  if(signature===timelineMediaSignature)return;timelineMediaSignature=signature;const generation=++timelineMediaGeneration;
  tracks.replaceChildren();canvas.width=width;canvas.height=72;const sums=new Float32Array(width);drawWaveform(canvas,[]);

@@ -1,3 +1,9 @@
+## Correctif 1.4.17
+
+Timeline de hauteur automatique : aucune bande média tronquée, zone distincte pour les durées. Bandes audio vertes translucides ; vidéos violettes.
+
+[Télécharger la PWA 1.4.17](downloads/S2A-Pilot-V1.4.17-PWA.zip)
+
 Correctif 1.4.16 : cache du service worker versionné correctement ; lanceur local avec actualisation des fichiers, sans suppression des projets IndexedDB.
 
 # S2A Pilot
