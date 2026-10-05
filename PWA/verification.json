@@ -488,5 +488,10 @@
       }
     },
     "timeline": "Six bandes visibles, hauteur automatique, audio vert translucide"
+  },
+  "pilot1421": {
+    "test": "Refus synchrone window-management reproduit sur 1.4.20, absent sur 1.4.21 ; Nouveau, + Cue et aperçu PDF fonctionnels",
+    "engine": "Chrome, simulation des API indisponibles",
+    "pending": "Safari sur iPad physique"
   }
 }

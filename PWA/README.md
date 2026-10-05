@@ -1,3 +1,13 @@
+# S2A Pilot 1.4.21 — compatibilité au démarrage
+
+La demande d’autorisation window-management n’est effectuée que si l’API des écrans étendus existe. Les erreurs synchrones et asynchrones sont interceptées ; elles ne bloquent plus l’initialisation. Compatibilité complémentaire : accès aux derniers éléments sans Array.at, ResizeObserver conditionnel et timeout de vérification version conditionnel.
+
+Test de reproduction dans Chrome avec API écran/permission non prise en charge : ancien démarrage bloqué, Nouveau / + Cue / Conduite PDF fonctionnels après correction. Ce test simule la défaillance ; Safari sur iPad réel reste à confirmer. Aucune donnée locale supprimée.
+
+Déployer tout le dossier et ouvrir actualiser.html si Safari conserve l’ancienne page. Le cache est versionné 1.4.21.
+
+## Historique
+
 # S2A Pilot 1.4.20
 
 Bandes et pastilles VIDÉO en rose vif, fond translucide et bordure plus visible. Les bandes audio restent vertes.
