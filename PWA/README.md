@@ -1,3 +1,9 @@
+# S2A Pilot 1.4.20
+
+Bandes et pastilles VIDÉO en rose vif, fond translucide et bordure plus visible. Les bandes audio restent vertes.
+
+## Historique
+
 # S2A Pilot 1.4.19 — vérification des mises à jour
 
 Vérification réseau de version.json au démarrage, au retour dans l’application et toutes les cinq minutes si visible. Le manifeste contourne le cache du service worker et est demandé sans cache avec une adresse unique. Sans réseau, aucune confirmation « à jour » n’est donnée ; le mode hors ligne reste disponible.

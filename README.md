@@ -1,3 +1,9 @@
+## Version 1.4.20
+
+Bandes et pastilles vidéo rose vif translucide, audio vert.
+
+[Télécharger la PWA 1.4.20](downloads/S2A-Pilot-V1.4.20-PWA.zip)
+
 ## Version 1.4.19
 
 Vérification de la version publiée sur le serveur au démarrage, au retour dans l’application et toutes les cinq minutes. Proposition d’actualisation, protégée pendant Show et lecture, avec sauvegarde locale conservée. Déployer version.json et actualiser.html avec le reste du dossier. Fonctionne à partir de cette version.
