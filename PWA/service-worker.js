@@ -1,15 +1,15 @@
-const CACHE_NAME='s2a-pilot-v1-4-39-app-shell';
+const CACHE_NAME='s2a-pilot-v1-4-40-app-shell';
 const APP_SHELL=[
   './',
   './index.html',
-  './app.js?v=1.4.39',
-  './i18n.js?v=1.4.39',
-  './technical-preview.js?v=1.4.39',
-  './technical-header-data.js?v=1.4.39',
+  './app.js?v=1.4.40',
+  './i18n.js?v=1.4.40',
+  './technical-preview.js?v=1.4.40',
+  './technical-header-data.js?v=1.4.40',
   './assets/conduite-header.webp',
-  './icons/s2a-pilot-180.png?v=1.4.39',
-  './icons/s2a-pilot-192.png?v=1.4.39',
-  './icons/s2a-pilot-512.png?v=1.4.39',
+  './icons/s2a-pilot-180.png?v=1.4.40',
+  './icons/s2a-pilot-192.png?v=1.4.40',
+  './icons/s2a-pilot-512.png?v=1.4.40',
   './manifest.webmanifest',
   './manifest.en.webmanifest',
   './companion/S2A-Copilote-1.2.8-app.zip',

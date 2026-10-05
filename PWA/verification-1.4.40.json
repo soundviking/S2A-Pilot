@@ -1,0 +1,13 @@
+{
+  "version": "1.4.40",
+  "change": "Red upcoming Cue glow pulses once per second at <=10s; active blue fades away",
+  "validated": [
+    "10-second boundary",
+    "One-second pulse not restarted on UI updates",
+    "Cue change and end reset",
+    "Edit clears urgency",
+    "Reduced-motion static red",
+    "Chrome screenshot visually inspected"
+  ],
+  "limitation": "No physical iPad check"
+}
