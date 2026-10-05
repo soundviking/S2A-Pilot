@@ -78,3 +78,8 @@ Chrome tests cover creation, editing, autosave, language selection, user content
 ## License
 
 Use is permitted; redistribution, publication or hosting for third parties requires prior written permission from S2A Production. See [the license](LICENSE).
+
+
+## iPad display
+
+Version 1.4.36 matches the PWA background and reserves status-bar safe areas. Any blur added by iPadOS needs validation on a physical iPad; complete removal is not guaranteed.

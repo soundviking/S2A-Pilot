@@ -1,0 +1,10 @@
+{
+  "version": "1.4.36",
+  "change": "Uniform opaque page/theme background and safe-area padding",
+  "limitation": "Physical iPadOS 27 validation required; OS-owned blur not controllable by this page",
+  "validated": [
+    "Chrome: 1024x768 and 768x1024 show layout without horizontal overflow",
+    "Matching root/body/theme background",
+    "FR/EN, PDF, project ZIP, offline boot, simulated Safari Mac and iPad output rules"
+  ]
+}

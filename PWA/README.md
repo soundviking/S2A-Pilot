@@ -70,3 +70,8 @@ Tests Chrome : création, édition, sauvegarde, langues, préservation des conte
 ## Licence
 
 Utilisation autorisée ; redistribution, publication ou hébergement pour des tiers soumis à un accord écrit préalable de S2A Production. Voir [la licence](LICENSE).
+
+
+## Affichage sur iPad
+
+La version 1.4.36 harmonise le fond de la PWA et réserve les zones de sécurité de la barre d’état. Le flou éventuellement ajouté par iPadOS doit être contrôlé sur un iPad réel ; sa suppression complète n’est pas garantie.
