@@ -939,7 +939,7 @@ final class AppModel: ObservableObject {
                 let pausedState=states.filter{$0.paused}.sorted{$0.elapsed < $1.elapsed}.first
                 let selected=live ?? pausedState
 
-                DispatchQueue.main.async { guard self.monitorGeneration == generation else { return }; 
+                DispatchQueue.main.async { guard self.monitorGeneration == generation else { return };
                     guard let selected, let show=showsSnapshot.first(where:{$0.groupID==selected.id}) else {
                         self.activeShow=nil; self.visualRunning=false; self.visualElapsed=0; self.visualStatus="En attente d’un numéro S2A Pilot"; return
                     }
