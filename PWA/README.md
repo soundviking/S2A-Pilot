@@ -1,3 +1,9 @@
+# Version 1.4.32 — Exemple du nom du numéro
+
+## Exemple du nom du numéro 1.4.32
+
+Le champ affiche désormais « Ex. Numéro Gala — Norbert Ferré ».
+
 # Version 1.4.31 — Waveforms nettes et zoom général en Edit
 
 ## Waveforms et zoom 1.4.31
