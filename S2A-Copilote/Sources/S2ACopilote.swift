@@ -121,7 +121,7 @@ struct QueuedShowCuePackage: Identifiable {
     let project: ShowCueProject
 }
 
-struct WorkspaceInfo {
+struct WorkspaceInfo: Identifiable, Equatable {
     let id: String
     let name: String
     let workspacePath: String
@@ -164,6 +164,11 @@ enum ShowCueError: LocalizedError {
 final class AppModel: ObservableObject {
     @Published var packages: [QueuedShowCuePackage] = []
     @Published var workspace: WorkspaceInfo?
+    @Published var availableWorkspaces: [WorkspaceInfo] = []
+    var selectedWorkspaceID: String {
+        get { workspace?.id ?? "" }
+        set { selectWorkspace(newValue) }
+    }
     @Published var status = "Choisis un package S2A Pilot."
     @Published var isBusy = false
     @Published var errorMessage: String?
@@ -175,12 +180,17 @@ final class AppModel: ObservableObject {
     @Published var visualStatus = "En attente d’un numéro S2A Pilot"
     @Published var visualAlwaysOnTop = true
 
+    private var workspaceTimer: Timer?
+    private var workspaceRefreshInFlight = false
+    private var lastDetectionError: String?
     private var monitorTimer: Timer?
     private var monitorPollInFlight = false
+    private var monitorGeneration = 0
 
     private var extractedURL: URL?
 
     deinit {
+        workspaceTimer?.invalidate()
         monitorTimer?.invalidate()
         for item in packages {
             try? FileManager.default.removeItem(at: item.extractedURL)
@@ -262,24 +272,67 @@ final class AppModel: ObservableObject {
         loadPackages([url])
     }
 
+    func startWorkspaceDetection() {
+        guard workspaceTimer == nil else { return }
+        refreshWorkspace()
+        workspaceTimer = Timer.scheduledTimer(withTimeInterval: 3, repeats: true) { [weak self] _ in
+            self?.refreshWorkspace()
+        }
+        if let workspaceTimer { RunLoop.main.add(workspaceTimer, forMode: .common) }
+    }
+
+    func selectWorkspace(_ id: String) {
+        guard !isBusy, let info = availableWorkspaces.first(where: { $0.id == id }), info != workspace else { return }
+        stopVisualMonitor()
+        workspace = info
+        activeShow = nil
+        visualRunning = false
+        visualElapsed = 0
+        loadSavedShows(for: info)
+        startVisualMonitor()
+    }
+
     func refreshWorkspace() {
-        errorMessage = nil
-        do {
-            let info = try qlabFrontWorkspace()
-            workspace = info
-            loadSavedShows(for: info)
-            status = "Workspace QLab détecté : \(info.name)"
-        } catch {
-            workspace = nil
-            savedShows = []
-            activeShow = nil
-            status = "Aucun workspace QLab détecté."
-            errorMessage = error.localizedDescription
+        guard !workspaceRefreshInFlight, !isBusy else { return }
+        workspaceRefreshInFlight = true
+        DispatchQueue.global(qos: .utility).async {
+            let result = Result { try self.qlabWorkspaces() }
+            DispatchQueue.main.async {
+                self.workspaceRefreshInFlight = false
+                guard !self.isBusy else { return }
+                switch result {
+                case .success(let infos):
+                    self.availableWorkspaces = infos
+                    let selected = infos.first(where: { $0.id == self.workspace?.id }) ?? infos.first
+                    if selected != self.workspace {
+                        self.stopVisualMonitor()
+                        self.workspace = selected
+                        self.activeShow = nil
+                        self.visualRunning = false
+                        self.visualElapsed = 0
+                        self.savedShows = []
+                        if let selected { self.loadSavedShows(for: selected); self.startVisualMonitor() }
+                    }
+                    if self.errorMessage == self.lastDetectionError { self.errorMessage = nil }
+                    self.lastDetectionError = nil
+                case .failure(let error):
+                    self.availableWorkspaces = []
+                    self.workspace = nil
+                    self.savedShows = []
+                    self.activeShow = nil
+                    self.visualRunning = false
+                    self.stopVisualMonitor()
+                    // No workspace is a normal state. Only genuine access/script errors reach this branch.
+                    let message = "Impossible de détecter les workspaces QLab : \(error.localizedDescription)"
+                    if self.lastDetectionError != message { self.errorMessage = message }
+                    self.lastDetectionError = message
+                }
+            }
         }
     }
 
     func importIntoQLab() {
-        guard !packages.isEmpty else { return }
+        guard !packages.isEmpty, let selectedWorkspace = workspace else { return }
 
         isBusy = true
         errorMessage = nil
@@ -287,7 +340,7 @@ final class AppModel: ObservableObject {
 
         DispatchQueue.global(qos: .userInitiated).async {
             do {
-                let initial = try self.qlabFrontWorkspace()
+                let initial = try self.qlabWorkspace(id: selectedWorkspace.id)
 
                 DispatchQueue.main.async {
                     let names = self.packages.map { "• \($0.project.title)" }.joined(separator: "\n")
@@ -302,7 +355,7 @@ final class AppModel: ObservableObject {
 
                     \(names)
 
-                    Chaque numéro sera créé dans son propre Group cue Start First.
+                    Chaque numéro sera créé dans son propre Group cue Timeline.
                     """
                     alert.addButton(withTitle: "Importer")
                     alert.addButton(withTitle: "Annuler")
@@ -318,17 +371,17 @@ final class AppModel: ObservableObject {
 
                     DispatchQueue.global(qos: .userInitiated).async {
                         do {
-                            var current = try self.qlabFrontWorkspace()
+                            var current = try self.qlabWorkspace(id: initial.id)
                             guard current.id == initial.id else {
-                                throw ShowCueError.commandFailed("Le workspace QLab au premier plan a changé. Import annulé.")
+                                throw ShowCueError.commandFailed("Le workspace QLab sélectionné a été fermé. Import annulé.")
                             }
 
                             var importedCount = 0
 
                             for item in queueSnapshot {
-                                current = try self.qlabFrontWorkspace()
+                                current = try self.qlabWorkspace(id: initial.id)
                                 guard current.id == initial.id else {
-                                    throw ShowCueError.commandFailed("Le workspace QLab au premier plan a changé pendant l’import.")
+                                    throw ShowCueError.commandFailed("Le workspace QLab sélectionné a été fermé pendant l’import.")
                                 }
 
                                 let result = try self.performImport(
@@ -346,6 +399,7 @@ final class AppModel: ObservableObject {
                                 )
                                 try self.saveShowRecord(record, for: current)
                                 importedCount += 1
+                                DispatchQueue.main.sync { self.removePackage(item.id) }
                             }
 
                             DispatchQueue.main.async {
@@ -358,8 +412,7 @@ final class AppModel: ObservableObject {
                                 self.startVisualMonitor()
                                 self.status = "\(importedCount) conduite\(importedCount > 1 ? "s" : "") S2A Pilot importée\(importedCount > 1 ? "s" : "") dans « \(current.name) »."
 
-                                // Successful batch import clears the queue.
-                                self.clearPackages()
+                                self.status = "\(importedCount) conduite\(importedCount > 1 ? "s" : "") importée\(importedCount > 1 ? "s" : "") dans « \(current.name) »."
                             }
                         } catch {
                             DispatchQueue.main.async {
@@ -429,68 +482,56 @@ final class AppModel: ObservableObject {
         return (temp, project)
     }
 
-    private func qlabFrontWorkspace() throws -> WorkspaceInfo {
+    private func qlabWorkspaces() throws -> [WorkspaceInfo] {
+        // Avoid launching QLab when no process is running.
+        guard !NSRunningApplication.runningApplications(withBundleIdentifier: "com.figure53.QLab.5").isEmpty else { return [] }
         let script = """
         tell application id "com.figure53.QLab.5"
-            if (count of workspaces) is 0 then error "Aucun workspace QLab n’est ouvert."
-            set w to front workspace
-            set wid to unique id of w
-
-            try
+            set resultText to ""
+            repeat with w in workspaces
+                set wid to unique id of w
                 set wname to name of w
-            on error
-                set wname to "Workspace QLab"
-            end try
-
-            set wpath to ""
-            try
-                set rawPath to path of w
-                if rawPath is not missing value and rawPath is not "" then
-                    try
-                        set wpath to POSIX path of (rawPath as alias)
-                    on error
-                        set wpath to rawPath as text
-                    end try
-                end if
-            end try
-
-            return wid & linefeed & wname & linefeed & wpath
+                set wpath to ""
+                try
+                    set rawPath to path of w
+                    if rawPath is not missing value and rawPath is not "" then
+                        try
+                            set wpath to POSIX path of (rawPath as alias)
+                        on error
+                            set wpath to rawPath as text
+                        end try
+                    end if
+                end try
+                set resultText to resultText & wid & (ASCII character 31) & wname & (ASCII character 31) & wpath & (ASCII character 30)
+            end repeat
+            return resultText
         end tell
         """
-
         let output = try run("/usr/bin/osascript", ["-e", script])
-        let parts = output
-            .split(separator: "\n", omittingEmptySubsequences: false)
-            .map(String.init)
-
-        guard let id = parts.first, !id.isEmpty else {
-            throw ShowCueError.commandFailed("QLab n’a pas renvoyé d’identifiant de workspace.")
+        return output.components(separatedBy: "\u{1e}").compactMap { record in
+            let parts = record.components(separatedBy: "\u{1f}")
+            guard parts.count == 3, !parts[0].isEmpty else { return nil }
+            return WorkspaceInfo(id: parts[0], name: parts[1], workspacePath: parts[2])
         }
+    }
 
-        let name = parts.count > 1
-            ? parts[1].trimmingCharacters(in: .whitespacesAndNewlines)
-            : "Workspace QLab"
-
-        let path = parts.count > 2
-            ? parts.dropFirst(2).joined(separator: "\n").trimmingCharacters(in: .whitespacesAndNewlines)
-            : ""
-
-        return WorkspaceInfo(
-            id: id,
-            name: name.isEmpty ? "Workspace QLab" : name,
-            workspacePath: path
-        )
+    private func qlabWorkspace(id: String) throws -> WorkspaceInfo {
+        guard let info = try qlabWorkspaces().first(where: { $0.id == id }) else {
+            throw ShowCueError.commandFailed("Le workspace sélectionné a été fermé. Choisis un workspace ouvert.")
+        }
+        return info
     }
 
     private func performImport(project: ShowCueProject, folder: URL, workspaceID: String) throws -> (groupID: String, mediaID: String?, imageURLs: [Int: URL]) {
-        let current = try qlabFrontWorkspace()
-        guard current.id == workspaceID else { throw ShowCueError.commandFailed("Le workspace QLab au premier plan a changé.") }
+        let current = try qlabWorkspace(id: workspaceID)
+        guard current.id == workspaceID else { throw ShowCueError.commandFailed("Le workspace QLab sélectionné a été fermé.") }
         guard let projectFolder = current.projectFolder else { throw ShowCueError.commandFailed("Le workspace QLab doit être enregistré avant l’import.") }
 
         let fm = FileManager.default
         let packageRoot = folder.standardizedFileURL.path + "/"
-        let mediaFolder = projectFolder.appendingPathComponent("S2A Pilot Media", isDirectory: true).appendingPathComponent(safeFileName(project.title), isDirectory: true)
-        let imageFolder = projectFolder.appendingPathComponent("images", isDirectory: true).appendingPathComponent(safeFileName(project.title), isDirectory: true)
+        let importFolderName = safeFileName(project.title) + "-" + UUID().uuidString
+        let mediaFolder = projectFolder.appendingPathComponent("S2A Pilot Media", isDirectory: true).appendingPathComponent(importFolderName, isDirectory: true)
+        let imageFolder = projectFolder.appendingPathComponent("images", isDirectory: true).appendingPathComponent(importFolderName, isDirectory: true)
         try fm.createDirectory(at: mediaFolder, withIntermediateDirectories: true)
         try fm.createDirectory(at: imageFolder, withIntermediateDirectories: true)
 
@@ -516,7 +557,7 @@ final class AppModel: ObservableObject {
                     let key = action.id ?? "cue\(cue.index)-\(offset)"
                     if destinationForAction[key] == nil {
                         let name = safeFileName(action.name ?? source.lastPathComponent)
-                        let destination = mediaFolder.appendingPathComponent(String(format: "%02d-", cue.index) + name)
+                        let destination = mediaFolder.appendingPathComponent(String(format: "%02d-", cue.index) + safeFileName(key) + "-" + name)
                         try copyReplacing(source, to: destination)
                         destinationForAction[key] = destination
                     }
@@ -534,12 +575,13 @@ final class AppModel: ObservableObject {
         var lines: [String] = []
         lines.append("tell application id \"com.figure53.QLab.5\"")
         lines.append("if (count of workspaces) is 0 then error \"Aucun workspace QLab n’est ouvert.\"")
-        lines.append("set targetWorkspace to front workspace")
-        lines.append("if (unique id of targetWorkspace) is not \(asAppleString(workspaceID)) then error \"Le workspace QLab au premier plan a changé.\"")
+        lines.append("set targetWorkspace to first workspace whose unique id is \(asAppleString(workspaceID))")
+        lines.append("if (unique id of targetWorkspace) is not \(asAppleString(workspaceID)) then error \"Le workspace QLab sélectionné a été fermé.\"")
         lines.append("make targetWorkspace type \"Group\"")
         lines.append("set showGroup to last item of (selected of targetWorkspace as list)")
         lines.append("set q name of showGroup to \(asAppleString(project.title))")
         lines.append("set mode of showGroup to timeline")
+        lines.append("set importedGroupNumber to q number of showGroup as text")
 
         var firstMediaVariable: String? = nil
         var mediaCounter = 0
@@ -715,12 +757,27 @@ final class AppModel: ObservableObject {
             }
         }
 
+        lines.append("set importedChildren to cues of showGroup as list")
+        lines.append("repeat with importedChild in importedChildren")
+        lines.append("set q number of importedChild to \"\"")
+        lines.append("end repeat")
+        lines.append("set usedNumbers to q number of cues of targetWorkspace")
+        lines.append("set groupNumber to my s2aGroupNumber(importedGroupNumber, usedNumbers)")
+        lines.append("set q number of showGroup to groupNumber")
+        lines.append("set end of usedNumbers to groupNumber")
+        lines.append("set childNumbers to my s2aChildNumbers(groupNumber, usedNumbers, count of importedChildren)")
+        lines.append("repeat with childIndex from 1 to count of importedChildren")
+        lines.append("set q number of item childIndex of importedChildren to item childIndex of childNumbers")
+        lines.append("end repeat")
+        lines.append("set selected of targetWorkspace to {showGroup}")
+
         if let firstMediaVariable {
             lines.append("return (uniqueID of showGroup as text) & tab & (uniqueID of \(firstMediaVariable) as text)")
         } else {
             lines.append("return (uniqueID of showGroup as text) & tab & \"\"")
         }
         lines.append("end tell")
+        lines.append("on s2aGroupNumber(currentNumber, usedNumbers)\n    if currentNumber is not \"\" then return currentNumber\n    set candidate to 1\n    repeat while usedNumbers contains (candidate as text)\n        set candidate to candidate + 1\n    end repeat\n    return candidate as text\nend s2aGroupNumber\n\non s2aChildNumbers(groupNumber, usedNumbers, childCount)\n    set resultNumbers to {}\n    set stepIndex to 1\n    repeat childCount times\n        set candidate to groupNumber & \".\" & (stepIndex as text)\n        repeat while usedNumbers contains candidate\n            set stepIndex to stepIndex + 1\n            set candidate to groupNumber & \".\" & (stepIndex as text)\n        end repeat\n        set end of resultNumbers to candidate\n        set end of usedNumbers to candidate\n        set stepIndex to stepIndex + 1\n    end repeat\n    return resultNumbers\nend s2aChildNumbers")
 
         let output = try run("/usr/bin/osascript", ["-e", lines.joined(separator: "\n")])
         let ids = output.split(separator: "\t", omittingEmptySubsequences: false).map(String.init)
@@ -737,7 +794,7 @@ final class AppModel: ObservableObject {
     }
 
     private func indexURL(for workspace: WorkspaceInfo) throws -> URL {
-        try showCueDirectory(for: workspace).appendingPathComponent("index.json")
+        try showCueDirectory(for: workspace).appendingPathComponent("index-" + safeFileName(workspace.id) + ".json")
     }
 
     private func makeSavedShowRecord(project: ShowCueProject, groupID: String, mediaID: String?, imageURLs: [Int: URL], workspace: WorkspaceInfo) throws -> SavedShowCue {
@@ -758,7 +815,9 @@ final class AppModel: ObservableObject {
     }
 
     private func loadIndexData(for workspace: WorkspaceInfo) throws -> SavedShowCueIndex {
-        let url = try indexURL(for: workspace)
+        let currentURL = try indexURL(for: workspace)
+        let legacyURL = try showCueDirectory(for: workspace).appendingPathComponent("index.json")
+        let url = FileManager.default.fileExists(atPath: currentURL.path) ? currentURL : legacyURL
         guard FileManager.default.fileExists(atPath: url.path) else {
             return SavedShowCueIndex(shows: [])
         }
@@ -819,6 +878,7 @@ final class AppModel: ObservableObject {
     }
 
     func stopVisualMonitor() {
+        monitorGeneration += 1
         monitorTimer?.invalidate()
         monitorTimer = nil
         monitorPollInFlight = false
@@ -828,15 +888,18 @@ final class AppModel: ObservableObject {
         guard !monitorPollInFlight, let workspace, !savedShows.isEmpty else { return }
         monitorPollInFlight = true
         let workspaceID = workspace.id
+        let generation = monitorGeneration
         let showsSnapshot = savedShows
 
         DispatchQueue.global(qos: .utility).async {
-            defer { DispatchQueue.main.async { self.monitorPollInFlight = false } }
+            defer { DispatchQueue.main.async { guard self.monitorGeneration == generation else { return };  self.monitorPollInFlight = false } }
             do {
                 var scriptLines: [String] = []
                 scriptLines.append("tell application id \"com.figure53.QLab.5\"")
                 scriptLines.append("if (count of workspaces) is 0 then return \"NO_WORKSPACE\"")
-                scriptLines.append("set w to front workspace")
+                scriptLines.append("set matches to (workspaces whose unique id is \(self.asAppleString(workspaceID)))")
+                scriptLines.append("if (count of matches) is 0 then return \"WRONG_WORKSPACE\"")
+                scriptLines.append("set w to first item of matches")
                 scriptLines.append("if (unique id of w) is not \(self.asAppleString(workspaceID)) then return \"WRONG_WORKSPACE\"")
                 scriptLines.append("set resultText to \"\"")
                 for show in showsSnapshot {
@@ -858,11 +921,11 @@ final class AppModel: ObservableObject {
 
                 let output = try self.run("/usr/bin/osascript", ["-e", scriptLines.joined(separator: "\n")])
                 if output == "NO_WORKSPACE" {
-                    DispatchQueue.main.async { self.activeShow=nil; self.visualRunning=false; self.visualElapsed=0; self.visualStatus="QLab n’a aucun workspace ouvert" }
+                    DispatchQueue.main.async { guard self.monitorGeneration == generation else { return };  self.activeShow=nil; self.visualRunning=false; self.visualElapsed=0; self.visualStatus="QLab n’a aucun workspace ouvert" }
                     return
                 }
                 if output == "WRONG_WORKSPACE" {
-                    DispatchQueue.main.async { self.activeShow=nil; self.visualRunning=false; self.visualElapsed=0; self.visualStatus="Le workspace QLab au premier plan a changé" }
+                    DispatchQueue.main.async { guard self.monitorGeneration == generation else { return };  self.activeShow=nil; self.visualRunning=false; self.visualElapsed=0; self.visualStatus="Le workspace QLab sélectionné a été fermé" }
                     return
                 }
 
@@ -876,7 +939,7 @@ final class AppModel: ObservableObject {
                 let pausedState=states.filter{$0.paused}.sorted{$0.elapsed < $1.elapsed}.first
                 let selected=live ?? pausedState
 
-                DispatchQueue.main.async {
+                DispatchQueue.main.async { guard self.monitorGeneration == generation else { return }; 
                     guard let selected, let show=showsSnapshot.first(where:{$0.groupID==selected.id}) else {
                         self.activeShow=nil; self.visualRunning=false; self.visualElapsed=0; self.visualStatus="En attente d’un numéro S2A Pilot"; return
                     }
@@ -886,7 +949,7 @@ final class AppModel: ObservableObject {
                     self.visualStatus=selected.paused ? "Pause" : "Lecture"
                 }
             } catch {
-                DispatchQueue.main.async { self.activeShow=nil; self.visualRunning=false; self.visualElapsed=0; self.visualStatus="Visualiseur indisponible : \(error.localizedDescription)" }
+                DispatchQueue.main.async { guard self.monitorGeneration == generation else { return };  self.activeShow=nil; self.visualRunning=false; self.visualElapsed=0; self.visualStatus="Visualiseur indisponible : \(error.localizedDescription)" }
             }
         }
     }
@@ -987,10 +1050,13 @@ struct ContentView: View {
     var body: some View {
         VStack(spacing: 18) {
             HStack(alignment: .center, spacing: 12) {
+                if let icon = NSImage(named: NSImage.Name("S2ACopiloteIcon")) {
+                    Image(nsImage: icon).resizable().scaledToFit().frame(width: 44, height: 44).clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                }
                 VStack(alignment: .leading, spacing: 3) {
                     Text("S2A Copilote")
                         .font(.system(size: 20, weight: .semibold))
-                    Text("Import de conduites S2A Pilot V5 dans QLab 5 — S2A Copilote 1.2.2")
+                    Text("Import de conduites S2A Pilot V5 dans QLab 5 — S2A Copilote 1.2.5")
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                 }
@@ -1084,8 +1150,17 @@ struct ContentView: View {
                             .font(.headline)
 
                         if let w = model.workspace {
-                            Text(w.name)
-                                .fontWeight(.medium)
+                            if model.availableWorkspaces.count > 1 {
+                                Picker("Workspace", selection: Binding(get: { model.selectedWorkspaceID }, set: { model.selectedWorkspaceID = $0 })) {
+                                    ForEach(model.availableWorkspaces) { info in
+                                        Text(info.name).tag(info.id)
+                                    }
+                                }
+                                .pickerStyle(.menu)
+                                .disabled(model.isBusy)
+                            } else {
+                                Text(w.name).fontWeight(.medium)
+                            }
 
                             if let folder = w.projectFolder {
                                 Text(folder.path)
@@ -1163,7 +1238,7 @@ struct ContentView: View {
         .padding(18)
         .frame(width: 640)
         .onAppear {
-            model.refreshWorkspace()
+            model.startWorkspaceDetection()
         }
     }
 }

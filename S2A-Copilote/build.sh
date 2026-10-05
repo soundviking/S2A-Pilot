@@ -10,13 +10,15 @@ RESOURCES="$APP/Contents/Resources"
 rm -rf "$BUILD"
 mkdir -p "$MACOS" "$RESOURCES"
 
-xcrun swiftc -parse-as-library \
-  "$ROOT/Sources/S2ACopilote.swift" \
-  -o "$MACOS/S2A Copilote" \
-  -framework SwiftUI \
-  -framework AppKit \
-  -framework Foundation \
-  -target arm64-apple-macos13.0
+for S2A_ARCH in arm64 x86_64; do
+  xcrun swiftc -parse-as-library \
+    "$ROOT/Sources/S2ACopilote.swift" \
+    -o "$BUILD/S2ACopilote-$S2A_ARCH" \
+    -framework SwiftUI -framework AppKit -framework Foundation \
+    -module-cache-path "$BUILD/module-cache" \
+    -target "$S2A_ARCH-apple-macos13.0"
+done
+/usr/bin/lipo -create "$BUILD/S2ACopilote-arm64" "$BUILD/S2ACopilote-x86_64" -output "$MACOS/S2A Copilote"
 
 ICONSET="$BUILD/S2ACopiloteIcon.iconset"
 rm -rf "$ICONSET"
@@ -46,9 +48,9 @@ cat > "$APP/Contents/Info.plist" <<'PLIST'
   <key>CFBundleIdentifier</key>
   <string>fr.s2aproduction.copilote</string>
   <key>CFBundleVersion</key>
-  <string>4</string>
+  <string>7</string>
   <key>CFBundleShortVersionString</key>
-  <string>1.2.2</string>
+  <string>1.2.5</string>
   <key>CFBundleExecutable</key>
   <string>S2A Copilote</string>
   <key>CFBundleIconFile</key>
@@ -70,4 +72,4 @@ echo ""
 echo "Build terminé :"
 echo "$APP"
 echo ""
-open "$APP"
+if [[ "${S2A_OPEN_AFTER_BUILD:-0}" == "1" ]]; then open "$APP"; fi

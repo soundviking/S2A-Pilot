@@ -1,10 +1,40 @@
-# S2A Copilote 1.2.2
+## Mise à jour Copilote 1.2.5 / Pilot 1.4.13
+
+Le logo bleu et orange de Copilote est restauré. Dans la fenêtre, ses angles sont arrondis. Pour les prochains imports QLab, le groupe conserve son numéro (par exemple 5) et les étapes internes sont numérotées 5.1, 5.2, 5.3, etc. Les numéros déjà utilisés ailleurs sont évités ; les anciennes conduites ne sont pas modifiées.
+
+L’application macOS universelle contient les architectures Intel et Apple Silicon et est incluse directement dans les ZIP des projets. Les tests automatisés valident la numérotation, les scripts d’import, les imports multiples simulés et la compilation. Un import dans un workspace QLab réel reste à essayer.
+
+# S2A Copilote 1.2.5
 
 Companion macOS pour importer un package S2A Pilot dans QLab 5 et afficher le visualiseur de conduite.
 
+## Distribution universelle 1.2.5
+
+L’application est désormais compilée pour **Intel (x86_64) et Apple Silicon (arm64)** dans le même exécutable universel, pour macOS 13 ou plus récent. Chaque ZIP de projet enregistré avec S2A Pilot 1.4.13 contient directement **companion/S2A Copilote.app** et une notice d’installation : glisser l’application dans Applications, sans compiler ni décompresser une deuxième archive. Les permissions de l’exécutable sont conservées.
+
+Les deux architectures et la signature locale ont été vérifiées. L’application extraite d’un ZIP produit par la PWA est également contrôlée par signature et comparaison des fichiers avec le build original. Le fonctionnement natif sur un Mac Intel physique reste à essayer ; le build a été réalisé sur Apple Silicon.
+
+## Nouveautés 1.2.3
+
+- Identité **S2A Copilote** et nouveau logo S2A Pilot, dans la fenêtre et l’icône macOS.
+- Détection automatique des workspaces QLab ouverts toutes les 3 secondes, en arrière-plan. QLab n’est pas lancé lorsque l’application est fermée. Une seule vérification à la fois ; aucune vérification pendant un import.
+- Menu déroulant si plusieurs workspaces sont ouverts. La sélection reste stable, même si un autre workspace passe au premier plan. Import et visualiseur utilisent le workspace choisi.
+- Aucun bandeau rouge pour l’état normal « Aucun workspace ». Les véritables erreurs (permission refusée, import invalide…) sont conservées et peuvent être masquées.
+- Ajout de plusieurs packages en une sélection, ou successivement. Chaque conduite devient son propre groupe Timeline. Les fichiers sont isolés par import et par média, y compris pour deux titres ou noms de médias identiques.
+- Les packages importés avec succès quittent la file au fur et à mesure ; en cas d’échec partiel, seuls les packages restants sont à réessayer.
+- Index distincts par workspace, avec lecture des anciens index pour compatibilité.
+
+### Installation et validation
+
+L’archive macOS fournie contient l’application compilée pour **Mac Intel et Apple Silicon**, macOS 13 ou plus récent, avec signature locale ad hoc. Décompresser puis placer **S2A Copilote.app** dans Applications en remplaçant l’ancienne version. Vérifier que le raccourci utilisé ouvre bien cette nouvelle version 1.2.5. L’application n’est pas notarialisée par Apple. Les deux architectures sont déjà incluses.
+
+Compilation et signature vérifiées sur ce Mac. Tests du modèle avec workspaces simulés et deux vrais packages : détection à vide sans bandeau, stabilité de la sélection, reconnexion, erreur affichée une seule fois, extraction multiple, création de fichiers distincts pour titres identiques, index et scripts dirigés vers la bonne cible. Syntaxe des scripts d’import contrôlée avec le dictionnaire QLab installé.
+
+À essayer dans QLab sur des workspaces de test : ouverture/fermeture automatique, choix entre deux workspaces, autorisation macOS d’automatisation, import simultané de plusieurs conduites et lecture/visualiseur. Aucun workspace utilisateur n’a été modifié pendant les tests ; l’import final dans QLab reste à valider sur votre configuration.
+
 ## Compatibilité S2A Pilot actuelle
 
-La version 1.2.2 accepte les packages multimédias S2A Pilot V4/V5 et conserve l'import des anciens packages à média principal.
+La version 1.2.5 accepte les packages multimédias S2A Pilot V4/V5 et conserve l'import des anciens packages à média principal.
 
 Lors d'un import multimédia, elle crée un **Group cue en mode Timeline** et traduit la conduite en cues QLab :
 
@@ -17,7 +47,7 @@ Lors d'un import multimédia, elle crée un **Group cue en mode Timeline** et tr
 - audio **CUT** par Stop cues ;
 - audio **FONDU** par Fade cues de sortie et d'entrée ;
 - **ARRÊT / FONDU TOUS LES MÉDIAS** traduit en Stop ou Fade cues ciblant les médias précédents ;
-- marqueur `FIN DE CONDUITE SHOWCUE` à la durée totale exportée par S2A Pilot.
+- marqueur `FIN DE CONDUITE S2A PILOT` à la durée totale exportée par S2A Pilot.
 
 Les médias et les visuels de conduite sont copiés dans le dossier du workspace QLab. Les descriptions de Cue sont conservées dans les notes des Memo cues.
 
@@ -61,10 +91,10 @@ Le package source peut être inclus dans un export S2A Pilot. Une application `.
 
 ## Compatibilité
 
-S2A Copilote 1.2.2 accepte les packages S2A Pilot V4/V5 et conserve la compatibilité avec les anciens packages `.showcue.zip`.
+S2A Copilote 1.2.5 accepte les packages S2A Pilot V4/V5 et conserve la compatibilité avec les anciens packages `.showcue.zip`.
 
 
-## Correctif 1.2.2
+## Correctif historique 1.2.2
 
 - État des médias actifs fiabilisé : un STOP/FONDU global vide la liste des médias actifs.
 - Suppression des CUT AUDIO/VIDÉO inutiles après un arrêt global déjà exécuté.

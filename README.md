@@ -1,179 +1,38 @@
 # S2A Pilot
 
-**S2A Pilot** est une solution de préparation et de conduite de spectacle multimédia développée par **S2A Production**.
-
-Elle comprend deux outils complémentaires :
-
-- **S2A Pilot 1.4.1** — application web/PWA de préparation et de conduite.
-- **S2A Copilote 1.2.2** — companion macOS pour importer une conduite S2A Pilot dans **QLab 5**.
-
-## S2A Pilot 1.4.1
-
-Fonctions principales :
-
-- modes **Édition** et **Show**
-- Cues au dixième de seconde
-- audio et vidéo
-- plusieurs médias dans une même conduite
-- points **IN / OUT**
-- waveform audio
-- aperçu vidéo
-- Loop
-- CUT
-- fondus
-- arrêt / fondu global
-- vidéo muette ou sonore
-- préchargement des médias
-- sortie vidéo externe sur noir
-- seek pendant la lecture sans pause
-- resynchronisation des médias
-- durée de conduite automatique ou manuelle
-- **Auto +10 s**
-- décompte de la prochaine Cue, rouge sous 10 secondes
-- visuel associé à la Cue
-- sauvegarde locale
-- Undo / Redo
-- fiche technique PDF
-- export portable `.s2apilot.zip`
-
-### Interface Édition
-
-Zone projet :
-
-**Nouveau → Ouvrir → Enregistrer → Enregistrer sous… → Fiche technique PDF**
-
-La restauration de la dernière sauvegarde est automatique.
-
-La zone **PRÉPARATION DU SHOW** contient les commandes de transport, la timeline et la durée de conduite avec **Auto +10 s**.
-
-Depuis la version **1.4.1** :
-
-- sélectionner une Cue dans la liste met son marqueur en surbrillance sur la timeline ;
-- cliquer sur un marqueur de timeline sélectionne et ouvre la Cue correspondante.
-
-### Interface Show
-
-Le mode Show affiche principalement :
-
-- **CUE ACTIVE**
-- **PROCHAINE CUE**
-- décompte rouge sous 10 secondes
-- **TIMELINE**
-
-## Calcul Auto +10 s
-
-La durée automatique correspond à :
-
-**fin effective la plus tardive de tous les médias + 10 secondes**
-
-Le calcul doit tenir compte :
-
-- du temps de départ de la Cue ;
-- des points IN / OUT ;
-- des médias qui continuent après le lancement d’une Cue suivante ;
-- des CUT ;
-- des STOP / FONDU globaux ;
-- des Loops arrêtés ultérieurement.
-
-## Export `.s2apilot.zip`
-
-Un package peut contenir :
-
-```text
-conduite.json
-media/
-visuals/
-fiche-technique.pdf
-companion/
-LISEZ-MOI-Technicien.txt
-```
-
-La fiche technique PDF est générée lors de **Enregistrer sous…** et peut être incluse dans le package.
-
-La compatibilité avec l’ancien format `.showcue.zip` est conservée lorsque cela est possible.
-
-## S2A Copilote 1.2.2
-
-S2A Copilote traduit une conduite S2A Pilot en structure exploitable dans **QLab 5**.
-
-Éléments pris en charge :
-
-- Group Timeline
-- Audio Cue
-- Video Cue
-- Memo Cue
-- Stop Cue
-- Fade Cue
-- IN / OUT
-- Loop
-- CUT audio
-- fondus
-- vidéo muette
-- médias simultanés
-- arrêt global audio / vidéo
-- marqueur de fin de conduite
-
-### Changements 1.2.2
-
-- tentative de mise en silence des Video Cues via **audio output patch number = 0** ;
-- STOP globaux renommés :
-  - `STOP GLOBAL — AUDIO`
-  - `STOP GLOBAL — VIDÉO`
-- nettoyage de la liste des médias actifs après STOP / FONDU global afin d’éviter les `CUT AUDIO` inutiles sur les Cues suivantes.
-
-Ces points doivent encore être validés en conditions réelles dans QLab 5.
-
-## Visualiseur S2A Copilote
-
-Le visualiseur intégré affiche :
-
-- Cue active
-- prochaine Cue
-- visuel
-- décompte
-- affichage rouge sous 10 secondes
-
-Les messages d’erreur permanents ont été supprimés : une erreur n’est affichée que lorsqu’une erreur réelle est détectée.
-
-## Structure du dépôt
-
-```text
-S2A-Pilot/
-├── PWA/
-├── S2A-Copilote/
-├── README.md
-└── SESSION-2026-10-02.md
-```
-
-## Compilation de S2A Copilote
-
-```bash
-cd S2A-Copilote
-chmod +x build.sh
-./build.sh
-```
-
-L’application produite est :
-
-`S2A Copilote.app`
-
-Les versions de test peuvent utiliser une signature ad hoc.
-
-## Workflow
-
-1. Préparer la conduite dans **S2A Pilot**.
-2. Ajouter médias, visuels et Cues.
-3. Tester la conduite en mode Show.
-4. Exporter le package `.s2apilot.zip`.
-5. Ouvrir le package avec **S2A Copilote**.
-6. Importer la conduite dans **QLab 5**.
-7. Vérifier la conduite QLab avant exploitation.
+S2A Pilot, développé par S2A Production, prépare et conduit des spectacles multimédias. S2A Copilote importe les projets dans QLab 5.
 
 ## Versions actuelles
 
-- **S2A Pilot : 1.4.1**
-- **S2A Copilote : 1.2.2**
+- **S2A Pilot 1.4.13** : application web installable, modes Edit et Show.
+- **S2A Copilote 1.2.5** : application macOS universelle Intel et Apple Silicon, macOS 13 minimum.
 
----
+## Dernières modifications
 
-**S2A Production**
+- Logo bleu et orange de Copilote restauré et arrondi dans la fenêtre.
+- Numéros QLab hiérarchiques pour les nouveaux imports : groupe 5, étapes 5.1, 5.2, 5.3… Les collisions sont évitées sans modifier les autres cues.
+- Copilote compilé est directement inclus dans chaque archive de projet, sans compilation supplémentaire, également hors ligne.
+- Saisie `02.41` ou `02,41` comprise comme 2 minutes 41 secondes ; déplacer une Cue sans média prolonge automatiquement la timeline.
+- Audio : Cut par défaut pour la Cue permanente à zéro ; fondu de 3 secondes pour les autres nouvelles Cues.
+- Interface responsive, bascule Edit / Show, préchargement automatique, moniteur vidéo et aperçu des médias avec waveform, lecture indépendante et zoom.
+- Conduite PDF consultable dans l’application, téléchargement explicite, en-tête photographique et cinq Cues standards par page.
+
+## Utilisation et hébergement
+
+Servir **tout le dossier PWA/** sur HTTPS, y compris `companion/`, `assets/`, `icons/`, `technical-preview.js` et le service worker. Ouvrir l’adresse du dossier (par exemple `/s2a-pilot/`). `index.html` reste le fichier d’accueil interne ; son nom est retiré de l’adresse affichée par l’application.
+
+Le projet s’enregistre en `.s2apilot.zip` avec médias, visuels, conduite et **companion/S2A Copilote.app**. Glisser l’application dans Applications, puis ouvrir les packages pour les importer dans QLab. L’application utilise une signature locale de test.
+
+## Vérifications
+
+Compilation native Intel et Apple Silicon, signature de l’application extraite, conservation des permissions, export et réimport des projets en ligne et hors ligne validés. Tests du modèle Copilote et des scripts d’import réalisés avec QLab simulé ; numérotation testée et scripts compilés avec le dictionnaire QLab installé.
+
+À vérifier avant exploitation : import réel dans QLab 5, fonctionnement sur Mac Intel physique, PWA sur iPhone/iPad et sortie sur un véritable écran étendu. Les versions précédentes et leurs tests sont détaillés dans les guides.
+
+## Documentation et sources
+
+- [Guide PWA et historique](PWA/README.md)
+- [Copilote : installation et tests](S2A-Copilote/README.md)
+- [Rapport de vérification](PWA/verification.json)
+
+Pour compiler Copilote depuis les sources : `cd S2A-Copilote && ./build.sh`. La distribution prête à installer est universelle ; aucune compilation n’est nécessaire pour l’utilisateur.

@@ -1,9 +1,16 @@
-const CACHE_NAME='s2a-pilot-v1-4-1-app-shell';
+const CACHE_NAME='s2a-pilot-v1-4-13-app-shell';
 const APP_SHELL=[
   './',
   './index.html',
+  './app.js',
+  './technical-preview.js',
+  './assets/conduite-header.webp',
+  './icons/s2a-pilot-180.png?v=1.4.13',
+  './icons/s2a-pilot-192.png?v=1.4.13',
+  './icons/s2a-pilot-512.png?v=1.4.13',
   './manifest.webmanifest',
-  './companion-archive.js',
+  './companion/S2A-Copilote-1.2.5-app.zip',
+  './companion/app-files.json',
   './icons/s2a-pilot-192.png',
   './icons/s2a-pilot-512.png'
 ];
@@ -20,7 +27,7 @@ self.addEventListener('activate',(event)=>{
   event.waitUntil(
     caches.keys()
       .then((keys)=>Promise.all(
-        keys.filter((key)=>key!==CACHE_NAME).map((key)=>caches.delete(key))
+        keys.filter((key)=>key!==CACHE_NAME && /^(s2a-pilot-|showcue|chokyu)/i.test(key)).map((key)=>caches.delete(key))
       ))
       .then(()=>self.clients.claim())
   );

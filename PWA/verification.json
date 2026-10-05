@@ -1,0 +1,352 @@
+{
+  "test": {
+    "report": [
+      "ordinateur: Edit/Show sans débordement à 1440 px",
+      "iPad: Edit/Show sans débordement à 820 px",
+      "iPhone: Edit/Show sans débordement à 390 px",
+      "petit téléphone: Edit/Show sans débordement à 320 px",
+      "Préchargement ciblé : média conservé après invalidation",
+      "Moniteur ordinateur : vidéo centrée, cadre 16/9, titre identique aux autres boxes",
+      "Moniteur ipad : vidéo centrée, cadre 16/9, titre identique aux autres boxes",
+      "Moniteur iphone : vidéo centrée, cadre 16/9, titre identique aux autres boxes",
+      "Moniteur petit-telephone : vidéo centrée, cadre 16/9, titre identique aux autres boxes",
+      "Vidéo réelle : Lecture, moniteur Show, arrêt immédiat à zéro",
+      "Lecture/Pause/reprise conservées",
+      "PDF généré ; export/import du package avec vidéo validé",
+      "Topologies simulées : étendu accepté, miroir/écran unique refusés",
+      "Moniteur absent sans vidéo",
+      "Rechargement hors ligne : application opérationnelle"
+    ],
+    "pdf": {
+      "header": "%PDF-1.4",
+      "size": 4222
+    },
+    "errors": []
+  },
+  "extra": {
+    "audio": "Lecture puis arrêt à zéro validés",
+    "race": "Lecture en attente annulée par Retour au début",
+    "targetedRendering": "Autres lignes Cue conservées",
+    "cacheUpgrade": [
+      "s2a-pilot-v1-4-2-app-shell",
+      "unrelated-test"
+    ],
+    "errors": []
+  },
+  "performance-realtime": [
+    {
+      "device": "ordinateur",
+      "version": "1.4.1",
+      "durationSeconds": 5,
+      "elapsedMs": 5002.7,
+      "cpuTaskMs": 931.33,
+      "heapMiB": 2.73
+    },
+    {
+      "device": "ordinateur",
+      "version": "1.4.2",
+      "durationSeconds": 5,
+      "elapsedMs": 5001.5,
+      "cpuTaskMs": 179.87,
+      "heapMiB": 3.6
+    },
+    {
+      "device": "iPad simulé",
+      "version": "1.4.1",
+      "durationSeconds": 5,
+      "elapsedMs": 5002.4,
+      "cpuTaskMs": 1027.75,
+      "heapMiB": 2.73
+    },
+    {
+      "device": "iPad simulé",
+      "version": "1.4.2",
+      "durationSeconds": 5,
+      "elapsedMs": 5000.6,
+      "cpuTaskMs": 188.42,
+      "heapMiB": 3.61
+    },
+    {
+      "device": "iPhone simulé",
+      "version": "1.4.1",
+      "durationSeconds": 5,
+      "elapsedMs": 5001.9,
+      "cpuTaskMs": 1279.25,
+      "heapMiB": 2.73
+    },
+    {
+      "device": "iPhone simulé",
+      "version": "1.4.2",
+      "durationSeconds": 5,
+      "elapsedMs": 5001.5,
+      "cpuTaskMs": 179.65,
+      "heapMiB": 3.59
+    }
+  ],
+  "previousVersionEvidence": "Validation 1.4.12 dans cueTimes1412, audioDefaults1412, mediaEditor et compiledCompanion1412 ; autres entrées historiques.",
+  "videoPermission": {
+    "report": {
+      "first": {
+        "calls": 1,
+        "queries": 1,
+        "enabled": true
+      },
+      "granted": {
+        "calls": 1,
+        "queries": 2
+      },
+      "denied": {
+        "calls": 2,
+        "queries": 3,
+        "disabled": true
+      },
+      "retry": {
+        "calls": 3,
+        "queries": 4
+      },
+      "audio": {
+        "calls": 3,
+        "queries": 4
+      },
+      "unsupported": {
+        "calls": 3,
+        "queries": 4
+      }
+    },
+    "errors": []
+  },
+  "videoPermissionEvidence": "Test conservé de la 1.4.3 ; JavaScript inchangé en 1.4.4.",
+  "cueImages": {
+    "report": [
+      "ordinateur, portrait : vignette active stable, largeur suivante conservée, cadre 16/9, remplissage cover, centrage validé",
+      "ordinateur, panoramique : vignette active stable, largeur suivante conservée, cadre 16/9, remplissage cover, centrage validé",
+      "ordinateur, carre : vignette active stable, largeur suivante conservée, cadre 16/9, remplissage cover, centrage validé",
+      "tablette, portrait : vignette active stable, largeur suivante conservée, cadre 16/9, remplissage cover, centrage validé",
+      "tablette, panoramique : vignette active stable, largeur suivante conservée, cadre 16/9, remplissage cover, centrage validé",
+      "tablette, carre : vignette active stable, largeur suivante conservée, cadre 16/9, remplissage cover, centrage validé",
+      "mobile, portrait : vignette active stable, largeur suivante conservée, cadre 16/9, remplissage cover, centrage validé",
+      "mobile, panoramique : vignette active stable, largeur suivante conservée, cadre 16/9, remplissage cover, centrage validé",
+      "mobile, carre : vignette active stable, largeur suivante conservée, cadre 16/9, remplissage cover, centrage validé",
+      "petit-mobile, portrait : vignette active stable, largeur suivante conservée, cadre 16/9, remplissage cover, centrage validé",
+      "petit-mobile, panoramique : vignette active stable, largeur suivante conservée, cadre 16/9, remplissage cover, centrage validé",
+      "petit-mobile, carre : vignette active stable, largeur suivante conservée, cadre 16/9, remplissage cover, centrage validé"
+    ],
+    "errors": []
+  },
+  "1.4.6": {
+    "change": "Ajouter image et Changer image remplacés par Visuel",
+    "validation": "Libellé vérifié, JavaScript validé syntaxiquement ; autres tests conservés de la 1.4.5."
+  },
+  "mediaEditor": {
+    "report": [
+      "Vidéo MP4/AAC : vraie waveform audio, mini moniteur, Lecture/Pause en premier",
+      "Scrub et déplacement clavier : aperçu vidéo mis à jour, conduite immobile",
+      "IN/OUT respectés : lecture locale de 0,5 à 1,5 s, arrêt à OUT",
+      "Boucle IN/OUT locale et Pause validées",
+      "Audio WAV : lecture locale audible ; un seul aperçu joue à la fois, conduite immobile",
+      "Lecture locale en attente : une seconde pression annule le départ",
+      "Lecteurs distincts : la commande locale ne modifie pas une conduite déjà en lecture",
+      "Lecture générale et passage Show arrêtent les aperçus ; moniteur Show conservé",
+      "Poignée IN : déplacement du point et aperçu de la position sélectionnée",
+      "Libellés Ajouter visuel / Changer visuel validés",
+      "ordinateur : waveform et mini moniteur à droite, sans débordement",
+      "ipad : waveform et mini moniteur à droite, sans débordement",
+      "iphone : waveform et mini moniteur à droite, sans débordement",
+      "petit-telephone : waveform et mini moniteur à droite, sans débordement"
+    ],
+    "errors": []
+  },
+  "modeSwitch": {
+    "report": [
+      "ordinateur : Edit et Show visibles, état actif exact, sélection idempotente, aucun débordement",
+      "ipad : Edit et Show visibles, état actif exact, sélection idempotente, aucun débordement",
+      "iphone : Edit et Show visibles, état actif exact, sélection idempotente, aucun débordement",
+      "petit-mobile : Edit et Show visibles, état actif exact, sélection idempotente, aucun débordement",
+      "Clavier : Entrée et Espace sélectionnent le mode ciblé"
+    ],
+    "errors": []
+  },
+  "changes148": {
+    "report": [
+      "Audio ajouté : fondu 3 secondes ; Ajouter un média bleu ; bouton Stop absent",
+      "Zoom ×2 centré sur la tête ; clic en vue zoomée positionné à 2,5 s sans modifier la conduite ni IN/OUT",
+      "Zoom borné, défilement et retour à la vue complète validés",
+      "Zoom également disponible pour la vidéo",
+      "ordinateur : sortie vidéo uniquement en Show, en-tête avant Edit/Show, taille cohérente et état visible",
+      "ipad : sortie vidéo uniquement en Show, en-tête avant Edit/Show, taille cohérente et état visible",
+      "iphone : sortie vidéo uniquement en Show, en-tête avant Edit/Show, taille cohérente et état visible",
+      "petit-mobile : sortie vidéo uniquement en Show, en-tête avant Edit/Show, taille cohérente et état visible",
+      "Ouverture/fermeture de la sortie : rouge actif et statut exact ; configuration écran simulée"
+    ],
+    "errors": []
+  },
+  "pdf149": {
+    "checks": [
+      "Adresse sans index.html",
+      "Tout réduire retiré",
+      "Cinq Cues avec visuels et média",
+      "Aperçu sans téléchargement automatique",
+      "Téléchargement explicite",
+      "Fermeture et libération URL",
+      "Escape",
+      "Dialogue mobile 820/390/320",
+      "Dix Cues et texte long exportés"
+    ],
+    "errors": []
+  },
+  "copilote123": {
+    "build": "arm64 macOS13, signature ad hoc verified",
+    "modelTests": "Real package archives, simulated QLab/workspaces; batch extraction, import file isolation, selected workspace, reconnection, single error, periodic timer",
+    "appleScript": "Discovery and import scripts syntax compiled; not executed on user workspaces"
+  },
+  "pdf1410": {
+    "checks": [
+      "Aperçu SVG intégré, sans iframe ni téléchargement automatique ; PDF explicite, compteurs dédupliqués audio/vidéo, zoom et nettoyage",
+      "Dix Cues, deux pages intégrées défilables et fermeture Échap",
+      "ipad : pages ajustées, zoom et défilement interne sans débordement de l’application",
+      "iphone : pages ajustées, zoom et défilement interne sans débordement de l’application",
+      "small : pages ajustées, zoom et défilement interne sans débordement de l’application",
+      "Rechargement et premier aperçu hors ligne : module local disponible, aucune dépendance au lecteur PDF natif",
+      "Descriptions longues conservées, aucune mention vidéo en l’absence de vidéo"
+    ],
+    "errors": [],
+    "moduleBytes": 4826
+  },
+  "pdf1411": {
+    "checks": [
+      "Aperçu SVG intégré, sans iframe ni téléchargement automatique ; PDF explicite, compteurs dédupliqués audio/vidéo, zoom et nettoyage",
+      "Dix Cues, deux pages intégrées défilables et fermeture Échap",
+      "ipad : pages ajustées, zoom et défilement interne sans débordement de l’application",
+      "iphone : pages ajustées, zoom et défilement interne sans débordement de l’application",
+      "small : pages ajustées, zoom et défilement interne sans débordement de l’application",
+      "Rechargement et premier aperçu hors ligne : module local disponible, aucune dépendance au lecteur PDF natif",
+      "Descriptions longues conservées, aucune mention vidéo en l’absence de vidéo"
+    ],
+    "errors": [],
+    "moduleBytes": 4826
+  },
+  "cueTimes1412": {
+    "checks": [
+      "Cinq Cues sans média : saisie à 02:41 acceptée, durée étendue à 02:51, annuler/rétablir conservés",
+      "02.41 et 02,41 = 2 min 41 ; deux-points, secondes entières et dixièmes conservés ; secondes invalides refusées",
+      "Cue non plafonnée même avec durée fixe héritée, marqueurs dans la timeline",
+      "Package sans média exporté/importé avec horaire exact ; lecture de conduite et retour à zéro",
+      "Saisie également validée aux largeurs 820/390/320 px"
+    ],
+    "cases": [
+      {
+        "input": "02.41",
+        "result": 161,
+        "expected": 161
+      },
+      {
+        "input": "02,41",
+        "result": 161,
+        "expected": 161
+      },
+      {
+        "input": "02:41",
+        "result": 161,
+        "expected": 161
+      },
+      {
+        "input": "02:41.5",
+        "result": 161.5,
+        "expected": 161.5
+      },
+      {
+        "input": "0.5",
+        "result": 0.5,
+        "expected": 0.5
+      },
+      {
+        "input": "00.05",
+        "result": 5,
+        "expected": 5
+      },
+      {
+        "input": "01.00",
+        "result": 60,
+        "expected": 60
+      },
+      {
+        "input": "60",
+        "result": 60,
+        "expected": 60
+      },
+      {
+        "input": "59.9",
+        "result": 59.9,
+        "expected": 59.9
+      },
+      {
+        "input": "02.60",
+        "result": null,
+        "expected": null
+      },
+      {
+        "input": "02:60",
+        "result": null,
+        "expected": null
+      },
+      {
+        "input": "-1",
+        "result": null,
+        "expected": null
+      },
+      {
+        "input": "abc",
+        "result": null,
+        "expected": null
+      },
+      {
+        "input": "",
+        "result": null,
+        "expected": null
+      },
+      {
+        "input": "trop grand",
+        "result": null,
+        "expected": null
+      }
+    ],
+    "errors": []
+  },
+  "audioDefaults1412": {
+    "checks": [
+      "Nouvel audio sur Cue 1 permanente : Cut dans le modèle et dans l’interface",
+      "Nouvel audio sur autre Cue à 02.41 : Fondu 3 secondes, horaire exact",
+      "Réglages personnalisés base Fondu 1,5 s et autre Cue Cut conservés après export/import"
+    ],
+    "errors": []
+  },
+  "compiledCompanion1412": {
+    "checks": [
+      "Projet généré par la PWA avec application .app directe et sans ancien ZIP de sources",
+      "ZIP incluant le compagnon généré également hors ligne",
+      "Package incluant .app toujours réimportable dans la PWA",
+      "Application extraite par ditto : fichiers identiques au build, exécutable conservé, Intel et Apple Silicon, signature valide pour les deux architectures"
+    ],
+    "errors": []
+  },
+  "copilote125": {
+    "version": "1.2.5",
+    "architectures": [
+      "x86_64",
+      "arm64"
+    ],
+    "logo": "Original bleu et orange restauré ; angles 10 px dans la fenêtre",
+    "numbering": "Groupe conservé ; étapes hiérarchiques, collisions évitées ; tests AppleScript réussis",
+    "importScripts": "Deux scripts générés compilés ; modèle testé avec QLab simulé",
+    "package": {
+      "checks": [
+        "Projet généré par la PWA avec application .app directe et sans ancien ZIP de sources",
+        "ZIP incluant le compagnon généré également hors ligne",
+        "Package incluant .app toujours réimportable dans la PWA"
+      ],
+      "errors": []
+    },
+    "extractedApp": "Fichiers identiques, permissions exécutables et signature toutes architectures vérifiées",
+    "remaining": "Import QLab réel et Mac Intel physique à essayer"
+  }
+}
