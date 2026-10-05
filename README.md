@@ -1,81 +1,58 @@
-## Version 1.4.20
-
-Bandes et pastilles vidéo rose vif translucide, audio vert.
-
-[Télécharger la PWA 1.4.20](downloads/S2A-Pilot-V1.4.20-PWA.zip)
-
-## Version 1.4.19
-
-Vérification de la version publiée sur le serveur au démarrage, au retour dans l’application et toutes les cinq minutes. Proposition d’actualisation, protégée pendant Show et lecture, avec sauvegarde locale conservée. Déployer version.json et actualiser.html avec le reste du dossier. Fonctionne à partir de cette version.
-
-[Télécharger la PWA 1.4.19](downloads/S2A-Pilot-V1.4.19-PWA.zip)
-
-## Version 1.4.18
-
-Pastille VIDÉO violette, assortie aux bandes vidéo de la timeline. Les Cues sans média n’affichent aucune pastille.
-
-[Télécharger la PWA 1.4.18](downloads/S2A-Pilot-V1.4.18-PWA.zip)
-
-## Correctif 1.4.17
-
-Timeline de hauteur automatique : aucune bande média tronquée, zone distincte pour les durées. Bandes audio vertes translucides ; vidéos violettes.
-
-[Télécharger la PWA 1.4.17](downloads/S2A-Pilot-V1.4.17-PWA.zip)
-
-Correctif 1.4.16 : cache du service worker versionné correctement ; lanceur local avec actualisation des fichiers, sans suppression des projets IndexedDB.
-
 # S2A Pilot
 
-S2A Pilot, développé par S2A Production, prépare et conduit des spectacles multimédias. S2A Copilote importe les projets dans QLab 5.
+Application de préparation et de conduite de spectacles multimédias, développée par **S2A Production**. Le compagnon **S2A Copilote** importe les projets dans **QLab 5**.
 
-## Versions actuelles
+## Versions actuelles et téléchargements
 
-- **S2A Pilot 1.4.16** : application web installable, modes Edit et Show.
-- **S2A Copilote 1.2.5** : application macOS universelle Intel et Apple Silicon, macOS 13 minimum.
+- **[S2A Pilot 1.4.20 — PWA](downloads/S2A-Pilot-V1.4.20-PWA.zip)**
+- **[S2A Copilote 1.2.5 — application macOS universelle](downloads/S2A-Copilote-1.2.5-macOS-Universel.zip)** : Intel et Apple Silicon, macOS 13 minimum.
 
-## Nouveautés Pilot 1.4.16
+## Préparer une conduite
 
-Les bandes médias sont intégrées à la timeline avec un fond translucide. La mention de waveform sous la timeline est supprimée.
+Un nouveau projet commence sans Cue imposée. **+ Cue** crée un repère avec titre, description et visuel. **+ Média** importe une musique ou une vidéo dans une nouvelle Cue, au temps courant. Toutes les Cues peuvent être déplacées ou supprimées, y compris celles à zéro.
 
-## Nouveautés Pilot 1.4.14
+Les médias disposent de points IN / OUT, Loop, waveform, aperçu vidéo, lecture indépendante et zoom. La saisie `02.41` ou `02,41` correspond à 2 minutes 41 secondes. Une Cue placée au-delà de la durée actuelle prolonge la timeline. Le premier média audio d’une Cue à zéro utilise Cut par défaut ; les autres nouveaux médias audio utilisent un fondu de trois secondes. Les réglages des projets importés sont conservés.
 
-- Départ sans Cue imposée. **+ Cue** crée un repère ; **+ Média** crée une Cue audio ou vidéo.
-- Sauvegarde locale automatique dès la saisie ; bouton Enregistrer supprimé, export via Enregistrer sous… conservé.
-- Show paysage : Cue active et prochaine Cue côte à côte, timeline en dessous et déplacements temporels verrouillés.
-- Waveform combinée et position des médias en Edit et Show ; cache réutilisé, aucun recalcul à chaque frame.
-- Zoom par pincement bloqué ; défilement et boutons de zoom des éditeurs conservés.
-- PDF : temps écoulé et temps restant entre parenthèses, calculé jusqu’à la fin de la conduite.
+Les modifications sont sauvegardées automatiquement sur l’appareil, dès la saisie. **Enregistrer sous…** produit le package portable `.s2apilot.zip`, avec médias, visuels, PDF et **companion/S2A Copilote.app** prête à installer.
 
-[Télécharger la PWA 1.4.16](downloads/S2A-Pilot-V1.4.16-PWA.zip)
+## Timeline et mode Show
 
-Tests automatisés Chrome, restauration locale, anciens projets, export hors ligne et mise en page PDF validés. Le blocage du pincement Safari / PWA reste à confirmer sur iPad réel.
+- Waveform combinée et bandes médias translucides en Edit et Show : **audio vert, vidéo rose vif**.
+- Hauteur de timeline adaptée au nombre de bandes, avec espace réservé aux graduations.
+- Pastilles audio/vidéo dans les Cues ; aucune pastille pour les Cues sans média.
+- Sur ordinateur en paysage, Cue active à gauche, prochaine Cue à droite et timeline en dessous.
+- En Show, les clics sur la timeline ne déplacent pas la lecture. Lecture / Pause et Retour au début restent disponibles.
+- Préchargement automatique, moniteur vidéo conditionnel et sortie vidéo pour un véritable affichage étendu.
+- Zoom de page par pincement bloqué ; défilement et boutons de zoom des éditeurs conservés.
 
-## Modifications précédentes
+## Conduite PDF
 
-- Logo bleu et orange de Copilote restauré et arrondi dans la fenêtre.
-- Numéros QLab hiérarchiques pour les nouveaux imports : groupe 5, étapes 5.1, 5.2, 5.3… Les collisions sont évitées sans modifier les autres cues.
-- Copilote compilé est directement inclus dans chaque archive de projet, sans compilation supplémentaire, également hors ligne.
-- Saisie `02.41` ou `02,41` comprise comme 2 minutes 41 secondes ; déplacer une Cue sans média prolonge automatiquement la timeline.
-- Audio : Cut par défaut pour la Cue permanente à zéro ; fondu de 3 secondes pour les autres nouvelles Cues.
-- Interface responsive, bascule Edit / Show, préchargement automatique, moniteur vidéo et aperçu des médias avec waveform, lecture indépendante et zoom.
-- Conduite PDF consultable dans l’application, téléchargement explicite, en-tête photographique et cinq Cues standards par page.
+Aperçu intégré avec téléchargement explicite, en-tête photographique, blocs arrondis, compteurs audio/vidéo et cinq Cues standards par page. Chaque Cue affiche le temps écoulé et le temps restant jusqu’à la fin de la conduite **entre parenthèses**. Les descriptions longues continuent sur les pages suivantes.
 
-## Utilisation et hébergement
+## Installation et mises à jour
 
-Servir **tout le dossier PWA/** sur HTTPS, y compris `companion/`, `assets/`, `icons/`, `technical-preview.js` et le service worker. Ouvrir l’adresse du dossier (par exemple `/s2a-pilot/`). `index.html` reste le fichier d’accueil interne ; son nom est retiré de l’adresse affichée par l’application.
+Déployer **tout le contenu de PWA/** sur HTTPS : `index.html`, `app.js`, `manifest.webmanifest`, `service-worker.js`, `version.json`, `actualiser.html`, `technical-preview.js`, `assets/`, `icons/` et `companion/`. Le serveur doit ouvrir index.html comme page d’accueil du dossier ; partager une adresse telle que `/s2a-pilot/`, sans ajouter index.html.
 
-Le projet s’enregistre en `.s2apilot.zip` avec médias, visuels, conduite et **companion/S2A Copilote.app**. Glisser l’application dans Applications, puis ouvrir les packages pour les importer dans QLab. L’application utilise une signature locale de test.
+Depuis la 1.4.19, l’application vérifie la version publiée sur le serveur au démarrage, au retour dans l’application et toutes les cinq minutes lorsqu’elle est visible. Une version plus récente est proposée sans actualisation forcée pendant Show ou lecture. La sauvegarde locale précède l’actualisation ; les projets IndexedDB sont conservés. Sans réseau, la version du serveur n’est pas confirmée et l’utilisation hors ligne reste disponible. Publier l’ensemble des fichiers de la même version avant de la rendre disponible.
 
-## Vérifications
+Pour tester localement sur Mac, décompresser la PWA et lancer **Démarrer S2A Pilot.command**. Fermer les anciennes fenêtres et arrêter l’ancien serveur avec Ctrl+C avant de lancer un autre dossier. Le lanceur actualise les caches de fichiers de l’application sans supprimer les projets locaux.
 
-Compilation native Intel et Apple Silicon, signature de l’application extraite, conservation des permissions, export et réimport des projets en ligne et hors ligne validés. Tests du modèle Copilote et des scripts d’import réalisés avec QLab simulé ; numérotation testée et scripts compilés avec le dictionnaire QLab installé.
+## S2A Copilote et QLab
 
-À vérifier avant exploitation : import réel dans QLab 5, fonctionnement sur Mac Intel physique, PWA sur iPhone/iPad et sortie sur un véritable écran étendu. Les versions précédentes et leurs tests sont détaillés dans les guides.
+Logo bleu et orange, angles arrondis dans la fenêtre, détection des workspaces, sélection si plusieurs sont ouverts et import de plusieurs packages. Les groupes conservent leur numéro ; les étapes des nouveaux imports utilisent une numérotation hiérarchique : **5, puis 5.1, 5.2, 5.3…**, en évitant les numéros déjà utilisés. Les anciennes conduites QLab ne sont pas renumérotées.
 
-## Documentation et sources
+Glisser l’application dans Applications ; aucune compilation n’est nécessaire. La distribution utilise une signature locale. Pour compiler les sources avec Xcode : `cd S2A-Copilote && ./build.sh`.
+
+## Vérifications et limites
+
+Parcours de création, sauvegarde et restauration, anciens projets, réglages média après autosave, suppression/annulation, Show paysage et timeline verrouillée vérifiés dans Chrome. Six bandes médias intégralement visibles vérifiées. PDF cinq/dix Cues, descriptions longues, aperçu et exports hors ligne contrôlés ; rendu PDF inspecté visuellement. Vérification des versions serveur identiques/supérieures, protection Show et panne réseau testées.
+
+Copilote : compilation Intel/Apple Silicon, signature et permissions de l’application extraite vérifiées ; modèle et scripts d’import testés avec QLab simulé, scripts compilés avec le dictionnaire QLab installé.
+
+À confirmer sur matériel réel avant exploitation : pincement dans Safari et PWA sur iPad, fluidité/CPU/mémoire avec les médias du spectacle, sortie sur écran étendu, import dans un workspace QLab réel et exécution sur Mac Intel physique. Les changements de couleur de la 1.4.20 ont fait l’objet d’un contrôle du code ; les parcours complets correspondent aux versions de test précédentes.
+
+## Documentation
 
 - [Guide PWA et historique](PWA/README.md)
 - [Copilote : installation et tests](S2A-Copilote/README.md)
-- [Rapport de vérification](PWA/verification.json)
-
-Pour compiler Copilote depuis les sources : `cd S2A-Copilote && ./build.sh`. La distribution prête à installer est universelle ; aucune compilation n’est nécessaire pour l’utilisateur.
+- [Rapports de vérification](PWA/verification.json)
