@@ -19,8 +19,16 @@ Application de préparation et de conduite de spectacles multimédias, développ
 
 ## Versions actuelles et téléchargements
 
-- **[S2A Pilot 1.4.27 — PWA](downloads/S2A-Pilot-V1.4.27-PWA.zip)**
+- **[S2A Pilot 1.4.28 — PWA](downloads/S2A-Pilot-V1.4.28-PWA.zip)**
 - **[S2A Copilote 1.2.5 — application macOS universelle](downloads/S2A-Copilote-1.2.5-macOS-Universel.zip)** : Intel et Apple Silicon, macOS 13 minimum.
+
+## Édition des Cues 1.4.28
+
+Le déplacement d’un repère sur la timeline est visible avant le relâchement : repère, temps et bande média suivent le geste sur une échelle stable. Le nouvel horaire est validé au relâchement ; une interruption annule l’aperçu. La liste se reclasse ensuite automatiquement.
+
+Le bouton **Dupliquer**, à côté de Supprimer dans la Cue déroulée, crée une copie au même temps avec titre, description, visuel et réglages médias. Les identifiants des actions sont distincts et les fichiers médias sont réutilisés. Les réglages de la copie sont indépendants. L’annulation et la sauvegarde automatique sont conservées.
+
+Retour visuel avant relâchement, validation, annulation du déplacement, duplication, indépendance des réglages et largeur mobile contrôlés dans Chrome. Geste tactile à confirmer sur iPad réel.
 
 ## Actualisation et démarrage 1.4.27
 

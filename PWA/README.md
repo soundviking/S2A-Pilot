@@ -1,3 +1,13 @@
+# Version 1.4.28 — Déplacement en direct et duplication
+
+## Édition des Cues 1.4.28
+
+Le déplacement d’un repère sur la timeline est visible avant le relâchement : repère, temps et bande média suivent le geste sur une échelle stable. Le nouvel horaire est validé au relâchement ; une interruption annule l’aperçu. La liste se reclasse ensuite automatiquement.
+
+Le bouton **Dupliquer**, à côté de Supprimer dans la Cue déroulée, crée une copie au même temps avec titre, description, visuel et réglages médias. Les identifiants des actions sont distincts et les fichiers médias sont réutilisés. Les réglages de la copie sont indépendants. L’annulation et la sauvegarde automatique sont conservées.
+
+Retour visuel avant relâchement, validation, annulation du déplacement, duplication, indépendance des réglages et largeur mobile contrôlés dans Chrome. Geste tactile à confirmer sur iPad réel.
+
 # Version 1.4.27 — Cohérence des mises à jour
 
 Chargement de app.js et des modules PDF avec numéro de version, affichage du numéro du programme exécuté, navigation réseau avec repli hors ligne, précache sans ancien cache HTTP, diagnostic de démarrage et sortie vidéo masquée dès le HTML. Lire DEPLOIEMENT.txt pour la purge Cloudflare nécessaire sur le serveur actuel.
