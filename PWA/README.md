@@ -1,3 +1,7 @@
+# S2A Pilot 1.4.18
+
+Pastille VIDÉO violette : fond translucide, texte clair et bordure assortis à la bande vidéo de la timeline. Les erreurs restent signalées en rouge.
+
 # S2A Pilot 1.4.17
 
 La hauteur de la timeline s’adapte au nombre de médias (minimum 86 px), avec une zone réservée aux graduations. Les bandes restent translucides : audio vert, vidéo violet. Les six bandes du scénario de test sont entièrement visibles. Les commandes et la waveform sont conservées.

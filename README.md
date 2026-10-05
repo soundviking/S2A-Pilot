@@ -1,3 +1,9 @@
+## Version 1.4.18
+
+Pastille VIDÉO violette, assortie aux bandes vidéo de la timeline.
+
+[Télécharger la PWA 1.4.18](downloads/S2A-Pilot-V1.4.18-PWA.zip)
+
 ## Correctif 1.4.17
 
 Timeline de hauteur automatique : aucune bande média tronquée, zone distincte pour les durées. Bandes audio vertes translucides ; vidéos violettes.
