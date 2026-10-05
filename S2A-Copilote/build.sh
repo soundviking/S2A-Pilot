@@ -48,9 +48,9 @@ cat > "$APP/Contents/Info.plist" <<'PLIST'
   <key>CFBundleIdentifier</key>
   <string>fr.s2aproduction.copilote</string>
   <key>CFBundleVersion</key>
-  <string>7</string>
+  <string>8</string>
   <key>CFBundleShortVersionString</key>
-  <string>1.2.5</string>
+  <string>1.2.6</string>
   <key>CFBundleExecutable</key>
   <string>S2A Copilote</string>
   <key>CFBundleIconFile</key>
@@ -63,6 +63,10 @@ cat > "$APP/Contents/Info.plist" <<'PLIST'
 </plist>
 PLIST
 
+mkdir -p "$RESOURCES/fr.lproj" "$RESOURCES/en.lproj"
+printf '%s\n' '"NSAppleEventsUsageDescription" = "S2A Copilote doit contrôler QLab afin d’importer la conduite dans le workspace sélectionné.";' > "$RESOURCES/fr.lproj/InfoPlist.strings"
+printf '%s\n' '"NSAppleEventsUsageDescription" = "S2A Copilote needs to control QLab to import the show into the selected workspace.";' > "$RESOURCES/en.lproj/InfoPlist.strings"
+cp "$ROOT/LICENSE" "$RESOURCES/LICENSE"
 chmod +x "$MACOS/S2A Copilote"
 
 /usr/bin/codesign --force --deep --sign - "$APP"

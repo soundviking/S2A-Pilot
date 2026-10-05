@@ -1,4 +1,4 @@
-DÉPLOIEMENT 1.4.34 — S2A PILOT
+DÉPLOIEMENT 1.4.35 — S2A PILOT
 
 1. Remplacer tout le contenu du dossier /qlab/ par cette version,
    y compris le fichier caché .htaccess. Ne pas remplacer uniquement index.html.
@@ -11,7 +11,7 @@ DÉPLOIEMENT 1.4.34 — S2A PILOT
 3. Dans Safari/PWA, ouvrir https://s2a-production.com/qlab/actualiser.html
    pour retirer les anciens caches de l’application. Les projets locaux
    IndexedDB sont conservés. Ne pas supprimer les données du site.
-4. Vérifier la version 1.4.34, Nouveau, + Cue, + Musique / Vidéo, Conduite PDF.
+4. Vérifier la version 1.4.35, Nouveau, + Cue, + Musique / Vidéo, Conduite PDF.
    Sans vidéo, la sortie vidéo doit rester masquée en Show.
 
 Diagnostic du 5 octobre 2026 : à l’URL habituelle, index.html et app.js
@@ -24,3 +24,5 @@ affiche la version du programme exécuté, utilise la page réseau quand elle
 est disponible, conserve le mode hors ligne et affiche un diagnostic si
 le programme ne démarre pas. Les tests ont été effectués dans Chrome ;
 le fonctionnement sur l’iPad Safari réel doit être confirmé après déploiement.
+
+VERSION BILINGUE : inclure i18n.js, manifest.en.webmanifest et companion/S2A-Copilote-1.2.6-app.zip. FR / EN dans l’en-tête ; Copilote 1.2.6 incluse. Sortie vidéo désactivée sur iPad / iPhone ; sur Mac Safari, fenêtre à placer manuellement. Chrome conserve le placement automatique sur affichage étendu détecté.

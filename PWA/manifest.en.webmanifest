@@ -1,7 +1,7 @@
 {
   "name": "S2A Pilot",
   "short_name": "S2A Pilot",
-  "description": "Préparation et conduite autonome multimédia pour spectacle.",
+  "description": "Prepare and run self-contained multimedia shows.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
@@ -22,5 +22,6 @@
       "purpose": "any"
     }
   ],
-  "id": "./index.html"
+  "id": "./index.html",
+  "lang": "en"
 }

@@ -1,5 +1,5 @@
 {
-  "version": "1.2.5",
+  "version": "1.2.6",
   "architectures": [
     "arm64",
     "x86_64"
@@ -13,7 +13,12 @@
     {
       "path": "S2A Copilote.app/Contents/MacOS/S2A Copilote",
       "mode": 33261,
-      "size": 2716560
+      "size": 2855040
+    },
+    {
+      "path": "S2A Copilote.app/Contents/Resources/LICENSE",
+      "mode": 33188,
+      "size": 2128
     },
     {
       "path": "S2A Copilote.app/Contents/Resources/S2ACopiloteIcon.icns",
@@ -21,9 +26,19 @@
       "size": 2063487
     },
     {
+      "path": "S2A Copilote.app/Contents/Resources/en.lproj/InfoPlist.strings",
+      "mode": 33188,
+      "size": 120
+    },
+    {
+      "path": "S2A Copilote.app/Contents/Resources/fr.lproj/InfoPlist.strings",
+      "mode": 33188,
+      "size": 134
+    },
+    {
       "path": "S2A Copilote.app/Contents/_CodeSignature/CodeResources",
       "mode": 33188,
-      "size": 2462
+      "size": 3416
     }
   ]
 }

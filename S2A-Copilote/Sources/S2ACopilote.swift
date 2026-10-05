@@ -1,6 +1,245 @@
 import SwiftUI
 import AppKit
 import Foundation
+private let defaultInterfaceLanguage = (Locale.preferredLanguages.first ?? "en").lowercased().hasPrefix("fr") ? "fr" : "en"
+private func L(_ text: String) -> String {
+    let language = UserDefaults.standard.string(forKey: "s2a-language") ?? defaultInterfaceLanguage
+    let catalog: [String: String] = [
+    "Lecture": "Play",
+    "Pause": "Pause",
+    "▶ Lecture": "▶ Play",
+    "Ⅱ Pause": "Ⅱ Pause",
+    "Lecture / Pause (Espace)": "Play / Pause (Space)",
+    "↺ Retour au début": "↺ Back to start",
+    "Retour au début": "Back to start",
+    "+ Musique / Vidéo": "+ Music / Video",
+    "Nouveau": "New",
+    "Ouvrir": "Open",
+    "Enregistrer sous…": "Save as…",
+    "Conduite PDF": "Cue sheet PDF",
+    "Conduite technique": "Technical cue sheet",
+    "CONDUITE TECHNIQUE": "TECHNICAL CUE SHEET",
+    "NOM DU NUMÉRO": "SHOW NAME",
+    "CUE ACTIVE": "ACTIVE CUE",
+    "PROCHAINE CUE": "NEXT CUE",
+    "SORTIE VIDÉO": "VIDEO OUTPUT",
+    "MONITEUR VIDÉO": "VIDEO MONITOR",
+    "Disponible uniquement avec un affichage étendu": "Available only with an extended display",
+    "Aucune vidéo en cours": "No video playing",
+    "Aucune Cue": "No Cue",
+    "Aucune autre Cue à venir": "No upcoming Cue",
+    "Aucun visuel pour cette Cue": "No visual for this Cue",
+    "Aucun visuel pour la prochaine Cue": "No visual for the next Cue",
+    "Aucune indication": "No instructions",
+    "Aucune description": "No description",
+    "Aucune sauvegarde locale détectée.": "No local save found.",
+    "Aucun média — cette Cue peut rester une simple indication de conduite.": "No media — this Cue can remain a simple show instruction.",
+    "Ajouter visuel": "Add visual",
+    "Changer visuel": "Change visual",
+    "Retirer visuel": "Remove visual",
+    "Ajouter": "Add",
+    "Ajouter…": "Add…",
+    "Dupliquer": "Duplicate",
+    "Supprimer": "Delete",
+    "Télécharger": "Download",
+    "Fermer": "Close",
+    "Annuler": "Cancel",
+    "Rétablir": "Redo",
+    "Importer": "Import",
+    "Installer": "Install",
+    "Plus tard": "Later",
+    "Partager": "Share",
+    "Sur l’écran d’accueil": "Add to Home Screen",
+    "Installer S2A Pilot": "Install S2A Pilot",
+    "Installe S2A Pilot sur cet appareil pour pouvoir l’utiliser même sans connexion Internet.": "Install S2A Pilot on this device to use it even without an Internet connection.",
+    "Sur iPhone / iPad :": "On iPhone / iPad:",
+    "Ouvre S2A Pilot dans Safari.": "Open S2A Pilot in Safari.",
+    "Touche": "Tap",
+    "Choisis": "Choose",
+    "Confirme avec": "Confirm with",
+    "Ajuster à l’écran": "Fit to screen",
+    "MÉDIAS": "MEDIA",
+    "MÉDIAS DÉCLENCHÉS PAR CETTE CUE": "MEDIA TRIGGERED BY THIS CUE",
+    "ARRÊT / FONDU TOUS LES MÉDIAS": "STOP / FADE ALL MEDIA",
+    "VIDÉO": "VIDEO",
+    "SON ACTIF": "ACTIVE AUDIO",
+    "FONDU": "FADE",
+    "Description / indication de conduite": "Description / show instruction",
+    "Temps de la Cue": "Cue time",
+    "Temps écoulé (temps restant avant la fin)": "Elapsed time (time remaining until the end)",
+    "Toute reproduction non autorisée par l’artiste est interdite.": "Any reproduction without the artist’s authorization is prohibited.",
+    "Créé avec S2A Pilot - S2A Production": "Created with S2A Pilot - S2A Production",
+    "Fin de conduite": "End of show",
+    "Prêt": "Ready",
+    "À préparer": "Not ready",
+    "Affichage étendu prêt": "Extended display ready",
+    "Sortie vidéo activée · affichage étendu prêt": "Video output active · extended display ready",
+    "Ajoute une vidéo pour préparer la sortie": "Add a video to prepare the output",
+    "Ouvrir la sortie vidéo": "Open video output",
+    "Fermer la sortie vidéo": "Close video output",
+    "Préparer la sortie vidéo sur noir": "Prepare video output on black",
+    "Lecture / pause de ce fichier uniquement": "Play / pause this file only",
+    "Lecture du média": "Play media",
+    "Pause du média": "Pause media",
+    "Lecture indisponible": "Playback unavailable",
+    "Chargement…": "Loading…",
+    "Aperçu fermé": "Preview closed",
+    "Aperçu indisponible": "Preview unavailable",
+    "Aperçu vidéo du média sélectionné": "Preview of the selected video",
+    "Aucun visuel": "No visual",
+    "Média": "Media",
+    "Média introuvable": "Media not found",
+    "Média non décodable": "Media cannot be decoded",
+    "Média non décodable par ce navigateur": "This browser cannot decode the media",
+    "Délai de chargement dépassé": "Loading timed out",
+    "Délai de préchargement dépassé": "Preloading timed out",
+    "Préchargement annulé": "Preloading cancelled",
+    "Waveform indisponible": "Waveform unavailable",
+    "Calcul de la waveform…": "Calculating waveform…",
+    "Ajoutez un média pour afficher sa waveform.": "Add media to display its waveform.",
+    "Durée du fondu en secondes": "Fade duration in seconds",
+    "Durée du fondu global en secondes": "Global fade duration in seconds",
+    "Déplacer la tête de lecture ; faire défiler horizontalement après un zoom": "Move the playhead; scroll horizontally after zooming",
+    "Déplacer la tête de lecture du média": "Move the media playhead",
+    "Position dans le média": "Media position",
+    "Zoom de la timeline du fichier": "File timeline zoom",
+    "Zoom de la timeline générale": "Main timeline zoom",
+    "Zoomer la timeline du fichier": "Zoom in on the file timeline",
+    "Dézoomer la timeline du fichier": "Zoom out on the file timeline",
+    "Zoomer le média": "Zoom in on media",
+    "Dézoomer le média": "Zoom out on media",
+    "Zoomer la timeline générale": "Zoom in on the main timeline",
+    "Dézoomer la timeline générale": "Zoom out on the main timeline",
+    "Glisser pour déplacer la Cue et ajuster son temps (Alt + flèches au clavier)": "Drag to move the Cue and adjust its time (Alt + arrow keys on the keyboard)",
+    "Exemples : 02:41.0 ou 02.41 pour 2 minutes 41 ; 02:41.5 pour les dixièmes.": "Examples: 02:41.0 or 02.41 for 2 minutes 41; 02:41.5 for tenths.",
+    "Créer un package .s2apilot.zip portable complet, média inclus": "Create a complete portable .s2apilot.zip package, including media",
+    "Consulter ou télécharger la conduite technique PDF": "View or download the technical cue sheet PDF",
+    "Démarrer un nouveau projet": "Start a new project",
+    "Démarrer un nouveau projet ? Les modifications non enregistrées seront perdues.": "Start a new project? Unsaved changes will be lost.",
+    "Certains médias n’ont pas pu être préparés. Continuer quand même ?": "Some media could not be prepared. Continue anyway?",
+    "Création du package…": "Creating package…",
+    "Création de la conduite…": "Creating cue sheet…",
+    "Projet S2A Pilot": "S2A Pilot project",
+    "Projet sans nom": "Untitled project",
+    "Format ZIP non reconnu.": "Unrecognized ZIP format.",
+    "Ce ZIP utilise une compression non prise en charge.": "This ZIP uses unsupported compression.",
+    "Archive Copilote invalide.": "Invalid Copilote archive.",
+    "Archive Copilote incomplète.": "Incomplete Copilote archive.",
+    "S2A Copilote est indisponible. Vérifiez que tous les fichiers de la PWA ont été déployés.": "S2A Copilote is unavailable. Check that all PWA files have been deployed.",
+    "conduite.json introuvable.": "conduite.json not found.",
+    "Le visuel de l’en-tête est indisponible.": "The header image is unavailable.",
+    "Le navigateur a bloqué la fenêtre vidéo. Autorise les fenêtres surgissantes pour S2A Pilot.": "The browser blocked the video window. Allow pop-ups for S2A Pilot.",
+    "Plein écran indisponible": "Fullscreen unavailable",
+    "Instructions affichées": "Instructions displayed",
+    "Ouvrir la nouvelle version": "Open the new version",
+    "Quitter le mode Show et mettre la lecture en pause pour actualiser.": "Leave Show mode and pause playback to update.",
+    "Actualisation annulée : la sauvegarde locale a échoué.": "Update cancelled: local saving failed.",
+    "Version invalide": "Invalid version",
+    "Vérification indisponible": "Version check unavailable",
+    "Version plus récente disponible sur le serveur": "A newer version is available on the server",
+    "Version vérifiée sur le serveur": "Version checked on the server",
+    "Version du serveur non vérifiée : connexion indisponible.": "Server version not checked: connection unavailable.",
+    "Package S2A Pilot": "S2A Pilot package",
+    "Aucun package sélectionné": "No package selected",
+    "Retirer ce package": "Remove this package",
+    "Tout retirer": "Remove all",
+    "1 conduite S2A Pilot associée": "1 linked S2A Pilot show",
+    "Workspace non enregistré — import impossible": "Workspace not saved — import unavailable",
+    "Aucun workspace détecté": "No workspace detected",
+    "Actualiser le workspace QLab": "Refresh QLab workspace",
+    "Importer les conduites": "Import shows",
+    "Importer dans QLab": "Import into QLab",
+    "Visualiseur": "Monitor",
+    "Masquer le message": "Dismiss message",
+    "Toujours au premier plan": "Always on top",
+    "Visualiseur S2A Copilote": "S2A Copilote monitor",
+    "En attente d’un numéro S2A Pilot": "Waiting for an S2A Pilot show",
+    "Vérification de QLab…": "Checking QLab…",
+    "Choisir un ou plusieurs packages S2A Pilot": "Choose one or more S2A Pilot packages",
+    "Choisis un ou plusieurs packages S2A Pilot.": "Choose one or more S2A Pilot packages.",
+    "Choisis un package S2A Pilot.": "Choose an S2A Pilot package.",
+    "Import annulé.": "Import cancelled.",
+    "Échec de l’import.": "Import failed.",
+    "Impossible de détecter QLab.": "Unable to detect QLab.",
+    "QLab n’a aucun workspace ouvert": "QLab has no open workspace",
+    "Le workspace QLab doit être enregistré avant l’import.": "Save the QLab workspace before importing.",
+    "Le workspace QLab doit être enregistré.": "Save the QLab workspace.",
+    "Le workspace QLab sélectionné a été fermé.": "The selected QLab workspace has been closed.",
+    "Le workspace QLab sélectionné a été fermé pendant l’import.": "The selected QLab workspace was closed during import.",
+    "Le workspace QLab sélectionné a été fermé. Import annulé.": "The selected QLab workspace has been closed. Import cancelled.",
+    "Le workspace sélectionné a été fermé. Choisis un workspace ouvert.": "The selected workspace has been closed. Choose an open workspace.",
+    "QLab n’a pas renvoyé l’identifiant du Group cue importé.": "QLab did not return the imported Group cue ID.",
+    "Format de package S2A Pilot non reconnu.": "Unrecognized S2A Pilot package format.",
+    "S2A Copilote attend un fichier .s2apilot.zip, .showcue.zip ou .zip.": "S2A Copilote expects a .s2apilot.zip, .showcue.zip or .zip file.",
+    "conduite.json est introuvable dans le package.": "conduite.json is missing from the package.",
+    "Le package ne contient aucun média exploitable.": "The package contains no usable media.",
+    "FONDU GLOBAL — AUDIO": "GLOBAL FADE — AUDIO",
+    "FONDU GLOBAL — VIDÉO": "GLOBAL FADE — VIDEO",
+    "STOP GLOBAL — VIDÉO": "GLOBAL STOP — VIDEO",
+    "STOP GLOBAL — AUDIO": "GLOBAL STOP — AUDIO",
+    "Depuis": "Since",
+    "Cue à": "Cue at",
+    "Conduite technique —": "Technical cue sheet —",
+    "Dernière sauvegarde :": "Last save:",
+    "Dernière Cue :": "Last Cue:",
+    " fichier": " file",
+    " audio": " audio",
+    " vidéo": " video",
+    " utile /": " selected /",
+    " Mo": " MB",
+    "durée inconnue": "unknown duration",
+    " (copie)": " (copy)",
+    "Sauvegarde locale automatique · ": "Automatic local save · ",
+    "Échec de la sauvegarde locale : ": "Local save failed: ",
+    "Impossible d’ajouter ce média : ": "Unable to add this media: ",
+    "Impossible d’enregistrer : ": "Unable to save: ",
+    "Impossible d’ouvrir le projet : ": "Unable to open the project: ",
+    "Impossible de générer la conduite PDF : ": "Unable to generate the cue sheet PDF: ",
+    "Fichier de l’application indisponible : ": "Application file unavailable: ",
+    "Nouvelle version ": "New version ",
+    " disponible. Quittez le mode Show pour actualiser.": " available. Leave Show mode to update.",
+    " média(s) sans waveform décodable": " media item(s) without a decodable waveform",
+    "Déplacer ": "Move ",
+    "la Cue": "the Cue",
+    "Cliquer / toucher pour passer en plein écran": "Click / tap to enter fullscreen",
+    "Utilise le menu du navigateur puis « Installer l’application » ou ": "Use the browser menu, then “Install app” or ",
+    "« Ajouter à l’écran d’accueil ».</p>": "“Add to Home Screen”.</p>",
+    "Ex. Numéro Gala — Norbert Ferré": "E.g. Gala act — Norbert Ferré",
+    "Impossible de détecter les workspaces QLab : ": "Unable to detect QLab workspaces: ",
+    "Impossible de lire l’index S2A Pilot : ": "Unable to read the S2A Pilot index: ",
+    "Visualiseur indisponible : ": "Monitor unavailable: ",
+    "Média introuvable : ": "Media not found: ",
+    "Le média principal est introuvable : ": "The main media file is missing: ",
+    "FONDU ENTRÉE — ": "FADE IN — ",
+    "FONDU SORTIE — ": "FADE OUT — ",
+    "CUT VIDÉO — ": "CUT VIDEO — ",
+    "Importer un numéro": "Import a show",
+    "Importer ": "Import ",
+    " conduites S2A Pilot ?": " S2A Pilot shows?",
+    "Chaque numéro sera créé dans son propre Group cue Timeline.": "Each show will be created in its own Timeline Group cue.",
+    "Workspace QLab :": "QLab workspace:",
+    " conduites S2A Pilot associées": " linked S2A Pilot shows",
+    " média": " media item",
+    " sélectionné": " selected",
+    " chargés": " loaded",
+    " chargé": " loaded",
+    " à importer.": " to import.",
+    " importées": " imported",
+    " importée": " imported",
+    " prête": " ready",
+    " prêt": " ready",
+    " échec": " failure",
+    "dans ": "in ",
+    "Import de conduites S2A Pilot V5 dans QLab 5 — S2A Copilote 1.2.6": "Import S2A Pilot V5 shows into QLab 5 — S2A Copilote 1.2.6"
+    ]
+    if language != "en" { return catalog.first(where: { $0.value == text })?.key ?? text }
+    if let value = catalog[text] { return value }
+    var result = text
+    for key in catalog.keys.sorted(by: { $0.count > $1.count }) where key.count > 5 {
+        result = result.replacingOccurrences(of: key, with: catalog[key]!)
+    }
+    return result
+}
 
 struct ShowCueProject: Codable {
     struct LegacyMedia: Codable {
@@ -155,8 +394,8 @@ enum ShowCueError: LocalizedError {
 
     var errorDescription: String? {
         switch self {
-        case .invalidPackage(let s): return s
-        case .commandFailed(let s): return s
+        case .invalidPackage(let s): return L(s)
+        case .commandFailed(let s): return L(s)
         }
     }
 }
@@ -169,7 +408,7 @@ final class AppModel: ObservableObject {
         get { workspace?.id ?? "" }
         set { selectWorkspace(newValue) }
     }
-    @Published var status = "Choisis un package S2A Pilot."
+    @Published var status = L("Choisis un package S2A Pilot.")
     @Published var isBusy = false
     @Published var errorMessage: String?
 
@@ -177,7 +416,7 @@ final class AppModel: ObservableObject {
     @Published var activeShow: SavedShowCue?
     @Published var visualElapsed: Double = 0
     @Published var visualRunning = false
-    @Published var visualStatus = "En attente d’un numéro S2A Pilot"
+    @Published var visualStatus = L("En attente d’un numéro S2A Pilot")
     @Published var visualAlwaysOnTop = true
 
     private var workspaceTimer: Timer?
@@ -200,7 +439,7 @@ final class AppModel: ObservableObject {
 
     func choosePackage() {
         let panel = NSOpenPanel()
-        panel.title = "Choisir un ou plusieurs packages S2A Pilot"
+        panel.title = L("Choisir un ou plusieurs packages S2A Pilot")
         panel.allowedContentTypes = []
         panel.allowsMultipleSelection = true
         panel.canChooseDirectories = false
@@ -257,7 +496,7 @@ final class AppModel: ObservableObject {
         guard let index = packages.firstIndex(where: { $0.id == id }) else { return }
         let item = packages.remove(at: index)
         try? FileManager.default.removeItem(at: item.extractedURL)
-        status = packages.isEmpty ? "Choisis un ou plusieurs packages S2A Pilot." : "\(packages.count) package\(packages.count > 1 ? "s" : "") prêt\(packages.count > 1 ? "s" : "") à importer."
+        status = packages.isEmpty ? L("Choisis un ou plusieurs packages S2A Pilot.") : "\(packages.count) package\(packages.count > 1 ? "s" : "") prêt\(packages.count > 1 ? "s" : "") à importer."
     }
 
     func clearPackages() {
@@ -265,7 +504,7 @@ final class AppModel: ObservableObject {
             try? FileManager.default.removeItem(at: item.extractedURL)
         }
         packages.removeAll()
-        status = "Choisis un ou plusieurs packages S2A Pilot."
+        status = L("Choisis un ou plusieurs packages S2A Pilot.")
     }
 
     func loadPackage(_ url: URL) {
@@ -336,7 +575,7 @@ final class AppModel: ObservableObject {
 
         isBusy = true
         errorMessage = nil
-        status = "Vérification de QLab…"
+        status = L("Vérification de QLab…")
 
         DispatchQueue.global(qos: .userInitiated).async {
             do {
@@ -357,13 +596,17 @@ final class AppModel: ObservableObject {
 
                     Chaque numéro sera créé dans son propre Group cue Timeline.
                     """
-                    alert.addButton(withTitle: "Importer")
-                    alert.addButton(withTitle: "Annuler")
+                    alert.addButton(withTitle: L("Importer"))
+                    alert.addButton(withTitle: L("Annuler"))
                     alert.alertStyle = .informational
 
+                    if (UserDefaults.standard.string(forKey: "s2a-language") ?? defaultInterfaceLanguage) == "en" {
+                        alert.messageText = self.packages.count == 1 ? "Import ‘\(self.packages[0].project.title)’?" : "Import \(self.packages.count) S2A Pilot shows?"
+                        alert.informativeText = "QLab workspace:\n\(initial.name)\n\n\(names)\n\nEach show will be created in its own Timeline Group cue."
+                    }
                     guard alert.runModal() == .alertFirstButtonReturn else {
                         self.isBusy = false
-                        self.status = "Import annulé."
+                        self.status = L("Import annulé.")
                         return
                     }
 
@@ -373,7 +616,7 @@ final class AppModel: ObservableObject {
                         do {
                             var current = try self.qlabWorkspace(id: initial.id)
                             guard current.id == initial.id else {
-                                throw ShowCueError.commandFailed("Le workspace QLab sélectionné a été fermé. Import annulé.")
+                                throw ShowCueError.commandFailed(L("Le workspace QLab sélectionné a été fermé. Import annulé."))
                             }
 
                             var importedCount = 0
@@ -381,7 +624,7 @@ final class AppModel: ObservableObject {
                             for item in queueSnapshot {
                                 current = try self.qlabWorkspace(id: initial.id)
                                 guard current.id == initial.id else {
-                                    throw ShowCueError.commandFailed("Le workspace QLab sélectionné a été fermé pendant l’import.")
+                                    throw ShowCueError.commandFailed(L("Le workspace QLab sélectionné a été fermé pendant l’import."))
                                 }
 
                                 let result = try self.performImport(
@@ -408,7 +651,7 @@ final class AppModel: ObservableObject {
                                 self.loadSavedShows(for: current)
                                 self.visualElapsed = 0
                                 self.visualRunning = false
-                                self.visualStatus = "En attente d’un numéro S2A Pilot"
+                                self.visualStatus = L("En attente d’un numéro S2A Pilot")
                                 self.startVisualMonitor()
                                 self.status = "\(importedCount) conduite\(importedCount > 1 ? "s" : "") S2A Pilot importée\(importedCount > 1 ? "s" : "") dans « \(current.name) »."
 
@@ -418,7 +661,7 @@ final class AppModel: ObservableObject {
                             DispatchQueue.main.async {
                                 self.isBusy = false
                                 self.errorMessage = error.localizedDescription
-                                self.status = "Échec de l’import."
+                                self.status = L("Échec de l’import.")
                             }
                         }
                     }
@@ -427,7 +670,7 @@ final class AppModel: ObservableObject {
                 DispatchQueue.main.async {
                     self.isBusy = false
                     self.errorMessage = error.localizedDescription
-                    self.status = "Impossible de détecter QLab."
+                    self.status = L("Impossible de détecter QLab.")
                 }
             }
         }
@@ -441,20 +684,20 @@ final class AppModel: ObservableObject {
         try fm.createDirectory(at: temp, withIntermediateDirectories: true)
 
         guard url.pathExtension.lowercased() == "zip" else {
-            throw ShowCueError.invalidPackage("S2A Copilote attend un fichier .s2apilot.zip, .showcue.zip ou .zip.")
+            throw ShowCueError.invalidPackage(L("S2A Copilote attend un fichier .s2apilot.zip, .showcue.zip ou .zip."))
         }
         try run("/usr/bin/ditto", ["-x", "-k", url.path, temp.path])
 
         let manifest = temp.appendingPathComponent("conduite.json")
         guard fm.fileExists(atPath: manifest.path) else {
-            throw ShowCueError.invalidPackage("conduite.json est introuvable dans le package.")
+            throw ShowCueError.invalidPackage(L("conduite.json est introuvable dans le package."))
         }
 
         let data = try Data(contentsOf: manifest)
         let project = try JSONDecoder().decode(ShowCueProject.self, from: data)
         let acceptedFormats = ["showcue-multimedia-package", "show-cue-prep-package"]
         guard acceptedFormats.contains(project.format) || project.version >= 4 else {
-            throw ShowCueError.invalidPackage("Format de package S2A Pilot non reconnu.")
+            throw ShowCueError.invalidPackage(L("Format de package S2A Pilot non reconnu."))
         }
 
         let root = temp.standardizedFileURL.path + "/"
@@ -476,7 +719,7 @@ final class AppModel: ObservableObject {
                 throw ShowCueError.invalidPackage("Le média principal est introuvable : \(resolved.media.path)")
             }
         } else {
-            throw ShowCueError.invalidPackage("Le package ne contient aucun média exploitable.")
+            throw ShowCueError.invalidPackage(L("Le package ne contient aucun média exploitable."))
         }
 
         return (temp, project)
@@ -517,15 +760,15 @@ final class AppModel: ObservableObject {
 
     private func qlabWorkspace(id: String) throws -> WorkspaceInfo {
         guard let info = try qlabWorkspaces().first(where: { $0.id == id }) else {
-            throw ShowCueError.commandFailed("Le workspace sélectionné a été fermé. Choisis un workspace ouvert.")
+            throw ShowCueError.commandFailed(L("Le workspace sélectionné a été fermé. Choisis un workspace ouvert."))
         }
         return info
     }
 
     private func performImport(project: ShowCueProject, folder: URL, workspaceID: String) throws -> (groupID: String, mediaID: String?, imageURLs: [Int: URL]) {
         let current = try qlabWorkspace(id: workspaceID)
-        guard current.id == workspaceID else { throw ShowCueError.commandFailed("Le workspace QLab sélectionné a été fermé.") }
-        guard let projectFolder = current.projectFolder else { throw ShowCueError.commandFailed("Le workspace QLab doit être enregistré avant l’import.") }
+        guard current.id == workspaceID else { throw ShowCueError.commandFailed(L("Le workspace QLab sélectionné a été fermé.")) }
+        guard let projectFolder = current.projectFolder else { throw ShowCueError.commandFailed(L("Le workspace QLab doit être enregistré avant l’import.")) }
 
         let fm = FileManager.default
         let packageRoot = folder.standardizedFileURL.path + "/"
@@ -644,17 +887,17 @@ final class AppModel: ObservableObject {
                     if action.transition == "fade" {
                         let d = action.fadeSeconds
                         for target in priorAudioVariables {
-                            appendAudioFade(target: target, at: cue.time, duration: d, toDB: -120, stopWhenDone: true, label: "FONDU GLOBAL — AUDIO")
+                            appendAudioFade(target: target, at: cue.time, duration: d, toDB: -120, stopWhenDone: true, label: L("FONDU GLOBAL — AUDIO"))
                         }
                         for target in priorVideoVariables {
-                            appendVideoFade(target: target, at: cue.time, duration: d, stopWhenDone: true, label: "FONDU GLOBAL — VIDÉO")
+                            appendVideoFade(target: target, at: cue.time, duration: d, stopWhenDone: true, label: L("FONDU GLOBAL — VIDÉO"))
                         }
                     } else {
                         for target in priorAudioVariables {
-                            appendStop(target: target, at: cue.time, label: "STOP GLOBAL — AUDIO")
+                            appendStop(target: target, at: cue.time, label: L("STOP GLOBAL — AUDIO"))
                         }
                         for target in priorVideoVariables {
-                            appendStop(target: target, at: cue.time, label: "STOP GLOBAL — VIDÉO")
+                            appendStop(target: target, at: cue.time, label: L("STOP GLOBAL — VIDÉO"))
                         }
                     }
                     // Après un arrêt/fondu global, aucun média antérieur ne doit être
@@ -670,7 +913,7 @@ final class AppModel: ObservableObject {
                     let variable = "mediaCue\(mediaCounter)"
                     if firstMediaVariable == nil { firstMediaVariable = variable }
                     let cueType = action.isVideo ? "Video" : "Audio"
-                    let prefix = action.isVideo ? "VIDÉO" : "AUDIO"
+                    let prefix = action.isVideo ? L("VIDÉO") : "AUDIO"
                     let mediaName = "\(prefix) — \(cue.name) — \(action.name ?? destination.lastPathComponent)"
 
                     if action.isAudio {
@@ -781,14 +1024,14 @@ final class AppModel: ObservableObject {
 
         let output = try run("/usr/bin/osascript", ["-e", lines.joined(separator: "\n")])
         let ids = output.split(separator: "\t", omittingEmptySubsequences: false).map(String.init)
-        guard let groupID = ids.first, !groupID.isEmpty else { throw ShowCueError.commandFailed("QLab n’a pas renvoyé l’identifiant du Group cue importé.") }
+        guard let groupID = ids.first, !groupID.isEmpty else { throw ShowCueError.commandFailed(L("QLab n’a pas renvoyé l’identifiant du Group cue importé.")) }
         let mediaID = ids.count > 1 && !ids[1].isEmpty ? ids[1] : nil
         return (groupID, project.isMultimedia ? nil : mediaID, imageDestinations)
     }
 
     private func showCueDirectory(for workspace: WorkspaceInfo) throws -> URL {
         guard let projectFolder = workspace.projectFolder else {
-            throw ShowCueError.commandFailed("Le workspace QLab doit être enregistré.")
+            throw ShowCueError.commandFailed(L("Le workspace QLab doit être enregistré."))
         }
         return projectFolder.appendingPathComponent("S2A Pilot", isDirectory: true)
     }
@@ -799,7 +1042,7 @@ final class AppModel: ObservableObject {
 
     private func makeSavedShowRecord(project: ShowCueProject, groupID: String, mediaID: String?, imageURLs: [Int: URL], workspace: WorkspaceInfo) throws -> SavedShowCue {
         guard let projectFolder = workspace.projectFolder else {
-            throw ShowCueError.commandFailed("Le workspace QLab doit être enregistré.")
+            throw ShowCueError.commandFailed(L("Le workspace QLab doit être enregistré."))
         }
         let basePath = projectFolder.standardizedFileURL.path
         var relativeImages: [String: String] = [:]
@@ -869,7 +1112,7 @@ final class AppModel: ObservableObject {
             activeShow = nil
             visualRunning = false
             visualElapsed = 0
-            visualStatus = "En attente d’un numéro S2A Pilot"
+            visualStatus = L("En attente d’un numéro S2A Pilot")
             return
         }
         monitorTimer = Timer.scheduledTimer(withTimeInterval: 0.25, repeats: true) { [weak self] _ in self?.pollVisualMonitor() }
@@ -921,7 +1164,7 @@ final class AppModel: ObservableObject {
 
                 let output = try self.run("/usr/bin/osascript", ["-e", scriptLines.joined(separator: "\n")])
                 if output == "NO_WORKSPACE" {
-                    DispatchQueue.main.async { guard self.monitorGeneration == generation else { return };  self.activeShow=nil; self.visualRunning=false; self.visualElapsed=0; self.visualStatus="QLab n’a aucun workspace ouvert" }
+                    DispatchQueue.main.async { guard self.monitorGeneration == generation else { return };  self.activeShow=nil; self.visualRunning=false; self.visualElapsed=0; self.visualStatus=L("QLab n’a aucun workspace ouvert") }
                     return
                 }
                 if output == "WRONG_WORKSPACE" {
@@ -941,12 +1184,12 @@ final class AppModel: ObservableObject {
 
                 DispatchQueue.main.async { guard self.monitorGeneration == generation else { return };
                     guard let selected, let show=showsSnapshot.first(where:{$0.groupID==selected.id}) else {
-                        self.activeShow=nil; self.visualRunning=false; self.visualElapsed=0; self.visualStatus="En attente d’un numéro S2A Pilot"; return
+                        self.activeShow=nil; self.visualRunning=false; self.visualElapsed=0; self.visualStatus=L("En attente d’un numéro S2A Pilot"); return
                     }
                     self.activeShow=show
                     self.visualElapsed=max(0,selected.elapsed)
                     self.visualRunning=selected.running && !selected.paused
-                    self.visualStatus=selected.paused ? "Pause" : "Lecture"
+                    self.visualStatus=selected.paused ? L("Pause") : L("Lecture")
                 }
             } catch {
                 DispatchQueue.main.async { guard self.monitorGeneration == generation else { return };  self.activeShow=nil; self.visualRunning=false; self.visualElapsed=0; self.visualStatus="Visualiseur indisponible : \(error.localizedDescription)" }
@@ -1039,6 +1282,8 @@ final class AppModel: ObservableObject {
 
 struct ContentView: View {
     @ObservedObject var model: AppModel
+    @AppStorage("s2a-language") private var interfaceLanguage = defaultInterfaceLanguage
+    private var isEnglish: Bool { interfaceLanguage == "en" }
     @Environment(\.openWindow) private var openWindow
 
     private var workspaceStatusColor: Color {
@@ -1056,13 +1301,16 @@ struct ContentView: View {
                 VStack(alignment: .leading, spacing: 3) {
                     Text("S2A Copilote")
                         .font(.system(size: 20, weight: .semibold))
-                    Text("Import de conduites S2A Pilot V5 dans QLab 5 — S2A Copilote 1.2.5")
+                    Text(L("Import de conduites S2A Pilot V5 dans QLab 5 — S2A Copilote 1.2.6"))
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                 }
 
                 Spacer()
-
+                Picker("Language / Langue", selection: $interfaceLanguage) {
+                    Text("Français").tag("fr")
+                    Text("English").tag("en")
+                }.pickerStyle(.segmented).frame(width: 155).disabled(model.isBusy)
                 if model.isBusy {
                     ProgressView()
                         .controlSize(.small)
@@ -1076,9 +1324,9 @@ struct ContentView: View {
                         .foregroundStyle(.secondary)
 
                     VStack(alignment: .leading, spacing: 2) {
-                        Text("Package S2A Pilot")
+                        Text(L("Package S2A Pilot"))
                             .font(.headline)
-                        Text(model.packages.isEmpty ? "Aucun package sélectionné" : "\(model.packages.count) package\(model.packages.count > 1 ? "s" : "") sélectionné\(model.packages.count > 1 ? "s" : "")")
+                        Text(isEnglish ? (model.packages.isEmpty ? "No package selected" : "\(model.packages.count) package(s) selected") : model.packages.isEmpty ? L("Aucun package sélectionné") : "\(model.packages.count) package\(model.packages.count > 1 ? "s" : "") sélectionné\(model.packages.count > 1 ? "s" : "")")
                             .font(.caption)
                             .foregroundStyle(.secondary)
                             .lineLimit(1)
@@ -1087,7 +1335,7 @@ struct ContentView: View {
 
                     Spacer()
 
-                    Button("Ajouter…") {
+                    Button(L("Ajouter…")) {
                         model.choosePackage()
                     }
                     .disabled(model.isBusy)
@@ -1105,7 +1353,7 @@ struct ContentView: View {
                                 VStack(alignment: .leading, spacing: 2) {
                                     Text(item.project.title)
                                         .fontWeight(.medium)
-                                    Text("\(item.project.multimediaActionCount) média\(item.project.multimediaActionCount > 1 ? "s" : "") • \(item.project.cues.count) Cue\(item.project.cues.count > 1 ? "s" : "")")
+                                    Text(isEnglish ? "\(item.project.multimediaActionCount) media • \(item.project.cues.count) Cues" : "\(item.project.multimediaActionCount) média\(item.project.multimediaActionCount > 1 ? "s" : "") • \(item.project.cues.count) Cue\(item.project.cues.count > 1 ? "s" : "")")
                                         .font(.caption)
                                         .foregroundStyle(.secondary)
                                         .lineLimit(1)
@@ -1120,14 +1368,14 @@ struct ContentView: View {
                                 }
                                 .buttonStyle(.plain)
                                 .foregroundStyle(.secondary)
-                                .help("Retirer ce package")
+                                .help(L("Retirer ce package"))
                             }
                         }
 
                         if model.packages.count > 1 {
                             HStack {
                                 Spacer()
-                                Button("Tout retirer") {
+                                Button(L("Tout retirer")) {
                                     model.clearPackages()
                                 }
                                 .controlSize(.small)
@@ -1168,16 +1416,16 @@ struct ContentView: View {
                                     .foregroundStyle(.secondary)
                                     .lineLimit(1)
                                     .truncationMode(.middle)
-                                Text(model.savedShows.count == 1 ? "1 conduite S2A Pilot associée" : "\(model.savedShows.count) conduites S2A Pilot associées")
+                                Text(isEnglish ? "\(model.savedShows.count) linked S2A Pilot show(s)" : model.savedShows.count == 1 ? L("1 conduite S2A Pilot associée") : "\(model.savedShows.count) conduites S2A Pilot associées")
                                     .font(.caption2)
                                     .foregroundStyle(.secondary)
                             } else {
-                                Text("Workspace non enregistré — import impossible")
+                                Text(L("Workspace non enregistré — import impossible"))
                                     .font(.caption2)
                                     .foregroundStyle(.orange)
                             }
                         } else {
-                            Text("Aucun workspace détecté")
+                            Text(L("Aucun workspace détecté"))
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
                         }
@@ -1190,7 +1438,7 @@ struct ContentView: View {
                     } label: {
                         Image(systemName: "arrow.clockwise")
                     }
-                    .help("Actualiser le workspace QLab")
+                    .help(L("Actualiser le workspace QLab"))
                     .disabled(model.isBusy)
                 }
 
@@ -1200,7 +1448,7 @@ struct ContentView: View {
                     Button {
                         model.importIntoQLab()
                     } label: {
-                        Label(model.packages.count > 1 ? "Importer les conduites" : "Importer dans QLab", systemImage: "square.and.arrow.down")
+                        Label(model.packages.count > 1 ? L("Importer les conduites") : L("Importer dans QLab"), systemImage: "square.and.arrow.down")
                     }
                     .buttonStyle(.borderedProminent)
                     .controlSize(.large)
@@ -1210,7 +1458,7 @@ struct ContentView: View {
                         model.startVisualMonitor()
                         openWindow(id: "visual-monitor")
                     } label: {
-                        Label("Visualiseur", systemImage: "rectangle.on.rectangle")
+                        Label(L("Visualiseur"), systemImage: "rectangle.on.rectangle")
                     }
                     .controlSize(.large)
                     .disabled(model.savedShows.isEmpty)
@@ -1224,12 +1472,12 @@ struct ContentView: View {
             if let error = model.errorMessage {
                 HStack(alignment: .top, spacing: 10) {
                     Image(systemName: "exclamationmark.triangle.fill").foregroundStyle(.red)
-                    Text(error).font(.callout).textSelection(.enabled)
+                    Text(L(error)).font(.callout).textSelection(.enabled)
                     Spacer()
                     Button { model.errorMessage = nil } label: { Image(systemName: "xmark.circle.fill") }
                         .buttonStyle(.plain)
                         .foregroundStyle(.secondary)
-                        .help("Masquer le message")
+                        .help(L("Masquer le message"))
                 }
                 .padding(12)
                 .background(.red.opacity(0.08), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
@@ -1244,6 +1492,8 @@ struct ContentView: View {
 }
 struct VisualMonitorView: View {
     @ObservedObject var model: AppModel
+    @AppStorage("s2a-language") private var interfaceLanguage = defaultInterfaceLanguage
+    private var isEnglish: Bool { interfaceLanguage == "en" }
     @State private var window: NSWindow?
 
     private func shortTime(_ seconds: Double) -> String {
@@ -1272,14 +1522,14 @@ struct VisualMonitorView: View {
                 VStack(alignment: .leading, spacing: 1) {
                     Text(model.activeShow?.title ?? "S2A Pilot")
                         .font(.headline)
-                    Text(model.visualStatus)
+                    Text(L(model.visualStatus))
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }
 
                 Spacer()
 
-                Toggle("Toujours au premier plan", isOn: $model.visualAlwaysOnTop)
+                Toggle(L("Toujours au premier plan"), isOn: $model.visualAlwaysOnTop)
                     .toggleStyle(.switch)
                     .controlSize(.small)
                     .onChange(of: model.visualAlwaysOnTop) { _ in
@@ -1292,7 +1542,7 @@ struct VisualMonitorView: View {
             if let cue = model.nextVisualCue {
                 HStack(alignment: .top, spacing: 18) {
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("PROCHAINE CUE")
+                        Text(L("PROCHAINE CUE"))
                             .font(.caption2)
                             .fontWeight(.semibold)
                             .foregroundStyle(.secondary)
@@ -1302,13 +1552,13 @@ struct VisualMonitorView: View {
                             .lineLimit(3)
 
                         if let countdown = model.nextVisualCountdown {
-                            Text("dans \(shortTime(countdown))")
+                            Text(L("dans \(shortTime(countdown))"))
                                 .font(.system(size: 28, weight: .bold, design: .rounded))
                                 .monospacedDigit()
                                 .foregroundStyle(countdown <= 10.0 ? Color.red : Color.primary)
                         }
 
-                        Text("Cue à \(cue.timeText)")
+                        Text(L("Cue à \(cue.timeText)"))
                             .font(.callout)
                             .foregroundStyle(.secondary)
 
@@ -1331,7 +1581,7 @@ struct VisualMonitorView: View {
                                 Image(systemName: "photo")
                                     .font(.system(size: 34))
                                     .foregroundStyle(.secondary)
-                                Text("Aucun visuel")
+                                Text(L("Aucun visuel"))
                                     .font(.callout)
                                     .foregroundStyle(.secondary)
                             }
@@ -1345,7 +1595,7 @@ struct VisualMonitorView: View {
                         .font(.system(size: 42))
                         .foregroundStyle(.secondary)
 
-                    Text(model.activeShow == nil ? "En attente d’un numéro S2A Pilot" : "Fin de conduite")
+                    Text(model.activeShow == nil ? L("En attente d’un numéro S2A Pilot") : L("Fin de conduite"))
                         .font(.title3)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -1392,7 +1642,7 @@ struct ShowCueForQLabApp: App {
         }
         .windowResizability(.contentSize)
 
-        WindowGroup("Visualiseur S2A Copilote", id: "visual-monitor") {
+        WindowGroup(L("Visualiseur S2A Copilote"), id: "visual-monitor") {
             VisualMonitorView(model: model)
         }
         .defaultSize(width: 565, height: 330)

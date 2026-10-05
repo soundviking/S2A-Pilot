@@ -1,145 +1,76 @@
-# S2A Pilot
+# S2A Pilot 1.4.35 / S2A Copilote 1.2.6
 
-## Installer S2A Copilote si macOS bloque son ouverture
+![S2A Pilot](assets/social-preview.jpg)
 
-L’application est signée localement et n’est pas notariée par Apple. Après décompression, glisser **S2A Copilote.app** dans **Applications**, puis essayer de l’ouvrir une première fois.
+[PWA 1.4.35](downloads/S2A-Pilot-V1.4.35-PWA.zip) · [Copilote 1.2.6 — Intel / Apple Silicon](downloads/S2A-Copilote-1.2.6-macOS-Universel.zip)
 
-1. Si macOS la bloque, fermer le message et ouvrir **Réglages Système → Confidentialité et sécurité**.
-2. Descendre jusqu’à **Sécurité** et cliquer sur **Ouvrir quand même** pour **S2A Copilote**.
-3. Valider avec le mot de passe ou Touch ID si demandé, puis confirmer **Ouvrir**.
+# S2A Pilot — Guide utilisateur
 
-Le bouton apparaît après la tentative d’ouverture. S’il a disparu, essayer à nouveau d’ouvrir l’application puis revenir dans ces réglages. Une nouvelle version peut demander une nouvelle autorisation. Autoriser l’application téléchargée depuis ce dépôt officiel. [Procédure Apple](https://support.apple.com/fr-fr/102445).
+[English user guide](README.en.md)
 
-Lors du premier import, autoriser aussi le contrôle de **QLab** : il s’agit d’une permission distincte. Une notice accompagne l’application dans le ZIP macOS et dans chaque projet exporté (`companion/INSTALLATION.txt`).
+S2A Pilot prépare et joue des conduites multimédias. S2A Copilote importe leurs packages dans QLab 5.
 
+## Langue
 
-![S2A Pilot — conduite de spectacle](assets/social-preview.jpg)
+Au premier lancement, la PWA choisit le français si la langue principale du navigateur est française, sinon l’anglais. FR / EN dans l’en-tête permet de changer ce choix, mémorisé sur l’appareil. Copilote détecte la langue de macOS et propose Français / English. Les titres, descriptions et noms de médias des projets restent inchangés. Les PDF et notices exportés suivent la langue de l’interface.
 
-Application de préparation et de conduite de spectacles multimédias, développée par **S2A Production**. Le compagnon **S2A Copilote** importe les projets dans **QLab 5**.
+## Création et édition
 
-## Versions actuelles et téléchargements
+Un projet commence vide. + Cue crée une indication avec titre, description et visuel. + Musique / Vidéo importe un fichier dans une nouvelle Cue au temps courant. Retour au début permet de revenir à zéro avant l’import.
 
-- **[S2A Pilot 1.4.34 — PWA](downloads/S2A-Pilot-V1.4.34-PWA.zip)**
-- **[S2A Copilote 1.2.5 — application macOS universelle](downloads/S2A-Copilote-1.2.5-macOS-Universel.zip)** : Intel et Apple Silicon, macOS 13 minimum.
+Les Cues sont classées par temps. 02.41, 02,41 et 02:41.0 signifient 2 minutes 41. Une Cue peut prolonger la timeline. Toutes les Cues peuvent être déplacées ou supprimées, même à zéro. La poignée à gauche permet le glisser-déposer dans la liste ; le temps est ajusté entre les Cues voisines. Avant la première Cue, le temps devient zéro. Alt + flèches fonctionne au clavier sur la poignée.
 
-## Prochaine Cue 1.4.34
+La sélection est mise en évidence en bleu. Le déplacement d’un repère sur la timeline affiche en direct sa position, son temps et sa bande média, avec une échelle stable jusqu’au relâchement. Dupliquer, à côté de Supprimer dans la Cue déroulée, conserve les informations et réglages au même temps. Les réglages sont indépendants ; les fichiers sont réutilisés. Annuler / Rétablir permet de revenir sur ces changements.
 
-Suppression de la mention redondante « À VENIR » dans la box Prochaine Cue. Le halo bleu de la Cue active est conservé.
+## Médias et timeline
 
-## Cue active 1.4.33
+Chaque fichier a sa propre lecture indépendante, sa waveform, IN / OUT, Loop et zoom − / +. Une vidéo ajoute un aperçu. Après zoom, faire défiler horizontalement. Le dessin utilise la portion visible à la résolution de l’écran.
 
-En Show, la box Cue active bénéficie d’un contour et d’un repère latéral bleus, accompagnés d’un halo discret. La prochaine Cue conserve son contour neutre.
+Le premier nouvel audio à zéro utilise Cut ; les autres utilisent un fondu de trois secondes. Les réglages importés sont conservés. Ajouter visuel / Changer visuel concerne l’image de repérage, distincte du média joué.
 
-## Exemple du nom du numéro 1.4.32
+La timeline générale affiche les bandes audio vertes et vidéo roses ainsi que la waveform combinée des médias audibles. Sa hauteur s’adapte aux bandes. Son zoom jusqu’à ×32 est disponible uniquement en Edit. En Show, elle retrouve sa vue complète.
 
-Le champ affiche désormais « Ex. Numéro Gala — Norbert Ferré ».
+Lecture / Pause ou Espace commande la conduite. Le raccourci ignore la saisie, les dialogues et les commandes ayant leur propre action clavier ; maintenir la touche ne répète pas les bascules. Retour au début met en pause, arrête les médias et revient à zéro.
 
-## Waveforms et zoom 1.4.31
+## Show et sortie vidéo
 
-Les éditeurs audio/vidéo redessinent uniquement la portion visible à la résolution de l’écran, au lieu d’étirer un canvas plafonné. Le cache de waveform conserve 65 536 valeurs par action et réutilise le décodage lors des zooms. Défilement et redimensionnement déclenchent le dessin de la zone visible.
+En paysage large : Cue active à gauche avec halo bleu, prochaine Cue à droite avec titre et temps côte à côte, description dessous et visuel centré 16/9. Sur petit écran, le temps passe sous le titre. Les descriptions longues restent intégrales et peuvent agrandir les boxes. La timeline est verrouillée pour le déplacement du temps en Show. Le moniteur vidéo apparaît uniquement si une vidéo est présente.
 
-La timeline générale dispose de boutons − / + jusqu’à ×32 **uniquement en Edit**, avec défilement horizontal et graduations adaptées. Le passage en Show rétablit la vue complète et masque les boutons. Un geste de défilement ne valide pas un déplacement de lecture.
+La sortie vidéo apparaît uniquement en Show avec une vidéo. Son placement automatique demande une API de gestion des écrans disponible, une autorisation du navigateur et un vrai affichage étendu. Sur Mac avec Safari, la sortie ouvre une fenêtre à déplacer manuellement sur le second écran ; l’app ne peut pas vérifier l’affichage étendu. Chrome ou sa PWA peut placer automatiquement la fenêtre sur un affichage étendu détecté. La sortie est désactivée sur iPad / iPhone. La recopie n’est pas un affichage séparé. Le bouton devient rouge pendant l’activation. Autoriser les fenêtres surgissantes si nécessaire, puis cliquer dans la sortie pour le plein écran. Le préchargement est automatique.
 
-Vérification dans Chrome avec audio réel : waveform détaillée, zoom média ×64 à DPR 2, défilement, redimensionnement mobile, zoom général ×32 et retour en Show. Geste tactile à confirmer sur iPad réel.
+## Sauvegarde et PDF
 
-## Mode Show 1.4.30
+Chaque modification est sauvegardée localement, y compris pendant la saisie. Ces données dépendent de l’appareil, du navigateur, du profil et de l’adresse du site. Enregistrer sous… produit un .s2apilot.zip portable avec médias, visuels, données, PDF et Copilote.app compilée. Ouvrir restaure un package. Garder les médias lors de l’import QLab.
 
-La prochaine Cue affiche son titre à gauche et le compte à rebours à droite. La description occupe toute la largeur en dessous ; le visuel est centré sous ces informations au format 16/9. Les titres longs passent sur plusieurs lignes, les descriptions restent intégrales et la box grandit si nécessaire. À 600 px et moins, le temps repasse sous le titre.
-
-Disposition vérifiée dans Chrome à 1366, 1024, 600 et 390 px, avec titre long et dix lignes de description. La timeline reste visible dans le cas standard testé à 1366 × 768. Vérification Safari iPad réel à poursuivre après déploiement.
-
-## Raccourci clavier 1.4.29
-
-**Espace** bascule entre Lecture et Pause de la timeline générale, en Edit et Show. Le raccourci est ignoré pendant la saisie, dans les fenêtres de dialogue et sur les autres commandes ayant leur propre action clavier. Maintenir la touche ne provoque pas de bascules répétées. Les aperçus médias conservent leurs commandes indépendantes.
-
-## Édition des Cues 1.4.28
-
-Le déplacement d’un repère sur la timeline est visible avant le relâchement : repère, temps et bande média suivent le geste sur une échelle stable. Le nouvel horaire est validé au relâchement ; une interruption annule l’aperçu. La liste se reclasse ensuite automatiquement.
-
-Le bouton **Dupliquer**, à côté de Supprimer dans la Cue déroulée, crée une copie au même temps avec titre, description, visuel et réglages médias. Les identifiants des actions sont distincts et les fichiers médias sont réutilisés. Les réglages de la copie sont indépendants. L’annulation et la sauvegarde automatique sont conservées.
-
-Retour visuel avant relâchement, validation, annulation du déplacement, duplication, indépendance des réglages et largeur mobile contrôlés dans Chrome. Geste tactile à confirmer sur iPad réel.
-
-## Actualisation et démarrage 1.4.27
-
-Le programme et les modules PDF se chargent avec une URL liée à leur version. Le numéro affiché correspond au programme exécuté. Les pages utilisent le réseau avec repli hors ligne ; le service worker ne mélange plus les caches d’autres versions et son précache ignore les anciens fichiers HTTP. Un diagnostic apparaît si le démarrage échoue. La sortie vidéo est masquée dès le HTML.
-
-**Déploiement : remplacer tous les fichiers, inclure `.htaccess` et purger le cache Cloudflare de `/qlab/`.** Le 5 octobre, les URLs habituelles de ce serveur servaient encore 1.4.20, avec un cache de 31 jours. Lire [DEPLOIEMENT.txt](PWA/DEPLOIEMENT.txt). Ne pas supprimer les données du site : `actualiser.html` conserve les projets locaux.
-
-Version identique/supérieure, boutons Cue/PDF, sortie vidéo masquée, panne de chargement, PDF hors ligne et projet conservé après actualisation vérifiés dans Chrome. Safari iPad réel reste à confirmer après le remplacement des anciens fichiers sur le serveur.
-
-## Édition des Cues 1.4.26
-
-La Cue sélectionnée se distingue par un contour bleu clair, un repère latéral et un fond renforcé sur toute sa hauteur. Une poignée à gauche permet de déplacer les Cues par glisser-déposer dans la liste. Le déplacement ajuste leur temps entre les Cues voisines ; avant la première Cue, le temps devient 00:00.0. L’ordre reste chronologique. Alt + flèches est aussi disponible au clavier. Annulation et sauvegarde automatique conservées.
-
-Déplacement vers zéro, insertion entre deux Cues, annulation, clavier, sauvegarde et largeur mobile vérifiés dans Chrome. Geste tactile à confirmer sur iPad réel.
-
-## Libellé 1.4.24
-
-Le bouton **+ Musique / Vidéo** importe un fichier audio ou vidéo et crée une nouvelle Cue. **+ Cue** crée un repère avec titre, description et visuel.
-
-## Correctif de démarrage 1.4.21
-
-La vérification de permission d’écran non prise en charge ne bloque plus l’initialisation. L’API est interrogée uniquement lorsqu’un affichage étendu peut être détecté. Compatibilité renforcée pour Array.at, ResizeObserver et AbortSignal.timeout. Blocage reproduit et correctif validé avec API indisponible simulée dans Chrome : Nouveau, + Cue et PDF fonctionnels. À confirmer dans Safari sur iPad réel.
-
-## Sortie vidéo 1.4.22
-
-En Show, la sortie vidéo apparaît uniquement si au moins une vidéo est présente. Sans affichage étendu le bouton reste grisé. Il disparaît après suppression de la dernière vidéo.
-
-## Correctif PDF 1.4.23
-
-L’aperçu et la photo d’en-tête fonctionnent aussi lors d’une ouverture directe de index.html en file:// : chargement classique différé, sans import dynamique soumis à CORS. Pour toutes les fonctions PWA et l’export du compagnon, utiliser le lanceur local ou un serveur HTTPS.
-
-## Préparer une conduite
-
-Un nouveau projet commence sans Cue imposée. **+ Cue** crée un repère avec titre, description et visuel. **+ Musique / Vidéo** importe une musique ou une vidéo dans une nouvelle Cue, au temps courant. Toutes les Cues peuvent être déplacées ou supprimées, y compris celles à zéro.
-
-Les médias disposent de points IN / OUT, Loop, waveform, aperçu vidéo, lecture indépendante et zoom. La saisie `02.41` ou `02,41` correspond à 2 minutes 41 secondes. Une Cue placée au-delà de la durée actuelle prolonge la timeline. Le premier média audio d’une Cue à zéro utilise Cut par défaut ; les autres nouveaux médias audio utilisent un fondu de trois secondes. Les réglages des projets importés sont conservés.
-
-Les modifications sont sauvegardées automatiquement sur l’appareil, dès la saisie. **Enregistrer sous…** produit le package portable `.s2apilot.zip`, avec médias, visuels, PDF et **companion/S2A Copilote.app** prête à installer.
-
-## Timeline et mode Show
-
-- Waveform combinée et bandes médias translucides en Edit et Show : **audio vert, vidéo rose vif**.
-- Hauteur de timeline adaptée au nombre de bandes, avec espace réservé aux graduations.
-- Pastilles audio/vidéo dans les Cues ; aucune pastille pour les Cues sans média.
-- Sur ordinateur en paysage, Cue active à gauche, prochaine Cue à droite et timeline en dessous.
-- En Show, les clics sur la timeline ne déplacent pas la lecture. Lecture / Pause et Retour au début restent disponibles.
-- Préchargement automatique, moniteur vidéo conditionnel et sortie vidéo pour un véritable affichage étendu.
-- Zoom de page par pincement bloqué ; défilement et boutons de zoom des éditeurs conservés.
-
-## Conduite PDF
-
-Aperçu intégré avec téléchargement explicite, en-tête photographique, blocs arrondis, compteurs audio/vidéo et cinq Cues standards par page. Chaque Cue affiche le temps écoulé et le temps restant jusqu’à la fin de la conduite **entre parenthèses**. Les descriptions longues continuent sur les pages suivantes.
+Conduite PDF ouvre un aperçu intégré ; Télécharger crée le fichier. Le PDF inclut photographie d’en-tête, blocs arrondis, compteurs médias et cinq Cues standards par page. Les descriptions longues continuent sur les pages suivantes. Le temps écoulé et le temps restant entre parenthèses figurent pour chaque Cue. Le contenu saisi n’est pas traduit.
 
 ## Installation et mises à jour
 
-Déployer **tout le contenu de PWA/** sur HTTPS : `index.html`, `app.js`, `manifest.webmanifest`, `service-worker.js`, `version.json`, `actualiser.html`, `technical-preview.js`, `technical-header-data.js`, `assets/`, `icons/` et `companion/`. Le serveur doit ouvrir index.html comme page d’accueil du dossier ; partager une adresse telle que `/s2a-pilot/`, sans ajouter index.html.
+Sur Mac, décompresser et lancer Démarrer S2A Pilot.command ou Start S2A Pilot.command. Arrêter l’ancien serveur avant d’ouvrir un autre dossier. L’ouverture directe d’index.html permet l’aperçu PDF, mais le serveur local ou HTTPS est nécessaire pour toutes les fonctions et l’export du compagnon.
 
-Depuis la 1.4.19, l’application vérifie la version publiée sur le serveur au démarrage, au retour dans l’application et toutes les cinq minutes lorsqu’elle est visible. Une version plus récente est proposée sans actualisation forcée pendant Show ou lecture. La sauvegarde locale précède l’actualisation ; les projets IndexedDB sont conservés. Sans réseau, la version du serveur n’est pas confirmée et l’utilisation hors ligne reste disponible. Publier l’ensemble des fichiers de la même version avant de la rendre disponible.
+Déployer tout le contenu sur HTTPS, y compris .htaccess, i18n.js, les manifests, scripts, assets, icons et companion. Le serveur ouvre index.html comme page d’accueil ; partager l’adresse du dossier.
 
-Pour tester localement sur Mac, décompresser la PWA et lancer **Démarrer S2A Pilot.command**. Fermer les anciennes fenêtres et arrêter l’ancien serveur avec Ctrl+C avant de lancer un autre dossier. Le lanceur actualise les caches de fichiers de l’application sans supprimer les projets locaux.
+Purger Cloudflare après remplacement et supprimer les règles imposant un cache long aux fichiers HTML, JS, JSON et service worker. .htaccess empêche leur cache HTTP à l’origine Apache avec mod_headers ; une règle du CDN peut le remplacer. actualiser.html renouvelle les fichiers sans supprimer IndexedDB. Ne pas supprimer les données du site pour réparer une ancienne version.
 
-## S2A Copilote et QLab
+La PWA vérifie le serveur au démarrage, au retour et toutes les cinq minutes si visible. Elle propose une version supérieure sans actualisation forcée pendant Show ou lecture. Le numéro affiché correspond au programme exécuté. En cas de démarrage interrompu, un diagnostic apparaît. Le fonctionnement hors ligne reste disponible après installation.
 
-Logo bleu et orange, angles arrondis dans la fenêtre, détection des workspaces, sélection si plusieurs sont ouverts et import de plusieurs packages. Les groupes conservent leur numéro ; les étapes des nouveaux imports utilisent une numérotation hiérarchique : **5, puis 5.1, 5.2, 5.3…**, en évitant les numéros déjà utilisés. Les anciennes conduites QLab ne sont pas renumérotées.
+## Copilote et QLab
 
-Glisser l’application dans Applications ; aucune compilation n’est nécessaire. La distribution utilise une signature locale. Pour compiler les sources avec Xcode : `cd S2A-Copilote && ./build.sh`.
+Copilote.app universelle fonctionne sur Intel et Apple Silicon, macOS 13 minimum. La glisser dans Applications ; aucune compilation nécessaire. Signature locale, sans notarisation Apple.
 
-## Vérifications et limites
+1. Essayer de l’ouvrir une fois.
+2. Si bloquée : Réglages Système → Confidentialité et sécurité → Sécurité.
+3. Ouvrir quand même pour Copilote, s’authentifier si demandé, puis Ouvrir.
 
-Parcours de création, sauvegarde et restauration, anciens projets, réglages média après autosave, suppression/annulation, Show paysage et timeline verrouillée vérifiés dans Chrome. Six bandes médias intégralement visibles vérifiées. PDF cinq/dix Cues, descriptions longues, aperçu et exports hors ligne contrôlés ; rendu PDF inspecté visuellement. Vérification des versions serveur identiques/supérieures, protection Show et panne réseau testées.
+Le bouton apparaît après une tentative ; recommencer si nécessaire. Autoriser uniquement la distribution officielle. Une nouvelle version peut demander une nouvelle autorisation. Autoriser ensuite séparément le contrôle de QLab lors de l’import. [Procédure Apple](https://support.apple.com/fr-fr/102445).
 
-Copilote : compilation Intel/Apple Silicon, signature et permissions de l’application extraite vérifiées ; modèle et scripts d’import testés avec QLab simulé, scripts compilés avec le dictionnaire QLab installé.
+Les workspaces QLab ouverts sont détectés automatiquement ; un menu permet le choix si plusieurs sont ouverts. Enregistrer le workspace avant l’import. Plusieurs packages deviennent plusieurs groupes Timeline, numérotés avec leurs étapes : 5, 5.1, 5.2… Les numéros existants sont évités et les anciennes conduites ne sont pas renumérotées. Le visualiseur peut rester au premier plan.
 
-À confirmer sur matériel réel avant exploitation : pincement dans Safari et PWA sur iPad, fluidité/CPU/mémoire avec les médias du spectacle, sortie sur écran étendu, import dans un workspace QLab réel et exécution sur Mac Intel physique. Les changements de couleur de la 1.4.20 ont fait l’objet d’un contrôle du code ; les parcours complets correspondent aux versions de test précédentes.
+## Vérifications
 
-## Documentation
+Tests Chrome : création, édition, sauvegarde, langues, préservation des contenus, PDF, hors ligne, zoom et écrans simulés. Copilote : compilation universelle et signature locale. À confirmer sur appareils réels : Safari iPad, gestes tactiles, écran étendu, import QLab et exécution Intel.
 
-- [Guide PWA et historique](PWA/README.md)
-- [Copilote : installation et tests](S2A-Copilote/README.md)
-- [Rapports de vérification](PWA/verification.json)
 
-## Aperçu social GitHub
+## Licence
 
-Le visuel [social-preview.jpg](assets/social-preview.jpg) est prêt à charger dans Settings → General → Social preview → Edit → Upload an image. Format 1280 × 640 px, JPEG inférieur à 1 Mo. Ajouter le fichier au dépôt ou au README n’active pas à lui seul l’aperçu social : ce réglage doit être appliqué sur GitHub. Pour un dépôt privé, GitHub limite cette fonctionnalité ; consulter sa documentation avant activation.
+Utilisation autorisée ; redistribution, publication ou hébergement pour des tiers soumis à un accord écrit préalable de S2A Production. Voir [la licence](LICENSE).

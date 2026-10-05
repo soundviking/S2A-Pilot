@@ -1,0 +1,16 @@
+{
+  "pilot": "1.4.35",
+  "copilote": "1.2.6",
+  "validated": [
+    "Chrome: automatic FR/EN and remembered switch",
+    "User-authored titles and descriptions preserved",
+    "English PDF and project ZIP notices",
+    "Offline PWA shell",
+    "Simulated Safari Mac manual video output and iPad blocked",
+    "Native translation catalog",
+    "Universal arm64/x86_64 binary and local signature"
+  ],
+  "limitations": [
+    "No physical iPad/Safari or live QLab validation in this release"
+  ]
+}

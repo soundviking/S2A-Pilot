@@ -17,7 +17,7 @@ function svgPage(page,index,title){
   }
   if((match=line.match(/^([-\d.]+) ([-\d.]+) ([-\d.]+) ([-\d.]+) re ([fS])$/))){drawing.push(`<rect x="${match[1]}" y="${match[2]}" width="${match[3]}" height="${match[4]}" fill="${match[5]==='f'?fill:'none'}" stroke="${match[5]==='S'?stroke:'none'}" stroke-width="${width}"/>`);continue;}
   if((match=line.match(/^q ([-\d.]+) 0 0 ([-\d.]+) ([-\d.]+) ([-\d.]+) cm \/Im(\d+) Do Q$/))){
-   const image=page.images[Number(match[5])-1];if(!image)throw new Error('Visuel de conduite manquant');
+   const image=page.images[Number(match[5])-1];if(!image)throw new Error(tr('Visuel de conduite manquant'));
    drawing.push(`<image x="${match[3]}" y="${-(Number(match[4])+Number(match[2]))}" width="${match[1]}" height="${match[2]}" transform="scale(1 -1)" href="${jpegUrl(image.bytes)}" preserveAspectRatio="none"/>`);continue;
   }
   if(/\b(?:m|l|c|h)\b/.test(line)){
@@ -29,17 +29,17 @@ function svgPage(page,index,title){
     if(token==='h'){path.push('Z');continue;}
     if(token==='f'||token==='S')paint=token;
    }
-   if(!paint)throw new Error('Dessin de conduite non reconnu');
+   if(!paint)throw new Error(tr('Dessin de conduite non reconnu'));
    drawing.push(`<path d="${path.join(' ')}" fill="${paint==='f'?fill:'none'}" stroke="${paint==='S'?stroke:'none'}" stroke-width="${width}"/>`);continue;
   }
-  throw new Error('Instruction de conduite non reconnue');
+  throw new Error(tr('Instruction de conduite non reconnue'));
  }
- return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 595 842" width="595" height="842" role="img" aria-label="${escapeXml(`Page ${index+1} sur ${page.totalPages} — ${title}`)}"><title>${escapeXml(`Conduite technique — ${title} — page ${index+1}`)}</title><rect width="595" height="842" fill="white"/><g transform="translate(0 842) scale(1 -1)">${drawing.join('')}</g></svg>`;
+ return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 595 842" width="595" height="842" role="img" aria-label="${escapeXml(`Page ${index+1} ${S2ALanguage.language==='en'?'of':'sur'} ${page.totalPages} — ${title}`)}"><title>${escapeXml(`${tr('Conduite technique')} — ${title} — page ${index+1}`)}</title><rect width="595" height="842" fill="white"/><g transform="translate(0 842) scale(1 -1)">${drawing.join('')}</g></svg>`;
 }
 function mountTechnicalPreview(pages,title,controls){
  const {container,minus,plus,label,fit}=controls;let zoom=1,disposed=false;
  const fragment=document.createDocumentFragment(),elements=[];
- pages.forEach((page,index)=>{const element=document.createElement('article');element.className='pdfPreviewPage';element.setAttribute('aria-label',`Page ${index+1} sur ${pages.length}`);element.innerHTML=svgPage({...page,totalPages:pages.length},index,title);elements.push(element);fragment.append(element);});
+ pages.forEach((page,index)=>{const element=document.createElement('article');element.className='pdfPreviewPage';element.setAttribute('aria-label',`Page ${index+1} ${S2ALanguage.language==='en'?'of':'sur'} ${pages.length}`);element.innerHTML=svgPage({...page,totalPages:pages.length},index,title);elements.push(element);fragment.append(element);});
  container.replaceChildren(fragment);
  function layout(){if(disposed)return;const padding=parseFloat(getComputedStyle(container).paddingLeft)*2,baseWidth=Math.min(794,Math.max(100,container.clientWidth-padding));for(const element of elements)element.style.width=`${Math.round(baseWidth*zoom)}px`;label.textContent=`${Math.round(zoom*100)} %`;minus.disabled=zoom<=1;plus.disabled=zoom>=3;}
  function change(value){const old=zoom;zoom=Math.max(1,Math.min(3,value));layout();container.scrollTop=container.scrollTop*zoom/old;}
