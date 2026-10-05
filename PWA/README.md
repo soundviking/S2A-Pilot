@@ -1,3 +1,13 @@
+# Version 1.4.31 — Waveforms nettes et zoom général en Edit
+
+## Waveforms et zoom 1.4.31
+
+Les éditeurs audio/vidéo redessinent uniquement la portion visible à la résolution de l’écran, au lieu d’étirer un canvas plafonné. Le cache de waveform conserve 65 536 valeurs par action et réutilise le décodage lors des zooms. Défilement et redimensionnement déclenchent le dessin de la zone visible.
+
+La timeline générale dispose de boutons − / + jusqu’à ×32 **uniquement en Edit**, avec défilement horizontal et graduations adaptées. Le passage en Show rétablit la vue complète et masque les boutons. Un geste de défilement ne valide pas un déplacement de lecture.
+
+Vérification dans Chrome avec audio réel : waveform détaillée, zoom média ×64 à DPR 2, défilement, redimensionnement mobile, zoom général ×32 et retour en Show. Geste tactile à confirmer sur iPad réel.
+
 # Version 1.4.30 — Prochaine Cue en mode Show
 
 ## Mode Show 1.4.30
