@@ -1,4 +1,4 @@
-S2A COPILOTE 1.2.7 — INSTALLATION SUR MAC
+S2A COPILOTE 1.2.8 — INSTALLATION SUR MAC
 
 Mac Intel et Apple Silicon — macOS 13 ou plus récent.
 Aucune compilation nécessaire. Application signée localement, non notariée par Apple.

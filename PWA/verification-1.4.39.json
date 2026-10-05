@@ -1,0 +1,13 @@
+{
+  "pilot": "1.4.39",
+  "copilote": "1.2.8",
+  "change": "Reconcile retained import metadata with live QLab group IDs every 3 seconds",
+  "validated": [
+    "Both native architectures compiled",
+    "Missing, present and restored group reconciliation with stubbed QLab responses",
+    "Access errors propagate; index retained; unsaved workspace excluded",
+    "Universal binary signature",
+    "ZIP integrity and embedded companion manifest"
+  ],
+  "limitation": "No live QLab session exercised; verify reopening without saving and group deletion/restoration on a real workspace"
+}

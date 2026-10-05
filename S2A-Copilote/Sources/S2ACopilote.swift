@@ -230,7 +230,7 @@ private func L(_ text: String) -> String {
     " prêt": " ready",
     " échec": " failure",
     "dans ": "in ",
-    "Import de conduites S2A Pilot V5 dans QLab 5 — S2A Copilote 1.2.7": "Import S2A Pilot V5 shows into QLab 5 — S2A Copilote 1.2.7"
+    "Import de conduites S2A Pilot V5 dans QLab 5 — S2A Copilote 1.2.8": "Import S2A Pilot V5 shows into QLab 5 — S2A Copilote 1.2.8"
     ]
     if language != "en" { return catalog.first(where: { $0.value == text })?.key ?? text }
     if let value = catalog[text] { return value }
@@ -534,15 +534,21 @@ final class AppModel: ObservableObject {
     func refreshWorkspace() {
         guard !workspaceRefreshInFlight, !isBusy else { return }
         workspaceRefreshInFlight = true
+        let selectionID = workspace?.id
         DispatchQueue.global(qos: .utility).async {
-            let result = Result { try self.qlabWorkspaces() }
+            let result = Result { () throws -> ([WorkspaceInfo], WorkspaceInfo?, [SavedShowCue]) in
+                let infos = try self.qlabWorkspaces()
+                let selected = infos.first(where: { $0.id == selectionID }) ?? infos.first
+                let shows = try selected.map { try self.liveSavedShows(for: $0) } ?? []
+                return (infos, selected, shows)
+            }
             DispatchQueue.main.async {
                 self.workspaceRefreshInFlight = false
                 guard !self.isBusy else { return }
+                guard self.workspace?.id == selectionID else { self.refreshWorkspace(); return }
                 switch result {
-                case .success(let infos):
+                case .success(let (infos, selected, shows)):
                     self.availableWorkspaces = infos
-                    let selected = infos.first(where: { $0.id == self.workspace?.id }) ?? infos.first
                     if selected != self.workspace {
                         self.stopVisualMonitor()
                         self.workspace = selected
@@ -550,7 +556,20 @@ final class AppModel: ObservableObject {
                         self.visualRunning = false
                         self.visualElapsed = 0
                         self.savedShows = []
-                        if let selected { self.loadSavedShows(for: selected); self.startVisualMonitor() }
+                    }
+                    if Set(self.savedShows.map { $0.groupID }) != Set(shows.map { $0.groupID }) {
+                        self.stopVisualMonitor()
+                    }
+                    self.savedShows = shows
+                    if let active = self.activeShow, !shows.contains(where: { $0.groupID == active.groupID }) {
+                        self.activeShow = nil
+                        self.visualRunning = false
+                        self.visualElapsed = 0
+                    }
+                    if shows.isEmpty {
+                        self.stopVisualMonitor()
+                    } else if self.monitorTimer == nil {
+                        self.startVisualMonitor()
                     }
                     if self.errorMessage == self.lastDetectionError { self.errorMessage = nil }
                     self.lastDetectionError = nil
@@ -1080,23 +1099,32 @@ final class AppModel: ObservableObject {
         try data.write(to: indexURL(for: workspace), options: .atomic)
     }
 
+    // The index is metadata, not proof that an imported group still exists.
+    // Keep it intact: a saved workspace or Undo can restore a missing group.
+    private func liveSavedShows(for workspace: WorkspaceInfo) throws -> [SavedShowCue] {
+        guard workspace.projectFolder != nil else { return [] }
+        let records = try loadIndexData(for: workspace).shows
+        guard !records.isEmpty else { return [] }
+        var lines = ["tell application id \"com.figure53.QLab.5\"",
+                     "set matches to (workspaces whose unique id is \(asAppleString(workspace.id)))",
+                     "if (count of matches) is 0 then error \"Workspace closed during synchronization\"",
+                     "set w to first item of matches", "set resultText to \"\""]
+        for record in records {
+            lines.append("if exists (cue id \(asAppleString(record.groupID)) of w) then")
+            lines.append("set resultText to resultText & \(asAppleString(record.groupID)) & linefeed")
+            lines.append("end if")
+        }
+        lines.append("return resultText")
+        lines.append("end tell")
+        let output = try run("/usr/bin/osascript", ["-e", lines.joined(separator: "\n")])
+        let liveIDs = Set(output.split(separator: "\n").map(String.init))
+        return records.filter { liveIDs.contains($0.groupID) }.sorted { $0.importedAt < $1.importedAt }
+    }
+
     private func loadSavedShows(for workspace: WorkspaceInfo) {
-        guard workspace.projectFolder != nil else {
-            savedShows = []
-            activeShow = nil
-            return
-        }
-        do {
-            let index = try loadIndexData(for: workspace)
-            savedShows = index.shows.sorted(by: { $0.importedAt < $1.importedAt })
-            if let currentActive = activeShow, !savedShows.contains(where: { $0.groupID == currentActive.groupID }) {
-                activeShow = nil
-            }
-        } catch {
-            savedShows = []
-            activeShow = nil
-            errorMessage = "Impossible de lire l’index S2A Pilot : \(error.localizedDescription)"
-        }
+        savedShows = []
+        activeShow = nil
+        refreshWorkspace()
     }
 
     private func saveShowRecord(_ record: SavedShowCue, for workspace: WorkspaceInfo) throws {
@@ -1301,7 +1329,7 @@ struct ContentView: View {
                 VStack(alignment: .leading, spacing: 3) {
                     Text("S2A Copilote")
                         .font(.system(size: 20, weight: .semibold))
-                    Text(L("Import de conduites S2A Pilot V5 dans QLab 5 — S2A Copilote 1.2.7"))
+                    Text(L("Import de conduites S2A Pilot V5 dans QLab 5 — S2A Copilote 1.2.8"))
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                 }
