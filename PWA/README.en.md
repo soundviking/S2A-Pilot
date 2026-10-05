@@ -1,5 +1,7 @@
 # S2A Pilot — User guide
 
+The rights to S2A Pilot and S2A Copilote belong to the company S2A Production. These applications were developed by Antoine CLOPIER with assistance from ChatGPT.
+
 S2A Pilot prepares and runs multimedia shows. S2A Copilote imports its project packages into QLab 5. The app names and Edit / Show labels are the same in both languages.
 
 ## Language

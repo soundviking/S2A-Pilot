@@ -1,5 +1,7 @@
 # S2A Copilote 1.2.6
 
+The rights to S2A Pilot and S2A Copilote belong to the company S2A Production. These applications were developed by Antoine CLOPIER with assistance from ChatGPT.
+
 [Français](README.md)
 
 Universal macOS app: Intel and Apple Silicon, macOS 13 or later. Uses the system language initially; the Français / English header switch remembers a manual preference. User-authored project titles, Cue names and descriptions are preserved.

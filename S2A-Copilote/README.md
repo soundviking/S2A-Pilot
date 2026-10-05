@@ -1,5 +1,7 @@
 # S2A Copilote 1.2.6
 
+Les droits sur S2A Pilot et S2A Copilote appartiennent à la société S2A Production. Ces applications ont été développées par Antoine CLOPIER, avec l’aide de ChatGPT.
+
 [English](README.en.md)
 
 Application macOS universelle Intel et Apple Silicon, macOS 13 minimum. Langue du système détectée au premier lancement ; bascule Français / English mémorisée. Les titres, noms de Cues et descriptions de projets ne sont pas traduits.

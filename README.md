@@ -6,6 +6,8 @@
 
 # S2A Pilot — Guide utilisateur
 
+Les droits sur S2A Pilot et S2A Copilote appartiennent à la société S2A Production. Ces applications ont été développées par Antoine CLOPIER, avec l’aide de ChatGPT.
+
 [English user guide](README.en.md)
 
 S2A Pilot prépare et joue des conduites multimédias. S2A Copilote importe leurs packages dans QLab 5.
