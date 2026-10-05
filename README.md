@@ -1,5 +1,7 @@
 # S2A Pilot
 
+![S2A Pilot — conduite de spectacle](assets/social-preview.jpg)
+
 Application de préparation et de conduite de spectacles multimédias, développée par **S2A Production**. Le compagnon **S2A Copilote** importe les projets dans **QLab 5**.
 
 ## Versions actuelles et téléchargements
@@ -56,3 +58,7 @@ Copilote : compilation Intel/Apple Silicon, signature et permissions de l’appl
 - [Guide PWA et historique](PWA/README.md)
 - [Copilote : installation et tests](S2A-Copilote/README.md)
 - [Rapports de vérification](PWA/verification.json)
+
+## Aperçu social GitHub
+
+Le visuel [social-preview.jpg](assets/social-preview.jpg) est prêt à charger dans Settings → General → Social preview → Edit → Upload an image. Format 1280 × 640 px, JPEG inférieur à 1 Mo. Ajouter le fichier au dépôt ou au README n’active pas à lui seul l’aperçu social : ce réglage doit être appliqué sur GitHub. Pour un dépôt privé, GitHub limite cette fonctionnalité ; consulter sa documentation avant activation.
