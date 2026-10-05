@@ -1,5 +1,18 @@
 ## Mise à jour Copilote 1.2.5 / Pilot 1.4.13
 
+## Installer S2A Copilote si macOS bloque son ouverture
+
+L’application est signée localement et n’est pas notariée par Apple. Après décompression, glisser **S2A Copilote.app** dans **Applications**, puis essayer de l’ouvrir une première fois.
+
+1. Si macOS la bloque, fermer le message et ouvrir **Réglages Système → Confidentialité et sécurité**.
+2. Descendre jusqu’à **Sécurité** et cliquer sur **Ouvrir quand même** pour **S2A Copilote**.
+3. Valider avec le mot de passe ou Touch ID si demandé, puis confirmer **Ouvrir**.
+
+Le bouton apparaît après la tentative d’ouverture. S’il a disparu, essayer à nouveau d’ouvrir l’application puis revenir dans ces réglages. Une nouvelle version peut demander une nouvelle autorisation. Autoriser l’application téléchargée depuis ce dépôt officiel. [Procédure Apple](https://support.apple.com/fr-fr/102445).
+
+Lors du premier import, autoriser aussi le contrôle de **QLab** : il s’agit d’une permission distincte. Une notice accompagne l’application dans le ZIP macOS et dans chaque projet exporté (`companion/INSTALLATION.txt`).
+
+
 Le logo bleu et orange de Copilote est restauré. Dans la fenêtre, ses angles sont arrondis. Pour les prochains imports QLab, le groupe conserve son numéro (par exemple 5) et les étapes internes sont numérotées 5.1, 5.2, 5.3, etc. Les numéros déjà utilisés ailleurs sont évités ; les anciennes conduites ne sont pas modifiées.
 
 L’application macOS universelle contient les architectures Intel et Apple Silicon et est incluse directement dans les ZIP des projets. Les tests automatisés valident la numérotation, les scripts d’import, les imports multiples simulés et la compilation. Un import dans un workspace QLab réel reste à essayer.

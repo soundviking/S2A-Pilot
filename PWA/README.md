@@ -1,3 +1,19 @@
+# Version 1.4.25 — Assistance à l’installation de Copilote
+
+Notice détaillée ajoutée aux projets exportés : première tentative d’ouverture, Réglages Système, Confidentialité et sécurité, Ouvrir quand même et confirmation. Copilote reste en version 1.2.5 universelle.
+
+## Installer S2A Copilote si macOS bloque son ouverture
+
+L’application est signée localement et n’est pas notariée par Apple. Après décompression, glisser **S2A Copilote.app** dans **Applications**, puis essayer de l’ouvrir une première fois.
+
+1. Si macOS la bloque, fermer le message et ouvrir **Réglages Système → Confidentialité et sécurité**.
+2. Descendre jusqu’à **Sécurité** et cliquer sur **Ouvrir quand même** pour **S2A Copilote**.
+3. Valider avec le mot de passe ou Touch ID si demandé, puis confirmer **Ouvrir**.
+
+Le bouton apparaît après la tentative d’ouverture. S’il a disparu, essayer à nouveau d’ouvrir l’application puis revenir dans ces réglages. Une nouvelle version peut demander une nouvelle autorisation. Autoriser l’application téléchargée depuis ce dépôt officiel. [Procédure Apple](https://support.apple.com/fr-fr/102445).
+
+Lors du premier import, autoriser aussi le contrôle de **QLab** : il s’agit d’une permission distincte. Une notice accompagne l’application dans le ZIP macOS et dans chaque projet exporté (`companion/INSTALLATION.txt`).
+
 # S2A Pilot 1.4.24
 
 Le bouton de création d’une Cue média est nommé **+ Musique / Vidéo**. Il conserve le choix d’un fichier audio ou vidéo et la création d’une nouvelle Cue. Tous les correctifs de la 1.4.23 sont inclus.

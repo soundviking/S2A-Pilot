@@ -1,12 +1,25 @@
 # S2A Pilot
 
+## Installer S2A Copilote si macOS bloque son ouverture
+
+L’application est signée localement et n’est pas notariée par Apple. Après décompression, glisser **S2A Copilote.app** dans **Applications**, puis essayer de l’ouvrir une première fois.
+
+1. Si macOS la bloque, fermer le message et ouvrir **Réglages Système → Confidentialité et sécurité**.
+2. Descendre jusqu’à **Sécurité** et cliquer sur **Ouvrir quand même** pour **S2A Copilote**.
+3. Valider avec le mot de passe ou Touch ID si demandé, puis confirmer **Ouvrir**.
+
+Le bouton apparaît après la tentative d’ouverture. S’il a disparu, essayer à nouveau d’ouvrir l’application puis revenir dans ces réglages. Une nouvelle version peut demander une nouvelle autorisation. Autoriser l’application téléchargée depuis ce dépôt officiel. [Procédure Apple](https://support.apple.com/fr-fr/102445).
+
+Lors du premier import, autoriser aussi le contrôle de **QLab** : il s’agit d’une permission distincte. Une notice accompagne l’application dans le ZIP macOS et dans chaque projet exporté (`companion/INSTALLATION.txt`).
+
+
 ![S2A Pilot — conduite de spectacle](assets/social-preview.jpg)
 
 Application de préparation et de conduite de spectacles multimédias, développée par **S2A Production**. Le compagnon **S2A Copilote** importe les projets dans **QLab 5**.
 
 ## Versions actuelles et téléchargements
 
-- **[S2A Pilot 1.4.24 — PWA](downloads/S2A-Pilot-V1.4.24-PWA.zip)**
+- **[S2A Pilot 1.4.25 — PWA](downloads/S2A-Pilot-V1.4.25-PWA.zip)**
 - **[S2A Copilote 1.2.5 — application macOS universelle](downloads/S2A-Copilote-1.2.5-macOS-Universel.zip)** : Intel et Apple Silicon, macOS 13 minimum.
 
 ## Libellé 1.4.24

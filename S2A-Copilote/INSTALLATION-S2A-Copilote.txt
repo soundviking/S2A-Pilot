@@ -1,0 +1,27 @@
+S2A COPILOTE 1.2.5 — INSTALLATION SUR MAC
+
+Mac Intel et Apple Silicon — macOS 13 ou plus récent.
+Aucune compilation nécessaire. Application signée localement, non notariée par Apple.
+
+1. Décompressez le ZIP et glissez S2A Copilote.app dans Applications.
+   Remplacez l’ancienne version si nécessaire.
+2. Essayez d’ouvrir S2A Copilote depuis Applications une première fois.
+3. Si macOS bloque son ouverture, fermez le message et ouvrez :
+   Réglages Système > Confidentialité et sécurité.
+4. Descendez jusqu’à la section Sécurité. Repérez le message concernant
+   S2A Copilote, puis cliquez sur « Ouvrir quand même ».
+5. Validez avec votre mot de passe ou Touch ID si demandé, puis confirmez
+   « Ouvrir ». L’autorisation est mémorisée pour cette application.
+
+Le bouton « Ouvrir quand même » apparaît après la tentative d’ouverture.
+S’il n’est plus affiché, essayez à nouveau d’ouvrir l’application, puis
+retournez immédiatement dans Confidentialité et sécurité.
+Une nouvelle version peut nécessiter une nouvelle autorisation.
+Autorisez uniquement l’application provenant du dépôt officiel :
+https://github.com/soundviking/S2A-Pilot
+
+Une fois l’application ouverte, autorisez le contrôle de QLab lorsque
+macOS le demande lors de l’import. Cette permission est distincte de
+l’autorisation d’ouverture ci-dessus.
+
+Procédure Apple : https://support.apple.com/fr-fr/102445
