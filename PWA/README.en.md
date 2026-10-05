@@ -82,10 +82,10 @@ Use is permitted; redistribution, publication or hosting for third parties requi
 
 ## iPad display
 
-Version 1.4.40 matches the PWA background and reserves status-bar safe areas. Any blur added by iPadOS needs validation on a physical iPad; complete removal is not guaranteed.
+Version 1.4.41 matches the PWA background and reserves status-bar safe areas. Any blur added by iPadOS needs validation on a physical iPad; complete removal is not guaranteed.
 
 
-Version 1.4.40: stronger blue glow around the active Cue in Show, with soft inner and outer light and no animation.
+Version 1.4.41: stronger blue glow around the active Cue in Show, with soft inner and outer light and no animation.
 
 
-Version 1.4.40: in the final ten seconds before the next Cue, a red glow fades in and out once per second while the active Cue’s blue glow fades away. Outside this interval, blue returns. With reduced motion, red remains steady.
+Version 1.4.41: in the final ten seconds before the next Cue, a red glow fades in and out once per second while the active Cue’s blue glow fades away. Outside this interval, blue returns. With reduced motion, red remains steady.

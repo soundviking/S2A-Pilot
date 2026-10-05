@@ -230,7 +230,7 @@ private func L(_ text: String) -> String {
     " prêt": " ready",
     " échec": " failure",
     "dans ": "in ",
-    "Import de conduites S2A Pilot V5 dans QLab 5 — S2A Copilote 1.2.8": "Import S2A Pilot V5 shows into QLab 5 — S2A Copilote 1.2.8"
+    "Import de conduites S2A Pilot V5 dans QLab 5 — S2A Copilote 1.2.9": "Import S2A Pilot V5 shows into QLab 5 — S2A Copilote 1.2.9"
     ]
     if language != "en" { return catalog.first(where: { $0.value == text })?.key ?? text }
     if let value = catalog[text] { return value }
@@ -1329,7 +1329,7 @@ struct ContentView: View {
                 VStack(alignment: .leading, spacing: 3) {
                     Text("S2A Copilote")
                         .font(.system(size: 20, weight: .semibold))
-                    Text(L("Import de conduites S2A Pilot V5 dans QLab 5 — S2A Copilote 1.2.8"))
+                    Text(L("Import de conduites S2A Pilot V5 dans QLab 5 — S2A Copilote 1.2.9"))
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                 }
@@ -1518,6 +1518,37 @@ struct ContentView: View {
         }
     }
 }
+// One smooth pulse per second; driven by SwiftUI rather than a polling timer.
+struct UpcomingCueWarningGlow: View {
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @State private var bright = false
+
+    private func startPulse() {
+        guard !reduceMotion else { return }
+        withAnimation(.easeInOut(duration: 0.5).repeatForever(autoreverses: true)) {
+            bright = true
+        }
+    }
+
+    var body: some View {
+        RoundedRectangle(cornerRadius: 14, style: .continuous)
+            .stroke(Color.red.opacity(0.9), lineWidth: 2)
+            .shadow(color: .red.opacity(0.7), radius: 5)
+            .shadow(color: .red.opacity(0.45), radius: 12)
+            .shadow(color: .red.opacity(0.25), radius: 20)
+            .opacity(reduceMotion || bright ? 1 : 0.12)
+            .allowsHitTesting(false)
+            .accessibilityHidden(true)
+            .onAppear { startPulse() }
+            .onChange(of: reduceMotion) { _ in
+                var transaction = Transaction()
+                transaction.disablesAnimations = true
+                withTransaction(transaction) { bright = false }
+                startPulse()
+            }
+    }
+}
+
 struct VisualMonitorView: View {
     @ObservedObject var model: AppModel
     @AppStorage("s2a-language") private var interfaceLanguage = defaultInterfaceLanguage
@@ -1616,6 +1647,13 @@ struct VisualMonitorView: View {
                         }
                     }
                     .frame(minWidth: 245, minHeight: 170)
+                }
+                .padding(12)
+                .background(RoundedRectangle(cornerRadius: 14, style: .continuous).fill(.quaternary.opacity(0.25)))
+                .overlay {
+                    if let remaining = model.nextVisualCountdown, remaining <= 10.0 {
+                        UpcomingCueWarningGlow()
+                    }
                 }
             } else {
                 VStack(spacing: 10) {

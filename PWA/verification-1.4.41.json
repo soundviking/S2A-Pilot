@@ -1,0 +1,11 @@
+{
+  "pilot": "1.4.41",
+  "copilote": "1.2.9",
+  "change": "SwiftUI red glow on next-action block at <=10 seconds; one-second fade pulse, reduced-motion static glow",
+  "validated": [
+    "Both native architectures compiled",
+    "Universal binary signature",
+    "ZIP integrity and embedded companion manifest"
+  ],
+  "limitation": "Native animation rendering and live QLab timing need verification on a real Mac"
+}

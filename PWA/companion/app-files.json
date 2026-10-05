@@ -1,5 +1,5 @@
 {
-  "version": "1.2.8",
+  "version": "1.2.9",
   "architectures": [
     "arm64",
     "x86_64"
@@ -13,7 +13,7 @@
     {
       "path": "S2A Copilote.app/Contents/MacOS/S2A Copilote",
       "mode": 33261,
-      "size": 2925792
+      "size": 3066128
     },
     {
       "path": "S2A Copilote.app/Contents/Resources/LICENSE",
