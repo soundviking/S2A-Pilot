@@ -19,8 +19,14 @@ Application de préparation et de conduite de spectacles multimédias, développ
 
 ## Versions actuelles et téléchargements
 
-- **[S2A Pilot 1.4.25 — PWA](downloads/S2A-Pilot-V1.4.25-PWA.zip)**
+- **[S2A Pilot 1.4.26 — PWA](downloads/S2A-Pilot-V1.4.26-PWA.zip)**
 - **[S2A Copilote 1.2.5 — application macOS universelle](downloads/S2A-Copilote-1.2.5-macOS-Universel.zip)** : Intel et Apple Silicon, macOS 13 minimum.
+
+## Édition des Cues 1.4.26
+
+La Cue sélectionnée se distingue par un contour bleu clair, un repère latéral et un fond renforcé sur toute sa hauteur. Une poignée à gauche permet de déplacer les Cues par glisser-déposer dans la liste. Le déplacement ajuste leur temps entre les Cues voisines ; avant la première Cue, le temps devient 00:00.0. L’ordre reste chronologique. Alt + flèches est aussi disponible au clavier. Annulation et sauvegarde automatique conservées.
+
+Déplacement vers zéro, insertion entre deux Cues, annulation, clavier, sauvegarde et largeur mobile vérifiés dans Chrome. Geste tactile à confirmer sur iPad réel.
 
 ## Libellé 1.4.24
 

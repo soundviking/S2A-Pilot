@@ -5,7 +5,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" name="viewport"/>
 <title>S2A Pilot</title>
-<link href="./icons/s2a-pilot-192.png?v=1.4.25" rel="icon" type="image/png"/>
+<link href="./icons/s2a-pilot-192.png?v=1.4.26" rel="icon" type="image/png"/>
 <style>
 :root{
   font-family: system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
@@ -557,7 +557,23 @@ body.locked .showVideoMonitorCard.hasVideo{display:block!important}
 .cuesToolbarLeft{display:flex;align-items:center;gap:9px}.collapseAllBtn{padding:7px 10px;font-size:.78rem}
 .cues{gap:7px}
 .cueAccordion{background:#151922;border:1px solid #2b3240;border-radius:12px;overflow:hidden;transition:border-color .15s,background .15s}
+.cueDragHandle{padding:0!important;min-width:26px;min-height:32px;line-height:1;background:transparent!important;border:0!important;color:#a9d2ff;font-size:24px;cursor:grab;touch-action:none;flex-shrink:0}
+.cueNumber{display:flex;align-items:center;gap:3px}
+.cueDragging{opacity:.55}
+.cueAccordion.dropBefore{box-shadow:inset 0 4px 0 #66a8ff!important}
+.cueAccordion.dropAfter{box-shadow:inset 0 -4px 0 #66a8ff!important}
+body:not(.locked) .cueSummary{grid-template-columns:96px 86px minmax(0,1fr) auto 28px}
+@media(max-width:760px){body:not(.locked) .cueSummary{grid-template-columns:82px 78px minmax(0,1fr) 28px}}
+@media(max-width:480px){body:not(.locked) .cueSummary{grid-template-columns:72px 70px minmax(0,1fr) 24px}}
 .cueAccordion.expanded{border-color:#536176;background:#171c25}
+body:not(.locked) .cueAccordion.expanded{border-color:#66a8ff;background:#192b43;box-shadow:inset 5px 0 0 #66a8ff,0 0 0 1px rgba(102,168,255,.35)}
+body:not(.locked) .cueAccordion.expanded .cueSummary{background:#213c60;border-bottom-color:#4c79ab}
+body:not(.locked) .cueAccordion.expanded .cueNumber{color:#a9d2ff}
+body:not(.locked) .cueAccordion.expanded .cueSummaryName{color:#fff}
+body:not(.locked) .cueAccordion.expanded .cueChevron{color:#a9d2ff}
+body:not(.locked) .cueAccordion.expanded .cueDetails{background:rgba(30,61,99,.25)}
+body:not(.locked) .cueAccordion.expanded input:focus,body:not(.locked) .cueAccordion.expanded textarea:focus,body:not(.locked) .cueAccordion.expanded select:focus{outline:2px solid #66a8ff;outline-offset:2px}
+
 .cueSummary{display:grid;grid-template-columns:72px 86px minmax(0,1fr) auto 28px;gap:10px;align-items:center;padding:10px 12px;cursor:pointer;user-select:none;min-height:54px}
 .cueSummary:hover{background:#1b202a}.cueAccordion.expanded .cueSummary{background:#1d232e;border-bottom:1px solid #303847}
 .cueNumber{font-size:.72rem;font-weight:850;letter-spacing:.06em;color:#9da7b5}.cueSummaryTime{font-variant-numeric:tabular-nums;font-weight:800;color:#f4f6f8;font-size:.88rem}
@@ -599,7 +615,7 @@ body.locked .activeCueCard>h2,body.locked .nextTopCard>h2,body.locked .showVideo
 html,body{overscroll-behavior-y:none;}
 .activeCueImage[hidden],.nextImage[hidden]{display:none!important;}
 
-/* V1.4.25 — sélection Cue ↔ timeline + companion 1.2.2 */
+/* V1.4.26 — sélection Cue ↔ timeline + companion 1.2.2 */
 .showOnly{display:none}
 body.locked .showOnly{display:flex}
 .preflightIntegrated{display:grid;gap:12px;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid #2b3240}
@@ -608,7 +624,7 @@ body.locked .showOnly{display:flex}
 body.locked .timelineCard{display:block}
 
 
-/* 1.4.25 : mêmes libellés et disposition adaptable */
+/* 1.4.26 : mêmes libellés et disposition adaptable */
 [hidden]{display:none!important}
 .timeline .tick:first-of-type{transform:none}.timeline .tick:last-of-type{transform:translateX(-100%)}
 .showVideoMonitor{display:none;grid-column:1/-1;order:100}
@@ -621,14 +637,14 @@ button{white-space:normal;touch-action:manipulation}
 @media(max-width:900px){main.spectaclePriorityLayout{display:flex!important;flex-direction:column!important;padding:12px!important}.card{width:100%;box-sizing:border-box}.appTopBar{flex-wrap:wrap;gap:12px}.row{flex-wrap:wrap}.nextWrap{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
 @media(max-width:480px){main.spectaclePriorityLayout{padding:8px!important}.card{padding:12px!important}.cueEditGrid{grid-template-columns:1fr}.cueEditGrid .imageControls,.cueEditGrid>.danger{grid-column:1}.mediaAction{display:flex;flex-wrap:wrap}.mediaEditor{width:100%;min-width:0}.nextWrap{display:flex;flex-direction:column}.nextImageWrap{width:100%}.nextCountdown{font-size:clamp(2rem,12vw,4rem)!important}.row button{flex:1 1 120px}.time{font-size:clamp(1.6rem,10vw,3rem)}.cueSummary{grid-template-columns:45px 70px minmax(0,1fr) 24px}.projectActions{width:100%}.appIdentity{min-width:0}.outputPrep{flex-wrap:wrap}input,textarea,select{max-width:100%;box-sizing:border-box}}
 
-/* 1.4.25 : visuels Show remplis sans déformation, dimensions stables */
+/* 1.4.26 : visuels Show remplis sans déformation, dimensions stables */
 body.locked .activeCueImage{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
 body.locked .nextTopCard .nextWrap{grid-template-columns:minmax(0,1fr) minmax(153.9px,226.8px)}
 body.locked .nextTopCard .nextImageWrap{width:100%;max-width:226.8px;aspect-ratio:16/9;align-self:center;justify-self:center}
 body.locked .nextTopCard .nextImage{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
 @media(max-width:760px){body.locked .nextTopCard .nextWrap{grid-template-columns:1fr}body.locked .nextTopCard .nextImageWrap{width:min(90%,252px);max-width:252px;align-self:center;justify-self:center;margin-inline:auto}}
 
-/* 1.4.25 : audition et aperçu indépendants de la conduite */
+/* 1.4.26 : audition et aperçu indépendants de la conduite */
 .mediaEditorTop .mediaPreviewToggle{padding:6px 9px;font-size:.76rem;min-width:96px;white-space:nowrap}
 .mediaEditorField input[type=text]{min-width:0;width:78px}
 .mediaEditorMain{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;align-items:center}
@@ -662,7 +678,7 @@ body.locked .nextTopCard .nextImage{position:absolute;inset:0;width:100%;height:
 @media(max-width:480px){.modeSwitchBtn{min-width:50px;padding:8px 9px}}
 @media(prefers-reduced-motion:reduce){.modeSwitchBtn{transition:none}}
 
-/* 1.4.25 : zoom des médias et sortie vidéo uniquement dans l’en-tête Show */
+/* 1.4.26 : zoom des médias et sortie vidéo uniquement dans l’en-tête Show */
 .fileLabel.addMediaBtn{background:#246fd1;border-color:#2b7de7;color:#fff}.fileLabel.addMediaBtn:hover{background:#2d7bdf}
 .mediaEditorTimeline .mediaVisual{overflow-x:auto;overflow-y:hidden;scrollbar-width:thin;scrollbar-color:#5b7192 #11151d}
 .mediaVisualContent{position:relative;height:100%;min-width:100%;user-select:none;touch-action:none}
@@ -679,7 +695,7 @@ body.locked .nextTopCard .nextImage{position:absolute;inset:0;width:100%;height:
 .pdfPreviewDialog{width:min(1000px,94vw);height:90dvh;max-width:94vw;max-height:94dvh;padding:14px;border:1px solid #45536a;border-radius:14px;background:#111722;color:#fff}.pdfPreviewDialog::backdrop{background:#000a}.pdfPreviewLayout{height:100%;display:flex;flex-direction:column;gap:12px}.pdfPreviewToolbar{display:flex;align-items:center;flex-wrap:wrap;gap:10px}.pdfPreviewToolbar strong{flex:1;min-width:150px}.pdfPreviewToolbar a{display:inline-flex;align-items:center;padding:10px 12px;border-radius:8px;background:#246fd1;color:white;text-decoration:none}
 .pdfPreviewPages{flex:1;min-height:0;overflow:auto;display:flex;flex-direction:column;align-items:flex-start;gap:16px;background:#252f40;border-radius:8px;padding:12px;box-sizing:border-box;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}.pdfPreviewPage{flex-shrink:0;margin:0 auto;background:white;border-radius:4px;box-shadow:0 3px 12px #0006;overflow:hidden}.pdfPreviewPage svg{display:block;width:100%;height:auto}.pdfPreviewZoom{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.pdfPreviewZoom button{min-height:40px}.pdfPreviewZoom span{min-width:48px;text-align:center;font-size:.85rem}.pdfPreviewToolbar strong{overflow-wrap:anywhere}@media(max-width:480px){.pdfPreviewDialog{padding:9px}.pdfPreviewToolbar{gap:7px}.pdfPreviewToolbar strong{flex-basis:100%}.pdfPreviewPages{padding:8px}.pdfPreviewZoom{gap:6px}.pdfPreviewZoom button{padding:8px 10px}}
 
-/* 1.4.25 : repères et médias distincts ; aperçu global en Edit. */
+/* 1.4.26 : repères et médias distincts ; aperçu global en Edit. */
 #projectWaveform{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.8}
 #projectMediaTracks{position:absolute;inset:5px 0 22px;display:flex;flex-direction:column;gap:3px;min-height:0;overflow:hidden;pointer-events:none;z-index:1}
 .projectMediaBar{position:relative;flex-shrink:0;box-sizing:border-box;min-width:3px;height:20px;border-radius:5px;background:rgba(42,153,89,.28);border:1px solid rgba(101,210,142,.4);color:#d0f5df;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:2px 5px}
@@ -711,7 +727,7 @@ html,body{touch-action:pan-x pan-y}input,textarea,select{font-size:max(16px,1em)
 <meta content="yes" name="apple-mobile-web-app-capable"/>
 <meta content="black" name="apple-mobile-web-app-status-bar-style"/>
 <meta content="S2A Pilot" name="apple-mobile-web-app-title"/>
-<link href="./icons/s2a-pilot-180.png?v=1.4.25" rel="apple-touch-icon"/>
+<link href="./icons/s2a-pilot-180.png?v=1.4.26" rel="apple-touch-icon"/>
 </head>
 <body>
 <main class="spectaclePriorityLayout">
@@ -720,7 +736,7 @@ html,body{touch-action:pan-x pan-y}input,textarea,select{font-size:max(16px,1em)
 <div class="appIdentity">
   <strong>S2A Pilot</strong>
   <span class="appAttribution">(by S2A Production)</span>
-  <span class="appVersion">Version 1.4.25</span>
+  <span class="appVersion">Version 1.4.26</span>
 </div>
 <div class="headerActions">
 <div class="headerVideoOutput showOnly">

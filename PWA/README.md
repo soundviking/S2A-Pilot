@@ -1,3 +1,9 @@
+# Version 1.4.26 — Cue sélectionnée plus visible
+
+Une poignée à gauche permet de déplacer les Cues dans la liste. Le temps est ajusté entre les Cues voisines ; un placement avant la première Cue donne 00:00.0. L’ordre reste chronologique, les médias restent attachés à leur Cue et le déplacement peut être annulé. Alt + flèches permet également de déplacer une Cue au clavier. Le geste tactile reste à confirmer sur iPad réel.
+
+En Edit, la Cue déroulée bénéficie d’un contour bleu clair, d’un repère latéral, d’un en-tête bleu renforcé et d’un fond distinct sur toute la zone d’édition.
+
 # Version 1.4.25 — Assistance à l’installation de Copilote
 
 Notice détaillée ajoutée aux projets exportés : première tentative d’ouverture, Réglages Système, Confidentialité et sécurité, Ouvrir quand même et confirmation. Copilote reste en version 1.2.5 universelle.
