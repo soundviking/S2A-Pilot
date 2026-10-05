@@ -1,3 +1,15 @@
+# S2A Pilot 1.4.19 — vérification des mises à jour
+
+Vérification réseau de version.json au démarrage, au retour dans l’application et toutes les cinq minutes si visible. Le manifeste contourne le cache du service worker et est demandé sans cache avec une adresse unique. Sans réseau, aucune confirmation « à jour » n’est donnée ; le mode hors ligne reste disponible.
+
+Une version serveur supérieure affiche une proposition d’actualisation. L’actualisation est bloquée en Show ou pendant la lecture ; elle sauvegarde le projet puis renouvelle uniquement les fichiers de l’application. Les données IndexedDB restent conservées.
+
+Alexandre doit déployer tout le dossier, notamment version.json et actualiser.html, à chaque mise à jour. La comparaison porte sur la version publiée sur son serveur, pas sur GitHub. La mise à jour du serveur doit être complète avant sa mise à disposition. Ce mécanisme est disponible à partir de la 1.4.19 ; les anciennes pages déjà ouvertes nécessitent un premier rechargement.
+
+Tests : version identique, version supérieure, Show, lecture en cours et panne réseau vérifiés.
+
+## Historique
+
 # S2A Pilot 1.4.18
 
 Pastille VIDÉO violette : fond translucide, texte clair et bordure assortis à la bande vidéo de la timeline. Les erreurs restent signalées en rouge. Les Cues sans média n’affichent aucune pastille.

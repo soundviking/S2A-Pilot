@@ -1,13 +1,13 @@
-const CACHE_NAME='s2a-pilot-v1-4-18b-app-shell';
+const CACHE_NAME='s2a-pilot-v1-4-19-app-shell';
 const APP_SHELL=[
   './',
   './index.html',
   './app.js',
   './technical-preview.js',
   './assets/conduite-header.webp',
-  './icons/s2a-pilot-180.png?v=1.4.18',
-  './icons/s2a-pilot-192.png?v=1.4.18',
-  './icons/s2a-pilot-512.png?v=1.4.18',
+  './icons/s2a-pilot-180.png?v=1.4.19',
+  './icons/s2a-pilot-192.png?v=1.4.19',
+  './icons/s2a-pilot-512.png?v=1.4.19',
   './manifest.webmanifest',
   './companion/S2A-Copilote-1.2.5-app.zip',
   './companion/app-files.json',
@@ -35,6 +35,7 @@ self.addEventListener('activate',(event)=>{
 
 self.addEventListener('fetch',(event)=>{
   if(event.request.method!=='GET') return;
+  if(new URL(event.request.url).pathname.endsWith('/version.json')){event.respondWith(fetch(event.request,{cache:'no-store'}));return;}
   event.respondWith(
     caches.match(event.request).then((cached)=>{
       if(cached) return cached;
