@@ -6,12 +6,16 @@ Application de préparation et de conduite de spectacles multimédias, développ
 
 ## Versions actuelles et téléchargements
 
-- **[S2A Pilot 1.4.21 — PWA](downloads/S2A-Pilot-V1.4.21-PWA.zip)**
+- **[S2A Pilot 1.4.22 — PWA](downloads/S2A-Pilot-V1.4.22-PWA.zip)**
 - **[S2A Copilote 1.2.5 — application macOS universelle](downloads/S2A-Copilote-1.2.5-macOS-Universel.zip)** : Intel et Apple Silicon, macOS 13 minimum.
 
 ## Correctif de démarrage 1.4.21
 
 La vérification de permission d’écran non prise en charge ne bloque plus l’initialisation. L’API est interrogée uniquement lorsqu’un affichage étendu peut être détecté. Compatibilité renforcée pour Array.at, ResizeObserver et AbortSignal.timeout. Blocage reproduit et correctif validé avec API indisponible simulée dans Chrome : Nouveau, + Cue et PDF fonctionnels. À confirmer dans Safari sur iPad réel.
+
+## Sortie vidéo 1.4.22
+
+En Show, la sortie vidéo apparaît uniquement si au moins une vidéo est présente. Sans affichage étendu le bouton reste grisé. Il disparaît après suppression de la dernière vidéo.
 
 ## Préparer une conduite
 

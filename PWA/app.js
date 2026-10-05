@@ -206,7 +206,7 @@ function syncVideoSurfaces(){updateVideoOutputControls();const box=$('showVideoM
 function projectHasVideo(){return allActions('video').length>0;}
 let screenDetails=null;
 function extendedScreen(){if(screen.isExtended!==true)return null;return screenDetails?.screens.find(s=>s!==screenDetails.currentScreen&&(s.left!==screenDetails.currentScreen.left||s.top!==screenDetails.currentScreen.top))||null;}
-function updateVideoOutputControls(){const open=!!(videoOutputWindow&&!videoOutputWindow.closed),extended=!!extendedScreen();videoOutputBtn.disabled=!extended||!projectHasVideo();videoOutputBtn.classList.toggle('active',open);videoOutputState.textContent=!extended?'Disponible uniquement avec un affichage étendu':open?'Sortie vidéo activée · affichage étendu prêt':projectHasVideo()?'Affichage étendu prêt':'Ajoute une vidéo pour préparer la sortie';videoOutputBtn.title=open?'Fermer la sortie vidéo':'Ouvrir la sortie vidéo';}
+function updateVideoOutputControls(){videoOutputBtn.closest('.headerVideoOutput').hidden=!projectHasVideo();const open=!!(videoOutputWindow&&!videoOutputWindow.closed),extended=!!extendedScreen();videoOutputBtn.disabled=!extended||!projectHasVideo();videoOutputBtn.classList.toggle('active',open);videoOutputState.textContent=!extended?'Disponible uniquement avec un affichage étendu':open?'Sortie vidéo activée · affichage étendu prêt':projectHasVideo()?'Affichage étendu prêt':'Ajoute une vidéo pour préparer la sortie';videoOutputBtn.title=open?'Fermer la sortie vidéo':'Ouvrir la sortie vidéo';}
 let screenDetectionPromise=null;
 async function detectScreens(){
   if(typeof window.getScreenDetails!=='function'){screenDetails=null;onScreensChanged();return false;}
@@ -763,7 +763,7 @@ document.addEventListener('touchmove',e=>{if(e.touches.length>1)e.preventDefault
 document.addEventListener('wheel',e=>{if(e.ctrlKey)e.preventDefault();},{passive:false});
 
 // This manifest is requested from the network, outside the service-worker cache.
-const APP_VERSION='1.4.21';let lastVersionCheck=0,versionCheckRunning=false;
+const APP_VERSION='1.4.22';let lastVersionCheck=0,versionCheckRunning=false;
 const updateNotice=document.createElement('div');updateNotice.id='updateNotice';updateNotice.hidden=true;updateNotice.setAttribute('role','status');const updateText=document.createElement('span'),updateButton=document.createElement('button');updateButton.type='button';updateButton.textContent='Ouvrir la nouvelle version';updateNotice.append(updateText,updateButton);document.querySelector('main').prepend(updateNotice);
 function updateVersionButton(){const b=document.getElementById('updateNotice')?.querySelector('button');if(!b)return;b.disabled=locked||transportPlaying;b.title=b.disabled?'Quitter le mode Show et mettre la lecture en pause pour actualiser.':'';}
 function versionIsNewer(a,b){const x=a.split('.').map(Number),y=b.split('.').map(Number);for(let i=0;i<3;i++){if(x[i]!==y[i])return x[i]>y[i];}return false;}

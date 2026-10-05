@@ -1,3 +1,9 @@
+# S2A Pilot 1.4.22
+
+En mode Show, le bouton Sortie vidéo et son statut sont visibles uniquement si la conduite contient une vidéo. Ils disparaissent après suppression de la dernière vidéo et restent masqués en Edit. Sans écran étendu, le bouton visible reste grisé. Le correctif de démarrage Safari 1.4.21 est inclus.
+
+## Historique
+
 # S2A Pilot 1.4.21 — compatibilité au démarrage
 
 La demande d’autorisation window-management n’est effectuée que si l’API des écrans étendus existe. Les erreurs synchrones et asynchrones sont interceptées ; elles ne bloquent plus l’initialisation. Compatibilité complémentaire : accès aux derniers éléments sans Array.at, ResizeObserver conditionnel et timeout de vérification version conditionnel.

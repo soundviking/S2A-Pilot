@@ -493,5 +493,9 @@
     "test": "Refus synchrone window-management reproduit sur 1.4.20, absent sur 1.4.21 ; Nouveau, + Cue et aperçu PDF fonctionnels",
     "engine": "Chrome, simulation des API indisponibles",
     "pending": "Safari sur iPad physique"
+  },
+  "pilot1422": {
+    "videoOutput": "Sans vidéo masqué ; avec vidéo visible en Show et grisé sans écran étendu ; masqué en Edit et après suppression",
+    "test": "Chrome automatisé"
   }
 }
