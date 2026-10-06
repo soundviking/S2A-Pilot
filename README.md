@@ -1,14 +1,16 @@
-# S2A Pilot 1.4.42 / S2A Copilote 1.2.10
+# S2A Pilot 1.4.43 / S2A Copilote 1.2.10
 
 🇫🇷 **Français** | 🇬🇧 [English](README.en.md)
 
 ![S2A Pilot](assets/social-preview.jpg)
 
-[PWA 1.4.42](downloads/S2A-Pilot-V1.4.42-PWA.zip) · [Copilote 1.2.10 — Intel / Apple Silicon](downloads/S2A-Copilote-1.2.10-macOS-Universel.zip)
+[PWA 1.4.43](downloads/S2A-Pilot-V1.4.43-PWA.zip) · [Copilote 1.2.10 — Intel / Apple Silicon](downloads/S2A-Copilote-1.2.10-macOS-Universel.zip)
 
 # S2A Pilot — Guide utilisateur
 
 Les droits sur S2A Pilot et S2A Copilote appartiennent à la société S2A Production. Ces applications ont été développées par Antoine CLOPIER, avec l’aide de ChatGPT.
+
+[English user guide](README.en.md)
 
 S2A Pilot prépare et joue des conduites multimédias. S2A Copilote importe leurs packages dans QLab 5.
 
@@ -36,7 +38,7 @@ Lecture / Pause ou Espace commande la conduite. Le raccourci ignore la saisie, l
 
 ## Show et sortie vidéo
 
-En paysage large : Cue active à gauche avec halo bleu, prochaine Cue à droite avec titre et temps côte à côte, description dessous et visuel centré 16/9. Sur petit écran, le temps passe sous le titre. Les descriptions longues restent intégrales et peuvent agrandir les boxes. La timeline est verrouillée pour le déplacement du temps en Show. Le moniteur vidéo apparaît uniquement si une vidéo est présente.
+En paysage large : Cue active à gauche avec halo bleu, prochaine Cue à droite avec titre et temps côte à côte, description dessous et visuel centré 16/9. Sur petit écran, le temps passe sous le titre. Les descriptions longues restent intégrales et peuvent agrandir les boxes. La timeline permet désormais la navigation dans le temps en Show ; les Cues restent non éditables. Le moniteur vidéo apparaît uniquement si une vidéo est présente.
 
 La sortie vidéo apparaît uniquement en Show avec une vidéo. Son placement automatique demande une API de gestion des écrans disponible, une autorisation du navigateur et un vrai affichage étendu. Sur Mac avec Safari, la sortie ouvre une fenêtre à déplacer manuellement sur le second écran ; l’app ne peut pas vérifier l’affichage étendu. Chrome ou sa PWA peut placer automatiquement la fenêtre sur un affichage étendu détecté. La sortie est désactivée sur iPad / iPhone. La recopie n’est pas un affichage séparé. Le bouton devient rouge pendant l’activation. Autoriser les fenêtres surgissantes si nécessaire, puis cliquer dans la sortie pour le plein écran. Le préchargement est automatique.
 
@@ -76,3 +78,30 @@ Tests Chrome : création, édition, sauvegarde, langues, préservation des conte
 ## Licence
 
 Utilisation autorisée ; redistribution, publication ou hébergement pour des tiers soumis à un accord écrit préalable de S2A Production. Voir [la licence](LICENSE).
+
+
+## Affichage sur iPad
+
+La version 1.4.43 harmonise le fond de la PWA et réserve les zones de sécurité de la barre d’état. Le flou éventuellement ajouté par iPadOS doit être contrôlé sur un iPad réel ; sa suppression complète n’est pas garantie.
+
+
+Version 1.4.43 : halo lumineux bleu renforcé autour de la Cue active en mode Show, avec lumière diffuse intérieure et extérieure, sans animation.
+
+
+Version 1.4.43 : à dix secondes de la prochaine Cue, son halo rouge pulse en fondu toutes les secondes et le halo bleu de la Cue active s’éteint en fondu. Hors de cette zone, le halo bleu revient. En réduction des animations, le rouge reste fixe.
+
+## Version 1.4.43 — timelines et compatibilité
+
+La tête de lecture blanche reprend le dessin des timelines médias. Elle se déplace en continu au doigt ou à la souris en Edit et Show ; clic/tap direct, flèches, Début/Fin sont conservés. Pendant le glissement, les médias sont mis en pause et l’interface suit la position ; au relâchement, les médias sont repositionnés et la lecture reprend si elle était active. Une annulation du geste restaure la position initiale. Au zoom, le sélecteur reste déplaçable et le fond permet le défilement horizontal.
+
+En Show, TIMELINE est au-dessus des boxes Cue active et prochaine Cue. Les repères jaunes numérotés sont informatifs et ne déplacent pas les Cues. En Edit, seul le repère de la Cue sélectionnée porte son numéro, sans halo bleu. Les portions avant IN et après OUT sont assombries ; la zone retenue garde son bleu transparent. ⏮ remplace le texte Retour au début ; son libellé reste accessible et son comportement ne change pas.
+
+Le mode ancien navigateur est accessible dans `legacy/index.html`. Il est choisi automatiquement sur iOS 9–12, ou lorsqu’un navigateur ne peut pas lire la syntaxe ou les APIs de base de la version complète. iOS 13+ utilise la version complète si ces capacités sont présentes : il ne s’agit pas d’une garantie pour toutes les versions de Safari.
+
+Ce mode propose une seule musique, les Cues et descriptions, les images, Edit/Show, la navigation tactile/souris, la duplication, une sauvegarde IndexedDB distincte et une conduite imprimable. Il lit les ZIP non compressés exportés par S2A Pilot. S’il y a plusieurs musiques, seule la première est jouée et un message l’indique. Les vidéos ne sont pas jouées. Les points IN/OUT de la musique importée sont respectés, mais leur édition, les boucles, les fondus, le mixage, les waveforms et la sortie vidéo ne sont pas proposés.
+
+L’export de compatibilité est un fichier `.s2apilot.json` avec musique et visuels intégrés, réouvrable dans les deux modes. Il ne contient pas Copilote ni un PDF généré ; la version complète peut ensuite produire le package habituel. Sur Safari ancien, le téléchargement peut s’ouvrir dans une fenêtre plutôt que déclencher un enregistrement direct. Les données locales des deux modes sont séparées : utiliser l’export pour les transférer.
+
+iOS 9–10 doit disposer d’une connexion au site : aucun hors ligne moderne n’est promis. À partir d’iOS 11.3, le service worker peut mettre en cache les fichiers, mais cela reste à confirmer sur l’appareil réel. La lecture automatique après un changement de position peut être refusée par Safari ancien ; lancer une musique à zéro depuis Lecture est le scénario à vérifier en priorité. Les limitations sont affichées dans l’interface. Tests réalisés dans Chrome avec détection iOS simulée et audit de syntaxe ES5 ; aucun iPad 2 physique n’a été testé.
+
+La loupe identifie les commandes de zoom en Edit. Show affiche les minutes et secondes, sans dixièmes ; le temps fixe sous le compte à rebours est supprimé. Le chargement du compagnon demande des fichiers frais pour limiter les manifestes obsolètes.

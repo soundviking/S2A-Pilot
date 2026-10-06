@@ -1,10 +1,10 @@
-# S2A Pilot 1.4.42 / S2A Copilote 1.2.10
+# S2A Pilot 1.4.43 / S2A Copilote 1.2.10
 
 🇫🇷 [Français](README.md) | 🇬🇧 **English**
 
 ![S2A Pilot](assets/social-preview.jpg)
 
-[PWA 1.4.42](downloads/S2A-Pilot-V1.4.42-PWA.zip) · [Copilote 1.2.10 — Intel / Apple Silicon](downloads/S2A-Copilote-1.2.10-macOS-Universel.zip)
+[PWA 1.4.43](downloads/S2A-Pilot-V1.4.43-PWA.zip) · [Copilote 1.2.10 — Intel / Apple Silicon](downloads/S2A-Copilote-1.2.10-macOS-Universel.zip)
 
 # S2A Pilot — User guide
 
@@ -40,7 +40,7 @@ Media bands appear on the timeline: green for audio, pink for video. The combine
 
 Use Play / Pause, or press Space. The keyboard shortcut is ignored while typing, inside dialogs or when another control owns Space. Holding it does not repeatedly toggle playback. Back to start pauses playback, stops running media and returns to zero.
 
-In Show, the active Cue is on the left on wide landscape screens and is highlighted with a blue halo. The next Cue has its title and countdown across its top, a full-width description below, then a centered 16:9 visual. On narrow screens the countdown moves below the title. Long text is retained, so the panels may grow. The main timeline cannot seek or move Cues in Show. The video monitor appears only if the show contains video.
+In Show, the active Cue is on the left on wide landscape screens and is highlighted with a blue halo. The next Cue has its title and countdown across its top, a full-width description below, then a centered 16:9 visual. On narrow screens the countdown moves below the title. Long text is retained, so the panels may grow. The main timeline can seek in Show; Cue markers remain non-editable. The video monitor appears only if the show contains video.
 
 ## External video output
 
@@ -86,3 +86,30 @@ Chrome tests cover creation, editing, autosave, language selection, user content
 ## License
 
 Use is permitted; redistribution, publication or hosting for third parties requires prior written permission from S2A Production. See [the license](LICENSE).
+
+
+## iPad display
+
+Version 1.4.43 matches the PWA background and reserves status-bar safe areas. Any blur added by iPadOS needs validation on a physical iPad; complete removal is not guaranteed.
+
+
+Version 1.4.43: stronger blue glow around the active Cue in Show, with soft inner and outer light and no animation.
+
+
+Version 1.4.43: in the final ten seconds before the next Cue, a red glow fades in and out once per second while the active Cue’s blue glow fades away. Outside this interval, blue returns. With reduced motion, red remains steady.
+
+## Version 1.4.43 — timelines and compatibility
+
+The white playhead matches the media timeline design. Mouse/touch dragging updates continuously in Edit and Show, with direct click/tap and arrow/Home/End navigation. Media pauses while dragging, then seeks and resumes on release if playback was active. Cancelling restores the original position. At zoom, drag the playhead to seek or swipe the background to scroll.
+
+In Show, TIMELINE is above the active and next Cue panels. Numbered yellow markers are informational and cannot move Cues. In Edit, only the selected marker displays its number, without a blue glow. Regions before IN and after OUT are darkened; the retained selection keeps its transparent blue. ⏮ replaces Back to start text, retaining an accessible label and the same behavior.
+
+The older-browser mode lives at `legacy/index.html`. It is selected automatically on iOS 9–12 or when the full app’s syntax/core APIs are unavailable. iOS 13+ uses the full app when these capabilities exist; this is not a guarantee for every Safari version.
+
+It supports one music track, Cues/descriptions/images, Edit/Show, mouse/touch navigation, duplication, separate IndexedDB autosave and a printable cue sheet. It opens uncompressed project ZIPs exported by S2A Pilot. If multiple audio tracks exist, only the first is played and a message explains this. Video is not played. Imported audio IN/OUT points are respected, but trim editing, loops, fades, mixing, waveforms and video output are unavailable.
+
+Compatibility exports use `.s2apilot.json`, including audio and visuals, and can be opened in either mode. They contain neither Copilote nor a generated PDF; the full app can subsequently export a standard package. Older Safari may open the export in a separate window rather than downloading directly. The two modes have separate local data stores; transfer projects through exports.
+
+iOS 9–10 requires access to the site; modern offline support is not promised. From iOS 11.3, a service worker can cache app files, subject to real-device validation. Older Safari may deny automatic audio playback after seeking; starting music at zero via Play is the first scenario to verify. Limitations are shown in the UI. Tests use Chrome with simulated iOS detection and an ES5 syntax audit; no physical iPad 2 has been tested.
+
+A magnifying glass identifies zoom controls in Edit. Show displays minutes and seconds without tenths; the fixed cue time beneath the countdown is removed. Companion downloads request fresh files to reduce stale manifests.
