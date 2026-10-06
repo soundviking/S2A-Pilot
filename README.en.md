@@ -1,10 +1,10 @@
-# S2A Pilot 1.4.43 / S2A Copilote 1.2.10
+# S2A Pilot 1.4.44 / S2A Copilote 1.2.10
 
 🇫🇷 [Français](README.md) | 🇬🇧 **English**
 
 ![S2A Pilot](assets/social-preview.jpg)
 
-[PWA 1.4.43](downloads/S2A-Pilot-V1.4.43-PWA.zip) · [Copilote 1.2.10 — Intel / Apple Silicon](downloads/S2A-Copilote-1.2.10-macOS-Universel.zip)
+[PWA 1.4.44](downloads/S2A-Pilot-V1.4.44-PWA.zip) · [Copilote 1.2.10 — Intel / Apple Silicon](downloads/S2A-Copilote-1.2.10-macOS-Universel.zip)
 
 # S2A Pilot — User guide
 
@@ -90,15 +90,15 @@ Use is permitted; redistribution, publication or hosting for third parties requi
 
 ## iPad display
 
-Version 1.4.43 matches the PWA background and reserves status-bar safe areas. Any blur added by iPadOS needs validation on a physical iPad; complete removal is not guaranteed.
+Version 1.4.44 matches the PWA background and reserves status-bar safe areas. Any blur added by iPadOS needs validation on a physical iPad; complete removal is not guaranteed.
 
 
-Version 1.4.43: stronger blue glow around the active Cue in Show, with soft inner and outer light and no animation.
+Version 1.4.44: stronger blue glow around the active Cue in Show, with soft inner and outer light and no animation.
 
 
-Version 1.4.43: in the final ten seconds before the next Cue, a red glow fades in and out once per second while the active Cue’s blue glow fades away. Outside this interval, blue returns. With reduced motion, red remains steady.
+Version 1.4.44: in the final ten seconds before the next Cue, a red glow fades in and out once per second while the active Cue’s blue glow fades away. Outside this interval, blue returns. With reduced motion, red remains steady.
 
-## Version 1.4.43 — timelines and compatibility
+## Version 1.4.44 — timelines and compatibility
 
 The white playhead matches the media timeline design. Mouse/touch dragging updates continuously in Edit and Show, with direct click/tap and arrow/Home/End navigation. Media pauses while dragging, then seeks and resumes on release if playback was active. Cancelling restores the original position. At zoom, drag the playhead to seek or swipe the background to scroll.
 
@@ -113,3 +113,5 @@ Compatibility exports use `.s2apilot.json`, including audio and visuals, and can
 iOS 9–10 requires access to the site; modern offline support is not promised. From iOS 11.3, a service worker can cache app files, subject to real-device validation. Older Safari may deny automatic audio playback after seeking; starting music at zero via Play is the first scenario to verify. Limitations are shown in the UI. Tests use Chrome with simulated iOS detection and an ES5 syntax audit; no physical iPad 2 has been tested.
 
 A magnifying glass identifies zoom controls in Edit. Show displays minutes and seconds without tenths; the fixed cue time beneath the countdown is removed. Companion downloads request fresh files to reduce stale manifests.
+
+Compact title-only Cue bubbles below the general timeline in Edit and Show. Active Cue has a blue glow and takes collision priority, then upcoming Cues in time order. Yellow markers remain visible. Show next-Cue image uses the left half; up to four subsequent Cues appear on the right. Restart button height matches Play/Pause.

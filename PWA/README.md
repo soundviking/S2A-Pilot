@@ -74,15 +74,15 @@ Utilisation autorisée ; redistribution, publication ou hébergement pour des ti
 
 ## Affichage sur iPad
 
-La version 1.4.43 harmonise le fond de la PWA et réserve les zones de sécurité de la barre d’état. Le flou éventuellement ajouté par iPadOS doit être contrôlé sur un iPad réel ; sa suppression complète n’est pas garantie.
+La version 1.4.44 harmonise le fond de la PWA et réserve les zones de sécurité de la barre d’état. Le flou éventuellement ajouté par iPadOS doit être contrôlé sur un iPad réel ; sa suppression complète n’est pas garantie.
 
 
-Version 1.4.43 : halo lumineux bleu renforcé autour de la Cue active en mode Show, avec lumière diffuse intérieure et extérieure, sans animation.
+Version 1.4.44 : halo lumineux bleu renforcé autour de la Cue active en mode Show, avec lumière diffuse intérieure et extérieure, sans animation.
 
 
-Version 1.4.43 : à dix secondes de la prochaine Cue, son halo rouge pulse en fondu toutes les secondes et le halo bleu de la Cue active s’éteint en fondu. Hors de cette zone, le halo bleu revient. En réduction des animations, le rouge reste fixe.
+Version 1.4.44 : à dix secondes de la prochaine Cue, son halo rouge pulse en fondu toutes les secondes et le halo bleu de la Cue active s’éteint en fondu. Hors de cette zone, le halo bleu revient. En réduction des animations, le rouge reste fixe.
 
-## Version 1.4.43 — timelines et compatibilité
+## Version 1.4.44 — timelines et compatibilité
 
 La tête de lecture blanche reprend le dessin des timelines médias. Elle se déplace en continu au doigt ou à la souris en Edit et Show ; clic/tap direct, flèches, Début/Fin sont conservés. Pendant le glissement, les médias sont mis en pause et l’interface suit la position ; au relâchement, les médias sont repositionnés et la lecture reprend si elle était active. Une annulation du geste restaure la position initiale. Au zoom, le sélecteur reste déplaçable et le fond permet le défilement horizontal.
 
@@ -97,3 +97,5 @@ L’export de compatibilité est un fichier `.s2apilot.json` avec musique et vis
 iOS 9–10 doit disposer d’une connexion au site : aucun hors ligne moderne n’est promis. À partir d’iOS 11.3, le service worker peut mettre en cache les fichiers, mais cela reste à confirmer sur l’appareil réel. La lecture automatique après un changement de position peut être refusée par Safari ancien ; lancer une musique à zéro depuis Lecture est le scénario à vérifier en priorité. Les limitations sont affichées dans l’interface. Tests réalisés dans Chrome avec détection iOS simulée et audit de syntaxe ES5 ; aucun iPad 2 physique n’a été testé.
 
 La loupe identifie les commandes de zoom en Edit. Show affiche les minutes et secondes, sans dixièmes ; le temps fixe sous le compte à rebours est supprimé. Le chargement du compagnon demande des fichiers frais pour limiter les manifestes obsolètes.
+
+Bulles compactes avec titre seul sous la timeline générale en Edit et Show. Priorité à la Cue active avec halo bleu, puis aux prochaines Cues dans l’ordre du temps ; les traits jaunes restent visibles. En Show, visuel de la prochaine Cue dans la moitié gauche et jusqu’à quatre Cues suivantes à droite. Bouton retour aligné sur Lecture/Pause.

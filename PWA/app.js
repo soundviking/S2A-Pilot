@@ -28,6 +28,7 @@ function uuid(){return crypto.randomUUID?crypto.randomUUID():String(Date.now()+M
 function newBaseCue(){return{id:uuid(),time:0,name:'Cue 1',description:'',imageDataUrl:null,imageName:null,isBase:false,mediaActions:[]};}
 function roundTenth(t){return Math.round((Number(t)||0)*10)/10;}
 function fmt(t){let x=Math.max(0,roundTenth(Number.isFinite(t)?t:0)),tt=Math.round(x*10),m=Math.floor(tt/600);tt-=m*600;return `${String(m).padStart(2,'0')}:${String(Math.floor(tt/10)).padStart(2,'0')}.${tt%10}`;}
+let timelineLabelSignature='',upcomingListSignature='';
 function fmtDisplay(t,countdown=false){if(!locked)return fmt(t);const seconds=(countdown?Math.ceil:Math.floor)(Math.max(0,Number(t)||0));return String(Math.floor(seconds/60)).padStart(2,'0')+':'+String(seconds%60).padStart(2,'0');}
 function parseTime(value){
  if(typeof value!=='string')return null;
@@ -305,10 +306,10 @@ function renderTimeline(){
    };
    marker.addEventListener('pointermove',preview);marker.addEventListener('pointerup',finish);marker.addEventListener('pointercancel',finish);marker.addEventListener('lostpointercapture',finish);
   });timeline.appendChild(marker);
- }scheduleTimelineMedia();
+ }timelineLabelSignature='';updateTimelineCueLabels();scheduleTimelineMedia();
 }
 
-function updateTransport(){const t=currentTransportTime(),d=projectDuration(),pct=d?Math.min(100,t/d*100):0;clock.textContent=fmtDisplay(t);durationEl.textContent=`/ ${fmtDisplay(d)}`;playhead.style.left=`${pct}%`;playhead.setAttribute('aria-valuemin','0');playhead.setAttribute('aria-valuemax',String(d));playhead.setAttribute('aria-valuenow',String(roundTenth(t)));playhead.setAttribute('aria-valuetext',fmtDisplay(t));progress.style.width=`${pct}%`;const state=transportPlaying?'pause':'play';if(playBtn.dataset.transportState!==state){playBtn.dataset.transportState=state;playBtnIcon.textContent=transportPlaying?'Ⅱ':'▶';playBtnLabel.textContent=transportPlaying?tr('Pause'):tr('Lecture');}updateShowPanels();}
+function updateTransport(){const t=currentTransportTime(),d=projectDuration(),pct=d?Math.min(100,t/d*100):0;clock.textContent=fmtDisplay(t);durationEl.textContent=`/ ${fmtDisplay(d)}`;playhead.style.left=`${pct}%`;playhead.setAttribute('aria-valuemin','0');playhead.setAttribute('aria-valuemax',String(d));playhead.setAttribute('aria-valuenow',String(roundTenth(t)));playhead.setAttribute('aria-valuetext',fmtDisplay(t));progress.style.width=`${pct}%`;const state=transportPlaying?'pause':'play';if(playBtn.dataset.transportState!==state){playBtn.dataset.transportState=state;playBtnIcon.textContent=transportPlaying?'Ⅱ':'▶';playBtnLabel.textContent=transportPlaying?tr('Pause'):tr('Lecture');}updateShowPanels();updateTimelineCueLabels();updateUpcomingCueList();}
 let lastDisplayUpdate=0;
 function animationLoop(){rafId=0;if(!transportPlaying)return;const t=currentTransportTime();for(const c of cues){if(c.time>lastTransportTime+.0001&&c.time<=t+.0001)onCueCrossed(c).catch(console.warn);}lastTransportTime=t;updateAudioGains(t);enforceMediaBounds(t);const vs=videoStateAt(t);if(runtimeVideo){if(!vs||vs.item.action.id!==runtimeVideo.item.action.id){stopVideoRuntime();}else{const expected=mediaPositionAt(runtimeVideo.item.action,t-runtimeVideo.item.start);if(Math.abs((runtimeVideo.el.currentTime||0)-expected)>.55)try{runtimeVideo.el.currentTime=expected;}catch{}runtimeVideo.opacity=vs.opacity??1;}}if(performance.now()-lastDisplayUpdate>=100){lastDisplayUpdate=performance.now();syncExternalVideo();if(runtimeVideo)runtimeVideo.el.style.opacity=String(runtimeVideo.opacity??1);updateTransport();}if(t>=projectDuration()){pauseTransport();return;}rafId=requestAnimationFrame(animationLoop);}
 
@@ -876,7 +877,7 @@ document.addEventListener('touchmove',e=>{if(e.touches.length>1)e.preventDefault
 document.addEventListener('wheel',e=>{if(e.ctrlKey)e.preventDefault();},{passive:false});
 
 // This manifest is requested from the network, outside the service-worker cache.
-const APP_VERSION='1.4.43';document.querySelector('.appVersion').textContent='Version '+APP_VERSION;let lastVersionCheck=0,versionCheckRunning=false;
+const APP_VERSION='1.4.44';document.querySelector('.appVersion').textContent='Version '+APP_VERSION;let lastVersionCheck=0,versionCheckRunning=false;
 const updateNotice=document.createElement('div');updateNotice.id='updateNotice';updateNotice.hidden=true;updateNotice.setAttribute('role','status');const updateText=document.createElement('span'),updateButton=document.createElement('button');updateButton.type='button';updateButton.textContent=tr('Ouvrir la nouvelle version');updateNotice.append(updateText,updateButton);document.querySelector('main').prepend(updateNotice);
 function updateVersionButton(){const b=document.getElementById('updateNotice')?.querySelector('button');if(!b)return;b.disabled=locked||transportPlaying;b.title=b.disabled?tr('Quitter le mode Show et mettre la lecture en pause pour actualiser.'):'';}
 function versionIsNewer(a,b){const x=a.split('.').map(Number),y=b.split('.').map(Number);for(let i=0;i<3;i++){if(x[i]!==y[i])return x[i]>y[i];}return false;}
@@ -897,3 +898,25 @@ $('generalZoomOut').onclick=()=>setGeneralTimelineZoom(generalTimelineZoom/2);
 generalTimelineViewport.addEventListener('scroll',()=>scheduleTimelineMedia());updateGeneralZoomControls();
 
 S2ALanguage.localize();$('languageSelect').onchange=()=>S2ALanguage.setLanguage($('languageSelect').value);window.addEventListener('s2a-language-change',()=>{pauseMediaPreviews();closePdfPreview();playBtn.dataset.transportState='';renderCues();S2ALanguage.localize();updateShowPanels();checkAppVersion(true);});
+
+function updateTimelineCueLabels(){
+ const host=$('timelineCueLabels');if(!host)return;
+ const t=currentTransportTime(),active=getActiveCue(t),ordered=orderedCues(),width=generalTimelineViewport.clientWidth,total=timeline.clientWidth,scroll=generalTimelineViewport.scrollLeft,d=projectDuration();
+ const key=JSON.stringify([active?.id,width,total,scroll,d,ordered.map(c=>[c.id,c.name,c.time])]);if(key===timelineLabelSignature)return;timelineLabelSignature=key;host.style.transform='translateX('+scroll+'px)';host.replaceChildren();if(width<1)return;
+ const priority=[...(active?[active]:[]),...ordered.filter(c=>c.time>t),...ordered.filter(c=>c.time<=t&&c!==active).reverse()],occupied=[];
+ for(const cue of priority){const anchor=cue.time/d*total-scroll;if(anchor<0||anchor>width)continue;
+ const bubble=document.createElement('div');bubble.className='timelineCueBubble'+(cue===active?' active':'');bubble.title=cue.name||'Cue';const text=document.createElement('span');text.className='cueBubbleText';text.textContent=cue.name||'Cue';bubble.append(text);host.append(bubble);
+ const w=Math.min(width,bubble.getBoundingClientRect().width),left=Math.max(0,Math.min(width-w,anchor-w/2));if(occupied.some(r=>left<r.end+6&&left+w>r.start-6)){bubble.remove();continue;}
+ bubble.style.left=left+'px';bubble.style.maxWidth=Math.min(160,width)+'px';bubble.style.setProperty('--pointer-left',Math.max(5,Math.min(w-5,anchor-left))+'px');occupied.push({start:left,end:left+w});
+ }
+}
+function updateUpcomingCueList(){
+ const next=getNextCue(),ordered=orderedCues(),following=next?ordered.slice(ordered.indexOf(next)+1):[],items=following.slice(0,4),lang=S2ALanguage.language;
+ const key=JSON.stringify([lang,locked,items.map(c=>[c.id,c.name,c.time])]);if(key===upcomingListSignature)return;upcomingListSignature=key;
+ $('upcomingCueHeading').textContent=lang==='en'?'AFTER THAT':'ENSUITE';const host=$('upcomingCueRows');host.replaceChildren();
+ if(!items.length){const empty=document.createElement('div');empty.className='small muted';empty.textContent=tr('Aucune autre Cue à venir');host.append(empty);}
+ for(const cue of items){const row=document.createElement('div');row.className='upcomingCueRow';const name=document.createElement('span'),time=document.createElement('time');name.textContent=cue.name||'Cue';time.textContent=fmtDisplay(cue.time);row.append(name,time);host.append(row);}
+}
+generalTimelineViewport.addEventListener('scroll',updateTimelineCueLabels);
+window.addEventListener('resize',()=>{timelineLabelSignature='';updateTimelineCueLabels();});
+updateTimelineCueLabels();updateUpcomingCueList();
