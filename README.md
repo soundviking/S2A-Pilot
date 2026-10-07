@@ -2,7 +2,7 @@
 
 🇫🇷 **Français** | 🇬🇧 [English](README.en.md)
 
-![S2A Pilot](assets/social-preview.jpg)
+![S2A Pilot](assets/social-preview.png)
 
 [PWA 1.4.64](downloads/S2A-Pilot-V1.4.64-PWA.zip) · [Copilote 1.2.10 — Intel / Apple Silicon](downloads/S2A-Copilote-1.2.10-macOS-Universel.zip)
 
