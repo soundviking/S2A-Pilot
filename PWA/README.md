@@ -194,3 +194,8 @@ Loupe seule supprimée à côté des commandes de zoom des timelines générale 
 ## Version 1.4.65
 
 En Show, un geste sur la liste des Cues fait défiler la page, sans défilement interne de la liste. La reprise Lecture/Pause conserve les médias prêts sans repositionnement inutile ; Lecture/Pause porte un halo blanc et Musique / Vidéo adopte le style standard. Dans les Cues audio/vidéo, seul le bouton Supprimer de la Cue reste présent, sous Dupliquer ; les indications techniques de préparation sont masquées. Le cadre de fin de conduite est plein. Aide illustrée enrichie en quatre étapes, avec musique de 1 min 40, visuels de scène et raccourci Espace, formats audio/vidéo et rappel de sauvegarde/export. Copilote 1.2.10 et le format des packages restent compatibles.
+
+
+## Version 1.4.66
+
+Les bulles des Cues déjà passées sur la timeline générale sont grisées. La Cue active conserve son halo bleu et les Cues à venir restent jaunes. Les couleurs suivent la position de lecture, y compris après un retour en arrière, en Edit et en Show.

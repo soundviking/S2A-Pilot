@@ -202,3 +202,8 @@ Removed the standalone magnifier beside zoom controls on main and media timeline
 ## Version 1.4.65
 
 In Show, gestures over the Cue list scroll the page while internal list scrolling stays disabled. Play/Pause resumes prepared media without unnecessary seeking; the transport button has a white glow and Music / Video uses the standard style. Audio/video Cues retain only the Cue Delete button below Duplicate; technical preparation labels are hidden. The end-of-show visual frame has a solid border. Quick help now has four steps with a 1 minute 40 second track, stage visuals the Space shortcut, audio/video formats and saving/export reminders. Copilote 1.2.10 and package compatibility are preserved.
+
+
+## Version 1.4.66
+
+Past Cue bubbles on the general timeline are grey. The active Cue keeps its blue glow and upcoming Cues remain yellow. Colors follow the transport position, including backward seeking, in Edit and Show.

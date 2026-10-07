@@ -1,0 +1,13 @@
+{
+  "version": "1.4.66",
+  "changes": [
+    "Past general-timeline Cue bubbles grey; active Cue blue; upcoming Cues yellow"
+  ],
+  "validated": [
+    "Modern and ES5 compatibility, Edit and Show, backward seeking, lightweight mode"
+  ],
+  "included": "All 1.4.65 fixes and enriched four-step help",
+  "limitations": [
+    "Physical iPad validation remains to be performed"
+  ]
+}

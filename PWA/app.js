@@ -880,7 +880,7 @@ document.addEventListener('touchmove',e=>{if(e.touches.length>1)e.preventDefault
 document.addEventListener('wheel',e=>{if(e.ctrlKey)e.preventDefault();},{passive:false});
 
 // This manifest is requested from the network, outside the service-worker cache.
-const APP_VERSION='1.4.65';document.querySelector('.appVersion').textContent='Version '+APP_VERSION;let lastVersionCheck=0,versionCheckRunning=false;
+const APP_VERSION='1.4.66';document.querySelector('.appVersion').textContent='Version '+APP_VERSION;let lastVersionCheck=0,versionCheckRunning=false;
 const updateNotice=document.createElement('div');updateNotice.id='updateNotice';updateNotice.hidden=true;updateNotice.setAttribute('role','status');const updateText=document.createElement('span'),updateButton=document.createElement('button');updateButton.type='button';updateButton.textContent=tr('Ouvrir la nouvelle version');updateNotice.append(updateText,updateButton);document.querySelector('main').prepend(updateNotice);
 function updateVersionButton(){const b=document.getElementById('updateNotice')?.querySelector('button');if(!b)return;b.disabled=locked||transportPlaying;b.title=b.disabled?tr('Quitter le mode Show et mettre la lecture en pause pour actualiser.'):'';}
 function versionIsNewer(a,b){const x=a.split('.').map(Number),y=b.split('.').map(Number);for(let i=0;i<3;i++){if(x[i]!==y[i])return x[i]>y[i];}return false;}
@@ -908,7 +908,7 @@ function updateTimelineCueLabels(){
  const key=JSON.stringify([active?.id,width,total,scroll,d,ordered.map(c=>[c.id,c.name,c.time])]);if(key===timelineLabelSignature)return;timelineLabelSignature=key;host.style.transform='translateX('+scroll+'px)';host.replaceChildren();if(width<1)return;
  const priority=[...(active?[active]:[]),...ordered.filter(c=>c.time>t),...ordered.filter(c=>c.time<=t&&c!==active).reverse()],occupied=[];
  for(const cue of priority){const anchor=cue.time/d*total-scroll;if(anchor<0||anchor>width)continue;
- const bubble=document.createElement('div');bubble.className='timelineCueBubble'+(cue===active?' active':'');bubble.title=cue.name||'Cue';const text=document.createElement('span');text.className='cueBubbleText';text.textContent=cue.name||'Cue';bubble.append(text);host.append(bubble);
+ const bubble=document.createElement('div');bubble.className='timelineCueBubble'+(cue===active?' active':cue.time<=t?' completed':'');bubble.title=cue.name||'Cue';const text=document.createElement('span');text.className='cueBubbleText';text.textContent=cue.name||'Cue';bubble.append(text);host.append(bubble);
  const w=Math.min(width,bubble.getBoundingClientRect().width),left=Math.max(0,Math.min(width-w,anchor-w/2));if(occupied.some(r=>left<r.end+6&&left+w>r.start-6)){bubble.remove();continue;}
  bubble.style.left=left+'px';bubble.style.maxWidth=Math.min(160,width)+'px';bubble.style.setProperty('--pointer-left',Math.max(5,Math.min(w-5,anchor-left))+'px');occupied.push({start:left,end:left+w});
  }
