@@ -212,3 +212,8 @@ Past Cue bubbles on the general timeline are grey. The active Cue keeps its blue
 ## Version 1.4.67
 
 Help step 4 keeps only the Space shortcut and the formats, saving and export notes; the repeated screenshot has been removed to save space. The first three steps retain their screenshots.
+
+
+## Version 1.4.68
+
+Help step 4 ends with the S2A Production team’s greeting, in French and English.

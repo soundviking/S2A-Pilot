@@ -204,3 +204,8 @@ Les bulles des Cues déjà passées sur la timeline générale sont grisées. La
 ## Version 1.4.67
 
 L’étape 4 de l’aide conserve uniquement le raccourci Espace et l’encart formats, sauvegarde et exports ; la capture répétée a été retirée pour gagner de la place. Les trois premières étapes gardent leurs visuels.
+
+
+## Version 1.4.68
+
+L’étape 4 de l’aide se termine par le message de l’équipe S2A Production, en français et en anglais.

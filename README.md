@@ -1,10 +1,10 @@
-# S2A Pilot 1.4.67 / S2A Copilote 1.2.10
+# S2A Pilot 1.4.68 / S2A Copilote 1.2.10
 
 🇫🇷 **Français** | 🇬🇧 [English](README.en.md)
 
 ![S2A Pilot](assets/social-preview.png)
 
-[PWA 1.4.67](downloads/S2A-Pilot-V1.4.67-PWA.zip) · [Copilote 1.2.10 — Intel / Apple Silicon](downloads/S2A-Copilote-1.2.10-macOS-Universel.zip)
+[PWA 1.4.68](downloads/S2A-Pilot-V1.4.68-PWA.zip) · [Copilote 1.2.10 — Intel / Apple Silicon](downloads/S2A-Copilote-1.2.10-macOS-Universel.zip)
 
 # S2A Pilot — Guide utilisateur
 
@@ -212,3 +212,8 @@ Les bulles des Cues déjà passées sur la timeline générale sont grisées. La
 ## Version 1.4.67
 
 L’étape 4 de l’aide conserve uniquement le raccourci Espace et l’encart formats, sauvegarde et exports ; la capture répétée a été retirée pour gagner de la place. Les trois premières étapes gardent leurs visuels.
+
+
+## Version 1.4.68
+
+L’étape 4 de l’aide se termine par le message de l’équipe S2A Production, en français et en anglais.

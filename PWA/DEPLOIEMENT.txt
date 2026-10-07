@@ -1,4 +1,4 @@
-DÉPLOIEMENT 1.4.67 — S2A PILOT
+DÉPLOIEMENT 1.4.68 — S2A PILOT
 
 1. Remplacer tout le contenu du dossier /qlab/ par cette version,
    y compris le fichier caché .htaccess. Ne pas remplacer uniquement index.html.
@@ -11,7 +11,7 @@ DÉPLOIEMENT 1.4.67 — S2A PILOT
 3. Dans Safari/PWA, ouvrir https://s2a-production.com/qlab/actualiser.html
    pour retirer les anciens caches de l’application. Les projets locaux
    IndexedDB sont conservés. Ne pas supprimer les données du site.
-4. Vérifier la version 1.4.67, Nouveau, + Cue, + Musique / Vidéo, Conduite PDF.
+4. Vérifier la version 1.4.68, Nouveau, + Cue, + Musique / Vidéo, Conduite PDF.
    Sans vidéo, la sortie vidéo doit rester masquée en Show.
 
 Diagnostic du 5 octobre 2026 : à l’URL habituelle, index.html et app.js
@@ -28,9 +28,9 @@ le fonctionnement sur l’iPad Safari réel doit être confirmé après déploie
 VERSION BILINGUE : inclure i18n.js, manifest.en.webmanifest et companion/S2A-Copilote-1.2.10-app.zip. FR / EN dans l’en-tête ; Copilote 1.2.10 incluse. Sortie vidéo désactivée sur iPad / iPhone ; sur Mac Safari, fenêtre à placer manuellement. Chrome conserve le placement automatique sur affichage étendu détecté.
 
 
-1.4.67 : copier aussi compatibility-loader.js et le dossier legacy/ complet. Ne pas oublier le fichier caché .htaccess. Les navigateurs anciens chargent compat/ ; legacy/index.html reste le secours allégé. Les caches Cloudflare doivent respecter les en-têtes du serveur et être purgés après déploiement ; un cache navigateur de 31 jours bloque les mises à jour.
+1.4.68 : copier aussi compatibility-loader.js et le dossier legacy/ complet. Ne pas oublier le fichier caché .htaccess. Les navigateurs anciens chargent compat/ ; legacy/index.html reste le secours allégé. Les caches Cloudflare doivent respecter les en-têtes du serveur et être purgés après déploiement ; un cache navigateur de 31 jours bloque les mises à jour.
 
 
-1.4.67 : copier aussi compatibility-loader.js et le dossier legacy/ complet. Ne pas oublier le fichier caché .htaccess. Les navigateurs anciens chargent compat/ ; legacy/index.html reste le secours allégé. Les caches Cloudflare doivent respecter les en-têtes du serveur et être purgés après déploiement ; un cache navigateur de 31 jours bloque les mises à jour.
+1.4.68 : copier aussi compatibility-loader.js et le dossier legacy/ complet. Ne pas oublier le fichier caché .htaccess. Les navigateurs anciens chargent compat/ ; legacy/index.html reste le secours allégé. Les caches Cloudflare doivent respecter les en-têtes du serveur et être purgés après déploiement ; un cache navigateur de 31 jours bloque les mises à jour.
 
-1.4.67 : déployer le dossier compat/ COMPLET, material-ui.js et material-ui.css. Les bibliothèques et SVG sont locaux. Sur iOS 9.3.5, vérifier physiquement lecture, fournisseur de documents et téléchargements. Aucun hors ligne par service worker sous iOS 9.
+1.4.68 : déployer le dossier compat/ COMPLET, material-ui.js et material-ui.css. Les bibliothèques et SVG sont locaux. Sur iOS 9.3.5, vérifier physiquement lecture, fournisseur de documents et téléchargements. Aucun hors ligne par service worker sous iOS 9.
