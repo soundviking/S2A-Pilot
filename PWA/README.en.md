@@ -96,13 +96,24 @@ The white playhead matches the media timeline design. Mouse/touch dragging updat
 
 In Show, TIMELINE is above the active and next Cue panels. Numbered yellow markers are informational and cannot move Cues. In Edit, only the selected marker displays its number, without a blue glow. Regions before IN and after OUT are darkened; the retained selection keeps its transparent blue. ⏮ replaces Back to start text, retaining an accessible label and the same behavior.
 
-The older-browser mode lives at `legacy/index.html`. It is selected automatically on iOS 9–12 or when the full app’s syntax/core APIs are unavailable. iOS 13+ uses the full app when these capabilities exist; this is not a guarantee for every Safari version.
+## Version 1.4.45 — icons and older browsers
 
-It supports one music track, Cues/descriptions/images, Edit/Show, mouse/touch navigation, duplication, separate IndexedDB autosave and a printable cue sheet. It opens uncompressed project ZIPs exported by S2A Pilot. If multiple audio tracks exist, only the first is played and a message explains this. Video is not played. Imported audio IN/OUT points are respected, but trim editing, loops, fades, mixing, waveforms and video output are unavailable.
+UI icons use official Material Symbols Outlined SVGs embedded locally: no Google font, CDN or remote request. S2A Pilot and S2A Production logos are unchanged. Button labels and behavior remain the same.
 
-Compatibility exports use `.s2apilot.json`, including audio and visuals, and can be opened in either mode. They contain neither Copilote nor a generated PDF; the full app can subsequently export a standard package. Older Safari may open the export in a separate window rather than downloading directly. The two modes have separate local data stores; transfer projects through exports.
+In Show, “After that” keeps the first Cue clear; subsequent rows gradually fade through a CSS opacity mask and a darker background. No blur, added animation or continuous JavaScript processing. Order, content and the existing four-row display limit are unchanged.
 
-iOS 9–10 requires access to the site; modern offline support is not promised. From iOS 11.3, a service worker can cache app files, subject to real-device validation. Older Safari may deny automatic audio playback after seeking; starting music at zero via Play is the first scenario to verify. Limitations are shown in the UI. Tests use Chrome with simulated iOS detection and an ES5 syntax audit; no physical iPad 2 has been tested.
+### iOS 9.3.5 compatibility
+
+Older browsers now try an ES5 build of the current application engine with local adapters. This restores editing commands, multiple media in a show, IN/OUT, loop and fade settings, waveforms and zoom, independent previews, touch navigation, undo/redo, the built-in PDF preview and package generation with Copilote. This branch stores media as buffers instead of Blob records. Audio fades use Web Audio when the browser allows a media source connection.
+
+Audio import no longer forces the photo/video picker. iOS 9 needs an installed compatible document provider, such as iCloud Drive, and an accessible file. The app cannot install that provider. Try WAV and MP3 first.
+
+When no full-app draft exists, the previous lightweight draft is recovered automatically, preserving its original. An existing full-app draft, including an empty one, takes priority. The one-track lightweight mode remains available through the compatibility link and `legacy/index.html`.
+
+**Physical-iPad checks still required:** Safari 9 imposes playback, codec, memory and download restrictions. Video may require the native fullscreen player; audio transitions, loops, fades and downloads must be tested on the device. ZIP generation is available, but saving may depend on the share menu or an installed application. iOS 9 has no service worker: full offline support and extended video output are unavailable there. Adding a Home Screen shortcut does not remove these limits.
+
+Tests cover icons and Play/Pause states, French/English, short/medium/long lists, desktop/tablet/phone layouts, modern-browser offline use, PDF and Copilote packages. Older-browser checks simulate missing APIs, callback Web Audio decoding, storage rejecting Blob records, touch events and draft migration; they are not physical Safari 9/iPad tests.
+
 
 A magnifying glass identifies zoom controls in Edit. Show displays minutes and seconds without tenths; the fixed cue time beneath the countdown is removed. Companion downloads request fresh files to reduce stale manifests.
 

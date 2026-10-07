@@ -1,0 +1,28 @@
+{
+  "family": "Material Symbols Outlined",
+  "opticalSize": 24,
+  "weight": 400,
+  "fill": 0,
+  "source": "https://github.com/google/material-design-icons",
+  "icons": {
+    "add_circle": "https://raw.githubusercontent.com/google/material-design-icons/master/symbols/web/add_circle/materialsymbolsoutlined/add_circle_24px.svg",
+    "add_photo_alternate": "https://raw.githubusercontent.com/google/material-design-icons/master/symbols/web/add_photo_alternate/materialsymbolsoutlined/add_photo_alternate_24px.svg",
+    "content_copy": "https://raw.githubusercontent.com/google/material-design-icons/master/symbols/web/content_copy/materialsymbolsoutlined/content_copy_24px.svg",
+    "delete": "https://raw.githubusercontent.com/google/material-design-icons/master/symbols/web/delete/materialsymbolsoutlined/delete_24px.svg",
+    "folder_open": "https://raw.githubusercontent.com/google/material-design-icons/master/symbols/web/folder_open/materialsymbolsoutlined/folder_open_24px.svg",
+    "hide_image": "https://raw.githubusercontent.com/google/material-design-icons/master/symbols/web/hide_image/materialsymbolsoutlined/hide_image_24px.svg",
+    "music_note_add": "https://raw.githubusercontent.com/google/material-design-icons/master/symbols/web/music_note_add/materialsymbolsoutlined/music_note_add_24px.svg",
+    "note_add": "https://raw.githubusercontent.com/google/material-design-icons/master/symbols/web/note_add/materialsymbolsoutlined/note_add_24px.svg",
+    "pause": "https://raw.githubusercontent.com/google/material-design-icons/master/symbols/web/pause/materialsymbolsoutlined/pause_24px.svg",
+    "picture_as_pdf": "https://raw.githubusercontent.com/google/material-design-icons/master/symbols/web/picture_as_pdf/materialsymbolsoutlined/picture_as_pdf_24px.svg",
+    "play_arrow": "https://raw.githubusercontent.com/google/material-design-icons/master/symbols/web/play_arrow/materialsymbolsoutlined/play_arrow_24px.svg",
+    "redo": "https://raw.githubusercontent.com/google/material-design-icons/master/symbols/web/redo/materialsymbolsoutlined/redo_24px.svg",
+    "save_as": "https://raw.githubusercontent.com/google/material-design-icons/master/symbols/web/save_as/materialsymbolsoutlined/save_as_24px.svg",
+    "screen_share": "https://raw.githubusercontent.com/google/material-design-icons/master/symbols/web/screen_share/materialsymbolsoutlined/screen_share_24px.svg",
+    "search": "https://raw.githubusercontent.com/google/material-design-icons/master/symbols/web/search/materialsymbolsoutlined/search_24px.svg",
+    "skip_previous": "https://raw.githubusercontent.com/google/material-design-icons/master/symbols/web/skip_previous/materialsymbolsoutlined/skip_previous_24px.svg",
+    "undo": "https://raw.githubusercontent.com/google/material-design-icons/master/symbols/web/undo/materialsymbolsoutlined/undo_24px.svg",
+    "zoom_in": "https://raw.githubusercontent.com/google/material-design-icons/master/symbols/web/zoom_in/materialsymbolsoutlined/zoom_in_24px.svg",
+    "zoom_out": "https://raw.githubusercontent.com/google/material-design-icons/master/symbols/web/zoom_out/materialsymbolsoutlined/zoom_out_24px.svg"
+  }
+}

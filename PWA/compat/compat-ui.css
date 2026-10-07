@@ -1,12 +1,4 @@
-<!DOCTYPE html>
 
-<html lang="fr">
-<head>
-<meta charset="utf-8"/>
-<meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" name="viewport"/>
-<title>S2A Pilot</title>
-<link href="./icons/s2a-pilot-192.png?v=1.4.45" rel="icon" type="image/png"/>
-<style>
 :root{
   font-family: system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   color-scheme: dark;
@@ -15,13 +7,13 @@
   --cue:#ffd166;
 }
 *{box-sizing:border-box}
-html{background:var(--bg)}
-body{margin:0;background:var(--bg);color:var(--text);padding:env(safe-area-inset-top,0px) env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px)}
+html{background:#111318}
+body{margin:0;background:#111318;color:#f4f6f8;padding:env(safe-area-inset-top,0px) env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px)}
 main{max-width:980px;margin:auto;padding:20px}
 h1{font-size:1.5rem;margin:0 0 4px}
 .brandHeader{display:flex;align-items:center;gap:14px;margin:0 0 18px;flex-wrap:wrap}
 .brandLogo{width:58px;height:58px;border-radius:14px;object-fit:cover;flex:0 0 auto}
-.s2aLogoWrap{display:flex;align-items:center;padding-left:12px;border-left:1px solid var(--line);min-height:50px}
+.s2aLogoWrap{display:flex;align-items:center;padding-left:12px;border-left:1px solid #3b4352;min-height:50px}
 .s2aLogo{display:block;max-width:150px;max-height:48px;width:auto;height:auto;object-fit:contain;filter:drop-shadow(0 1px 2px rgba(0,0,0,.45))}
 .brandText{min-width:220px;flex:1}
 .brandText h1{margin:0 0 3px}
@@ -33,24 +25,24 @@ h1{font-size:1.5rem;margin:0 0 4px}
   .s2aLogo{max-width:125px;max-height:42px}
 }
 h2{font-size:1rem;margin:0}
-.sub{color:var(--muted);margin:0 0 20px}
+.sub{color:#9da7b5;margin:0 0 20px}
 .showTitleWrap{display:grid;gap:8px;margin:0 0 16px}
 .projectActions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;align-items:center}
 .projectActions .pdfTechBtn{margin-left:auto}
-.autosaveState{font-size:.82rem;color:var(--muted);margin-top:8px}
-.showTitleLabel{font-size:.82rem;color:var(--muted);font-weight:650;letter-spacing:.04em}
+.autosaveState{font-size:.82rem;color:#9da7b5;margin-top:8px}
+.showTitleLabel{font-size:.82rem;color:#9da7b5;font-weight:650;letter-spacing:.04em}
 .showTitleInput{font-size:1.15rem;font-weight:700;padding:11px 12px !important;width:100%;min-width:0 !important}
-.card{background:var(--panel);border:1px solid #2a303b;border-radius:16px;padding:16px;margin:14px 0}
+.card{background:#1b1f27;border:1px solid #2a303b;border-radius:16px;padding:16px;margin:14px 0}
 .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 button,.fileLabel,input,textarea{
-  font:inherit;border-radius:10px;border:1px solid var(--line)
+  font:inherit;border-radius:10px;border:1px solid #3b4352
 }
-button,.fileLabel{background:var(--panel2);color:var(--text);padding:10px 14px;cursor:pointer}
+button,.fileLabel{background:#232936;color:#f4f6f8;padding:10px 14px;cursor:pointer}
 button.primary{background:#246fd1;border-color:#2b7de7}
 button.danger{color:#ffd7d7}
 button:disabled{opacity:.45;cursor:not-allowed}
 input[type=file]{display:none}
-input[type=text],textarea{background:#12161d;color:var(--text);padding:9px 10px;min-width:180px}
+input[type=text],textarea{background:#12161d;color:#f4f6f8;padding:9px 10px;min-width:180px}
 textarea{resize:vertical}
 .cueTextFields{display:grid;gap:7px;min-width:0}
 .cueTextFields input,.cueTextFields textarea{width:100%;min-width:0}
@@ -65,23 +57,23 @@ textarea{resize:vertical}
   text-align:center;
 }
 .time{font-variant-numeric:tabular-nums;font-size:1.5rem;font-weight:700}
-.muted{color:var(--muted)}
+.muted{color:#9da7b5}
 .timeline{
-  position:relative;height:86px;background:#0d1015;border:1px solid var(--line);
+  position:relative;height:86px;background:#0d1015;border:1px solid #3b4352;
   border-radius:12px;margin:16px 0;overflow:hidden;touch-action:none;cursor:pointer
 }
 .progress{position:absolute;inset:0 auto 0 0;width:0;background:rgba(102,168,255,.15);pointer-events:none}
-.playhead{position:absolute;top:0;bottom:0;width:2px;background:var(--accent);left:0;pointer-events:none}
+.playhead{position:absolute;top:0;bottom:0;width:2px;background:#66a8ff;left:0;pointer-events:none}
 .marker{
   position:absolute;top:0;bottom:0;width:12px;margin-left:-6px;
   cursor:ew-resize;touch-action:none;z-index:3
 }
 .marker::after{
-  content:"";position:absolute;top:0;bottom:0;left:5px;width:3px;background:var(--cue)
+  content:"";position:absolute;top:0;bottom:0;left:5px;width:3px;background:#ffd166
 }
 .marker::before{
   content:"";position:absolute;top:6px;left:0;width:12px;height:12px;border-radius:50%;
-  background:var(--cue);box-shadow:0 0 0 2px rgba(0,0,0,.35)
+  background:#ffd166;box-shadow:0 0 0 2px rgba(0,0,0,.35)
 }
 .marker.dragging::after,.marker.dragging::before{background:#fff0a8}
 .marker.dragging{z-index:5}
@@ -90,8 +82,8 @@ textarea{resize:vertical}
 @media(max-width:760px){.cueEditGrid .cueEditActions{grid-column:2}}
 @media(max-width:480px){.cueEditGrid .cueEditActions{grid-column:1;flex-direction:row;flex-wrap:wrap}}
 
-.marker.selectedCueMarker::after{background:var(--accent);width:5px;left:4px;box-shadow:0 0 10px rgba(102,168,255,.95)}
-.marker.selectedCueMarker::before{background:#fff;box-shadow:0 0 0 3px var(--accent),0 0 14px rgba(102,168,255,.95)}
+.marker.selectedCueMarker::after{background:#66a8ff;width:5px;left:4px;box-shadow:0 0 10px rgba(102,168,255,.95)}
+.marker.selectedCueMarker::before{background:#fff;box-shadow:0 0 0 3px #66a8ff,0 0 14px rgba(102,168,255,.95)}
 .tick{position:absolute;bottom:4px;transform:translateX(-50%);font-size:.72rem;color:#8490a1;pointer-events:none}
 .cues{display:grid;gap:10px;margin-top:12px}
 .cue{
@@ -124,16 +116,16 @@ body.locked .timeline{cursor:default}
   background:#151922;border:1px solid #2b3240;border-radius:14px;padding:16px;
   display:flex;flex-direction:column;justify-content:center;min-height:180px
 }
-.nextLabel{font-size:.78rem;letter-spacing:.08em;color:var(--muted);margin-bottom:8px}
+.nextLabel{font-size:.78rem;letter-spacing:.08em;color:#9da7b5;margin-bottom:8px}
 .nextName{font-size:1.6rem;font-weight:750;line-height:1.15;margin-bottom:10px}
 .nextCountdown{font-size:2rem;font-variant-numeric:tabular-nums;font-weight:800}
-.nextAt{margin-top:6px;color:var(--muted);font-variant-numeric:tabular-nums}
+.nextAt{margin-top:6px;color:#9da7b5;font-variant-numeric:tabular-nums}
 .nextImageWrap{
   background:#0d1015;border:1px solid #2b3240;border-radius:14px;
   display:flex;align-items:center;justify-content:center;overflow:hidden;aspect-ratio:16/9;min-height:0
 }
 .nextImage{width:100%;height:100%;min-height:0;aspect-ratio:16/9;object-fit:contain;background:#0d1015}
-.noImage{color:var(--muted);padding:20px;text-align:center}
+.noImage{color:#9da7b5;padding:20px;text-align:center}
 @media(max-width:760px){
   main{padding:14px}
   .cue{grid-template-columns:112px 1fr}
@@ -237,7 +229,7 @@ body.locked .showVideoMonitorCard{order:5}
 /* V1.1.5 — interface compacte */
 .appTopBar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 8px;padding:0 2px;flex-wrap:wrap}
 .appIdentity{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap}
-.appIdentity strong{font-size:1.08rem}.appVersion{font-size:.78rem;color:var(--muted)}
+.appIdentity strong{font-size:1.08rem}.appVersion{font-size:.78rem;color:#9da7b5}
 .modeButton{margin-left:auto;min-width:112px;font-weight:700}.modeButton.showMode{border-color:#d5a928}
 .projectCard{padding:10px 12px;margin:8px 0}.projectCard .showTitleWrap{gap:4px;margin:0 0 7px}.projectCard .showTitleLabel{font-size:.76rem}.projectCard .showTitleInput{padding:8px 10px}.projectCard .projectActions{margin-top:7px;gap:7px}.projectCard .autosaveState{margin-top:5px;font-size:.75rem}
 .brandFooter{display:flex;justify-content:center;align-items:center;margin:18px 0 2px;padding:10px 0 2px;opacity:.65}.footerLogo{width:80px;height:40px;object-fit:contain;border-radius:4px}
@@ -437,7 +429,7 @@ body.locked .timelineCard > .hint{display:none !important}
 .appAttribution{
   font-weight:400;
   font-size:.88rem;
-  color:var(--muted);
+  color:#9da7b5;
 }
 .modeButton{
   height:40px;
@@ -472,7 +464,7 @@ body.locked .nextTopCard .nextImageWrap{width:90%;max-width:252px;justify-self:e
 body.locked .nextTopCard .nextImage{width:100%;height:100%;max-width:100%;max-height:100%;object-fit:contain;display:block}
 @media(max-width:760px){body.locked .nextTopCard .nextWrap{grid-template-columns:1fr;overflow:hidden}body.locked .nextTopCard .nextImageWrap{width:min(90%,252px);justify-self:center}}
 .activeCueVisualWrap{position:relative;width:min(496px,100%);margin:12px auto 0;aspect-ratio:16/9;overflow:hidden;border-radius:12px;background:#090b0f}
-#activeCueNoImage{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:20px;box-sizing:border-box;text-align:center;color:var(--muted);pointer-events:none}
+#activeCueNoImage{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:20px;box-sizing:border-box;text-align:center;color:#9da7b5;pointer-events:none}
 #activeCueNoImage[hidden]{display:none!important}
 .timeline .tick:first-of-type{transform:none}.timeline .tick:last-of-type{transform:translateX(-100%)}
 #playBtn>*{pointer-events:none}
@@ -505,20 +497,20 @@ body.locked .nextTopCard .nextImageWrap.noUpcomingCue #noNextImage{width:100%;bo
 .cue{grid-template-columns:112px minmax(210px,1fr) 110px auto;align-items:start}
 .cueMediaPanel{grid-column:1 / -1;border-top:1px solid #2b3240;padding-top:10px;margin-top:2px;display:grid;gap:8px}
 .cueMediaHeader{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
-.cueMediaTitle{font-size:.78rem;letter-spacing:.07em;color:var(--muted);font-weight:750}
+.cueMediaTitle{font-size:.78rem;letter-spacing:.07em;color:#9da7b5;font-weight:750}
 .addMediaBtn{padding:7px 10px;font-size:.82rem}
 .mediaActionList{display:grid;gap:7px}
 .mediaAction{display:grid;grid-template-columns:minmax(180px,1fr) auto auto auto;gap:8px;align-items:center;background:#10141b;border:1px solid #303847;border-radius:10px;padding:8px 9px}
 .mediaActionIdentity{min-width:0;display:flex;align-items:center;gap:8px}
 .mediaKindBadge{font-size:.72rem;font-weight:800;letter-spacing:.04em;border:1px solid #465166;border-radius:999px;padding:4px 7px;white-space:nowrap}
 .mediaActionName{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:.88rem}
-.mediaActionMeta{font-size:.74rem;color:var(--muted);margin-top:2px}
-.mediaAction select,.mediaAction input[type=number]{background:#12161d;color:var(--text);border:1px solid var(--line);border-radius:8px;padding:7px 8px;font:inherit;font-size:.8rem}
+.mediaActionMeta{font-size:.74rem;color:#9da7b5;margin-top:2px}
+.mediaAction select,.mediaAction input[type=number]{background:#12161d;color:#f4f6f8;border:1px solid #3b4352;border-radius:8px;padding:7px 8px;font:inherit;font-size:.8rem}
 .mediaAction input[type=number]{width:70px;min-width:70px}
 .mediaActionOptions{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
 .mediaActionToggle{display:flex;gap:6px;align-items:center;font-size:.8rem;color:#dbe2ec;white-space:nowrap}
 .removeMediaBtn{padding:7px 9px;font-size:.8rem}
-.cueMediaEmpty{font-size:.8rem;color:var(--muted);padding:4px 0}
+.cueMediaEmpty{font-size:.8rem;color:#9da7b5;padding:4px 0}
 .mediaCard{display:none!important}
 .mediaCard.hasVideo{display:block!important}
 body.locked .mediaCard{display:none!important}
@@ -526,23 +518,23 @@ body.locked .mediaCard{display:none!important}
 body.locked .showVideoMonitorCard.hasVideo{display:block!important}
 .videoMonitorFrame,.showVideoMonitorFrame{background:#000;overflow:hidden}
 .videoMonitorFrame video,.showVideoMonitorFrame video{width:100%!important;height:100%!important;object-fit:contain!important;background:#000}
-.startupPrompt{border:0;padding:0;background:transparent;color:var(--text);max-width:min(520px,calc(100vw - 28px));width:100%}
+.startupPrompt{border:0;padding:0;background:transparent;color:#f4f6f8;max-width:min(520px,calc(100vw - 28px));width:100%}
 .startupPrompt::backdrop{background:rgba(3,6,10,.78);backdrop-filter:blur(7px)}
 .startupPromptBox{background:#171c25;border:1px solid #384151;border-radius:18px;padding:24px;box-shadow:0 24px 80px rgba(0,0,0,.55)}
 .startupPromptBox h3{font-size:1.45rem;margin:4px 0 8px}
-.startupPromptBox p{color:var(--muted);line-height:1.45;margin:0 0 20px}
+.startupPromptBox p{color:#9da7b5;line-height:1.45;margin:0 0 20px}
 .startupEyebrow{font-size:.75rem;letter-spacing:.13em;color:#8fbfff;font-weight:800}
 .startupPromptActions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .startupPromptActions button{min-height:48px}
-.transportMediaStatus{font-size:.78rem;color:var(--muted)}
+.transportMediaStatus{font-size:.78rem;color:#9da7b5}
 @media(max-width:760px){.cue{grid-template-columns:100px 1fr}.cueMediaPanel{grid-column:1 / -1}.mediaAction{grid-template-columns:1fr}.mediaActionOptions{justify-content:flex-start}.startupPromptActions{grid-template-columns:1fr}}
 
 
 
 /* V1.3.2 — correctifs transport, urgence décompte et visuels Show */
 .showDurationControl{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:12px 0 10px;padding:9px 10px;border:1px solid #303847;border-radius:10px;background:#11161e}
-.showDurationControl label{font-size:.78rem;font-weight:700;color:#dfe6ef}.showDurationControl input{width:92px;background:#0e1218;color:var(--text);border:1px solid var(--line);border-radius:8px;padding:7px 9px;font:700 .85rem ui-monospace,SFMono-Regular,Menlo,monospace}.showDurationControl button{padding:7px 10px;font-size:.78rem}
-.mediaAction{grid-template-columns:minmax(180px,1fr) auto auto auto}.mediaEditor{grid-column:1/-1;border-top:1px solid #252d39;padding-top:9px;margin-top:2px}.mediaEditorTop{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px}.mediaEditorField{display:flex;align-items:center;gap:5px;font-size:.76rem;color:var(--muted)}.mediaEditorField input[type=text]{width:82px;background:#0d1117;color:var(--text);border:1px solid #394354;border-radius:7px;padding:6px 7px;font:700 .76rem ui-monospace,SFMono-Regular,Menlo,monospace}.loopToggle{display:flex;align-items:center;gap:6px;font-size:.78rem;font-weight:700;color:#dfe6ef}.mediaVisual{position:relative;height:70px;border:1px solid #313b4b;border-radius:9px;overflow:hidden;background:#080b10;user-select:none;touch-action:none}.waveCanvas{width:100%;height:100%;display:block}.mediaSelection{position:absolute;top:0;bottom:0;background:rgba(38,132,255,.15);border-left:2px solid #4ca2ff;border-right:2px solid #4ca2ff;pointer-events:none}.trimHandle{position:absolute;top:0;bottom:0;width:18px;transform:translateX(-9px);cursor:ew-resize;z-index:4;touch-action:none}.trimHandle:before{content:"";position:absolute;left:7px;top:0;bottom:0;width:4px;border-radius:4px;background:#ffd15a;box-shadow:0 0 0 1px rgba(0,0,0,.35)}.trimHandle:after{content:"";position:absolute;left:2px;top:5px;width:14px;height:14px;border-radius:50%;background:#ffd15a;box-shadow:0 1px 4px #000}.mediaVisualLabels{display:flex;justify-content:space-between;margin-top:4px;font:600 .68rem ui-monospace,SFMono-Regular,Menlo,monospace;color:#7f8999}.stopAllAction{border-color:#7b343c;background:#1b1114}.stopAllAction .mediaKindBadge{background:#4d171d;color:#ffadb4}.addActionButtons{display:flex;gap:7px;align-items:center;flex-wrap:wrap}.stopAllBtn{border-color:#70313a;color:#ffb1b8}.cueMediaChip.stop{border-color:#74343c;color:#ff9ca5;background:#2a1418}
+.showDurationControl label{font-size:.78rem;font-weight:700;color:#dfe6ef}.showDurationControl input{width:92px;background:#0e1218;color:#f4f6f8;border:1px solid #3b4352;border-radius:8px;padding:7px 9px;font:700 .85rem ui-monospace,SFMono-Regular,Menlo,monospace}.showDurationControl button{padding:7px 10px;font-size:.78rem}
+.mediaAction{grid-template-columns:minmax(180px,1fr) auto auto auto}.mediaEditor{grid-column:1/-1;border-top:1px solid #252d39;padding-top:9px;margin-top:2px}.mediaEditorTop{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px}.mediaEditorField{display:flex;align-items:center;gap:5px;font-size:.76rem;color:#9da7b5}.mediaEditorField input[type=text]{width:82px;background:#0d1117;color:#f4f6f8;border:1px solid #394354;border-radius:7px;padding:6px 7px;font:700 .76rem ui-monospace,SFMono-Regular,Menlo,monospace}.loopToggle{display:flex;align-items:center;gap:6px;font-size:.78rem;font-weight:700;color:#dfe6ef}.mediaVisual{position:relative;height:70px;border:1px solid #313b4b;border-radius:9px;overflow:hidden;background:#080b10;user-select:none;touch-action:none}.waveCanvas{width:100%;height:100%;display:block}.mediaSelection{position:absolute;top:0;bottom:0;background:rgba(38,132,255,.15);border-left:2px solid #4ca2ff;border-right:2px solid #4ca2ff;pointer-events:none}.trimHandle{position:absolute;top:0;bottom:0;width:18px;transform:translateX(-9px);cursor:ew-resize;z-index:4;touch-action:none}.trimHandle:before{content:"";position:absolute;left:7px;top:0;bottom:0;width:4px;border-radius:4px;background:#ffd15a;box-shadow:0 0 0 1px rgba(0,0,0,.35)}.trimHandle:after{content:"";position:absolute;left:2px;top:5px;width:14px;height:14px;border-radius:50%;background:#ffd15a;box-shadow:0 1px 4px #000}.mediaVisualLabels{display:flex;justify-content:space-between;margin-top:4px;font:600 .68rem ui-monospace,SFMono-Regular,Menlo,monospace;color:#7f8999}.stopAllAction{border-color:#7b343c;background:#1b1114}.stopAllAction .mediaKindBadge{background:#4d171d;color:#ffadb4}.addActionButtons{display:flex;gap:7px;align-items:center;flex-wrap:wrap}.stopAllBtn{border-color:#70313a;color:#ffb1b8}.cueMediaChip.stop{border-color:#74343c;color:#ff9ca5;background:#2a1418}
 @media(max-width:760px){.showDurationControl{align-items:flex-start}.mediaEditorTop{align-items:flex-start}.mediaAction{grid-template-columns:1fr}.mediaEditor{grid-column:1}}
 
 /* V1.2.2 — sortie vidéo plein écran et suppression du moniteur interne */
@@ -550,14 +542,14 @@ body.locked .showVideoMonitorCard.hasVideo{display:block!important}
 .preflightHeader{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap}
 .preflightTitle{display:grid;gap:4px}.preflightTitle h2{font-size:.92rem;letter-spacing:.05em}
 .preflightActions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.preflightStatus{display:flex;align-items:center;gap:8px;font-size:.84rem;color:var(--muted)}
+.preflightStatus{display:flex;align-items:center;gap:8px;font-size:.84rem;color:#9da7b5}
 .preflightDot{width:9px;height:9px;border-radius:50%;background:#77808d;box-shadow:0 0 0 3px rgba(119,128,141,.12)}
 .preflightStatus.preparing .preflightDot{background:#e0ad38;box-shadow:0 0 0 3px rgba(224,173,56,.14)}
 .preflightStatus.ready .preflightDot{background:#32b36b;box-shadow:0 0 0 3px rgba(50,179,107,.14)}
 .preflightStatus.error .preflightDot{background:#e14b56;box-shadow:0 0 0 3px rgba(225,75,86,.14)}
 .outputPrep{display:flex;align-items:center;gap:10px;padding-top:10px;border-top:1px solid #2b3240;flex-wrap:wrap}
 .outputPrep .videoOutputBigButton{width:74px;height:50px;border-radius:10px!important}.outputPrep .videoOutputIcon{width:46px;height:32px}
-.outputPrepText{display:grid;gap:2px}.outputPrepText strong{font-size:.86rem}.outputPrepText span{font-size:.78rem;color:var(--muted)}
+.outputPrepText{display:grid;gap:2px}.outputPrepText strong{font-size:.86rem}.outputPrepText span{font-size:.78rem;color:#9da7b5}
 #preloadBin{position:fixed;left:-10000px;top:-10000px;width:2px;height:2px;overflow:hidden;opacity:.001;pointer-events:none}
 
 .cuesToolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%}
@@ -584,12 +576,12 @@ body:not(.locked) .cueAccordion.expanded input:focus,body:not(.locked) .cueAccor
 .cueSummary{display:grid;grid-template-columns:72px 86px minmax(0,1fr) auto 28px;gap:10px;align-items:center;padding:10px 12px;cursor:pointer;user-select:none;min-height:54px}
 .cueSummary:hover{background:#1b202a}.cueAccordion.expanded .cueSummary{background:#1d232e;border-bottom:1px solid #303847}
 .cueNumber{font-size:.72rem;font-weight:850;letter-spacing:.06em;color:#9da7b5}.cueSummaryTime{font-variant-numeric:tabular-nums;font-weight:800;color:#f4f6f8;font-size:.88rem}
-.cueSummaryMain{min-width:0}.cueSummaryName{font-weight:750;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.cueSummaryDescription{font-size:.76rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}
+.cueSummaryMain{min-width:0}.cueSummaryName{font-weight:750;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.cueSummaryDescription{font-size:.76rem;color:#9da7b5;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}
 .cueSummaryMedia{display:flex;align-items:center;justify-content:flex-end;gap:5px;flex-wrap:wrap}.cueMediaChip{font-size:.68rem;font-weight:750;padding:4px 6px;border:1px solid #3c4657;border-radius:999px;color:#cbd3de;white-space:nowrap}.cueMediaChip.ready{border-color:#2e6d4b;color:#8de0b1}.cueMediaChip.error{border-color:#77343b;color:#ff9ca4}
 .cueChevron{width:24px;height:24px;display:flex;align-items:center;justify-content:center;color:#9da7b5;transition:transform .16s}.cueAccordion.expanded .cueChevron{transform:rotate(180deg)}
 .cueDetails{display:none;padding:12px}.cueAccordion.expanded .cueDetails{display:block}.cueEditGrid{display:grid;grid-template-columns:112px minmax(210px,1fr) 110px auto;gap:10px;align-items:start}.cueDetails .cueMediaPanel{grid-column:1/-1;margin-top:10px}
 .cuePrepBadge{font-size:.68rem;padding:3px 6px;border-radius:999px;border:1px solid #465166;color:#aeb8c6}.cuePrepBadge.ready{border-color:#2e6d4b;color:#8de0b1}.cuePrepBadge.error{border-color:#77343b;color:#ff9ca4}
-.mediaAction.prepared{border-color:#2e5f46}.mediaAction.prepareError{border-color:#77343b}.mediaActionPrep{font-size:.7rem;color:var(--muted);white-space:nowrap}.mediaActionPrep.ready{color:#7fd9a5}.mediaActionPrep.error{color:#ff929b}
+.mediaAction.prepared{border-color:#2e5f46}.mediaAction.prepareError{border-color:#77343b}.mediaActionPrep{font-size:.7rem;color:#9da7b5;white-space:nowrap}.mediaActionPrep.ready{color:#7fd9a5}.mediaActionPrep.error{color:#ff929b}
 @media(max-width:760px){.cueSummary{grid-template-columns:58px 78px minmax(0,1fr) 28px}.cueSummaryMedia{grid-column:2/4;justify-content:flex-start}.cueEditGrid{grid-template-columns:100px 1fr}.cueEditGrid .imageControls,.cueEditGrid>.danger{grid-column:2}.preflightActions{width:100%}}
 
 
@@ -768,8 +760,8 @@ body.locked.nextCueUrgent .nextTopCard::before{animation:nextCueGlow 1s ease-in-
 .playhead::before{content:"";position:absolute;left:6px;top:0;bottom:0;width:2px;background:#fff;box-shadow:0 0 3px #000}
 .playhead::after{content:"";position:absolute;left:2px;top:2px;width:10px;height:10px;background:#fff;border-radius:2px;transform:rotate(45deg)}
 .playhead:focus-visible{outline:2px solid #70a9e8;outline-offset:-2px}
-.marker.selectedCueMarker::after{background:var(--cue);width:3px;left:5px;box-shadow:none}
-.marker.selectedCueMarker::before,body.locked .marker::before{content:attr(data-number);width:21px;height:21px;left:-4px;top:3px;color:#302407;text-align:center;font:700 11px/21px system-ui;background:var(--cue);box-shadow:0 0 0 2px rgba(0,0,0,.35)}
+.marker.selectedCueMarker::after{background:#ffd166;width:3px;left:5px;box-shadow:none}
+.marker.selectedCueMarker::before,body.locked .marker::before{content:attr(data-number);width:21px;height:21px;left:-4px;top:3px;color:#302407;text-align:center;font:700 11px/21px system-ui;background:#ffd166;box-shadow:0 0 0 2px rgba(0,0,0,.35)}
 body.locked .marker{pointer-events:none;cursor:default}
 .marker::before{z-index:1}.marker::after{z-index:0}
 .mediaExcluded{position:absolute;top:0;bottom:0;background:rgba(0,0,0,.78);pointer-events:none;z-index:1}
@@ -785,151 +777,34 @@ body.locked .timelineCard{order:1}body.locked .activeCueCard{order:2}body.locked
 .marker::before,body.locked .marker::before,.marker.selectedCueMarker::before{display:none!important}
 .timelineCueBubble{position:absolute;box-sizing:border-box;height:22px;padding:2px 7px;border:1px solid #ae8d49;border-radius:6px;background:#353026;color:#ffe4a4;font:600 12px/16px system-ui;white-space:nowrap;max-width:160px}
 .timelineCueBubble .cueBubbleText{display:block;overflow:hidden;text-overflow:ellipsis}
-.timelineCueBubble::before{content:"";position:absolute;top:-5px;left:var(--pointer-left,50%);width:7px;height:7px;transform:translateX(-50%) rotate(45deg);background:inherit;border-top:1px solid #ae8d49;border-left:1px solid #ae8d49}
-.timelineCueBubble.active{background:#223e61;color:#e3f1ff;border-color:#80b9ff;box-shadow:0 0 6px #509dff,0 0 13px #438ae899}
+.timelineCueBubble::before{content:"";position:absolute;top:-5px;left:50%;width:7px;height:7px;transform:translateX(-50%) rotate(45deg);background:inherit;border-top:1px solid #ae8d49;border-left:1px solid #ae8d49}
+.timelineCueBubble.active{background:#223e61;color:#e3f1ff;border-color:#80b9ff;box-shadow:0 0 6px #509dff,0 0 13px rgba(67,138,232,0.600)}
 .timelineCueBubble.active::before{border-color:#80b9ff}
 body.locked .nextTopCard .nextWrap{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-content:start;align-items:start}
 body.locked .nextTopCard .nextInfo{grid-column:1/-1;width:auto;min-width:0}
 body.locked .nextTopCard .nextImageWrap{grid-column:1;width:100%!important;max-width:none!important;margin:0!important;min-width:0}
 body.locked .nextTopCard .nextImage{width:100%;aspect-ratio:16/9;object-fit:cover}
 .upcomingCueList{display:none}
-body.locked .upcomingCueList{display:block;grid-column:2;min-width:0;background:#141922;border:1px solid var(--line);border-radius:12px;padding:12px}
+body.locked .upcomingCueList{display:block;grid-column:2;min-width:0;background:#141922;border:1px solid #3b4352;border-radius:12px;padding:12px}
 .upcomingCueList h3{font-size:.72rem;letter-spacing:.1em;color:#9db4cf;margin:0 0 7px}
-.upcomingCueRow{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);font-size:.85rem}
-.upcomingCueRow:last-child{border-bottom:0}.upcomingCueRow span{overflow-wrap:anywhere;min-width:0}.upcomingCueRow time{white-space:nowrap;color:var(--muted);font-variant-numeric:tabular-nums}
+.upcomingCueRow{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid #3b4352;font-size:.85rem}
+.upcomingCueRow:last-child{border-bottom:0}.upcomingCueRow span{overflow-wrap:anywhere;min-width:0}.upcomingCueRow time{white-space:nowrap;color:#9da7b5;font-variant-numeric:tabular-nums}
 @media(max-width:480px){body.locked .nextTopCard .nextWrap{gap:10px}.upcomingCueRow{font-size:.75rem;gap:6px}.upcomingCueList{padding:8px!important}}
 
-</style>
-<link href="./manifest.webmanifest" rel="manifest"/>
-<meta content="#111318" name="theme-color"/>
-<meta content="yes" name="apple-mobile-web-app-capable"/>
-<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
-<meta content="S2A Pilot" name="apple-mobile-web-app-title"/>
-<link href="./icons/s2a-pilot-180.png?v=1.4.45" rel="apple-touch-icon"/>
-<link rel="stylesheet" href="./material-ui.css">
-</head>
-<body>
-<main class="spectaclePriorityLayout">
-<div class="appTopBar">
-<img alt="Logo S2A Pilot" class="headerBrandLogo" src="./icons/s2a-pilot-192.png"/>
-<div class="appIdentity">
-  <strong>S2A Pilot</strong>
-  <span class="appAttribution">(by S2A Production)</span>
-  <span class="appVersion">Version 1.4.45</span>
-</div>
-<div class="headerActions"><select id="languageSelect" aria-label="Language / Langue"><option value="fr">FR</option><option value="en">EN</option></select>
-<div class="headerVideoOutput showOnly" hidden>
-<button aria-label="Préparer la sortie vidéo sur noir" class="videoOutputBigButton" id="videoOutputBtn" title="Ouvrir la sortie vidéo sur noir" type="button" data-material-action="screen_share" data-material-only=""><svg aria-hidden="true" class="videoOutputIcon" viewBox="0 0 92 62"><rect fill="none" height="38" rx="5" stroke="currentColor" stroke-width="4" width="56" x="6" y="5"></rect><rect fill="none" height="38" rx="5" stroke="currentColor" stroke-width="4" width="56" x="30" y="19"></rect></svg></button><div class="outputPrepText"><strong>SORTIE VIDÉO</strong><span id="videoOutputState">Disponible uniquement avec un affichage étendu</span></div></div>
 
-<div class="historyActions editOnly" aria-label="Historique des modifications">
-<button aria-label="Annuler" class="historyIconBtn" disabled id="undoBtn" type="button" title="Annuler (⌘/Ctrl+Z)" data-material-action="undo" data-material-only=""><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M9 7 4 12l5 5"/><path d="M4 12h9a7 7 0 0 1 7 7"/></svg></button>
-<button aria-label="Rétablir" class="historyIconBtn" disabled id="redoBtn" type="button" title="Rétablir (⇧⌘/Ctrl+Z)" data-material-action="redo" data-material-only=""><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m15 7 5 5-5 5"/><path d="M20 12h-9a7 7 0 0 0-7 7"/></svg></button>
-</div>
-<div class="modeSwitch" role="group" aria-label="Mode de travail">
-<button class="modeSwitchBtn active" id="editModeBtn" type="button" aria-pressed="true">Edit</button>
-<button class="modeSwitchBtn" id="showModeBtn" type="button" aria-pressed="false">Show</button>
-</div></div>
-</div>
-<section class="card editOnly projectCard">
-<div class="showTitleWrap">
-<label class="showTitleLabel" for="showTitle">NOM DU NUMÉRO</label>
-<input class="showTitleInput" id="showTitle" placeholder="Ex. Numéro Gala — Norbert Ferré" type="text"/>
-</div>
-<div class="projectActions">
-<button id="newProjectBtn" type="button" title="Démarrer un nouveau projet" data-material-action="note_add">Nouveau</button>
-<button id="openProjectBtn" type="button" data-material-action="folder_open">Ouvrir</button>
-<input accept=".json,.zip,.s2apilot.zip,.showcue,.showcue.zip,application/zip" id="projectFile" type="file"/>
-<button disabled id="saveAsBtn" type="button" title="Créer un package .s2apilot.zip portable complet, média inclus" data-material-action="save_as">Enregistrer sous…</button>
-<button class="pdfTechBtn" id="pdfTechBtn" type="button" title="Consulter ou télécharger la conduite technique PDF" data-material-action="picture_as_pdf">Conduite PDF</button>
-</div>
-<div class="autosaveState small muted" id="startupProjectInfo">Aucune sauvegarde locale détectée.</div>
-</section>
-<section class="card timelineCard preflightCard" id="preflightCard">
-  <h2 class="showOnly timelineShowTitle">TIMELINE</h2>
-<div class="row">
-<button class="primary transportToggleBtn" disabled="" id="playBtn" type="button" title="Lecture / Pause (Espace)" aria-keyshortcuts="Space"><span aria-hidden="true" class="transportButtonIcon" id="playBtnIcon" data-material-action="play_arrow" data-material-only="">▶</span><span class="transportButtonLabel" id="playBtnLabel">Lecture</span></button>
-<button disabled="" id="restartBtn" title="Retour au début" aria-label="Retour au début" data-material-action="skip_previous" data-material-only="">⏮</button>
-<button class="editOnly" disabled="" id="addCueBtn" data-material-action="add_circle">+ Cue</button>
-<button class="editOnly primary" id="addMediaGlobalBtn" type="button" data-material-action="music_note_add">+ Musique / Vidéo</button><input id="globalMediaFile" type="file" accept="audio/*,video/*,.mp3,.m4a,.aac,.wav,.aif,.aiff,.flac,.ogg,.mp4,.m4v,.mov,.webm" hidden>
-<span class="time" id="clock">00:00.0</span>
-<span class="muted" id="duration">/ 00:00.0</span>
-</div>
-<div class="mediaZoomControls editOnly" id="generalZoomControls" aria-label="Zoom de la timeline générale"><span aria-hidden="true" data-material-action="search" data-material-only="">🔍</span><button id="generalZoomOut" type="button" aria-label="Dézoomer la timeline générale" data-material-action="zoom_out" data-material-only="">−</button><span id="generalZoomLabel">×1</span><button id="generalZoomIn" type="button" aria-label="Zoomer la timeline générale" data-material-action="zoom_in" data-material-only="">+</button></div>
-<div id="generalTimelineViewport"><div aria-label="Timeline audio" class="timeline" id="timeline">
-<canvas id="projectWaveform" aria-label="Waveform combinée de la conduite"></canvas>
-<div class="progress" id="progress"></div>
-<div id="projectMediaTracks"></div>
-<div class="playhead" id="playhead"></div>
-</div>
-<div id="timelineCueLabels" aria-label="Titres des Cues"></div>
-</div>
-<div id="projectWaveformStatus" class="small muted" aria-live="polite"></div>
-</section>
-<section class="card activeCueCard">
-<h2>CUE ACTIVE</h2>
-<div class="nextTopName" id="activeCueName">Cue 1</div>
-<div class="small muted" id="activeCueAt">Depuis 00:00.0</div>
-<div class="cueDescriptionShow" id="activeCueDescription" hidden></div>
-<div class="activeCueVisualWrap">
-<img alt="" class="activeCueImage" hidden id="activeCueImage"/>
-<div class="activeCueShade" id="activeCueShade"></div>
-<div class="small muted" id="activeCueNoImage">Aucun visuel pour cette Cue</div>
-</div></section>
-<section class="card nextTopCard">
-<h2>PROCHAINE CUE</h2>
-<div class="nextWrap" style="margin-top:12px">
-<div class="nextInfo">
-<div class="nextTitleGroup">
-<div class="nextName" id="nextName">Aucune Cue</div></div>
-<div class="nextTiming"><div class="nextCountdown" id="nextCountdown">—</div>
-<div hidden class="nextAt" id="nextAt"></div></div>
-<div class="cueDescriptionShow" id="nextCueDescription" hidden></div>
-</div>
-<div class="nextImageWrap">
-<img alt="" class="nextImage" hidden="" id="nextImage"/>
-<div class="noImage" id="noNextImage">Aucun visuel pour la prochaine Cue</div>
-</div>
-<div class="upcomingCueList" id="upcomingCueList"><h3 id="upcomingCueHeading"></h3><div id="upcomingCueRows"></div></div>
-</div>
-</section>
-<section class="card editOnly">
-<div class="cuesToolbar">
-  <div class="cuesToolbarLeft"><strong>CUES</strong><span class="muted" id="cueCount">0 Cue</span></div>
-
-</div>
-<div class="cues" id="cueList"></div>
-</section>
-
-<section class="card showVideoMonitor" id="showVideoMonitor" hidden>
-<h2>MONITEUR VIDÉO</h2><div id="showVideoSurface"><span id="showVideoEmpty">Aucune vidéo en cours</span></div>
-</section></main>
-<div aria-hidden="true" id="preloadBin"></div>
-<dialog class="installPrompt" id="installPrompt">
-<div class="installPromptBox">
-<h3>Installer S2A Pilot</h3>
-<p>Installe S2A Pilot sur cet appareil pour pouvoir l’utiliser même sans connexion Internet.</p>
-<div class="installIOSHelp" id="installIOSHelp">
-<strong>Sur iPhone / iPad :</strong>
-<ol>
-<li>Ouvre S2A Pilot dans Safari.</li>
-<li>Touche <strong>Partager</strong>.</li>
-<li>Choisis <strong>Sur l’écran d’accueil</strong>.</li>
-<li>Confirme avec <strong>Ajouter</strong>.</li>
-</ol>
-</div>
-<div class="installPromptActions">
-<button id="installLaterBtn">Plus tard</button>
-<button class="primary" id="installNowBtn">Installer</button>
-</div>
-</div>
-</dialog>
-<dialog id="pdfPreviewDialog" class="pdfPreviewDialog" aria-labelledby="pdfPreviewTitle"><div class="pdfPreviewLayout"><div class="pdfPreviewToolbar"><strong id="pdfPreviewTitle">Conduite technique</strong><a id="pdfPreviewDownload">Télécharger</a><button id="pdfPreviewClose" type="button">Fermer</button></div><div class="pdfPreviewZoom" role="group" aria-label="Zoom de la conduite"><button id="pdfPreviewZoomOut" aria-label="Réduire le zoom de la conduite" type="button" data-material-action="zoom_out" data-material-only="">−</button><span id="pdfPreviewZoomLabel" aria-live="polite">100 %</span><button id="pdfPreviewZoomIn" aria-label="Agrandir le zoom de la conduite" type="button" data-material-action="zoom_in" data-material-only="">+</button><button id="pdfPreviewFit" type="button">Ajuster à l’écran</button></div><div id="pdfPreviewPages" class="pdfPreviewPages" tabindex="0" aria-label="Pages de la conduite technique"></div></div></dialog>
-<script>
-window.s2aBootReady=false;
-window.s2aReportBootError=function(message){if(window.s2aBootReady)return;var box=document.getElementById('startupError');if(!box){box=document.createElement('div');box.id='startupError';box.setAttribute('role','alert');box.style.cssText='padding:14px;border:1px solid #ff9ca4;border-radius:10px;background:#44232c;color:#fff;white-space:pre-wrap';document.querySelector('main').insertBefore(box,document.querySelector('main').firstChild);}var en=(navigator.language||'en').indexOf('fr')!==0;try{en=(localStorage.getItem('s2a-language')||(en?'en':'fr'))==='en';}catch(error){}box.textContent=(en?'S2A Pilot could not finish starting. Your local projects are preserved.\n':'Le démarrage de S2A Pilot est interrompu. Vos projets locaux sont conservés.\n')+message+'\n';var link=document.createElement('a');link.href='./actualiser.html?repair='+Date.now();link.textContent=en?'Refresh application files':'Actualiser les fichiers de l’application';link.style.color='#a9d2ff';box.appendChild(link);};
-window.addEventListener('error',function(e){window.s2aReportBootError((e.message||'Chargement impossible')+' — '+(e.filename||'')+':'+(e.lineno||''));});
-</script>
-<script src="./material-ui.js"></script>
-<script src="./compatibility-loader.js?v=1.4.45"></script>
-</body>
-</html>
+/* Only loaded by the old-browser branch. Static colors and flex replace CSS variables/grid. */
+body{padding:0}main.spectaclePriorityLayout{display:block!important}
+.row,.appTopBar,.headerActions,.historyActions,.mediaEditorTop{display:flex;flex-wrap:wrap}.row>*,.headerActions>*,.historyActions>*{margin:3px}
+.cueSummary{display:flex}.cueSummaryIndex,.cueSummaryTime,.cueDragHandle{margin-right:10px}.cueSummaryMain{flex:1}.cueEditGrid{display:flex;flex-wrap:wrap}.cueEditGrid>*{margin:4px}.cueTextFields{flex:1;min-width:180px}.cueTextFields input,.cueTextFields textarea{width:100%}.cueEditActions{display:flex;flex-direction:column}.mediaAction{display:flex;flex-wrap:wrap}.mediaEditor{width:100%}.mediaEditorMain{display:flex;align-items:center}.mediaPreviewWrap{margin-left:10px;min-width:90px}
+body.locked main.spectaclePriorityLayout{display:flex!important;flex-flow:row wrap!important;align-items:stretch}
+body.locked .appTopBar,body.locked .timelineCard,body.locked .showVideoMonitor{width:100%;flex-basis:100%}
+body.locked .timelineCard{order:1;margin-bottom:14px}body.locked .activeCueCard{order:2;width:calc(50% - 7px);margin:0 7px 0 0}body.locked .nextTopCard{order:3;width:calc(50% - 7px);margin:0 0 0 7px}body.locked .showVideoMonitor{order:4}
+body.locked .nextTopCard .nextWrap{display:flex!important;flex-flow:row wrap!important}body.locked .nextTopCard .nextInfo{display:flex;flex-wrap:wrap;width:100%;margin-bottom:12px}#nextName{flex:1}#nextCueDescription{width:100%}
+body.locked .nextTopCard .nextImageWrap{width:calc(50% - 6px)!important;flex-basis:calc(50% - 6px);margin-right:12px!important}body.locked .upcomingCueList{width:calc(50% - 6px)}body.locked .nextTopCard .nextImage{height:auto;max-width:100%}
+#activeCueNoImage{top:0;right:0;bottom:0;left:0}.startupPrompt{max-width:520px}.time{font-size:2rem}.nextCountdown{font-size:2.5rem}.upcomingCueRow{margin:0}
+.upcomingCueRow:nth-child(2){-webkit-mask-image:linear-gradient(to bottom,rgba(0,0,0,1),rgba(0,0,0,.78))}.upcomingCueRow:nth-child(3){-webkit-mask-image:linear-gradient(to bottom,rgba(0,0,0,.78),rgba(0,0,0,.43))}.upcomingCueRow:nth-child(4){-webkit-mask-image:linear-gradient(to bottom,rgba(0,0,0,.43),rgba(0,0,0,.06))}.upcomingCueRow:nth-child(2):last-child{-webkit-mask-image:linear-gradient(to bottom,rgba(0,0,0,1),rgba(0,0,0,.06))}.upcomingCueRow:nth-child(3):last-child{-webkit-mask-image:linear-gradient(to bottom,rgba(0,0,0,.78),rgba(0,0,0,.06))}
+@media(max-width:700px){body.locked .activeCueCard,body.locked .nextTopCard{width:100%;margin:7px 0}.cueEditGrid{display:block}.mediaEditorMain{display:block}.headerActions{width:100%}.nextCountdown{font-size:2rem}}
+body.locked main.spectaclePriorityLayout{gap:0!important}.card{box-sizing:border-box}body.locked .nextTopCard .nextWrap{gap:0!important}body.locked .nextTopCard .nextTitleGroup{flex:1;margin-right:8px}body.locked .nextTopCard .nextTiming{flex:0 0 auto}
+body.locked .nextTopCard .nextImageWrap{height:0;padding-bottom:28.125%;align-self:flex-start}body.locked .nextTopCard .nextImage{position:absolute;top:0;left:0;width:100%;height:100%}body.locked .nextTopCard #noNextImage{position:absolute;top:0;right:0;bottom:0;left:0;display:flex;align-items:center;justify-content:center;margin:0;padding:8px}
+body.locked .nextTopCard::before{top:-1px;right:-1px;bottom:-1px;left:-1px}
+body.locked .nextTopCard .nextInfo{flex-direction:row;gap:0!important;text-align:left}.compatNotice{padding:8px 12px;border:1px solid #394354;border-radius:10px;color:#c3ccd9;font-size:.78rem;line-height:1.4;box-sizing:border-box;margin:8px 0;flex-basis:100%;width:100%;order:0}.compatNotice a{color:#a9d2ff}

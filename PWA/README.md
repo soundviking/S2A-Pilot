@@ -88,13 +88,24 @@ La tête de lecture blanche reprend le dessin des timelines médias. Elle se dé
 
 En Show, TIMELINE est au-dessus des boxes Cue active et prochaine Cue. Les repères jaunes numérotés sont informatifs et ne déplacent pas les Cues. En Edit, seul le repère de la Cue sélectionnée porte son numéro, sans halo bleu. Les portions avant IN et après OUT sont assombries ; la zone retenue garde son bleu transparent. ⏮ remplace le texte Retour au début ; son libellé reste accessible et son comportement ne change pas.
 
-Le mode ancien navigateur est accessible dans `legacy/index.html`. Il est choisi automatiquement sur iOS 9–12, ou lorsqu’un navigateur ne peut pas lire la syntaxe ou les APIs de base de la version complète. iOS 13+ utilise la version complète si ces capacités sont présentes : il ne s’agit pas d’une garantie pour toutes les versions de Safari.
+## Version 1.4.45 — pictogrammes et anciens navigateurs
 
-Ce mode propose une seule musique, les Cues et descriptions, les images, Edit/Show, la navigation tactile/souris, la duplication, une sauvegarde IndexedDB distincte et une conduite imprimable. Il lit les ZIP non compressés exportés par S2A Pilot. S’il y a plusieurs musiques, seule la première est jouée et un message l’indique. Les vidéos ne sont pas jouées. Les points IN/OUT de la musique importée sont respectés, mais leur édition, les boucles, les fondus, le mixage, les waveforms et la sortie vidéo ne sont pas proposés.
+Les pictogrammes utilisent les SVG officiels Material Symbols Outlined, embarqués localement : aucune police Google, aucun CDN, aucune requête distante. Les logos S2A Pilot et S2A Production restent identiques. Les boutons conservent leurs libellés et leur comportement.
 
-L’export de compatibilité est un fichier `.s2apilot.json` avec musique et visuels intégrés, réouvrable dans les deux modes. Il ne contient pas Copilote ni un PDF généré ; la version complète peut ensuite produire le package habituel. Sur Safari ancien, le téléchargement peut s’ouvrir dans une fenêtre plutôt que déclencher un enregistrement direct. Les données locales des deux modes sont séparées : utiliser l’export pour les transférer.
+En Show, « Ensuite » conserve sa première Cue nette ; les suivantes s’atténuent progressivement par un masque d’opacité CSS et un fond assombri. Aucun flou, aucune animation ajoutée ni traitement JavaScript continu. L’ordre, le contenu et la limite préexistante de quatre Cues affichées ne changent pas.
 
-iOS 9–10 doit disposer d’une connexion au site : aucun hors ligne moderne n’est promis. À partir d’iOS 11.3, le service worker peut mettre en cache les fichiers, mais cela reste à confirmer sur l’appareil réel. La lecture automatique après un changement de position peut être refusée par Safari ancien ; lancer une musique à zéro depuis Lecture est le scénario à vérifier en priorité. Les limitations sont affichées dans l’interface. Tests réalisés dans Chrome avec détection iOS simulée et audit de syntaxe ES5 ; aucun iPad 2 physique n’a été testé.
+### Compatibilité iOS 9.3.5
+
+Les anciens navigateurs essaient désormais une version ES5 du même moteur que l’application actuelle, avec des adaptations locales. Cela rétablit les commandes d’édition, plusieurs médias dans la conduite, IN/OUT, boucles et réglages de fondu, waveforms et zoom, prévisualisation indépendante, navigation tactile, annuler/rétablir, PDF intégré et génération du package avec Copilote. Le stockage des médias utilise des buffers plutôt que des Blob sur cette branche. Les fondus audio passent par Web Audio lorsque le navigateur permet le raccordement du média.
+
+L’import audio ne force plus le sélecteur photo/vidéo. Sur iOS 9, il faut un fournisseur de documents compatible installé (par exemple iCloud Drive) et un fichier accessible. L’application ne peut pas installer ce fournisseur. WAV et MP3 sont les premiers formats à essayer.
+
+Si aucune sauvegarde de la version complète n’existe, la sauvegarde du précédent mode allégé est récupérée automatiquement ; l’original est conservé. Un projet complet existant, même vide, reste prioritaire. Le mode allégé à une musique reste accessible via le lien de compatibilité et dans `legacy/index.html`.
+
+**Limites à vérifier sur l’iPad réel :** Safari 9 impose ses règles de lecture, codecs, mémoire et téléchargement. La vidéo peut nécessiter le lecteur natif plein écran ; les enchaînements audio, boucles, fondus et téléchargements doivent être essayés sur l’appareil. Le ZIP est généré, mais son enregistrement peut dépendre du menu de partage ou d’une application installée. iOS 9 n’a pas de service worker : aucun hors ligne complet ni sortie vidéo étendue n’est promis sur cet appareil. L’ajout à l’écran d’accueil ne lève pas ces limites.
+
+Tests : icônes et changements Play/Pause, français/anglais, listes courtes/moyennes/longues, formats ordinateur/tablette/téléphone, hors ligne sur navigateur moderne, PDF et package Copilote. La compatibilité ancienne a été testée avec les API manquantes simulées, lecture callback Web Audio, stockage refusant les Blob, événements tactiles et récupération de sauvegarde ; ce n’est pas un test du moteur Safari 9 sur iPad physique.
+
 
 La loupe identifie les commandes de zoom en Edit. Show affiche les minutes et secondes, sans dixièmes ; le temps fixe sous le compte à rebours est supprimé. Le chargement du compagnon demande des fichiers frais pour limiter les manifestes obsolètes.
 

@@ -1,0 +1,13 @@
+{
+  "compiler": "@babel/standalone 7.28.5",
+  "polyfills": [
+    "core-js 3.46.0",
+    "whatwg-fetch 3.6.20"
+  ],
+  "target": "ES5 / Safari 9",
+  "sourceSHA256": {
+    "i18n.js": "fc6435a5a45bf82c523db7a561aa185274e820d2ddf1b21d2ece95c6ab9a175f",
+    "app.js": "81a095f65a31d1b041e0973737a4a0c44c68105b33894d37822c548c543e82ba",
+    "technical-preview.js": "a74db4e343891e05e8c052d4aeb3e54204a6e7ca3d237c5bce2a4f8995a9ab6b"
+  }
+}

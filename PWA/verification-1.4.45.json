@@ -1,0 +1,42 @@
+{
+  "pilot": "1.4.45",
+  "copilote": "1.2.10",
+  "baseline_commit": "9ef4eebbdcf24c3ddbf5eb8ee33b148147e85a20",
+  "tests": {
+    "material_official_svg_geometries": 19,
+    "icons_static_dynamic_and_button_heights": true,
+    "languages_fr_en": true,
+    "short_medium_long_lists_order_preserved": true,
+    "responsive_desktop_tablet_phone": true,
+    "modern_offline_icons_pdf_package": true,
+    "pdf_without_companion": true,
+    "compat_missing_apis_and_es5_syntax": true,
+    "compat_waveform_in_out_loop_zoom": true,
+    "compat_audio_fade_web_audio_with_ineffective_html_volume": true,
+    "compat_audio_video_preview_and_multi_media_package": true,
+    "compat_continuous_touch_and_autosave_restore": true,
+    "legacy_draft_migration_nondestructive": true,
+    "logos_and_native_companion_byte_identical": true
+  },
+  "physical_iOS_9_3_5_tested": false,
+  "limitations": [
+    "Document provider required for audio import on iOS 9",
+    "Safari codecs, playback policy, native video fullscreen, memory and download limitations require device testing",
+    "No service-worker offline support or extended video output on iOS 9"
+  ],
+  "generated_source_hashes": {
+    "i18n.js": "fc6435a5a45bf82c523db7a561aa185274e820d2ddf1b21d2ece95c6ab9a175f",
+    "app.js": "81a095f65a31d1b041e0973737a4a0c44c68105b33894d37822c548c543e82ba",
+    "technical-preview.js": "a74db4e343891e05e8c052d4aeb3e54204a6e7ca3d237c5bce2a4f8995a9ab6b"
+  },
+  "preserved_assets_sha256": {
+    "PWA/icons/s2a-pilot-1024.png": "6b77c7e78a60e0d7b0ae2428f712736462eecbfec28245502758347bd6a5894f",
+    "PWA/icons/s2a-pilot-180.png": "bf15c1ee5e254e508bd6be21a9f7dd579605ee633d49a8730f05de60422fd0a4",
+    "PWA/icons/s2a-pilot-192.png": "60ea83a1a5c821491db1a6751a151b7c79b572fba533b2ca042a55258d43a5e1",
+    "PWA/icons/s2a-pilot-512.png": "45b5a9ee2b271f2e68a746e20be807c5c476087c2599e8aa9a38174943f95973",
+    "PWA/icons/s2a-production.png": "ecaa98354ea08e47740ac38f8548b907f964acc0050686c733db1028511dec9a",
+    "PWA/assets/conduite-header.webp": "fdf271a92834d975eb216ace56d032dc8b48a20aace41a33aed6851eddba5046",
+    "PWA/companion/S2A-Copilote-1.2.10-app.zip": "932aa7205fcaf1524ee6abc8528ca238f01ade61d0c521cee91f94cc1d728c8f",
+    "PWA/companion/app-files.json": "0a0d4650bc8a636565a3c450f0aee21ad469e572abb489b77f2972e6a28859d5"
+  }
+}

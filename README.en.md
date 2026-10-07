@@ -1,10 +1,10 @@
-# S2A Pilot 1.4.44 / S2A Copilote 1.2.10
+# S2A Pilot 1.4.45 / S2A Copilote 1.2.10
 
 🇫🇷 [Français](README.md) | 🇬🇧 **English**
 
 ![S2A Pilot](assets/social-preview.jpg)
 
-[PWA 1.4.44](downloads/S2A-Pilot-V1.4.44-PWA.zip) · [Copilote 1.2.10 — Intel / Apple Silicon](downloads/S2A-Copilote-1.2.10-macOS-Universel.zip)
+[PWA 1.4.45](downloads/S2A-Pilot-V1.4.45-PWA.zip) · [Copilote 1.2.10 — Intel / Apple Silicon](downloads/S2A-Copilote-1.2.10-macOS-Universel.zip)
 
 # S2A Pilot — User guide
 
@@ -97,6 +97,24 @@ Version 1.4.44: stronger blue glow around the active Cue in Show, with soft inne
 
 
 Version 1.4.44: in the final ten seconds before the next Cue, a red glow fades in and out once per second while the active Cue’s blue glow fades away. Outside this interval, blue returns. With reduced motion, red remains steady.
+
+## Version 1.4.45 — icons and older browsers
+
+UI icons use official Material Symbols Outlined SVGs embedded locally: no Google font, CDN or remote request. S2A Pilot and S2A Production logos are unchanged. Button labels and behavior remain the same.
+
+In Show, “After that” keeps the first Cue clear; subsequent rows gradually fade through a CSS opacity mask and a darker background. No blur, added animation or continuous JavaScript processing. Order, content and the existing four-row display limit are unchanged.
+
+### iOS 9.3.5 compatibility
+
+Older browsers now try an ES5 build of the current application engine with local adapters. This restores editing commands, multiple media in a show, IN/OUT, loop and fade settings, waveforms and zoom, independent previews, touch navigation, undo/redo, the built-in PDF preview and package generation with Copilote. This branch stores media as buffers instead of Blob records. Audio fades use Web Audio when the browser allows a media source connection.
+
+Audio import no longer forces the photo/video picker. iOS 9 needs an installed compatible document provider, such as iCloud Drive, and an accessible file. The app cannot install that provider. Try WAV and MP3 first.
+
+When no full-app draft exists, the previous lightweight draft is recovered automatically, preserving its original. An existing full-app draft, including an empty one, takes priority. The one-track lightweight mode remains available through the compatibility link and `legacy/index.html`.
+
+**Physical-iPad checks still required:** Safari 9 imposes playback, codec, memory and download restrictions. Video may require the native fullscreen player; audio transitions, loops, fades and downloads must be tested on the device. ZIP generation is available, but saving may depend on the share menu or an installed application. iOS 9 has no service worker: full offline support and extended video output are unavailable there. Adding a Home Screen shortcut does not remove these limits.
+
+Tests cover icons and Play/Pause states, French/English, short/medium/long lists, desktop/tablet/phone layouts, modern-browser offline use, PDF and Copilote packages. Older-browser checks simulate missing APIs, callback Web Audio decoding, storage rejecting Blob records, touch events and draft migration; they are not physical Safari 9/iPad tests.
 
 ## Version 1.4.44 — timelines and compatibility
 
