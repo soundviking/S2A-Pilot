@@ -1,10 +1,10 @@
-# S2A Pilot 1.4.62 / S2A Copilote 1.2.10
+# S2A Pilot 1.4.63 / S2A Copilote 1.2.10
 
 🇫🇷 **Français** | 🇬🇧 [English](README.en.md)
 
 ![S2A Pilot](assets/social-preview.jpg)
 
-[PWA 1.4.62](downloads/S2A-Pilot-V1.4.62-PWA.zip) · [Copilote 1.2.10 — Intel / Apple Silicon](downloads/S2A-Copilote-1.2.10-macOS-Universel.zip)
+[PWA 1.4.63](downloads/S2A-Pilot-V1.4.63-PWA.zip) · [Copilote 1.2.10 — Intel / Apple Silicon](downloads/S2A-Copilote-1.2.10-macOS-Universel.zip)
 
 # S2A Pilot — Guide utilisateur
 
@@ -189,3 +189,7 @@ Le halo bleu s’éteint en fondu de 0,7 seconde pendant que le décompte pulse 
 ## Version 1.4.62
 
 Repère bleu devant Suivant rétabli. Pic du halo à chaque seconde entière restante, piloté par le temps de lecture avec fondu entre les battements ; pause et déplacement conservent la synchronisation. Aucun minuteur supplémentaire. Halo fixe si la réduction des animations est demandée.
+
+## Version 1.4.63
+
+Case Muet vidéo remplacée par un bouton Material local : haut-parleur barré si muet, haut-parleur si actif. État accessible et infobulle traduite ; sauvegarde automatique et annulation conservées. Styles inutilisés de la case supprimés. Aide hors ligne et exports PDF/Copilote vérifiés.

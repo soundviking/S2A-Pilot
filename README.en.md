@@ -1,10 +1,10 @@
-# S2A Pilot 1.4.62 / S2A Copilote 1.2.10
+# S2A Pilot 1.4.63 / S2A Copilote 1.2.10
 
 🇫🇷 [Français](README.md) | 🇬🇧 **English**
 
 ![S2A Pilot](assets/social-preview.jpg)
 
-[PWA 1.4.62](downloads/S2A-Pilot-V1.4.62-PWA.zip) · [Copilote 1.2.10 — Intel / Apple Silicon](downloads/S2A-Copilote-1.2.10-macOS-Universel.zip)
+[PWA 1.4.63](downloads/S2A-Pilot-V1.4.63-PWA.zip) · [Copilote 1.2.10 — Intel / Apple Silicon](downloads/S2A-Copilote-1.2.10-macOS-Universel.zip)
 
 # S2A Pilot — User guide
 
@@ -197,3 +197,7 @@ Blue glow fades out over 0.7 seconds while the countdown pulses red, then fades 
 ## Version 1.4.62
 
 Next heading blue marker restored. Countdown glow peaks at each whole remaining second, driven by the transport animation frame with a smooth fade between beats; pauses and seeks retain its phase. No additional timer. Reduced-motion preference uses a steady glow.
+
+## Version 1.4.63
+
+Video mute checkbox replaced with a local Material button: crossed-out speaker when muted, speaker when enabled. Accessible state and localized tooltip; autosave and undo preserved. Unused checkbox styles removed. Offline help and Copilote/PDF export checked.

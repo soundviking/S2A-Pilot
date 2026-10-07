@@ -182,3 +182,7 @@ Blue glow fades out over 0.7 seconds while the countdown pulses red, then fades 
 ## Version 1.4.62
 
 Next heading blue marker restored. Countdown glow peaks at each whole remaining second, driven by the transport animation frame with a smooth fade between beats; pauses and seeks retain its phase. No additional timer. Reduced-motion preference uses a steady glow.
+
+## Version 1.4.63
+
+Video mute checkbox replaced with a local Material button: crossed-out speaker when muted, speaker when enabled. Accessible state and localized tooltip; autosave and undo preserved. Unused checkbox styles removed. Offline help and Copilote/PDF export checked.

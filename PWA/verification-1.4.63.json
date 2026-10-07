@@ -1,0 +1,17 @@
+{
+  "version": "1.4.63",
+  "passed": [
+    "Video mute toggles model and volume_off/volume_up icons",
+    "Accessible pressed state and checkbox removed",
+    "Help FR/EN, offline, lightweight/full compatibility",
+    "Translations, PDF, portable package includes Copilote",
+    "Compiled compatibility source hashes match",
+    "Logos and companion byte-identical"
+  ],
+  "cleanup": [
+    "Unused mute checkbox CSS removed"
+  ],
+  "limitations": [
+    "Physical old iPad not tested"
+  ]
+}
