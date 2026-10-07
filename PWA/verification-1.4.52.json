@@ -1,0 +1,11 @@
+{
+  "version": "1.4.52",
+  "tests": [
+    "Responsive Show 390/768/1024/1280",
+    "Consistent Cue list heading CSS",
+    "Refreshed help screenshots"
+  ],
+  "limitations": [
+    "Physical old iPad untested"
+  ]
+}

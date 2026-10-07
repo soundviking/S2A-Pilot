@@ -134,3 +134,7 @@ Show : titres harmonisés « Cue active » et « Prochaine Cue : numéro », tit
 ## Version 1.4.51
 
 Liste Show : défilement manuel bloqué ; suivi automatique de la Cue active en paysage. En portrait, la liste adapte sa hauteur au nombre de Cues, sans barre de défilement interne.
+
+## Version 1.4.52
+
+Titre de la liste Show harmonisé avec les autres boxes : petites capitales espacées, teinte bleutée et repère vertical bleu. Captures d’aide actualisées. Inclut la hauteur adaptée au nombre de Cues en portrait et le verrouillage du défilement manuel.

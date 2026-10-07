@@ -1,10 +1,10 @@
-# S2A Pilot 1.4.51 / S2A Copilote 1.2.10
+# S2A Pilot 1.4.52 / S2A Copilote 1.2.10
 
 🇫🇷 [Français](README.md) | 🇬🇧 **English**
 
 ![S2A Pilot](assets/social-preview.jpg)
 
-[PWA 1.4.51](downloads/S2A-Pilot-V1.4.51-PWA.zip) · [Copilote 1.2.10 — Intel / Apple Silicon](downloads/S2A-Copilote-1.2.10-macOS-Universel.zip)
+[PWA 1.4.52](downloads/S2A-Pilot-V1.4.52-PWA.zip) · [Copilote 1.2.10 — Intel / Apple Silicon](downloads/S2A-Copilote-1.2.10-macOS-Universel.zip)
 
 # S2A Pilot — User guide
 
@@ -157,3 +157,7 @@ Show: consistent Active Cue / Next Cue: number headings, larger active title, gr
 ## Version 1.4.51
 
 Show Cue list: manual scrolling blocked; automatic current-Cue tracking in landscape. In portrait, the list grows with the number of Cues, without an internal scrollbar.
+
+## Version 1.4.52
+
+Show Cue list heading now matches the other panel headings, with blue accent and spaced uppercase lettering. Help screenshots refreshed. Includes portrait height based on Cue count and locked manual list scrolling.

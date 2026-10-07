@@ -142,3 +142,7 @@ Show: consistent Active Cue / Next Cue: number headings, larger active title, gr
 ## Version 1.4.51
 
 Show Cue list: manual scrolling blocked; automatic current-Cue tracking in landscape. In portrait, the list grows with the number of Cues, without an internal scrollbar.
+
+## Version 1.4.52
+
+Show Cue list heading now matches the other panel headings, with blue accent and spaced uppercase lettering. Help screenshots refreshed. Includes portrait height based on Cue count and locked manual list scrolling.
