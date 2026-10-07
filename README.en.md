@@ -1,10 +1,10 @@
-# S2A Pilot 1.4.64 / S2A Copilote 1.2.10
+# S2A Pilot 1.4.65 / S2A Copilote 1.2.10
 
 🇫🇷 [Français](README.md) | 🇬🇧 **English**
 
 ![S2A Pilot](assets/social-preview.png)
 
-[PWA 1.4.64](downloads/S2A-Pilot-V1.4.64-PWA.zip) · [Copilote 1.2.10 — Intel / Apple Silicon](downloads/S2A-Copilote-1.2.10-macOS-Universel.zip)
+[PWA 1.4.65](downloads/S2A-Pilot-V1.4.65-PWA.zip) · [Copilote 1.2.10 — Intel / Apple Silicon](downloads/S2A-Copilote-1.2.10-macOS-Universel.zip)
 
 # S2A Pilot — User guide
 
@@ -20,7 +20,7 @@ S2A Copilote uses the macOS preferred language at first launch and offers a Fran
 
 ## Quick help
 
-On first launch, a three-step guide introduces show creation, Cue settings and Show mode with actual application screenshots. It appears before the installation prompt. The “?” button in Edit, to the left of Undo and Redo, opens it again. The guide and screenshots are available in French and English and bundled locally for offline use in browsers that support it. They also cover compatibility mode.
+On first launch, a four-step guide introduces show creation, Cue settings, Show mode and the Space shortcut for Play/Pause on computers. Actual application screenshots show a 1 minute 40 second audio track with its waveform and stage visuals. It appears before the installation prompt. The “?” button in Edit, to the left of Undo and Redo, opens it again. The guide and screenshots are available in French and English and bundled locally for offline use in browsers that support it. They also cover compatibility mode.
 
 ## Prepare a show
 
@@ -205,3 +205,8 @@ Video mute checkbox replaced with a local Material button: crossed-out speaker w
 ## Version 1.4.64
 
 Removed the standalone magnifier beside zoom controls on main and media timelines. Zoom in/out icons retained; unused search SVG removed. Help screenshots updated.
+
+
+## Version 1.4.65
+
+In Show, gestures over the Cue list scroll the page while internal list scrolling stays disabled. Play/Pause resumes prepared media without unnecessary seeking; the transport button has a white glow and Music / Video uses the standard style. Audio/video Cues retain only the Cue Delete button below Duplicate; technical preparation labels are hidden. The end-of-show visual frame has a solid border. Quick help now has four steps with a 1 minute 40 second track, stage visuals the Space shortcut, audio/video formats and saving/export reminders. Copilote 1.2.10 and package compatibility are preserved.

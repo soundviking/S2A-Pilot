@@ -12,7 +12,7 @@ S2A Copilote uses the macOS preferred language at first launch and offers a Fran
 
 ## Quick help
 
-On first launch, a three-step guide introduces show creation, Cue settings and Show mode with actual application screenshots. It appears before the installation prompt. The “?” button in Edit, to the left of Undo and Redo, opens it again. The guide and screenshots are available in French and English and bundled locally for offline use in browsers that support it. They also cover compatibility mode.
+On first launch, a four-step guide introduces show creation, Cue settings, Show mode and the Space shortcut for Play/Pause on computers. Actual application screenshots show a 1 minute 40 second audio track with its waveform and stage visuals. It appears before the installation prompt. The “?” button in Edit, to the left of Undo and Redo, opens it again. The guide and screenshots are available in French and English and bundled locally for offline use in browsers that support it. They also cover compatibility mode.
 
 ## Prepare a show
 
@@ -94,12 +94,6 @@ Version 1.4.44: stronger blue glow around the active Cue in Show, with soft inne
 
 Version 1.4.44: in the final ten seconds before the next Cue, a red glow fades in and out once per second while the active Cue’s blue glow fades away. Outside this interval, blue returns. With reduced motion, red remains steady.
 
-## Version 1.4.44 — timelines and compatibility
-
-The white playhead matches the media timeline design. Mouse/touch dragging updates continuously in Edit and Show, with direct click/tap and arrow/Home/End navigation. Media pauses while dragging, then seeks and resumes on release if playback was active. Cancelling restores the original position. At zoom, drag the playhead to seek or swipe the background to scroll.
-
-In Show, TIMELINE is above the active and next Cue panels. Numbered yellow markers are informational and cannot move Cues. In Edit, only the selected marker displays its number, without a blue glow. Regions before IN and after OUT are darkened; the retained selection keeps its transparent blue. ⏮ replaces Back to start text, retaining an accessible label and the same behavior.
-
 ## Version 1.4.45 — icons and older browsers
 
 UI icons use official Material Symbols Outlined SVGs embedded locally: no Google font, CDN or remote request. S2A Pilot and S2A Production logos are unchanged. Button labels and behavior remain the same.
@@ -118,6 +112,19 @@ When no full-app draft exists, the previous lightweight draft is recovered autom
 
 Tests cover icons and Play/Pause states, French/English, short/medium/long lists, desktop/tablet/phone layouts, modern-browser offline use, PDF and Copilote packages. Older-browser checks simulate missing APIs, callback Web Audio decoding, storage rejecting Blob records, touch events and draft migration; they are not physical Safari 9/iPad tests.
 
+## Version 1.4.44 — timelines and compatibility
+
+The white playhead matches the media timeline design. Mouse/touch dragging updates continuously in Edit and Show, with direct click/tap and arrow/Home/End navigation. Media pauses while dragging, then seeks and resumes on release if playback was active. Cancelling restores the original position. At zoom, drag the playhead to seek or swipe the background to scroll.
+
+In Show, TIMELINE is above the active and next Cue panels. Numbered yellow markers are informational and cannot move Cues. In Edit, only the selected marker displays its number, without a blue glow. Regions before IN and after OUT are darkened; the retained selection keeps its transparent blue. ⏮ replaces Back to start text, retaining an accessible label and the same behavior.
+
+The older-browser mode lives at `legacy/index.html`. It is selected automatically on iOS 9–12 or when the full app’s syntax/core APIs are unavailable. iOS 13+ uses the full app when these capabilities exist; this is not a guarantee for every Safari version.
+
+It supports one music track, Cues/descriptions/images, Edit/Show, mouse/touch navigation, duplication, separate IndexedDB autosave and a printable cue sheet. It opens uncompressed project ZIPs exported by S2A Pilot. If multiple audio tracks exist, only the first is played and a message explains this. Video is not played. Imported audio IN/OUT points are respected, but trim editing, loops, fades, mixing, waveforms and video output are unavailable.
+
+Compatibility exports use `.s2apilot.json`, including audio and visuals, and can be opened in either mode. They contain neither Copilote nor a generated PDF; the full app can subsequently export a standard package. Older Safari may open the export in a separate window rather than downloading directly. The two modes have separate local data stores; transfer projects through exports.
+
+iOS 9–10 requires access to the site; modern offline support is not promised. From iOS 11.3, a service worker can cache app files, subject to real-device validation. Older Safari may deny automatic audio playback after seeking; starting music at zero via Play is the first scenario to verify. Limitations are shown in the UI. Tests use Chrome with simulated iOS detection and an ES5 syntax audit; no physical iPad 2 has been tested.
 
 A magnifying glass identifies zoom controls in Edit. Show displays minutes and seconds without tenths; the fixed cue time beneath the countdown is removed. Companion downloads request fresh files to reduce stale manifests.
 
@@ -190,3 +197,8 @@ Video mute checkbox replaced with a local Material button: crossed-out speaker w
 ## Version 1.4.64
 
 Removed the standalone magnifier beside zoom controls on main and media timelines. Zoom in/out icons retained; unused search SVG removed. Help screenshots updated.
+
+
+## Version 1.4.65
+
+In Show, gestures over the Cue list scroll the page while internal list scrolling stays disabled. Play/Pause resumes prepared media without unnecessary seeking; the transport button has a white glow and Music / Video uses the standard style. Audio/video Cues retain only the Cue Delete button below Duplicate; technical preparation labels are hidden. The end-of-show visual frame has a solid border. Quick help now has four steps with a 1 minute 40 second track, stage visuals the Space shortcut, audio/video formats and saving/export reminders. Copilote 1.2.10 and package compatibility are preserved.

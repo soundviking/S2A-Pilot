@@ -12,7 +12,7 @@ Au premier lancement, la PWA choisit le français si la langue principale du nav
 
 ## Aide rapide
 
-Au premier lancement, une aide en trois étapes présente la création de la conduite, les réglages des Cues et le mode Show avec des captures réelles de l’application. Elle apparaît avant la proposition d’installation. Le bouton « ? », en Edit à gauche d’Annuler et Rétablir, permet de la rouvrir. L’aide et ses captures sont disponibles en français et en anglais, intégrées localement pour fonctionner hors ligne sur les navigateurs compatibles avec ce fonctionnement. Elles sont également adaptées au mode de compatibilité.
+Au premier lancement, une aide en quatre étapes présente la création de la conduite, les réglages des Cues, le mode Show et le raccourci Espace pour Lecture/Pause sur ordinateur. Les captures réelles montrent une musique de 1 min 40 avec sa waveform et des visuels de scène. Elle apparaît avant la proposition d’installation. Le bouton « ? », en Edit à gauche d’Annuler et Rétablir, permet de la rouvrir. L’aide et ses captures sont disponibles en français et en anglais, intégrées localement pour fonctionner hors ligne sur les navigateurs compatibles avec ce fonctionnement. Elles sont également adaptées au mode de compatibilité.
 
 ## Création et édition
 
@@ -86,12 +86,6 @@ Version 1.4.44 : halo lumineux bleu renforcé autour de la Cue active en mode Sh
 
 Version 1.4.44 : à dix secondes de la prochaine Cue, son halo rouge pulse en fondu toutes les secondes et le halo bleu de la Cue active s’éteint en fondu. Hors de cette zone, le halo bleu revient. En réduction des animations, le rouge reste fixe.
 
-## Version 1.4.44 — timelines et compatibilité
-
-La tête de lecture blanche reprend le dessin des timelines médias. Elle se déplace en continu au doigt ou à la souris en Edit et Show ; clic/tap direct, flèches, Début/Fin sont conservés. Pendant le glissement, les médias sont mis en pause et l’interface suit la position ; au relâchement, les médias sont repositionnés et la lecture reprend si elle était active. Une annulation du geste restaure la position initiale. Au zoom, le sélecteur reste déplaçable et le fond permet le défilement horizontal.
-
-En Show, TIMELINE est au-dessus des boxes Cue active et prochaine Cue. Les repères jaunes numérotés sont informatifs et ne déplacent pas les Cues. En Edit, seul le repère de la Cue sélectionnée porte son numéro, sans halo bleu. Les portions avant IN et après OUT sont assombries ; la zone retenue garde son bleu transparent. ⏮ remplace le texte Retour au début ; son libellé reste accessible et son comportement ne change pas.
-
 ## Version 1.4.45 — pictogrammes et anciens navigateurs
 
 Les pictogrammes utilisent les SVG officiels Material Symbols Outlined, embarqués localement : aucune police Google, aucun CDN, aucune requête distante. Les logos S2A Pilot et S2A Production restent identiques. Les boutons conservent leurs libellés et leur comportement.
@@ -110,6 +104,19 @@ Si aucune sauvegarde de la version complète n’existe, la sauvegarde du préc�
 
 Tests : icônes et changements Play/Pause, français/anglais, listes courtes/moyennes/longues, formats ordinateur/tablette/téléphone, hors ligne sur navigateur moderne, PDF et package Copilote. La compatibilité ancienne a été testée avec les API manquantes simulées, lecture callback Web Audio, stockage refusant les Blob, événements tactiles et récupération de sauvegarde ; ce n’est pas un test du moteur Safari 9 sur iPad physique.
 
+## Version 1.4.44 — timelines et compatibilité
+
+La tête de lecture blanche reprend le dessin des timelines médias. Elle se déplace en continu au doigt ou à la souris en Edit et Show ; clic/tap direct, flèches, Début/Fin sont conservés. Pendant le glissement, les médias sont mis en pause et l’interface suit la position ; au relâchement, les médias sont repositionnés et la lecture reprend si elle était active. Une annulation du geste restaure la position initiale. Au zoom, le sélecteur reste déplaçable et le fond permet le défilement horizontal.
+
+En Show, TIMELINE est au-dessus des boxes Cue active et prochaine Cue. Les repères jaunes numérotés sont informatifs et ne déplacent pas les Cues. En Edit, seul le repère de la Cue sélectionnée porte son numéro, sans halo bleu. Les portions avant IN et après OUT sont assombries ; la zone retenue garde son bleu transparent. ⏮ remplace le texte Retour au début ; son libellé reste accessible et son comportement ne change pas.
+
+Le mode ancien navigateur est accessible dans `legacy/index.html`. Il est choisi automatiquement sur iOS 9–12, ou lorsqu’un navigateur ne peut pas lire la syntaxe ou les APIs de base de la version complète. iOS 13+ utilise la version complète si ces capacités sont présentes : il ne s’agit pas d’une garantie pour toutes les versions de Safari.
+
+Ce mode propose une seule musique, les Cues et descriptions, les images, Edit/Show, la navigation tactile/souris, la duplication, une sauvegarde IndexedDB distincte et une conduite imprimable. Il lit les ZIP non compressés exportés par S2A Pilot. S’il y a plusieurs musiques, seule la première est jouée et un message l’indique. Les vidéos ne sont pas jouées. Les points IN/OUT de la musique importée sont respectés, mais leur édition, les boucles, les fondus, le mixage, les waveforms et la sortie vidéo ne sont pas proposés.
+
+L’export de compatibilité est un fichier `.s2apilot.json` avec musique et visuels intégrés, réouvrable dans les deux modes. Il ne contient pas Copilote ni un PDF généré ; la version complète peut ensuite produire le package habituel. Sur Safari ancien, le téléchargement peut s’ouvrir dans une fenêtre plutôt que déclencher un enregistrement direct. Les données locales des deux modes sont séparées : utiliser l’export pour les transférer.
+
+iOS 9–10 doit disposer d’une connexion au site : aucun hors ligne moderne n’est promis. À partir d’iOS 11.3, le service worker peut mettre en cache les fichiers, mais cela reste à confirmer sur l’appareil réel. La lecture automatique après un changement de position peut être refusée par Safari ancien ; lancer une musique à zéro depuis Lecture est le scénario à vérifier en priorité. Les limitations sont affichées dans l’interface. Tests réalisés dans Chrome avec détection iOS simulée et audit de syntaxe ES5 ; aucun iPad 2 physique n’a été testé.
 
 La loupe identifie les commandes de zoom en Edit. Show affiche les minutes et secondes, sans dixièmes ; le temps fixe sous le compte à rebours est supprimé. Le chargement du compagnon demande des fichiers frais pour limiter les manifestes obsolètes.
 
@@ -182,3 +189,8 @@ Case Muet vidéo remplacée par un bouton Material local : haut-parleur barré s
 ## Version 1.4.64
 
 Loupe seule supprimée à côté des commandes de zoom des timelines générale et médias. Loupes +/− conservées ; SVG search inutilisé retiré. Captures d’aide actualisées.
+
+
+## Version 1.4.65
+
+En Show, un geste sur la liste des Cues fait défiler la page, sans défilement interne de la liste. La reprise Lecture/Pause conserve les médias prêts sans repositionnement inutile ; Lecture/Pause porte un halo blanc et Musique / Vidéo adopte le style standard. Dans les Cues audio/vidéo, seul le bouton Supprimer de la Cue reste présent, sous Dupliquer ; les indications techniques de préparation sont masquées. Le cadre de fin de conduite est plein. Aide illustrée enrichie en quatre étapes, avec musique de 1 min 40, visuels de scène et raccourci Espace, formats audio/vidéo et rappel de sauvegarde/export. Copilote 1.2.10 et le format des packages restent compatibles.

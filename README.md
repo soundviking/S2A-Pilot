@@ -1,10 +1,10 @@
-# S2A Pilot 1.4.64 / S2A Copilote 1.2.10
+# S2A Pilot 1.4.65 / S2A Copilote 1.2.10
 
 🇫🇷 **Français** | 🇬🇧 [English](README.en.md)
 
 ![S2A Pilot](assets/social-preview.png)
 
-[PWA 1.4.64](downloads/S2A-Pilot-V1.4.64-PWA.zip) · [Copilote 1.2.10 — Intel / Apple Silicon](downloads/S2A-Copilote-1.2.10-macOS-Universel.zip)
+[PWA 1.4.65](downloads/S2A-Pilot-V1.4.65-PWA.zip) · [Copilote 1.2.10 — Intel / Apple Silicon](downloads/S2A-Copilote-1.2.10-macOS-Universel.zip)
 
 # S2A Pilot — Guide utilisateur
 
@@ -20,7 +20,7 @@ Au premier lancement, la PWA choisit le français si la langue principale du nav
 
 ## Aide rapide
 
-Au premier lancement, une aide en trois étapes présente la création de la conduite, les réglages des Cues et le mode Show avec des captures réelles de l’application. Elle apparaît avant la proposition d’installation. Le bouton « ? », en Edit à gauche d’Annuler et Rétablir, permet de la rouvrir. L’aide et ses captures sont disponibles en français et en anglais, intégrées localement pour fonctionner hors ligne sur les navigateurs compatibles avec ce fonctionnement. Elles sont également adaptées au mode de compatibilité.
+Au premier lancement, une aide en quatre étapes présente la création de la conduite, les réglages des Cues, le mode Show et le raccourci Espace pour Lecture/Pause sur ordinateur. Les captures réelles montrent une musique de 1 min 40 avec sa waveform et des visuels de scène. Elle apparaît avant la proposition d’installation. Le bouton « ? », en Edit à gauche d’Annuler et Rétablir, permet de la rouvrir. L’aide et ses captures sont disponibles en français et en anglais, intégrées localement pour fonctionner hors ligne sur les navigateurs compatibles avec ce fonctionnement. Elles sont également adaptées au mode de compatibilité.
 
 ## Création et édition
 
@@ -197,3 +197,8 @@ Case Muet vidéo remplacée par un bouton Material local : haut-parleur barré s
 ## Version 1.4.64
 
 Loupe seule supprimée à côté des commandes de zoom des timelines générale et médias. Loupes +/− conservées ; SVG search inutilisé retiré. Captures d’aide actualisées.
+
+
+## Version 1.4.65
+
+En Show, un geste sur la liste des Cues fait défiler la page, sans défilement interne de la liste. La reprise Lecture/Pause conserve les médias prêts sans repositionnement inutile ; Lecture/Pause porte un halo blanc et Musique / Vidéo adopte le style standard. Dans les Cues audio/vidéo, seul le bouton Supprimer de la Cue reste présent, sous Dupliquer ; les indications techniques de préparation sont masquées. Le cadre de fin de conduite est plein. Aide illustrée enrichie en quatre étapes, avec musique de 1 min 40, visuels de scène et raccourci Espace, formats audio/vidéo et rappel de sauvegarde/export. Copilote 1.2.10 et le format des packages restent compatibles.

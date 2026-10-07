@@ -1,0 +1,23 @@
+{
+  "version": "1.4.65",
+  "changes": [
+    "Page scrolling from the Show Cue list without internal list scrolling",
+    "Four-step FR/EN help with 100-second actual audio waveform, stage visuals, Space shortcut, import formats and save/export reminders",
+    "Reuse paused prepared audio/video without unnecessary seek on resume",
+    "Static white glow on Play/Pause and standard Music/Video button",
+    "Single Delete control per audio/video Cue; no technical preparation status label",
+    "Solid end-of-show thumbnail border"
+  ],
+  "validated": [
+    "Touch gesture in portrait scrolls page while Cue list stays fixed",
+    "Audio resume produces one play event and no seeking event when position is correct",
+    "Seeking, restart, fade overlap and immediate pause cancellation",
+    "Audio/video Cue controls and mute toggle",
+    "Help first launch, install ordering, FR/EN, offline, desktop/tablet/phone, full/compat/lightweight modes",
+    "PDF, portable package with compiled Copilote, autosave restoration, FR/EN regression"
+  ],
+  "limitations": [
+    "No physical iPad or Safari audio-latency measurement; browser/device output buffering remains browser-dependent",
+    "iOS 9 has no service-worker offline support"
+  ]
+}
