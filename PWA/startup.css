@@ -1,0 +1,11 @@
+/* Local startup animation: CSS and ES5 timer both release the interface. */
+.s2aStartup{position:fixed;inset:0;top:0;right:0;bottom:0;left:0;z-index:10000;background:#080b10;color:#a6bbd3;display:flex;align-items:center;justify-content:center;text-align:center;animation:s2aStartupExit 3s linear both;-webkit-animation:s2aStartupExit 3s linear both}
+.s2aStartupInner{perspective:900px;-webkit-perspective:900px}.s2aStartupLogo{display:block;width:148px;height:148px;margin:auto;border-radius:32px;animation:s2aStartupWords 3s ease both;-webkit-animation:s2aStartupWords 3s ease both}.s2aStartupSlogan{margin:24px 0 0;font:14px -apple-system,BlinkMacSystemFont,Arial,sans-serif;letter-spacing:1px;animation:s2aStartupWords 3s ease both;-webkit-animation:s2aStartupWords 3s ease both}
+@keyframes s2aStartupWords{0%,12%{opacity:0}28%,78%{opacity:1}100%{opacity:0}}@-webkit-keyframes s2aStartupWords{0%,12%{opacity:0}28%,78%{opacity:1}100%{opacity:0}}
+@keyframes s2aStartupExit{0%,78%{opacity:1;visibility:visible}100%{opacity:0;visibility:hidden}}@-webkit-keyframes s2aStartupExit{0%,78%{opacity:1;visibility:visible}100%{opacity:0;visibility:hidden}}
+@media(prefers-reduced-motion:reduce){.s2aStartupLogo{animation-name:s2aStartupWords;-webkit-animation-name:s2aStartupWords}}
+
+
+.s2aStartupLogoWrap{position:relative;width:180px;height:180px;margin:auto}.s2aStartupLogoWrap .s2aStartupLogo{position:absolute;top:16px;left:16px;width:148px;height:148px}.s2aStartupRing{position:absolute;top:0;left:0;width:180px;height:180px;overflow:visible;animation:s2aStartupWords 3s ease both;-webkit-animation:s2aStartupWords 3s ease both}.s2aStartupStroke{fill:none;stroke:#8ac7ff;stroke-linecap:round;stroke-dasharray:585.062;stroke-dashoffset:585.062;animation:s2aStartupProgress 2.45s linear both;-webkit-animation:s2aStartupProgress 2.45s linear both}.ringLayer0{stroke-width:16;opacity:.12}.ringLayer1{stroke-width:7;opacity:.35}.ringLayer2{stroke-width:2.5;opacity:1}
+@keyframes s2aStartupProgress{from{stroke-dashoffset:585.062}to{stroke-dashoffset:0}}@-webkit-keyframes s2aStartupProgress{from{stroke-dashoffset:585.062}to{stroke-dashoffset:0}}
+@media(prefers-reduced-motion:reduce){.s2aStartupStroke{animation:none;-webkit-animation:none;stroke-dashoffset:0}}
