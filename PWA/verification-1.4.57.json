@@ -1,0 +1,11 @@
+{
+  "version": "1.4.57",
+  "tests": [
+    "Countdown subpanel",
+    "Upcoming Cue number",
+    "Empty countdown --:--",
+    "Responsive Show four sizes",
+    "Help screenshots refreshed"
+  ],
+  "limitation": "Physical old iPad untested"
+}

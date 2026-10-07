@@ -162,3 +162,7 @@ The glowing active Cue card displays “No description” when its description i
 ## Version 1.4.56
 
 Upcoming heading uses CUE number; a 16:9 thumbnail appears to the right of its title and description, with No visual if absent. Updated help screenshots.
+
+## Version 1.4.57
+
+Countdown is framed in a right-hand subpanel of the glowing card, labelled with the upcoming Cue number. Shows --:-- when no Cue follows. Help screenshots refreshed.
