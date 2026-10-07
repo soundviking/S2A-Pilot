@@ -214,3 +214,10 @@ L’étape 4 de l’aide se termine par le message de l’équipe S2A Production
 ## Version 1.4.69
 
 En Show, le bas de la liste des Cues se fond doucement dans le noir uniquement lorsque des Cues restent masquées. La liste reste nette si elle tient entièrement dans son cadre.
+
+
+## Version 1.4.70
+
+En Edit, une poubelle rouge à droite de chaque Cue permet de la supprimer sans la déplier. La flèche reste à gauche de cette icône ; le bouton Supprimer intérieur a été retiré.
+
+Version 1.4.70 : suppression des Cues dans leur en-tête, aide Muet vidéo illustrée et protection Lecture/Pause de 0,5 seconde au clavier, au clic et au toucher, avec halo rouge en fondu.
