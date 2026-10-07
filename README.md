@@ -1,10 +1,10 @@
-# S2A Pilot 1.4.61 / S2A Copilote 1.2.10
+# S2A Pilot 1.4.62 / S2A Copilote 1.2.10
 
 🇫🇷 **Français** | 🇬🇧 [English](README.en.md)
 
 ![S2A Pilot](assets/social-preview.jpg)
 
-[PWA 1.4.61](downloads/S2A-Pilot-V1.4.61-PWA.zip) · [Copilote 1.2.10 — Intel / Apple Silicon](downloads/S2A-Copilote-1.2.10-macOS-Universel.zip)
+[PWA 1.4.62](downloads/S2A-Pilot-V1.4.62-PWA.zip) · [Copilote 1.2.10 — Intel / Apple Silicon](downloads/S2A-Copilote-1.2.10-macOS-Universel.zip)
 
 # S2A Pilot — Guide utilisateur
 
@@ -185,3 +185,7 @@ Numéro de la Cue active agrandi ; pastilles audio/vidéo à côté du numéro a
 ## Version 1.4.61
 
 Le halo bleu s’éteint en fondu de 0,7 seconde pendant que le décompte pulse en rouge, puis revient en fondu au changement de Cue.
+
+## Version 1.4.62
+
+Repère bleu devant Suivant rétabli. Pic du halo à chaque seconde entière restante, piloté par le temps de lecture avec fondu entre les battements ; pause et déplacement conservent la synchronisation. Aucun minuteur supplémentaire. Halo fixe si la réduction des animations est demandée.

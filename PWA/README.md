@@ -170,3 +170,7 @@ Numéro de la Cue active agrandi ; pastilles audio/vidéo à côté du numéro a
 ## Version 1.4.61
 
 Le halo bleu s’éteint en fondu de 0,7 seconde pendant que le décompte pulse en rouge, puis revient en fondu au changement de Cue.
+
+## Version 1.4.62
+
+Repère bleu devant Suivant rétabli. Pic du halo à chaque seconde entière restante, piloté par le temps de lecture avec fondu entre les battements ; pause et déplacement conservent la synchronisation. Aucun minuteur supplémentaire. Halo fixe si la réduction des animations est demandée.

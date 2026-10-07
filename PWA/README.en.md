@@ -178,3 +178,7 @@ Next Cue: fixed 16:9 thumbnail beside headings, full-width description below. Ma
 ## Version 1.4.61
 
 Blue glow fades out over 0.7 seconds while the countdown pulses red, then fades back in after the Cue change.
+
+## Version 1.4.62
+
+Next heading blue marker restored. Countdown glow peaks at each whole remaining second, driven by the transport animation frame with a smooth fade between beats; pauses and seeks retain its phase. No additional timer. Reduced-motion preference uses a steady glow.

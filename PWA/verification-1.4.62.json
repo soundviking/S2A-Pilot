@@ -1,0 +1,11 @@
+{
+  "version": "1.4.62",
+  "tests": [
+    "Peak opacity 1 at integer seconds",
+    "Half-second opacity .12; quarter-second .56",
+    "Next heading blue 4px marker",
+    "Responsive Show four sizes"
+  ],
+  "method": "Transport-driven animation frame, no extra timer",
+  "limitation": "Display refresh and browser scheduling limit visual timing precision"
+}
