@@ -1,10 +1,10 @@
-# S2A Pilot 1.4.54 / S2A Copilote 1.2.10
+# S2A Pilot 1.4.55 / S2A Copilote 1.2.10
 
 🇫🇷 **Français** | 🇬🇧 [English](README.en.md)
 
 ![S2A Pilot](assets/social-preview.jpg)
 
-[PWA 1.4.54](downloads/S2A-Pilot-V1.4.54-PWA.zip) · [Copilote 1.2.10 — Intel / Apple Silicon](downloads/S2A-Copilote-1.2.10-macOS-Universel.zip)
+[PWA 1.4.55](downloads/S2A-Pilot-V1.4.55-PWA.zip) · [Copilote 1.2.10 — Intel / Apple Silicon](downloads/S2A-Copilote-1.2.10-macOS-Universel.zip)
 
 # S2A Pilot — Guide utilisateur
 
@@ -161,3 +161,7 @@ Show : « Visuel actif » au-dessus de l’image. « Avenir : Q numéro » conti
 ## Version 1.4.54
 
 Pastilles audio/vidéo uniquement textuelles en Edit et Show, vertes et roses. Styles d’aide obsolètes supprimés ; rendu des pastilles regroupé, sans reconstruction quand leur état ne change pas pendant la lecture. Vérifications aide, hors ligne, Show responsive, PDF, export avec Copilote et branche complète de compatibilité.
+
+## Version 1.4.55
+
+La box lumineuse de la Cue active affiche « Pas de description » lorsque sa description est vide.

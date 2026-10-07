@@ -146,3 +146,7 @@ Show : « Visuel actif » au-dessus de l’image. « Avenir : Q numéro » conti
 ## Version 1.4.54
 
 Pastilles audio/vidéo uniquement textuelles en Edit et Show, vertes et roses. Styles d’aide obsolètes supprimés ; rendu des pastilles regroupé, sans reconstruction quand leur état ne change pas pendant la lecture. Vérifications aide, hors ligne, Show responsive, PDF, export avec Copilote et branche complète de compatibilité.
+
+## Version 1.4.55
+
+La box lumineuse de la Cue active affiche « Pas de description » lorsque sa description est vide.

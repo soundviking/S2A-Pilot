@@ -1,10 +1,10 @@
-# S2A Pilot 1.4.54 / S2A Copilote 1.2.10
+# S2A Pilot 1.4.55 / S2A Copilote 1.2.10
 
 🇫🇷 [Français](README.md) | 🇬🇧 **English**
 
 ![S2A Pilot](assets/social-preview.jpg)
 
-[PWA 1.4.54](downloads/S2A-Pilot-V1.4.54-PWA.zip) · [Copilote 1.2.10 — Intel / Apple Silicon](downloads/S2A-Copilote-1.2.10-macOS-Universel.zip)
+[PWA 1.4.55](downloads/S2A-Pilot-V1.4.55-PWA.zip) · [Copilote 1.2.10 — Intel / Apple Silicon](downloads/S2A-Copilote-1.2.10-macOS-Universel.zip)
 
 # S2A Pilot — User guide
 
@@ -169,3 +169,7 @@ Show: Active visual replaces Active Cue above the image. Upcoming: Q number cont
 ## Version 1.4.54
 
 Audio/video badges use text only in Edit and Show, with green audio and pink video colors. Removed obsolete help styles and consolidated badge rendering to skip unchanged updates during playback. Help, offline, responsive Show, PDF, export with Copilote and full compatibility branch verified.
+
+## Version 1.4.55
+
+The glowing active Cue card displays “No description” when its description is empty.

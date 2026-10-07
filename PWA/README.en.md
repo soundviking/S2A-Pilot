@@ -154,3 +154,7 @@ Show: Active visual replaces Active Cue above the image. Upcoming: Q number cont
 ## Version 1.4.54
 
 Audio/video badges use text only in Edit and Show, with green audio and pink video colors. Removed obsolete help styles and consolidated badge rendering to skip unchanged updates during playback. Help, offline, responsive Show, PDF, export with Copilote and full compatibility branch verified.
+
+## Version 1.4.55
+
+The glowing active Cue card displays “No description” when its description is empty.
