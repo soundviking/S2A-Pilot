@@ -126,3 +126,7 @@ Compact title-only Cue bubbles below the general timeline in Edit and Show. Acti
 ## Version 1.4.47 — help and buttons
 
 A three-step illustrated guide opens on first launch before installation and can be reopened with “?” in Edit. French/English screenshots are bundled locally, including compatibility mode. Cue and Music / Video retain their icons without a redundant “+” in their labels. Play/Pause has a fixed width in both languages. S2A Copilote remains at 1.2.10; the package format is unchanged.
+
+## Version 1.4.48
+
+Show: timeline above the full Cue list on the left and active Cue details on the right, with active and next visuals side by side. Cue numbers precede their titles. All Cues remain in the list; playback and project format are unchanged. Quick-help screenshots are refreshed and have an embedded local fallback when separate PNG files are unavailable. Phone layout stacks the panels. Copilote 1.2.10 unchanged.

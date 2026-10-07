@@ -1,0 +1,13 @@
+{
+  "version": "1.4.48",
+  "tests": [
+    "Show responsive 390/768/1024/1280, complete Cue list and active highlight",
+    "Cue numbers before active and next titles",
+    "Help screenshots FR/EN, offline, first-launch persistence",
+    "Embedded fallback tested with all PNG requests returning 404",
+    "PDF and packages containing universal Copilote",
+    "Compiled ES5 source hashes match",
+    "Logos and companion unchanged"
+  ],
+  "limitation": "iOS 9.3.5 real hardware untested"
+}

@@ -118,3 +118,7 @@ Bulles compactes avec titre seul sous la timeline générale en Edit et Show. Pr
 ## Version 1.4.47 — aide et boutons
 
 Aide illustrée en trois étapes, au premier lancement avant l’installation et accessible avec « ? » en Edit. Captures françaises/anglaises intégrées localement, également adaptées au mode de compatibilité. Les boutons Cue et Musique / Vidéo conservent leurs icônes sans « + » dans leur texte. Lecture/Pause garde une largeur fixe dans les deux langues. S2A Copilote reste en version 1.2.10 ; le format des packages est inchangé.
+
+## Version 1.4.48
+
+Mode Show : timeline en haut, liste complète à gauche, informations de la Cue active à droite et visuels actif/suivant côte à côte. Les titres sont précédés de leur numéro. Toutes les Cues restent présentes ; lecture et format des projets inchangés. Captures de l’aide actualisées avec secours local intégré si les PNG séparés sont indisponibles. Disposition empilée sur téléphone. Copilote 1.2.10 inchangé.
