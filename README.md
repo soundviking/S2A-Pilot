@@ -1,10 +1,10 @@
-# S2A Pilot 1.4.71 / S2A Copilote 1.2.10
+# S2A Pilot 1.4.72 / S2A Copilote 1.2.10
 
 🇫🇷 **Français** | 🇬🇧 [English](README.en.md)
 
 ![S2A Pilot](assets/social-preview.png)
 
-[PWA 1.4.71](downloads/S2A-Pilot-V1.4.71-PWA.zip) · [Copilote 1.2.10 — Intel / Apple Silicon](downloads/S2A-Copilote-1.2.10-macOS-Universel.zip)
+[PWA 1.4.72](downloads/S2A-Pilot-V1.4.72-PWA.zip) · [Copilote 1.2.10 — Intel / Apple Silicon](downloads/S2A-Copilote-1.2.10-macOS-Universel.zip)
 
 # S2A Pilot — Guide utilisateur
 
@@ -231,3 +231,5 @@ En Edit, une poubelle rouge à droite de chaque Cue permet de la supprimer sans 
 Version 1.4.70 : suppression des Cues dans leur en-tête, aide Muet vidéo illustrée et protection Lecture/Pause de 0,5 seconde au clavier, au clic et au toucher, avec halo rouge en fondu.
 
 Version 1.4.71 : fondu en haut de la liste Show uniquement après défilement, sans atténuer la Cue active.
+
+Version 1.4.72 : fichiers et captures de l’aide versionnés pour empêcher la réutilisation d’une ancienne aide en cache. Quatre étapes vérifiées dans l’archive.

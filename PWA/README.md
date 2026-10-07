@@ -223,3 +223,5 @@ En Edit, une poubelle rouge à droite de chaque Cue permet de la supprimer sans 
 Version 1.4.70 : suppression des Cues dans leur en-tête, aide Muet vidéo illustrée et protection Lecture/Pause de 0,5 seconde au clavier, au clic et au toucher, avec halo rouge en fondu.
 
 Version 1.4.71 : fondu en haut de la liste Show uniquement après défilement, sans atténuer la Cue active.
+
+Version 1.4.72 : fichiers et captures de l’aide versionnés pour empêcher la réutilisation d’une ancienne aide en cache. Quatre étapes vérifiées dans l’archive.

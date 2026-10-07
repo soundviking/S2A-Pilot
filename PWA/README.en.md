@@ -231,3 +231,5 @@ In Edit, a red trash icon at the right of each Cue deletes it without expanding 
 Version 1.4.70: Cue deletion in the row header, illustrated video mute tip and a shared 0.5-second Play/Pause guard for keyboard, mouse and touch, with a fading red glow.
 
 Version 1.4.71: top fade in the Show Cue list only after scrolling, keeping the active Cue clear.
+
+Version 1.4.72: versioned help files and screenshots prevent stale cached help. Four steps checked in the release archive.
