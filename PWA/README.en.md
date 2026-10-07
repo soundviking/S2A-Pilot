@@ -207,3 +207,8 @@ In Show, gestures over the Cue list scroll the page while internal list scrollin
 ## Version 1.4.66
 
 Past Cue bubbles on the general timeline are grey. The active Cue keeps its blue glow and upcoming Cues remain yellow. Colors follow the transport position, including backward seeking, in Edit and Show.
+
+
+## Version 1.4.67
+
+Help step 4 keeps only the Space shortcut and the formats, saving and export notes; the repeated screenshot has been removed to save space. The first three steps retain their screenshots.

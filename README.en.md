@@ -1,10 +1,10 @@
-# S2A Pilot 1.4.66 / S2A Copilote 1.2.10
+# S2A Pilot 1.4.67 / S2A Copilote 1.2.10
 
 🇫🇷 [Français](README.md) | 🇬🇧 **English**
 
 ![S2A Pilot](assets/social-preview.png)
 
-[PWA 1.4.66](downloads/S2A-Pilot-V1.4.66-PWA.zip) · [Copilote 1.2.10 — Intel / Apple Silicon](downloads/S2A-Copilote-1.2.10-macOS-Universel.zip)
+[PWA 1.4.67](downloads/S2A-Pilot-V1.4.67-PWA.zip) · [Copilote 1.2.10 — Intel / Apple Silicon](downloads/S2A-Copilote-1.2.10-macOS-Universel.zip)
 
 # S2A Pilot — User guide
 
@@ -215,3 +215,8 @@ In Show, gestures over the Cue list scroll the page while internal list scrollin
 ## Version 1.4.66
 
 Past Cue bubbles on the general timeline are grey. The active Cue keeps its blue glow and upcoming Cues remain yellow. Colors follow the transport position, including backward seeking, in Edit and Show.
+
+
+## Version 1.4.67
+
+Help step 4 keeps only the Space shortcut and the formats, saving and export notes; the repeated screenshot has been removed to save space. The first three steps retain their screenshots.

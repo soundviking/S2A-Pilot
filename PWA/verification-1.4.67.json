@@ -1,0 +1,7 @@
+{
+  "version": "1.4.67",
+  "change": "Hide the repeated screenshot in help step 4 only",
+  "validated": [
+    "FR/EN full and lightweight: screenshots retained in steps 1\u20133; step 4 texts and notes retained; Back restores screenshot"
+  ]
+}

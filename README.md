@@ -1,10 +1,10 @@
-# S2A Pilot 1.4.66 / S2A Copilote 1.2.10
+# S2A Pilot 1.4.67 / S2A Copilote 1.2.10
 
 🇫🇷 **Français** | 🇬🇧 [English](README.en.md)
 
 ![S2A Pilot](assets/social-preview.png)
 
-[PWA 1.4.66](downloads/S2A-Pilot-V1.4.66-PWA.zip) · [Copilote 1.2.10 — Intel / Apple Silicon](downloads/S2A-Copilote-1.2.10-macOS-Universel.zip)
+[PWA 1.4.67](downloads/S2A-Pilot-V1.4.67-PWA.zip) · [Copilote 1.2.10 — Intel / Apple Silicon](downloads/S2A-Copilote-1.2.10-macOS-Universel.zip)
 
 # S2A Pilot — Guide utilisateur
 
@@ -207,3 +207,8 @@ En Show, un geste sur la liste des Cues fait défiler la page, sans défilement 
 ## Version 1.4.66
 
 Les bulles des Cues déjà passées sur la timeline générale sont grisées. La Cue active conserve son halo bleu et les Cues à venir restent jaunes. Les couleurs suivent la position de lecture, y compris après un retour en arrière, en Edit et en Show.
+
+
+## Version 1.4.67
+
+L’étape 4 de l’aide conserve uniquement le raccourci Espace et l’encart formats, sauvegarde et exports ; la capture répétée a été retirée pour gagner de la place. Les trois premières étapes gardent leurs visuels.

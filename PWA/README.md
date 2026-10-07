@@ -199,3 +199,8 @@ En Show, un geste sur la liste des Cues fait défiler la page, sans défilement 
 ## Version 1.4.66
 
 Les bulles des Cues déjà passées sur la timeline générale sont grisées. La Cue active conserve son halo bleu et les Cues à venir restent jaunes. Les couleurs suivent la position de lecture, y compris après un retour en arrière, en Edit et en Show.
+
+
+## Version 1.4.67
+
+L’étape 4 de l’aide conserve uniquement le raccourci Espace et l’encart formats, sauvegarde et exports ; la capture répétée a été retirée pour gagner de la place. Les trois premières étapes gardent leurs visuels.
