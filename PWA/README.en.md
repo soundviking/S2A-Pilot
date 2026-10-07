@@ -170,3 +170,7 @@ Countdown is framed in a right-hand subpanel of the glowing card, labelled with 
 ## Version 1.4.58
 
 Active Cue number enlarged; audio/video badges sit beside it above the title, instead of below the countdown. Updated help screenshots.
+
+## Version 1.4.60
+
+Next Cue: fixed 16:9 thumbnail beside headings, full-width description below. Main card keeps its blue glow; red pulse is limited to the countdown subpanel. CUE is uppercase in its label. Help screenshots refreshed.

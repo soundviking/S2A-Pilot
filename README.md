@@ -1,10 +1,10 @@
-# S2A Pilot 1.4.59 / S2A Copilote 1.2.10
+# S2A Pilot 1.4.60 / S2A Copilote 1.2.10
 
 🇫🇷 **Français** | 🇬🇧 [English](README.en.md)
 
 ![S2A Pilot](assets/social-preview.jpg)
 
-[PWA 1.4.59](downloads/S2A-Pilot-V1.4.59-PWA.zip) · [Copilote 1.2.10 — Intel / Apple Silicon](downloads/S2A-Copilote-1.2.10-macOS-Universel.zip)
+[PWA 1.4.60](downloads/S2A-Pilot-V1.4.60-PWA.zip) · [Copilote 1.2.10 — Intel / Apple Silicon](downloads/S2A-Copilote-1.2.10-macOS-Universel.zip)
 
 # S2A Pilot — Guide utilisateur
 
@@ -177,3 +177,7 @@ Décompte encadré dans une sous-box à droite de la box lumineuse, avec le num�
 ## Version 1.4.58
 
 Numéro de la Cue active agrandi ; pastilles audio/vidéo à côté du numéro au-dessus du titre, au lieu de sous le décompte. Captures d’aide actualisées.
+
+## Version 1.4.60
+
+« Suivant » : vignette fixe 16:9 à côté des titres, description en pleine largeur dessous. Halo bleu conservé sur la box principale ; halo rouge pulsé uniquement sur la sous-box du décompte. CUE en majuscules dans son libellé. Captures d’aide actualisées.

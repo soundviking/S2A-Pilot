@@ -162,3 +162,7 @@ Décompte encadré dans une sous-box à droite de la box lumineuse, avec le num�
 ## Version 1.4.58
 
 Numéro de la Cue active agrandi ; pastilles audio/vidéo à côté du numéro au-dessus du titre, au lieu de sous le décompte. Captures d’aide actualisées.
+
+## Version 1.4.60
+
+« Suivant » : vignette fixe 16:9 à côté des titres, description en pleine largeur dessous. Halo bleu conservé sur la box principale ; halo rouge pulsé uniquement sur la sous-box du décompte. CUE en majuscules dans son libellé. Captures d’aide actualisées.

@@ -1,0 +1,11 @@
+{
+  "version": "1.4.60",
+  "passed": [
+    "Fixed 16:9 missing-image frame",
+    "Full-width description",
+    "Suivant heading",
+    "Red pulse on countdown subpanel",
+    "Responsive across four sizes",
+    "Updated help screenshots"
+  ]
+}
