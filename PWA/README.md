@@ -141,7 +141,7 @@ Titre de la liste Show harmonisé avec les autres boxes : petites capitales espa
 
 ## Version 1.4.53
 
-Show : « Visuel actif » au-dessus de l’image. « Avenir : Q numéro » contient le titre et la description de la prochaine Cue sans image ; « Pas de description » si vide. Pastilles audio vertes / vidéo roses selon ses médias. Captures d’aide actualisées.
+Show : « Visuel actif » au-dessus de l’image. « Avenir : Cue numéro » contient le titre et la description de la prochaine Cue sans image ; « Pas de description » si vide. Pastilles audio vertes / vidéo roses selon ses médias. Captures d’aide actualisées.
 
 ## Version 1.4.54
 
@@ -157,7 +157,7 @@ Titre corrigé « A VENIR : CUE numéro ». Vignette 16:9 à droite du titre et 
 
 ## Version 1.4.57
 
-Décompte encadré dans une sous-box à droite de la box lumineuse, avec le numéro de la Cue à venir (« Q7 dans »). Affiche --:-- après la dernière Cue. Captures d’aide actualisées.
+Décompte encadré dans une sous-box à droite de la box lumineuse, avec le numéro de la Cue à venir (« Cue 7 dans »). Affiche --:-- après la dernière Cue. Captures d’aide actualisées.
 
 ## Version 1.4.58
 
