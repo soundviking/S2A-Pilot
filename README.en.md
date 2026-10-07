@@ -1,10 +1,10 @@
-# S2A Pilot 1.4.74 / S2A Copilote 1.2.10
+# S2A Pilot 1.4.75 / S2A Copilote 1.2.10
 
 🇫🇷 [Français](README.md) | 🇬🇧 **English**
 
 ![S2A Pilot](assets/social-preview.png)
 
-[PWA 1.4.74](downloads/S2A-Pilot-V1.4.74-PWA.zip) · [Copilote 1.2.10 — Intel / Apple Silicon](downloads/S2A-Copilote-1.2.10-macOS-Universel.zip)
+[PWA 1.4.75](downloads/S2A-Pilot-V1.4.75-PWA.zip) · [Copilote 1.2.10 — Intel / Apple Silicon](downloads/S2A-Copilote-1.2.10-macOS-Universel.zip)
 
 # S2A Pilot — User guide
 
@@ -245,3 +245,5 @@ Version 1.4.72: versioned help files and screenshots prevent stale cached help. 
 Version 1.4.73: help step 4 has two sections, a concise Space bar tip and an illustrated muted video tip without a boxed paragraph.
 
 Version 1.4.74: local three-second startup animation, stationary logo with a progressive blue outline, French/English slogan and lightweight mode support. Help opens after startup.
+
+Version 1.4.75: rotating startup logo with a brighter blue glow. Fade without rotation on iOS 9, in lightweight mode and with reduced motion.

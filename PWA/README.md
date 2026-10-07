@@ -229,3 +229,5 @@ Version 1.4.72 : fichiers et captures de l’aide versionnés pour empêcher la 
 Version 1.4.73 : étape 4 de l’aide séparée en deux sections, astuce Espace simplifiée et Vidéo muette illustrée, sans encart.
 
 Version 1.4.74 : animation locale de trois secondes au démarrage, logo fixe et halo bleu progressif, slogan français/anglais, compatible mode allégé. Aide affichée après l’animation.
+
+Version 1.4.75 : retour à la rotation du logo avec halo bleu plus lumineux. Fondu sans rotation sur iOS 9, en mode allégé et avec mouvements réduits.
