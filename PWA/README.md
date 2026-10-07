@@ -150,3 +150,7 @@ Pastilles audio/vidéo uniquement textuelles en Edit et Show, vertes et roses. S
 ## Version 1.4.55
 
 La box lumineuse de la Cue active affiche « Pas de description » lorsque sa description est vide.
+
+## Version 1.4.56
+
+Titre corrigé « A VENIR : CUE numéro ». Vignette 16:9 à droite du titre et de la description, avec « Pas de visuel » si aucune image. Captures d’aide actualisées.

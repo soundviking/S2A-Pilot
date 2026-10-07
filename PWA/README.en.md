@@ -158,3 +158,7 @@ Audio/video badges use text only in Edit and Show, with green audio and pink vid
 ## Version 1.4.55
 
 The glowing active Cue card displays “No description” when its description is empty.
+
+## Version 1.4.56
+
+Upcoming heading uses CUE number; a 16:9 thumbnail appears to the right of its title and description, with No visual if absent. Updated help screenshots.

@@ -1,0 +1,10 @@
+{
+  "version": "1.4.56",
+  "passed": [
+    "Upcoming heading",
+    "Visible right-hand thumbnail and missing-image text",
+    "Responsive 390/768/1024/1280",
+    "Updated help screenshots"
+  ],
+  "limitation": "Physical old iPad not tested"
+}
