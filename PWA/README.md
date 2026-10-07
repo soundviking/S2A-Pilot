@@ -130,3 +130,7 @@ Trois boxes Show indépendantes : numéro/titre/description avec décompte avant
 ## Version 1.4.50
 
 Show : titres harmonisés « Cue active » et « Prochaine Cue : numéro », titre actif agrandi, badges audio verts et vidéo roses. Boxes de visuel compactes de même hauteur en paysage, liste droite alignée sur la hauteur totale. Captures d’aide actualisées.
+
+## Version 1.4.51
+
+Liste Show : défilement manuel bloqué ; suivi automatique de la Cue active en paysage. En portrait, la liste adapte sa hauteur au nombre de Cues, sans barre de défilement interne.

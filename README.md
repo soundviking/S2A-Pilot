@@ -1,10 +1,10 @@
-# S2A Pilot 1.4.50 / S2A Copilote 1.2.10
+# S2A Pilot 1.4.51 / S2A Copilote 1.2.10
 
 🇫🇷 **Français** | 🇬🇧 [English](README.en.md)
 
 ![S2A Pilot](assets/social-preview.jpg)
 
-[PWA 1.4.50](downloads/S2A-Pilot-V1.4.50-PWA.zip) · [Copilote 1.2.10 — Intel / Apple Silicon](downloads/S2A-Copilote-1.2.10-macOS-Universel.zip)
+[PWA 1.4.51](downloads/S2A-Pilot-V1.4.51-PWA.zip) · [Copilote 1.2.10 — Intel / Apple Silicon](downloads/S2A-Copilote-1.2.10-macOS-Universel.zip)
 
 # S2A Pilot — Guide utilisateur
 
@@ -145,3 +145,7 @@ Trois boxes Show indépendantes : numéro/titre/description avec décompte avant
 ## Version 1.4.50
 
 Show : titres harmonisés « Cue active » et « Prochaine Cue : numéro », titre actif agrandi, badges audio verts et vidéo roses. Boxes de visuel compactes de même hauteur en paysage, liste droite alignée sur la hauteur totale. Captures d’aide actualisées.
+
+## Version 1.4.51
+
+Liste Show : défilement manuel bloqué ; suivi automatique de la Cue active en paysage. En portrait, la liste adapte sa hauteur au nombre de Cues, sans barre de défilement interne.

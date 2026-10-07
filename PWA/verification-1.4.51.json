@@ -1,0 +1,12 @@
+{
+  "version": "1.4.51",
+  "tests": [
+    "Responsive Show 390/768/1024/1280",
+    "Manual list scroll disabled",
+    "Automatic active row positioning in landscape",
+    "Portrait height adapts to Cue count"
+  ],
+  "limitations": [
+    "Physical iOS 9.3.5 not tested"
+  ]
+}

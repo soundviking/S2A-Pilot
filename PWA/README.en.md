@@ -138,3 +138,7 @@ Show uses three independent cards: Cue number/title/description with the upcomin
 ## Version 1.4.50
 
 Show: consistent Active Cue / Next Cue: number headings, larger active title, green audio and pink video badges. Compact matching visual cards in landscape, with the right Cue list aligned to the total height. Help screenshots updated.
+
+## Version 1.4.51
+
+Show Cue list: manual scrolling blocked; automatic current-Cue tracking in landscape. In portrait, the list grows with the number of Cues, without an internal scrollbar.
