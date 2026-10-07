@@ -1,10 +1,10 @@
-# S2A Pilot 1.4.49 / S2A Copilote 1.2.10
+# S2A Pilot 1.4.50 / S2A Copilote 1.2.10
 
 🇫🇷 [Français](README.md) | 🇬🇧 **English**
 
 ![S2A Pilot](assets/social-preview.jpg)
 
-[PWA 1.4.49](downloads/S2A-Pilot-V1.4.49-PWA.zip) · [Copilote 1.2.10 — Intel / Apple Silicon](downloads/S2A-Copilote-1.2.10-macOS-Universel.zip)
+[PWA 1.4.50](downloads/S2A-Pilot-V1.4.50-PWA.zip) · [Copilote 1.2.10 — Intel / Apple Silicon](downloads/S2A-Copilote-1.2.10-macOS-Universel.zip)
 
 # S2A Pilot — User guide
 
@@ -149,3 +149,7 @@ Show: timeline above the full Cue list on the left and active Cue details on the
 ## Version 1.4.49
 
 Show uses three independent cards: Cue number/title/description with the upcoming countdown and optional media badge; main visual; next Cue. Only the countdown card glows blue, then pulses red in the last ten seconds. The Cue list is on the right in landscape and below in portrait. Missing visuals use black thumbnails. Quick-help screenshots refreshed.
+
+## Version 1.4.50
+
+Show: consistent Active Cue / Next Cue: number headings, larger active title, green audio and pink video badges. Compact matching visual cards in landscape, with the right Cue list aligned to the total height. Help screenshots updated.

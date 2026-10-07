@@ -126,3 +126,7 @@ Mode Show : timeline en haut, liste complète à gauche, informations de la Cue 
 ## Version 1.4.49
 
 Trois boxes Show indépendantes : numéro/titre/description avec décompte avant la prochaine Cue et badge média éventuel ; visuel principal ; prochaine Cue. Le halo bleu est uniquement sur la box du décompte, puis rouge pulsé pendant les dix dernières secondes. Liste à droite en paysage, en bas en portrait. Vignettes noires pour les Cues sans visuel. Captures de l’aide actualisées.
+
+## Version 1.4.50
+
+Show : titres harmonisés « Cue active » et « Prochaine Cue : numéro », titre actif agrandi, badges audio verts et vidéo roses. Boxes de visuel compactes de même hauteur en paysage, liste droite alignée sur la hauteur totale. Captures d’aide actualisées.

@@ -1,0 +1,11 @@
+{
+  "version": "1.4.50",
+  "passed": [
+    "Responsive Show and unchanged Edit",
+    "Independent cards and countdown halo",
+    "FR/EN headings and media colors",
+    "PDF/Copilote exports",
+    "Updated local help captures"
+  ],
+  "limitation": "Physical old iPad not tested"
+}
