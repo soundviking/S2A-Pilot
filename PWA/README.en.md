@@ -229,3 +229,5 @@ In Show, only the bottom of the Cue list fades into black when additional Cues a
 In Edit, a red trash icon at the right of each Cue deletes it without expanding it. The expand arrow sits to its left; the inner Delete button has been removed.
 
 Version 1.4.70: Cue deletion in the row header, illustrated video mute tip and a shared 0.5-second Play/Pause guard for keyboard, mouse and touch, with a fading red glow.
+
+Version 1.4.71: top fade in the Show Cue list only after scrolling, keeping the active Cue clear.

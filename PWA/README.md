@@ -221,3 +221,5 @@ En Show, le bas de la liste des Cues se fond doucement dans le noir uniquement l
 En Edit, une poubelle rouge à droite de chaque Cue permet de la supprimer sans la déplier. La flèche reste à gauche de cette icône ; le bouton Supprimer intérieur a été retiré.
 
 Version 1.4.70 : suppression des Cues dans leur en-tête, aide Muet vidéo illustrée et protection Lecture/Pause de 0,5 seconde au clavier, au clic et au toucher, avec halo rouge en fondu.
+
+Version 1.4.71 : fondu en haut de la liste Show uniquement après défilement, sans atténuer la Cue active.

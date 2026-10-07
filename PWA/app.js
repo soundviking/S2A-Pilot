@@ -884,7 +884,7 @@ document.addEventListener('touchmove',e=>{if(e.touches.length>1)e.preventDefault
 document.addEventListener('wheel',e=>{if(e.ctrlKey)e.preventDefault();},{passive:false});
 
 // This manifest is requested from the network, outside the service-worker cache.
-const APP_VERSION='1.4.70';document.querySelector('.appVersion').textContent='Version '+APP_VERSION;let lastVersionCheck=0,versionCheckRunning=false;
+const APP_VERSION='1.4.71';document.querySelector('.appVersion').textContent='Version '+APP_VERSION;let lastVersionCheck=0,versionCheckRunning=false;
 const updateNotice=document.createElement('div');updateNotice.id='updateNotice';updateNotice.hidden=true;updateNotice.setAttribute('role','status');const updateText=document.createElement('span'),updateButton=document.createElement('button');updateButton.type='button';updateButton.textContent=tr('Ouvrir la nouvelle version');updateNotice.append(updateText,updateButton);document.querySelector('main').prepend(updateNotice);
 function updateVersionButton(){const b=document.getElementById('updateNotice')?.querySelector('button');if(!b)return;b.disabled=locked||transportPlaying;b.title=b.disabled?tr('Quitter le mode Show et mettre la lecture en pause pour actualiser.'):'';}
 function versionIsNewer(a,b){const x=a.split('.').map(Number),y=b.split('.').map(Number);for(let i=0;i<3;i++){if(x[i]!==y[i])return x[i]>y[i];}return false;}
@@ -942,7 +942,7 @@ function updateNextMediaBadges(cue){renderCueMediaBadges($('nextCueMediaBadges')
 
 function updateCountdownBeat(t){const el=$('countdownBeat');if(!el)return;const next=getNextCue(t),remaining=next?next.time-t:Infinity;const urgent=locked&&remaining>=0&&remaining<=10.0001;let opacity=0;if(urgent){setShowText(nextCountdown,fmtDisplay(remaining,true));const reduced=countdownMotionPreference&&countdownMotionPreference.matches;opacity=reduced?1:.12+.88*(.5+.5*Math.cos(2*Math.PI*remaining));}const value=opacity.toFixed(3);if(el.style.opacity!==value)el.style.opacity=value;}
 
-function updateShowOverviewFade(){const host=$('showCueOverviewRows');if(!host)return;host.parentElement.classList.toggle('hasHiddenCues',locked&&host.clientHeight>0&&host.scrollHeight-host.clientHeight-host.scrollTop>1);}
+function updateShowOverviewFade(){const host=$('showCueOverviewRows');if(!host)return;const card=host.parentElement;card.classList.toggle('hasHiddenCues',locked&&host.clientHeight>0&&host.scrollHeight-host.clientHeight-host.scrollTop>1);const active=host.querySelector('.isActive'),clearance=active?active.getBoundingClientRect().top-host.getBoundingClientRect().top-12:56;const height=Math.max(0,Math.min(56,host.clientHeight*.3,clearance));card.style.setProperty('--overview-top-fade-height',height+'px');card.classList.toggle('hasPreviousCues',locked&&host.scrollTop>1&&height>1);}
 window.addEventListener('resize',()=>requestAnimationFrame(updateShowOverviewFade));
 $('showCueOverviewRows').addEventListener('scroll',updateShowOverviewFade);
 if(typeof ResizeObserver==='function')new ResizeObserver(updateShowOverviewFade).observe($('showCueOverviewRows'));
