@@ -23,6 +23,7 @@
     "skip_previous": "https://raw.githubusercontent.com/google/material-design-icons/master/symbols/web/skip_previous/materialsymbolsoutlined/skip_previous_24px.svg",
     "undo": "https://raw.githubusercontent.com/google/material-design-icons/master/symbols/web/undo/materialsymbolsoutlined/undo_24px.svg",
     "zoom_in": "https://raw.githubusercontent.com/google/material-design-icons/master/symbols/web/zoom_in/materialsymbolsoutlined/zoom_in_24px.svg",
-    "zoom_out": "https://raw.githubusercontent.com/google/material-design-icons/master/symbols/web/zoom_out/materialsymbolsoutlined/zoom_out_24px.svg"
+    "zoom_out": "https://raw.githubusercontent.com/google/material-design-icons/master/symbols/web/zoom_out/materialsymbolsoutlined/zoom_out_24px.svg",
+    "help": "https://raw.githubusercontent.com/google/material-design-icons/master/symbols/web/help/materialsymbolsoutlined/help_24px.svg"
   }
 }

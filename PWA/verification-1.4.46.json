@@ -1,0 +1,7 @@
+{
+  "version": "1.4.46",
+  "helpTests": "First launch before installation; once-only persistence; Edit placement; keyboard and focus; FR/EN screenshots; desktop/tablet/phone; service-worker offline; lightweight and compatibility branches: passed",
+  "actualIOS935HardwareTested": false,
+  "compatBuildSourceHashesMatch": true,
+  "unchangedIconAndCompanionFiles": 7
+}

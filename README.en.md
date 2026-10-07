@@ -1,10 +1,10 @@
-# S2A Pilot 1.4.45 / S2A Copilote 1.2.10
+# S2A Pilot 1.4.47 / S2A Copilote 1.2.10
 
 🇫🇷 [Français](README.md) | 🇬🇧 **English**
 
 ![S2A Pilot](assets/social-preview.jpg)
 
-[PWA 1.4.45](downloads/S2A-Pilot-V1.4.45-PWA.zip) · [Copilote 1.2.10 — Intel / Apple Silicon](downloads/S2A-Copilote-1.2.10-macOS-Universel.zip)
+[PWA 1.4.47](downloads/S2A-Pilot-V1.4.47-PWA.zip) · [Copilote 1.2.10 — Intel / Apple Silicon](downloads/S2A-Copilote-1.2.10-macOS-Universel.zip)
 
 # S2A Pilot — User guide
 
@@ -18,9 +18,13 @@ The web app uses the browser’s preferred language at first launch: French for 
 
 S2A Copilote uses the macOS preferred language at first launch and offers a Français / English switch in its header. Its manual preference is remembered independently from the web app.
 
+## Quick help
+
+On first launch, a three-step guide introduces show creation, Cue settings and Show mode with actual application screenshots. It appears before the installation prompt. The “?” button in Edit, to the left of Undo and Redo, opens it again. The guide and screenshots are available in French and English and bundled locally for offline use in browsers that support it. They also cover compatibility mode.
+
 ## Prepare a show
 
-A new project starts without any Cue. Set the show name, then use **+ Cue** for a title, description and visual, or **+ Music / Video** to import media into a new Cue. New Cues use the current main timeline position. Return to the start before importing if you want the media to start at zero.
+A new project starts without any Cue. Set the show name, then use **Cue** for a title, description and visual, or **Music / Video** to import media into a new Cue. New Cues use the current main timeline position. Return to the start before importing if you want the media to start at zero.
 
 Cues are ordered by their time. Enter `02.41`, `02,41` or `02:41.0` for 2 minutes 41 seconds. An earlier timeline limit does not prevent a Cue from being placed later. Moving a Cue in the list changes its time to fit between adjacent Cues; dropping before the first places it at zero. A Cue at zero can still be changed or deleted.
 
@@ -133,3 +137,7 @@ iOS 9–10 requires access to the site; modern offline support is not promised. 
 A magnifying glass identifies zoom controls in Edit. Show displays minutes and seconds without tenths; the fixed cue time beneath the countdown is removed. Companion downloads request fresh files to reduce stale manifests.
 
 Compact title-only Cue bubbles below the general timeline in Edit and Show. Active Cue has a blue glow and takes collision priority, then upcoming Cues in time order. Yellow markers remain visible. Show next-Cue image uses the left half; up to four subsequent Cues appear on the right. Restart button height matches Play/Pause.
+
+## Version 1.4.47 — help and buttons
+
+A three-step illustrated guide opens on first launch before installation and can be reopened with “?” in Edit. French/English screenshots are bundled locally, including compatibility mode. Cue and Music / Video retain their icons without a redundant “+” in their labels. Play/Pause has a fixed width in both languages. S2A Copilote remains at 1.2.10; the package format is unchanged.

@@ -1,10 +1,10 @@
-# S2A Pilot 1.4.45 / S2A Copilote 1.2.10
+# S2A Pilot 1.4.47 / S2A Copilote 1.2.10
 
 🇫🇷 **Français** | 🇬🇧 [English](README.en.md)
 
 ![S2A Pilot](assets/social-preview.jpg)
 
-[PWA 1.4.45](downloads/S2A-Pilot-V1.4.45-PWA.zip) · [Copilote 1.2.10 — Intel / Apple Silicon](downloads/S2A-Copilote-1.2.10-macOS-Universel.zip)
+[PWA 1.4.47](downloads/S2A-Pilot-V1.4.47-PWA.zip) · [Copilote 1.2.10 — Intel / Apple Silicon](downloads/S2A-Copilote-1.2.10-macOS-Universel.zip)
 
 # S2A Pilot — Guide utilisateur
 
@@ -18,9 +18,13 @@ S2A Pilot prépare et joue des conduites multimédias. S2A Copilote importe leur
 
 Au premier lancement, la PWA choisit le français si la langue principale du navigateur est française, sinon l’anglais. FR / EN dans l’en-tête permet de changer ce choix, mémorisé sur l’appareil. Copilote détecte la langue de macOS et propose Français / English. Les titres, descriptions et noms de médias des projets restent inchangés. Les PDF et notices exportés suivent la langue de l’interface.
 
+## Aide rapide
+
+Au premier lancement, une aide en trois étapes présente la création de la conduite, les réglages des Cues et le mode Show avec des captures réelles de l’application. Elle apparaît avant la proposition d’installation. Le bouton « ? », en Edit à gauche d’Annuler et Rétablir, permet de la rouvrir. L’aide et ses captures sont disponibles en français et en anglais, intégrées localement pour fonctionner hors ligne sur les navigateurs compatibles avec ce fonctionnement. Elles sont également adaptées au mode de compatibilité.
+
 ## Création et édition
 
-Un projet commence vide. + Cue crée une indication avec titre, description et visuel. + Musique / Vidéo importe un fichier dans une nouvelle Cue au temps courant. Retour au début permet de revenir à zéro avant l’import.
+Un projet commence vide. Cue crée une indication avec titre, description et visuel. Musique / Vidéo importe un fichier dans une nouvelle Cue au temps courant. Retour au début permet de revenir à zéro avant l’import.
 
 Les Cues sont classées par temps. 02.41, 02,41 et 02:41.0 signifient 2 minutes 41. Une Cue peut prolonger la timeline. Toutes les Cues peuvent être déplacées ou supprimées, même à zéro. La poignée à gauche permet le glisser-déposer dans la liste ; le temps est ajusté entre les Cues voisines. Avant la première Cue, le temps devient zéro. Alt + flèches fonctionne au clavier sur la poignée.
 
@@ -125,3 +129,7 @@ iOS 9–10 doit disposer d’une connexion au site : aucun hors ligne moderne n�
 La loupe identifie les commandes de zoom en Edit. Show affiche les minutes et secondes, sans dixièmes ; le temps fixe sous le compte à rebours est supprimé. Le chargement du compagnon demande des fichiers frais pour limiter les manifestes obsolètes.
 
 Bulles compactes avec titre seul sous la timeline générale en Edit et Show. Priorité à la Cue active avec halo bleu, puis aux prochaines Cues dans l’ordre du temps ; les traits jaunes restent visibles. En Show, visuel de la prochaine Cue dans la moitié gauche et jusqu’à quatre Cues suivantes à droite. Bouton retour aligné sur Lecture/Pause.
+
+## Version 1.4.47 — aide et boutons
+
+Aide illustrée en trois étapes, au premier lancement avant l’installation et accessible avec « ? » en Edit. Captures françaises/anglaises intégrées localement, également adaptées au mode de compatibilité. Les boutons Cue et Musique / Vidéo conservent leurs icônes sans « + » dans leur texte. Lecture/Pause garde une largeur fixe dans les deux langues. S2A Copilote reste en version 1.2.10 ; le format des packages est inchangé.

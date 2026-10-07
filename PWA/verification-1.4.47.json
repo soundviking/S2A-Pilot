@@ -1,0 +1,15 @@
+{
+  "version": "1.4.47",
+  "passed": [
+    "FR/EN fixed 120px Play/Pause on phone/tablet/desktop",
+    "Cue and Music/Video labels without +",
+    "Three-step help, first launch before install, persistence, keyboard focus",
+    "Updated twelve actual screenshots",
+    "Offline help and application",
+    "PDF translation and exports including universal Copilote 1.2.10",
+    "Logos and companion byte-identical"
+  ],
+  "limitations": [
+    "iOS 9.3.5 physical hardware not tested"
+  ]
+}
