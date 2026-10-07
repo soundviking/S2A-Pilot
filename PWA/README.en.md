@@ -130,3 +130,7 @@ A three-step illustrated guide opens on first launch before installation and can
 ## Version 1.4.48
 
 Show: timeline above the full Cue list on the left and active Cue details on the right, with active and next visuals side by side. Cue numbers precede their titles. All Cues remain in the list; playback and project format are unchanged. Quick-help screenshots are refreshed and have an embedded local fallback when separate PNG files are unavailable. Phone layout stacks the panels. Copilote 1.2.10 unchanged.
+
+## Version 1.4.49
+
+Show uses three independent cards: Cue number/title/description with the upcoming countdown and optional media badge; main visual; next Cue. Only the countdown card glows blue, then pulses red in the last ten seconds. The Cue list is on the right in landscape and below in portrait. Missing visuals use black thumbnails. Quick-help screenshots refreshed.

@@ -1,0 +1,15 @@
+{
+  "version": "1.4.49",
+  "tests": [
+    "Three independent Show cards",
+    "Cue number separate from title; Since hidden",
+    "Countdown in header; red pulse <=10s on header only",
+    "Missing-image black thumbnails",
+    "List right in landscape / bottom in portrait",
+    "Four responsive screen sizes and Edit unchanged",
+    "Help FR/EN, offline, and Copilote/PDF exports"
+  ],
+  "limitations": [
+    "Physical iOS 9.3.5 hardware untested"
+  ]
+}

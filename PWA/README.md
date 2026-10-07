@@ -122,3 +122,7 @@ Aide illustrée en trois étapes, au premier lancement avant l’installation et
 ## Version 1.4.48
 
 Mode Show : timeline en haut, liste complète à gauche, informations de la Cue active à droite et visuels actif/suivant côte à côte. Les titres sont précédés de leur numéro. Toutes les Cues restent présentes ; lecture et format des projets inchangés. Captures de l’aide actualisées avec secours local intégré si les PNG séparés sont indisponibles. Disposition empilée sur téléphone. Copilote 1.2.10 inchangé.
+
+## Version 1.4.49
+
+Trois boxes Show indépendantes : numéro/titre/description avec décompte avant la prochaine Cue et badge média éventuel ; visuel principal ; prochaine Cue. Le halo bleu est uniquement sur la box du décompte, puis rouge pulsé pendant les dix dernières secondes. Liste à droite en paysage, en bas en portrait. Vignettes noires pour les Cues sans visuel. Captures de l’aide actualisées.
