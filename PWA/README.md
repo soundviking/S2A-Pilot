@@ -225,3 +225,5 @@ Version 1.4.70 : suppression des Cues dans leur en-tête, aide Muet vidéo illus
 Version 1.4.71 : fondu en haut de la liste Show uniquement après défilement, sans atténuer la Cue active.
 
 Version 1.4.72 : fichiers et captures de l’aide versionnés pour empêcher la réutilisation d’une ancienne aide en cache. Quatre étapes vérifiées dans l’archive.
+
+Version 1.4.73 : étape 4 de l’aide séparée en deux sections, astuce Espace simplifiée et Vidéo muette illustrée, sans encart.

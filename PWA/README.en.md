@@ -233,3 +233,5 @@ Version 1.4.70: Cue deletion in the row header, illustrated video mute tip and a
 Version 1.4.71: top fade in the Show Cue list only after scrolling, keeping the active Cue clear.
 
 Version 1.4.72: versioned help files and screenshots prevent stale cached help. Four steps checked in the release archive.
+
+Version 1.4.73: help step 4 has two sections, a concise Space bar tip and an illustrated muted video tip without a boxed paragraph.

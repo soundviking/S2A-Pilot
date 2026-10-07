@@ -1,10 +1,10 @@
-# S2A Pilot 1.4.72 / S2A Copilote 1.2.10
+# S2A Pilot 1.4.73 / S2A Copilote 1.2.10
 
 🇫🇷 [Français](README.md) | 🇬🇧 **English**
 
 ![S2A Pilot](assets/social-preview.png)
 
-[PWA 1.4.72](downloads/S2A-Pilot-V1.4.72-PWA.zip) · [Copilote 1.2.10 — Intel / Apple Silicon](downloads/S2A-Copilote-1.2.10-macOS-Universel.zip)
+[PWA 1.4.73](downloads/S2A-Pilot-V1.4.73-PWA.zip) · [Copilote 1.2.10 — Intel / Apple Silicon](downloads/S2A-Copilote-1.2.10-macOS-Universel.zip)
 
 # S2A Pilot — User guide
 
@@ -241,3 +241,5 @@ Version 1.4.70: Cue deletion in the row header, illustrated video mute tip and a
 Version 1.4.71: top fade in the Show Cue list only after scrolling, keeping the active Cue clear.
 
 Version 1.4.72: versioned help files and screenshots prevent stale cached help. Four steps checked in the release archive.
+
+Version 1.4.73: help step 4 has two sections, a concise Space bar tip and an illustrated muted video tip without a boxed paragraph.
