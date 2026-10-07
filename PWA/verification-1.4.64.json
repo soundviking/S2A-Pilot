@@ -1,0 +1,9 @@
+{
+  "version": "1.4.64",
+  "checks": [
+    "Standalone search icon removed",
+    "Zoom in/out retained",
+    "Mute button state test passed",
+    "Updated help screenshots"
+  ]
+}

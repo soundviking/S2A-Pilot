@@ -380,7 +380,7 @@ function mediaTrimEditor(cue,initialAction){
   const main=document.createElement('div');main.className='mediaEditorMain'+(initialAction.kind==='video'?' hasVideoPreview':'');
   const lane=document.createElement('div');lane.className='mediaEditorTimeline';
   const toolbar=document.createElement('div');toolbar.className='mediaZoomControls';toolbar.setAttribute('aria-label',tr('Zoom de la timeline du fichier'));
-  const zoomOut=document.createElement('button'),zoomIn=document.createElement('button'),zoomLabel=document.createElement('span');zoomOut.type=zoomIn.type='button';S2AMaterial.set(zoomOut,'zoom_out');S2AMaterial.set(zoomIn,'zoom_in');zoomOut.title=tr('Dézoomer la timeline du fichier');zoomIn.title=tr('Zoomer la timeline du fichier');zoomOut.setAttribute('aria-label',tr('Dézoomer le média'));zoomIn.setAttribute('aria-label',tr('Zoomer le média'));zoomOut.className='mediaZoomOut';zoomIn.className='mediaZoomIn';zoomLabel.className='mediaZoomLabel';const zoomIcon=document.createElement('span');S2AMaterial.set(zoomIcon,'search');zoomIcon.setAttribute('aria-hidden','true');toolbar.append(zoomIcon,zoomOut,zoomLabel,zoomIn);
+  const zoomOut=document.createElement('button'),zoomIn=document.createElement('button'),zoomLabel=document.createElement('span');zoomOut.type=zoomIn.type='button';S2AMaterial.set(zoomOut,'zoom_out');S2AMaterial.set(zoomIn,'zoom_in');zoomOut.title=tr('Dézoomer la timeline du fichier');zoomIn.title=tr('Zoomer la timeline du fichier');zoomOut.setAttribute('aria-label',tr('Dézoomer le média'));zoomIn.setAttribute('aria-label',tr('Zoomer le média'));zoomOut.className='mediaZoomOut';zoomIn.className='mediaZoomIn';zoomLabel.className='mediaZoomLabel';toolbar.append(zoomOut,zoomLabel,zoomIn);
   const viewport=document.createElement('div');viewport.className='mediaVisual';viewport.title=tr('Déplacer la tête de lecture ; faire défiler horizontalement après un zoom');
   const visual=document.createElement('div');visual.className='mediaVisualContent';viewport.append(visual);
   const savedView=mediaPreviewViews.get(initialAction.id)||{zoom:1,start:0};let zoom=Math.max(1,Math.min(64,savedView.zoom));
@@ -880,7 +880,7 @@ document.addEventListener('touchmove',e=>{if(e.touches.length>1)e.preventDefault
 document.addEventListener('wheel',e=>{if(e.ctrlKey)e.preventDefault();},{passive:false});
 
 // This manifest is requested from the network, outside the service-worker cache.
-const APP_VERSION='1.4.63';document.querySelector('.appVersion').textContent='Version '+APP_VERSION;let lastVersionCheck=0,versionCheckRunning=false;
+const APP_VERSION='1.4.64';document.querySelector('.appVersion').textContent='Version '+APP_VERSION;let lastVersionCheck=0,versionCheckRunning=false;
 const updateNotice=document.createElement('div');updateNotice.id='updateNotice';updateNotice.hidden=true;updateNotice.setAttribute('role','status');const updateText=document.createElement('span'),updateButton=document.createElement('button');updateButton.type='button';updateButton.textContent=tr('Ouvrir la nouvelle version');updateNotice.append(updateText,updateButton);document.querySelector('main').prepend(updateNotice);
 function updateVersionButton(){const b=document.getElementById('updateNotice')?.querySelector('button');if(!b)return;b.disabled=locked||transportPlaying;b.title=b.disabled?tr('Quitter le mode Show et mettre la lecture en pause pour actualiser.'):'';}
 function versionIsNewer(a,b){const x=a.split('.').map(Number),y=b.split('.').map(Number);for(let i=0;i<3;i++){if(x[i]!==y[i])return x[i]>y[i];}return false;}

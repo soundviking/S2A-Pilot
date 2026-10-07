@@ -186,3 +186,7 @@ Next heading blue marker restored. Countdown glow peaks at each whole remaining 
 ## Version 1.4.63
 
 Video mute checkbox replaced with a local Material button: crossed-out speaker when muted, speaker when enabled. Accessible state and localized tooltip; autosave and undo preserved. Unused checkbox styles removed. Offline help and Copilote/PDF export checked.
+
+## Version 1.4.64
+
+Removed the standalone magnifier beside zoom controls on main and media timelines. Zoom in/out icons retained; unused search SVG removed. Help screenshots updated.
