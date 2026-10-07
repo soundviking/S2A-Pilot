@@ -142,3 +142,7 @@ Titre de la liste Show harmonisé avec les autres boxes : petites capitales espa
 ## Version 1.4.53
 
 Show : « Visuel actif » au-dessus de l’image. « Avenir : Q numéro » contient le titre et la description de la prochaine Cue sans image ; « Pas de description » si vide. Pastilles audio vertes / vidéo roses selon ses médias. Captures d’aide actualisées.
+
+## Version 1.4.54
+
+Pastilles audio/vidéo uniquement textuelles en Edit et Show, vertes et roses. Styles d’aide obsolètes supprimés ; rendu des pastilles regroupé, sans reconstruction quand leur état ne change pas pendant la lecture. Vérifications aide, hors ligne, Show responsive, PDF, export avec Copilote et branche complète de compatibilité.

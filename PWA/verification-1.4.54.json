@@ -1,0 +1,20 @@
+{
+  "version": "1.4.54",
+  "passed": [
+    "Help first launch and installation order, FR/EN screenshots, offline, light and full compatibility",
+    "Show responsive across four sizes",
+    "Upcoming description and media badges",
+    "PDF preview/download FR/EN without companion server",
+    "Exports including Copilote, autosave/restore and translations",
+    "Full compatibility: missing APIs, callback audio, WAV, waveform, preview, PDF, ZIP and restore",
+    "Logos and companion unchanged; ES5 build source hashes match"
+  ],
+  "cleanup": [
+    "Removed unused help CSS",
+    "Shared media badge renderer with state signature",
+    "Header labels only update when changed"
+  ],
+  "limitations": [
+    "Physical iOS 9.3.5 hardware untested; browser simulation is not real-device validation"
+  ]
+}

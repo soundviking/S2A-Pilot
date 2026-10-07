@@ -150,3 +150,7 @@ Show Cue list heading now matches the other panel headings, with blue accent and
 ## Version 1.4.53
 
 Show: Active visual replaces Active Cue above the image. Upcoming: Q number contains the next title and description instead of an image, with No description when empty. Green audio / pink video badges reflect its media. Help screenshots refreshed.
+
+## Version 1.4.54
+
+Audio/video badges use text only in Edit and Show, with green audio and pink video colors. Removed obsolete help styles and consolidated badge rendering to skip unchanged updates during playback. Help, offline, responsive Show, PDF, export with Copilote and full compatibility branch verified.
