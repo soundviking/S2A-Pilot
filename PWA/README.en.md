@@ -166,3 +166,7 @@ Upcoming heading uses CUE number; a 16:9 thumbnail appears to the right of its t
 ## Version 1.4.57
 
 Countdown is framed in a right-hand subpanel of the glowing card, labelled with the upcoming Cue number. Shows --:-- when no Cue follows. Help screenshots refreshed.
+
+## Version 1.4.58
+
+Active Cue number enlarged; audio/video badges sit beside it above the title, instead of below the countdown. Updated help screenshots.

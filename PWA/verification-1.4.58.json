@@ -1,0 +1,9 @@
+{
+  "version": "1.4.58",
+  "tests": [
+    "Responsive Show 390/768/1024/1280",
+    "Countdown subpanel preserved",
+    "Help screenshots updated"
+  ],
+  "change": "Active Cue number 1.3rem and badges beside it"
+}

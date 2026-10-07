@@ -1,10 +1,10 @@
-# S2A Pilot 1.4.57 / S2A Copilote 1.2.10
+# S2A Pilot 1.4.58 / S2A Copilote 1.2.10
 
 🇫🇷 **Français** | 🇬🇧 [English](README.en.md)
 
 ![S2A Pilot](assets/social-preview.jpg)
 
-[PWA 1.4.57](downloads/S2A-Pilot-V1.4.57-PWA.zip) · [Copilote 1.2.10 — Intel / Apple Silicon](downloads/S2A-Copilote-1.2.10-macOS-Universel.zip)
+[PWA 1.4.58](downloads/S2A-Pilot-V1.4.58-PWA.zip) · [Copilote 1.2.10 — Intel / Apple Silicon](downloads/S2A-Copilote-1.2.10-macOS-Universel.zip)
 
 # S2A Pilot — Guide utilisateur
 
@@ -173,3 +173,7 @@ Titre corrigé « A VENIR : CUE numéro ». Vignette 16:9 à droite du titre et 
 ## Version 1.4.57
 
 Décompte encadré dans une sous-box à droite de la box lumineuse, avec le numéro de la Cue à venir (« Q7 dans »). Affiche --:-- après la dernière Cue. Captures d’aide actualisées.
+
+## Version 1.4.58
+
+Numéro de la Cue active agrandi ; pastilles audio/vidéo à côté du numéro au-dessus du titre, au lieu de sous le décompte. Captures d’aide actualisées.

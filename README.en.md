@@ -1,10 +1,10 @@
-# S2A Pilot 1.4.57 / S2A Copilote 1.2.10
+# S2A Pilot 1.4.58 / S2A Copilote 1.2.10
 
 🇫🇷 [Français](README.md) | 🇬🇧 **English**
 
 ![S2A Pilot](assets/social-preview.jpg)
 
-[PWA 1.4.57](downloads/S2A-Pilot-V1.4.57-PWA.zip) · [Copilote 1.2.10 — Intel / Apple Silicon](downloads/S2A-Copilote-1.2.10-macOS-Universel.zip)
+[PWA 1.4.58](downloads/S2A-Pilot-V1.4.58-PWA.zip) · [Copilote 1.2.10 — Intel / Apple Silicon](downloads/S2A-Copilote-1.2.10-macOS-Universel.zip)
 
 # S2A Pilot — User guide
 
@@ -181,3 +181,7 @@ Upcoming heading uses CUE number; a 16:9 thumbnail appears to the right of its t
 ## Version 1.4.57
 
 Countdown is framed in a right-hand subpanel of the glowing card, labelled with the upcoming Cue number. Shows --:-- when no Cue follows. Help screenshots refreshed.
+
+## Version 1.4.58
+
+Active Cue number enlarged; audio/video badges sit beside it above the title, instead of below the countdown. Updated help screenshots.

@@ -158,3 +158,7 @@ Titre corrigé « A VENIR : CUE numéro ». Vignette 16:9 à droite du titre et 
 ## Version 1.4.57
 
 Décompte encadré dans une sous-box à droite de la box lumineuse, avec le numéro de la Cue à venir (« Q7 dans »). Affiche --:-- après la dernière Cue. Captures d’aide actualisées.
+
+## Version 1.4.58
+
+Numéro de la Cue active agrandi ; pastilles audio/vidéo à côté du numéro au-dessus du titre, au lieu de sous le décompte. Captures d’aide actualisées.
