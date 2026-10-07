@@ -5,7 +5,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" name="viewport"/>
 <title>S2A Pilot</title>
-<link href="./icons/s2a-pilot-192.png?v=1.4.52" rel="icon" type="image/png"/>
+<link href="./icons/s2a-pilot-192.png?v=1.4.53" rel="icon" type="image/png"/>
 <style>
 :root{
   font-family: system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
@@ -622,7 +622,7 @@ body.locked .activeCueCard>h2,body.locked .nextTopCard>h2,body.locked .showVideo
 html,body{overscroll-behavior-y:none;}
 .activeCueImage[hidden],.nextImage[hidden]{display:none!important;}
 
-/* V1.4.52 — sélection Cue ↔ timeline + companion 1.2.2 */
+/* V1.4.53 — sélection Cue ↔ timeline + companion 1.2.2 */
 .showOnly{display:none}
 body.locked .showOnly{display:flex}
 .preflightIntegrated{display:grid;gap:12px;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid #2b3240}
@@ -631,7 +631,7 @@ body.locked .showOnly{display:flex}
 body.locked .timelineCard{display:block}
 
 
-/* 1.4.52 : mêmes libellés et disposition adaptable */
+/* 1.4.53 : mêmes libellés et disposition adaptable */
 [hidden]{display:none!important}
 .timeline .tick:first-of-type{transform:none}.timeline .tick:last-of-type{transform:translateX(-100%)}
 .showVideoMonitor{display:none;grid-column:1/-1;order:100}
@@ -644,14 +644,14 @@ button{white-space:normal;touch-action:manipulation}
 @media(max-width:900px){main.spectaclePriorityLayout{display:flex!important;flex-direction:column!important;padding:12px!important}.card{width:100%;box-sizing:border-box}.appTopBar{flex-wrap:wrap;gap:12px}.row{flex-wrap:wrap}.nextWrap{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
 @media(max-width:480px){main.spectaclePriorityLayout{padding:8px!important}.card{padding:12px!important}.cueEditGrid{grid-template-columns:1fr}.cueEditGrid .imageControls,.cueEditGrid>.danger{grid-column:1}.mediaAction{display:flex;flex-wrap:wrap}.mediaEditor{width:100%;min-width:0}.nextWrap{display:flex;flex-direction:column}.nextImageWrap{width:100%}.nextCountdown{font-size:clamp(2rem,12vw,4rem)!important}.row button{flex:1 1 120px}.time{font-size:clamp(1.6rem,10vw,3rem)}.cueSummary{grid-template-columns:45px 70px minmax(0,1fr) 24px}.projectActions{width:100%}.appIdentity{min-width:0}.outputPrep{flex-wrap:wrap}input,textarea,select{max-width:100%;box-sizing:border-box}}
 
-/* 1.4.52 : visuels Show remplis sans déformation, dimensions stables */
+/* 1.4.53 : visuels Show remplis sans déformation, dimensions stables */
 body.locked .activeCueImage{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
 body.locked .nextTopCard .nextWrap{grid-template-columns:minmax(0,1fr) minmax(153.9px,226.8px)}
 body.locked .nextTopCard .nextImageWrap{width:100%;max-width:226.8px;aspect-ratio:16/9;align-self:center;justify-self:center}
 body.locked .nextTopCard .nextImage{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
 @media(max-width:760px){body.locked .nextTopCard .nextWrap{grid-template-columns:1fr}body.locked .nextTopCard .nextImageWrap{width:min(90%,252px);max-width:252px;align-self:center;justify-self:center;margin-inline:auto}}
 
-/* 1.4.52 : audition et aperçu indépendants de la conduite */
+/* 1.4.53 : audition et aperçu indépendants de la conduite */
 .mediaEditorTop .mediaPreviewToggle{padding:6px 9px;font-size:.76rem;min-width:96px;white-space:nowrap}
 .mediaEditorField input[type=text]{min-width:0;width:78px}
 .mediaEditorMain{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;align-items:center}
@@ -685,7 +685,7 @@ body.locked .nextTopCard .nextImage{position:absolute;inset:0;width:100%;height:
 @media(max-width:480px){.modeSwitchBtn{min-width:50px;padding:8px 9px}}
 @media(prefers-reduced-motion:reduce){.modeSwitchBtn{transition:none}}
 
-/* 1.4.52 : zoom des médias et sortie vidéo uniquement dans l’en-tête Show */
+/* 1.4.53 : zoom des médias et sortie vidéo uniquement dans l’en-tête Show */
 .fileLabel.addMediaBtn{background:#246fd1;border-color:#2b7de7;color:#fff}.fileLabel.addMediaBtn:hover{background:#2d7bdf}
 .mediaEditorTimeline .mediaVisual{overflow-x:auto;overflow-y:hidden;scrollbar-width:thin;scrollbar-color:#5b7192 #11151d}
 .mediaVisualContent{position:relative;height:100%;min-width:100%;user-select:none;touch-action:none}
@@ -702,7 +702,7 @@ body.locked .nextTopCard .nextImage{position:absolute;inset:0;width:100%;height:
 .pdfPreviewDialog{width:min(1000px,94vw);height:90dvh;max-width:94vw;max-height:94dvh;padding:14px;border:1px solid #45536a;border-radius:14px;background:#111722;color:#fff}.pdfPreviewDialog::backdrop{background:#000a}.pdfPreviewLayout{height:100%;display:flex;flex-direction:column;gap:12px}.pdfPreviewToolbar{display:flex;align-items:center;flex-wrap:wrap;gap:10px}.pdfPreviewToolbar strong{flex:1;min-width:150px}.pdfPreviewToolbar a{display:inline-flex;align-items:center;padding:10px 12px;border-radius:8px;background:#246fd1;color:white;text-decoration:none}
 .pdfPreviewPages{flex:1;min-height:0;overflow:auto;display:flex;flex-direction:column;align-items:flex-start;gap:16px;background:#252f40;border-radius:8px;padding:12px;box-sizing:border-box;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}.pdfPreviewPage{flex-shrink:0;margin:0 auto;background:white;border-radius:4px;box-shadow:0 3px 12px #0006;overflow:hidden}.pdfPreviewPage svg{display:block;width:100%;height:auto}.pdfPreviewZoom{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.pdfPreviewZoom button{min-height:40px}.pdfPreviewZoom span{min-width:48px;text-align:center;font-size:.85rem}.pdfPreviewToolbar strong{overflow-wrap:anywhere}@media(max-width:480px){.pdfPreviewDialog{padding:9px}.pdfPreviewToolbar{gap:7px}.pdfPreviewToolbar strong{flex-basis:100%}.pdfPreviewPages{padding:8px}.pdfPreviewZoom{gap:6px}.pdfPreviewZoom button{padding:8px 10px}}
 
-/* 1.4.52 : repères et médias distincts ; aperçu global en Edit. */
+/* 1.4.53 : repères et médias distincts ; aperçu global en Edit. */
 #projectWaveform{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.8}
 #projectMediaTracks{position:absolute;inset:5px 0 22px;display:flex;flex-direction:column;gap:3px;min-height:0;overflow:hidden;pointer-events:none;z-index:1}
 .projectMediaBar{position:relative;flex-shrink:0;box-sizing:border-box;min-width:3px;height:20px;border-radius:5px;background:rgba(42,153,89,.28);border:1px solid rgba(101,210,142,.4);color:#d0f5df;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:2px 5px}
@@ -846,13 +846,15 @@ body.locked .nextTopCard .nextInfo{display:none}
 @media(orientation:landscape) and (min-width:641px){body.locked .showVisualColumns{align-items:stretch}body.locked .principalVisualCard,body.locked .showVisualColumns>.nextTopCard{align-self:stretch;height:auto;display:flex;flex-direction:column}body.locked .principalVisualCard .activeCueVisualWrap,body.locked .showVisualColumns .nextImageWrap{width:100%;aspect-ratio:16/9;min-height:0;height:auto;flex:none;margin:0}body.locked .showCueOverview{align-self:stretch;max-height:none;position:relative}body.locked #showCueOverviewRows{position:absolute;top:48px;left:14px;right:14px;bottom:14px;overflow:auto}body.locked .showVisualColumns .nextWrap{margin:0!important;gap:0}}
 body.locked .showCueOverview,body.locked #showCueOverviewRows{overflow:hidden!important;touch-action:none;overscroll-behavior:none;scrollbar-width:none}body.locked .showCueOverview::-webkit-scrollbar,body.locked #showCueOverviewRows::-webkit-scrollbar{display:none}
 @media(orientation:portrait),(max-width:640px){body.locked .showCueOverview{max-height:none}body.locked #showCueOverviewRows{max-height:none;position:static}}
+body.locked .showVisualColumns .nextTopCard .nextInfo{display:block;padding:0;margin:0;border:0;background:none}body.locked .showVisualColumns .nextTopCard .nextImageWrap{display:none}body.locked .showVisualColumns .nextTopCard .nextName{font-size:clamp(1.3rem,2.5vw,2rem);margin-bottom:10px}body.locked .showVisualColumns .nextTopCard #nextCueDescription{display:block;white-space:pre-wrap;overflow-wrap:anywhere}body.locked .showVisualColumns .nextTopCard #nextCueDescription[hidden]{display:none}
+#nextCueMediaBadges{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}#nextCueMediaBadges:empty{display:none}#nextCueMediaBadges .audio{background:rgba(39,174,96,.22);border:1px solid #398b60;color:#9ae8b8}#nextCueMediaBadges .video{background:rgba(255,49,153,.30);border:1px solid rgba(255,92,177,.85);color:#ffd6ed}
 </style>
 <link href="./manifest.webmanifest" rel="manifest"/>
 <meta content="#111318" name="theme-color"/>
 <meta content="yes" name="apple-mobile-web-app-capable"/>
 <meta content="black" name="apple-mobile-web-app-status-bar-style"/>
 <meta content="S2A Pilot" name="apple-mobile-web-app-title"/>
-<link href="./icons/s2a-pilot-180.png?v=1.4.52" rel="apple-touch-icon"/>
+<link href="./icons/s2a-pilot-180.png?v=1.4.53" rel="apple-touch-icon"/>
 <link rel="stylesheet" href="./material-ui.css">
 <link rel="stylesheet" href="./quick-help.css">
 </head>
@@ -863,7 +865,7 @@ body.locked .showCueOverview,body.locked #showCueOverviewRows{overflow:hidden!im
 <div class="appIdentity">
   <strong>S2A Pilot</strong>
   <span class="appAttribution">(by S2A Production)</span>
-  <span class="appVersion">Version 1.4.52</span>
+  <span class="appVersion">Version 1.4.53</span>
 </div>
 <div class="headerActions"><select id="languageSelect" aria-label="Language / Langue"><option value="fr">FR</option><option value="en">EN</option></select>
 <div class="headerVideoOutput showOnly" hidden>
@@ -919,7 +921,7 @@ body.locked .showCueOverview,body.locked #showCueOverviewRows{overflow:hidden!im
 <div class="nextTopName" id="activeCueName">Cue 1</div>
 <div hidden id="activeCueAt"></div>
 <div class="cueDescriptionShow" id="activeCueDescription" hidden></div>
-<div class="activeCueTiming"><div id="nextCountdown" class="nextCountdown">—</div><span id="activeCueMedia" hidden></span></div></section><div class="showVisualColumns"><section class="card principalVisualCard"><h2 id="principalVisualHeading">CUE ACTIVE</h2><div class="activeCueVisualWrap">
+<div class="activeCueTiming"><div id="nextCountdown" class="nextCountdown">—</div><span id="activeCueMedia" hidden></span></div></section><div class="showVisualColumns"><section class="card principalVisualCard"><h2 id="principalVisualHeading">VISUEL ACTIF</h2><div class="activeCueVisualWrap">
 <img alt="" class="activeCueImage" hidden id="activeCueImage"/>
 <div class="activeCueShade" id="activeCueShade"></div>
 <div class="small muted" id="activeCueNoImage">Aucun visuel pour cette Cue</div>
@@ -931,7 +933,7 @@ body.locked .showCueOverview,body.locked #showCueOverviewRows{overflow:hidden!im
 <div class="nextName" id="nextName">Aucune Cue</div></div>
 <div class="nextTiming">
 <div hidden class="nextAt" id="nextAt"></div></div>
-<div class="cueDescriptionShow" id="nextCueDescription" hidden></div>
+<div class="cueDescriptionShow" id="nextCueDescription" hidden></div><div id="nextCueMediaBadges"></div>
 </div>
 <div class="nextImageWrap">
 <img alt="" class="nextImage" hidden="" id="nextImage"/>
@@ -980,6 +982,6 @@ window.addEventListener('error',function(e){window.s2aReportBootError((e.message
 </script>
 <script src="./material-ui.js"></script>
 <script src="./help-images.js"></script><script src="./quick-help.js"></script>
-<script src="./compatibility-loader.js?v=1.4.52"></script>
+<script src="./compatibility-loader.js?v=1.4.53"></script>
 </body>
 </html>

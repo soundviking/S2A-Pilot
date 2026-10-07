@@ -138,3 +138,7 @@ Liste Show : défilement manuel bloqué ; suivi automatique de la Cue active en 
 ## Version 1.4.52
 
 Titre de la liste Show harmonisé avec les autres boxes : petites capitales espacées, teinte bleutée et repère vertical bleu. Captures d’aide actualisées. Inclut la hauteur adaptée au nombre de Cues en portrait et le verrouillage du défilement manuel.
+
+## Version 1.4.53
+
+Show : « Visuel actif » au-dessus de l’image. « Avenir : Q numéro » contient le titre et la description de la prochaine Cue sans image ; « Pas de description » si vide. Pastilles audio vertes / vidéo roses selon ses médias. Captures d’aide actualisées.

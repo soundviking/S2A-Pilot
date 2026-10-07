@@ -1,0 +1,12 @@
+{
+  "version": "1.4.53",
+  "tests": [
+    "Responsive layout",
+    "Upcoming title and description without image",
+    "Empty description fallback",
+    "Audio/video badge kinds",
+    "PDF/Copilote exports",
+    "Updated help screenshots"
+  ],
+  "limitation": "Physical old iPad not tested"
+}
