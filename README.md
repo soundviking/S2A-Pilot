@@ -1,10 +1,10 @@
-# S2A Pilot 1.4.68 / S2A Copilote 1.2.10
+# S2A Pilot 1.4.69 / S2A Copilote 1.2.10
 
 🇫🇷 **Français** | 🇬🇧 [English](README.en.md)
 
 ![S2A Pilot](assets/social-preview.png)
 
-[PWA 1.4.68](downloads/S2A-Pilot-V1.4.68-PWA.zip) · [Copilote 1.2.10 — Intel / Apple Silicon](downloads/S2A-Copilote-1.2.10-macOS-Universel.zip)
+[PWA 1.4.69](downloads/S2A-Pilot-V1.4.69-PWA.zip) · [Copilote 1.2.10 — Intel / Apple Silicon](downloads/S2A-Copilote-1.2.10-macOS-Universel.zip)
 
 # S2A Pilot — Guide utilisateur
 
@@ -217,3 +217,8 @@ L’étape 4 de l’aide conserve uniquement le raccourci Espace et l’encart f
 ## Version 1.4.68
 
 L’étape 4 de l’aide se termine par le message de l’équipe S2A Production, en français et en anglais.
+
+
+## Version 1.4.69
+
+En Show, le bas de la liste des Cues se fond doucement dans le noir uniquement lorsque des Cues restent masquées. La liste reste nette si elle tient entièrement dans son cadre.

@@ -217,3 +217,8 @@ Help step 4 keeps only the Space shortcut and the formats, saving and export not
 ## Version 1.4.68
 
 Help step 4 ends with the S2A Production team’s greeting, in French and English.
+
+
+## Version 1.4.69
+
+In Show, only the bottom of the Cue list fades into black when additional Cues are hidden. A fully fitting list remains sharp.

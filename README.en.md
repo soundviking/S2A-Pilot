@@ -1,10 +1,10 @@
-# S2A Pilot 1.4.68 / S2A Copilote 1.2.10
+# S2A Pilot 1.4.69 / S2A Copilote 1.2.10
 
 🇫🇷 [Français](README.md) | 🇬🇧 **English**
 
 ![S2A Pilot](assets/social-preview.png)
 
-[PWA 1.4.68](downloads/S2A-Pilot-V1.4.68-PWA.zip) · [Copilote 1.2.10 — Intel / Apple Silicon](downloads/S2A-Copilote-1.2.10-macOS-Universel.zip)
+[PWA 1.4.69](downloads/S2A-Pilot-V1.4.69-PWA.zip) · [Copilote 1.2.10 — Intel / Apple Silicon](downloads/S2A-Copilote-1.2.10-macOS-Universel.zip)
 
 # S2A Pilot — User guide
 
@@ -225,3 +225,8 @@ Help step 4 keeps only the Space shortcut and the formats, saving and export not
 ## Version 1.4.68
 
 Help step 4 ends with the S2A Production team’s greeting, in French and English.
+
+
+## Version 1.4.69
+
+In Show, only the bottom of the Cue list fades into black when additional Cues are hidden. A fully fitting list remains sharp.

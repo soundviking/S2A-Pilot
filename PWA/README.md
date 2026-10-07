@@ -209,3 +209,8 @@ L’étape 4 de l’aide conserve uniquement le raccourci Espace et l’encart f
 ## Version 1.4.68
 
 L’étape 4 de l’aide se termine par le message de l’équipe S2A Production, en français et en anglais.
+
+
+## Version 1.4.69
+
+En Show, le bas de la liste des Cues se fond doucement dans le noir uniquement lorsque des Cues restent masquées. La liste reste nette si elle tient entièrement dans son cadre.

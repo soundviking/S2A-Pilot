@@ -1,0 +1,10 @@
+{
+  "version": "1.4.69",
+  "change": "Bottom-only CSS fade for clipped Show Cue list",
+  "validated": [
+    "3/6 Cues fit: no fade",
+    "20 Cues: 56px bottom fade; all rows retained",
+    "Last Cue and portrait: fade disabled",
+    "Overlay does not intercept gestures"
+  ]
+}
