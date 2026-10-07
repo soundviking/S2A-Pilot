@@ -1,10 +1,10 @@
-# S2A Pilot 1.4.60 / S2A Copilote 1.2.10
+# S2A Pilot 1.4.61 / S2A Copilote 1.2.10
 
 🇫🇷 [Français](README.md) | 🇬🇧 **English**
 
 ![S2A Pilot](assets/social-preview.jpg)
 
-[PWA 1.4.60](downloads/S2A-Pilot-V1.4.60-PWA.zip) · [Copilote 1.2.10 — Intel / Apple Silicon](downloads/S2A-Copilote-1.2.10-macOS-Universel.zip)
+[PWA 1.4.61](downloads/S2A-Pilot-V1.4.61-PWA.zip) · [Copilote 1.2.10 — Intel / Apple Silicon](downloads/S2A-Copilote-1.2.10-macOS-Universel.zip)
 
 # S2A Pilot — User guide
 
@@ -189,3 +189,7 @@ Active Cue number enlarged; audio/video badges sit beside it above the title, in
 ## Version 1.4.60
 
 Next Cue: fixed 16:9 thumbnail beside headings, full-width description below. Main card keeps its blue glow; red pulse is limited to the countdown subpanel. CUE is uppercase in its label. Help screenshots refreshed.
+
+## Version 1.4.61
+
+Blue glow fades out over 0.7 seconds while the countdown pulses red, then fades back in after the Cue change.

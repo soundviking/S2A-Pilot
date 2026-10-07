@@ -1,0 +1,9 @@
+{
+  "version": "1.4.61",
+  "verified": [
+    "Blue glow fades to transparent at urgent countdown",
+    "Blue glow restored after urgency",
+    "0.7 second CSS transition",
+    "Responsive four sizes"
+  ]
+}

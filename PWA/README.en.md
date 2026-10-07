@@ -174,3 +174,7 @@ Active Cue number enlarged; audio/video badges sit beside it above the title, in
 ## Version 1.4.60
 
 Next Cue: fixed 16:9 thumbnail beside headings, full-width description below. Main card keeps its blue glow; red pulse is limited to the countdown subpanel. CUE is uppercase in its label. Help screenshots refreshed.
+
+## Version 1.4.61
+
+Blue glow fades out over 0.7 seconds while the countdown pulses red, then fades back in after the Cue change.
