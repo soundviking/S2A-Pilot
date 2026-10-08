@@ -123,9 +123,9 @@ private func L(_ text: String) -> String {
     "Projet sans nom": "Untitled project",
     "Format ZIP non reconnu.": "Unrecognized ZIP format.",
     "Ce ZIP utilise une compression non prise en charge.": "This ZIP uses unsupported compression.",
-    "Archive Copilote invalide.": "Invalid Copilote archive.",
-    "Archive Copilote incomplète.": "Incomplete Copilote archive.",
-    "S2A Copilote est indisponible. Vérifiez que tous les fichiers de la PWA ont été déployés.": "S2A Copilote is unavailable. Check that all PWA files have been deployed.",
+    "Archive Copilot invalide.": "Invalid Copilot archive.",
+    "Archive Copilot incomplète.": "Incomplete Copilot archive.",
+    "S2A Copilot est indisponible. Vérifiez que tous les fichiers de la PWA ont été déployés.": "S2A Copilot is unavailable. Check that all PWA files have been deployed.",
     "conduite.json introuvable.": "conduite.json not found.",
     "Le visuel de l’en-tête est indisponible.": "The header image is unavailable.",
     "Le navigateur a bloqué la fenêtre vidéo. Autorise les fenêtres surgissantes pour S2A Pilot.": "The browser blocked the video window. Allow pop-ups for S2A Pilot.",
@@ -152,7 +152,7 @@ private func L(_ text: String) -> String {
     "Visualiseur": "Monitor",
     "Masquer le message": "Dismiss message",
     "Toujours au premier plan": "Always on top",
-    "Visualiseur S2A Copilote": "S2A Copilote monitor",
+    "Visualiseur S2A Copilot": "S2A Copilot monitor",
     "En attente d’un numéro S2A Pilot": "Waiting for an S2A Pilot show",
     "Vérification de QLab…": "Checking QLab…",
     "Choisir un ou plusieurs packages S2A Pilot": "Choose one or more S2A Pilot packages",
@@ -170,7 +170,7 @@ private func L(_ text: String) -> String {
     "Le workspace sélectionné a été fermé. Choisis un workspace ouvert.": "The selected workspace has been closed. Choose an open workspace.",
     "QLab n’a pas renvoyé l’identifiant du Group cue importé.": "QLab did not return the imported Group cue ID.",
     "Format de package S2A Pilot non reconnu.": "Unrecognized S2A Pilot package format.",
-    "S2A Copilote attend un fichier .s2apilot.zip, .showcue.zip ou .zip.": "S2A Copilote expects a .s2apilot.zip, .showcue.zip or .zip file.",
+    "S2A Copilot attend un fichier .s2apilot.zip, .showcue.zip ou .zip.": "S2A Copilot expects a .s2apilot.zip, .showcue.zip or .zip file.",
     "conduite.json est introuvable dans le package.": "conduite.json is missing from the package.",
     "Le package ne contient aucun média exploitable.": "The package contains no usable media.",
     "FONDU GLOBAL — AUDIO": "GLOBAL FADE — AUDIO",
@@ -230,7 +230,7 @@ private func L(_ text: String) -> String {
     " prêt": " ready",
     " échec": " failure",
     "dans ": "in ",
-    "Import de conduites S2A Pilot V5 dans QLab 5 — S2A Copilote 1.2.10": "Import S2A Pilot V5 shows into QLab 5 — S2A Copilote 1.2.10"
+    "Import de conduites S2A Pilot V5 dans QLab 5 — S2A Copilot 1.2.11": "Import S2A Pilot V5 shows into QLab 5 — S2A Copilot 1.2.11"
     ]
     if language != "en" { return catalog.first(where: { $0.value == text })?.key ?? text }
     if let value = catalog[text] { return value }
@@ -703,7 +703,7 @@ final class AppModel: ObservableObject {
         try fm.createDirectory(at: temp, withIntermediateDirectories: true)
 
         guard url.pathExtension.lowercased() == "zip" else {
-            throw ShowCueError.invalidPackage(L("S2A Copilote attend un fichier .s2apilot.zip, .showcue.zip ou .zip."))
+            throw ShowCueError.invalidPackage(L("S2A Copilot attend un fichier .s2apilot.zip, .showcue.zip ou .zip."))
         }
         try run("/usr/bin/ditto", ["-x", "-k", url.path, temp.path])
 
@@ -1323,13 +1323,13 @@ struct ContentView: View {
     var body: some View {
         VStack(spacing: 18) {
             HStack(alignment: .center, spacing: 12) {
-                if let icon = NSImage(named: NSImage.Name("S2ACopiloteIcon")) {
+                if let icon = NSImage(named: NSImage.Name("S2ACopilotIcon")) {
                     Image(nsImage: icon).resizable().scaledToFit().frame(width: 44, height: 44).clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
                 }
                 VStack(alignment: .leading, spacing: 3) {
-                    Text("S2A Copilote")
+                    Text("S2A Copilot")
                         .font(.system(size: 20, weight: .semibold))
-                    Text(L("Import de conduites S2A Pilot V5 dans QLab 5 — S2A Copilote 1.2.10"))
+                    Text(L("Import de conduites S2A Pilot V5 dans QLab 5 — S2A Copilot 1.2.11"))
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                 }
@@ -1708,7 +1708,7 @@ struct ShowCueForQLabApp: App {
         }
         .windowResizability(.contentSize)
 
-        WindowGroup(L("Visualiseur S2A Copilote"), id: "visual-monitor") {
+        WindowGroup(L("Visualiseur S2A Copilot"), id: "visual-monitor") {
             VisualMonitorView(model: model)
         }
         .defaultSize(width: 565, height: 330)

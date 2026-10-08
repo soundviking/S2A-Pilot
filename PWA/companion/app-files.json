@@ -1,44 +1,44 @@
 {
-  "version": "1.2.10",
+  "version": "1.2.11",
   "architectures": [
     "arm64",
     "x86_64"
   ],
   "files": [
     {
-      "path": "S2A Copilote.app/Contents/Info.plist",
+      "path": "S2A Copilot.app/Contents/Info.plist",
       "mode": 33188,
-      "size": 863
+      "size": 858
     },
     {
-      "path": "S2A Copilote.app/Contents/MacOS/S2A Copilote",
+      "path": "S2A Copilot.app/Contents/MacOS/S2A Copilot",
       "mode": 33261,
-      "size": 3066128
+      "size": 3066144
     },
     {
-      "path": "S2A Copilote.app/Contents/Resources/LICENSE",
+      "path": "S2A Copilot.app/Contents/Resources/LICENSE",
       "mode": 33188,
-      "size": 2467
+      "size": 2462
     },
     {
-      "path": "S2A Copilote.app/Contents/Resources/S2ACopiloteIcon.icns",
+      "path": "S2A Copilot.app/Contents/Resources/S2ACopilotIcon.icns",
       "mode": 33188,
-      "size": 2063487
+      "size": 1601127
     },
     {
-      "path": "S2A Copilote.app/Contents/Resources/en.lproj/InfoPlist.strings",
+      "path": "S2A Copilot.app/Contents/Resources/en.lproj/InfoPlist.strings",
       "mode": 33188,
-      "size": 120
+      "size": 119
     },
     {
-      "path": "S2A Copilote.app/Contents/Resources/fr.lproj/InfoPlist.strings",
+      "path": "S2A Copilot.app/Contents/Resources/fr.lproj/InfoPlist.strings",
       "mode": 33188,
-      "size": 134
+      "size": 133
     },
     {
-      "path": "S2A Copilote.app/Contents/_CodeSignature/CodeResources",
+      "path": "S2A Copilot.app/Contents/_CodeSignature/CodeResources",
       "mode": 33188,
-      "size": 3416
+      "size": 3414
     }
   ]
 }

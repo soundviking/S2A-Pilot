@@ -1,14 +1,14 @@
 # S2A Pilot — User guide
 
-The rights to S2A Pilot and S2A Copilote belong to the company S2A Production. These applications were developed by Antoine CLOPIER with assistance from ChatGPT.
+The rights to S2A Pilot and S2A Copilot belong to the company S2A Production. These applications were developed by Antoine CLOPIER with assistance from ChatGPT.
 
-S2A Pilot prepares and runs multimedia shows. S2A Copilote imports its project packages into QLab 5. The app names and Edit / Show labels are the same in both languages.
+S2A Pilot prepares and runs multimedia shows. S2A Copilot imports its project packages into QLab 5. The app names and Edit / Show labels are the same in both languages.
 
 ## Language
 
 The web app uses the browser’s preferred language at first launch: French for French locales, English otherwise. Use FR / EN in the header, next to Edit / Show, to override this choice. The override is saved on this device. Titles, descriptions, visuals and media filenames belonging to your project are never translated. PDF exports and package installation instructions use the currently selected interface language.
 
-S2A Copilote uses the macOS preferred language at first launch and offers a Français / English switch in its header. Its manual preference is remembered independently from the web app.
+S2A Copilot uses the macOS preferred language at first launch and offers a Français / English switch in its header. Its manual preference is remembered independently from the web app.
 
 ## Quick help
 
@@ -46,7 +46,7 @@ The output button becomes red while the video window is active. Allow pop-ups if
 
 ## Save, open and export
 
-Edits are saved locally on this device, including text while typing. Local saves are specific to the browser, profile and site address. Use **Save as…** for a portable `.s2apilot.zip` backup and transfer. It includes show data, media, visuals, the PDF and a ready-to-install universal S2A Copilote.app. Do not delete media folders before importing into QLab. Open restores a package.
+Edits are saved locally on this device, including text while typing. Local saves are specific to the browser, profile and site address. Use **Save as…** for a portable `.s2apilot.zip` backup and transfer. It includes show data, media, visuals, the PDF and a ready-to-install universal S2A Copilot.app. Do not delete media folders before importing into QLab. Open restores a package.
 
 ## Cue sheet PDF
 
@@ -62,21 +62,21 @@ After deployment, purge Cloudflare’s cache for the app folder and remove rules
 
 Pilot checks the server version on startup, when returning to the app and every five minutes while visible. It offers a newer version without forcing an update during Show or playback. The displayed version is the program actually running. A startup diagnostic appears if code fails to load. Offline use remains available after installation.
 
-## S2A Copilote installation and QLab
+## S2A Copilot installation and QLab
 
 The universal .app supports Intel and Apple Silicon Macs, macOS 13 or later. Move it into Applications; no compilation is needed. It is locally signed, not notarized by Apple.
 
-1. Try opening S2A Copilote once.
+1. Try opening S2A Copilot once.
 2. If blocked, open System Settings → Privacy & Security → Security.
-3. Choose Open Anyway for S2A Copilote, authenticate if prompted, then confirm Open.
+3. Choose Open Anyway for S2A Copilot, authenticate if prompted, then confirm Open.
 
-Open Anyway appears after an opening attempt. Try again if it has disappeared. Only approve the app from the official repository. A new version may require approval again. During import, separately allow Copilote to control QLab. See [Apple’s instructions](https://support.apple.com/en-us/102445).
+Open Anyway appears after an opening attempt. Try again if it has disappeared. Only approve the app from the official repository. A new version may require approval again. During import, separately allow Copilot to control QLab. See [Apple’s instructions](https://support.apple.com/en-us/102445).
 
-Copilote automatically detects open QLab workspaces and lets you choose when several are open. Save the workspace before importing. Add multiple project packages to import each show into its own Timeline Group cue. The group retains its number and children use numbers such as 5.1, 5.2 and 5.3, avoiding existing numbers. Existing imports are not renumbered. The monitor follows imported shows and can stay on top.
+Copilot automatically detects open QLab workspaces and lets you choose when several are open. Save the workspace before importing. Add multiple project packages to import each show into its own Timeline Group cue. The group retains its number and children use numbers such as 5.1, 5.2 and 5.3, avoiding existing numbers. Existing imports are not renumbered. The monitor follows imported shows and can stay on top.
 
 ## Validation limits
 
-Chrome tests cover creation, editing, autosave, language selection, user content preservation, PDF preview/export, offline files, waveform zoom and mocked screen detection. Copilote is compiled for both architectures and its local signature is verified. Real Safari/iPad touch behavior, real extended-display playback, live QLab imports and execution on a physical Intel Mac must still be checked before show use.
+Chrome tests cover creation, editing, autosave, language selection, user content preservation, PDF preview/export, offline files, waveform zoom and mocked screen detection. Copilot is compiled for both architectures and its local signature is verified. Real Safari/iPad touch behavior, real extended-display playback, live QLab imports and execution on a physical Intel Mac must still be checked before show use.
 
 
 ## License
@@ -95,3 +95,7 @@ A three-second animation shows the validated logo rotating with a blue glow that
 ## Older browsers
 
 An ES5 compatibility engine is provided. A lightweight single-track mode is also available in `legacy/index.html`. On iOS 9.3.5, file import requires an available document provider. Audio/video codecs, fades, downloads and memory limits need validation on the actual iPad; adding the app to the Home Screen does not remove these browser limits.
+
+## Visual identity
+
+S2A Pilot uses cyan wings; S2A Copilot uses orange wings. The companion is now named S2A Copilot in both languages. The S2A Production logo is unchanged.

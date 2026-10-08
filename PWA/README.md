@@ -1,14 +1,14 @@
 # S2A Pilot — Guide utilisateur
 
-Les droits sur S2A Pilot et S2A Copilote appartiennent à la société S2A Production. Ces applications ont été développées par Antoine CLOPIER, avec l’aide de ChatGPT.
+Les droits sur S2A Pilot et S2A Copilot appartiennent à la société S2A Production. Ces applications ont été développées par Antoine CLOPIER, avec l’aide de ChatGPT.
 
 [English user guide](README.en.md)
 
-S2A Pilot prépare et joue des conduites multimédias. S2A Copilote importe leurs packages dans QLab 5.
+S2A Pilot prépare et joue des conduites multimédias. S2A Copilot importe leurs packages dans QLab 5.
 
 ## Langue
 
-Au premier lancement, la PWA choisit le français si la langue principale du navigateur est française, sinon l’anglais. FR / EN dans l’en-tête permet de changer ce choix, mémorisé sur l’appareil. Copilote détecte la langue de macOS et propose Français / English. Les titres, descriptions et noms de médias des projets restent inchangés. Les PDF et notices exportés suivent la langue de l’interface.
+Au premier lancement, la PWA choisit le français si la langue principale du navigateur est française, sinon l’anglais. FR / EN dans l’en-tête permet de changer ce choix, mémorisé sur l’appareil. Copilot détecte la langue de macOS et propose Français / English. Les titres, descriptions et noms de médias des projets restent inchangés. Les PDF et notices exportés suivent la langue de l’interface.
 
 ## Aide rapide
 
@@ -40,7 +40,7 @@ La sortie vidéo apparaît uniquement en Show avec une vidéo. Son placement aut
 
 ## Sauvegarde et PDF
 
-Chaque modification est sauvegardée localement, y compris pendant la saisie. Ces données dépendent de l’appareil, du navigateur, du profil et de l’adresse du site. Enregistrer sous… produit un .s2apilot.zip portable avec médias, visuels, données, PDF et Copilote.app compilée. Ouvrir restaure un package. Garder les médias lors de l’import QLab.
+Chaque modification est sauvegardée localement, y compris pendant la saisie. Ces données dépendent de l’appareil, du navigateur, du profil et de l’adresse du site. Enregistrer sous… produit un .s2apilot.zip portable avec médias, visuels, données, PDF et Copilot.app compilée. Ouvrir restaure un package. Garder les médias lors de l’import QLab.
 
 Conduite PDF ouvre un aperçu intégré ; Télécharger crée le fichier. Le PDF inclut photographie d’en-tête, blocs arrondis, compteurs médias et cinq Cues standards par page. Les descriptions longues continuent sur les pages suivantes. Le temps écoulé et le temps restant entre parenthèses figurent pour chaque Cue. Le contenu saisi n’est pas traduit.
 
@@ -54,13 +54,13 @@ Purger Cloudflare après remplacement et supprimer les règles imposant un cache
 
 La PWA vérifie le serveur au démarrage, au retour et toutes les cinq minutes si visible. Elle propose une version supérieure sans actualisation forcée pendant Show ou lecture. Le numéro affiché correspond au programme exécuté. En cas de démarrage interrompu, un diagnostic apparaît. Le fonctionnement hors ligne reste disponible après installation.
 
-## Copilote et QLab
+## Copilot et QLab
 
-Copilote.app universelle fonctionne sur Intel et Apple Silicon, macOS 13 minimum. La glisser dans Applications ; aucune compilation nécessaire. Signature locale, sans notarisation Apple.
+Copilot.app universelle fonctionne sur Intel et Apple Silicon, macOS 13 minimum. La glisser dans Applications ; aucune compilation nécessaire. Signature locale, sans notarisation Apple.
 
 1. Essayer de l’ouvrir une fois.
 2. Si bloquée : Réglages Système → Confidentialité et sécurité → Sécurité.
-3. Ouvrir quand même pour Copilote, s’authentifier si demandé, puis Ouvrir.
+3. Ouvrir quand même pour Copilot, s’authentifier si demandé, puis Ouvrir.
 
 Le bouton apparaît après une tentative ; recommencer si nécessaire. Autoriser uniquement la distribution officielle. Une nouvelle version peut demander une nouvelle autorisation. Autoriser ensuite séparément le contrôle de QLab lors de l’import. [Procédure Apple](https://support.apple.com/fr-fr/102445).
 
@@ -68,7 +68,7 @@ Les workspaces QLab ouverts sont détectés automatiquement ; un menu permet le 
 
 ## Vérifications
 
-Tests Chrome : création, édition, sauvegarde, langues, préservation des contenus, PDF, hors ligne, zoom et écrans simulés. Copilote : compilation universelle et signature locale. À confirmer sur appareils réels : Safari iPad, gestes tactiles, écran étendu, import QLab et exécution Intel.
+Tests Chrome : création, édition, sauvegarde, langues, préservation des contenus, PDF, hors ligne, zoom et écrans simulés. Copilot : compilation universelle et signature locale. À confirmer sur appareils réels : Safari iPad, gestes tactiles, écran étendu, import QLab et exécution Intel.
 
 
 ## Licence
@@ -87,3 +87,7 @@ Une animation de trois secondes affiche le logo validé en rotation avec un halo
 ## Anciens navigateurs
 
 Un moteur compatible ES5 est fourni. Un mode allégé à une musique reste accessible dans `legacy/index.html`. Sur iOS 9.3.5, l’import nécessite un fournisseur de documents disponible. Les codecs audio/vidéo, fondus, téléchargements et limites de mémoire restent à vérifier sur l’iPad réel ; l’ajout à l’écran d’accueil ne supprime pas ces limites du navigateur.
+
+## Identité visuelle
+
+S2A Pilot utilise les ailes cyan ; S2A Copilot, les ailes orange. L’application compagnon porte désormais le nom S2A Copilot dans les deux langues. Le logo S2A Production reste inchangé.

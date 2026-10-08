@@ -1,15 +1,15 @@
-S2A COPILOTE 1.2.10 — INSTALLATION SUR MAC
+S2A COPILOT 1.2.11 — INSTALLATION SUR MAC
 
 Mac Intel et Apple Silicon — macOS 13 ou plus récent.
 Aucune compilation nécessaire. Application signée localement, non notariée par Apple.
 
-1. Décompressez le ZIP et glissez S2A Copilote.app dans Applications.
+1. Décompressez le ZIP et glissez S2A Copilot.app dans Applications.
    Remplacez l’ancienne version si nécessaire.
-2. Essayez d’ouvrir S2A Copilote depuis Applications une première fois.
+2. Essayez d’ouvrir S2A Copilot depuis Applications une première fois.
 3. Si macOS bloque son ouverture, fermez le message et ouvrez :
    Réglages Système > Confidentialité et sécurité.
 4. Descendez jusqu’à la section Sécurité. Repérez le message concernant
-   S2A Copilote, puis cliquez sur « Ouvrir quand même ».
+   S2A Copilot, puis cliquez sur « Ouvrir quand même ».
 5. Validez avec votre mot de passe ou Touch ID si demandé, puis confirmez
    « Ouvrir ». L’autorisation est mémorisée pour cette application.
 
