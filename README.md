@@ -1,10 +1,10 @@
-# S2A Pilot 1.4.82 / S2A Copilot 1.2.11
+# S2A Pilot 1.4.83 / S2A Copilot 1.2.11
 
 🇫🇷 **Français** | 🇬🇧 [English](README.en.md)
 
 ![S2A Pilot](assets/social-preview.png)
 
-[PWA 1.4.82](downloads/S2A-Pilot-V1.4.82-PWA.zip) · [Copilot 1.2.11 — Intel / Apple Silicon](downloads/S2A-Copilot-1.2.11-macOS-Universel.zip)
+[PWA 1.4.83](downloads/S2A-Pilot-V1.4.83-PWA.zip) · [Copilot 1.2.11 — Intel / Apple Silicon](downloads/S2A-Copilot-1.2.11-macOS-Universel.zip)
 
 # S2A Pilot — Guide utilisateur
 
@@ -42,7 +42,7 @@ Lecture / Pause ou Espace commande la conduite. Le raccourci ignore la saisie, l
 
 ## Show et sortie vidéo
 
-La timeline est en haut, suivie d’une liste pleine largeur affichant jusqu’à cinq Cues. Elle suit automatiquement la lecture, sans défilement tactile interne. Chaque ligne présente le numéro, le visuel, le temps et le titre. La Cue active reste toujours la première ligne visible. Son visuel mesure 50 % de la largeur de l’écran, celui de la suivante 30 % ; ils conservent le format 16/9. Sur les petits écrans, les textes passent en dessous pour rester lisibles. La Cue active affiche un halo bleu ; sa description et celle de la suivante restent visibles, avec « Pas de description » si elles sont vides. Le décompte de la suivante apparaît dans une sous-box. À dix secondes, le chrono devient rouge, le halo bleu s’éteint en fondu et un halo rouge pulse sur la ligne suivante au rythme des secondes. Le visuel de la Cue active commence son fondu au noir à dix secondes de la suivante et atteint le noir au passage de Cue ; il suit le temps de la conduite, y compris en pause ou après navigation. Sans Cue suivante, il reste éclairé. Les Cues passées ne sont plus affichées dans cette fenêtre ; elles restent dans le projet et réapparaissent en revenant dans le temps ; un fondu inférieur masque la suite lorsqu’elle dépasse la fenêtre. La timeline permet la navigation dans le temps ; les Cues restent non éditables. Le moniteur vidéo apparaît uniquement si une vidéo est présente.
+La timeline est en haut, suivie d’une liste pleine largeur affichant jusqu’à cinq Cues. Elle suit automatiquement la lecture, sans défilement tactile interne. Chaque ligne présente le numéro, le visuel, le temps et le titre. La Cue active reste toujours la première ligne visible. Son visuel mesure 30 % de la largeur de l’écran, celui de la suivante 15 % ; ils conservent le format 16/9. Sur les petits écrans, les textes passent en dessous pour rester lisibles. La Cue active affiche un halo bleu ; sa description et celle de la suivante restent visibles, avec « Pas de description » si elles sont vides. Le décompte de la suivante apparaît dans une sous-box. À dix secondes, le chrono devient rouge, le halo bleu s’éteint en fondu et un halo rouge pulse sur la ligne suivante au rythme des secondes. Le visuel de la Cue active commence son fondu au noir à dix secondes de la suivante et atteint le noir au passage de Cue ; il suit le temps de la conduite, y compris en pause ou après navigation. Sans Cue suivante, il reste éclairé. Les Cues passées ne sont plus affichées dans cette fenêtre ; elles restent dans le projet et réapparaissent en revenant dans le temps ; un fondu inférieur masque la suite lorsqu’elle dépasse la fenêtre. La timeline permet la navigation dans le temps ; les Cues restent non éditables. Le moniteur vidéo apparaît uniquement si une vidéo est présente.
 
 La sortie vidéo apparaît uniquement en Show avec une vidéo. Son placement automatique demande une API de gestion des écrans disponible, une autorisation du navigateur et un vrai affichage étendu. Sur Mac avec Safari, la sortie ouvre une fenêtre à déplacer manuellement sur le second écran ; l’app ne peut pas vérifier l’affichage étendu. Chrome ou sa PWA peut placer automatiquement la fenêtre sur un affichage étendu détecté. La sortie est désactivée sur iPad / iPhone. La recopie n’est pas un affichage séparé. Le bouton devient rouge pendant l’activation. Autoriser les fenêtres surgissantes si nécessaire, puis cliquer dans la sortie pour le plein écran. Le préchargement est automatique.
 

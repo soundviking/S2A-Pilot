@@ -6,7 +6,7 @@
 <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" name="viewport"/>
 <title>S2A Pilot</title>
 <script>if(window.navigator.standalone===true)document.documentElement.className+=' iosStandalone';</script>
-<link href="./icons/s2a-pilot-192.png?v=1.4.82" rel="icon" type="image/png"/>
+<link href="./icons/s2a-pilot-192.png?v=1.4.83" rel="icon" type="image/png"/>
 <style>
 :root{
   font-family: system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
@@ -567,7 +567,7 @@ body:not(.locked) .cueAccordion.expanded input:focus,body:not(.locked) .cueAccor
 
 html,body{overscroll-behavior-y:none;}
 
-/* V1.4.82 — sélection Cue ↔ timeline + companion 1.2.2 */
+/* V1.4.83 — sélection Cue ↔ timeline + companion 1.2.2 */
 .showOnly{display:none}
 body.locked .showOnly{display:flex}
 .preflightIntegrated{display:grid;gap:12px;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid #2b3240}
@@ -576,7 +576,7 @@ body.locked .showOnly{display:flex}
 body.locked .timelineCard{display:block}
 
 
-/* 1.4.82 : mêmes libellés et disposition adaptable */
+/* 1.4.83 : mêmes libellés et disposition adaptable */
 [hidden]{display:none!important}
 .timeline .tick:first-of-type{transform:none}.timeline .tick:last-of-type{transform:translateX(-100%)}
 .showVideoMonitor{display:none;grid-column:1/-1;order:100}
@@ -589,10 +589,10 @@ button{white-space:normal;touch-action:manipulation}
 @media(max-width:900px){main.spectaclePriorityLayout{display:flex!important;flex-direction:column!important;padding:12px!important}.card{width:100%;box-sizing:border-box}.appTopBar{flex-wrap:wrap;gap:12px}.row{flex-wrap:wrap}}
 @media(max-width:480px){main.spectaclePriorityLayout{padding:8px!important}.card{padding:12px!important}.cueEditGrid{grid-template-columns:1fr}.cueEditGrid .imageControls,.cueEditGrid>.danger{grid-column:1}.mediaAction{display:flex;flex-wrap:wrap}.mediaEditor{width:100%;min-width:0}.row button{flex:1 1 120px}.time{font-size:clamp(1.6rem,10vw,3rem)}.cueSummary{grid-template-columns:45px 70px minmax(0,1fr) 24px}.projectActions{width:100%}.appIdentity{min-width:0}.outputPrep{flex-wrap:wrap}input,textarea,select{max-width:100%;box-sizing:border-box}}
 
-/* 1.4.82 : visuels Show remplis sans déformation{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
+/* 1.4.83 : visuels Show remplis sans déformation{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
 
 
-/* 1.4.82 : audition et aperçu indépendants de la conduite */
+/* 1.4.83 : audition et aperçu indépendants de la conduite */
 .mediaEditorTop .mediaPreviewToggle{padding:6px 9px;font-size:.76rem;min-width:96px;white-space:nowrap}
 .mediaEditorField input[type=text]{min-width:0;width:78px}
 .mediaEditorMain{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;align-items:center}
@@ -626,7 +626,7 @@ button{white-space:normal;touch-action:manipulation}
 @media(max-width:480px){.modeSwitchBtn{min-width:50px;padding:8px 9px}}
 @media(prefers-reduced-motion:reduce){.modeSwitchBtn{transition:none}}
 
-/* 1.4.82 : zoom des médias et sortie vidéo uniquement dans l’en-tête Show */
+/* 1.4.83 : zoom des médias et sortie vidéo uniquement dans l’en-tête Show */
 .fileLabel.addMediaBtn{background:#246fd1;border-color:#2b7de7;color:#fff}.fileLabel.addMediaBtn:hover{background:#2d7bdf}
 .mediaEditorTimeline .mediaVisual{overflow-x:auto;overflow-y:hidden;scrollbar-width:thin;scrollbar-color:#5b7192 #11151d}
 .mediaVisualContent{position:relative;height:100%;min-width:100%;user-select:none;touch-action:none}
@@ -643,7 +643,7 @@ button{white-space:normal;touch-action:manipulation}
 .pdfPreviewDialog{width:min(1000px,94vw);height:90dvh;max-width:94vw;max-height:94dvh;padding:14px;border:1px solid #45536a;border-radius:14px;background:#111722;color:#fff}.pdfPreviewDialog::backdrop{background:#000a}.pdfPreviewLayout{height:100%;display:flex;flex-direction:column;gap:12px}.pdfPreviewToolbar{display:flex;align-items:center;flex-wrap:wrap;gap:10px}.pdfPreviewToolbar strong{flex:1;min-width:150px}.pdfPreviewToolbar a{display:inline-flex;align-items:center;padding:10px 12px;border-radius:8px;background:#246fd1;color:white;text-decoration:none}
 .pdfPreviewPages{flex:1;min-height:0;overflow:auto;display:flex;flex-direction:column;align-items:flex-start;gap:16px;background:#252f40;border-radius:8px;padding:12px;box-sizing:border-box;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}.pdfPreviewPage{flex-shrink:0;margin:0 auto;background:white;border-radius:4px;box-shadow:0 3px 12px #0006;overflow:hidden}.pdfPreviewPage svg{display:block;width:100%;height:auto}.pdfPreviewZoom{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.pdfPreviewZoom button{min-height:40px}.pdfPreviewZoom span{min-width:48px;text-align:center;font-size:.85rem}.pdfPreviewToolbar strong{overflow-wrap:anywhere}@media(max-width:480px){.pdfPreviewDialog{padding:9px}.pdfPreviewToolbar{gap:7px}.pdfPreviewToolbar strong{flex-basis:100%}.pdfPreviewPages{padding:8px}.pdfPreviewZoom{gap:6px}.pdfPreviewZoom button{padding:8px 10px}}
 
-/* 1.4.82 : repères et médias distincts ; aperçu global en Edit. */
+/* 1.4.83 : repères et médias distincts ; aperçu global en Edit. */
 #projectWaveform{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.8}
 #projectMediaTracks{position:absolute;inset:5px 0 22px;display:flex;flex-direction:column;gap:3px;min-height:0;overflow:hidden;pointer-events:none;z-index:1}
 .projectMediaBar{position:relative;flex-shrink:0;box-sizing:border-box;min-width:3px;height:20px;border-radius:5px;background:rgba(42,153,89,.28);border:1px solid rgba(101,210,142,.4);color:#d0f5df;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:2px 5px}
@@ -654,13 +654,13 @@ button{white-space:normal;touch-action:manipulation}
 body.locked .timeline{touch-action:pan-y;cursor:default}body.locked .marker{pointer-events:none}
 html,body{touch-action:pan-x pan-y}input,textarea,select{font-size:max(16px,1em)}
 @media(min-width:900px) and (orientation:landscape){
- body.locked main.spectaclePriorityLayout{display:grid!important;max-width:1500px;padding:12px 18px!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;align-items:stretch}
- body.locked .appTopBar,body.locked .modeCard,body.locked .showVideoMonitor{grid-column:1/-1;margin:0}
- body.locked .timelineCard{grid-column:1/-1;grid-row:3;margin:0;padding:14px}
+ body.locked main.spectaclePriorityLayout{display:flex!important;flex-direction:column;max-width:1500px;padding:12px 18px!important;gap:12px;align-items:stretch}
+ body.locked .appTopBar,body.locked .modeCard,body.locked .showVideoMonitor{margin:0}
+ body.locked .timelineCard{margin:0;padding:14px}
  body.locked .card h2{margin-bottom:8px}
 }
 .cueMediaChip.video:not(.error){background:rgba(255,49,153,.30);border-color:rgba(255,92,177,.85);color:#ffd6ed}
-#updateNotice{grid-column:1/-1;order:0;padding:10px 14px;background:#253748;border:1px solid #5584ad;border-radius:10px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}#updateNotice button{margin-left:auto}
+#updateNotice{order:-1;padding:10px 14px;background:#253748;border:1px solid #5584ad;border-radius:10px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}#updateNotice button{margin-left:auto}
 
 .preflightCard{grid-template-columns:minmax(0,1fr);min-width:0}
 #generalTimelineViewport{min-width:0;width:100%;overflow-x:auto;overflow-y:hidden;margin:16px 0;scrollbar-width:thin;scrollbar-color:#5b7192 #11151d}
@@ -683,7 +683,6 @@ body.locked .marker{pointer-events:none;cursor:default}
 .mediaExcluded{position:absolute;top:0;bottom:0;background:rgba(0,0,0,.78);pointer-events:none;z-index:1}
 .mediaExcluded.before{left:0}.mediaExcluded.after{right:0}
 body.locked .timelineCard{order:1}
-@media(min-width:900px){body.locked .timelineCard{grid-column:1/-1;grid-row:2}}
 .timelineCard .row>button{box-sizing:border-box;line-height:1.25}
 #restartBtn{min-width:44px;font-size:inherit;display:inline-flex;align-items:center;justify-content:center}
 
@@ -702,7 +701,7 @@ body.locked .timelineCard{order:1}
 
 
 .showWorkspace{display:none}
-body.locked .showWorkspace{display:block;order:2;grid-column:1/-1;grid-row:3}
+body.locked .showWorkspace{display:block;order:2}
 body.locked .showCueOverview{position:relative;margin:0}
 body.locked .showCueOverview h2{font-size:.85rem;font-weight:800;letter-spacing:.12em;color:#9fb7d1;line-height:1.2;margin:0 0 12px;text-transform:uppercase}
 body.locked .showCueOverview h2::before{content:"";display:inline-block;width:4px;height:14px;background:#6c9fce;border-radius:3px;margin-right:8px;vertical-align:middle}
@@ -724,17 +723,17 @@ body.locked .showCueOverview::before,body.locked .showCueOverview::after{display
 .showOverviewRow{position:relative;display:grid;grid-template-columns:32px 64px 70px minmax(0,1fr) 140px;gap:14px;min-height:64px;padding:12px;border:1px solid #343b47;border-radius:12px;background:#141922;transition:box-shadow .7s ease,border-color .7s ease,background-color .7s ease}
 .showOverviewRow .overviewNumber{font-size:15px;color:#9fb7d1}.showOverviewRow .overviewName{font-size:18px;font-weight:700;color:#f4f6f8}.showOverviewRow .overviewTime{font-size:13px}.overviewContent{min-width:0}.overviewBadges{display:flex;gap:6px;margin-top:6px}.overviewBadges:empty{display:none}
 .showOverviewRow .overviewVisual{width:64px;height:36px;aspect-ratio:16/9;min-width:0;overflow:hidden;border-radius:8px;display:flex;align-items:center;justify-content:center}.showOverviewRow .overviewVisual img{width:100%;height:100%;object-fit:cover;border-radius:inherit}.showOverviewRow .showOverviewPlaceholder{background:#080a0d;border:1px solid #343b47;font-size:12px;text-align:center;color:#9da7b5}
-.showOverviewRow.isActive{grid-template-columns:32px 50vw 70px minmax(0,1fr);background:#1b2636;border-color:#9acbff;box-shadow:inset 0 0 18px #4597ff33,0 0 10px 2px #4395ffaa,0 0 26px 4px #2c7eff66}
+.showOverviewRow.isActive{grid-template-columns:32px 30vw 70px minmax(0,1fr);background:#1b2636;border-color:#9acbff;box-shadow:inset 0 0 18px #4597ff33,0 0 10px 2px #4395ffaa,0 0 26px 4px #2c7eff66}
 .showOverviewRow.isActive .overviewVisual{width:100%;height:auto;aspect-ratio:16/9;background:#000}.showOverviewRow.isActive .overviewName{font-size:clamp(1.4rem,3vw,2rem)}.overviewDescription{margin-top:10px;white-space:pre-wrap;overflow-wrap:anywhere;font-size:17px;line-height:1.4;color:#d5dce6}
 body.nextCueUrgent .showOverviewRow.isActive{border-color:#343b47;background:#141922;box-shadow:inset 0 0 18px #4597ff00,0 0 10px 2px #4395ff00,0 0 26px 4px #2c7eff00}
 .overviewCountdown{grid-column:5;display:flex;align-items:center;justify-content:center;padding:8px;border:1px solid #45536a;border-radius:10px;background:#101620;min-width:0}.overviewCountdownClock{font-size:clamp(1.8rem,3vw,2.5rem);font-weight:800;font-variant-numeric:tabular-nums;color:#f4f6f8}.isUrgent .overviewCountdownClock{color:#ff453a}
 .overviewBeat{position:absolute;inset:-1px;pointer-events:none;border:1px solid #ff9b96;border-radius:inherit;box-shadow:inset 0 0 12px #ff453a33,0 0 10px 2px #ff453aaa,0 0 24px 3px #ff2d2d66;opacity:0}
-.showOverviewRow.isNext{grid-template-columns:32px 30vw 70px minmax(0,1fr) 140px}.showOverviewRow.isNext .overviewVisual{width:100%;height:auto;aspect-ratio:16/9}
+.showOverviewRow.isNext{grid-template-columns:32px 15vw 70px minmax(0,1fr) 140px}.showOverviewRow.isNext .overviewVisual{width:100%;height:auto;aspect-ratio:16/9}
 body.locked main.spectaclePriorityLayout{max-width:none!important}
-@media(max-width:1100px){.showOverviewRow.isActive{grid-template-columns:24px 50vw 70px}.showOverviewRow.isActive .overviewContent{grid-column:2/4;grid-row:2}.showOverviewRow.isActive .overviewTime{grid-column:3;grid-row:1}.showOverviewRow.isNext{grid-template-columns:24px 30vw 58px minmax(0,1fr)}.showOverviewRow.isNext .overviewCountdown{grid-column:4;grid-row:2;justify-self:end;min-width:100px}}
-@media(max-width:760px){.showOverviewRow{grid-template-columns:24px 64px 58px minmax(0,1fr);gap:10px}.showOverviewRow.isActive{grid-template-columns:24px 50vw 58px}.showOverviewRow .overviewName{font-size:16px}.showOverviewRow .overviewTime{font-size:12px}.overviewDescription{font-size:15px}}
-@media(max-width:640px){.showOverviewRow.isNext{grid-template-columns:24px 30vw 58px}.showOverviewRow.isNext .overviewContent{grid-column:2/4;grid-row:2}.showOverviewRow.isNext .overviewCountdown{grid-column:2/4;grid-row:3}}
-@media(max-width:480px){.showOverviewRow{grid-template-columns:20px 48px 48px minmax(0,1fr);gap:6px;padding:10px}.showOverviewRow .overviewVisual{width:48px;height:27px}.showOverviewRow.isActive{grid-template-columns:20px 50vw minmax(0,1fr)}.showOverviewRow.isNext{grid-template-columns:20px 30vw 48px}.showOverviewRow .overviewNumber{font-size:12px}.overviewCountdownClock{font-size:1.6rem}.showOverviewRow.isActive .overviewName{font-size:18px}.overviewCountdown{min-width:80px}}
+@media(max-width:1100px){.showOverviewRow.isActive{grid-template-columns:24px 30vw 70px}.showOverviewRow.isActive .overviewContent{grid-column:2/4;grid-row:2}.showOverviewRow.isActive .overviewTime{grid-column:3;grid-row:1}.showOverviewRow.isNext{grid-template-columns:24px 15vw 58px minmax(0,1fr)}.showOverviewRow.isNext .overviewCountdown{grid-column:4;grid-row:2;justify-self:end;min-width:100px}}
+@media(max-width:760px){.showOverviewRow{grid-template-columns:24px 64px 58px minmax(0,1fr);gap:10px}.showOverviewRow.isActive{grid-template-columns:24px 30vw 58px}.showOverviewRow .overviewName{font-size:16px}.showOverviewRow .overviewTime{font-size:12px}.overviewDescription{font-size:15px}}
+@media(max-width:640px){.showOverviewRow.isNext{grid-template-columns:24px 15vw 58px}.showOverviewRow.isNext .overviewContent{grid-column:2/4;grid-row:2}.showOverviewRow.isNext .overviewCountdown{grid-column:2/4;grid-row:3}}
+@media(max-width:480px){.showOverviewRow{grid-template-columns:20px 48px 48px minmax(0,1fr);gap:6px;padding:10px}.showOverviewRow .overviewVisual{width:48px;height:27px}.showOverviewRow.isActive{grid-template-columns:20px 30vw minmax(0,1fr)}.showOverviewRow.isNext{grid-template-columns:20px 15vw 48px}.showOverviewRow .overviewNumber{font-size:12px}.overviewCountdownClock{font-size:1.6rem}.showOverviewRow.isActive .overviewName{font-size:18px}.overviewCountdown{min-width:80px}}
 @media(max-width:360px){.showOverviewRow.isActive .overviewTime{grid-column:2;grid-row:2}.showOverviewRow.isActive .overviewContent{grid-row:3}}
 @media(prefers-reduced-motion:reduce){.showOverviewRow{transition:none}}
 
@@ -749,18 +748,18 @@ body.locked .showCueOverview.hasHiddenCues::after{display:block;content:"";posit
 <meta content="yes" name="apple-mobile-web-app-capable"/>
 <meta content="black" name="apple-mobile-web-app-status-bar-style"/>
 <meta content="S2A Pilot" name="apple-mobile-web-app-title"/>
-<link href="./icons/s2a-pilot-180.png?v=1.4.82" rel="apple-touch-icon"/>
+<link href="./icons/s2a-pilot-180.png?v=1.4.83" rel="apple-touch-icon"/>
 <link rel="stylesheet" href="./material-ui.css">
-<link rel="stylesheet" href="./quick-help.css?v=1.4.82">
-<link rel="stylesheet" href="./startup.css?v=1.4.82"></head>
-<body><script src="./startup.js?v=1.4.82"></script>
+<link rel="stylesheet" href="./quick-help.css?v=1.4.83">
+<link rel="stylesheet" href="./startup.css?v=1.4.83"></head>
+<body><script src="./startup.js?v=1.4.83"></script>
 <main class="spectaclePriorityLayout">
 <div class="appTopBar">
-<img alt="Logo S2A Pilot" class="headerBrandLogo" src="./icons/s2a-pilot-192.png?v=1.4.82"/>
+<img alt="Logo S2A Pilot" class="headerBrandLogo" src="./icons/s2a-pilot-192.png?v=1.4.83"/>
 <div class="appIdentity">
   <strong>S2A Pilot</strong>
   <span class="appAttribution">(by S2A Production)</span>
-  <span class="appVersion">Version 1.4.82</span>
+  <span class="appVersion">Version 1.4.83</span>
 </div>
 <div class="headerActions"><select id="languageSelect" aria-label="Language / Langue"><option value="fr">FR</option><option value="en">EN</option></select>
 <div class="headerVideoOutput showOnly" hidden>
@@ -850,7 +849,7 @@ window.s2aReportBootError=function(message){if(window.s2aBootReady)return;var bo
 window.addEventListener('error',function(e){window.s2aReportBootError((e.message||'Chargement impossible')+' — '+(e.filename||'')+':'+(e.lineno||''));});
 </script>
 <script src="./material-ui.js"></script>
-<script src="./help-images.js?v=1.4.82"></script><script src="./quick-help.js?v=1.4.82"></script>
-<script src="./compatibility-loader.js?v=1.4.82"></script>
+<script src="./help-images.js?v=1.4.83"></script><script src="./quick-help.js?v=1.4.83"></script>
+<script src="./compatibility-loader.js?v=1.4.83"></script>
 </body>
 </html>
