@@ -886,7 +886,7 @@ document.addEventListener('touchmove',e=>{if(e.touches.length>1)e.preventDefault
 document.addEventListener('wheel',e=>{if(e.ctrlKey)e.preventDefault();},{passive:false});
 
 // This manifest is requested from the network, outside the service-worker cache.
-const APP_VERSION='1.4.80';document.querySelector('.appVersion').textContent='Version '+APP_VERSION;let lastVersionCheck=0,versionCheckRunning=false;
+const APP_VERSION='1.4.81';document.querySelector('.appVersion').textContent='Version '+APP_VERSION;let lastVersionCheck=0,versionCheckRunning=false;
 const updateNotice=document.createElement('div');updateNotice.id='updateNotice';updateNotice.hidden=true;updateNotice.setAttribute('role','status');const updateText=document.createElement('span'),updateButton=document.createElement('button');updateButton.type='button';updateButton.textContent=tr('Ouvrir la nouvelle version');updateNotice.append(updateText,updateButton);document.querySelector('main').prepend(updateNotice);
 function updateVersionButton(){const b=document.getElementById('updateNotice')?.querySelector('button');if(!b)return;b.disabled=locked||transportPlaying;b.title=b.disabled?tr('Quitter le mode Show et mettre la lecture en pause pour actualiser.'):'';}
 function versionIsNewer(a,b){const x=a.split('.').map(Number),y=b.split('.').map(Number);for(let i=0;i<3;i++){if(x[i]!==y[i])return x[i]>y[i];}return false;}
@@ -932,7 +932,7 @@ function updateShowOverview(){
  if(key===showOverviewSignature)return;showOverviewSignature=key;host.replaceChildren();
  if(!ordered.length){const empty=document.createElement('div');empty.className='small muted';empty.textContent=tr('Aucune Cue');host.append(empty);}
  for(const cue of ordered){
-  const row=document.createElement('div');row.className='showOverviewRow'+(cue===active?' isActive':'')+(cue===next?' isNext':'')+(active&&cue.time<=active.time&&cue!==active?' isPast':'');row.dataset.cueId=cue.id;
+  const row=document.createElement('div');row.className='showOverviewRow'+(cue===active?' isActive':'')+(cue===next?' isNext':'');row.dataset.cueId=cue.id;
   if(cue===active)row.setAttribute('aria-current','step');
   const number=document.createElement('span');number.className='overviewNumber';number.textContent=String(cues.indexOf(cue)+1);
   const visual=document.createElement('div');visual.className='overviewVisual';
@@ -951,24 +951,19 @@ function updateShowOverview(){
 function fitShowCueList(){
  if(!locked)return;const host=$('showCueOverviewRows'),rows=Array.from(host.children).filter(row=>row.classList.contains('showOverviewRow'));
  host.style.height='auto';if(!rows.length)return;
- const activeIndex=Math.max(0,rows.findIndex(row=>row.classList.contains('isActive'))),start=Math.max(0,activeIndex-1),visible=rows.slice(start,start+5);
+ const activeIndex=Math.max(0,rows.findIndex(row=>row.classList.contains('isActive'))),start=activeIndex,visible=rows.slice(start,start+5);
  const height=visible.reduce((sum,row)=>sum+row.getBoundingClientRect().height,0)+Math.max(0,visible.length-1)*12;
  rows.forEach((row,index)=>{row.style.visibility=index>=start&&index<start+5?'visible':'hidden';});
- host.style.height=(height+48)+'px';host.scrollTop=rows[start].offsetTop-rows[0].offsetTop;updateShowListPastFade();
+ host.style.height=(height+48)+'px';host.scrollTop=rows[start].offsetTop-rows[0].offsetTop;updateShowListOverflow();
 }
-function updateShowListPastFade(){
+function updateShowListOverflow(){
  if(!locked)return;const host=$('showCueOverviewRows'),card=host.parentElement;
  card.classList.toggle('hasHiddenCues',host.scrollHeight-host.clientHeight-host.scrollTop>1);
- const top=host.getBoundingClientRect().top;
- for(const row of host.querySelectorAll('.isPast')){const rect=row.getBoundingClientRect();const progress=Math.max(0,Math.min(1,(top+100-rect.top)/100));row.style.opacity=String(1-.7*progress);}
 }
 window.addEventListener('resize',()=>requestAnimationFrame(fitShowCueList));
 
 function setShowText(element,text){if(element.textContent!==text)element.textContent=text;}
 function renderCueMediaBadges(host,cue){const kinds=[...new Set((cue?.mediaActions||[]).map(a=>a.kind).filter(k=>k==='audio'||k==='video'))],key=kinds.join(',')+S2ALanguage.language;if(host.dataset.kind===key)return;host.dataset.kind=key;host.replaceChildren();for(const kind of kinds){const chip=document.createElement('span');chip.className='cueMediaChip '+kind;chip.textContent=kind==='video'?tr('VIDÉO'):'AUDIO';host.append(chip);}}
-
-
-
 
 function updateCountdownBeat(t){
  if(!locked)return;const host=$('showCueOverviewRows'),next=getNextCue(t),remaining=next?Math.max(0,next.time-t):Infinity;
