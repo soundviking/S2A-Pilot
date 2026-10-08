@@ -1,10 +1,10 @@
-# S2A Pilot 1.4.79 / S2A Copilot 1.2.11
+# S2A Pilot 1.4.80 / S2A Copilot 1.2.11
 
 🇫🇷 [Français](README.md) | 🇬🇧 **English**
 
 ![S2A Pilot](assets/social-preview.png)
 
-[PWA 1.4.79](downloads/S2A-Pilot-V1.4.79-PWA.zip) · [Copilot 1.2.11 — Intel / Apple Silicon](downloads/S2A-Copilot-1.2.11-macOS-Universel.zip)
+[PWA 1.4.80](downloads/S2A-Pilot-V1.4.80-PWA.zip) · [Copilot 1.2.11 — Intel / Apple Silicon](downloads/S2A-Copilot-1.2.11-macOS-Universel.zip)
 
 # S2A Pilot — User guide
 
@@ -44,7 +44,7 @@ Media bands appear on the timeline: green for audio, pink for video. The combine
 
 Use Play / Pause, or press Space. The keyboard shortcut is ignored while typing, inside dialogs or when another control owns Space. Holding it does not repeatedly toggle playback. Back to start pauses playback, stops running media and returns to zero.
 
-Show places a full-width Cue list below the timeline, displaying up to five Cues and automatically following playback without an inner touch scroll. Each row shows its number, visual, time and title. The active Cue has a larger visual and a blue halo. Descriptions remain visible on the active and next Cues, with “No description” when empty. The next countdown appears in its own small panel. At ten seconds it turns red, the blue halo fades out, and a red halo pulses around the next row in time with the remaining seconds. Past Cues darken at the top; a bottom fade hides the continuation when it exceeds the window. The main timeline can seek in Show; Cue markers remain non-editable. The video monitor appears only if the show contains video.
+Show places a full-width Cue list below the timeline, displaying up to five Cues and automatically following playback without an inner touch scroll. Each row shows its number, visual, time and title. The active Cue has a larger visual and a blue halo. Descriptions remain visible on the active and next Cues, with “No description” when empty. The next countdown appears in its own small panel. At ten seconds it turns red, the blue halo fades out, and a red halo pulses around the next row in time with the remaining seconds. The active Cue visual starts fading to black ten seconds before the next Cue and reaches black at the transition. It follows the show time, including pause and seeking; it remains fully visible when there is no next Cue. Past Cues darken at the top; a bottom fade hides the continuation when it exceeds the window. The main timeline can seek in Show; Cue markers remain non-editable. The video monitor appears only if the show contains video.
 
 ## External video output
 

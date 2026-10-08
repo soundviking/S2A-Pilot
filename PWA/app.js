@@ -886,7 +886,7 @@ document.addEventListener('touchmove',e=>{if(e.touches.length>1)e.preventDefault
 document.addEventListener('wheel',e=>{if(e.ctrlKey)e.preventDefault();},{passive:false});
 
 // This manifest is requested from the network, outside the service-worker cache.
-const APP_VERSION='1.4.79';document.querySelector('.appVersion').textContent='Version '+APP_VERSION;let lastVersionCheck=0,versionCheckRunning=false;
+const APP_VERSION='1.4.80';document.querySelector('.appVersion').textContent='Version '+APP_VERSION;let lastVersionCheck=0,versionCheckRunning=false;
 const updateNotice=document.createElement('div');updateNotice.id='updateNotice';updateNotice.hidden=true;updateNotice.setAttribute('role','status');const updateText=document.createElement('span'),updateButton=document.createElement('button');updateButton.type='button';updateButton.textContent=tr('Ouvrir la nouvelle version');updateNotice.append(updateText,updateButton);document.querySelector('main').prepend(updateNotice);
 function updateVersionButton(){const b=document.getElementById('updateNotice')?.querySelector('button');if(!b)return;b.disabled=locked||transportPlaying;b.title=b.disabled?tr('Quitter le mode Show et mettre la lecture en pause pour actualiser.'):'';}
 function versionIsNewer(a,b){const x=a.split('.').map(Number),y=b.split('.').map(Number);for(let i=0;i<3;i++){if(x[i]!==y[i])return x[i]>y[i];}return false;}
@@ -973,6 +973,8 @@ function renderCueMediaBadges(host,cue){const kinds=[...new Set((cue?.mediaActio
 function updateCountdownBeat(t){
  if(!locked)return;const host=$('showCueOverviewRows'),next=getNextCue(t),remaining=next?Math.max(0,next.time-t):Infinity;
  const urgent=!!next&&remaining<=10.0001;document.body.classList.toggle('nextCueUrgent',urgent);
+ const activeImage=host.querySelector('.isActive .overviewVisual img');
+ if(activeImage){const opacity=String(Math.min(1,remaining/10));if(activeImage.style.opacity!==opacity)activeImage.style.opacity=opacity;}
  const row=host.querySelector('.isNext');if(!row||row.dataset.cueId!==next?.id)return;
  const clock=row.querySelector('.overviewCountdownClock');setShowText(clock,fmtDisplay(remaining,true));row.classList.toggle('isUrgent',urgent);
  const reduced=countdownMotionPreference&&countdownMotionPreference.matches;
