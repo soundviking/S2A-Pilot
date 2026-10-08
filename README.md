@@ -1,10 +1,10 @@
-# S2A Pilot 1.4.77 / S2A Copilot 1.2.11
+# S2A Pilot 1.4.78 / S2A Copilot 1.2.11
 
 🇫🇷 **Français** | 🇬🇧 [English](README.en.md)
 
 ![S2A Pilot](assets/social-preview.png)
 
-[PWA 1.4.77](downloads/S2A-Pilot-V1.4.77-PWA.zip) · [Copilot 1.2.11 — Intel / Apple Silicon](downloads/S2A-Copilot-1.2.11-macOS-Universel.zip)
+[PWA 1.4.78](downloads/S2A-Pilot-V1.4.78-PWA.zip) · [Copilot 1.2.11 — Intel / Apple Silicon](downloads/S2A-Copilot-1.2.11-macOS-Universel.zip)
 
 # S2A Pilot — Guide utilisateur
 
@@ -90,11 +90,11 @@ La PWA harmonise le fond de la PWA et réserve les zones de sécurité de la bar
 
 ## Démarrage
 
-Une animation de trois secondes affiche le logo validé en rotation avec un halo bleu qui le suit. Le slogan reprend la langue française ou anglaise choisie. Le mode allégé et la réduction des mouvements utilisent un simple fondu. L’aide apparaît ensuite. Toutes les ressources sont locales.
+Une animation de trois secondes affiche le logo validé en rotation avec un halo bleu qui le suit. Le slogan reprend la langue française ou anglaise choisie. Sur iOS 9 et avec la réduction des mouvements, un simple fondu est utilisé. L’aide apparaît ensuite. Toutes les ressources sont locales.
 
 ## Anciens navigateurs
 
-Un moteur compatible ES5 est fourni. Un mode allégé à une musique reste accessible dans `legacy/index.html`. Sur iOS 9.3.5, l’import nécessite un fournisseur de documents disponible. Les codecs audio/vidéo, fondus, téléchargements et limites de mémoire restent à vérifier sur l’iPad réel ; l’ajout à l’écran d’accueil ne supprime pas ces limites du navigateur.
+L’interface complète utilise un moteur compatible ES5 sur les anciens navigateurs. Le mode allégé et les liens de bascule ont été supprimés. Sur iOS 9.3.5, l’import nécessite un fournisseur de documents disponible. Les codecs audio/vidéo, fondus, téléchargements et limites de mémoire restent à vérifier sur l’iPad réel ; l’ajout à l’écran d’accueil ne supprime pas ces limites du navigateur.
 
 ## Identité visuelle
 

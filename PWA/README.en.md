@@ -90,11 +90,11 @@ The PWA matches the PWA background and reserves status-bar safe areas. Any blur 
 
 ## Startup
 
-A three-second animation shows the validated logo rotating with a blue glow that follows it. The slogan uses the selected French or English language. Lightweight mode and reduced motion use a simple fade. Help opens afterwards. All assets are local.
+A three-second animation shows the validated logo rotating with a blue glow that follows it. The slogan uses the selected French or English language. iOS 9 and reduced motion use a simple fade. Help opens afterwards. All assets are local.
 
 ## Older browsers
 
-An ES5 compatibility engine is provided. A lightweight single-track mode is also available in `legacy/index.html`. On iOS 9.3.5, file import requires an available document provider. Audio/video codecs, fades, downloads and memory limits need validation on the actual iPad; adding the app to the Home Screen does not remove these browser limits.
+Older browsers use the full interface through an ES5 compatibility engine. Lightweight mode and switching links have been removed. On iOS 9.3.5, file import requires an available document provider. Audio/video codecs, fades, downloads and memory limits need validation on the actual iPad; adding the app to the Home Screen does not remove these browser limits.
 
 ## Visual identity
 
