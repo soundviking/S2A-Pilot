@@ -1,8 +1,8 @@
-DEPLOYMENT — S2A Pilot 1.4.81
+DEPLOYMENT — S2A Pilot 1.4.82
 
 Replace the complete /qlab/ folder contents, including hidden .htaccess, i18n.js, manifest.en.webmanifest and companion/S2A-Copilot-1.2.11-app.zip. Purge Cloudflare’s cache and remove long-cache rules for HTML, JavaScript, JSON, manifests and service workers. Open actualiser.html afterward; local IndexedDB projects are preserved. Do not clear site data.
 
-Check version 1.4.81, FR / EN, New, + Cue, + Music / Video, PDF and package export. Copilot 1.2.11 is already compiled for Intel and Apple Silicon. Video output is unavailable on iPad / iPhone. Safari Mac opens a manually positioned window; Chrome places it on an automatically detected extended display.
+Check version 1.4.82, FR / EN, New, + Cue, + Music / Video, PDF and package export. Copilot 1.2.11 is already compiled for Intel and Apple Silicon. Video output is unavailable on iPad / iPhone. Safari Mac opens a manually positioned window; Chrome places it on an automatically detected extended display.
 
 Chrome tests cover languages, preserving project text, PDF, exported notices, offline assets and simulated Mac/iPad output. Real Safari/iPad, real monitors and live QLab imports remain to be verified.
 
@@ -10,4 +10,4 @@ Chrome tests cover languages, preserving project text, PDF, exported notices, of
 
 
 
-1.4.81: deploy the complete compat/ folder and material-ui.js/material-ui.css. All libraries and SVG icons are local. iOS 9.3.5 still requires physical-device playback, document-provider and download checks. No service worker offline support on iOS 9.
+1.4.82: deploy the complete compat/ folder and material-ui.js/material-ui.css. All libraries and SVG icons are local. iOS 9.3.5 still requires physical-device playback, document-provider and download checks. No service worker offline support on iOS 9.
