@@ -1,10 +1,10 @@
-# S2A Pilot 1.4.78 / S2A Copilot 1.2.11
+# S2A Pilot 1.4.79 / S2A Copilot 1.2.11
 
 🇫🇷 **Français** | 🇬🇧 [English](README.en.md)
 
 ![S2A Pilot](assets/social-preview.png)
 
-[PWA 1.4.78](downloads/S2A-Pilot-V1.4.78-PWA.zip) · [Copilot 1.2.11 — Intel / Apple Silicon](downloads/S2A-Copilot-1.2.11-macOS-Universel.zip)
+[PWA 1.4.79](downloads/S2A-Pilot-V1.4.79-PWA.zip) · [Copilot 1.2.11 — Intel / Apple Silicon](downloads/S2A-Copilot-1.2.11-macOS-Universel.zip)
 
 # S2A Pilot — Guide utilisateur
 
@@ -20,7 +20,7 @@ Au premier lancement, la PWA choisit le français si la langue principale du nav
 
 ## Aide rapide
 
-Au premier lancement, une aide en quatre étapes présente la création de la conduite, les réglages des Cues, le mode Show et le raccourci Espace pour Lecture/Pause sur ordinateur. Les captures réelles montrent une musique de 1 min 40 avec sa waveform et des visuels de scène. Elle apparaît avant la proposition d’installation. Le bouton « ? », en Edit à gauche d’Annuler et Rétablir, permet de la rouvrir. L’aide et ses captures sont disponibles en français et en anglais, intégrées localement pour fonctionner hors ligne sur les navigateurs compatibles avec ce fonctionnement. Elles sont également adaptées au mode de compatibilité.
+Au premier lancement, une aide en quatre étapes présente la création de la conduite, les réglages des Cues, le mode Show et le raccourci Espace pour Lecture/Pause sur ordinateur. Les captures réelles montrent une musique de 3 min 20 avec sa waveform et des visuels de scène. Elle apparaît avant la proposition d’installation. Le bouton « ? », en Edit à gauche d’Annuler et Rétablir, permet de la rouvrir. L’aide et ses captures sont disponibles en français et en anglais, intégrées localement pour fonctionner hors ligne sur les navigateurs compatibles avec ce fonctionnement. Elles sont également adaptées au mode de compatibilité.
 
 ## Création et édition
 
@@ -28,7 +28,7 @@ Un projet commence vide. Cue crée une indication avec titre, description et vis
 
 Les Cues sont classées par temps. 02.41, 02,41 et 02:41.0 signifient 2 minutes 41. Une Cue peut prolonger la timeline. Toutes les Cues peuvent être déplacées ou supprimées, même à zéro. La poignée à gauche permet le glisser-déposer dans la liste ; le temps est ajusté entre les Cues voisines. Avant la première Cue, le temps devient zéro. Alt + flèches fonctionne au clavier sur la poignée.
 
-La sélection est mise en évidence en bleu. Le déplacement d’un repère sur la timeline affiche en direct sa position, son temps et sa bande média, avec une échelle stable jusqu’au relâchement. Dupliquer, à côté de Supprimer dans la Cue déroulée, conserve les informations et réglages au même temps. Les réglages sont indépendants ; les fichiers sont réutilisés. Annuler / Rétablir permet de revenir sur ces changements.
+La sélection est mise en évidence en bleu. Le déplacement d’un repère sur la timeline affiche en direct sa position, son temps et sa bande média, avec une échelle stable jusqu’au relâchement. Dupliquer, dans la Cue déroulée, conserve les informations et réglages au même temps. Les réglages sont indépendants ; les fichiers sont réutilisés. La poubelle à droite de chaque ligne demande confirmation avant suppression. Un clic sur la ligne déroule la Cue. Annuler / Rétablir permet de revenir sur ces changements.
 
 ## Médias et timeline
 
@@ -42,7 +42,7 @@ Lecture / Pause ou Espace commande la conduite. Le raccourci ignore la saisie, l
 
 ## Show et sortie vidéo
 
-En paysage large : Cue active à gauche avec halo bleu, prochaine Cue à droite avec titre et temps côte à côte, description dessous et visuel centré 16/9. Sur petit écran, le temps passe sous le titre. Les descriptions longues restent intégrales et peuvent agrandir les boxes. La timeline permet désormais la navigation dans le temps en Show ; les Cues restent non éditables. Le moniteur vidéo apparaît uniquement si une vidéo est présente.
+La timeline est en haut, suivie d’une liste pleine largeur affichant jusqu’à cinq Cues. Elle suit automatiquement la lecture, sans défilement tactile interne. Chaque ligne présente le numéro, le visuel, le temps et le titre. La Cue active affiche un visuel agrandi et un halo bleu ; sa description et celle de la suivante restent visibles, avec « Pas de description » si elles sont vides. Le décompte de la suivante apparaît dans une sous-box. À dix secondes, le chrono devient rouge, le halo bleu s’éteint en fondu et un halo rouge pulse sur la ligne suivante au rythme des secondes. Les Cues passées s’assombrissent en haut ; un fondu inférieur masque la suite lorsqu’elle dépasse la fenêtre. La timeline permet la navigation dans le temps ; les Cues restent non éditables. Le moniteur vidéo apparaît uniquement si une vidéo est présente.
 
 La sortie vidéo apparaît uniquement en Show avec une vidéo. Son placement automatique demande une API de gestion des écrans disponible, une autorisation du navigateur et un vrai affichage étendu. Sur Mac avec Safari, la sortie ouvre une fenêtre à déplacer manuellement sur le second écran ; l’app ne peut pas vérifier l’affichage étendu. Chrome ou sa PWA peut placer automatiquement la fenêtre sur un affichage étendu détecté. La sortie est désactivée sur iPad / iPhone. La recopie n’est pas un affichage séparé. Le bouton devient rouge pendant l’activation. Autoriser les fenêtres surgissantes si nécessaire, puis cliquer dans la sortie pour le plein écran. Le préchargement est automatique.
 

@@ -1,3 +1,11 @@
+# S2A Pilot 1.4.79 / S2A Copilot 1.2.11
+
+🇫🇷 [Français](README.md) | 🇬🇧 **English**
+
+![S2A Pilot](assets/social-preview.png)
+
+[PWA 1.4.79](downloads/S2A-Pilot-V1.4.79-PWA.zip) · [Copilot 1.2.11 — Intel / Apple Silicon](downloads/S2A-Copilot-1.2.11-macOS-Universel.zip)
+
 # S2A Pilot — User guide
 
 The rights to S2A Pilot and S2A Copilot belong to the company S2A Production. These applications were developed by Antoine CLOPIER with assistance from ChatGPT.
@@ -12,7 +20,7 @@ S2A Copilot uses the macOS preferred language at first launch and offers a Fran�
 
 ## Quick help
 
-On first launch, a four-step guide introduces show creation, Cue settings, Show mode and the Space shortcut for Play/Pause on computers. Actual application screenshots show a 1 minute 40 second audio track with its waveform and stage visuals. It appears before the installation prompt. The “?” button in Edit, to the left of Undo and Redo, opens it again. The guide and screenshots are available in French and English and bundled locally for offline use in browsers that support it. They also cover compatibility mode.
+On first launch, a four-step guide introduces show creation, Cue settings, Show mode and the Space shortcut for Play/Pause on computers. Actual application screenshots show a 3 minute 20 second audio track with its waveform and stage visuals. It appears before the installation prompt. The “?” button in Edit, to the left of Undo and Redo, opens it again. The guide and screenshots are available in French and English and bundled locally for offline use in browsers that support it. They also cover compatibility mode.
 
 ## Prepare a show
 
@@ -22,7 +30,7 @@ Cues are ordered by their time. Enter `02.41`, `02,41` or `02:41.0` for 2 minute
 
 The selected Cue has a blue outline and background. Drag the handle on its left to reorder it, or use Alt + arrow keys while the handle has keyboard focus. When dragging a timeline marker, its position, time and media band follow the pointer. The scale stays fixed until you release it. Interrupting the gesture cancels its preview.
 
-Expand a Cue to use **Duplicate**, beside Delete. The copy starts at the same time and retains its description, visual and media settings. Its settings are independent, while the stored media file is reused. Undo / Redo can reverse these edits.
+Expand a Cue to use **Duplicate**. The copy starts at the same time and retains its description, visual and media settings. Its settings are independent, while the stored media file is reused. The trash icon at the right of each row asks for confirmation before deletion. Click the row to expand it. Undo / Redo can reverse these edits.
 
 ## Audio and video editing
 
@@ -36,7 +44,7 @@ Media bands appear on the timeline: green for audio, pink for video. The combine
 
 Use Play / Pause, or press Space. The keyboard shortcut is ignored while typing, inside dialogs or when another control owns Space. Holding it does not repeatedly toggle playback. Back to start pauses playback, stops running media and returns to zero.
 
-In Show, the active Cue is on the left on wide landscape screens and is highlighted with a blue halo. The next Cue has its title and countdown across its top, a full-width description below, then a centered 16:9 visual. On narrow screens the countdown moves below the title. Long text is retained, so the panels may grow. The main timeline can seek in Show; Cue markers remain non-editable. The video monitor appears only if the show contains video.
+Show places a full-width Cue list below the timeline, displaying up to five Cues and automatically following playback without an inner touch scroll. Each row shows its number, visual, time and title. The active Cue has a larger visual and a blue halo. Descriptions remain visible on the active and next Cues, with “No description” when empty. The next countdown appears in its own small panel. At ten seconds it turns red, the blue halo fades out, and a red halo pulses around the next row in time with the remaining seconds. Past Cues darken at the top; a bottom fade hides the continuation when it exceeds the window. The main timeline can seek in Show; Cue markers remain non-editable. The video monitor appears only if the show contains video.
 
 ## External video output
 
