@@ -558,7 +558,7 @@ body:not(.locked) .cueAccordion.expanded input:focus,body:not(.locked) .cueAccor
 
 html,body{overscroll-behavior-y:none;}
 
-/* V1.4.83 — sélection Cue ↔ timeline + companion 1.2.2 */
+/* V1.4.91 — sélection Cue ↔ timeline + companion 1.2.2 */
 .showOnly{display:none}
 body.locked .showOnly{display:flex}
 .preflightIntegrated{display:grid;gap:12px;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid #2b3240}
@@ -567,7 +567,7 @@ body.locked .showOnly{display:flex}
 body.locked .timelineCard{display:block}
 
 
-/* 1.4.83 : mêmes libellés et disposition adaptable */
+/* 1.4.91 : mêmes libellés et disposition adaptable */
 [hidden]{display:none!important}
 .timeline .tick:first-of-type{transform:none}.timeline .tick:last-of-type{transform:translateX(-100%)}
 .showVideoMonitor{display:none;grid-column:1/-1;order:100}
@@ -580,10 +580,10 @@ button{white-space:normal;touch-action:manipulation}
 @media(max-width:900px){main.spectaclePriorityLayout{display:flex!important;flex-direction:column!important;padding:12px!important}.card{width:100%;box-sizing:border-box}.appTopBar{flex-wrap:wrap;gap:12px}.row{flex-wrap:wrap}}
 @media(max-width:480px){main.spectaclePriorityLayout{padding:8px!important}.card{padding:12px!important}.cueEditGrid{grid-template-columns:1fr}.cueEditGrid .imageControls,.cueEditGrid>.danger{grid-column:1}.mediaAction{display:flex;flex-wrap:wrap}.mediaEditor{width:100%;min-width:0}.row button{flex:1 1 120px}.time{font-size:clamp(1.6rem,10vw,3rem)}.cueSummary{grid-template-columns:45px 70px minmax(0,1fr) 24px}.projectActions{width:100%}.appIdentity{min-width:0}.outputPrep{flex-wrap:wrap}input,textarea,select{max-width:100%;box-sizing:border-box}}
 
-/* 1.4.83 : visuels Show remplis sans déformation{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
+/* 1.4.91 : visuels Show remplis sans déformation{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
 
 
-/* 1.4.83 : audition et aperçu indépendants de la conduite */
+/* 1.4.91 : audition et aperçu indépendants de la conduite */
 .mediaEditorTop .mediaPreviewToggle{padding:6px 9px;font-size:.76rem;min-width:96px;white-space:nowrap}
 .mediaEditorField input[type=text]{min-width:0;width:78px}
 .mediaEditorMain{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;align-items:center}
@@ -617,7 +617,7 @@ button{white-space:normal;touch-action:manipulation}
 @media(max-width:480px){.modeSwitchBtn{min-width:50px;padding:8px 9px}}
 @media(prefers-reduced-motion:reduce){.modeSwitchBtn{transition:none}}
 
-/* 1.4.83 : zoom des médias et sortie vidéo uniquement dans l’en-tête Show */
+/* 1.4.91 : zoom des médias et sortie vidéo uniquement dans l’en-tête Show */
 .fileLabel.addMediaBtn{background:#246fd1;border-color:#2b7de7;color:#fff}.fileLabel.addMediaBtn:hover{background:#2d7bdf}
 .mediaEditorTimeline .mediaVisual{overflow-x:auto;overflow-y:hidden;scrollbar-width:thin;scrollbar-color:#5b7192 #11151d}
 .mediaVisualContent{position:relative;height:100%;min-width:100%;user-select:none;touch-action:none}
@@ -634,7 +634,7 @@ button{white-space:normal;touch-action:manipulation}
 .pdfPreviewDialog{width:min(1000px,94vw);height:90dvh;max-width:94vw;max-height:94dvh;padding:14px;border:1px solid #45536a;border-radius:14px;background:#111722;color:#fff}.pdfPreviewDialog::backdrop{background:#000a}.pdfPreviewLayout{height:100%;display:flex;flex-direction:column;gap:12px}.pdfPreviewToolbar{display:flex;align-items:center;flex-wrap:wrap;gap:10px}.pdfPreviewToolbar strong{flex:1;min-width:150px}.pdfPreviewToolbar a{display:inline-flex;align-items:center;padding:10px 12px;border-radius:8px;background:#246fd1;color:white;text-decoration:none}
 .pdfPreviewPages{flex:1;min-height:0;overflow:auto;display:flex;flex-direction:column;align-items:flex-start;gap:16px;background:#252f40;border-radius:8px;padding:12px;box-sizing:border-box;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}.pdfPreviewPage{flex-shrink:0;margin:0 auto;background:white;border-radius:4px;box-shadow:0 3px 12px #0006;overflow:hidden}.pdfPreviewPage svg{display:block;width:100%;height:auto}.pdfPreviewZoom{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.pdfPreviewZoom button{min-height:40px}.pdfPreviewZoom span{min-width:48px;text-align:center;font-size:.85rem}.pdfPreviewToolbar strong{overflow-wrap:anywhere}@media(max-width:480px){.pdfPreviewDialog{padding:9px}.pdfPreviewToolbar{gap:7px}.pdfPreviewToolbar strong{flex-basis:100%}.pdfPreviewPages{padding:8px}.pdfPreviewZoom{gap:6px}.pdfPreviewZoom button{padding:8px 10px}}
 
-/* 1.4.83 : repères et médias distincts ; aperçu global en Edit. */
+/* 1.4.91 : repères et médias distincts ; aperçu global en Edit. */
 #projectWaveform{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.8}
 #projectMediaTracks{position:absolute;inset:5px 0 22px;display:flex;flex-direction:column;gap:3px;min-height:0;overflow:hidden;pointer-events:none;z-index:1}
 .projectMediaBar{position:relative;flex-shrink:0;box-sizing:border-box;min-width:3px;height:20px;border-radius:5px;background:rgba(42,153,89,.28);border:1px solid rgba(101,210,142,.4);color:#d0f5df;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:2px 5px}
@@ -696,8 +696,6 @@ body.locked .showWorkspace{display:block;order:2}
 body.locked .showCueOverview{position:relative;margin:0}
 body.locked .showCueOverview h2{font-size:.85rem;font-weight:800;letter-spacing:.12em;color:#9fb7d1;line-height:1.2;margin:0 0 12px;text-transform:uppercase}
 body.locked .showCueOverview h2::before{content:"";display:inline-block;width:4px;height:14px;background:#6c9fce;border-radius:3px;margin-right:8px;vertical-align:middle}
-body.locked .overviewBadges .cueMediaChip.audio{background:rgba(39,174,96,.22);border:1px solid #398b60;color:#9ae8b8}
-body.locked .overviewBadges .cueMediaChip.video{background:rgba(255,49,153,.30);border:1px solid rgba(255,92,177,.85);color:#ffd6ed}
 
 body:not(.locked) .cueSummary{grid-template-columns:96px 86px minmax(0,1fr) auto 40px}.cueDeleteBtn{display:flex;align-items:center;justify-content:center;width:40px;height:40px;min-width:40px;padding:8px;color:#ff6b72;background:transparent;border:1px solid transparent}.cueDeleteBtn:hover{background:rgba(255,69,58,0.094);border-color:rgba(255,107,114,0.333)}.cueDeleteBtn:focus-visible{outline:2px solid #ff6b72;outline-offset:2px}.cueDeleteBtn .materialSymbol{width:21px;height:21px}@media(max-width:760px){body:not(.locked) .cueSummary{grid-template-columns:82px 78px minmax(0,1fr) 40px}body:not(.locked) .cueSummaryMedia{grid-row:2;grid-column:2/4}body:not(.locked) .cueDeleteBtn{grid-row:1;grid-column:4}}@media(max-width:480px){body:not(.locked) .cueSummary{grid-template-columns:62px 66px minmax(0,1fr) 40px;gap:6px;padding-left:8px;padding-right:8px}}
 
@@ -712,20 +710,25 @@ body.locked .showCueOverview{width:100%;max-height:none;overflow:visible!importa
 body.locked #showCueOverviewRows{position:static;max-height:none;overflow:visible!important;display:flex;flex-direction:column;gap:12px}
 body.locked .showCueOverview::before,body.locked .showCueOverview::after{display:none}
 .showOverviewRow{position:relative;display:grid;grid-template-columns:32px 64px 70px minmax(0,1fr) 140px;gap:14px;min-height:64px;padding:12px;border:1px solid #343b47;border-radius:12px;background:#141922;transition:box-shadow .7s ease,border-color .7s ease,background-color .7s ease}
-.showOverviewRow .overviewNumber{font-size:15px;color:#9fb7d1}.showOverviewRow .overviewName{font-size:18px;font-weight:700;color:#f4f6f8}.showOverviewRow .overviewTime{font-size:13px}.overviewContent{min-width:0}.overviewBadges{display:flex;gap:6px;margin-top:6px}.overviewBadges:empty{display:none}
+.showOverviewRow .overviewNumber{font-size:15px;color:#9fb7d1}.showOverviewRow .overviewName{font-size:18px;font-weight:700;color:#f4f6f8}.showOverviewRow .overviewTime{font-size:13px}.overviewContent{min-width:0}
 .showOverviewRow .overviewVisual{width:64px;height:36px;aspect-ratio:16/9;min-width:0;overflow:hidden;border-radius:8px;display:flex;align-items:center;justify-content:center}.showOverviewRow .overviewVisual img{width:100%;height:100%;object-fit:cover;border-radius:inherit}.showOverviewRow .showOverviewPlaceholder{background:#080a0d;border:1px solid #343b47;font-size:12px;text-align:center;color:#9da7b5}
 .showOverviewRow.isActive{grid-template-columns:32px 30vw 70px minmax(0,1fr);background:#1b2636;border-color:#9acbff;box-shadow:inset 0 0 18px rgba(69,151,255,0.200),0 0 10px 2px rgba(67,149,255,0.667),0 0 26px 4px rgba(44,126,255,0.400)}
-.showOverviewRow.isActive .overviewVisual{width:100%;height:auto;aspect-ratio:16/9;background:#000}.showOverviewRow.isActive .overviewName{font-size:clamp(1.4rem,3vw,2rem)}.overviewDescription{margin-top:10px;white-space:pre-wrap;overflow-wrap:anywhere;font-size:17px;line-height:1.4;color:#d5dce6}
+.showOverviewRow.isActive .overviewVisual{align-self:start;width:100%;height:auto;aspect-ratio:16/9;background:#000}.showOverviewRow.isActive .overviewName{font-size:clamp(1.4rem,3vw,2rem)}.overviewDescription{margin-top:10px;white-space:pre-wrap;overflow-wrap:anywhere;font-size:17px;line-height:1.4;color:#d5dce6}
 body.nextCueUrgent .showOverviewRow.isActive{border-color:#343b47;background:#141922;box-shadow:inset 0 0 18px rgba(69,151,255,0.000),0 0 10px 2px rgba(67,149,255,0.000),0 0 26px 4px rgba(44,126,255,0.000)}
-.overviewCountdown{grid-column:5;display:flex;align-items:center;justify-content:center;padding:8px;border:1px solid #45536a;border-radius:10px;background:#101620;min-width:0}.overviewCountdownClock{font-size:clamp(1.8rem,3vw,2.5rem);font-weight:800;font-variant-numeric:tabular-nums;color:#f4f6f8}.isUrgent .overviewCountdownClock{color:#ff453a}
+.overviewCountdown{grid-column:5;align-self:center;display:flex;align-items:center;justify-content:center;padding:8px;border:1px solid #45536a;border-radius:10px;background:#101620;min-width:0}.overviewCountdownClock{font-size:clamp(1.8rem,3vw,2.5rem);font-weight:800;font-variant-numeric:tabular-nums;color:#f4f6f8}.isUrgent .overviewCountdownClock{color:#ff453a}
 .overviewBeat{position:absolute;inset:-1px;pointer-events:none;border:1px solid #ff9b96;border-radius:inherit;box-shadow:inset 0 0 12px rgba(255,69,58,0.200),0 0 10px 2px rgba(255,69,58,0.667),0 0 24px 3px rgba(255,45,45,0.400);opacity:0}
-.showOverviewRow.isNext{grid-template-columns:32px 15vw 70px minmax(0,1fr) 140px}.showOverviewRow.isNext .overviewVisual{width:100%;height:auto;aspect-ratio:16/9}
+.showOverviewRow.isNext{grid-template-columns:32px 15vw 70px minmax(0,1fr) 140px}.showOverviewRow.isNext .overviewVisual{align-self:start;width:100%;height:auto;aspect-ratio:16/9}
 body.locked main.spectaclePriorityLayout{max-width:none!important}
-@media(max-width:1100px){.showOverviewRow.isActive{grid-template-columns:24px 30vw 70px}.showOverviewRow.isActive .overviewContent{grid-column:2/4;grid-row:2}.showOverviewRow.isActive .overviewTime{grid-column:3;grid-row:1}.showOverviewRow.isNext{grid-template-columns:24px 15vw 58px minmax(0,1fr)}.showOverviewRow.isNext .overviewCountdown{grid-column:4;grid-row:2;justify-self:end;min-width:100px}}
-@media(max-width:760px){.showOverviewRow{grid-template-columns:24px 64px 58px minmax(0,1fr);gap:10px}.showOverviewRow.isActive{grid-template-columns:24px 30vw 58px}.showOverviewRow .overviewName{font-size:16px}.showOverviewRow .overviewTime{font-size:12px}.overviewDescription{font-size:15px}}
-@media(max-width:640px){.showOverviewRow.isNext{grid-template-columns:24px 15vw 58px}.showOverviewRow.isNext .overviewContent{grid-column:2/4;grid-row:2}.showOverviewRow.isNext .overviewCountdown{grid-column:2/4;grid-row:3}}
-@media(max-width:480px){.showOverviewRow{grid-template-columns:20px 48px 48px minmax(0,1fr);gap:6px;padding:10px}.showOverviewRow .overviewVisual{width:48px;height:27px}.showOverviewRow.isActive{grid-template-columns:20px 30vw minmax(0,1fr)}.showOverviewRow.isNext{grid-template-columns:20px 15vw 48px}.showOverviewRow .overviewNumber{font-size:12px}.overviewCountdownClock{font-size:1.6rem}.showOverviewRow.isActive .overviewName{font-size:18px}.overviewCountdown{min-width:80px}}
-@media(max-width:360px){.showOverviewRow.isActive .overviewTime{grid-column:2;grid-row:2}.showOverviewRow.isActive .overviewContent{grid-row:3}}
+/* Show order: number, visual, cue time, title/description, next countdown. */
+.showOverviewRow.isActive .overviewNumber,.showOverviewRow.isNext .overviewNumber{grid-column:1;grid-row:1}
+.showOverviewRow.isActive .overviewVisual,.showOverviewRow.isNext .overviewVisual{grid-column:2;grid-row:1}
+.showOverviewRow.isActive .overviewTime,.showOverviewRow.isNext .overviewTime{grid-column:3;grid-row:1}
+.showOverviewRow.isActive .overviewContent,.showOverviewRow.isNext .overviewContent{grid-column:4;grid-row:1}
+.showOverviewRow.isNext .overviewCountdown{grid-column:5;grid-row:1}
+.overviewName{overflow-wrap:anywhere}
+@media(max-width:1100px){.showOverviewRow.isActive{grid-template-columns:24px 30vw 58px minmax(0,1fr)}.showOverviewRow.isNext{grid-template-columns:24px 15vw 58px minmax(0,1fr) 100px}.showOverviewRow.isNext .overviewCountdownClock{font-size:1.8rem}}
+@media(max-width:760px){.showOverviewRow{grid-template-columns:24px 64px 58px minmax(0,1fr);gap:10px}.showOverviewRow.isActive{grid-template-columns:24px 30vw 48px minmax(0,1fr)}.showOverviewRow.isNext{grid-template-columns:24px 15vw 48px minmax(0,1fr)}.showOverviewRow.isNext .overviewCountdown{grid-column:4;grid-row:2;justify-self:end}.showOverviewRow .overviewName{font-size:16px}.showOverviewRow .overviewTime{font-size:12px}.overviewDescription{font-size:15px}.showOverviewRow.isNext .overviewCountdownClock{font-size:1.6rem}}
+@media(max-width:480px){.showOverviewRow{grid-template-columns:20px 48px 48px minmax(0,1fr);gap:6px;padding:10px}.showOverviewRow .overviewVisual{width:48px;height:27px}.showOverviewRow.isActive{grid-template-columns:20px 30vw 42px minmax(0,1fr)}.showOverviewRow.isNext{grid-template-columns:20px 15vw 42px minmax(0,1fr)}.showOverviewRow .overviewNumber{font-size:12px}.showOverviewRow.isActive .overviewName{font-size:18px}.showOverviewRow.isNext .overviewCountdown{padding:5px}.showOverviewRow.isNext .overviewCountdownClock{font-size:1rem}}
 @media(prefers-reduced-motion:reduce){.showOverviewRow{transition:none}}
 
 /* Keep a five-Cue window that follows the show without an inner touch scroll. */
@@ -733,6 +736,28 @@ body.locked #showCueOverviewRows{position:relative;display:block;overflow:hidden
 body.locked #showCueOverviewRows>.showOverviewRow{margin-bottom:12px}
 body.locked #showCueOverviewRows>.showOverviewRow:last-child{margin-bottom:0}
 body.locked .showCueOverview.hasHiddenCues::after{display:block;content:"";position:absolute;left:16px;right:16px;bottom:16px;height:56px;max-height:20%;background:linear-gradient(to bottom,rgba(8,11,16,0),rgba(8,11,16,.25) 35%,rgba(8,11,16,.75) 75%,#080b10);pointer-events:none;z-index:2}
+
+
+/* Wide Show: active and next share the first row; phones stay stacked. */
+@media (min-width:960px) and (min-height:600px) and (orientation:landscape), (min-width:960px) and (hover:hover) and (pointer:fine){
+ body.locked #showCueOverviewRows{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:stretch}
+ body.locked #showCueOverviewRows>.showOverviewRow{grid-column:1/-1;margin-bottom:0}
+ body.locked #showCueOverviewRows>.showOverviewRow.isActive{grid-column:1;grid-row:1}
+ body.locked #showCueOverviewRows>.showOverviewRow.isNext{grid-column:2;grid-row:1}
+ .showOverviewRow.isActive,.showOverviewRow.isNext{grid-template-columns:22px minmax(0,15vw) 48px minmax(0,1fr);gap:10px;align-content:start}
+ .showOverviewRow.isNext{grid-template-columns:22px minmax(0,7.5vw) 48px minmax(0,1fr)}
+ .showOverviewRow.isActive .overviewName{font-size:clamp(1.4rem,2vw,2rem)}
+ .showOverviewRow.isNext .overviewCountdown{grid-column:4;grid-row:2;justify-self:end;align-self:start}
+ .showOverviewRow.isNext .overviewCountdownClock{font-size:clamp(1.6rem,2.5vw,2.3rem)}
+ .showOverviewRow.isActive .overviewDescription,.showOverviewRow.isNext .overviewDescription{font-size:16px}
+}
+
+.cueDeleteOverlay{position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.72);display:flex;align-items:center;justify-content:center;padding:20px}
+.cueDeleteDialog{width:100%;max-width:460px;padding:24px;background:#1b1f27;border:1px solid #3b4352;border-radius:16px;box-shadow:0 16px 60px #0008}
+.cueDeleteDialog h2{margin:0 0 14px;font-size:1.25rem;color:#f4f6f8;letter-spacing:normal;text-transform:none}
+.cueDeleteDialog p{margin:0 0 24px;color:#9da7b5;overflow-wrap:break-word}
+.cueDeleteDialogActions{display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap}
+
 
 /* Only loaded by the old-browser branch. Static colors and flex replace CSS variables/grid. */
 body{padding:0}main.spectaclePriorityLayout{display:block!important}

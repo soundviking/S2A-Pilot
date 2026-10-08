@@ -1,10 +1,10 @@
-# S2A Pilot 1.4.83 / S2A Copilot 1.2.11
+# S2A Pilot 1.4.91 / S2A Copilot 1.2.11
 
 🇫🇷 [Français](README.md) | 🇬🇧 **English**
 
 ![S2A Pilot](assets/social-preview.png)
 
-[PWA 1.4.83](downloads/S2A-Pilot-V1.4.83-PWA.zip) · [Copilot 1.2.11 — Intel / Apple Silicon](downloads/S2A-Copilot-1.2.11-macOS-Universel.zip)
+[PWA 1.4.91](downloads/S2A-Pilot-V1.4.91-PWA.zip) · [Copilot 1.2.11 — Intel / Apple Silicon](downloads/S2A-Copilot-1.2.11-macOS-Universel.zip)
 
 # S2A Pilot — User guide
 
@@ -44,7 +44,9 @@ Media bands appear on the timeline: green for audio, pink for video. The combine
 
 Use Play / Pause, or press Space. The keyboard shortcut is ignored while typing, inside dialogs or when another control owns Space. Holding it does not repeatedly toggle playback. Back to start pauses playback, stops running media and returns to zero.
 
-Show places a full-width Cue list below the timeline, displaying up to five Cues and automatically following playback without an inner touch scroll. Each row shows its number, visual, time and title. The active Cue is always the first visible row. Its visual is 30% of the screen width and the next visual 15%; both retain a 16:9 aspect ratio. On small screens, text moves below the visual to remain readable. The active Cue has a blue halo. Descriptions remain visible on the active and next Cues, with “No description” when empty. The next countdown appears in its own small panel. At ten seconds it turns red, the blue halo fades out, and a red halo pulses around the next row in time with the remaining seconds. The active Cue visual starts fading to black ten seconds before the next Cue and reaches black at the transition. It follows the show time, including pause and seeking; it remains fully visible when there is no next Cue. Past Cues leave this window but remain in the project and reappear when seeking backward; a bottom fade hides the continuation when it exceeds the window. The main timeline can seek in Show; Cue markers remain non-editable. The video monitor appears only if the show contains video.
+On a computer or an iPad in landscape, the active Cue occupies the left half of the list and the next Cue the right half; the remaining Cues appear below. iPad portrait and both iPhone orientations retain the vertical layout.
+
+Show places a full-width Cue list below the timeline, displaying up to five Cues and automatically following playback without an inner touch scroll. Each row shows its number, visual, time and title. The active Cue is always the first visible row. At the next Cue, the list changes immediately, without movement or resizing animations. In the vertical layout, its visual is 30% of the screen width and the next visual 15%; in the two-column layout, these proportions adapt to each card. Both retain a 16:9 aspect ratio. The active Cue has a blue halo. Descriptions remain visible on the active and next Cues, with “No description” when empty. The next countdown appears in its own small panel. At ten seconds it turns red, the blue halo fades out, and a red halo pulses around the next row in time with the remaining seconds. The active Cue visual starts fading to black ten seconds before the next Cue and reaches black at the transition. It follows the show time, including pause and seeking; it remains fully visible when there is no next Cue. Past Cues leave this window but remain in the project and reappear when seeking backward; a bottom fade hides the continuation when it exceeds the window. The main timeline can seek in Show; Cue markers remain non-editable. The video monitor appears only if the show contains video.
 
 ## External video output
 
@@ -84,7 +86,7 @@ Copilot automatically detects open QLab workspaces and lets you choose when seve
 
 ## Validation limits
 
-Chrome tests cover creation, editing, autosave, language selection, user content preservation, PDF preview/export, offline files, waveform zoom and mocked screen detection. Copilot is compiled for both architectures and its local signature is verified. Real Safari/iPad touch behavior, real extended-display playback, live QLab imports and execution on a physical Intel Mac must still be checked before show use.
+Chrome and WebKit tests cover immediate Cue changes on simulated desktop, tablet and phone screens, visual sizes, audio playback, pause and seeking. Additional checks cover creation, editing, autosave, languages, PDF and offline use. Copilot is compiled for both architectures and its local signature is verified. Real Safari/iPad touch behavior, real extended-display playback, live QLab imports and execution on a physical Intel Mac must still be checked before show use.
 
 
 ## License
@@ -98,7 +100,7 @@ The PWA matches the PWA background and reserves status-bar safe areas. Any blur 
 
 ## Startup
 
-A three-second animation shows the validated logo rotating with a blue glow that follows it. The slogan uses the selected French or English language. iOS 9 and reduced motion use a simple fade. Help opens afterwards. All assets are local.
+A three-second animation shows the validated logo staying still, with a soft blue light and a subtle highlight. The slogan fades in word by word. The slogan uses the selected French or English language. iOS 9 and reduced motion use a simple fade. Help opens afterwards. All assets are local.
 
 ## Older browsers
 
