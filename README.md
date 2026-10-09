@@ -1,10 +1,10 @@
-# S2A Pilot 1.4.99 / S2A Copilot 1.2.11
+# S2A Pilot 1.5.0 / S2A Copilot 1.2.11
 
 🇫🇷 **Français** | 🇬🇧 [English](README.en.md)
 
 ![S2A Pilot](assets/social-preview.png)
 
-[PWA 1.4.99](downloads/S2A-Pilot-V1.4.99-PWA.zip) · [Copilot 1.2.11 — Intel / Apple Silicon](downloads/S2A-Copilot-1.2.11-macOS-Universel.zip)
+[PWA 1.5.0](downloads/S2A-Pilot-V1.5.0-PWA.zip) · [Copilot 1.2.11 — Intel / Apple Silicon](downloads/S2A-Copilot-1.2.11-macOS-Universel.zip)
 
 # S2A Pilot — Guide utilisateur
 
@@ -20,7 +20,10 @@ Au premier lancement, la PWA choisit le français si la langue principale du nav
 
 ## Aide rapide
 
-Au premier lancement, une aide en quatre étapes présente la création de la conduite, les réglages des Cues, le mode Show et le raccourci Espace pour Lecture/Pause sur ordinateur. Les captures réelles montrent une musique de 3 min 20 avec sa waveform et des visuels de scène. Elle apparaît avant la proposition d’installation. Le bouton « ? », en Edit à gauche d’Annuler et Rétablir, permet de la rouvrir. L’aide et ses captures sont disponibles en français et en anglais, intégrées localement pour fonctionner hors ligne sur les navigateurs compatibles avec ce fonctionnement. Elles sont également adaptées au mode de compatibilité.
+Au premier lancement, une aide en quatre étapes présente la création de la conduite, les réglages des Cues, le mode Show et le choix de disposition. La quatrième page « Vanille ou chocolat ? » compare Maverick et Iceman avec deux captures réelles de la même conduite. Les captures réelles montrent une musique de 3 min 20 avec sa waveform et des visuels de scène. Elle apparaît avant la proposition d’installation. Le bouton « ? », en Edit à gauche d’Annuler et Rétablir, permet de la rouvrir. L’aide et ses captures sont disponibles en français et en anglais, intégrées localement pour fonctionner hors ligne sur les navigateurs compatibles avec ce fonctionnement. Elles sont également adaptées au mode de compatibilité.
+
+
+Sur iPhone, le visuel est en haut à gauche, le titre à sa droite et la description occupe toute la largeur en dessous. En Iceman, la Cue suivante réserve le haut droit au décompte et place son titre et sa description en dessous. Dans les deux styles, le chrono de la Timeline reste discret et le décompte est plus grand. Le halo de démarrage s’efface avant ses bords pour éviter toute coupure. En portrait sur iPad, Iceman place les descriptions de l’active et de la suivante sur toute la largeur en bas, avec le décompte en haut à droite de la suivante. Maverick place le chrono de lecture sous Lecture et Retour au début.
 
 ## Création et édition
 

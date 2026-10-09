@@ -1,10 +1,10 @@
-# S2A Pilot 1.4.97 / S2A Copilot 1.2.11
+# S2A Pilot 1.5.0 / S2A Copilot 1.2.11
 
 🇫🇷 [Français](README.md) | 🇬🇧 **English**
 
 ![S2A Pilot](assets/social-preview.png)
 
-[PWA 1.4.97](downloads/S2A-Pilot-V1.4.97-PWA.zip) · [Copilot 1.2.11 — Intel / Apple Silicon](downloads/S2A-Copilot-1.2.11-macOS-Universel.zip)
+[PWA 1.5.0](downloads/S2A-Pilot-V1.5.0-PWA.zip) · [Copilot 1.2.11 — Intel / Apple Silicon](downloads/S2A-Copilot-1.2.11-macOS-Universel.zip)
 
 # S2A Pilot — User guide
 
@@ -20,7 +20,10 @@ S2A Copilot uses the macOS preferred language at first launch and offers a Fran�
 
 ## Quick help
 
-On first launch, a four-step guide introduces show creation, Cue settings, Show mode and the Space shortcut for Play/Pause on computers. Actual application screenshots show a 3 minute 20 second audio track with its waveform and stage visuals. It appears before the installation prompt. The “?” button in Edit, to the left of Undo and Redo, opens it again. The guide and screenshots are available in French and English and bundled locally for offline use in browsers that support it. They also cover compatibility mode.
+On first launch, a four-step guide introduces show creation, Cue settings, Show mode and the layout selector. Page four, “Vanilla or chocolate?”, compares Maverick and Iceman with two actual screenshots of the same show. Actual application screenshots show a 3 minute 20 second audio track with its waveform and stage visuals. It appears before the installation prompt. The “?” button in Edit, to the left of Undo and Redo, opens it again. The guide and screenshots are available in French and English and bundled locally for offline use in browsers that support it. They also cover compatibility mode.
+
+
+On iPhone, each Cue places its visual at the upper left, its title to the right and its description across the full width below. In Iceman, the next Cue keeps its countdown at the upper right, with its title and description below. Both styles use a smaller Timeline clock and a larger countdown. The startup halo fades before its edges to prevent clipping. On iPad in portrait, Iceman places the active and next Cue descriptions across the full width below, with the next countdown at the upper right. Maverick places the transport clock below Play and Return to start.
 
 ## Prepare a show
 
@@ -40,6 +43,8 @@ New audio on the first Cue at zero uses Cut by default. Other newly added audio 
 
 ## Main timeline and Show
 
+The selector beside the language offers **Maverick** (default) and **Iceman**. Maverick keeps the current layout and hides past Cues. The layout selector appears only in Show. Layout, video output and Edit/Show controls have matching heights. Iceman visuals measure 22.5% of the screen width (75% of their previous size), retaining 16:9. Iceman uses full-width rows, keeps past Cues compact and places the countdown inside the next Cue. The choice is saved locally and in the project ZIP; older projects default to Maverick.
+
 Media bands appear on the timeline: green for audio, pink for video. The combined waveform reflects audible media. The timeline height adapts to its media bands. Main timeline zoom is available only in Edit, up to ×32; switching to Show restores the complete timeline.
 
 Use Play / Pause, or press Space. The keyboard shortcut is ignored while typing, inside dialogs or when another control owns Space. Holding it does not repeatedly toggle playback. Back to start pauses playback, stops running media and returns to zero.
@@ -48,7 +53,7 @@ On a computer or an iPad in landscape, the active Cue occupies the left half of 
 
 The timeline stays pinned to the top while you scroll the Cue list. The “Countdown” panel is centered above the timeline in its own compact panel with a subtle border. On desktop it moves to the right edge only when the controls no longer leave enough room in the center. It stays centered on iPad and aligns with the right edge at Play button height on iPhone. Without a next Cue, it displays --:--. At ten seconds, the clock turns red and its panel pulses together with the next Cue halo, in time with the remaining seconds; the active Cue’s blue halo fades out.
 
-Show displays up to five Cues and automatically follows playback without an inner touch scroll. The active Cue is always the first visible row. Cue changes are immediate, without movement or resizing animations. The order is number, visual, Cue time, title and description. Active and next Cues have equally sized 16:9 visuals, titles and descriptions. The visuals measure 30% of the screen width in the vertical layout and 15% in the two-column layout. Descriptions appear only on these two Cues, with “No description” when empty. Audio/Video badges appear only in Edit. The active visual fades to black during the last ten seconds before the next Cue; it follows the show time, including pause and seeking, and stays fully visible when there is no next Cue. Past Cues remain in the project and reappear when seeking backward. A bottom fade hides the continuation beyond the five-Cue window. The timeline can seek in Show; Cue markers remain non-editable. The video monitor appears only if the show contains video.
+In Maverick, Show displays up to five Cues and automatically follows playback without an inner touch scroll. The active Cue is always the first visible row. Cue changes are immediate, without movement or resizing animations. The order is number, visual, Cue time, title and description. Active and next Cues have equally sized 16:9 visuals, titles and descriptions. The visuals measure 30% of the screen width in the vertical layout and 15% in the two-column layout. Descriptions appear only on these two Cues, with “No description” when empty. Audio/Video badges appear only in Edit. The active visual fades to black during the last ten seconds before the next Cue; it follows the show time, including pause and seeking, and stays fully visible when there is no next Cue. Past Cues remain in the project and reappear when seeking backward. A bottom fade hides the continuation beyond the five-Cue window. The timeline can seek in Show; Cue markers remain non-editable. The video monitor appears only if the show contains video.
 
 ## External video output
 

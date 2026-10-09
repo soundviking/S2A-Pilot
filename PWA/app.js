@@ -951,7 +951,7 @@ document.addEventListener('touchmove',e=>{if(e.touches.length>1)e.preventDefault
 document.addEventListener('wheel',e=>{if(e.ctrlKey)e.preventDefault();},{passive:false});
 
 // This manifest is requested from the network, outside the service-worker cache.
-const APP_VERSION='1.4.99';document.querySelector('.appVersion').textContent='Version '+APP_VERSION;let lastVersionCheck=0,versionCheckRunning=false;
+const APP_VERSION='1.5.0';document.querySelector('.appVersion').textContent='Version '+APP_VERSION;let lastVersionCheck=0,versionCheckRunning=false;
 const updateNotice=document.createElement('div');updateNotice.id='updateNotice';updateNotice.hidden=true;updateNotice.setAttribute('role','status');const updateText=document.createElement('span'),updateButton=document.createElement('button');updateButton.type='button';updateButton.textContent=tr('Ouvrir la nouvelle version');updateNotice.append(updateText,updateButton);const updateMain=document.querySelector('main');updateMain.insertBefore(updateNotice,updateMain.firstChild);
 function updateVersionButton(){const b=document.getElementById('updateNotice')?.querySelector('button');if(!b)return;b.disabled=locked||transportPlaying;b.title=b.disabled?tr('Quitter le mode Show et mettre la lecture en pause pour actualiser.'):'';}
 function versionIsNewer(a,b){const x=a.split('.').map(Number),y=b.split('.').map(Number);for(let i=0;i<3;i++){if(x[i]!==y[i])return x[i]>y[i];}return false;}
@@ -1004,7 +1004,7 @@ function updateShowOverview(){
   if(cue===active)row.setAttribute('aria-current','step');
   const number=document.createElement('span');number.className='overviewNumber';number.textContent=String(cues.indexOf(cue)+1);
   const visual=document.createElement('div');visual.className='overviewVisual';
-  if(cue.imageDataUrl){const previousImage=previousRows.get(cue.id)?.querySelector('.overviewVisual img'),img=previousImage?.getAttribute('src')===cue.imageDataUrl?previousImage:document.createElement('img');img.src=cue.imageDataUrl;img.alt='';visual.append(img);}else{visual.classList.add('showOverviewPlaceholder');visual.setAttribute('aria-label',tr('Aucun visuel'));if(cue===active)visual.textContent=S2ALanguage.language==='en'?'No visual':'Pas de visuel';}
+  if(cue.imageDataUrl){const previousImage=previousRows.get(cue.id)?.querySelector('.overviewVisual img'),img=previousImage?.getAttribute('src')===cue.imageDataUrl?previousImage:document.createElement('img');img.src=cue.imageDataUrl;img.alt='';if(cue!==active)img.style.removeProperty('opacity');visual.append(img);}else{visual.classList.add('showOverviewPlaceholder');visual.setAttribute('aria-label',tr('Aucun visuel'));if(cue===active)visual.textContent=S2ALanguage.language==='en'?'No visual':'Pas de visuel';}
   const content=document.createElement('div');content.className='overviewContent';const name=document.createElement('div');name.className='overviewName';name.textContent=cue.name||'Cue';content.append(name);
   if(cue===active||cue===next){const description=document.createElement('div');description.className='overviewDescription';description.textContent=String(cue.description||'').trim()?cue.description:(S2ALanguage.language==='en'?'No description':'Pas de description');content.append(description);}
   const time=document.createElement('time');time.className='overviewTime';time.textContent=fmtDisplay(cue.time);

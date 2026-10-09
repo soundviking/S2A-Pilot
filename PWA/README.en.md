@@ -1,10 +1,10 @@
-# S2A Pilot 1.4.99 / S2A Copilot 1.2.11
+# S2A Pilot 1.5.0 / S2A Copilot 1.2.11
 
 🇫🇷 [Français](README.md) | 🇬🇧 **English**
 
 ![S2A Pilot](assets/social-preview.png)
 
-[PWA 1.4.99](downloads/S2A-Pilot-V1.4.99-PWA.zip) · [Copilot 1.2.11 — Intel / Apple Silicon](downloads/S2A-Copilot-1.2.11-macOS-Universel.zip)
+[PWA 1.5.0](downloads/S2A-Pilot-V1.5.0-PWA.zip) · [Copilot 1.2.11 — Intel / Apple Silicon](downloads/S2A-Copilot-1.2.11-macOS-Universel.zip)
 
 # S2A Pilot — User guide
 
@@ -20,7 +20,10 @@ S2A Copilot uses the macOS preferred language at first launch and offers a Fran�
 
 ## Quick help
 
-On first launch, a four-step guide introduces show creation, Cue settings, Show mode and the Space shortcut for Play/Pause on computers. Actual application screenshots show a 3 minute 20 second audio track with its waveform and stage visuals. It appears before the installation prompt. The “?” button in Edit, to the left of Undo and Redo, opens it again. The guide and screenshots are available in French and English and bundled locally for offline use in browsers that support it. They also cover compatibility mode.
+On first launch, a four-step guide introduces show creation, Cue settings, Show mode and the layout selector. Page four, “Vanilla or chocolate?”, compares Maverick and Iceman with two actual screenshots of the same show. Actual application screenshots show a 3 minute 20 second audio track with its waveform and stage visuals. It appears before the installation prompt. The “?” button in Edit, to the left of Undo and Redo, opens it again. The guide and screenshots are available in French and English and bundled locally for offline use in browsers that support it. They also cover compatibility mode.
+
+
+On iPhone, each Cue places its visual at the upper left, its title to the right and its description across the full width below. In Iceman, the next Cue keeps its countdown at the upper right, with its title and description below. Both styles use a smaller Timeline clock and a larger countdown. The startup halo fades before its edges to prevent clipping. On iPad in portrait, Iceman places the active and next Cue descriptions across the full width below, with the next countdown at the upper right. Maverick places the transport clock below Play and Return to start.
 
 ## Prepare a show
 

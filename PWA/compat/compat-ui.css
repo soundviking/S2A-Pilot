@@ -558,7 +558,7 @@ body:not(.locked) .cueAccordion.expanded input:focus,body:not(.locked) .cueAccor
 
 html,body{overscroll-behavior-y:none;}
 
-/* V1.4.99 — sélection Cue ↔ timeline + companion 1.2.2 */
+/* V1.5.0 — sélection Cue ↔ timeline + companion 1.2.2 */
 .showOnly{display:none}
 body.locked .showOnly{display:flex}
 .preflightIntegrated{display:grid;gap:12px;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid #2b3240}
@@ -567,7 +567,7 @@ body.locked .showOnly{display:flex}
 body.locked .timelineCard{display:block}
 
 
-/* 1.4.99 : mêmes libellés et disposition adaptable */
+/* 1.5.0 : mêmes libellés et disposition adaptable */
 [hidden]{display:none!important}
 .timeline .tick:first-of-type{transform:none}.timeline .tick:last-of-type{transform:translateX(-100%)}
 .showVideoMonitor{display:none;grid-column:1/-1;order:100}
@@ -580,10 +580,10 @@ button{white-space:normal;touch-action:manipulation}
 @media(max-width:900px){main.spectaclePriorityLayout{display:flex!important;flex-direction:column!important;padding:12px!important}.card{width:100%;box-sizing:border-box}.appTopBar{flex-wrap:wrap;gap:12px}.row{flex-wrap:wrap}}
 @media(max-width:480px){main.spectaclePriorityLayout{padding:8px!important}.card{padding:12px!important}.cueEditGrid{grid-template-columns:1fr}.cueEditGrid .imageControls,.cueEditGrid>.danger{grid-column:1}.mediaAction{display:flex;flex-wrap:wrap}.mediaEditor{width:100%;min-width:0}.row button{flex:1 1 120px}.time{font-size:clamp(1.6rem,10vw,3rem)}.cueSummary{grid-template-columns:45px 70px minmax(0,1fr) 24px}.projectActions{width:100%}.appIdentity{min-width:0}.outputPrep{flex-wrap:wrap}input,textarea,select{max-width:100%;box-sizing:border-box}}
 
-/* 1.4.99 : visuels Show remplis sans déformation{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
+/* 1.5.0 : visuels Show remplis sans déformation{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
 
 
-/* 1.4.99 : audition et aperçu indépendants de la conduite */
+/* 1.5.0 : audition et aperçu indépendants de la conduite */
 .mediaEditorTop .mediaPreviewToggle{padding:6px 9px;font-size:.76rem;min-width:96px;white-space:nowrap}
 .mediaEditorField input[type=text]{min-width:0;width:78px}
 .mediaEditorMain{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;align-items:center}
@@ -617,7 +617,7 @@ button{white-space:normal;touch-action:manipulation}
 @media(max-width:480px){.modeSwitchBtn{min-width:50px;padding:8px 9px}}
 @media(prefers-reduced-motion:reduce){.modeSwitchBtn{transition:none}}
 
-/* 1.4.99 : zoom des médias et sortie vidéo uniquement dans l’en-tête Show */
+/* 1.5.0 : zoom des médias et sortie vidéo uniquement dans l’en-tête Show */
 .fileLabel.addMediaBtn{background:#246fd1;border-color:#2b7de7;color:#fff}.fileLabel.addMediaBtn:hover{background:#2d7bdf}
 .mediaEditorTimeline .mediaVisual{overflow-x:auto;overflow-y:hidden;scrollbar-width:thin;scrollbar-color:#5b7192 #11151d}
 .mediaVisualContent{position:relative;height:100%;min-width:100%;user-select:none;touch-action:none}
@@ -634,7 +634,7 @@ button{white-space:normal;touch-action:manipulation}
 .pdfPreviewDialog{width:min(1000px,94vw);height:90dvh;max-width:94vw;max-height:94dvh;padding:14px;border:1px solid #45536a;border-radius:14px;background:#111722;color:#fff}.pdfPreviewDialog::backdrop{background:#000a}.pdfPreviewLayout{height:100%;display:flex;flex-direction:column;gap:12px}.pdfPreviewToolbar{display:flex;align-items:center;flex-wrap:wrap;gap:10px}.pdfPreviewToolbar strong{flex:1;min-width:150px}.pdfPreviewToolbar a{display:inline-flex;align-items:center;padding:10px 12px;border-radius:8px;background:#246fd1;color:white;text-decoration:none}
 .pdfPreviewPages{flex:1;min-height:0;overflow:auto;display:flex;flex-direction:column;align-items:flex-start;gap:16px;background:#252f40;border-radius:8px;padding:12px;box-sizing:border-box;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}.pdfPreviewPage{flex-shrink:0;margin:0 auto;background:white;border-radius:4px;box-shadow:0 3px 12px #0006;overflow:hidden}.pdfPreviewPage svg{display:block;width:100%;height:auto}.pdfPreviewZoom{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.pdfPreviewZoom button{min-height:40px}.pdfPreviewZoom span{min-width:48px;text-align:center;font-size:.85rem}.pdfPreviewToolbar strong{overflow-wrap:anywhere}@media(max-width:480px){.pdfPreviewDialog{padding:9px}.pdfPreviewToolbar{gap:7px}.pdfPreviewToolbar strong{flex-basis:100%}.pdfPreviewPages{padding:8px}.pdfPreviewZoom{gap:6px}.pdfPreviewZoom button{padding:8px 10px}}
 
-/* 1.4.99 : repères et médias distincts ; aperçu global en Edit. */
+/* 1.5.0 : repères et médias distincts ; aperçu global en Edit. */
 #projectWaveform{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.8}
 #projectMediaTracks{position:absolute;inset:5px 0 22px;display:flex;flex-direction:column;gap:3px;min-height:0;overflow:hidden;pointer-events:none;z-index:1}
 .projectMediaBar{position:relative;flex-shrink:0;box-sizing:border-box;min-width:3px;height:20px;border-radius:5px;background:rgba(42,153,89,.28);border:1px solid rgba(101,210,142,.4);color:#d0f5df;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:2px 5px}
@@ -756,7 +756,9 @@ body.locked .timelineTransport{display:grid;grid-template-columns:minmax(0,1fr) 
 body.locked .timelineTransport>.row{grid-column:1;min-width:0}
 body.locked .showNextCountdown{grid-column:2;position:relative;justify-self:center;display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 18px;border:1px solid #45536a;border-radius:10px;background:#101620;box-shadow:0 2px 6px #0002;min-width:180px;text-align:center}
 .showCountdownLabel{font-size:.85rem;color:#9fb7d1;font-weight:650}
-.showCountdownClock{font-size:clamp(1.8rem,3vw,2.5rem);font-weight:800;font-variant-numeric:tabular-nums;line-height:1.1;color:#f4f6f8}
+.showCountdownClock{font-size:clamp(2.2rem,4vw,3rem);font-weight:800;font-variant-numeric:tabular-nums;line-height:1.1;color:#f4f6f8}
+body.locked .timelineTransport #clock{font-size:1.1rem}
+body.locked .timelineTransport #duration{font-size:.85rem}
 .showNextCountdown.isUrgent .showCountdownClock{color:#ff453a}
 
 @media(min-width:600px) and (max-height:500px) and (orientation:landscape){
@@ -781,7 +783,7 @@ body.locked .timelineTransport.isTablet .showNextCountdown{grid-column:2;grid-ro
  body.locked .timelineTransport>.row{grid-column:1;grid-row:1;align-self:start;gap:8px}
  body.locked .showNextCountdown{grid-column:2;grid-row:1;justify-self:end;align-self:start;flex-direction:column;gap:3px;padding:5px 10px;min-width:0}
  .showCountdownLabel{font-size:.75rem}
- .showCountdownClock{font-size:1.6rem}
+ .showCountdownClock{font-size:2.2rem}
 }
 
 .cueDeleteOverlay{position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.72);display:flex;align-items:center;justify-content:center;padding:20px}
@@ -816,6 +818,41 @@ body.locked.showLayoutIceman .showOverviewRow.isActive .overviewName,body.locked
  body.locked.showLayoutIceman .showOverviewRow.isActive,body.locked.showLayoutIceman .showOverviewRow.isNext{grid-template-columns:20px minmax(0,22.5vw) 42px minmax(0,1fr);gap:6px}
  body.locked.showLayoutIceman .showOverviewRow .showNextCountdown{grid-column:4;grid-row:2;min-width:0;margin-top:8px}
  body.locked.showLayoutIceman .showOverviewRow.isActive .overviewName,body.locked.showLayoutIceman .showOverviewRow.isNext .overviewName{font-size:18px}
+}
+/* Phone Cue cards: visual and title above a full-width description. */
+@media(max-width:760px), (max-width:959px) and (max-height:500px) and (pointer:coarse){
+ body.locked .showOverviewRow{grid-template-columns:20px 48px minmax(0,1fr);gap:6px}
+ body.locked .showOverviewRow.isActive,body.locked .showOverviewRow.isNext{grid-template-columns:20px minmax(0,30vw) minmax(0,1fr)}
+ body.locked.showLayoutIceman .showOverviewRow.isActive{grid-template-columns:20px minmax(0,22.5vw) minmax(0,1fr)}
+ body.locked .showOverviewRow .overviewNumber{grid-column:1;grid-row:1}
+ body.locked .showOverviewRow .overviewVisual{grid-column:2;grid-row:1;width:100%;height:auto;aspect-ratio:16/9;max-width:100%;align-self:start}
+ body.locked .showOverviewRow .overviewTime{grid-column:2;grid-row:2;align-self:start;justify-self:start;min-width:0}
+ body.locked .showOverviewRow .overviewContent{display:contents}
+ body.locked .showOverviewRow .overviewName{grid-column:3;grid-row:1/3;align-self:start}
+ body.locked .showOverviewRow .overviewDescription{grid-column:1/-1;grid-row:3;margin-top:4px}
+ body.locked.showLayoutIceman .showOverviewRow.isNext{grid-template-columns:20px minmax(0,1fr) auto}
+ body.locked.showLayoutIceman .showOverviewRow.isNext .overviewVisual{max-width:22.5vw}
+ body.locked.showLayoutIceman .showOverviewRow.isNext .showNextCountdown{grid-column:3;grid-row:1/3;align-self:start;margin-top:0;min-width:0;padding:8px 10px}
+ body.locked.showLayoutIceman .showOverviewRow.isNext .overviewName{grid-column:1/-1;grid-row:3}
+ body.locked.showLayoutIceman .showOverviewRow.isNext .overviewDescription{grid-column:1/-1;grid-row:4}
+}
+/* Iceman portrait tablets use the same reading order as phones. */
+@media(min-width:761px) and (orientation:portrait){
+ body.locked:not(.showLayoutIceman) .timelineTransport>.row{display:grid;grid-template-columns:max-content max-content 44px;gap:8px;justify-content:start;align-items:center}
+ body.locked:not(.showLayoutIceman) .timelineTransport #playBtn{grid-column:1/3;grid-row:1}
+ body.locked:not(.showLayoutIceman) .timelineTransport #restartBtn{grid-column:3;grid-row:1}
+ body.locked:not(.showLayoutIceman) .timelineTransport #clock{grid-column:1;grid-row:2}
+ body.locked:not(.showLayoutIceman) .timelineTransport #duration{grid-column:2;grid-row:2}
+ body.locked.showLayoutIceman .showOverviewRow.isActive{grid-template-columns:24px minmax(0,22.5vw) minmax(0,1fr)}
+ body.locked.showLayoutIceman .showOverviewRow.isNext{grid-template-columns:24px minmax(0,1fr) auto}
+ body.locked.showLayoutIceman .showOverviewRow.isActive .overviewContent,body.locked.showLayoutIceman .showOverviewRow.isNext .overviewContent{display:contents}
+ body.locked.showLayoutIceman .showOverviewRow.isActive .overviewTime,body.locked.showLayoutIceman .showOverviewRow.isNext .overviewTime{grid-column:2;grid-row:2;align-self:start}
+ body.locked.showLayoutIceman .showOverviewRow.isActive .overviewName,body.locked.showLayoutIceman .showOverviewRow.isNext .overviewName{grid-column:3;grid-row:1/3;align-self:start}
+ body.locked.showLayoutIceman .showOverviewRow.isActive .overviewDescription,body.locked.showLayoutIceman .showOverviewRow.isNext .overviewDescription{grid-column:1/-1;grid-row:3;margin-top:4px}
+ body.locked.showLayoutIceman .showOverviewRow.isNext .overviewVisual{max-width:22.5vw}
+ body.locked.showLayoutIceman .showOverviewRow.isNext .showNextCountdown{grid-column:3;grid-row:1/3;align-self:start;margin-top:0}
+ body.locked.showLayoutIceman .showOverviewRow.isNext .overviewName{grid-column:1/-1;grid-row:3}
+ body.locked.showLayoutIceman .showOverviewRow.isNext .overviewDescription{grid-column:1/-1;grid-row:4}
 }
 
 /* Only loaded by the old-browser branch. Static colors and flex replace CSS variables/grid. */

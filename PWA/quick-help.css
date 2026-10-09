@@ -5,3 +5,7 @@
 .quickHelpHeader{display:flex;align-items:center;justify-content:space-between}.quickHelpHeader h2{font-size:1.25rem;margin:0 12px 0 0;letter-spacing:normal;color:#f4f6f8}.quickHelpHeader h2:before{display:none}.quickHelpClose{font-size:.8rem;padding:6px 10px;flex-shrink:0}
 @media(max-width:480px){.quickHelpOverlay{padding:10px}.quickHelpBox{padding:16px;max-height:calc(100% - 20px)}.quickHelpHeader h2{font-size:1.1rem}}
 .quickHelpBox h3{margin:4px 0 8px;color:#d4e7ff;font-size:1.1rem}.quickHelpCounter{margin:12px 0 4px;color:#80b9ff;font-size:.78rem}.quickHelpText{margin:8px 0 14px}.quickHelpScreenshot{display:block;max-width:100%;width:100%;height:auto;border:1px solid #394354;border-radius:8px;background:#111318;box-sizing:border-box}.quickHelpFooter{display:flex;justify-content:flex-end;margin-top:16px}.quickHelpFooter button{margin-left:8px}.quickHelpFooter [hidden],.quickHelpBox [hidden]{display:none!important}.quickHelpButton[data-material-only]{padding:8px!important}.quickHelpButton svg.materialSymbol{width:21px;height:21px}
+
+.quickHelpLayout{margin:20px 0 0}.quickHelpLayout h3{margin-bottom:8px}.quickHelpLayout figcaption{margin:10px 0 0;color:#d5dce6}.quickHelpLayouts{min-width:0}
+
+.quickHelpLayoutIntro{display:flex;align-items:center;gap:12px}.quickHelpLayoutIcon{display:flex;align-items:center;justify-content:center;flex:0 0 44px;height:44px;box-sizing:border-box;background:#222b3a;border:1px solid #80b9ff;border-radius:10px;box-shadow:0 0 10px #438ae866;color:#f4f6f8}.quickHelpLayoutIcon svg{display:block;width:32px;height:32px}
