@@ -5,10 +5,11 @@ const escapeXml=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&l
 const color=values=>`rgb(${values.map(v=>Math.round(Number(v)*255)).join(',')})`;
 function jpegUrl(bytes){let binary='';for(let i=0;i<bytes.length;i+=8192)binary+=String.fromCharCode(...bytes.subarray(i,i+8192));return 'data:image/jpeg;base64,'+btoa(binary);}
 function svgPage(page,index,title){
- let fill='#000',stroke='#000',width=.7;const drawing=[];
+ let fill='#000',stroke='#000',width=.7,clipId=null;const drawing=[];
  for(const raw of page.content.split('\n')){
   const line=raw.trim();if(!line)continue;
   let match;
+  if(line==='q'||line==='Q'){clipId=null;continue;}
   if((match=line.match(/^([\d.]+) ([\d.]+) ([\d.]+) (rg|RG)$/))){if(match[4]==='rg')fill=color(match.slice(1,4));else stroke=color(match.slice(1,4));continue;}
   if((match=line.match(/^BT \/(F[12]) ([\d.]+) Tf 1 0 0 1 ([-\d.]+) ([-\d.]+) Tm <([A-F\d]*)> Tj ET$/))){
    const bytes=Uint8Array.from(match[5].match(/../g)||[],v=>parseInt(v,16));
@@ -18,17 +19,20 @@ function svgPage(page,index,title){
   if((match=line.match(/^([-\d.]+) ([-\d.]+) ([-\d.]+) ([-\d.]+) re ([fS])$/))){drawing.push(`<rect x="${match[1]}" y="${match[2]}" width="${match[3]}" height="${match[4]}" fill="${match[5]==='f'?fill:'none'}" stroke="${match[5]==='S'?stroke:'none'}" stroke-width="${width}"/>`);continue;}
   if((match=line.match(/^q ([-\d.]+) 0 0 ([-\d.]+) ([-\d.]+) ([-\d.]+) cm \/Im(\d+) Do Q$/))){
    const image=page.images[Number(match[5])-1];if(!image)throw new Error(tr('Visuel de conduite manquant'));
-   drawing.push(`<image x="${match[3]}" y="${-(Number(match[4])+Number(match[2]))}" width="${match[1]}" height="${match[2]}" transform="scale(1 -1)" href="${jpegUrl(image.bytes)}" preserveAspectRatio="none"/>`);continue;
+   const imageSvg=`<image x="${match[3]}" y="${-(Number(match[4])+Number(match[2]))}" width="${match[1]}" height="${match[2]}" transform="scale(1 -1)" href="${jpegUrl(image.bytes)}" preserveAspectRatio="none"/>`;
+   drawing.push(clipId?`<g clip-path="url(#${clipId})">${imageSvg}</g>`:imageSvg);continue;
   }
   if(/\b(?:m|l|c|h)\b/.test(line)){
-   const tokens=line.split(/\s+/),path=[];let args=[],paint=null;
+   const tokens=line.split(/\s+/),path=[];let args=[],paint=null,clipping=false;
    for(const token of tokens){
     if(/^-?\d+(?:\.\d+)?$/.test(token)){args.push(token);continue;}
     if(token==='w'){width=Number(args.pop());args=[];continue;}
     if(['m','l','c'].includes(token)){path.push(({m:'M',l:'L',c:'C'})[token]+args.join(' '));args=[];continue;}
     if(token==='h'){path.push('Z');continue;}
+    if(token==='W'){clipping=true;continue;}
     if(token==='f'||token==='S')paint=token;
    }
+   if(clipping){clipId=`pdf-clip-${index}-${drawing.length}`;drawing.push(`<defs><clipPath id="${clipId}" clipPathUnits="userSpaceOnUse"><path d="${path.join(' ')}"/></clipPath></defs>`);continue;}
    if(!paint)throw new Error(tr('Dessin de conduite non reconnu'));
    drawing.push(`<path d="${path.join(' ')}" fill="${paint==='f'?fill:'none'}" stroke="${paint==='S'?stroke:'none'}" stroke-width="${width}"/>`);continue;
   }

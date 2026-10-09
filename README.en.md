@@ -1,10 +1,10 @@
-# S2A Pilot 1.4.91 / S2A Copilot 1.2.11
+# S2A Pilot 1.4.97 / S2A Copilot 1.2.11
 
 🇫🇷 [Français](README.md) | 🇬🇧 **English**
 
 ![S2A Pilot](assets/social-preview.png)
 
-[PWA 1.4.91](downloads/S2A-Pilot-V1.4.91-PWA.zip) · [Copilot 1.2.11 — Intel / Apple Silicon](downloads/S2A-Copilot-1.2.11-macOS-Universel.zip)
+[PWA 1.4.97](downloads/S2A-Pilot-V1.4.97-PWA.zip) · [Copilot 1.2.11 — Intel / Apple Silicon](downloads/S2A-Copilot-1.2.11-macOS-Universel.zip)
 
 # S2A Pilot — User guide
 
@@ -46,7 +46,9 @@ Use Play / Pause, or press Space. The keyboard shortcut is ignored while typing,
 
 On a computer or an iPad in landscape, the active Cue occupies the left half of the list and the next Cue the right half; the remaining Cues appear below. iPad portrait and both iPhone orientations retain the vertical layout.
 
-Show places a full-width Cue list below the timeline, displaying up to five Cues and automatically following playback without an inner touch scroll. Each row shows its number, visual, time and title. The active Cue is always the first visible row. At the next Cue, the list changes immediately, without movement or resizing animations. In the vertical layout, its visual is 30% of the screen width and the next visual 15%; in the two-column layout, these proportions adapt to each card. Both retain a 16:9 aspect ratio. The active Cue has a blue halo. Descriptions remain visible on the active and next Cues, with “No description” when empty. The next countdown appears in its own small panel. At ten seconds it turns red, the blue halo fades out, and a red halo pulses around the next row in time with the remaining seconds. The active Cue visual starts fading to black ten seconds before the next Cue and reaches black at the transition. It follows the show time, including pause and seeking; it remains fully visible when there is no next Cue. Past Cues leave this window but remain in the project and reappear when seeking backward; a bottom fade hides the continuation when it exceeds the window. The main timeline can seek in Show; Cue markers remain non-editable. The video monitor appears only if the show contains video.
+The timeline stays pinned to the top while you scroll the Cue list. The “Countdown” panel is centered above the timeline in its own compact panel with a subtle border. On desktop it moves to the right edge only when the controls no longer leave enough room in the center. It stays centered on iPad and aligns with the right edge at Play button height on iPhone. Without a next Cue, it displays --:--. At ten seconds, the clock turns red and its panel pulses together with the next Cue halo, in time with the remaining seconds; the active Cue’s blue halo fades out.
+
+Show displays up to five Cues and automatically follows playback without an inner touch scroll. The active Cue is always the first visible row. Cue changes are immediate, without movement or resizing animations. The order is number, visual, Cue time, title and description. Active and next Cues have equally sized 16:9 visuals, titles and descriptions. The visuals measure 30% of the screen width in the vertical layout and 15% in the two-column layout. Descriptions appear only on these two Cues, with “No description” when empty. Audio/Video badges appear only in Edit. The active visual fades to black during the last ten seconds before the next Cue; it follows the show time, including pause and seeking, and stays fully visible when there is no next Cue. Past Cues remain in the project and reappear when seeking backward. A bottom fade hides the continuation beyond the five-Cue window. The timeline can seek in Show; Cue markers remain non-editable. The video monitor appears only if the show contains video.
 
 ## External video output
 
@@ -60,7 +62,7 @@ Edits are saved locally on this device, including text while typing. Local saves
 
 ## Cue sheet PDF
 
-**Cue sheet PDF** opens a preview inside Pilot without forcing a download. Use Download when you want the file. The PDF has a photographic header, rounded Cue blocks, audio/video counts and five standard Cues per page. Long descriptions continue onto subsequent pages. Each Cue shows elapsed time and remaining time until the end in parentheses. Project text is preserved in its original language.
+**Cue sheet PDF** opens a preview inside Pilot without forcing a download. Use Download when you want the file. The PDF header uses the first available visual in chronological Cue order, cropped into a banner; if none is available, it keeps the default image. A QR code with rounded corners and a larger S2A Pilot logo on the right leads to https://s2a-production.com/S2A-Pilot/. The preview, downloaded PDF and package PDF use the same banner and QR code, also offline. The PDF has rounded Cue blocks, audio/video counts and five standard Cues per page. Long descriptions continue onto subsequent pages. Each Cue shows elapsed time and remaining time until the end in parentheses. Project text is preserved in its original language.
 
 ## Install the PWA and update it
 
