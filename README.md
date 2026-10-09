@@ -1,10 +1,10 @@
-# S2A Pilot 1.4.97 / S2A Copilot 1.2.11
+# S2A Pilot 1.4.98 / S2A Copilot 1.2.11
 
 🇫🇷 **Français** | 🇬🇧 [English](README.en.md)
 
 ![S2A Pilot](assets/social-preview.png)
 
-[PWA 1.4.97](downloads/S2A-Pilot-V1.4.97-PWA.zip) · [Copilot 1.2.11 — Intel / Apple Silicon](downloads/S2A-Copilot-1.2.11-macOS-Universel.zip)
+[PWA 1.4.98](downloads/S2A-Pilot-V1.4.98-PWA.zip) · [Copilot 1.2.11 — Intel / Apple Silicon](downloads/S2A-Copilot-1.2.11-macOS-Universel.zip)
 
 # S2A Pilot — Guide utilisateur
 
@@ -42,11 +42,13 @@ Lecture / Pause ou Espace commande la conduite. Le raccourci ignore la saisie, l
 
 ## Show et sortie vidéo
 
-Sur ordinateur et sur iPad en paysage, la Cue active occupe la moitié gauche de la liste et la suivante la moitié droite ; les autres Cues restent en dessous. Sur iPad en portrait et sur iPhone dans les deux orientations, la disposition verticale est conservée.
+Le sélecteur à côté de la langue propose **Maverick**, par défaut, et **Iceman**. Le choix est conservé dans la sauvegarde locale et dans le ZIP de la conduite ; les anciens projets utilisent Maverick. Iceman affiche toutes les Cues en pleine largeur : les Cues passées restent compactes, seules l’active et la suivante sont agrandies, et le décompte apparaît dans la Cue suivante.
+
+En Maverick, sur ordinateur et sur iPad en paysage, la Cue active occupe la moitié gauche de la liste et la suivante la moitié droite ; les autres Cues restent en dessous. Sur iPad en portrait et sur iPhone dans les deux orientations, la disposition verticale est conservée.
 
 La timeline reste fixée en haut de l’écran pendant le défilement de la liste. Le panneau « Décompte » apparaît au centre de son panneau, au-dessus de la timeline, dans une sous-box compacte au cadre discret. Sur ordinateur, elle rejoint le bord droit uniquement si les commandes ne laissent plus assez de place au centre. Sur iPad, elle reste centrée ; sur iPhone, elle est alignée sur le bord droit à la hauteur du bouton Lecture. Sans Cue suivante, il affiche --:--. À dix secondes, le chrono devient rouge et sa sous-box pulse en même temps que le halo de la Cue suivante, au rythme des secondes ; le halo bleu de la Cue active s’éteint en fondu.
 
-La liste pleine largeur affiche jusqu’à cinq Cues et suit automatiquement la lecture, sans défilement tactile interne. La Cue active reste toujours la première visible. Les changements de Cue sont immédiats, sans animation de déplacement. L’ordre est : numéro, visuel, temps, titre et description. La Cue active et la suivante utilisent des visuels identiques en taille, au format 16/9, ainsi que la même taille de titre et de description. Le visuel mesure 30 % de la largeur de l’écran en disposition verticale, 15 % en disposition à deux colonnes. Les descriptions apparaissent uniquement sur ces deux Cues, avec « Pas de description » si elles sont vides. Les pastilles Audio/Vidéo apparaissent uniquement en Edit. Le visuel actif commence son fondu au noir à dix secondes de la suivante et atteint le noir au passage de Cue ; il suit le temps de la conduite, y compris en pause ou après navigation. Sans Cue suivante, il reste éclairé. Les Cues passées restent dans le projet et réapparaissent en revenant dans le temps ; un fondu inférieur masque la suite lorsqu’elle dépasse la fenêtre. La timeline permet la navigation ; les Cues restent non éditables. Le moniteur vidéo apparaît uniquement si une vidéo est présente.
+En Maverick, la liste affiche jusqu’à cinq Cues et suit automatiquement la lecture, sans défilement tactile interne. La Cue active reste toujours la première visible. Les changements de Cue sont immédiats, sans animation de déplacement. L’ordre est : numéro, visuel, temps, titre et description. La Cue active et la suivante utilisent des visuels identiques en taille, au format 16/9, ainsi que la même taille de titre et de description. Le visuel mesure 30 % de la largeur de l’écran en disposition verticale, 15 % en disposition à deux colonnes. Les descriptions apparaissent uniquement sur ces deux Cues, avec « Pas de description » si elles sont vides. Les pastilles Audio/Vidéo apparaissent uniquement en Edit. Le visuel actif commence son fondu au noir à dix secondes de la suivante et atteint le noir au passage de Cue ; il suit le temps de la conduite, y compris en pause ou après navigation. Sans Cue suivante, il reste éclairé. Les Cues passées restent dans le projet et réapparaissent en revenant dans le temps ; un fondu inférieur masque la suite lorsqu’elle dépasse la fenêtre. La timeline permet la navigation ; les Cues restent non éditables. Le moniteur vidéo apparaît uniquement si une vidéo est présente.
 
 La sortie vidéo apparaît uniquement en Show avec une vidéo. Son placement automatique demande une API de gestion des écrans disponible, une autorisation du navigateur et un vrai affichage étendu. Sur Mac avec Safari, la sortie ouvre une fenêtre à déplacer manuellement sur le second écran ; l’app ne peut pas vérifier l’affichage étendu. Chrome ou sa PWA peut placer automatiquement la fenêtre sur un affichage étendu détecté. La sortie est désactivée sur iPad / iPhone. La recopie n’est pas un affichage séparé. Le bouton devient rouge pendant l’activation. Autoriser les fenêtres surgissantes si nécessaire, puis cliquer dans la sortie pour le plein écran. Le préchargement est automatique.
 
@@ -103,3 +105,5 @@ L’interface complète utilise un moteur compatible ES5 sur les anciens navigat
 ## Identité visuelle
 
 S2A Pilot utilise les ailes cyan ; S2A Copilot, les ailes orange. L’application compagnon porte désormais le nom S2A Copilot dans les deux langues. Le logo S2A Production reste inchangé.
+
+Show layouts: **Maverick** (default, side-by-side on wide screens, past Cues hidden) and **Iceman** (full-width, compact past Cues retained, countdown inside the next Cue). The choice is saved locally and in the project ZIP; older projects default to Maverick.
