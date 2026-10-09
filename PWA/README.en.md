@@ -1,10 +1,10 @@
-# S2A Pilot 1.4.98 / S2A Copilot 1.2.11
+# S2A Pilot 1.4.99 / S2A Copilot 1.2.11
 
 🇫🇷 [Français](README.md) | 🇬🇧 **English**
 
 ![S2A Pilot](assets/social-preview.png)
 
-[PWA 1.4.98](downloads/S2A-Pilot-V1.4.98-PWA.zip) · [Copilot 1.2.11 — Intel / Apple Silicon](downloads/S2A-Copilot-1.2.11-macOS-Universel.zip)
+[PWA 1.4.99](downloads/S2A-Pilot-V1.4.99-PWA.zip) · [Copilot 1.2.11 — Intel / Apple Silicon](downloads/S2A-Copilot-1.2.11-macOS-Universel.zip)
 
 # S2A Pilot — User guide
 
@@ -40,7 +40,7 @@ New audio on the first Cue at zero uses Cut by default. Other newly added audio 
 
 ## Main timeline and Show
 
-The selector beside the language offers **Maverick** (default) and **Iceman**. Maverick keeps the current layout and hides past Cues. Iceman uses full-width rows, keeps past Cues compact and places the countdown inside the next Cue. The choice is saved locally and in the project ZIP; older projects default to Maverick.
+The selector beside the language offers **Maverick** (default) and **Iceman**. Maverick keeps the current layout and hides past Cues. The layout selector appears only in Show. Layout, video output and Edit/Show controls have matching heights. Iceman visuals measure 22.5% of the screen width (75% of their previous size), retaining 16:9. Iceman uses full-width rows, keeps past Cues compact and places the countdown inside the next Cue. The choice is saved locally and in the project ZIP; older projects default to Maverick.
 
 Media bands appear on the timeline: green for audio, pink for video. The combined waveform reflects audible media. The timeline height adapts to its media bands. Main timeline zoom is available only in Edit, up to ×32; switching to Show restores the complete timeline.
 

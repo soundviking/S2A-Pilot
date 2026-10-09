@@ -1,10 +1,10 @@
-# S2A Pilot 1.4.98 / S2A Copilot 1.2.11
+# S2A Pilot 1.4.99 / S2A Copilot 1.2.11
 
 🇫🇷 **Français** | 🇬🇧 [English](README.en.md)
 
 ![S2A Pilot](assets/social-preview.png)
 
-[PWA 1.4.98](downloads/S2A-Pilot-V1.4.98-PWA.zip) · [Copilot 1.2.11 — Intel / Apple Silicon](downloads/S2A-Copilot-1.2.11-macOS-Universel.zip)
+[PWA 1.4.99](downloads/S2A-Pilot-V1.4.99-PWA.zip) · [Copilot 1.2.11 — Intel / Apple Silicon](downloads/S2A-Copilot-1.2.11-macOS-Universel.zip)
 
 # S2A Pilot — Guide utilisateur
 
@@ -42,7 +42,7 @@ Lecture / Pause ou Espace commande la conduite. Le raccourci ignore la saisie, l
 
 ## Show et sortie vidéo
 
-Le sélecteur à côté de la langue propose **Maverick**, par défaut, et **Iceman**. Le choix est conservé dans la sauvegarde locale et dans le ZIP de la conduite ; les anciens projets utilisent Maverick. Iceman affiche toutes les Cues en pleine largeur : les Cues passées restent compactes, seules l’active et la suivante sont agrandies, et le décompte apparaît dans la Cue suivante.
+Le sélecteur à côté de la langue propose **Maverick**, par défaut, et **Iceman**. Le choix est conservé dans la sauvegarde locale et dans le ZIP de la conduite ; les anciens projets utilisent Maverick. Les boutons Disposition, Sortie vidéo et Edit/Show ont la même hauteur. Disposition apparaît uniquement en Show. Iceman utilise des visuels de 22,5 % de la largeur de l’écran (75 % de leur taille précédente), toujours en 16/9. Iceman affiche toutes les Cues en pleine largeur : les Cues passées restent compactes, seules l’active et la suivante sont agrandies, et le décompte apparaît dans la Cue suivante.
 
 En Maverick, sur ordinateur et sur iPad en paysage, la Cue active occupe la moitié gauche de la liste et la suivante la moitié droite ; les autres Cues restent en dessous. Sur iPad en portrait et sur iPhone dans les deux orientations, la disposition verticale est conservée.
 
