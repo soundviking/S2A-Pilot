@@ -10,15 +10,15 @@ RESOURCES="$APP/Contents/Resources"
 rm -rf "$BUILD"
 mkdir -p "$MACOS" "$RESOURCES"
 
-# Recover the pinned, licensed runtime from the published companion when building a fresh checkout.
+# Recover the pinned, licensed runtime from the separate Bridge download when building a fresh checkout.
 mkdir -p "$ROOT/Resources/CopilotRuntime"
 for S2A_NODE_ARCH in arm64 x64; do
   if [[ ! -f "$ROOT/Resources/CopilotRuntime/node-runtime-$S2A_NODE_ARCH.tar.gz" ]]; then
-    /usr/bin/unzip -p "$ROOT/../PWA/companion/S2A-Pilot-Bridge-1.3.1-app.zip" "S2A Pilot Bridge.app/Contents/Resources/Copilot/runtime/node-runtime-$S2A_NODE_ARCH.tar.gz" > "$ROOT/Resources/CopilotRuntime/node-runtime-$S2A_NODE_ARCH.tar.gz"
+    /usr/bin/unzip -p "$ROOT/../downloads/S2A-Pilot-Bridge-1.3.1-macOS-Universel.zip" "S2A Pilot Bridge.app/Contents/Resources/Copilot/runtime/node-runtime-$S2A_NODE_ARCH.tar.gz" > "$ROOT/Resources/CopilotRuntime/node-runtime-$S2A_NODE_ARCH.tar.gz"
   fi
 done
 if [[ ! -f "$ROOT/Resources/CopilotRuntime/LICENSE-Node.txt" ]]; then
-  /usr/bin/unzip -p "$ROOT/../PWA/companion/S2A-Pilot-Bridge-1.3.1-app.zip" "S2A Pilot Bridge.app/Contents/Resources/Copilot/runtime/LICENSE-Node.txt" > "$ROOT/Resources/CopilotRuntime/LICENSE-Node.txt"
+  /usr/bin/unzip -p "$ROOT/../downloads/S2A-Pilot-Bridge-1.3.1-macOS-Universel.zip" "S2A Pilot Bridge.app/Contents/Resources/Copilot/runtime/LICENSE-Node.txt" > "$ROOT/Resources/CopilotRuntime/LICENSE-Node.txt"
 fi
 
 for S2A_ARCH in arm64 x86_64; do

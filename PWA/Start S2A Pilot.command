@@ -13,6 +13,6 @@ if ! kill -0 "$server_pid" 2>/dev/null; then
   echo "Could not start. Check whether port 8092 is already in use."
   exit 1
 fi
-open "http://localhost:8092/actualiser.html?version=1.5.2"
+open "http://localhost:8092/actualiser.html?version=1.5.3"
 printf 'S2A Pilot : http://localhost:8092/index.html\nStop with Ctrl+C.\n'
 wait "$server_pid"

@@ -1,12 +1,12 @@
-S2A PILOT 1.5.2
+S2A PILOT 1.5.3
 
 To deploy, replace the complete /S2A-Pilot/ folder, including .htaccess,
-compat/ and companion/. Do not replace index.html alone.
-The included QLab gateway is S2A Pilot Bridge 1.3.0.
+compat/. Remove any old companion/ folder: Bridge is downloaded separately from GitHub. Do not replace index.html alone.
 
 Purge this folder in the CDN. Avoid long-lived caches for HTML, JS, JSON and
 the service worker. Check the displayed version, Edit, Show, both layouts,
 FR/EN help, PDF and offline ZIP export. actualiser.html refreshes caches
 without erasing IndexedDB projects. Do not clear site data as an update fix.
 
-The separate Copilot prototype must not be deployed with the PWA.
+
+Web Copilot: deploy copilot-api.php on PHP 8+ with writable private temporary storage. Browser sharing needs no Bridge. Keep Pilot open and connected. Exclude copilot-api.php from Cloudflare caching.

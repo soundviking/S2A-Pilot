@@ -19,7 +19,7 @@ var body=en?[
  'Passez en Show. Lecture / Pause commande toute la conduite. L’icône de retour arrête les médias et revient à zéro. Dans la liste, suivez la Cue active éclairée en bleu et le décompte de la prochaine Cue. La barre compacte reste en haut pendant le défilement de la liste.',
  'En Show, touchez Disposition pour choisir votre style.'
  ];text.textContent=body[step];text.className='quickHelpText'+(step===3?' quickHelpLayoutIntro':'');if(step===3){var source=document.getElementById('showLayoutButton'),symbol=source&&source.querySelector('svg');if(symbol){var badge=document.createElement('span');badge.className='quickHelpLayoutIcon';badge.setAttribute('aria-hidden','true');badge.appendChild(symbol.cloneNode(true));text.insertBefore(badge,text.firstChild);}}image.hidden=step===3;comparisons.hidden=step!==3;
-function screenshot(element,key,alt){element.onerror=function(){var data=window.S2AHelpImages&&window.S2AHelpImages[key];if(data&&element.src!==data)element.src=data;};element.src=(light?'../':'')+'assets/help/'+key+'?v=1.5.2';element.alt=alt;}
+function screenshot(element,key,alt){element.onerror=function(){var data=window.S2AHelpImages&&window.S2AHelpImages[key];if(data&&element.src!==data)element.src=data;};element.src=(light?'../':'')+'assets/help/'+key+'?v=1.5.3';element.alt=alt;}
 if(step!==3)screenshot(image,(light?'legacy-':'')+lang+'-'+['create','cue','show'][step]+'.png',(en?'Screenshot: ':'Capture : ')+titles[step]);
 if(step===3){for(var i=0;i<layouts.length;i++)screenshot(layouts[i].image,lang+'-'+layouts[i].name.toLowerCase()+'.png',(en?'Same show in ':'Même conduite en ')+layouts[i].name);
 layouts[0].caption.textContent=en?'Countdown in the Timeline; past Cues hidden.':'Décompte dans la Timeline ; Cues passées masquées.';

@@ -1,0 +1,17 @@
+{
+  "version": "1.5.3",
+  "date": "2026-10-10",
+  "checks": [
+    "Chrome and WebKit: save picker invoked during user gesture; cancel; ZIP download fallback",
+    "Real ZIP export/import: audio, visual, PDF, Iceman layout; shared media deduplicated; CRC verified",
+    "Chrome offline / WebKit HTTP blocked: ZIP and PDF export; no Bridge fetch or API cache",
+    "Real PHP relay: Chrome host to independent WebKit viewer, visual changes, seek, read-only authorization, invalid key, disconnect/recovery and revocation",
+    "Local Copilot and Bridge state fixture regression",
+    "Apple Vision decodes the Copilot QR with central logo",
+    "PWA ZIP and source hashes verified; no Bridge application or Node runtime archive"
+  ],
+  "limitations": [
+    "Physical iPad and live QLab not tested",
+    "Production PHP relay must be installed on HTTPS hosting; live server deployment not performed here"
+  ]
+}

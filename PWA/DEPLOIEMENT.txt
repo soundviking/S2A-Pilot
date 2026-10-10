@@ -1,8 +1,7 @@
-S2A PILOT 1.5.2
+S2A PILOT 1.5.3
 
 Déploiement : remplacer l’ensemble du dossier /S2A-Pilot/, y compris
-.htaccess, compat/ et companion/. Ne pas remplacer uniquement index.html.
-La passerelle incluse est S2A Pilot Bridge 1.3.0.
+.htaccess et compat/. Supprimer le dossier companion/ d’un ancien déploiement : Bridge se télécharge séparément sur GitHub. Ne pas remplacer uniquement index.html.
 
 Purger les fichiers de ce dossier dans le CDN. Ne pas imposer un cache long
 à HTML, JS, JSON ou au service worker. Vérifier la version affichée, Edit,
@@ -10,4 +9,5 @@ Show, les deux dispositions, l’aide FR/EN, le PDF et l’export ZIP hors ligne
 actualiser.html renouvelle les caches sans effacer les projets IndexedDB.
 Ne pas supprimer les données du site pour réparer une ancienne version.
 
-Le prototype Copilot est séparé et ne doit pas être déployé avec la PWA.
+
+Copilot web : déployer copilot-api.php sur PHP 8+ avec stockage temporaire privé accessible en écriture. Aucun Bridge nécessaire pour partager depuis le navigateur. Garder Pilot ouvert et connecté. Exclure copilot-api.php du cache Cloudflare.

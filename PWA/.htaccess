@@ -7,3 +7,11 @@
   </FilesMatch>
 </IfModule>
 DirectoryIndex index.html
+
+# Live Copilot snapshots must never be cached by the host/CDN.
+<IfModule mod_headers.c>
+  <Files "copilot-api.php">
+    Header always set Cache-Control "no-store, private, max-age=0"
+    Header always set CDN-Cache-Control "no-store"
+  </Files>
+</IfModule>

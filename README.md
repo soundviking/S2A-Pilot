@@ -1,10 +1,10 @@
-# S2A Pilot 1.5.2 / S2A Pilot Bridge 1.3.1
+# S2A Pilot 1.5.3 / S2A Pilot Bridge 1.3.1
 
 🇫🇷 **Français** | 🇬🇧 [English](README.en.md)
 
 ![S2A Pilot](assets/social-preview.png)
 
-[Version publiée : PWA 1.5.2](downloads/S2A-Pilot-V1.5.2-PWA.zip) · [Bridge 1.3.1 — Intel / Apple Silicon](downloads/S2A-Pilot-Bridge-1.3.1-macOS-Universel.zip)
+[Version publiée : PWA 1.5.3](downloads/S2A-Pilot-V1.5.3-PWA.zip) · [Bridge 1.3.1 — Intel / Apple Silicon](downloads/S2A-Pilot-Bridge-1.3.1-macOS-Universel.zip)
 
 # S2A Pilot — Guide utilisateur
 
@@ -57,15 +57,15 @@ La sortie vidéo apparaît uniquement en Show avec une vidéo. Son placement aut
 
 ## Sauvegarde et PDF
 
-Chaque modification est sauvegardée localement, y compris pendant la saisie. Ces données dépendent de l’appareil, du navigateur, du profil et de l’adresse du site. Enregistrer sous… produit un .s2apilot.zip portable avec médias, visuels, données, PDF et S2A Pilot Bridge.app compilée. Ouvrir restaure un package. Garder les médias lors de l’import QLab.
+Chaque modification est sauvegardée localement, y compris pendant la saisie. Ces données dépendent de l’appareil, du navigateur, du profil et de l’adresse du site. Enregistrer sous… produit un .s2apilot.zip portable avec médias, visuels, données et PDF. Bridge est téléchargé séparément sur GitHub ; aucune application n’est ajoutée au ZIP de conduite. Ouvrir restaure un package. Garder les médias lors de l’import QLab.
 
 Conduite PDF ouvre un aperçu intégré ; Télécharger crée le fichier. L’en-tête du PDF reprend le premier visuel disponible dans l’ordre chronologique des Cues, recadré en bandeau ; sans visuel, il conserve l’image par défaut. Un QR code au cadre arrondi avec un logo S2A Pilot agrandi dans la partie droite mène à https://s2a-production.com/S2A-Pilot/. L’aperçu, le PDF téléchargé et celui intégré au package utilisent le même bandeau et le même QR code, également hors ligne. Le PDF inclut des blocs arrondis, compteurs médias et cinq Cues standards par page. Les descriptions longues continuent sur les pages suivantes. Le temps écoulé et le temps restant entre parenthèses figurent pour chaque Cue. Le contenu saisi n’est pas traduit.
 
 ## Installation et mises à jour
 
-Sur Mac, décompresser et lancer Démarrer S2A Pilot.command ou Start S2A Pilot.command. Arrêter l’ancien serveur avant d’ouvrir un autre dossier. L’ouverture directe d’index.html permet l’aperçu PDF, mais le serveur local ou HTTPS est nécessaire pour toutes les fonctions et l’export du compagnon.
+Sur Mac, décompresser et lancer Démarrer S2A Pilot.command ou Start S2A Pilot.command. Arrêter l’ancien serveur avant d’ouvrir un autre dossier. L’ouverture directe d’index.html permet l’aperçu PDF, mais le serveur local ou HTTPS est nécessaire pour toutes les fonctions et l’export des conduites.
 
-Déployer tout le contenu sur HTTPS, y compris .htaccess, i18n.js, les manifests, scripts, assets, icons et companion. Le serveur ouvre index.html comme page d’accueil ; partager l’adresse du dossier.
+Déployer tout le contenu sur HTTPS, y compris .htaccess, i18n.js, les manifests, scripts, assets et icons. Supprimer le dossier companion d’un ancien déploiement, devenu inutile. Le serveur ouvre index.html comme page d’accueil ; partager l’adresse du dossier.
 
 Purger Cloudflare après remplacement et supprimer les règles imposant un cache long aux fichiers HTML, JS, JSON et service worker. .htaccess empêche leur cache HTTP à l’origine Apache avec mod_headers ; une règle du CDN peut le remplacer. actualiser.html renouvelle les fichiers sans supprimer IndexedDB. Ne pas supprimer les données du site pour réparer une ancienne version.
 
@@ -116,4 +116,6 @@ Depuis Pilot en Show, le bouton de partage iOS à côté de Disposition ouvre le
 
 Bridge 1.3.1 suit directement QLab pour les conduites S2A importées et indexées dans le workspace sélectionné. Son bouton Copilot ouvre le même affichage de suivi. Les formats de conduite et la préférence de langue restent compatibles.
 
-Le partage nécessite le [service Copilot](copilot-service/README.md). Le lanceur fourni démarre un essai local sur le Mac, sans téléchargement de moteur. Un site statique seul ne fournit pas la signalisation. L’accès iPad nécessite HTTPS ; l’essai physique et le suivi d’une vraie conduite QLab restent à valider. Le moteur embarqué contient Node.js sous ses licences d’origine.
+Depuis Pilot hébergé en HTTPS, le bouton de partage crée directement le lien et le QR Copilot : aucun Mac, Bridge ou Node n’est nécessaire. Déployer aussi `copilot-api.php` sur un hébergement PHP 8 ou plus récent, avec un répertoire temporaire privé accessible en écriture. Le relais transmet les Cues, le décompte et des vignettes ; il ne transmet pas les fichiers audio/vidéo et n’accepte aucune commande de lecture. Garder Pilot ouvert, au premier plan et connecté. Le lien donne accès à la conduite : le partager uniquement avec les personnes concernées. Arrêter le partage révoque ce lien ; il expire au plus tard après six heures. Après une coupure, Copilot fige les informations et masque le décompte jusqu’à la reprise.
+
+Le lanceur local « Démarrer Pilot et Copilot.command » reste optionnel pour les essais sur Mac, avec Node.js 18+ installé ou Bridge déjà installé dans Applications. Bridge est un téléchargement GitHub séparé et n’est présent ni dans la PWA ni dans les ZIP de conduite. Les liens localhost restent limités à l’ordinateur. Le suivi QLab de Bridge conserve son service local. Les essais physiques iPad et QLab restent à confirmer. Voir [le service Copilot](copilot-service/README.md).
