@@ -1,29 +1,29 @@
-# S2A Pilot 1.5.0 / S2A Copilot 1.2.11
+# S2A Pilot 1.5.1 / S2A Pilot Bridge 1.3.0
 
 🇫🇷 [Français](README.md) | 🇬🇧 **English**
 
 ![S2A Pilot](assets/social-preview.png)
 
-[PWA 1.5.0](downloads/S2A-Pilot-V1.5.0-PWA.zip) · [Copilot 1.2.11 — Intel / Apple Silicon](downloads/S2A-Copilot-1.2.11-macOS-Universel.zip)
+[Published PWA 1.5.1](downloads/S2A-Pilot-V1.5.1-PWA.zip) · [Bridge 1.3.0 — Intel / Apple Silicon](downloads/S2A-Pilot-Bridge-1.3.0-macOS-Universel.zip)
 
 # S2A Pilot — User guide
 
-The rights to S2A Pilot and S2A Copilot belong to the company S2A Production. These applications were developed by Antoine CLOPIER with assistance from ChatGPT.
+The rights to S2A Pilot and S2A Pilot Bridge belong to the company S2A Production. These applications were developed by Antoine CLOPIER with assistance from ChatGPT.
 
-S2A Pilot prepares and runs multimedia shows. S2A Copilot imports its project packages into QLab 5. The app names and Edit / Show labels are the same in both languages.
+S2A Pilot prepares and runs multimedia shows. S2A Pilot Bridge imports its project packages into QLab 5. The app names and Edit / Show labels are the same in both languages.
 
 ## Language
 
 The web app uses the browser’s preferred language at first launch: French for French locales, English otherwise. Use FR / EN in the header, next to Edit / Show, to override this choice. The override is saved on this device. Titles, descriptions, visuals and media filenames belonging to your project are never translated. PDF exports and package installation instructions use the currently selected interface language.
 
-S2A Copilot uses the macOS preferred language at first launch and offers a Français / English switch in its header. Its manual preference is remembered independently from the web app.
+S2A Pilot Bridge uses the macOS preferred language at first launch and offers a Français / English switch in its header. Its manual preference is remembered independently from the web app.
 
 ## Quick help
 
 On first launch, a four-step guide introduces show creation, Cue settings, Show mode and the layout selector. Page four, “Vanilla or chocolate?”, compares Maverick and Iceman with two actual screenshots of the same show. Actual application screenshots show a 3 minute 20 second audio track with its waveform and stage visuals. It appears before the installation prompt. The “?” button in Edit, to the left of Undo and Redo, opens it again. The guide and screenshots are available in French and English and bundled locally for offline use in browsers that support it. They also cover compatibility mode.
 
 
-On iPhone, each Cue places its visual at the upper left, its title to the right and its description across the full width below. In Iceman, the next Cue keeps its countdown at the upper right, with its title and description below. Both styles use a smaller Timeline clock and a larger countdown. The startup halo fades before its edges to prevent clipping. On iPad in portrait, Iceman places the active and next Cue descriptions across the full width below, with the next countdown at the upper right. Maverick places the transport clock below Play and Return to start.
+On iPhone, each Cue places its visual at the upper left, its title to the right and its description across the full width below. In Iceman, the next Cue keeps its countdown at the upper right, with its title and description below. Both styles use a smaller Timeline clock and a larger countdown. The startup halo fades before its edges to prevent clipping. On iPad in portrait, Iceman places the active and next Cue descriptions across the full width below, with the next countdown at the upper right. The compact Show transport keeps its controls, progress and clock on one row.
 
 ## Prepare a show
 
@@ -45,13 +45,13 @@ New audio on the first Cue at zero uses Cut by default. Other newly added audio 
 
 The selector beside the language offers **Maverick** (default) and **Iceman**. Maverick keeps the current layout and hides past Cues. The layout selector appears only in Show. Layout, video output and Edit/Show controls have matching heights. Iceman visuals measure 22.5% of the screen width (75% of their previous size), retaining 16:9. Iceman uses full-width rows, keeps past Cues compact and places the countdown inside the next Cue. The choice is saved locally and in the project ZIP; older projects default to Maverick.
 
-Media bands appear on the timeline: green for audio, pink for video. The combined waveform reflects audible media. The timeline height adapts to its media bands. Main timeline zoom is available only in Edit, up to ×32; switching to Show restores the complete timeline.
+Media bands appear on the timeline: green for audio, pink for video. The combined waveform reflects audible media. The timeline height adapts to its media bands. Main timeline zoom is available only in Edit, up to ×32; Show uses a single compact row: Play/Pause icon, Back to start icon, thin progress bar, elapsed time. Only future Cues appear as small dots; waveform, media bands and labels remain available in Edit.
 
 Use Play / Pause, or press Space. The keyboard shortcut is ignored while typing, inside dialogs or when another control owns Space. Holding it does not repeatedly toggle playback. Back to start pauses playback, stops running media and returns to zero.
 
 On a computer or an iPad in landscape, the active Cue occupies the left half of the list and the next Cue the right half; the remaining Cues appear below. iPad portrait and both iPhone orientations retain the vertical layout.
 
-The timeline stays pinned to the top while you scroll the Cue list. The “Countdown” panel is centered above the timeline in its own compact panel with a subtle border. On desktop it moves to the right edge only when the controls no longer leave enough room in the center. It stays centered on iPad and aligns with the right edge at Play button height on iPhone. Without a next Cue, it displays --:--. At ten seconds, the clock turns red and its panel pulses together with the next Cue halo, in time with the remaining seconds; the active Cue’s blue halo fades out.
+The compact transport stays pinned while you scroll. Maverick keeps the countdown centered above this row; Iceman keeps it inside the next Cue. Without a next Cue, it displays --:--. At ten seconds, the clock turns red and its panel pulses together with the next Cue halo, in time with the remaining seconds; the active Cue’s blue halo fades out.
 
 In Maverick, Show displays up to five Cues and automatically follows playback without an inner touch scroll. The active Cue is always the first visible row. Cue changes are immediate, without movement or resizing animations. The order is number, visual, Cue time, title and description. Active and next Cues have equally sized 16:9 visuals, titles and descriptions. The visuals measure 30% of the screen width in the vertical layout and 15% in the two-column layout. Descriptions appear only on these two Cues, with “No description” when empty. Audio/Video badges appear only in Edit. The active visual fades to black during the last ten seconds before the next Cue; it follows the show time, including pause and seeking, and stays fully visible when there is no next Cue. Past Cues remain in the project and reappear when seeking backward. A bottom fade hides the continuation beyond the five-Cue window. The timeline can seek in Show; Cue markers remain non-editable. The video monitor appears only if the show contains video.
 
@@ -63,7 +63,7 @@ The output button becomes red while the video window is active. Allow pop-ups if
 
 ## Save, open and export
 
-Edits are saved locally on this device, including text while typing. Local saves are specific to the browser, profile and site address. Use **Save as…** for a portable `.s2apilot.zip` backup and transfer. It includes show data, media, visuals, the PDF and a ready-to-install universal S2A Copilot.app. Do not delete media folders before importing into QLab. Open restores a package.
+Edits are saved locally on this device, including text while typing. Local saves are specific to the browser, profile and site address. Use **Save as…** for a portable `.s2apilot.zip` backup and transfer. It includes show data, media, visuals, the PDF and a ready-to-install universal S2A Pilot Bridge.app. Do not delete media folders before importing into QLab. Open restores a package.
 
 ## Cue sheet PDF
 
@@ -79,21 +79,21 @@ After deployment, purge Cloudflare’s cache for the app folder and remove rules
 
 Pilot checks the server version on startup, when returning to the app and every five minutes while visible. It offers a newer version without forcing an update during Show or playback. The displayed version is the program actually running. A startup diagnostic appears if code fails to load. Offline use remains available after installation.
 
-## S2A Copilot installation and QLab
+## S2A Pilot Bridge installation and QLab
 
 The universal .app supports Intel and Apple Silicon Macs, macOS 13 or later. Move it into Applications; no compilation is needed. It is locally signed, not notarized by Apple.
 
-1. Try opening S2A Copilot once.
+1. Try opening S2A Pilot Bridge once.
 2. If blocked, open System Settings → Privacy & Security → Security.
-3. Choose Open Anyway for S2A Copilot, authenticate if prompted, then confirm Open.
+3. Choose Open Anyway for S2A Pilot Bridge, authenticate if prompted, then confirm Open.
 
-Open Anyway appears after an opening attempt. Try again if it has disappeared. Only approve the app from the official repository. A new version may require approval again. During import, separately allow Copilot to control QLab. See [Apple’s instructions](https://support.apple.com/en-us/102445).
+Open Anyway appears after an opening attempt. Try again if it has disappeared. Only approve the app from the official repository. A new version may require approval again. During import, separately allow Bridge to control QLab. See [Apple’s instructions](https://support.apple.com/en-us/102445).
 
-Copilot automatically detects open QLab workspaces and lets you choose when several are open. Save the workspace before importing. Add multiple project packages to import each show into its own Timeline Group cue. The group retains its number and children use numbers such as 5.1, 5.2 and 5.3, avoiding existing numbers. Existing imports are not renumbered. The monitor follows imported shows and can stay on top.
+Bridge automatically detects open QLab workspaces and lets you choose when several are open. Save the workspace before importing. Add multiple project packages to import each show into its own Timeline Group cue. The group retains its number and children use numbers such as 5.1, 5.2 and 5.3, avoiding existing numbers. Existing imports are not renumbered. The monitor follows imported shows and can stay on top.
 
 ## Validation limits
 
-Chrome and WebKit tests cover immediate Cue changes on simulated desktop, tablet and phone screens, visual sizes, audio playback, pause and seeking. Additional checks cover creation, editing, autosave, languages, PDF and offline use. Copilot is compiled for both architectures and its local signature is verified. Real Safari/iPad touch behavior, real extended-display playback, live QLab imports and execution on a physical Intel Mac must still be checked before show use.
+Chrome and WebKit tests cover immediate Cue changes on simulated desktop, tablet and phone screens, visual sizes, audio playback, pause and seeking. Additional checks cover creation, editing, autosave, languages, PDF and offline use. Bridge is compiled for both architectures and its local signature is verified. Real Safari/iPad touch behavior, real extended-display playback, live QLab imports and execution on a physical Intel Mac must still be checked before show use.
 
 
 ## License
@@ -115,4 +115,10 @@ Older browsers use the full interface through an ES5 compatibility engine. Light
 
 ## Visual identity
 
-S2A Pilot uses cyan wings; S2A Copilot uses orange wings. The companion is now named S2A Copilot in both languages. The S2A Production logo is unchanged.
+S2A Pilot uses cyan wings; S2A Pilot Bridge uses orange wings. The companion is now named S2A Pilot Bridge in both languages. The S2A Production logo is unchanged.
+
+## S2A Pilot Bridge and Copilot
+
+Bridge 1.3.0 renames the QLab gateway. Its technical source folder and bundle ID remain unchanged, as do project formats and language preferences. The new [Copilot prototype](prototypes/copilot/README.md) is a separate read-only WebRTC experiment with local QR signaling. Real-device iOS 13 and PWA installation are not yet validated.
+
+In Show, Play/Pause has a wider button. The show name appears above the transport, with the current Cue position in Maverick. Passed Cue dots disappear in Maverick and stay visible in Iceman.

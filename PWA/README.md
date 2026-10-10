@@ -1,29 +1,29 @@
-# S2A Pilot 1.5.0 / S2A Copilot 1.2.11
+# S2A Pilot 1.5.1 / S2A Pilot Bridge 1.3.0
 
 🇫🇷 **Français** | 🇬🇧 [English](README.en.md)
 
-![S2A Pilot](assets/social-preview.png)
+![S2A Pilot](../assets/social-preview.png)
 
-[PWA 1.5.0](downloads/S2A-Pilot-V1.5.0-PWA.zip) · [Copilot 1.2.11 — Intel / Apple Silicon](downloads/S2A-Copilot-1.2.11-macOS-Universel.zip)
+[Version publiée : PWA 1.5.1](../downloads/S2A-Pilot-V1.5.1-PWA.zip) · [Bridge 1.3.0 — Intel / Apple Silicon](../downloads/S2A-Pilot-Bridge-1.3.0-macOS-Universel.zip)
 
 # S2A Pilot — Guide utilisateur
 
-Les droits sur S2A Pilot et S2A Copilot appartiennent à la société S2A Production. Ces applications ont été développées par Antoine CLOPIER, avec l’aide de ChatGPT.
+Les droits sur S2A Pilot et S2A Pilot Bridge appartiennent à la société S2A Production. Ces applications ont été développées par Antoine CLOPIER, avec l’aide de ChatGPT.
 
 [English user guide](README.en.md)
 
-S2A Pilot prépare et joue des conduites multimédias. S2A Copilot importe leurs packages dans QLab 5.
+S2A Pilot prépare et joue des conduites multimédias. S2A Pilot Bridge importe leurs packages dans QLab 5.
 
 ## Langue
 
-Au premier lancement, la PWA choisit le français si la langue principale du navigateur est française, sinon l’anglais. FR / EN dans l’en-tête permet de changer ce choix, mémorisé sur l’appareil. Copilot détecte la langue de macOS et propose Français / English. Les titres, descriptions et noms de médias des projets restent inchangés. Les PDF et notices exportés suivent la langue de l’interface.
+Au premier lancement, la PWA choisit le français si la langue principale du navigateur est française, sinon l’anglais. FR / EN dans l’en-tête permet de changer ce choix, mémorisé sur l’appareil. Bridge détecte la langue de macOS et propose Français / English. Les titres, descriptions et noms de médias des projets restent inchangés. Les PDF et notices exportés suivent la langue de l’interface.
 
 ## Aide rapide
 
 Au premier lancement, une aide en quatre étapes présente la création de la conduite, les réglages des Cues, le mode Show et le choix de disposition. La quatrième page « Vanille ou chocolat ? » compare Maverick et Iceman avec deux captures réelles de la même conduite. Les captures réelles montrent une musique de 3 min 20 avec sa waveform et des visuels de scène. Elle apparaît avant la proposition d’installation. Le bouton « ? », en Edit à gauche d’Annuler et Rétablir, permet de la rouvrir. L’aide et ses captures sont disponibles en français et en anglais, intégrées localement pour fonctionner hors ligne sur les navigateurs compatibles avec ce fonctionnement. Elles sont également adaptées au mode de compatibilité.
 
 
-Sur iPhone, le visuel est en haut à gauche, le titre à sa droite et la description occupe toute la largeur en dessous. En Iceman, la Cue suivante réserve le haut droit au décompte et place son titre et sa description en dessous. Dans les deux styles, le chrono de la Timeline reste discret et le décompte est plus grand. Le halo de démarrage s’efface avant ses bords pour éviter toute coupure. En portrait sur iPad, Iceman place les descriptions de l’active et de la suivante sur toute la largeur en bas, avec le décompte en haut à droite de la suivante. Maverick place le chrono de lecture sous Lecture et Retour au début.
+Sur iPhone, le visuel est en haut à gauche, le titre à sa droite et la description occupe toute la largeur en dessous. En Iceman, la Cue suivante réserve le haut droit au décompte et place son titre et sa description en dessous. Dans les deux styles, le chrono de la Timeline reste discret et le décompte est plus grand. Le halo de démarrage s’efface avant ses bords pour éviter toute coupure. En portrait sur iPad, Iceman place les descriptions de l’active et de la suivante sur toute la largeur en bas, avec le décompte en haut à droite de la suivante. En Show, le transport tient sur une ligne : Lecture/Pause (icône), Retour au début, progression et chrono. En Maverick, le décompte reste au-dessus ; en Iceman, il reste dans la Cue suivante.
 
 ## Création et édition
 
@@ -39,7 +39,7 @@ Chaque fichier a sa propre lecture indépendante, sa waveform, IN / OUT, Loop et
 
 Le premier nouvel audio à zéro utilise Cut ; les autres utilisent un fondu de trois secondes. Les réglages importés sont conservés. Ajouter visuel / Changer visuel concerne l’image de repérage, distincte du média joué.
 
-La timeline générale affiche les bandes audio vertes et vidéo roses ainsi que la waveform combinée des médias audibles. Sa hauteur s’adapte aux bandes. Son zoom jusqu’à ×32 est disponible uniquement en Edit. En Show, elle retrouve sa vue complète.
+La timeline générale affiche les bandes audio vertes et vidéo roses ainsi que la waveform combinée des médias audibles. Sa hauteur s’adapte aux bandes. Son zoom jusqu’à ×32 est disponible uniquement en Edit. En Show, elle devient une barre de progression fine avec des points pour les Cues futures. La waveform, les bandes et les étiquettes restent réservées à Edit.
 
 Lecture / Pause ou Espace commande la conduite. Le raccourci ignore la saisie, les dialogues et les commandes ayant leur propre action clavier ; maintenir la touche ne répète pas les bascules. Retour au début met en pause, arrête les médias et revient à zéro.
 
@@ -49,7 +49,7 @@ Le sélecteur à côté de la langue propose **Maverick**, par défaut, et **Ice
 
 En Maverick, sur ordinateur et sur iPad en paysage, la Cue active occupe la moitié gauche de la liste et la suivante la moitié droite ; les autres Cues restent en dessous. Sur iPad en portrait et sur iPhone dans les deux orientations, la disposition verticale est conservée.
 
-La timeline reste fixée en haut de l’écran pendant le défilement de la liste. Le panneau « Décompte » apparaît au centre de son panneau, au-dessus de la timeline, dans une sous-box compacte au cadre discret. Sur ordinateur, elle rejoint le bord droit uniquement si les commandes ne laissent plus assez de place au centre. Sur iPad, elle reste centrée ; sur iPhone, elle est alignée sur le bord droit à la hauteur du bouton Lecture. Sans Cue suivante, il affiche --:--. À dix secondes, le chrono devient rouge et sa sous-box pulse en même temps que le halo de la Cue suivante, au rythme des secondes ; le halo bleu de la Cue active s’éteint en fondu.
+La barre de transport reste fixée en haut pendant le défilement. En Maverick, le décompte est centré au-dessus de la barre ; en Iceman, il reste dans la Cue suivante. Sans Cue suivante, il affiche --:--. À dix secondes, le chrono devient rouge et sa sous-box pulse en même temps que le halo de la Cue suivante, au rythme des secondes ; le halo bleu de la Cue active s’éteint en fondu.
 
 En Maverick, la liste affiche jusqu’à cinq Cues et suit automatiquement la lecture, sans défilement tactile interne. La Cue active reste toujours la première visible. Les changements de Cue sont immédiats, sans animation de déplacement. L’ordre est : numéro, visuel, temps, titre et description. La Cue active et la suivante utilisent des visuels identiques en taille, au format 16/9, ainsi que la même taille de titre et de description. Le visuel mesure 30 % de la largeur de l’écran en disposition verticale, 15 % en disposition à deux colonnes. Les descriptions apparaissent uniquement sur ces deux Cues, avec « Pas de description » si elles sont vides. Les pastilles Audio/Vidéo apparaissent uniquement en Edit. Le visuel actif commence son fondu au noir à dix secondes de la suivante et atteint le noir au passage de Cue ; il suit le temps de la conduite, y compris en pause ou après navigation. Sans Cue suivante, il reste éclairé. Les Cues passées restent dans le projet et réapparaissent en revenant dans le temps ; un fondu inférieur masque la suite lorsqu’elle dépasse la fenêtre. La timeline permet la navigation ; les Cues restent non éditables. Le moniteur vidéo apparaît uniquement si une vidéo est présente.
 
@@ -57,7 +57,7 @@ La sortie vidéo apparaît uniquement en Show avec une vidéo. Son placement aut
 
 ## Sauvegarde et PDF
 
-Chaque modification est sauvegardée localement, y compris pendant la saisie. Ces données dépendent de l’appareil, du navigateur, du profil et de l’adresse du site. Enregistrer sous… produit un .s2apilot.zip portable avec médias, visuels, données, PDF et Copilot.app compilée. Ouvrir restaure un package. Garder les médias lors de l’import QLab.
+Chaque modification est sauvegardée localement, y compris pendant la saisie. Ces données dépendent de l’appareil, du navigateur, du profil et de l’adresse du site. Enregistrer sous… produit un .s2apilot.zip portable avec médias, visuels, données, PDF et S2A Pilot Bridge.app compilée. Ouvrir restaure un package. Garder les médias lors de l’import QLab.
 
 Conduite PDF ouvre un aperçu intégré ; Télécharger crée le fichier. L’en-tête du PDF reprend le premier visuel disponible dans l’ordre chronologique des Cues, recadré en bandeau ; sans visuel, il conserve l’image par défaut. Un QR code au cadre arrondi avec un logo S2A Pilot agrandi dans la partie droite mène à https://s2a-production.com/S2A-Pilot/. L’aperçu, le PDF téléchargé et celui intégré au package utilisent le même bandeau et le même QR code, également hors ligne. Le PDF inclut des blocs arrondis, compteurs médias et cinq Cues standards par page. Les descriptions longues continuent sur les pages suivantes. Le temps écoulé et le temps restant entre parenthèses figurent pour chaque Cue. Le contenu saisi n’est pas traduit.
 
@@ -71,13 +71,13 @@ Purger Cloudflare après remplacement et supprimer les règles imposant un cache
 
 La PWA vérifie le serveur au démarrage, au retour et toutes les cinq minutes si visible. Elle propose une version supérieure sans actualisation forcée pendant Show ou lecture. Le numéro affiché correspond au programme exécuté. En cas de démarrage interrompu, un diagnostic apparaît. Le fonctionnement hors ligne reste disponible après installation.
 
-## Copilot et QLab
+## Bridge et QLab
 
-Copilot.app universelle fonctionne sur Intel et Apple Silicon, macOS 13 minimum. La glisser dans Applications ; aucune compilation nécessaire. Signature locale, sans notarisation Apple.
+S2A Pilot Bridge.app universelle fonctionne sur Intel et Apple Silicon, macOS 13 minimum. La glisser dans Applications ; aucune compilation nécessaire. Signature locale, sans notarisation Apple.
 
 1. Essayer de l’ouvrir une fois.
 2. Si bloquée : Réglages Système → Confidentialité et sécurité → Sécurité.
-3. Ouvrir quand même pour Copilot, s’authentifier si demandé, puis Ouvrir.
+3. Ouvrir quand même pour Bridge, s’authentifier si demandé, puis Ouvrir.
 
 Le bouton apparaît après une tentative ; recommencer si nécessaire. Autoriser uniquement la distribution officielle. Une nouvelle version peut demander une nouvelle autorisation. Autoriser ensuite séparément le contrôle de QLab lors de l’import. [Procédure Apple](https://support.apple.com/fr-fr/102445).
 
@@ -85,7 +85,7 @@ Les workspaces QLab ouverts sont détectés automatiquement ; un menu permet le 
 
 ## Vérifications
 
-Tests Chrome et WebKit : changements immédiats de Cue sur ordinateur, tablette et téléphone simulés, tailles des visuels, lecture audio, pauses et navigation. Contrôles complémentaires : création, édition, sauvegarde, langues, PDF et fonctionnement hors ligne. Copilot : compilation universelle et signature locale. À confirmer sur appareils réels : Safari iPad, gestes tactiles, écran étendu, import QLab et exécution Intel.
+Tests Chrome et WebKit : changements immédiats de Cue sur ordinateur, tablette et téléphone simulés, tailles des visuels, lecture audio, pauses et navigation. Contrôles complémentaires : création, édition, sauvegarde, langues, PDF et fonctionnement hors ligne. Bridge : compilation universelle et signature locale. À confirmer sur appareils réels : Safari iPad, gestes tactiles, écran étendu, import QLab et exécution Intel.
 
 
 ## Licence
@@ -107,6 +107,13 @@ L’interface complète utilise un moteur compatible ES5 sur les anciens navigat
 
 ## Identité visuelle
 
-S2A Pilot utilise les ailes cyan ; S2A Copilot, les ailes orange. L’application compagnon porte désormais le nom S2A Copilot dans les deux langues. Le logo S2A Production reste inchangé.
+S2A Pilot conserve son logo et ses ailes cyan. S2A Pilot Bridge reprend le symbole original avec une aile cyan et une aile orange, accompagnées d’un symbole de liaison discret. Le logo S2A Production reste inchangé.
 
-Show layouts: **Maverick** (default, side-by-side on wide screens, past Cues hidden) and **Iceman** (full-width, compact past Cues retained, countdown inside the next Cue). The choice is saved locally and in the project ZIP; older projects default to Maverick.
+
+## S2A Pilot Bridge et Copilot
+
+Bridge 1.3.0 remplace le nom de la passerelle QLab ; le dossier source `S2A-Copilot` et le bundle ID `fr.s2aproduction.copilote` sont conservés pour éviter une migration inutile. Les formats de conduite et la préférence de langue ne changent pas.
+
+Le nouveau **S2A Copilot** est un prototype de suivi en lecture seule, séparé de Pilot : [prototype et essais](../prototypes/copilot/README.md). Sa connexion locale WebRTC utilise un serveur de signalisation local pour l’appairage QR. L’installation PWA et iOS 13 restent à valider sur appareils physiques avant une intégration.
+
+En Show, le bouton Lecture/Pause est élargi. Le nom du spectacle apparaît au-dessus du transport, avec la position de la Cue en Maverick. Les points déjà atteints disparaissent en Maverick et restent visibles en Iceman.

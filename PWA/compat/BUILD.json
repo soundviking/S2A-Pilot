@@ -6,8 +6,8 @@
   ],
   "target": "ES5 / Safari 9",
   "sourceSHA256": {
-    "i18n.js": "cc856ffdfbfd5ef4714fe754daa25be0ceebc9212e0573353e63b36debdbe912",
-    "app.js": "d34367d32ae09949859b753cc7d47b6033dbaaebb43905d39263fe221ee92291",
+    "i18n.js": "3b969bff5a11c791be45e56113e8e663205a6a2109bb03be27b91cfb34e51af9",
+    "app.js": "9ff5c8e3df2e14c222a9484c8b094dd96eeea12959432b07c4d35193c63d9ad6",
     "technical-preview.js": "0d8f8e53b30f91120e82044c51aa34a9995b9272d64edac232017f4678153a20"
   }
 }

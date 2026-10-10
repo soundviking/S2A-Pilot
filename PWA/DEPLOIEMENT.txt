@@ -1,34 +1,13 @@
-DÉPLOIEMENT 1.4.97 — S2A PILOT
+S2A PILOT 1.5.1
 
-1. Remplacer tout le contenu du dossier /qlab/ par cette version,
-   y compris le fichier caché .htaccess. Ne pas remplacer uniquement index.html.
-2. Dans Cloudflare, purger les fichiers du dossier /qlab/ (ou tout le cache
-   si la purge par dossier n’est pas disponible). Désactiver toute règle
-   imposant un cache de longue durée à HTML, JS, JSON et au service worker.
-   Le .htaccess fourni empêche la mise en cache HTTP de ces fichiers à
-   l’origine si mod_headers est disponible ; une règle Cloudflare peut
-   néanmoins avoir priorité.
-3. Dans Safari/PWA, ouvrir https://s2a-production.com/qlab/actualiser.html
-   pour retirer les anciens caches de l’application. Les projets locaux
-   IndexedDB sont conservés. Ne pas supprimer les données du site.
-4. Vérifier la version 1.4.97, Nouveau, + Cue, + Musique / Vidéo, Conduite PDF.
-   Sans vidéo, la sortie vidéo doit rester masquée en Show.
+Déploiement : remplacer l’ensemble du dossier /S2A-Pilot/, y compris
+.htaccess, compat/ et companion/. Ne pas remplacer uniquement index.html.
+La passerelle incluse est S2A Pilot Bridge 1.3.0.
 
-Diagnostic du 5 octobre 2026 : à l’URL habituelle, index.html et app.js
-servaient encore 1.4.20 et Cloudflare annonçait max-age=2678400 (31 jours).
-Le démarrage Safari de cette ancienne version peut être interrompu par
-la demande de permission window-management non prise en charge.
+Purger les fichiers de ce dossier dans le CDN. Ne pas imposer un cache long
+à HTML, JS, JSON ou au service worker. Vérifier la version affichée, Edit,
+Show, les deux dispositions, l’aide FR/EN, le PDF et l’export ZIP hors ligne.
+actualiser.html renouvelle les caches sans effacer les projets IndexedDB.
+Ne pas supprimer les données du site pour réparer une ancienne version.
 
-Cette version lie app.js et les modules PDF à leur numéro de version,
-affiche la version du programme exécuté, utilise la page réseau quand elle
-est disponible, conserve le mode hors ligne et affiche un diagnostic si
-le programme ne démarre pas. Les tests ont été effectués dans Chrome ;
-le fonctionnement sur l’iPad Safari réel doit être confirmé après déploiement.
-
-VERSION BILINGUE : inclure i18n.js, manifest.en.webmanifest et companion/S2A-Copilot-1.2.11-app.zip. FR / EN dans l’en-tête ; Copilot 1.2.11 incluse. Sortie vidéo désactivée sur iPad / iPhone ; sur Mac Safari, fenêtre à placer manuellement. Chrome conserve le placement automatique sur affichage étendu détecté.
-
-
-
-
-
-1.4.97 : déployer le dossier compat/ COMPLET, material-ui.js et material-ui.css. Les bibliothèques et SVG sont locaux. Sur iOS 9.3.5, vérifier physiquement lecture, fournisseur de documents et téléchargements. Aucun hors ligne par service worker sous iOS 9.
+Le prototype Copilot est séparé et ne doit pas être déployé avec la PWA.

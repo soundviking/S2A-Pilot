@@ -1,25 +1,25 @@
-# S2A Copilot 1.2.11
+# S2A Pilot Bridge 1.3.0
 
-The rights to S2A Pilot and S2A Copilot belong to the company S2A Production. These applications were developed by Antoine CLOPIER with assistance from ChatGPT.
+The rights to S2A Pilot and S2A Pilot Bridge belong to the company S2A Production. These applications were developed by Antoine CLOPIER with assistance from ChatGPT.
 
 [Français](README.md)
 
 Universal macOS app: Intel and Apple Silicon, macOS 13 or later. Uses the system language initially; the Français / English header switch remembers a manual preference. User-authored project titles, Cue names and descriptions are preserved.
 
-S2A COPILOT 1.2.11 — MAC INSTALLATION
+S2A PILOT BRIDGE 1.3.0 — MAC INSTALLATION
 
 Intel and Apple Silicon Macs — macOS 13 or later. No compilation required. Locally signed; not notarized by Apple.
 
-1. Extract the ZIP and move S2A Copilot.app into Applications. Replace the previous version if needed.
-2. Try opening S2A Copilot once.
+1. Extract the ZIP and move S2A Pilot Bridge.app into Applications. Replace the previous version if needed.
+2. Try opening S2A Pilot Bridge once.
 3. If macOS blocks it, dismiss the message and open System Settings > Privacy & Security.
-4. Scroll to Security and choose Open Anyway for S2A Copilot.
+4. Scroll to Security and choose Open Anyway for S2A Pilot Bridge.
 5. Authenticate if requested, then confirm Open.
 
 Open Anyway appears after an opening attempt. If it disappears, try opening the app again and return to these settings. A new version may require a new approval. Only approve the app from the official repository:
 https://github.com/soundviking/S2A-Pilot
 
-When importing, also allow S2A Copilot to control QLab. This is a separate permission.
+When importing, also allow S2A Pilot Bridge to control QLab. This is a separate permission.
 Apple instructions: https://support.apple.com/en-us/102445
 
 
@@ -29,17 +29,17 @@ Apple instructions: https://support.apple.com/en-us/102445
 
 The universal .app supports Intel and Apple Silicon Macs, macOS 13 or later. Move it into Applications; no compilation is needed. It is locally signed, not notarized by Apple.
 
-1. Try opening S2A Copilot once.
+1. Try opening S2A Pilot Bridge once.
 2. If blocked, open System Settings → Privacy & Security → Security.
-3. Choose Open Anyway for S2A Copilot, authenticate if prompted, then confirm Open.
+3. Choose Open Anyway for S2A Pilot Bridge, authenticate if prompted, then confirm Open.
 
-Open Anyway appears after an opening attempt. Try again if it has disappeared. Only approve the app from the official repository. A new version may require approval again. During import, separately allow Copilot to control QLab. See [Apple’s instructions](https://support.apple.com/en-us/102445).
+Open Anyway appears after an opening attempt. Try again if it has disappeared. Only approve the app from the official repository. A new version may require approval again. During import, separately allow Bridge to control QLab. See [Apple’s instructions](https://support.apple.com/en-us/102445).
 
-Copilot automatically detects open QLab workspaces and lets you choose when several are open. Save the workspace before importing. Add multiple project packages to import each show into its own Timeline Group cue. The group retains its number and children use numbers such as 5.1, 5.2 and 5.3, avoiding existing numbers. Existing imports are not renumbered. The monitor follows imported shows and can stay on top.
+Bridge automatically detects open QLab workspaces and lets you choose when several are open. Save the workspace before importing. Add multiple project packages to import each show into its own Timeline Group cue. The group retains its number and children use numbers such as 5.1, 5.2 and 5.3, avoiding existing numbers. Existing imports are not renumbered. The monitor follows imported shows and can stay on top.
 
 ## Validation limits
 
-Chrome tests cover creation, editing, autosave, language selection, user content preservation, PDF preview/export, offline files, waveform zoom and mocked screen detection. Copilot is compiled for both architectures and its local signature is verified. Real Safari/iPad touch behavior, real extended-display playback, live QLab imports and execution on a physical Intel Mac must still be checked before show use.
+Chrome tests cover creation, editing, autosave, language selection, user content preservation, PDF preview/export, offline files, waveform zoom and mocked screen detection. Bridge is compiled for both architectures and its local signature is verified. Real Safari/iPad touch behavior, real extended-display playback, live QLab imports and execution on a physical Intel Mac must still be checked before show use.
 
 
 ## Build from source
@@ -52,13 +52,13 @@ Run `zsh build.sh` with Xcode command-line tools installed. The script builds bo
 Use is permitted; redistribution, publication or hosting for third parties requires prior written permission from S2A Production. See [the license](LICENSE).
 
 
-Version 1.2.11: fixed clipped label behind the language selector.
+Version 1.3.0: fixed clipped label behind the language selector.
 
 
-Version 1.2.11: linked shows are checked against the open QLab workspace every 3 seconds. Missing groups are excluded from the count and visual monitor. Index metadata and media are retained; restored groups can reappear. This check does not mirror title/content edits made in QLab or save QLab automatically.
+Version 1.3.0: linked shows are checked against the open QLab workspace every 3 seconds. Missing groups are excluded from the count and visual monitor. Index metadata and media are retained; restored groups can reappear. This check does not mirror title/content edits made in QLab or save QLab automatically.
 
 
-Version 1.2.11: a red glow fades in and out once per second around the next-action monitor block during its final ten seconds. No blue glow or active-action box is added. The effect disappears when the next action is farther away or the show has ended. With reduced motion, red remains steady.
+Version 1.3.0: a red glow fades in and out once per second around the next-action monitor block during its final ten seconds. No blue glow or active-action box is added. The effect disappears when the next action is farther away or the show has ended. With reduced motion, red remains steady.
 
 
-Version 1.2.11: monitor red outline increased from 2 to 4 points, with a wider, brighter glow. The smooth pulse remains one second long.
+Version 1.3.0: monitor red outline increased from 2 to 4 points, with a wider, brighter glow. The smooth pulse remains one second long.

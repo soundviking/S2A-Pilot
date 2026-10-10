@@ -1,15 +1,15 @@
-S2A COPILOT 1.2.11 — MAC INSTALLATION
+S2A PILOT BRIDGE 1.3.0 — MAC INSTALLATION
 
 Intel and Apple Silicon Macs — macOS 13 or later. No compilation required. Locally signed; not notarized by Apple.
 
-1. Extract the ZIP and move S2A Copilot.app into Applications. Replace the previous version if needed.
-2. Try opening S2A Copilot once.
+1. Extract the ZIP and move S2A Pilot Bridge.app into Applications. Replace the previous version if needed.
+2. Try opening S2A Pilot Bridge once.
 3. If macOS blocks it, dismiss the message and open System Settings > Privacy & Security.
-4. Scroll to Security and choose Open Anyway for S2A Copilot.
+4. Scroll to Security and choose Open Anyway for S2A Pilot Bridge.
 5. Authenticate if requested, then confirm Open.
 
 Open Anyway appears after an opening attempt. If it disappears, try opening the app again and return to these settings. A new version may require a new approval. Only approve the app from the official repository:
 https://github.com/soundviking/S2A-Pilot
 
-When importing, also allow S2A Copilot to control QLab. This is a separate permission.
+When importing, also allow S2A Pilot Bridge to control QLab. This is a separate permission.
 Apple instructions: https://support.apple.com/en-us/102445
