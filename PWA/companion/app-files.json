@@ -1,5 +1,5 @@
 {
-  "version": "1.3.0",
+  "version": "1.3.1",
   "architectures": [
     "arm64",
     "x86_64"
@@ -13,7 +13,87 @@
     {
       "path": "S2A Pilot Bridge.app/Contents/MacOS/S2A Pilot Bridge",
       "mode": 33261,
-      "size": 3066144
+      "size": 3223168
+    },
+    {
+      "path": "S2A Pilot Bridge.app/Contents/Resources/Copilot/PWA/bridge-copilot.js",
+      "mode": 33188,
+      "size": 713
+    },
+    {
+      "path": "S2A Pilot Bridge.app/Contents/Resources/Copilot/PWA/bridge.html",
+      "mode": 33188,
+      "size": 1538
+    },
+    {
+      "path": "S2A Pilot Bridge.app/Contents/Resources/Copilot/PWA/compat/copilot.es5.js",
+      "mode": 33188,
+      "size": 24863
+    },
+    {
+      "path": "S2A Pilot Bridge.app/Contents/Resources/Copilot/PWA/copilot/LICENSE-qrcode.txt",
+      "mode": 33188,
+      "size": 1098
+    },
+    {
+      "path": "S2A Pilot Bridge.app/Contents/Resources/Copilot/PWA/copilot/qrcode.js",
+      "mode": 33188,
+      "size": 33168
+    },
+    {
+      "path": "S2A Pilot Bridge.app/Contents/Resources/Copilot/PWA/copilot-ui.css",
+      "mode": 33188,
+      "size": 62731
+    },
+    {
+      "path": "S2A Pilot Bridge.app/Contents/Resources/Copilot/PWA/copilot.html",
+      "mode": 33188,
+      "size": 1584
+    },
+    {
+      "path": "S2A Pilot Bridge.app/Contents/Resources/Copilot/PWA/icons/s2a-copilot-192.png",
+      "mode": 33188,
+      "size": 1393889
+    },
+    {
+      "path": "S2A Pilot Bridge.app/Contents/Resources/Copilot/PWA/startup.css",
+      "mode": 33188,
+      "size": 4802
+    },
+    {
+      "path": "S2A Pilot Bridge.app/Contents/Resources/Copilot/PWA/startup.js",
+      "mode": 33188,
+      "size": 2758
+    },
+    {
+      "path": "S2A Pilot Bridge.app/Contents/Resources/Copilot/gateway.cjs",
+      "mode": 33188,
+      "size": 1248
+    },
+    {
+      "path": "S2A Pilot Bridge.app/Contents/Resources/Copilot/launcher.cjs",
+      "mode": 33188,
+      "size": 3732
+    },
+    {
+      "path": "S2A Pilot Bridge.app/Contents/Resources/Copilot/runtime/LICENSE-Node.txt",
+      "mode": 33188,
+      "size": 145485
+    },
+    {
+      "path": "S2A Pilot Bridge.app/Contents/Resources/Copilot/runtime/node-runtime-arm64.tar.gz",
+      "mode": 33188,
+      "size": 36863311
+    },
+    {
+      "path": "S2A Pilot Bridge.app/Contents/Resources/Copilot/runtime/node-runtime-x64.tar.gz",
+      "mode": 33188,
+      "size": 38053057
+    },
+    {
+      "path": "S2A Pilot Bridge.app/Contents/Resources/Copilot/server.cjs",
+      "mode": 33188,
+      "size": 6559
     },
     {
       "path": "S2A Pilot Bridge.app/Contents/Resources/LICENSE",
@@ -38,7 +118,7 @@
     {
       "path": "S2A Pilot Bridge.app/Contents/_CodeSignature/CodeResources",
       "mode": 33188,
-      "size": 3422
+      "size": 7624
     }
   ]
 }

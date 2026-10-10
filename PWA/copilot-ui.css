@@ -1,0 +1,876 @@
+
+:root{
+  font-family: system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  color-scheme: dark;
+  --bg:#111318; --panel:#1b1f27; --panel2:#232936; --text:#f4f6f8;
+  --muted:#9da7b5; --accent:#66a8ff; --danger:#ff6b6b; --line:#3b4352;
+  --cue:#ffd166;
+}
+*{box-sizing:border-box}
+html{background:var(--bg)}
+/* Keep the installed iOS app's top edge opaque beneath the status bar. */
+html.iosStandalone::before{content:"";position:fixed;top:0;left:0;right:0;height:6px;height:max(6px,env(safe-area-inset-top,0px));background:var(--bg);z-index:100;pointer-events:none}
+body{margin:0;background:var(--bg);color:var(--text);padding:env(safe-area-inset-top,0px) env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px)}
+main{max-width:980px;margin:auto;padding:20px}
+h1{font-size:1.5rem;margin:0 0 4px}
+.brandHeader{display:flex;align-items:center;gap:14px;margin:0 0 18px;flex-wrap:wrap}
+.brandLogo{width:58px;height:58px;border-radius:14px;object-fit:cover;flex:0 0 auto}
+.s2aLogoWrap{display:flex;align-items:center;padding-left:12px;border-left:1px solid var(--line);min-height:50px}
+.s2aLogo{display:block;max-width:150px;max-height:48px;width:auto;height:auto;object-fit:contain;filter:drop-shadow(0 1px 2px rgba(0,0,0,.45))}
+.brandText{min-width:220px;flex:1}
+.brandText h1{margin:0 0 3px}
+.brandText .sub{margin:0}
+@media (max-width:640px){
+  .brandHeader{align-items:flex-start}
+  .brandText{order:3;flex-basis:100%;min-width:0}
+  .s2aLogoWrap{padding-left:10px}
+  .s2aLogo{max-width:125px;max-height:42px}
+}
+h2{font-size:1rem;margin:0}
+.sub{color:var(--muted);margin:0 0 20px}
+.showTitleWrap{display:grid;gap:8px;margin:0 0 16px}
+.projectActions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;align-items:center}
+.projectActions .pdfTechBtn{margin-left:auto}
+.autosaveState{font-size:.82rem;color:var(--muted);margin-top:8px}
+.showTitleLabel{font-size:.82rem;color:var(--muted);font-weight:650;letter-spacing:.04em}
+.showTitleInput{font-size:1.15rem;font-weight:700;padding:11px 12px !important;width:100%;min-width:0 !important}
+.card{background:var(--panel);border:1px solid #2a303b;border-radius:16px;padding:16px;margin:14px 0}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+button,.fileLabel,input,textarea{
+  font:inherit;border-radius:10px;border:1px solid var(--line)
+}
+button,.fileLabel{background:var(--panel2);color:var(--text);padding:10px 14px;cursor:pointer}
+button.primary{background:#246fd1;border-color:#2b7de7}
+button.danger{color:#ffd7d7}
+button:disabled{opacity:.45;cursor:not-allowed}
+input[type=file]{display:none}
+input[type=text],textarea{background:#12161d;color:var(--text);padding:9px 10px;min-width:180px}
+textarea{resize:vertical}
+.cueTextFields{display:grid;gap:7px;min-width:0}
+.cueTextFields input,.cueTextFields textarea{width:100%;min-width:0}
+.cueDescription{min-height:62px;line-height:1.3}
+.baseCueBadge{font-size:.72rem;color:#ffe39a;margin-top:3px}
+.baseCueTime{opacity:.8;cursor:not-allowed}
+.marker.baseCueMarker{cursor:default}
+.timeInput{
+  width:112px;
+  min-width:112px !important;
+  font-variant-numeric:tabular-nums;
+  text-align:center;
+}
+.time{font-variant-numeric:tabular-nums;font-size:1.5rem;font-weight:700}
+.muted{color:var(--muted)}
+.timeline{
+  position:relative;height:86px;background:#0d1015;border:1px solid var(--line);
+  border-radius:12px;margin:16px 0;overflow:hidden;touch-action:none;cursor:pointer
+}
+.progress{position:absolute;inset:0 auto 0 0;width:0;background:rgba(102,168,255,.15);pointer-events:none}
+.playhead{position:absolute;top:0;bottom:0;width:2px;background:var(--accent);left:0;pointer-events:none}
+.marker{
+  position:absolute;top:0;bottom:0;width:12px;margin-left:-6px;
+  cursor:ew-resize;touch-action:none;z-index:3
+}
+.marker::after{
+  content:"";position:absolute;top:0;bottom:0;left:5px;width:3px;background:var(--cue)
+}
+.marker::before{
+  content:"";position:absolute;top:6px;left:0;width:12px;height:12px;border-radius:50%;
+  background:var(--cue);box-shadow:0 0 0 2px rgba(0,0,0,.35)
+}
+.marker.dragging::after,.marker.dragging::before{background:#fff0a8}
+.marker.dragging{z-index:5}
+.cueDragTime{position:absolute;top:24px;left:6px;white-space:nowrap;font-size:12px;font-weight:800;font-variant-numeric:tabular-nums;color:#fff;background:#15314f;border:1px solid #66a8ff;border-radius:6px;padding:3px 6px;pointer-events:none}
+.cueEditActions{display:flex;flex-direction:column;gap:8px}
+@media(max-width:760px){.cueEditGrid .cueEditActions{grid-column:2}}
+@media(max-width:480px){.cueEditGrid .cueEditActions{grid-column:1;flex-direction:row;flex-wrap:wrap}}
+
+.marker.selectedCueMarker::after{background:var(--accent);width:5px;left:4px;box-shadow:0 0 10px rgba(102,168,255,.95)}
+.marker.selectedCueMarker::before{background:#fff;box-shadow:0 0 0 3px var(--accent),0 0 14px rgba(102,168,255,.95)}
+.tick{position:absolute;bottom:4px;transform:translateX(-50%);font-size:.72rem;color:#8490a1;pointer-events:none}
+.cues{display:grid;gap:10px;margin-top:12px}
+.cue{
+  display:grid;
+  grid-template-columns:112px minmax(180px,1fr) 110px auto;
+  gap:10px;align-items:center;
+  background:#151922;border:1px solid #2b3240;border-radius:12px;padding:10px
+}
+.cueImageThumb{
+  width:100%;max-width:110px;height:64px;object-fit:cover;border-radius:8px;
+  border:1px solid #3b4352;background:#0d1015
+}
+.imageControls{display:grid;gap:6px}
+.imageControls .fileLabel{padding:7px 9px;text-align:center;font-size:.82rem}
+.imageControls button{padding:7px 9px;font-size:.82rem}
+.small{font-size:.88rem}
+.countdownUrgent{color:#ff453a !important;}
+.lockBar{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.lockState{font-weight:750}
+.lockedBadge{display:inline-block;padding:5px 9px;border-radius:999px;background:#3a2b13;border:1px solid #6f5521;color:#ffe39a;font-size:.82rem}
+.spectacleOnly{display:none}
+body.locked .editOnly{display:none !important}
+body.locked .spectacleOnly{display:flex}
+body.locked .timeline{cursor:default}
+.hint{margin-top:6px}
+.nextLabel{font-size:.78rem;letter-spacing:.08em;color:var(--muted);margin-bottom:8px}
+.noImage{color:var(--muted);padding:20px;text-align:center}
+@media(max-width:760px){
+  main{padding:14px}
+  .cue{grid-template-columns:112px 1fr}
+  .imageControls,.cue > button{grid-column:2}
+}
+
+
+/* V9.10 — organisation du mode spectacle */
+body.locked main{
+  display:flex;
+  flex-direction:column;
+}
+body.locked .brandHeader{order:0}
+body.locked .modeCard{order:1}
+body.locked .timelineCard{order:4}
+body.locked .musicCard{display:none !important}
+
+
+/* V1.1 — sortie vidéo autonome */
+.videoOutputCard .videoStatus{
+  flex:1 1 260px;
+}
+.videoOutputCard .videoActions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  align-items:center;
+}
+
+
+/* V1.1.15 — titre Monitor vidéo */
+.mediaBoxLayout{display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,360px);gap:16px;align-items:center}
+.mediaMain{min-width:0}
+.videoMonitorCard{display:none;align-items:center;justify-content:flex-end}
+.videoMonitorCard.show{display:flex}
+.videoMonitorFrame{
+  width:100%;aspect-ratio:16/9;background:#000;border:1px solid #3b4352;
+  border-radius:12px;overflow:hidden;display:flex;align-items:center;justify-content:center
+}
+.videoMonitorFrame video{width:100%;height:100%;object-fit:contain;background:#000;display:block}
+.videoMonitorNote{display:none}
+.showVideoMonitorCard{display:none}
+body.locked .showVideoMonitorCard{order:5}
+.showVideoMonitorFrame{
+  width:min(100%,720px);aspect-ratio:16/9;margin:0 auto;background:#000;
+  border:1px solid #3b4352;border-radius:14px;overflow:hidden;
+  display:flex;align-items:center;justify-content:center
+}
+.showVideoMonitorFrame video{width:100%;height:100%;object-fit:contain;background:#000;display:block}
+@media(max-width:760px){
+  .mediaBoxLayout{grid-template-columns:minmax(0,1fr) minmax(190px,42%)}
+}
+@media(max-width:560px){
+  .mediaBoxLayout{grid-template-columns:1fr}
+  .videoMonitorCard{justify-content:flex-start}
+  .videoMonitorFrame{width:min(100%,360px)}
+}
+
+/* S2A Pilot — installation PWA */
+.installPrompt{
+  border:none;border-radius:18px;background:#171b22;color:#f4f6f8;padding:0;
+  width:min(460px,calc(100% - 28px));box-shadow:0 24px 70px rgba(0,0,0,.45)
+}
+.installPrompt::backdrop{background:rgba(0,0,0,.68)}
+.installPromptBox{padding:20px}
+.installPromptBox h3{margin:0 0 8px;font-size:1.25rem}
+.installPromptBox p{margin:8px 0 14px;line-height:1.45}
+.installPromptActions{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap}
+.installIOSHelp{
+  display:none;margin-top:14px;padding:12px 14px;border-radius:12px;
+  background:#10141a;border:1px solid rgba(255,255,255,.08)
+}
+.installIOSHelp.show{display:block}
+.installIOSHelp ol{margin:8px 0 0 20px;padding:0}
+.installIOSHelp li{margin:6px 0}
+
+
+/* V1.1.5 — interface compacte */
+.appTopBar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 8px;padding:0 2px;flex-wrap:wrap}
+.appIdentity{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap}
+.appIdentity strong{font-size:1.08rem}.appVersion{font-size:.78rem;color:var(--muted)}
+.modeButton{margin-left:auto;min-width:112px;font-weight:700}.modeButton.showMode{border-color:#d5a928}
+.projectCard{padding:10px 12px;margin:8px 0}.projectCard .showTitleWrap{gap:4px;margin:0 0 7px}.projectCard .showTitleLabel{font-size:.76rem}.projectCard .showTitleInput{padding:8px 10px}.projectCard .projectActions{margin-top:7px;gap:7px}.projectCard .autosaveState{margin-top:5px;font-size:.75rem}
+.brandFooter{display:flex;justify-content:center;align-items:center;margin:18px 0 2px;padding:10px 0 2px;opacity:.65}.footerLogo{width:80px;height:40px;object-fit:contain;border-radius:4px}
+body.locked .appTopBar{order:0}body.locked .brandFooter{order:99}
+.videoActions{margin-top:8px;gap:7px}.videoActions #videoOutputState{flex:1 1 220px}
+@media(max-width:560px){.appTopBar{align-items:center}.appIdentity{gap:6px}.appIdentity strong{font-size:.98rem}.modeButton{min-width:104px;padding:8px 10px}.projectCard{padding:9px 10px}}
+
+/* V1.1.10 */
+.headerActions{display:flex;align-items:center;gap:10px;margin-left:auto}
+.headerActions .fileLabel{margin:0;white-space:nowrap}
+.modeButton{background:#b4232f !important;border-color:#d94a55 !important;color:#fff !important}
+.modeButton:hover{background:#c92c39 !important}
+body.locked .modeButton{background:#b4232f !important;border-color:#d94a55 !important;color:#fff !important}
+.mediaCard{display:none}
+.mediaCard.hasVideo{display:block}
+.mediaCard .mediaBoxLayout{grid-template-columns:minmax(220px,.7fr) minmax(320px,1.3fr)}
+#mediaFileName{margin-bottom:10px}
+.videoActions{align-items:center;justify-content:flex-start}
+.videoOutputBigButton{width:118px;height:76px;padding:10px;border-radius:10px !important;display:inline-flex;align-items:center;justify-content:center;background:#202733;border:1px solid #596477;color:#fff;font-size:0;line-height:0}
+.videoOutputBigButton:hover{background:#2b3442}
+.videoOutputBigButton.active{background:#b4232f;border-color:#d94a55}
+.videoOutputIcon{width:64px;height:44px;display:block}
+@media(max-width:650px){.headerActions{gap:7px}.headerActions .fileLabel,.modeButton{padding-left:10px;padding-right:10px}.mediaCard .mediaBoxLayout{grid-template-columns:1fr}}
+
+
+/* V1.1.11 */
+.mediaCard #mediaFileName{display:none !important}
+.mediaCard .mediaBoxLayout{grid-template-columns:minmax(220px,.7fr) minmax(320px,1.3fr);align-items:stretch}
+.mediaCard .mediaMain{display:flex;align-items:center;justify-content:center;min-height:190px}
+.mediaCard .videoActions{width:100%;height:100%;margin-top:0 !important;display:flex;align-items:center;justify-content:center}
+.videoOutputBigButton{width:132px;height:92px;border-radius:12px !important;display:inline-flex;align-items:center;justify-content:center}
+.videoOutputIcon{width:82px;height:58px;display:block}
+@media(max-width:650px){.mediaCard .mediaMain{min-height:115px}}
+
+
+/* V1.1.12 — monitoring vidéo = taille vignette TOP (110 × 64) */
+.mediaCard .mediaBoxLayout{
+  grid-template-columns:minmax(0,1fr) 110px;
+  gap:18px;
+  align-items:center
+}
+.mediaCard .mediaMain{
+  min-height:112px;
+  display:flex;
+  align-items:center;
+  justify-content:center
+}
+.mediaCard .videoMonitorCard{
+  width:110px;
+  min-width:110px;
+  display:none;
+  align-items:center;
+  justify-content:center
+}
+.mediaCard .videoMonitorCard.show{display:flex}
+.mediaCard .videoMonitorFrame{
+  width:110px !important;
+  height:64px !important;
+  min-width:110px;
+  aspect-ratio:auto !important;
+  border-radius:8px
+}
+.mediaCard .videoMonitorFrame video{
+  width:110px !important;
+  height:64px !important;
+  object-fit:contain
+}
+.mediaCard .videoActions{
+  width:100%;
+  height:100%;
+  margin:0 !important;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:8px
+}
+#videoOutputState{
+  flex:none !important;
+  width:100%;
+  text-align:center;
+  line-height:1.25
+}
+.showVideoMonitorFrame{
+  width:110px !important;
+  height:64px !important;
+  min-width:110px;
+  aspect-ratio:auto !important;
+  margin:0 auto;
+  border-radius:8px
+}
+.showVideoMonitorFrame video{
+  width:110px !important;
+  height:64px !important;
+  object-fit:contain
+}
+.showVideoMonitorCard{
+  padding-top:12px !important;
+  padding-bottom:12px !important
+}
+@media(max-width:650px){
+  .mediaCard .mediaBoxLayout{
+    grid-template-columns:minmax(0,1fr) 110px !important;
+    gap:12px
+  }
+  .mediaCard .mediaMain{min-height:112px}
+}
+
+
+/* V1.1.13 — moniteur vidéo exact : 360 × 180 px */
+.mediaCard .mediaBoxLayout{
+  grid-template-columns:minmax(0,1fr) 360px !important;
+  gap:18px;
+  align-items:center
+}
+.mediaCard .videoMonitorCard{
+  width:360px !important;
+  min-width:360px !important;
+  display:none;
+  align-items:center;
+  justify-content:center
+}
+.mediaCard .videoMonitorCard.show{display:flex}
+.mediaCard .videoMonitorFrame,
+.showVideoMonitorFrame{
+  width:360px !important;
+  height:180px !important;
+  min-width:360px !important;
+  min-height:180px !important;
+  max-width:360px !important;
+  max-height:180px !important;
+  aspect-ratio:auto !important;
+  border-radius:10px
+}
+.mediaCard .videoMonitorFrame video,
+.showVideoMonitorFrame video{
+  width:360px !important;
+  height:180px !important;
+  object-fit:contain
+}
+.showVideoMonitorCard{
+  padding-top:12px !important;
+  padding-bottom:12px !important
+}
+@media(max-width:650px){
+  .mediaCard .mediaBoxLayout{
+    grid-template-columns:1fr !important;
+  }
+  .mediaCard .videoMonitorCard{
+    width:360px !important;
+    min-width:360px !important;
+    max-width:100%;
+    justify-self:center
+  }
+}
+
+
+/* V1.1.14 */
+.mediaCard .videoMonitorCard{width:360px !important;min-width:360px !important}
+.mediaCard .videoMonitorFrame{
+ width:360px !important;height:auto !important;min-width:360px !important;min-height:0 !important;
+ max-width:360px !important;max-height:none !important;aspect-ratio:16 / 9 !important
+}
+.mediaCard .videoMonitorFrame video{width:100% !important;height:100% !important;object-fit:contain}
+.showVideoMonitorCard{width:auto !important}
+.showVideoMonitorFrame{
+ width:100% !important;height:auto !important;min-width:0 !important;min-height:0 !important;
+ max-width:none !important;max-height:none !important;aspect-ratio:16 / 9 !important;margin:0 !important
+}
+.showVideoMonitorFrame video{width:100% !important;height:100% !important;object-fit:contain}
+
+
+/* V1.1.15 — titre de la box monitoring vidéo */
+.videoMonitorTitle{margin:0 0 12px}
+
+
+/* V1.1.16 — pas de texte d'aide sous la timeline en mode show */
+body.locked .timelineCard > .hint{display:none !important}
+
+
+/* V1.1.17 — header compact, footer supprimé, monitor show -20 %, CUES chronologiques */
+.appTopBar{
+  flex-wrap:nowrap !important;
+  min-height:40px;
+}
+.headerBrandLogo{
+  width:52px;
+  height:40px;
+  object-fit:contain;
+  flex:0 0 52px;
+}
+.appIdentity{
+  flex-wrap:nowrap;
+  white-space:nowrap;
+  min-width:0;
+}
+.appAttribution{
+  font-weight:400;
+  font-size:.88rem;
+  color:var(--muted);
+}
+.modeButton{
+  height:40px;
+}
+.showVideoMonitorFrame{
+  width:80% !important;
+  max-width:80% !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+  aspect-ratio:16 / 9 !important;
+}
+@media(max-width:760px){
+  .appTopBar{gap:8px}
+  .headerBrandLogo{width:44px;height:40px;flex-basis:44px}
+  .appIdentity{gap:5px}
+  .appIdentity strong{font-size:.96rem}
+  .appAttribution{font-size:.72rem}
+  .appVersion{font-size:.68rem}
+  .headerActions{gap:6px}
+}
+@media(max-width:620px){
+  .appAttribution{display:none}
+}
+
+
+
+.historyActions .historyIconBtn{width:40px!important;height:40px!important;min-width:40px!important;padding:0!important;display:inline-flex;align-items:center;justify-content:center;font-size:1.35rem!important;line-height:1;border-radius:10px}
+
+.timeline .tick:first-of-type{transform:none}.timeline .tick:last-of-type{transform:translateX(-100%)}
+#playBtn>*{pointer-events:none}
+
+
+/* V1.1.26 — états de mode, historique moderne et fin de conduite */
+.modeButton{
+  background:#167a43 !important;border-color:#23965a !important;color:#fff !important;
+  box-shadow:0 1px 0 rgba(255,255,255,.08) inset;
+}
+.modeButton:hover{background:#1b8b4e !important}
+.modeButton.showMode{
+  background:#c82d3a !important;border-color:#e14b56 !important;color:#fff !important;
+}
+.modeButton.showMode:hover{background:#d93643 !important}
+.historyActions .historyIconBtn svg{width:21px;height:21px;display:block;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.historyActions .historyIconBtn{font-size:0!important;background:#171d27;border-color:#3a4352}
+.historyActions .historyIconBtn:not(:disabled):hover{background:#222a36;border-color:#596477}
+.timeline .tick:first-of-type{transform:none}.timeline .tick:last-of-type{transform:translateX(-100%)}
+
+
+/* V1.2.0 — moteur multimédia par Cue */
+.headerActions .fileLabel{display:none!important}
+.cue{grid-template-columns:112px minmax(210px,1fr) 110px auto;align-items:start}
+.cueMediaPanel{grid-column:1 / -1;border-top:1px solid #2b3240;padding-top:10px;margin-top:2px;display:grid;gap:8px}
+.cueMediaHeader{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.cueMediaTitle{font-size:.78rem;letter-spacing:.07em;color:var(--muted);font-weight:750}
+.addMediaBtn{padding:7px 10px;font-size:.82rem}
+.mediaActionList{display:grid;gap:7px}
+.mediaAction{display:grid;grid-template-columns:minmax(180px,1fr) auto auto auto;gap:8px;align-items:center;background:#10141b;border:1px solid #303847;border-radius:10px;padding:8px 9px}
+.mediaActionIdentity{min-width:0;display:flex;align-items:center;gap:8px}
+.mediaKindBadge{font-size:.72rem;font-weight:800;letter-spacing:.04em;border:1px solid #465166;border-radius:999px;padding:4px 7px;white-space:nowrap}
+.mediaActionName{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:.88rem}
+.mediaActionMeta{font-size:.74rem;color:var(--muted);margin-top:2px}
+.mediaAction select,.mediaAction input[type=number]{background:#12161d;color:var(--text);border:1px solid var(--line);border-radius:8px;padding:7px 8px;font:inherit;font-size:.8rem}
+.mediaAction input[type=number]{width:70px;min-width:70px}
+.mediaActionOptions{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.removeMediaBtn{padding:7px 9px;font-size:.8rem}
+.cueMediaEmpty{font-size:.8rem;color:var(--muted);padding:4px 0}
+.mediaCard{display:none!important}
+.mediaCard.hasVideo{display:block!important}
+body.locked .mediaCard{display:none!important}
+.showVideoMonitorCard{display:none}
+body.locked .showVideoMonitorCard.hasVideo{display:block!important}
+.videoMonitorFrame,.showVideoMonitorFrame{background:#000;overflow:hidden}
+.videoMonitorFrame video,.showVideoMonitorFrame video{width:100%!important;height:100%!important;object-fit:contain!important;background:#000}
+.startupPrompt{border:0;padding:0;background:transparent;color:var(--text);max-width:min(520px,calc(100vw - 28px));width:100%}
+.startupPrompt::backdrop{background:rgba(3,6,10,.78);backdrop-filter:blur(7px)}
+.startupPromptBox{background:#171c25;border:1px solid #384151;border-radius:18px;padding:24px;box-shadow:0 24px 80px rgba(0,0,0,.55)}
+.startupPromptBox h3{font-size:1.45rem;margin:4px 0 8px}
+.startupPromptBox p{color:var(--muted);line-height:1.45;margin:0 0 20px}
+.startupEyebrow{font-size:.75rem;letter-spacing:.13em;color:#8fbfff;font-weight:800}
+.startupPromptActions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.startupPromptActions button{min-height:48px}
+.transportMediaStatus{font-size:.78rem;color:var(--muted)}
+@media(max-width:760px){.cue{grid-template-columns:100px 1fr}.cueMediaPanel{grid-column:1 / -1}.mediaAction{grid-template-columns:1fr}.mediaActionOptions{justify-content:flex-start}.startupPromptActions{grid-template-columns:1fr}}
+
+
+
+/* V1.3.2 — correctifs transport, urgence décompte et visuels Show */
+.showDurationControl{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:12px 0 10px;padding:9px 10px;border:1px solid #303847;border-radius:10px;background:#11161e}
+.showDurationControl label{font-size:.78rem;font-weight:700;color:#dfe6ef}.showDurationControl input{width:92px;background:#0e1218;color:var(--text);border:1px solid var(--line);border-radius:8px;padding:7px 9px;font:700 .85rem ui-monospace,SFMono-Regular,Menlo,monospace}.showDurationControl button{padding:7px 10px;font-size:.78rem}
+.mediaAction{grid-template-columns:minmax(180px,1fr) auto auto auto}.mediaAction:not(.stopAllAction){grid-template-columns:minmax(180px,1fr) auto}.mediaEditor{grid-column:1/-1;border-top:1px solid #252d39;padding-top:9px;margin-top:2px}.mediaEditorTop{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px}.mediaEditorField{display:flex;align-items:center;gap:5px;font-size:.76rem;color:var(--muted)}.mediaEditorField input[type=text]{width:82px;background:#0d1117;color:var(--text);border:1px solid #394354;border-radius:7px;padding:6px 7px;font:700 .76rem ui-monospace,SFMono-Regular,Menlo,monospace}.loopToggle{display:flex;align-items:center;gap:6px;font-size:.78rem;font-weight:700;color:#dfe6ef}.mediaVisual{position:relative;height:70px;border:1px solid #313b4b;border-radius:9px;overflow:hidden;background:#080b10;user-select:none;touch-action:none}.waveCanvas{width:100%;height:100%;display:block}.mediaSelection{position:absolute;top:0;bottom:0;background:rgba(38,132,255,.15);border-left:2px solid #4ca2ff;border-right:2px solid #4ca2ff;pointer-events:none}.trimHandle{position:absolute;top:0;bottom:0;width:18px;transform:translateX(-9px);cursor:ew-resize;z-index:4;touch-action:none}.trimHandle:before{content:"";position:absolute;left:7px;top:0;bottom:0;width:4px;border-radius:4px;background:#ffd15a;box-shadow:0 0 0 1px rgba(0,0,0,.35)}.trimHandle:after{content:"";position:absolute;left:2px;top:5px;width:14px;height:14px;border-radius:50%;background:#ffd15a;box-shadow:0 1px 4px #000}.mediaVisualLabels{display:flex;justify-content:space-between;margin-top:4px;font:600 .68rem ui-monospace,SFMono-Regular,Menlo,monospace;color:#7f8999}.stopAllAction{border-color:#7b343c;background:#1b1114}.stopAllAction .mediaKindBadge{background:#4d171d;color:#ffadb4}.addActionButtons{display:flex;gap:7px;align-items:center;flex-wrap:wrap}.stopAllBtn{border-color:#70313a;color:#ffb1b8}.cueMediaChip.stop{border-color:#74343c;color:#ff9ca5;background:#2a1418}
+@media(max-width:760px){.showDurationControl{align-items:flex-start}.mediaEditorTop{align-items:flex-start}.mediaAction{grid-template-columns:1fr}.mediaEditor{grid-column:1}}
+
+/* V1.2.2 — sortie vidéo plein écran et suppression du moniteur interne */
+.preflightCard{display:grid;gap:12px}
+.preflightHeader{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.preflightTitle{display:grid;gap:4px}.preflightTitle h2{font-size:.92rem;letter-spacing:.05em}
+.preflightActions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.preflightStatus{display:flex;align-items:center;gap:8px;font-size:.84rem;color:var(--muted)}
+.preflightDot{width:9px;height:9px;border-radius:50%;background:#77808d;box-shadow:0 0 0 3px rgba(119,128,141,.12)}
+.preflightStatus.preparing .preflightDot{background:#e0ad38;box-shadow:0 0 0 3px rgba(224,173,56,.14)}
+.preflightStatus.ready .preflightDot{background:#32b36b;box-shadow:0 0 0 3px rgba(50,179,107,.14)}
+.preflightStatus.error .preflightDot{background:#e14b56;box-shadow:0 0 0 3px rgba(225,75,86,.14)}
+.outputPrep{display:flex;align-items:center;gap:10px;padding-top:10px;border-top:1px solid #2b3240;flex-wrap:wrap}
+.outputPrep .videoOutputBigButton{width:74px;height:50px;border-radius:10px!important}.outputPrep .videoOutputIcon{width:46px;height:32px}
+.outputPrepText{display:grid;gap:2px}.outputPrepText strong{font-size:.86rem}.outputPrepText span{font-size:.78rem;color:var(--muted)}
+#preloadBin{position:fixed;left:-10000px;top:-10000px;width:2px;height:2px;overflow:hidden;opacity:.001;pointer-events:none}
+
+.cuesToolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%}
+.cuesToolbarLeft{display:flex;align-items:center;gap:9px}.collapseAllBtn{padding:7px 10px;font-size:.78rem}
+.cues{gap:7px}
+.cueAccordion{background:#151922;border:1px solid #2b3240;border-radius:12px;overflow:hidden;transition:border-color .15s,background .15s}
+.cueDragHandle{padding:0!important;min-width:26px;min-height:32px;line-height:1;background:transparent!important;border:0!important;color:#a9d2ff;font-size:24px;cursor:grab;touch-action:none;flex-shrink:0}
+.cueNumber{display:flex;align-items:center;gap:3px}
+.cueDragging{opacity:.55}
+.cueAccordion.dropBefore{box-shadow:inset 0 4px 0 #66a8ff!important}
+.cueAccordion.dropAfter{box-shadow:inset 0 -4px 0 #66a8ff!important}
+body:not(.locked) .cueSummary{grid-template-columns:96px 86px minmax(0,1fr) auto 28px}
+@media(max-width:760px){body:not(.locked) .cueSummary{grid-template-columns:82px 78px minmax(0,1fr) 28px}}
+@media(max-width:480px){body:not(.locked) .cueSummary{grid-template-columns:72px 70px minmax(0,1fr) 24px}}
+.cueAccordion.expanded{border-color:#536176;background:#171c25}
+body:not(.locked) .cueAccordion.expanded{border-color:#66a8ff;background:#192b43;box-shadow:inset 5px 0 0 #66a8ff,0 0 0 1px rgba(102,168,255,.35)}
+body:not(.locked) .cueAccordion.expanded .cueSummary{background:#213c60;border-bottom-color:#4c79ab}
+body:not(.locked) .cueAccordion.expanded .cueNumber{color:#a9d2ff}
+body:not(.locked) .cueAccordion.expanded .cueSummaryName{color:#fff}
+
+body:not(.locked) .cueAccordion.expanded .cueDetails{background:rgba(30,61,99,.25)}
+body:not(.locked) .cueAccordion.expanded input:focus,body:not(.locked) .cueAccordion.expanded textarea:focus,body:not(.locked) .cueAccordion.expanded select:focus{outline:2px solid #66a8ff;outline-offset:2px}
+
+.cueSummary{display:grid;grid-template-columns:72px 86px minmax(0,1fr) auto 28px;gap:10px;align-items:center;padding:10px 12px;cursor:pointer;user-select:none;min-height:54px}
+.cueSummary:hover{background:#1b202a}.cueAccordion.expanded .cueSummary{background:#1d232e;border-bottom:1px solid #303847}
+.cueNumber{font-size:.72rem;font-weight:850;letter-spacing:.06em;color:#9da7b5}.cueSummaryTime{font-variant-numeric:tabular-nums;font-weight:800;color:#f4f6f8;font-size:.88rem}
+.cueSummaryMain{min-width:0}.cueSummaryName{font-weight:750;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.cueSummaryDescription{font-size:.76rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}
+.cueSummaryMedia{display:flex;align-items:center;justify-content:flex-end;gap:5px;flex-wrap:wrap}.cueMediaChip{font-size:.68rem;font-weight:750;padding:4px 6px;border:1px solid #3c4657;border-radius:999px;color:#cbd3de;white-space:nowrap}.cueMediaChip.ready{border-color:#2e6d4b;color:#8de0b1}.cueMediaChip.error{border-color:#77343b;color:#ff9ca4}
+
+.cueDetails{display:none;padding:12px}.cueAccordion.expanded .cueDetails{display:block}.cueEditGrid{display:grid;grid-template-columns:112px minmax(210px,1fr) 110px auto;gap:10px;align-items:start}.cueDetails .cueMediaPanel{grid-column:1/-1;margin-top:10px}
+.cuePrepBadge{font-size:.68rem;padding:3px 6px;border-radius:999px;border:1px solid #465166;color:#aeb8c6}.cuePrepBadge.ready{border-color:#2e6d4b;color:#8de0b1}.cuePrepBadge.error{border-color:#77343b;color:#ff9ca4}
+.mediaAction.prepared{border-color:#2e5f46}.mediaAction.prepareError{border-color:#77343b}
+@media(max-width:760px){.cueSummary{grid-template-columns:58px 78px minmax(0,1fr) 28px}.cueSummaryMedia{grid-column:2/4;justify-content:flex-start}.cueEditGrid{grid-template-columns:100px 1fr}.cueEditGrid .imageControls,.cueEditGrid>.danger{grid-column:2}.preflightActions{width:100%}}
+
+
+/* V1.3.4 — hiérarchie visuelle, transport stable et actions projet simplifiées */
+.projectCard .showTitleLabel,
+.preflightTitle h2,
+.showVideoMonitor>h2,
+.cuesToolbarLeft>strong{
+  display:flex;align-items:center;gap:7px;
+  color:#89a4c5;font-size:.72rem;font-weight:850;letter-spacing:.12em;line-height:1.2;
+}
+.projectCard .showTitleLabel::before,
+.preflightTitle h2::before,
+.showVideoMonitor>h2::before,
+.cuesToolbarLeft>strong::before{
+  content:"";width:3px;height:13px;border-radius:999px;background:#4c79ad;flex:0 0 auto;
+}body.locked .showVideoMonitor>h2{margin-bottom:8px}
+.projectActions{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.projectActions .pdfTechBtn{margin-left:0}
+#playBtn.transportToggleBtn:not(:disabled){box-shadow:0 0 0 1px rgba(255,255,255,.65),0 0 10px rgba(255,255,255,.35),0 0 20px rgba(255,255,255,.18)}
+#playBtn.transportToggleBtn{display:inline-flex;align-items:center;justify-content:center;gap:6px;width:120px;min-width:120px;flex:0 0 120px;touch-action:manipulation}
+.transportToggleBtn>*{pointer-events:none;user-select:none}
+.transportButtonIcon{display:inline-flex;align-items:center;justify-content:center;min-width:1em}
+@media(max-width:680px){.projectActions .pdfTechBtn{margin-left:0}.projectActions{align-items:stretch}.projectActions button{flex:1 1 auto}}
+
+html,body{overscroll-behavior-y:none;}
+
+/* V1.5.2 — sélection Cue ↔ timeline + companion 1.2.2 */
+.showOnly{display:none}
+body.locked .showOnly{display:flex}
+.preflightIntegrated{display:grid;gap:12px;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid #2b3240}
+.timelineShowTitle{align-items:center;gap:7px;color:#89a4c5;font-size:.72rem;font-weight:850;letter-spacing:.12em;line-height:1.2;margin:0 0 12px}
+.timelineShowTitle::before{content:"";width:3px;height:13px;border-radius:999px;background:#4c79ad;flex:0 0 auto}
+body.locked .timelineCard{display:block}
+
+
+/* 1.5.2 : mêmes libellés et disposition adaptable */
+[hidden]{display:none!important}
+.timeline .tick:first-of-type{transform:none}.timeline .tick:last-of-type{transform:translateX(-100%)}
+.showVideoMonitor{display:none;grid-column:1/-1;order:100}
+body.locked .showVideoMonitor:not([hidden]){display:block}
+#showVideoSurface{position:relative;width:min(100%,720px,71.111vh);aspect-ratio:16/9;margin-inline:auto;background:#000;border:1px solid #3b4352;border-radius:14px;box-sizing:border-box;display:flex;align-items:center;justify-content:center;overflow:hidden;color:#9ba6b4}
+#showVideoSurface video{display:block;flex:none;width:100%;height:100%;min-width:0;object-fit:contain;margin:0}
+main,.card,.cueTextFields,.outputPrepText{min-width:0}
+button{white-space:normal;touch-action:manipulation}
+.outputPrepText{gap:8px;flex-wrap:wrap}
+@media(max-width:900px){main.spectaclePriorityLayout{display:flex!important;flex-direction:column!important;padding:12px!important}.card{width:100%;box-sizing:border-box}.appTopBar{flex-wrap:wrap;gap:12px}.row{flex-wrap:wrap}}
+@media(max-width:480px){main.spectaclePriorityLayout{padding:8px!important}.card{padding:12px!important}.cueEditGrid{grid-template-columns:1fr}.cueEditGrid .imageControls,.cueEditGrid>.danger{grid-column:1}.mediaAction{display:flex;flex-wrap:wrap}.mediaEditor{width:100%;min-width:0}.row button{flex:1 1 120px}.time{font-size:clamp(1.6rem,10vw,3rem)}.cueSummary{grid-template-columns:45px 70px minmax(0,1fr) 24px}.projectActions{width:100%}.appIdentity{min-width:0}.outputPrep{flex-wrap:wrap}input,textarea,select{max-width:100%;box-sizing:border-box}}
+
+/* 1.5.2 : visuels Show remplis sans déformation{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
+
+
+/* 1.5.2 : audition et aperçu indépendants de la conduite */
+.mediaEditorTop .mediaPreviewToggle{padding:6px 9px;font-size:.76rem;min-width:96px;white-space:nowrap}
+.mediaEditorField input[type=text]{min-width:0;width:78px}
+.mediaEditorMain{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;align-items:center}
+.mediaEditorMain.hasVideoPreview{grid-template-columns:minmax(0,1fr) 144px}
+.mediaEditorTimeline{min-width:0}.mediaEditorTimeline .mediaVisual{height:80px;cursor:crosshair}
+.mediaEditMonitor{width:100%;aspect-ratio:16/9;background:#000;overflow:hidden;border:1px solid #313b4b;border-radius:9px;box-sizing:border-box}
+.mediaEditMonitor video{display:block;width:100%;height:100%;object-fit:contain}
+.mediaPreviewHead{position:absolute;top:0;bottom:0;width:14px;transform:translateX(-7px);z-index:3;cursor:ew-resize;touch-action:none}
+.mediaPreviewHead::before{content:"";position:absolute;left:6px;top:0;bottom:0;width:2px;background:#fff;box-shadow:0 0 3px #000}
+.mediaPreviewHead::after{content:"";position:absolute;left:2px;top:2px;width:10px;height:10px;background:#fff;border-radius:2px;transform:rotate(45deg)}
+.mediaPreviewHead:focus-visible{outline:2px solid #70a9e8;outline-offset:-2px}
+.mediaPreviewPosition{color:#dae8fa;font-variant-numeric:tabular-nums}
+.waveformStatus{position:absolute;bottom:4px;left:8px;font-size:.65rem;color:#a6b2c5;pointer-events:none}
+@media(max-width:600px){
+.mediaEditorMain.hasVideoPreview{grid-template-columns:minmax(0,1fr) 90px}
+.mediaEditorTop{display:grid;grid-template-columns:auto minmax(0,1fr) minmax(0,1fr) auto;gap:4px;align-items:end}
+.mediaEditorTop .mediaPreviewToggle{min-width:0;padding:6px 5px;font-size:.68rem}
+.mediaEditorField{flex-direction:column;align-items:stretch;gap:3px;min-width:0}
+.mediaEditorField input[type=text]{width:100%;min-width:0;padding:6px 2px;font-size:.68rem}
+.mediaEditorTop .loopToggle{font-size:.68rem;gap:4px;padding-bottom:7px;white-space:nowrap}
+.mediaEditorTop .loopToggle input{margin:0}
+.mediaEditorTimeline .mediaVisual{height:70px}
+}
+
+/* Bascule explicite : les deux modes restent visibles */
+.modeSwitch{display:inline-flex;flex:0 0 auto;gap:2px;padding:3px;border:1px solid #3b4352;border-radius:11px;background:#10151d}
+.modeSwitchBtn{min-width:58px;padding:8px 11px;border:0;border-radius:8px;font-size:.82rem;font-weight:750;background:transparent;color:#a7b2c2;white-space:nowrap;transition:background-color .15s,color .15s}
+.modeSwitchBtn:hover{background:#222c39;color:#fff}.modeSwitchBtn.active{background:#34516f;color:#fff}
+#showModeBtn.active{background:#167a43;color:#fff}
+.modeSwitchBtn:focus-visible{outline:2px solid #89b9ef;outline-offset:-2px}
+@media(max-width:480px){.modeSwitchBtn{min-width:50px;padding:8px 9px}}
+@media(prefers-reduced-motion:reduce){.modeSwitchBtn{transition:none}}
+
+/* 1.5.2 : zoom des médias et sortie vidéo uniquement dans l’en-tête Show */
+.fileLabel.addMediaBtn{background:#246fd1;border-color:#2b7de7;color:#fff}.fileLabel.addMediaBtn:hover{background:#2d7bdf}
+.mediaEditorTimeline .mediaVisual{overflow-x:auto;overflow-y:hidden;scrollbar-width:thin;scrollbar-color:#5b7192 #11151d}
+.mediaVisualContent{position:relative;height:100%;min-width:100%;user-select:none;touch-action:none}
+.mediaZoomControls{display:flex;align-items:center;justify-content:flex-end;gap:6px;margin-bottom:5px}
+.mediaZoomControls button{width:27px;height:25px;padding:0;font-size:1rem;line-height:1;flex:0 0 auto}
+.mediaZoomLabel{min-width:35px;text-align:center;font-size:.68rem;color:#a8bbd4;font-variant-numeric:tabular-nums}
+.headerVideoOutput{display:none;align-items:center;gap:8px;min-width:0}
+.headerVideoOutput .videoOutputBigButton{width:40px;height:40px;padding:7px;border-radius:10px!important;flex:0 0 40px}
+.headerVideoOutput .videoOutputIcon{width:24px;height:24px}
+.headerVideoOutput .outputPrepText{gap:2px;max-width:240px}
+.headerVideoOutput .outputPrepText strong{font-size:.62rem;letter-spacing:.06em}
+.headerVideoOutput .outputPrepText span{font-size:.68rem;line-height:1.25;overflow-wrap:anywhere}
+@media(max-width:900px){.appTopBar{flex-wrap:wrap!important}.headerActions{flex:1 0 100%;width:100%;min-width:0;display:grid;grid-template-columns:minmax(0,1fr) auto;margin-left:0}.headerVideoOutput .outputPrepText{max-width:240px;min-width:0}.headerVideoOutput .outputPrepText span{overflow-wrap:normal}.historyActions{justify-self:start}.modeSwitch{justify-self:end}}
+.pdfPreviewDialog{width:min(1000px,94vw);height:90dvh;max-width:94vw;max-height:94dvh;padding:14px;border:1px solid #45536a;border-radius:14px;background:#111722;color:#fff}.pdfPreviewDialog::backdrop{background:#000a}.pdfPreviewLayout{height:100%;display:flex;flex-direction:column;gap:12px}.pdfPreviewToolbar{display:flex;align-items:center;flex-wrap:wrap;gap:10px}.pdfPreviewToolbar strong{flex:1;min-width:150px}.pdfPreviewToolbar a{display:inline-flex;align-items:center;padding:10px 12px;border-radius:8px;background:#246fd1;color:white;text-decoration:none}
+.pdfPreviewPages{flex:1;min-height:0;overflow:auto;display:flex;flex-direction:column;align-items:flex-start;gap:16px;background:#252f40;border-radius:8px;padding:12px;box-sizing:border-box;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}.pdfPreviewPage{flex-shrink:0;margin:0 auto;background:white;border-radius:4px;box-shadow:0 3px 12px #0006;overflow:hidden}.pdfPreviewPage svg{display:block;width:100%;height:auto}.pdfPreviewZoom{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.pdfPreviewZoom button{min-height:40px}.pdfPreviewZoom span{min-width:48px;text-align:center;font-size:.85rem}.pdfPreviewToolbar strong{overflow-wrap:anywhere}@media(max-width:480px){.pdfPreviewDialog{padding:9px}.pdfPreviewToolbar{gap:7px}.pdfPreviewToolbar strong{flex-basis:100%}.pdfPreviewPages{padding:8px}.pdfPreviewZoom{gap:6px}.pdfPreviewZoom button{padding:8px 10px}}
+
+/* 1.5.2 : repères et médias distincts ; aperçu global en Edit. */
+#projectWaveform{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.8}
+#projectMediaTracks{position:absolute;inset:5px 0 22px;display:flex;flex-direction:column;gap:3px;min-height:0;overflow:hidden;pointer-events:none;z-index:1}
+.projectMediaBar{position:relative;flex-shrink:0;box-sizing:border-box;min-width:3px;height:20px;border-radius:5px;background:rgba(42,153,89,.28);border:1px solid rgba(101,210,142,.4);color:#d0f5df;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:2px 5px}
+.projectMediaBar.video{background:rgba(255,49,153,.30);border-color:rgba(255,92,177,.75);color:#ffd6ed}
+#projectWaveform{z-index:0}.timeline .tick,.timeline .playhead{z-index:2}.projectMediaBar{text-shadow:0 1px 3px #000}
+.timeline .tick{background:rgba(13,16,21,.8);border-radius:3px;padding:0 2px}
+#projectWaveformStatus{margin-top:6px;font-size:11px}#projectWaveformStatus:empty{display:none}
+body.locked .timeline{touch-action:pan-y;cursor:default}body.locked .marker{pointer-events:none}
+html,body{touch-action:pan-x pan-y}input,textarea,select{font-size:max(16px,1em)}
+@media(min-width:900px) and (orientation:landscape){
+ body.locked main.spectaclePriorityLayout{display:flex!important;flex-direction:column;max-width:1500px;padding:12px 18px!important;gap:12px;align-items:stretch}
+ body.locked .appTopBar,body.locked .modeCard,body.locked .showVideoMonitor{margin:0}
+ body.locked .timelineCard{margin:0;padding:14px}
+ body.locked .card h2{margin-bottom:8px}
+}
+.cueMediaChip.video:not(.error){background:rgba(255,49,153,.30);border-color:rgba(255,92,177,.85);color:#ffd6ed}
+#updateNotice{order:-1;padding:10px 14px;background:#253748;border:1px solid #5584ad;border-radius:10px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}#updateNotice button{margin-left:auto}
+
+.preflightCard{grid-template-columns:minmax(0,1fr);min-width:0}
+#generalTimelineViewport{min-width:0;width:100%;overflow-x:auto;overflow-y:hidden;margin:16px 0;scrollbar-width:thin;scrollbar-color:#5b7192 #11151d}
+#generalTimelineViewport .timeline{margin:0;box-sizing:border-box}
+#generalZoomControls{justify-content:flex-end;margin-top:10px}
+body.locked #generalTimelineViewport{overflow:hidden}
+#languageSelect{font:700 .8rem system-ui;color:#e5ebf4;background:#171d27;border:1px solid #3a4352;border-radius:9px;padding:8px;max-width:70px}
+@media(max-width:900px){.headerActions{grid-template-columns:auto minmax(0,1fr) auto}}
+
+
+
+.playhead{width:14px;transform:translateX(-7px);background:none;pointer-events:auto;cursor:ew-resize;touch-action:none!important;z-index:6!important}
+.playhead::before{content:"";position:absolute;left:6px;top:0;bottom:0;width:2px;background:#fff;box-shadow:0 0 3px #000}
+.playhead::after{content:"";position:absolute;left:2px;top:2px;width:10px;height:10px;background:#fff;border-radius:2px;transform:rotate(45deg)}
+.playhead:focus-visible{outline:2px solid #70a9e8;outline-offset:-2px}
+.marker.selectedCueMarker::after{background:var(--cue);width:3px;left:5px;box-shadow:none}
+.marker.selectedCueMarker::before,body.locked .marker::before{content:attr(data-number);width:21px;height:21px;left:-4px;top:3px;color:#302407;text-align:center;font:700 11px/21px system-ui;background:var(--cue);box-shadow:0 0 0 2px rgba(0,0,0,.35)}
+body.locked .marker{pointer-events:none;cursor:default}
+.marker::before{z-index:1}.marker::after{z-index:0}
+.mediaExcluded{position:absolute;top:0;bottom:0;background:rgba(0,0,0,.78);pointer-events:none;z-index:1}
+.mediaExcluded.before{left:0}.mediaExcluded.after{right:0}
+body.locked .timelineCard{order:1}
+.timelineCard .row>button{box-sizing:border-box;line-height:1.25}
+#restartBtn{flex:0 0 44px;width:44px;min-width:44px;height:calc(1.25em + 22px);padding:10px 0;font-size:inherit;display:inline-flex;align-items:center;justify-content:center}
+
+/* Compact general-timeline titles. */
+#generalTimelineViewport{position:relative;padding-bottom:31px}
+#timelineCueLabels{position:absolute;left:0;right:0;bottom:4px;height:22px;pointer-events:none}
+.marker::before,body.locked .marker::before,.marker.selectedCueMarker::before{display:none!important}
+.timelineCueBubble{position:absolute;box-sizing:border-box;height:22px;padding:2px 7px;border:1px solid #ae8d49;border-radius:6px;background:#353026;color:#ffe4a4;font:600 12px/16px system-ui;white-space:nowrap;max-width:160px}
+.timelineCueBubble .cueBubbleText{display:block;overflow:hidden;text-overflow:ellipsis}
+.timelineCueBubble::before{content:"";position:absolute;top:-5px;left:var(--pointer-left,50%);width:7px;height:7px;transform:translateX(-50%) rotate(45deg);background:inherit;border-top:1px solid #ae8d49;border-left:1px solid #ae8d49}
+.timelineCueBubble.active{background:#223e61;color:#e3f1ff;border-color:#80b9ff;box-shadow:0 0 6px #509dff,0 0 13px #438ae899}
+.timelineCueBubble.active::before{border-color:#80b9ff}
+.timelineCueBubble.completed{background:#252a31;color:#929ba8;border-color:#515b69;box-shadow:none}
+.timelineCueBubble.completed::before{border-color:#515b69}
+
+
+
+.showWorkspace{display:none}
+body.locked .showWorkspace{display:block;order:2}
+body.locked .showCueOverview{position:relative;margin:0}
+body.locked .showCueOverview h2{font-size:.85rem;font-weight:800;letter-spacing:.12em;color:#9fb7d1;line-height:1.2;margin:0 0 12px;text-transform:uppercase}
+body.locked .showCueOverview h2::before{content:"";display:inline-block;width:4px;height:14px;background:#6c9fce;border-radius:3px;margin-right:8px;vertical-align:middle}
+
+body:not(.locked) .cueSummary{grid-template-columns:96px 86px minmax(0,1fr) auto 40px}.cueDeleteBtn{display:flex;align-items:center;justify-content:center;width:40px;height:40px;min-width:40px;padding:8px;color:#ff6b72;background:transparent;border:1px solid transparent}.cueDeleteBtn:hover{background:#ff453a18;border-color:#ff6b7255}.cueDeleteBtn:focus-visible{outline:2px solid #ff6b72;outline-offset:2px}.cueDeleteBtn .materialSymbol{width:21px;height:21px}@media(max-width:760px){body:not(.locked) .cueSummary{grid-template-columns:82px 78px minmax(0,1fr) 40px}body:not(.locked) .cueSummaryMedia{grid-row:2;grid-column:2/4}body:not(.locked) .cueDeleteBtn{grid-row:1;grid-column:4}}@media(max-width:480px){body:not(.locked) .cueSummary{grid-template-columns:62px 66px minmax(0,1fr) 40px;gap:6px;padding-left:8px;padding-right:8px}}
+
+#playBtn,#play{transition:box-shadow .25s ease}
+#playBtn.spaceGuard:not(:disabled),#play.spaceGuard:not(:disabled){box-shadow:0 0 0 1px rgba(255,92,92,.8),0 0 12px rgba(255,69,58,.65),0 0 24px rgba(255,69,58,.35)}
+
+
+
+/* Show: one full-width Cue list below the timeline. */
+body.locked .showWorkspace{display:block;width:100%;min-width:0}
+body.locked .showCueOverview{width:100%;max-height:none;overflow:visible!important;padding:16px}
+body.locked #showCueOverviewRows{position:static;max-height:none;overflow:visible!important;display:flex;flex-direction:column;gap:12px}
+body.locked .showCueOverview::before,body.locked .showCueOverview::after{display:none}
+.showOverviewRow{position:relative;display:grid;grid-template-columns:32px 64px 70px minmax(0,1fr);gap:14px;min-height:64px;padding:12px;border:1px solid #343b47;border-radius:12px;background:#141922;transition:box-shadow .7s ease,border-color .7s ease,background-color .7s ease}
+.showOverviewRow .overviewNumber{font-size:15px;color:#9fb7d1}.showOverviewRow .overviewName{font-size:18px;font-weight:700;color:#f4f6f8}.showOverviewRow .overviewTime{font-size:13px}.overviewContent{min-width:0}
+.showOverviewRow .overviewVisual{width:64px;height:36px;aspect-ratio:16/9;min-width:0;overflow:hidden;border-radius:8px;display:flex;align-items:center;justify-content:center}.showOverviewRow .overviewVisual img{width:100%;height:100%;object-fit:cover;border-radius:inherit}.showOverviewRow .showOverviewPlaceholder{background:#080a0d;border:1px solid #343b47;font-size:12px;text-align:center;color:#9da7b5}
+/* Active and next use the same visual size and typography. */
+.showOverviewRow.isActive,.showOverviewRow.isNext{grid-template-columns:32px 30vw 70px minmax(0,1fr)}
+.showOverviewRow.isActive{background:#1b2636;border-color:#9acbff;box-shadow:inset 0 0 18px #4597ff33,0 0 10px 2px #4395ffaa,0 0 26px 4px #2c7eff66}
+.showOverviewRow.isActive .overviewVisual,.showOverviewRow.isNext .overviewVisual{align-self:start;width:100%;height:auto;aspect-ratio:16/9;background:#000}
+.showOverviewRow.isActive .overviewName,.showOverviewRow.isNext .overviewName{font-size:clamp(1.4rem,3vw,2rem)}
+.overviewDescription{margin-top:10px;white-space:pre-wrap;overflow-wrap:anywhere;font-size:17px;line-height:1.4;color:#d5dce6}
+body.nextCueUrgent .showOverviewRow.isActive{border-color:#343b47;background:#141922;box-shadow:inset 0 0 18px #4597ff00,0 0 10px 2px #4395ff00,0 0 26px 4px #2c7eff00}
+.overviewBeat{position:absolute;inset:-1px;pointer-events:none;border:1px solid #ff9b96;border-radius:inherit;box-shadow:inset 0 0 12px #ff453a33,0 0 10px 2px #ff453aaa,0 0 24px 3px #ff2d2d66;opacity:0}
+body.locked main.spectaclePriorityLayout{max-width:none!important}
+/* Show order: number, visual, cue time, title/description. */
+.showOverviewRow.isActive .overviewNumber,.showOverviewRow.isNext .overviewNumber{grid-column:1;grid-row:1}
+.showOverviewRow.isActive .overviewVisual,.showOverviewRow.isNext .overviewVisual{grid-column:2;grid-row:1}
+.showOverviewRow.isActive .overviewTime,.showOverviewRow.isNext .overviewTime{grid-column:3;grid-row:1}
+.showOverviewRow.isActive .overviewContent,.showOverviewRow.isNext .overviewContent{grid-column:4;grid-row:1}
+.overviewName{overflow-wrap:anywhere}
+@media(max-width:1100px){.showOverviewRow.isActive,.showOverviewRow.isNext{grid-template-columns:24px 30vw 58px minmax(0,1fr)}}
+@media(max-width:760px){.showOverviewRow{grid-template-columns:24px 64px 58px minmax(0,1fr);gap:10px}.showOverviewRow.isActive,.showOverviewRow.isNext{grid-template-columns:24px 30vw 48px minmax(0,1fr)}.showOverviewRow .overviewName{font-size:16px}.showOverviewRow .overviewTime{font-size:12px}.overviewDescription{font-size:15px}}
+@media(max-width:480px){.showOverviewRow{grid-template-columns:20px 48px 48px minmax(0,1fr);gap:6px;padding:10px}.showOverviewRow .overviewVisual{width:48px;height:27px}.showOverviewRow.isActive,.showOverviewRow.isNext{grid-template-columns:20px 30vw 42px minmax(0,1fr)}.showOverviewRow .overviewNumber{font-size:12px}.showOverviewRow.isActive .overviewName,.showOverviewRow.isNext .overviewName{font-size:18px}}
+@media(prefers-reduced-motion:reduce){.showOverviewRow{transition:none}}
+
+/* Keep a five-Cue window that follows the show without an inner touch scroll. */
+body.locked #showCueOverviewRows{position:relative;display:block;overflow:hidden!important;touch-action:pan-y;padding:24px}
+body.locked #showCueOverviewRows>.showOverviewRow{margin-bottom:12px}
+body.locked #showCueOverviewRows>.showOverviewRow:last-child{margin-bottom:0}
+body.locked .showCueOverview.hasHiddenCues::after{display:block;content:"";position:absolute;left:16px;right:16px;bottom:16px;height:56px;max-height:20%;background:linear-gradient(to bottom,rgba(8,11,16,0),rgba(8,11,16,.25) 35%,rgba(8,11,16,.75) 75%,#080b10);pointer-events:none;z-index:2}
+
+
+/* Wide Show: active and next share the first row; phones stay stacked. */
+@media (min-width:960px) and (min-height:600px) and (orientation:landscape), (min-width:960px) and (hover:hover) and (pointer:fine){
+ body.locked #showCueOverviewRows{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:stretch}
+ body.locked #showCueOverviewRows>.showOverviewRow{grid-column:1/-1;margin-bottom:0}
+ body.locked #showCueOverviewRows>.showOverviewRow.isActive{grid-column:1;grid-row:1}
+ body.locked #showCueOverviewRows>.showOverviewRow.isNext{grid-column:2;grid-row:1}
+ .showOverviewRow.isActive,.showOverviewRow.isNext{grid-template-columns:22px minmax(0,15vw) 48px minmax(0,1fr);gap:10px;align-content:start}
+ .showOverviewRow.isActive .overviewName,.showOverviewRow.isNext .overviewName{font-size:clamp(1.4rem,2vw,2rem)}
+ .showOverviewRow.isActive .overviewDescription,.showOverviewRow.isNext .overviewDescription{font-size:16px}
+}
+
+/* The Show timeline stays above the page while the Cue list scrolls behind it. */
+body.locked .timelineCard{position:-webkit-sticky;position:sticky;top:0;top:env(safe-area-inset-top,0px);z-index:20;background:var(--panel);box-shadow:0 12px 18px #111318;border-radius:16px}
+body.locked .showNextCountdown{position:relative;display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 18px;border:1px solid #45536a;border-radius:10px;background:#101620;box-shadow:0 2px 6px #0002;min-width:180px;text-align:center}
+.showCountdownLabel{font-size:.85rem;color:#9fb7d1;font-weight:650}
+.showCountdownClock{font-size:clamp(2.2rem,4vw,3rem);font-weight:800;font-variant-numeric:tabular-nums;line-height:1.1;color:#f4f6f8}
+.showNextCountdown.isUrgent .showCountdownClock{color:#ff453a}
+
+@media(min-width:600px) and (max-height:500px) and (orientation:landscape){
+body.locked .showNextCountdown{position:relative;display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 18px;border:1px solid #45536a;border-radius:10px;background:#101620;box-shadow:0 2px 6px #0002;min-width:180px;text-align:center}
+ body.locked .timelineCard{padding:10px}
+ body.locked .timelineShowTitle{margin-bottom:6px}
+}
+
+.showNextCountdown>.overviewBeat{border:1px solid #ff918b;box-shadow:0 0 12px 2px #ff453a88,0 0 26px 4px #ff2d2d66}
+
+
+@media(max-width:760px), (max-width:959px) and (max-height:500px) and (pointer:coarse){
+body.locked .showNextCountdown{position:relative;display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 18px;border:1px solid #45536a;border-radius:10px;background:#101620;box-shadow:0 2px 6px #0002;min-width:180px;text-align:center}
+ .showCountdownLabel{font-size:.75rem}
+ .showCountdownClock{font-size:2.2rem}
+}
+
+.cueDeleteOverlay{position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.72);display:flex;align-items:center;justify-content:center;padding:20px}
+.cueDeleteDialog{width:100%;max-width:460px;padding:24px;background:var(--panel);border:1px solid var(--line);border-radius:16px;box-shadow:0 16px 60px #0008}
+.cueDeleteDialog h2{margin:0 0 14px;font-size:1.25rem;color:var(--text);letter-spacing:normal;text-transform:none}
+.cueDeleteDialog p{margin:0 0 24px;color:var(--muted);overflow-wrap:break-word}
+.cueDeleteDialogActions{display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap}
+
+
+.headerDisplayControls{display:flex;align-items:center;gap:8px}
+#showLayoutButton{width:40px;height:40px;flex:0 0 40px;padding:3px;line-height:1;display:flex;align-items:center;justify-content:center}
+#showLayoutButton svg{width:32px;height:32px;flex-shrink:0}
+body:not(.locked) #showLayoutButton{display:none}
+.modeSwitch{height:40px;box-sizing:border-box;align-items:center}
+.modeSwitchBtn{height:32px;box-sizing:border-box;display:flex;align-items:center;justify-content:center;padding-top:0;padding-bottom:0}
+.showLayoutDialog{background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:16px;padding:24px;width:min(460px,90vw);box-shadow:0 16px 60px #0008}
+.showLayoutDialog::backdrop{background:#000b}
+.showLayoutDialog h2{margin:0 0 20px;font-size:1.25rem;letter-spacing:normal;text-transform:none}
+.showLayoutChoice{display:block;width:100%;text-align:left;margin-bottom:12px;padding:16px}
+.showLayoutChoice strong{display:block;font-size:1.1rem;margin-bottom:8px}
+.showLayoutChoice span{display:block;font-size:.9rem;color:var(--muted)}
+.showLayoutChoice[aria-pressed="true"]{border-color:#72b8ff;background:#203b59}
+body.locked.showLayoutIceman #showCueOverviewRows{display:block}
+body.locked.showLayoutIceman #showCueOverviewRows>.showOverviewRow{margin-bottom:12px}
+body.locked.showLayoutIceman .timelineCard .showNextCountdown{display:none}
+body.locked.showLayoutIceman .showOverviewRow.isActive,body.locked.showLayoutIceman .showOverviewRow.isNext{grid-template-columns:24px minmax(0,22.5vw) 58px minmax(0,1fr);gap:12px}
+body.locked.showLayoutIceman .showOverviewRow.isNext{grid-template-columns:24px minmax(0,22.5vw) 58px minmax(0,1fr) auto}
+body.locked.showLayoutIceman .showOverviewRow .showNextCountdown{grid-column:5;grid-row:1;align-self:center;justify-self:end;min-width:120px;padding:8px 12px}
+body.locked.showLayoutIceman .showOverviewRow.isActive .overviewName,body.locked.showLayoutIceman .showOverviewRow.isNext .overviewName{font-size:clamp(1.4rem,3vw,2rem)}
+@media(max-width:900px){
+ body.locked.showLayoutIceman .showOverviewRow.isActive,body.locked.showLayoutIceman .showOverviewRow.isNext{grid-template-columns:20px minmax(0,22.5vw) 42px minmax(0,1fr);gap:6px}
+ body.locked.showLayoutIceman .showOverviewRow .showNextCountdown{grid-column:4;grid-row:2;min-width:0;margin-top:8px}
+ body.locked.showLayoutIceman .showOverviewRow.isActive .overviewName,body.locked.showLayoutIceman .showOverviewRow.isNext .overviewName{font-size:18px}
+}
+/* Phone Cue cards: visual and title above a full-width description. */
+@media(max-width:760px), (max-width:959px) and (max-height:500px) and (pointer:coarse){
+ body.locked .showOverviewRow{grid-template-columns:20px 48px minmax(0,1fr);gap:6px}
+ body.locked .showOverviewRow.isActive,body.locked .showOverviewRow.isNext{grid-template-columns:20px minmax(0,30vw) minmax(0,1fr)}
+ body.locked.showLayoutIceman .showOverviewRow.isActive{grid-template-columns:20px minmax(0,22.5vw) minmax(0,1fr)}
+ body.locked .showOverviewRow .overviewNumber{grid-column:1;grid-row:1}
+ body.locked .showOverviewRow .overviewVisual{grid-column:2;grid-row:1;width:100%;height:auto;aspect-ratio:16/9;max-width:100%;align-self:start}
+ body.locked .showOverviewRow .overviewTime{grid-column:2;grid-row:2;align-self:start;justify-self:start;min-width:0}
+ body.locked .showOverviewRow .overviewContent{display:contents}
+ body.locked .showOverviewRow .overviewName{grid-column:3;grid-row:1/3;align-self:start}
+ body.locked .showOverviewRow .overviewDescription{grid-column:1/-1;grid-row:3;margin-top:4px}
+ body.locked.showLayoutIceman .showOverviewRow.isNext{grid-template-columns:20px minmax(0,1fr) auto}
+ body.locked.showLayoutIceman .showOverviewRow.isNext .overviewVisual{max-width:22.5vw}
+ body.locked.showLayoutIceman .showOverviewRow.isNext .showNextCountdown{grid-column:3;grid-row:1/3;align-self:start;margin-top:0;min-width:0;padding:8px 10px}
+ body.locked.showLayoutIceman .showOverviewRow.isNext .overviewName{grid-column:1/-1;grid-row:3}
+ body.locked.showLayoutIceman .showOverviewRow.isNext .overviewDescription{grid-column:1/-1;grid-row:4}
+}
+/* Iceman portrait tablets use the same reading order as phones. */
+@media(min-width:761px) and (orientation:portrait){
+ body.locked.showLayoutIceman .showOverviewRow.isActive{grid-template-columns:24px minmax(0,22.5vw) minmax(0,1fr)}
+ body.locked.showLayoutIceman .showOverviewRow.isNext{grid-template-columns:24px minmax(0,1fr) auto}
+ body.locked.showLayoutIceman .showOverviewRow.isActive .overviewContent,body.locked.showLayoutIceman .showOverviewRow.isNext .overviewContent{display:contents}
+ body.locked.showLayoutIceman .showOverviewRow.isActive .overviewTime,body.locked.showLayoutIceman .showOverviewRow.isNext .overviewTime{grid-column:2;grid-row:2;align-self:start}
+ body.locked.showLayoutIceman .showOverviewRow.isActive .overviewName,body.locked.showLayoutIceman .showOverviewRow.isNext .overviewName{grid-column:3;grid-row:1/3;align-self:start}
+ body.locked.showLayoutIceman .showOverviewRow.isActive .overviewDescription,body.locked.showLayoutIceman .showOverviewRow.isNext .overviewDescription{grid-column:1/-1;grid-row:3;margin-top:4px}
+ body.locked.showLayoutIceman .showOverviewRow.isNext .overviewVisual{max-width:22.5vw}
+ body.locked.showLayoutIceman .showOverviewRow.isNext .showNextCountdown{grid-column:3;grid-row:1/3;align-self:start;margin-top:0}
+ body.locked.showLayoutIceman .showOverviewRow.isNext .overviewName{grid-column:1/-1;grid-row:3}
+ body.locked.showLayoutIceman .showOverviewRow.isNext .overviewDescription{grid-column:1/-1;grid-row:4}
+}
+
+/* Compact Show transport. Edit keeps its original timeline and seek controls. */
+.transportClock{display:contents}
+body.locked .showTransportHeader{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:start;gap:10px;width:100%;order:1}
+body.locked .showTransportHeader .timelineShowTitle{grid-column:1;grid-row:1;display:flex;min-width:0;margin:0;overflow:hidden;font-size:.95rem;letter-spacing:normal;text-transform:none;overflow-wrap:anywhere}
+body.locked .showCuePosition{grid-column:3;grid-row:1;justify-self:end;color:#9fb7d1;font-weight:650;white-space:nowrap;font-variant-numeric:tabular-nums}
+body.locked .showTransportHeader>.showNextCountdown{grid-column:2;grid-row:1;justify-self:center;margin:0}
+body.locked.showLayoutIceman .showTransportHeader{grid-template-columns:minmax(0,1fr)}
+body.locked.showLayoutIceman .showCuePosition{display:none}
+@media(max-width:600px){
+ body.locked .showTransportHeader{grid-template-columns:minmax(0,1fr) auto}
+ body.locked .showCuePosition{grid-column:2}
+ body.locked .showTransportHeader>.showNextCountdown{grid-column:1/-1;grid-row:2}
+}
+body.locked .timelineCard{padding:12px 16px}
+body.locked .timelineTransport{display:flex;flex-direction:column;gap:10px}
+body.locked .timelineTransport>.row{display:flex;flex-wrap:nowrap;align-items:center;width:100%;min-width:0;gap:10px;order:2}
+body.locked .timelineTransport #playBtn,body.locked .timelineTransport #restartBtn{width:40px;min-width:40px;height:40px;flex:0 0 40px;padding:8px;display:flex;align-items:center;justify-content:center}
+body.locked .timelineTransport #playBtn{width:72px;min-width:72px;flex-basis:72px}
+body.locked #playBtnLabel{display:none}
+body.locked .transportClock{display:flex;gap:5px;align-items:baseline;flex:none;white-space:nowrap}
+body.locked .timelineTransport #clock{font-size:1rem;line-height:1.2;font-variant-numeric:tabular-nums}
+body.locked .timelineTransport #duration{font-size:.75rem}
+body.locked #generalTimelineViewport{flex:1 1 0%;min-width:24px;width:auto;margin:0;padding:0;overflow:visible}
+body.locked #generalTimelineViewport #timeline{height:24px!important;min-height:24px;border:0;border-radius:0;background:transparent;overflow:visible;cursor:pointer;touch-action:none}
+body.locked #timeline::before{content:'';position:absolute;left:0;right:0;top:10px;height:4px;background:#454d5b;border-radius:3px}
+body.locked #timeline #progress{inset:10px auto auto 0;height:4px;border-radius:3px;background:#66a8ff;box-shadow:0 0 5px #66a8ff66;z-index:1}
+body.locked #timeline .marker{top:7px;height:10px;width:10px;margin-left:-5px;border:1px solid #1b1f27;border-radius:50%;background:#edf3ff;box-shadow:0 0 4px #edf3ff55;z-index:2}
+body.locked #timeline .marker::after,body.locked #timeline .marker::before,body.locked:not(.showLayoutIceman) #timeline .pastCue,body.locked #timeline .tick,body.locked #projectWaveform,body.locked #projectMediaTracks,body.locked #playhead,body.locked #timelineCueLabels,body.locked #projectWaveformStatus{display:none!important}
+body.locked #timeline:focus-visible{outline:2px solid #66a8ff;outline-offset:4px;border-radius:4px}
+@media(max-width:420px){
+ body.locked .timelineCard{padding:10px}
+ body.locked .timelineTransport>.row{gap:8px}
+ body.locked .timelineTransport #duration{display:none}
+}
+
+
+#copilotShareButton{width:40px;height:40px;padding:5px;display:flex;align-items:center;justify-content:center}#copilotShareButton svg{width:30px;height:30px}body:not(.locked) #copilotShareButton{display:none}#copilotShareLink{width:100%;font-size:14px}.copilotShareActions{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}#copilotQr{position:relative;width:280px;max-width:100%;margin:16px auto;padding:16px;background:white;border-radius:16px}#copilotQr canvas,#copilotQr>img{width:100%;height:auto}#copilotQr .copilotQrLogo{position:absolute;width:22%;height:auto;top:50%;left:50%;transform:translate(-50%,-50%);border:4px solid white;border-radius:8px;background:white}
+
+body.copilotViewer .timelineCard{position:sticky;top:0;z-index:4}body.copilotViewer #timeline{cursor:default;pointer-events:none}body.copilotViewer .showCountdownClock{font-size:2.5rem}.copilotConnection{padding:8px 14px;border-radius:8px;background:#18374e}.copilotConnection.stale{background:#502620;color:#ffc0bb}

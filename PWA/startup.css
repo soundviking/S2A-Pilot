@@ -13,3 +13,8 @@
 
 @-webkit-keyframes s2aStartupLogo{0%{opacity:0;-webkit-transform:translateY(5px)}22%,82%{opacity:1;-webkit-transform:translateY(0)}100%{opacity:0;-webkit-transform:translateY(0)}}@-webkit-keyframes s2aStartupLight{0%,4%{opacity:0}26%,78%{opacity:1}100%{opacity:0}}@-webkit-keyframes s2aStartupGlint{0%,22%{opacity:0;-webkit-transform:translateX(0)}28%{opacity:1}49%{opacity:0;-webkit-transform:translateX(440%)}100%{opacity:0;-webkit-transform:translateX(440%)}}@-webkit-keyframes s2aStartupWord1{0%,24%{opacity:0}40%,83%{opacity:1}100%{opacity:0}}@-webkit-keyframes s2aStartupWord2{0%,31%{opacity:0}47%,83%{opacity:1}100%{opacity:0}}@-webkit-keyframes s2aStartupWord3{0%,38%{opacity:0}54%,83%{opacity:1}100%{opacity:0}}@-webkit-keyframes s2aStartupExit{0%,85%{opacity:1;visibility:visible}100%{opacity:0;visibility:hidden}}
 .s2aStartupSimple .s2aStartupGlint{animation:none;-webkit-animation:none}.s2aStartupSimple .s2aStartupLogoWindow{animation-name:s2aStartupLight;-webkit-animation-name:s2aStartupLight}
+
+/* Copilot shares Pilot's timing and fade, with its orange visual identity. */
+.s2aStartupCopilot .s2aStartupHalo{background:radial-gradient(ellipse closest-side at center,rgba(255,157,38,.72) 0%,rgba(245,119,24,.46) 44%,rgba(204,77,14,.2) 74%,rgba(8,11,16,0) 100%)}
+.s2aStartupCopilot .s2aStartupGlint{background:linear-gradient(110deg,transparent 15%,rgba(255,220,172,.03) 40%,rgba(255,230,194,.14) 50%,rgba(255,220,172,.03) 60%,transparent 85%)}
+.s2aStartupCopilot .s2aStartupSlogan{color:#dfc9b6}

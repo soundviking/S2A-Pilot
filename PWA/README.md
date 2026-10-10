@@ -1,10 +1,10 @@
-# S2A Pilot 1.5.1 / S2A Pilot Bridge 1.3.0
+# S2A Pilot 1.5.2 / S2A Pilot Bridge 1.3.1
 
 🇫🇷 **Français** | 🇬🇧 [English](README.en.md)
 
 ![S2A Pilot](../assets/social-preview.png)
 
-[Version publiée : PWA 1.5.1](../downloads/S2A-Pilot-V1.5.1-PWA.zip) · [Bridge 1.3.0 — Intel / Apple Silicon](../downloads/S2A-Pilot-Bridge-1.3.0-macOS-Universel.zip)
+[Version publiée : PWA 1.5.2](../downloads/S2A-Pilot-V1.5.2-PWA.zip) · [Bridge 1.3.1 — Intel / Apple Silicon](../downloads/S2A-Pilot-Bridge-1.3.1-macOS-Universel.zip)
 
 # S2A Pilot — Guide utilisateur
 
@@ -112,8 +112,8 @@ S2A Pilot conserve son logo et ses ailes cyan. S2A Pilot Bridge reprend le symbo
 
 ## S2A Pilot Bridge et Copilot
 
-Bridge 1.3.0 remplace le nom de la passerelle QLab ; le dossier source `S2A-Copilot` et le bundle ID `fr.s2aproduction.copilote` sont conservés pour éviter une migration inutile. Les formats de conduite et la préférence de langue ne changent pas.
+En Show, le bouton de partage iOS à côté de Disposition ouvre le lien et le QR Copilot. Copilot suit Maverick en lecture seule, sans Lecture/Pause ni Retour au début, avec une animation orange de trois secondes à l’ouverture.
 
-Le nouveau **S2A Copilot** est un prototype de suivi en lecture seule, séparé de Pilot : [prototype et essais](../prototypes/copilot/README.md). Sa connexion locale WebRTC utilise un serveur de signalisation local pour l’appairage QR. L’installation PWA et iOS 13 restent à valider sur appareils physiques avant une intégration.
+Bridge 1.3.1 peut partager le suivi direct QLab des conduites S2A importées et indexées. Le bouton Copilot ouvre le service local et sa page de partage.
 
-En Show, le bouton Lecture/Pause est élargi. Le nom du spectacle apparaît au-dessus du transport, avec la position de la Cue en Maverick. Les points déjà atteints disparaissent en Maverick et restent visibles en Iceman.
+Le lanceur « Démarrer Pilot et Copilot.command » ouvre Pilot avec le service de partage sur ce Mac, sans téléchargement de moteur. L’adresse localhost ne peut pas être utilisée depuis un iPad. Un accès HTTPS approuvé est nécessaire ; le site statique seul ne fournit pas la signalisation. Les essais physiques iPad et sur une conduite QLab réellement jouée restent à valider. Voir [le service Copilot](copilot-service/README.md).

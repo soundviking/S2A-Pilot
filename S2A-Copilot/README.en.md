@@ -1,4 +1,4 @@
-# S2A Pilot Bridge 1.3.0
+# S2A Pilot Bridge 1.3.1
 
 The rights to S2A Pilot and S2A Pilot Bridge belong to the company S2A Production. These applications were developed by Antoine CLOPIER with assistance from ChatGPT.
 
@@ -6,7 +6,7 @@ The rights to S2A Pilot and S2A Pilot Bridge belong to the company S2A Productio
 
 Universal macOS app: Intel and Apple Silicon, macOS 13 or later. Uses the system language initially; the Français / English header switch remembers a manual preference. User-authored project titles, Cue names and descriptions are preserved.
 
-S2A PILOT BRIDGE 1.3.0 — MAC INSTALLATION
+S2A PILOT BRIDGE 1.3.1 — MAC INSTALLATION
 
 Intel and Apple Silicon Macs — macOS 13 or later. No compilation required. Locally signed; not notarized by Apple.
 
@@ -52,13 +52,13 @@ Run `zsh build.sh` with Xcode command-line tools installed. The script builds bo
 Use is permitted; redistribution, publication or hosting for third parties requires prior written permission from S2A Production. See [the license](LICENSE).
 
 
-Version 1.3.0: fixed clipped label behind the language selector.
+Version 1.3.1: fixed clipped label behind the language selector.
 
 
-Version 1.3.0: linked shows are checked against the open QLab workspace every 3 seconds. Missing groups are excluded from the count and visual monitor. Index metadata and media are retained; restored groups can reappear. This check does not mirror title/content edits made in QLab or save QLab automatically.
+Version 1.3.1: linked shows are checked against the open QLab workspace every 3 seconds. Missing groups are excluded from the count and visual monitor. Index metadata and media are retained; restored groups can reappear. This check does not mirror title/content edits made in QLab or save QLab automatically.
 
 
-Version 1.3.0: a red glow fades in and out once per second around the next-action monitor block during its final ten seconds. No blue glow or active-action box is added. The effect disappears when the next action is farther away or the show has ended. With reduced motion, red remains steady.
+Version 1.3.1: a red glow fades in and out once per second around the next-action monitor block during its final ten seconds. No blue glow or active-action box is added. The effect disappears when the next action is farther away or the show has ended. With reduced motion, red remains steady.
 
 
-Version 1.3.0: monitor red outline increased from 2 to 4 points, with a wider, brighter glow. The smooth pulse remains one second long.
+Version 1.3.1: monitor red outline increased from 2 to 4 points, with a wider, brighter glow. The smooth pulse remains one second long.

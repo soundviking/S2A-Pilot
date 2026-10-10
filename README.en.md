@@ -1,10 +1,10 @@
-# S2A Pilot 1.5.1 / S2A Pilot Bridge 1.3.0
+# S2A Pilot 1.5.2 / S2A Pilot Bridge 1.3.1
 
 🇫🇷 [Français](README.md) | 🇬🇧 **English**
 
 ![S2A Pilot](assets/social-preview.png)
 
-[Published PWA 1.5.1](downloads/S2A-Pilot-V1.5.1-PWA.zip) · [Bridge 1.3.0 — Intel / Apple Silicon](downloads/S2A-Pilot-Bridge-1.3.0-macOS-Universel.zip)
+[Published PWA 1.5.2](downloads/S2A-Pilot-V1.5.2-PWA.zip) · [Bridge 1.3.1 — Intel / Apple Silicon](downloads/S2A-Pilot-Bridge-1.3.1-macOS-Universel.zip)
 
 # S2A Pilot — User guide
 
@@ -119,6 +119,8 @@ S2A Pilot uses cyan wings; S2A Pilot Bridge uses orange wings. The companion is 
 
 ## S2A Pilot Bridge and Copilot
 
-Bridge 1.3.0 renames the QLab gateway. Its technical source folder and bundle ID remain unchanged, as do project formats and language preferences. The new [Copilot prototype](prototypes/copilot/README.md) is a separate read-only WebRTC experiment with local QR signaling. Real-device iOS 13 and PWA installation are not yet validated.
+In Pilot Show, the iOS sharing button beside Layout opens the Copilot link and QR, with Copy, Share and Stop sharing. Copilot uses the read-only Maverick display, without Play/Pause or Restart. Its three-second opening uses the Copilot logo and an orange glow, in French or English.
 
-In Show, Play/Pause has a wider button. The show name appears above the transport, with the current Cue position in Maverick. Passed Cue dots disappear in Maverick and stay visible in Iceman.
+Bridge 1.3.1 follows QLab directly for imported S2A shows indexed in the selected workspace. Its Copilot button opens the same viewer. Show formats and language preferences remain compatible.
+
+Sharing requires the [Copilot service](copilot-service/README.md). The included launcher runs a local Mac trial without downloading a runtime. Static hosting alone does not provide signaling. iPad access requires HTTPS; physical-device testing and a live QLab show remain to be validated. The embedded Node.js runtime includes its original licenses.

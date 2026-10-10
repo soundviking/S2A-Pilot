@@ -5,6 +5,10 @@ private let defaultInterfaceLanguage = (Locale.preferredLanguages.first ?? "en")
 private func L(_ text: String) -> String {
     let language = UserDefaults.standard.string(forKey: "s2a-language") ?? defaultInterfaceLanguage
     let catalog: [String: String] = [
+    "Copilot est déjà ouvert dans le navigateur.": "Copilot is already open in your browser.",
+    "Choisis un workspace QLab pour ouvrir Copilot.": "Choose a QLab workspace to open Copilot.",
+    "Le service Copilot est absent de cette version de Bridge.": "The Copilot service is missing from this Bridge version.",
+    "Copilot local : suivi QLab dans le navigateur.": "Local Copilot: follow QLab in your browser.",
     "Lecture": "Play",
     "Pause": "Pause",
     "▶ Lecture": "▶ Play",
@@ -230,7 +234,7 @@ private func L(_ text: String) -> String {
     " prêt": " ready",
     " échec": " failure",
     "dans ": "in ",
-    "Import de conduites S2A Pilot V5 dans QLab 5 — S2A Pilot Bridge 1.3.0": "Import S2A Pilot V5 shows into QLab 5 — S2A Pilot Bridge 1.3.0"
+    "Import de conduites S2A Pilot V5 dans QLab 5 — S2A Pilot Bridge 1.3.1": "Import S2A Pilot V5 shows into QLab 5 — S2A Pilot Bridge 1.3.1"
     ]
     if language != "en" { return catalog.first(where: { $0.value == text })?.key ?? text }
     if let value = catalog[text] { return value }
@@ -380,6 +384,7 @@ struct SavedShowCue: Codable, Identifiable {
     let cues: [ShowCueProject.Cue]
     let imagePaths: [String: String]
     let importedAt: Date
+    var showDuration: Double? = nil
     var id: String { groupID }
 }
 
@@ -426,9 +431,83 @@ final class AppModel: ObservableObject {
     private var monitorPollInFlight = false
     private var monitorGeneration = 0
 
+    private var copilotVisualCache: [String: String] = [:]
+    private var copilotTerminationObserver: NSObjectProtocol?
+    private var copilotProcess: Process?
+    private var copilotStateTimer: Timer?
+    private let copilotRuntimeURL = FileManager.default.temporaryDirectory.appendingPathComponent("S2A-Copilot-runtime-\(UUID().uuidString)", isDirectory: true)
+    private let copilotStateURL = FileManager.default.temporaryDirectory.appendingPathComponent("S2A-Copilot-\(UUID().uuidString).json")
+
+    func openCopilot() {
+        if copilotProcess?.isRunning == true { status = L("Copilot est déjà ouvert dans le navigateur."); return }
+        guard workspace != nil else { errorMessage = L("Choisis un workspace QLab pour ouvrir Copilot."); return }
+        guard let resources = Bundle.main.resourceURL else { return }
+        #if arch(arm64)
+        let architecture = "arm64"
+        #else
+        let architecture = "x64"
+        #endif
+        let service = resources.appendingPathComponent("Copilot")
+        let node = copilotRuntimeURL.appendingPathComponent("bin/node")
+        if !FileManager.default.fileExists(atPath: node.path) {
+            let archive = service.appendingPathComponent("runtime/node-runtime-\(architecture).tar.gz")
+            guard FileManager.default.fileExists(atPath: archive.path) else { errorMessage = L("Le service Copilot est absent de cette version de Bridge."); return }
+            do {
+                try FileManager.default.createDirectory(at: copilotRuntimeURL, withIntermediateDirectories: true)
+                _ = try run("/usr/bin/tar", ["-xzf", archive.path, "-C", copilotRuntimeURL.path])
+            } catch { errorMessage = error.localizedDescription; return }
+        }
+        if copilotTerminationObserver == nil {
+            copilotTerminationObserver = NotificationCenter.default.addObserver(forName: NSApplication.willTerminateNotification, object: nil, queue: .main) { [weak self] _ in self?.copilotProcess?.terminate() }
+        }
+        writeCopilotState()
+        startVisualMonitor()
+        copilotStateTimer?.invalidate()
+        copilotStateTimer = Timer.scheduledTimer(withTimeInterval: 0.25, repeats: true) { [weak self] _ in self?.writeCopilotState() }
+        let process = Process()
+        process.executableURL = node
+        process.arguments = [service.appendingPathComponent("launcher.cjs").path, FileManager.default.temporaryDirectory.path]
+        process.currentDirectoryURL = service
+        process.environment = ProcessInfo.processInfo.environment.merging(["BRIDGE_STATE": copilotStateURL.path, "ENTRY_PATH": "/bridge.html", "PILOT_ROOT": service.appendingPathComponent("PWA").path, "COPILOT_LOCAL_ONLY": "1"]) { _, new in new }
+        do { try process.run(); copilotProcess = process; status = L("Copilot local : suivi QLab dans le navigateur.") }
+        catch { copilotStateTimer?.invalidate(); errorMessage = error.localizedDescription }
+    }
+
+    private func writeCopilotState() {
+        let ordered = (activeShow?.cues ?? []).sorted { $0.time < $1.time }
+        let records: [[String: Any]] = ordered.map { ["id": String($0.index), "number": $0.index, "time": $0.time, "title": $0.name, "description": $0.description ?? ""] }
+        var thumbnails: [[String: String]] = []
+        if let show = activeShow, let folder = workspace?.projectFolder {
+            let current = ordered.lastIndex(where: { $0.time <= visualElapsed + 0.0001 }) ?? 0
+            for cue in ordered.dropFirst(current).prefix(2) {
+                guard let path = show.imagePaths[String(cue.index)] else { continue }
+                let url = path.hasPrefix("/") ? URL(fileURLWithPath: path) : folder.appendingPathComponent(path)
+                let key = show.groupID + ":" + String(cue.index) + ":" + url.path
+                if copilotVisualCache[key] == nil, let image = NSImage(contentsOf: url), let bitmap = NSBitmapImageRep(bitmapDataPlanes: nil, pixelsWide: 320, pixelsHigh: 180, bitsPerSample: 8, samplesPerPixel: 3, hasAlpha: false, isPlanar: false, colorSpaceName: .deviceRGB, bytesPerRow: 0, bitsPerPixel: 0) {
+                    NSGraphicsContext.saveGraphicsState()
+                    NSGraphicsContext.current = NSGraphicsContext(bitmapImageRep: bitmap)
+                    NSColor.black.setFill(); NSRect(x: 0, y: 0, width: 320, height: 180).fill()
+                    let scale = min(320 / max(1, image.size.width), 180 / max(1, image.size.height))
+                    let size = NSSize(width: image.size.width * scale, height: image.size.height * scale)
+                    image.draw(in: NSRect(x: (320 - size.width) / 2, y: (180 - size.height) / 2, width: size.width, height: size.height))
+                    NSGraphicsContext.restoreGraphicsState()
+                    if let data = bitmap.representation(using: .jpeg, properties: [.compressionFactor: 0.55]) { copilotVisualCache[key] = "data:image/jpeg;base64," + data.base64EncodedString() }
+                }
+                if let data = copilotVisualCache[key] { thumbnails.append(["id": String(cue.index), "src": data]) }
+            }
+        }
+        let state: [String: Any] = ["title": activeShow?.title ?? visualStatus, "time": visualElapsed, "duration": max(visualElapsed, activeShow?.showDuration ?? ((ordered.last?.time ?? 0) + 1)), "playing": visualRunning, "language": UserDefaults.standard.string(forKey: "s2a-language") ?? defaultInterfaceLanguage, "cues": records, "visuals": thumbnails, "updatedAt": Date().timeIntervalSince1970 * 1000]
+        if let data = try? JSONSerialization.data(withJSONObject: state) { try? data.write(to: copilotStateURL, options: .atomic) }
+    }
+
     private var extractedURL: URL?
 
     deinit {
+        copilotStateTimer?.invalidate()
+        if let copilotTerminationObserver { NotificationCenter.default.removeObserver(copilotTerminationObserver) }
+        copilotProcess?.terminate()
+        try? FileManager.default.removeItem(at: copilotStateURL)
+        try? FileManager.default.removeItem(at: copilotRuntimeURL)
         workspaceTimer?.invalidate()
         monitorTimer?.invalidate()
         for item in packages {
@@ -1073,7 +1152,7 @@ final class AppModel: ObservableObject {
                 relativeImages[String(cueIndex)] = fullPath
             }
         }
-        return SavedShowCue(groupID: groupID, mediaID: mediaID, audioID: project.resolvedLegacyMedia?.kind == "audio" ? mediaID : nil, title: project.title, cues: project.cues.sorted(by: { $0.time < $1.time }), imagePaths: relativeImages, importedAt: Date())
+        return SavedShowCue(groupID: groupID, mediaID: mediaID, audioID: project.resolvedLegacyMedia?.kind == "audio" ? mediaID : nil, title: project.title, cues: project.cues.sorted(by: { $0.time < $1.time }), imagePaths: relativeImages, importedAt: Date(), showDuration: project.resolvedShowDuration)
     }
 
     private func loadIndexData(for workspace: WorkspaceInfo) throws -> SavedShowCueIndex {
@@ -1329,7 +1408,7 @@ struct ContentView: View {
                 VStack(alignment: .leading, spacing: 3) {
                     Text("S2A Pilot Bridge")
                         .font(.system(size: 20, weight: .semibold))
-                    Text(L("Import de conduites S2A Pilot V5 dans QLab 5 — S2A Pilot Bridge 1.3.0"))
+                    Text(L("Import de conduites S2A Pilot V5 dans QLab 5 — S2A Pilot Bridge 1.3.1"))
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                 }
@@ -1362,6 +1441,10 @@ struct ContentView: View {
                     }
 
                     Spacer()
+
+                    Button { model.openCopilot() } label: { Label("Copilot", systemImage: "square.and.arrow.up") }
+                    .disabled(model.workspace == nil || model.isBusy)
+                    .help(isEnglish ? "Share the QLab show with Copilot" : "Partager le suivi QLab avec Copilot")
 
                     Button(L("Ajouter…")) {
                         model.choosePackage()

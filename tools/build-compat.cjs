@@ -6,7 +6,7 @@ fs.copyFileSync(path.join(vendor,'core-js-bundle/LICENSE'),path.join(out,'LICENS
 fs.copyFileSync(path.join(vendor,'whatwg-fetch/LICENSE'),path.join(out,'LICENSE-fetch.txt'));
 fs.writeFileSync(path.join(out,'polyfills.js'),fs.readFileSync(path.join(vendor,'core-js-bundle/minified.js'),'utf8')+'\n'+fs.readFileSync(path.join(vendor,'whatwg-fetch/dist/fetch.umd.js'),'utf8'));
 const hashes={};
-for(const file of ['i18n.js','app.js','technical-preview.js']){
+for(const file of ['i18n.js','app.js','technical-preview.js','copilot.js']){
  let source=fs.readFileSync(path.join(root,file),'utf8');hashes[file]=crypto.createHash('sha256').update(source).digest('hex');
  if(file==='app.js'){
  source=source.replace("if(startupSaved&&Array.isArray(startupSaved.cues))","if(!startupSaved){const previous=await S2ACompat.legacyProject();if(previous&&Array.isArray(previous.cues)){await importPackage(new File([JSON.stringify({format:'s2a-legacy-project',project:previous})],'compatibility.s2apilot.json',{type:'application/json'}));return;}}if(startupSaved&&Array.isArray(startupSaved.cues))");
@@ -20,9 +20,12 @@ for(const file of ['i18n.js','app.js','technical-preview.js']){
  fs.writeFileSync(path.join(out,file.replace('.js','.es5.js')),result.code+'\n');
 }
 const html=fs.readFileSync(path.join(root,'index.html'),'utf8');let css=html.match(/<style>([\s\S]*?)<\/style>/)[1];
+const receiverStyles='\nbody.copilotViewer .timelineCard{position:sticky;top:0;z-index:4}body.copilotViewer #timeline{cursor:default;pointer-events:none}body.copilotViewer .showCountdownClock{font-size:2.5rem}.copilotConnection{padding:8px 14px;border-radius:8px;background:#18374e}.copilotConnection.stale{background:#502620;color:#ffc0bb}\n';
+fs.writeFileSync(path.join(root,'copilot-ui.css'),css+receiverStyles);
 const vars={bg:'#111318',panel:'#1b1f27',panel2:'#232936',text:'#f4f6f8',muted:'#9da7b5',accent:'#66a8ff',danger:'#ff6b6b',line:'#3b4352',cue:'#ffd166'};
 css=css.replace(/var\(--([\w-]+)(?:,([^)]*))?\)/g,(_,key,fallback)=>vars[key]||fallback||'initial');
 css=css.replace(/#([a-fA-F0-9]{8})\b/g,(_,v)=>'rgba('+parseInt(v.slice(0,2),16)+','+parseInt(v.slice(2,4),16)+','+parseInt(v.slice(4,6),16)+','+(parseInt(v.slice(6,8),16)/255).toFixed(3)+')');
 css+='\n'+fs.readFileSync(path.join(__dirname,'compat-layout.css'),'utf8');fs.writeFileSync(path.join(out,'compat-ui.css'),css);
 fs.writeFileSync(path.join(out,'BUILD.json'),JSON.stringify({compiler:'@babel/standalone 7.28.5',polyfills:['core-js 3.46.0','whatwg-fetch 3.6.20'],target:'ES5 / Safari 9',sourceSHA256:hashes},null,2)+'\n');
-console.log('Built local compatibility scripts and CSS');
+fs.cpSync(path.resolve(__dirname,'../copilot-service'),path.join(root,'copilot-service'),{recursive:true});
+console.log('Built local compatibility scripts, shared CSS and packaged Copilot service');

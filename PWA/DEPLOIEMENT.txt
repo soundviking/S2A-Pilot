@@ -1,4 +1,4 @@
-S2A PILOT 1.5.1
+S2A PILOT 1.5.2
 
 Déploiement : remplacer l’ensemble du dossier /S2A-Pilot/, y compris
 .htaccess, compat/ et companion/. Ne pas remplacer uniquement index.html.

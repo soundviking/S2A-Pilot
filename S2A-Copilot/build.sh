@@ -10,6 +10,17 @@ RESOURCES="$APP/Contents/Resources"
 rm -rf "$BUILD"
 mkdir -p "$MACOS" "$RESOURCES"
 
+# Recover the pinned, licensed runtime from the published companion when building a fresh checkout.
+mkdir -p "$ROOT/Resources/CopilotRuntime"
+for S2A_NODE_ARCH in arm64 x64; do
+  if [[ ! -f "$ROOT/Resources/CopilotRuntime/node-runtime-$S2A_NODE_ARCH.tar.gz" ]]; then
+    /usr/bin/unzip -p "$ROOT/../PWA/companion/S2A-Pilot-Bridge-1.3.1-app.zip" "S2A Pilot Bridge.app/Contents/Resources/Copilot/runtime/node-runtime-$S2A_NODE_ARCH.tar.gz" > "$ROOT/Resources/CopilotRuntime/node-runtime-$S2A_NODE_ARCH.tar.gz"
+  fi
+done
+if [[ ! -f "$ROOT/Resources/CopilotRuntime/LICENSE-Node.txt" ]]; then
+  /usr/bin/unzip -p "$ROOT/../PWA/companion/S2A-Pilot-Bridge-1.3.1-app.zip" "S2A Pilot Bridge.app/Contents/Resources/Copilot/runtime/LICENSE-Node.txt" > "$ROOT/Resources/CopilotRuntime/LICENSE-Node.txt"
+fi
+
 for S2A_ARCH in arm64 x86_64; do
   xcrun swiftc -parse-as-library \
     "$ROOT/Sources/S2ACopilot.swift" \
@@ -48,9 +59,9 @@ cat > "$APP/Contents/Info.plist" <<'PLIST'
   <key>CFBundleIdentifier</key>
   <string>fr.s2aproduction.copilote</string>
   <key>CFBundleVersion</key>
-  <string>14</string>
+  <string>15</string>
   <key>CFBundleShortVersionString</key>
-  <string>1.3.0</string>
+  <string>1.3.1</string>
   <key>CFBundleExecutable</key>
   <string>S2A Pilot Bridge</string>
   <key>CFBundleIconFile</key>
@@ -68,6 +79,17 @@ printf '%s\n' '"NSAppleEventsUsageDescription" = "S2A Pilot Bridge doit contrôl
 printf '%s\n' '"NSAppleEventsUsageDescription" = "S2A Pilot Bridge needs to control QLab to import the show into the selected workspace.";' > "$RESOURCES/en.lproj/InfoPlist.strings"
 cp "$ROOT/LICENSE" "$RESOURCES/LICENSE"
 chmod +x "$MACOS/S2A Pilot Bridge"
+
+COPILOT="$RESOURCES/Copilot"
+mkdir -p "$COPILOT/PWA/compat" "$COPILOT/PWA/copilot" "$COPILOT/PWA/icons" "$COPILOT/runtime"
+cp "$ROOT/../copilot-service/"*.cjs "$COPILOT/"
+for file in copilot.html copilot-ui.css bridge.html bridge-copilot.js startup.js startup.css; do cp "$ROOT/../PWA/$file" "$COPILOT/PWA/"; done
+cp "$ROOT/../PWA/compat/copilot.es5.js" "$COPILOT/PWA/compat/"
+cp "$ROOT/../PWA/copilot/"* "$COPILOT/PWA/copilot/"
+cp "$ROOT/../PWA/icons/s2a-copilot-192.png" "$COPILOT/PWA/icons/"
+cp "$ROOT/Resources/CopilotRuntime/"node-runtime-*.tar.gz "$COPILOT/runtime/"
+cp "$ROOT/Resources/CopilotRuntime/LICENSE-Node.txt" "$COPILOT/runtime/"
+
 
 /usr/bin/codesign --force --deep --sign - "$APP"
 /usr/bin/codesign --verify --deep --strict "$APP"
