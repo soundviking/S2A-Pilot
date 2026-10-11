@@ -1,16 +1,32 @@
-"""Package lightweight Pilot; Bridge remains a separate, unchanged download."""
+"""Package Pilot and the offline Bridge installer. No Copilot service or runtime."""
 from pathlib import Path
-import json, zipfile
-repo = Path(__file__).resolve().parents[1]
-pwa = repo / 'PWA'
-release = json.loads((pwa / 'version.json').read_text())['version']
-# Bridge is distributed only as its separate GitHub download. Never add it to PWA.
-assert not (pwa / 'companion').exists(), 'Remove the obsolete embedded Bridge folder'
-pwa_zip = repo / f'downloads/S2A-Pilot-V{release}-PWA.zip'
-with zipfile.ZipFile(pwa_zip, 'w', zipfile.ZIP_DEFLATED) as archive:
-    for file in sorted(pwa.rglob('*')):
-        if file.is_file() and file.name != '.DS_Store': archive.write(file, file.relative_to(pwa).as_posix())
-for file in [pwa_zip]:
-    assert file.stat().st_size < 100 * 1024 * 1024, 'GitHub file limit exceeded'
-    with zipfile.ZipFile(file) as archive: assert archive.testzip() is None
-    print(file.name, round(file.stat().st_size / 1024 / 1024, 1), 'MiB; verified')
+import json, zipfile, plistlib
+repo=Path(__file__).resolve().parents[1]
+pwa=repo/'PWA'
+app=repo/'S2A-Copilot/build/S2A Pilot Bridge.app'
+release=json.loads((pwa/'version.json').read_text())['version']
+bridge=plistlib.loads((app/'Contents/Info.plist').read_bytes())['CFBundleShortVersionString']
+assert not (app/'Contents/Resources/Copilot').exists()
+assert not list(pwa.rglob('*.php'))
+companion=pwa/'companion';companion.mkdir(exist_ok=True)
+archive_path=companion/f'S2A-Pilot-Bridge-{bridge}-app.zip'
+entries=[]
+with zipfile.ZipFile(archive_path,'w',zipfile.ZIP_STORED) as archive:
+ for file in sorted(app.rglob('*')):
+  if file.is_file():
+   name='S2A Pilot Bridge.app/'+file.relative_to(app).as_posix()
+   archive.write(file,name);entries.append({'path':name,'mode':file.stat().st_mode,'size':file.stat().st_size})
+(companion/'app-files.json').write_text(json.dumps({'version':bridge,'architectures':['arm64','x86_64'],'files':entries},indent=2)+'\n')
+bridge_zip=repo/f'downloads/S2A-Pilot-Bridge-{bridge}-macOS-Universel.zip'
+with zipfile.ZipFile(bridge_zip,'w',zipfile.ZIP_DEFLATED) as archive:
+ for file in sorted(app.rglob('*')):
+  if file.is_file():archive.write(file,'S2A Pilot Bridge.app/'+file.relative_to(app).as_posix())
+ for name in ['INSTALLATION-S2A-Pilot-Bridge.txt','INSTALLATION.en.txt','LICENSE']:archive.write(repo/'S2A-Copilot'/name,name)
+pwa_zip=repo/f'downloads/S2A-Pilot-V{release}-PWA.zip'
+with zipfile.ZipFile(pwa_zip,'w',zipfile.ZIP_DEFLATED) as archive:
+ for file in sorted(pwa.rglob('*')):
+  if file.is_file() and file.name!='.DS_Store':archive.write(file,file.relative_to(pwa).as_posix())
+for file in [archive_path,bridge_zip,pwa_zip]:
+ assert file.stat().st_size<100*1024*1024
+ with zipfile.ZipFile(file) as archive:assert archive.testzip() is None
+ print(file.name,round(file.stat().st_size/1000000,2),'MB; verified')

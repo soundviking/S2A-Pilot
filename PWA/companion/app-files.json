@@ -1,0 +1,44 @@
+{
+  "version": "1.3.2",
+  "architectures": [
+    "arm64",
+    "x86_64"
+  ],
+  "files": [
+    {
+      "path": "S2A Pilot Bridge.app/Contents/Info.plist",
+      "mode": 33188,
+      "size": 881
+    },
+    {
+      "path": "S2A Pilot Bridge.app/Contents/MacOS/S2A Pilot Bridge",
+      "mode": 33261,
+      "size": 3066656
+    },
+    {
+      "path": "S2A Pilot Bridge.app/Contents/Resources/LICENSE",
+      "mode": 33188,
+      "size": 2556
+    },
+    {
+      "path": "S2A Pilot Bridge.app/Contents/Resources/S2APilotBridgeIcon.icns",
+      "mode": 33188,
+      "size": 779147
+    },
+    {
+      "path": "S2A Pilot Bridge.app/Contents/Resources/en.lproj/InfoPlist.strings",
+      "mode": 33188,
+      "size": 124
+    },
+    {
+      "path": "S2A Pilot Bridge.app/Contents/Resources/fr.lproj/InfoPlist.strings",
+      "mode": 33188,
+      "size": 138
+    },
+    {
+      "path": "S2A Pilot Bridge.app/Contents/_CodeSignature/CodeResources",
+      "mode": 33188,
+      "size": 3422
+    }
+  ]
+}

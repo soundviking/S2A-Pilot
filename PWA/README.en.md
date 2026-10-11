@@ -1,10 +1,10 @@
-# S2A Pilot 1.5.3 / S2A Pilot Bridge 1.3.1
+# S2A Pilot 1.5.4 / S2A Pilot Bridge 1.3.2
 
 🇫🇷 [Français](README.md) | 🇬🇧 **English**
 
 ![S2A Pilot](../assets/social-preview.png)
 
-[Published PWA 1.5.3](../downloads/S2A-Pilot-V1.5.3-PWA.zip) · [Bridge 1.3.1 — Intel / Apple Silicon](../downloads/S2A-Pilot-Bridge-1.3.1-macOS-Universel.zip)
+[Published PWA 1.5.4](../downloads/S2A-Pilot-V1.5.4-PWA.zip) · [Bridge 1.3.2 — Intel / Apple Silicon](../downloads/S2A-Pilot-Bridge-1.3.2-macOS-Universel.zip)
 
 # S2A Pilot — User guide
 
@@ -63,7 +63,7 @@ The output button becomes red while the video window is active. Allow pop-ups if
 
 ## Save, open and export
 
-Edits are saved locally on this device, including text while typing. Local saves are specific to the browser, profile and site address. Use **Save as…** for a portable `.s2apilot.zip` backup and transfer. It includes show data, media, visuals and the PDF. S2A Pilot Bridge is downloaded separately from GitHub and is not embedded in the export. Do not delete media folders before importing into QLab. Open restores a package.
+Edits are saved locally on this device, including text while typing. Local saves are specific to the browser, profile and site address. Use **Save as…** for a portable `.s2apilot.zip` backup and transfer. It includes show data, media, visuals and the PDF. S2A Pilot Bridge without Copilot is included in companion/ in the export and is also available on GitHub. Do not delete media folders before importing into QLab. Open restores a package.
 
 ## Cue sheet PDF
 
@@ -73,7 +73,7 @@ Edits are saved locally on this device, including text while typing. Local saves
 
 For local Mac testing, extract the PWA and run **Start S2A Pilot.command** (or its French equivalent). Stop any older local server before launching a new folder. Directly opening index.html supports PDF preview, but use the local launcher or HTTPS for all PWA features and show export.
 
-For hosting, deploy the complete folder contents over HTTPS, including hidden `.htaccess`, `i18n.js`, both manifest files, all code, icons, assets. Remove any obsolete companion folder left by an older deployment. Configure index.html as the directory index, then share `/qlab/` without an index.html suffix.
+For hosting, deploy the complete folder contents over HTTPS, including hidden `.htaccess`, `i18n.js`, both manifest files, all code, icons, assets. Deploy companion/ as well: it supplies the Bridge installer for show exports. Configure index.html as the directory index, then share `/qlab/` without an index.html suffix.
 
 After deployment, purge Cloudflare’s cache for the app folder and remove rules forcing long cache lifetimes for HTML, JS, JSON or the service worker. The provided `.htaccess` applies no-store at an Apache origin with mod_headers; edge rules can override it. Open `actualiser.html` to replace old app caches without deleting IndexedDB projects. Do not clear site data to fix a stale version.
 
@@ -117,12 +117,5 @@ Older browsers use the full interface through an ES5 compatibility engine. Light
 
 S2A Pilot uses cyan wings; S2A Pilot Bridge uses orange wings. The companion is now named S2A Pilot Bridge in both languages. The S2A Production logo is unchanged.
 
-## S2A Pilot Bridge and Copilot
 
-In Show, the iOS sharing button beside Layout opens the Copilot link and QR. Copilot follows Maverick in read-only mode, without Play/Pause or Restart, with a three-second orange opening animation.
-
-Bridge 1.3.1 shares the direct QLab monitor for imported, indexed S2A shows. Its Copilot button opens the local service and sharing page.
-
-On HTTPS-hosted Pilot, the sharing button creates the Copilot link and QR directly: no Mac, Bridge or Node installation is needed. Also deploy `copilot-api.php` on PHP 8 or newer hosting with a writable private temporary directory. The relay sends Cues, countdown and thumbnails; it sends no audio/video files and accepts no playback commands. Keep Pilot open, in the foreground and connected. The link grants access to the show: share it only with the intended viewers. Stop sharing revokes the link; it expires after at most six hours. During a connection outage, Copilot freezes its information and hides the countdown until recovery.
-
-The local “Start Pilot and Copilot.command” launcher remains optional for Mac testing, using installed Node.js 18+ or Bridge already installed in Applications. Bridge is a separate GitHub download, absent from both the PWA and exported show ZIPs. Localhost links work only on that computer. Bridge’s QLab sharing retains its local service. Physical iPad and live QLab tests remain to be confirmed. See [the Copilot service](copilot-service/README.md).
+Copilot sharing is suspended in this version. Pilot has no sharing button or PHP/Node relay; Bridge has no QR feature or bundled server. The multimedia export format is preserved for QLab import. When replacing an older deployment, remove its copilot-api.php, copilot-service/, copilot.html and Bridge sharing pages.

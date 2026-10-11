@@ -1,0 +1,16 @@
+{
+  "version": "1.5.4",
+  "bridge": "1.3.2",
+  "date": "2026-10-11",
+  "checks": [
+    "Pilot and Bridge contain no Copilot UI, PHP relay or Node runtime",
+    "Bridge universal arm64/x86_64 build and ad-hoc signature verified",
+    "Chrome/WebKit real ZIP save, import, audio deduplication, visuals and PDF; cancel and download fallback",
+    "Export without network: Bridge installer included and service-worker cached",
+    "Bridge production Swift model decodes both browsers exports; media and visuals exist; timing preserved",
+    "Production package reading and QLab import methods unchanged"
+  ],
+  "limitations": [
+    "Live QLab import and physical iPad not tested"
+  ]
+}
