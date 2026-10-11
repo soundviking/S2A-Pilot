@@ -1,0 +1,14 @@
+{
+  "version": "1.5.5",
+  "bridge": "1.3.2",
+  "date": "2026-10-11",
+  "checks": [
+    "Bridge promotional link removed from project controls",
+    "Project export and Bridge / QLab import code unchanged",
+    "Chrome and WebKit: ZIP save, import, media, PDF, cancellation, download fallback and offline export with Bridge",
+    "Bridge production decoder validates both browser exports, media, visuals and timings"
+  ],
+  "limitations": [
+    "Live QLab import and physical iPad not tested"
+  ]
+}

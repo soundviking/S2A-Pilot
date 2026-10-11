@@ -1,10 +1,10 @@
-# S2A Pilot 1.5.4 / S2A Pilot Bridge 1.3.2
+# S2A Pilot 1.5.5 / S2A Pilot Bridge 1.3.2
 
 🇫🇷 [Français](README.md) | 🇬🇧 **English**
 
 ![S2A Pilot](../assets/social-preview.png)
 
-[Published PWA 1.5.4](../downloads/S2A-Pilot-V1.5.4-PWA.zip) · [Bridge 1.3.2 — Intel / Apple Silicon](../downloads/S2A-Pilot-Bridge-1.3.2-macOS-Universel.zip)
+[Published PWA 1.5.5](../downloads/S2A-Pilot-V1.5.5-PWA.zip) · [Bridge 1.3.2 — Intel / Apple Silicon](../downloads/S2A-Pilot-Bridge-1.3.2-macOS-Universel.zip)
 
 # S2A Pilot — User guide
 
