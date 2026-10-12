@@ -1,10 +1,10 @@
-# S2A Pilot 1.5.5 / S2A Pilot Bridge 1.3.2
+# S2A Pilot 1.5.6 / S2A Pilot Bridge 1.3.3
 
 🇫🇷 **Français** | 🇬🇧 [English](README.en.md)
 
 ![S2A Pilot](assets/social-preview.png)
 
-[Version publiée : PWA 1.5.5](downloads/S2A-Pilot-V1.5.5-PWA.zip) · [Bridge 1.3.2 — Intel / Apple Silicon](downloads/S2A-Pilot-Bridge-1.3.2-macOS-Universel.zip)
+[Version publiée : PWA 1.5.6](downloads/S2A-Pilot-V1.5.6-PWA.zip) · [Bridge 1.3.3 — Intel / Apple Silicon](downloads/S2A-Pilot-Bridge-1.3.3-macOS-Universel.zip)
 
 # S2A Pilot — Guide utilisateur
 
@@ -24,6 +24,8 @@ Au premier lancement, une aide en quatre étapes présente la création de la co
 
 
 Sur iPhone, le visuel est en haut à gauche, le titre à sa droite et la description occupe toute la largeur en dessous. En Iceman, la Cue suivante réserve le haut droit au décompte et place son titre et sa description en dessous. Dans les deux styles, le chrono de la Timeline reste discret et le décompte est plus grand. Le halo de démarrage s’efface avant ses bords pour éviter toute coupure. En portrait sur iPad, Iceman place les descriptions de l’active et de la suivante sur toute la largeur en bas, avec le décompte en haut à droite de la suivante. En Show, le transport tient sur une ligne : Lecture/Pause (icône), Retour au début, progression et chrono. En Maverick, le décompte reste au-dessus ; en Iceman, il reste dans la Cue suivante.
+
+En Iceman, la vue se recentre automatiquement sur l’active et la suivante au changement de Cue. Le défilement manuel reste libre entre deux changements. Si les deux Cues dépassent la hauteur visible, l’active s’aligne sous la timeline. En Edit, ouvrir une Cue depuis la liste ou son repère recentre ses réglages ; un panneau trop haut s’aligne en haut. La saisie ne provoque pas de recentrage. Bridge conserve les menus Application et Fenêtre.
 
 ## Création et édition
 

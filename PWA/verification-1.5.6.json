@@ -1,0 +1,16 @@
+{
+  "version": "1.5.6",
+  "bridge": "1.3.3",
+  "date": "2026-10-12",
+  "checks": [
+    "Chrome/WebKit: Iceman centering with 200 Cues at 1440, 768 and 393 px; manual scrolling and layout switching",
+    "Chrome/WebKit: Edit opening centered, tall panels top aligned, typing does not recenter",
+    "Chrome/WebKit: ZIP save/import, media deduplication, visuals, PDF, cancellation, download fallback and offline export",
+    "Bridge universal arm64/x86_64 build and ad-hoc signature verified",
+    "Bridge menu filtering checked in French and English; application and Window menus retained",
+    "Bridge production decoder reads both browser exports with media, visuals, timings and audio settings preserved"
+  ],
+  "limitations": [
+    "Live QLab import and physical iPad/iPhone not tested"
+  ]
+}

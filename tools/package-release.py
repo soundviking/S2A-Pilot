@@ -16,6 +16,8 @@ with zipfile.ZipFile(archive_path,'w',zipfile.ZIP_STORED) as archive:
   if file.is_file():
    name='S2A Pilot Bridge.app/'+file.relative_to(app).as_posix()
    archive.write(file,name);entries.append({'path':name,'mode':file.stat().st_mode,'size':file.stat().st_size})
+for stale in companion.glob('S2A-Pilot-Bridge-*-app.zip'):
+ if stale!=archive_path:stale.unlink()
 (companion/'app-files.json').write_text(json.dumps({'version':bridge,'architectures':['arm64','x86_64'],'files':entries},indent=2)+'\n')
 bridge_zip=repo/f'downloads/S2A-Pilot-Bridge-{bridge}-macOS-Universel.zip'
 with zipfile.ZipFile(bridge_zip,'w',zipfile.ZIP_DEFLATED) as archive:

@@ -17,3 +17,7 @@ Les sources restent `PWA/app.js`, `PWA/i18n.js` et `PWA/technical-preview.js`. L
 ## Export avec Bridge
 
 test-pilot-export.cjs vérifie la sauvegarde, le PDF, les médias et leur réouverture dans Pilot ainsi que la présence de Bridge sans serveur dans le ZIP. Le format conduite.json version 5 reste compatible avec Bridge / QLab.
+
+## Recentrage des Cues
+
+test-cue-centering.cjs contrôle une conduite de 200 Cues dans Chrome et WebKit : Iceman sur ordinateur, iPad et iPhone simulés, défilement manuel, première/dernière Cue, changement de disposition et ouverture en Edit sans recentrage pendant la saisie. Définir S2A_TEST_URL pour le serveur local, S2A_PLAYWRIGHT pour le module Playwright et S2A_CHROME si Chrome doit être fourni explicitement.

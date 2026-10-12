@@ -1,10 +1,10 @@
-# S2A Pilot 1.5.5 / S2A Pilot Bridge 1.3.2
+# S2A Pilot 1.5.6 / S2A Pilot Bridge 1.3.3
 
 🇫🇷 [Français](README.md) | 🇬🇧 **English**
 
 ![S2A Pilot](../assets/social-preview.png)
 
-[Published PWA 1.5.5](../downloads/S2A-Pilot-V1.5.5-PWA.zip) · [Bridge 1.3.2 — Intel / Apple Silicon](../downloads/S2A-Pilot-Bridge-1.3.2-macOS-Universel.zip)
+[Published PWA 1.5.6](../downloads/S2A-Pilot-V1.5.6-PWA.zip) · [Bridge 1.3.3 — Intel / Apple Silicon](../downloads/S2A-Pilot-Bridge-1.3.3-macOS-Universel.zip)
 
 # S2A Pilot — User guide
 
@@ -24,6 +24,8 @@ On first launch, a four-step guide introduces show creation, Cue settings, Show 
 
 
 On iPhone, each Cue places its visual at the upper left, its title to the right and its description across the full width below. In Iceman, the next Cue keeps its countdown at the upper right, with its title and description below. Both styles use a smaller Timeline clock and a larger countdown. The startup halo fades before its edges to prevent clipping. On iPad in portrait, Iceman places the active and next Cue descriptions across the full width below, with the next countdown at the upper right. The compact Show transport keeps its controls, progress and clock on one row.
+
+In Iceman, the view automatically centers the active and next Cues when the active Cue changes. Manual scrolling remains available between changes. If both Cues exceed the visible height, the active Cue aligns below the timeline. In Edit, opening a Cue from the list or its timeline marker centers its settings; tall panels align at the top. Typing does not trigger recentering. Bridge keeps only its application and Window menus.
 
 ## Prepare a show
 

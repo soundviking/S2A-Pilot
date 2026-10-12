@@ -1700,8 +1700,37 @@ struct WindowAccessor: NSViewRepresentable {
         }
     }
 }
+// Bridge only needs the application menu and window management.
+final class BridgeAppDelegate: NSObject, NSApplicationDelegate {
+    func applicationDidFinishLaunching(_ notification: Notification) {
+        scheduleMenuCleanup()
+    }
+
+    func applicationDidBecomeActive(_ notification: Notification) {
+        scheduleMenuCleanup()
+    }
+
+    private func scheduleMenuCleanup() {
+        DispatchQueue.main.async {
+            guard let menu = NSApp.mainMenu else { return }
+            Self.simplify(menu, keepingWindowMenu: NSApp.windowsMenu)
+            NSApp.helpMenu = nil
+        }
+    }
+
+    static func simplify(_ menu: NSMenu, keepingWindowMenu windowMenu: NSMenu?) {
+        guard let applicationItem = menu.items.first else { return }
+        for item in menu.items where item !== applicationItem {
+            if windowMenu == nil || item.submenu !== windowMenu {
+                menu.removeItem(item)
+            }
+        }
+    }
+}
+
 @main
 struct ShowCueForQLabApp: App {
+    @NSApplicationDelegateAdaptor(BridgeAppDelegate.self) private var appDelegate
     @StateObject private var model = AppModel()
 
     var body: some Scene {
