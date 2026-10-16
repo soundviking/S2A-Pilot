@@ -1,0 +1,448 @@
+0	WELCOME	BIENVENIDA	WILLKOMMEN
+1	Prepare. Run. Perform.	Prepara. Dirige. Actúa.	Vorbereiten. Steuern. Spielen.
+2	The illustrated user manual for S2A Pilot and S2A Pilot Bridge.	El manual de uso ilustrado de S2A Pilot y S2A Pilot Bridge.	Das illustrierte Benutzerhandbuch für S2A Pilot und S2A Pilot Bridge.
+3	Pilot 1.5.6 · Demo show · Safari on Mac.	Pilot 1.5.6 · Espectáculo de demostración · Safari en Mac.	Pilot 1.5.6 · Demo-Ablauf · Safari auf dem Mac.
+4	<b>From your first Cue to the show.</b> Create a show, add media and follow the instructions in Show. If you use QLab, transfer your work with Bridge.	<b>De la primera Cue al espectáculo.</b> Crea una secuencia, añade medios y sigue las instrucciones en Show. Si usas QLab, transfiere tu trabajo con Bridge.	<b>Von der ersten Cue bis zur Show.</b> Erstelle einen Ablauf, füge Medien hinzu und folge den Anweisungen in Show. Mit Bridge überträgst du deine Arbeit bei Bedarf nach QLab.
+7	Prepare and follow a show in your browser.	Preparar y seguir un espectáculo en el navegador.	Einen Ablauf im Browser vorbereiten und verfolgen.
+8	Import the show into QLab 5 on Mac.	Importar el espectáculo en QLab 5 en Mac.	Den Ablauf auf dem Mac in QLab 5 importieren.
+9	Edition 1.0 · 15 October 2026	Edición 1.0 · 15 de octubre de 2026	Ausgabe 1.0 · 15. Oktober 2026
+10	A general workflow illustrated with the real Pilot interface in Safari on Mac. File selection and save dialogs depend on your device. Bridge workflow illustrations are explanatory diagrams.	Un recorrido genérico ilustrado con la interfaz real de Pilot en Safari en Mac. Las ventanas para elegir y guardar archivos dependen del dispositivo. Las ilustraciones del recorrido Bridge son diagramas explicativos.	Ein allgemeiner Arbeitsablauf mit Aufnahmen der echten Pilot-Oberfläche in Safari auf dem Mac. Dateiauswahl und Speicherdialoge hängen vom Gerät ab. Die Bridge-Abbildungen sind erklärende Ablaufdiagramme.
+11	CONTENTS	ÍNDICE	INHALT
+12	Your workflow	Tu recorrido	Dein Arbeitsablauf
+13	You can also open chapters using this PDF’s bookmarks.	También puedes acceder a los capítulos desde los marcadores de este PDF.	Die Kapitel sind auch über die Lesezeichen dieses PDFs erreichbar.
+14	Get started quickly	Para empezar rápidamente	Schneller Einstieg
+15	Follow chapters 02, 03, 04 and 08, then switch to Show in chapter 09. Read the Bridge section later if you use QLab.	Sigue los capítulos 02, 03, 04 y 08; después pasa a Show en el capítulo 09. Puedes leer la parte Bridge más adelante si usas QLab.	Folge den Kapiteln 02, 03, 04 und 08 und wechsle dann in Kapitel 09 zu Show. Den Bridge-Teil brauchst du nur, wenn du QLab verwendest.
+16	01 · DISCOVER PILOT	01 · DESCUBRIR PILOT	01 · PILOT KENNENLERNEN
+17	Two modes, one show	Dos modos, un espectáculo	Zwei Modi, ein Ablauf
+18	Edit is for preparation. Show is for following the performance.	Edit sirve para preparar. Show sirve para seguir el espectáculo.	Edit dient der Vorbereitung. Show begleitet die Vorstellung.
+19	In Edit, project controls stay above the Timeline.	En Edit, los controles del proyecto están encima de la línea de tiempo.	In Edit stehen die Projektbefehle über der Timeline.
+20	The Timeline displays times, Cues and media.	La línea de tiempo representa los tiempos, las Cues y los medios.	Die Timeline zeigt Zeiten, Cues und Medien.
+21	Prepare in Edit	Preparar en Edit	In Edit vorbereiten
+22	Name the show, create Cues and add files. A Cue is a timed marker with a title and optional instructions, visual and media.	Da un nombre al espectáculo, crea las Cues y añade archivos. Una Cue es un punto temporal con título y, opcionalmente, instrucciones, imagen y medios.	Benenne den Ablauf, erstelle Cues und füge Dateien hinzu. Eine Cue ist eine Zeitmarke mit Titel und optionalen Anweisungen, einem Bild und Medien.
+23	Follow in Show	Seguir en Show	In Show verfolgen
+24	The active and upcoming Cues become easier to read. Editing tools are hidden. Use Edit to return to preparation.	Las Cues activa y siguiente se leen mejor. Las herramientas de edición se ocultan. Edit permite volver a preparar.	Aktive und nächste Cue werden übersichtlicher. Die Bearbeitungswerkzeuge sind ausgeblendet. Mit Edit kehrst du zur Vorbereitung zurück.
+25	A show is more than a PDF	Un espectáculo no es solo un PDF	Ein Ablauf ist mehr als ein PDF
+26	The ZIP keeps the project and its files for reopening. The PDF is a cue sheet to read or print.	El ZIP conserva el proyecto y sus archivos para volver a abrirlo. El PDF es una hoja de Cues para consultar o imprimir.	Das ZIP enthält das Projekt und seine Dateien zum erneuten Öffnen. Das PDF ist ein Ablaufplan zum Lesen oder Drucken.
+27	02 · YOUR FIRST SHOW	02 · PRIMER ESPECTÁCULO	02 · DER ERSTE ABLAUF
+28	Create your first act	Crear tu primer número	Die erste Darbietung erstellen
+29	Manual example: a 3 min 20 soundtrack and six Cues.	Ejemplo del manual: música de 3 min 20 y seis Cues.	Beispiel im Handbuch: 3 Min. 20 Musik und sechs Cues.
+30	Controls for creating, opening and saving.	Controles para crear, abrir y guardar.	Befehle zum Erstellen, Öffnen und Speichern.
+31	Choose New	Elegir Nuevo	Neu wählen
+32	Start an empty show. Before replacing important work, export it using Save as…	Empieza con un espectáculo vacío. Antes de sustituir un trabajo importante, expórtalo con Guardar como…	Beginne einen leeren Ablauf. Exportiere wichtige Arbeit vor dem Ersetzen mit Speichern unter…
+33	Enter the show name	Indicar el nombre del número	Die Darbietung benennen
+34	Replace the suggested name with a recognisable title, such as “S2A Gala - discovery”.	Sustituye el nombre propuesto por uno reconocible, como «Gala S2A - descubrimiento».	Ersetze den vorgeschlagenen Namen durch einen eindeutigen Titel, etwa „S2A-Gala - Einstieg“.
+35	Add your first Cue	Añadir la primera Cue	Die erste Cue hinzufügen
+36	Use Back to start to return to zero, then click Cue. Open its row to add a title and instructions.	Vuelve a cero con Volver al inicio y pulsa Cue. Abre su fila para darle título e instrucciones.	Gehe mit Zum Anfang auf null zurück und klicke auf Cue. Öffne die Zeile und ergänze Titel und Anweisungen.
+37	Timing sets the pace	El tiempo marca el ritmo	Die Zeiten geben den Takt vor
+38	Cues are triggered at their positions in the show. Set their times, then test the sequence before the performance.	Las Cues se activan según su posición en el espectáculo. Define sus tiempos y prueba la secuencia antes de la función.	Cues werden an ihren Positionen im Ablauf ausgelöst. Lege die Zeiten fest und teste die Abfolge vor der Vorstellung.
+39	03 · CREATE AND ORGANISE	03 · CREAR Y ORGANIZAR	03 · ERSTELLEN UND ORDNEN
+40	Fill in a Cue	Completar una Cue	Eine Cue ausfüllen
+41	Click its row to open its settings.	Pulsa su fila para abrir sus ajustes.	Klicke auf die Zeile, um die Einstellungen zu öffnen.
+42	A first Cue opened in Edit.	Una primera Cue abierta en Edit.	Eine erste Cue, in Edit geöffnet.
+43	Set the time and title	Indicar el tiempo y el título	Zeit und Titel angeben
+44	The time field sets the Cue start. Give it a title you recognise immediately: “Curtain opening”, “Blue lighting”…	El campo de tiempo fija el inicio. El título debe identificarla enseguida: «Apertura del telón», «Ambiente azul»…	Das Zeitfeld legt den Cue-Start fest. Wähle einen sofort erkennbaren Titel: „Vorhang auf“, „Blaues Licht“…
+45	Write useful instructions	Escribir instrucciones útiles	Hilfreiche Anweisungen schreiben
+46	Describe the action to perform. Example: “Open the curtain. Bring up the front lights.”	Describe la acción esperada. Ejemplo: «Abrir el telón. Encender las luces frontales».	Beschreibe die gewünschte Aktion. Beispiel: „Vorhang öffnen. Frontlicht einschalten.“
+47	Add a visual if needed	Añadir una imagen si hace falta	Bei Bedarf ein Bild hinzufügen
+48	Add visual selects a reference image. It helps identify the moment; it does not replace an audio or video file to be played.	Añadir imagen elige una imagen de referencia. Ayuda a identificar el momento; no sustituye un archivo de audio o vídeo para reproducir.	Bild hinzufügen wählt ein Orientierungsbild. Es hilft beim Erkennen des Moments und ersetzt keine abzuspielende Audio- oder Videodatei.
+49	Find the open panel	Encontrar el panel abierto	Das geöffnete Feld finden
+50	Pilot centres the selected Cue for readability. If the panel is very tall, its top is brought into view. Typing does not continuously recenter it.	Pilot centra la Cue seleccionada para leerla mejor. Si el panel es muy alto, muestra su inicio. Al escribir no se recentra continuamente.	Pilot zentriert die ausgewählte Cue. Bei einem sehr hohen Feld wird dessen Anfang sichtbar gemacht. Beim Tippen wird nicht ständig neu zentriert.
+51	Organise without losing track	Organizar sin perderse	Übersichtlich organisieren
+52	The list follows Cue times.	La lista sigue los tiempos de las Cues.	Die Liste folgt den Cue-Zeiten.
+53	Six Cues with their times and titles.	Seis Cues con sus tiempos y títulos.	Sechs Cues mit Zeiten und Titeln.
+54	Adjust a Cue’s position	Ajustar la posición de una Cue	Die Position einer Cue anpassen
+55	Change its time or use its drag handle. Check the time afterwards and review the resulting order.	Modifica su tiempo o usa el asa de arrastre. Comprueba el tiempo después y revisa el orden obtenido.	Ändere die Zeit oder nutze den Ziehgriff. Prüfe danach die Zeit und die entstandene Reihenfolge.
+56	Duplicate a marker	Duplicar un punto	Eine Cue duplizieren
+57	Open the Cue and choose Duplicate. The copy keeps the settings; give it its own title and time.	Abre la Cue y elige Duplicar. La copia conserva los ajustes; dale después su propio título y tiempo.	Öffne die Cue und wähle Duplizieren. Die Kopie übernimmt die Einstellungen; gib ihr anschließend einen eigenen Titel und eine eigene Zeit.
+58	Undo an action	Corregir una acción	Eine Änderung korrigieren
+59	Undo and Redo in the Edit header let you move through available changes in the history.	Deshacer y Rehacer en la cabecera Edit permiten recorrer los cambios disponibles en el historial.	Rückgängig und Wiederholen in der Edit-Kopfzeile führen durch die im Verlauf verfügbaren Änderungen.
+60	Automatic numbering	Numeración automática	Automatische Nummerierung
+61	The number helps you find your place. Clear titles and consistent times matter most.	El número ayuda a orientarse. Lo principal son títulos claros y tiempos coherentes.	Die Nummer hilft bei der Orientierung. Klare Titel und stimmige Zeiten sind wichtiger.
+62	Delete a Cue	Eliminar una Cue	Eine Cue löschen
+63	The bin is directly accessible on every Edit row.	La papelera está disponible directamente en cada fila Edit.	Der Papierkorb ist direkt in jeder Edit-Zeile erreichbar.
+64	Pilot asks for confirmation in a dialog matching the app theme.	Pilot pide confirmación en una ventana con el tema de la aplicación.	Pilot bittet in einem Dialog im App-Design um Bestätigung.
+65	Find the correct row	Identificar la fila correcta	Die richtige Zeile finden
+66	Check its number, time and title before clicking the red bin.	Comprueba su número, tiempo y título antes de pulsar la papelera roja.	Prüfe Nummer, Zeit und Titel, bevor du auf den roten Papierkorb klickst.
+67	Read the confirmation	Leer la confirmación	Die Bestätigung lesen
+68	The dialog identifies the Cue. Choose Cancel to keep it or Delete to confirm.	La ventana identifica la Cue. Elige Cancelar para conservarla o Eliminar para confirmar.	Der Dialog nennt die betroffene Cue. Mit Abbrechen bleibt sie erhalten, mit Löschen bestätigst du den Vorgang.
+69	Check the list after deletion	Revisar la lista después de eliminar	Die Liste nach dem Löschen prüfen
+70	Review Cue order and make sure no essential media or marker was removed.	Revisa el orden y comprueba que no se haya eliminado un medio o punto necesario.	Prüfe die Reihenfolge und ob keine benötigten Medien oder Zeitmarken entfernt wurden.
+71	Before a major reorganisation	Antes de reorganizar mucho	Vor einer größeren Neuordnung
+72	Keep a show ZIP so you can recover a complete version with its media.	Conserva un ZIP para recuperar una versión completa con sus medios.	Bewahre ein Ablauf-ZIP auf, um eine vollständige Fassung mit Medien wiederherzustellen.
+73	04 · ADD MUSIC	04 · AÑADIR MÚSICA	04 · MUSIK HINZUFÜGEN
+74	Import the audio file	Importar el archivo de audio	Die Audiodatei importieren
+75	The button to use is called “Music / Video”.	El botón se llama «Música / Vídeo».	Der benötigte Button heißt „Musik / Video“.
+76	Import controls are in the Timeline in Edit.	Los controles de importación están en la línea de tiempo en Edit.	Die Importbefehle befinden sich in Edit in der Timeline.
+77	Choose the start time	Elegir el inicio	Den Startzeitpunkt wählen
+78	The media is added at the current time. For music at the start of the act, use Back to start first.	El medio se añade en el tiempo actual. Para música al principio, usa antes Volver al inicio.	Das Medium wird an der aktuellen Zeit eingefügt. Nutze für Musik am Anfang zuerst Zum Anfang.
+79	Click Music / Video	Pulsar Música / Vídeo	Auf Musik / Video klicken
+80	Find and select your track in your device’s file picker.	Busca y selecciona la música en el selector de archivos del dispositivo.	Suche und wähle dein Stück im Dateiauswahldialog des Geräts.
+81	Wait for Pilot to return	Esperar el regreso a Pilot	Auf die Rückkehr zu Pilot warten
+82	Import creates a new Cue containing the media. Rename it if the filename is unclear.	La importación crea una nueva Cue con el medio. Renómbrala si el nombre del archivo no es claro.	Der Import erstellt eine neue Cue mit dem Medium. Benenne sie um, falls der Dateiname nicht aussagekräftig ist.
+83	Prepare your files	Preparar los archivos	Die Dateien vorbereiten
+84	Your music must be available as a file on the device. Pilot does not directly access the iOS Music app library.	La música debe estar disponible como archivo en el dispositivo. Pilot no accede directamente a la biblioteca de Música de iOS.	Die Musik muss auf dem Gerät als Datei verfügbar sein. Pilot greift nicht direkt auf die Mediathek der iOS-Musik-App zu.
+85	Check the import	Verificar la importación	Den Import prüfen
+86	Example: Ouverture-du-spectacle.wav, duration 03:20.	Ejemplo: Ouverture-du-spectacle.wav, duración 03:20.	Beispiel: Ouverture-du-spectacle.wav, Dauer 03:20.
+87	A real 3 min 20 WAV file imported into Pilot.	Un archivo WAV real de 3 min 20 importado en Pilot.	Eine echte WAV-Datei mit 3 Min. 20, in Pilot importiert.
+88	Read the name and duration	Leer el nombre y la duración	Name und Dauer lesen
+89	The AUDIO header shows the file and its selected duration. Check that it is the right track.	La cabecera AUDIO muestra el archivo y su duración útil. Comprueba que sea la música correcta.	Die AUDIO-Zeile zeigt Datei und verwendete Dauer. Prüfe, ob es das richtige Stück ist.
+90	Listen to the file alone	Escuchar solo el archivo	Nur die Datei anhören
+91	The small Play button inside the media starts its preview, independently of the main show playback.	El pequeño botón Reproducir dentro del medio inicia su vista previa, independiente de la reproducción general.	Die kleine Wiedergabetaste im Medium startet dessen Vorschau unabhängig von der allgemeinen Show-Wiedergabe.
+92	Test the whole show	Probar el espectáculo completo	Den gesamten Ablauf testen
+93	Stop the preview, then use main playback to check the start time.	Detén la vista previa y usa la reproducción general para comprobar el inicio.	Stoppe die Vorschau und prüfe den Einsatz mit der allgemeinen Wiedergabe.
+94	An accepted format is not enough	Un formato aceptado no basta	Ein akzeptiertes Format reicht nicht
+95	Playback also depends on the codec and browser. Test your files on the show device with the actual sound setup.	La reproducción también depende del códec y del navegador. Prueba los archivos en el dispositivo del espectáculo con el sonido real.	Die Wiedergabe hängt auch von Codec und Browser ab. Teste die Dateien auf dem vorgesehenen Gerät mit der tatsächlichen Tonanlage.
+96	05 · MEDIA SETTINGS	05 · AJUSTAR UN MEDIO	05 · MEDIEN EINSTELLEN
+97	Choose the start and end	Elegir el principio y el final	Anfang und Ende wählen
+98	IN and OUT are positions within the file.	IN y OUT son posiciones dentro del archivo.	IN und OUT sind Positionen innerhalb der Datei.
+99	The audio editor and waveform handles.	El editor de audio y los tiradores de la forma de onda.	Der Audioeditor und die Wellenform-Griffe.
+100	Set IN	Ajustar IN	IN einstellen
+101	IN defines where playback starts in the file. At 00:00.0, Pilot starts at the beginning.	IN indica dónde empezar en el archivo. A 00:00.0, Pilot usa el principio.	IN bestimmt den Start innerhalb der Datei. Bei 00:00.0 beginnt Pilot am Anfang.
+102	Set OUT	Ajustar OUT	OUT einstellen
+103	OUT defines where file playback stops. Here, 03:20.0 is the end of the music.	OUT indica dónde detener el archivo. Aquí, 03:20.0 corresponde al final de la música.	OUT bestimmt das Ende der Dateiwiedergabe. Hier entspricht 03:20.0 dem Musikende.
+104	Listen to your selection	Escuchar el fragmento elegido	Den gewählten Ausschnitt anhören
+105	Use the media Play button to check the cut points. Yellow handles and waveform zoom help you refine them.	Usa Reproducir en el medio para comprobar los cortes. Los tiradores amarillos y el zoom ayudan a afinarlos.	Prüfe die Schnittpunkte mit der Medien-Wiedergabetaste. Gelbe Griffe und Wellenform-Zoom helfen bei der Feineinstellung.
+106	Two different kinds of time	Dos tiempos distintos	Zwei verschiedene Zeiten
+107	The Cue time places it in the show. IN and OUT select the file portion played from that Cue.	El tiempo de la Cue la sitúa en el espectáculo. IN y OUT eligen el fragmento del archivo que sonará desde esa Cue.	Die Cue-Zeit platziert sie im Ablauf. IN und OUT wählen den Dateiausschnitt, der ab dieser Cue abgespielt wird.
+108	CUT, FADE and Loop	CUT, FUNDIDO y Loop	CUT, FADE und Loop
+109	Choose how the media starts and which portion repeats.	Elige cómo entra el medio y qué fragmento se repite.	Wähle, wie das Medium startet und welcher Ausschnitt wiederholt wird.
+110	FADE with a three-second duration.	FUNDIDO de tres segundos.	FADE mit drei Sekunden Dauer.
+111	SETTING	AJUSTE	EINSTELLUNG
+112	EFFECT	EFECTO	WIRKUNG
+114	Immediate audio start.	Inicio directo del audio.	Direkter Audiostart.
+115	FADE	FUNDIDO	FADE
+116	The sound rises gradually over the specified duration.	El sonido sube progresivamente durante el tiempo indicado.	Der Ton wird über die angegebene Dauer eingeblendet.
+118	Repeats the portion between IN and OUT.	Repite el fragmento entre IN y OUT.	Wiederholt den Ausschnitt zwischen IN und OUT.
+119	Example: IN at 00:10, OUT at 03:10 and Loop checked.	Ejemplo: IN en 00:10, OUT en 03:10 y Loop activado.	Beispiel: IN bei 00:10, OUT bei 03:10 und Loop aktiviert.
+120	Choose the audio transition	Elegir la transición de audio	Den Audioübergang wählen
+121	Select CUT or FADE. For FADE, enter the required duration and listen to the result.	Elige CUT o FUNDIDO. Con FUNDIDO, indica la duración y escucha el resultado.	Wähle CUT oder FADE. Gib bei FADE die gewünschte Dauer an und höre das Ergebnis an.
+122	Enable Loop only when needed	Activar Loop solo si hace falta	Loop nur bei Bedarf aktivieren
+123	Check Loop for repeating ambience. Check the joins and plan when to stop or replace the ambience.	Activa Loop para un ambiente repetido. Comprueba las uniones y prevé cuándo detenerlo o sustituirlo.	Aktiviere Loop für wiederkehrende Atmosphäre. Prüfe die Übergänge und plane, wann du sie stoppst oder ersetzt.
+124	06 · TIMELINE IN EDIT	06 · LÍNEA DE TIEMPO EN EDIT	06 · TIMELINE IN EDIT
+125	Read and move markers	Leer y mover los puntos	Markierungen lesen und verschieben
+126	The white line shows the current show time.	La línea blanca indica el tiempo actual del espectáculo.	Die weiße Linie zeigt die aktuelle Ablaufzeit.
+127	Audio in green, video in pink, Cue markers and waveform.	Audio en verde, vídeo en rosa, puntos de Cues y forma de onda.	Audio in Grün, Video in Rosa, Cue-Markierungen und Wellenform.
+128	Find the show time	Identificar el tiempo del espectáculo	Die Ablaufzeit erkennen
+129	The timer beside Play shows your position. Click the Timeline to seek to another time.	El cronómetro junto a Reproducir muestra tu posición. Pulsa en la línea de tiempo para cambiarla.	Die Uhr neben Wiedergabe zeigt deine Position. Klicke in die Timeline, um die Position zu ändern.
+130	Select or move a Cue	Seleccionar o mover una Cue	Eine Cue wählen oder verschieben
+131	A marker lets you find its Cue. In Edit, moving it changes the Cue time. Check the value in the Cue afterwards.	Un punto permite encontrar su Cue. En Edit, moverlo cambia su tiempo. Comprueba después el valor en la Cue.	Über eine Markierung findest du ihre Cue. Verschieben in Edit ändert die Cue-Zeit. Prüfe den Wert anschließend in der Cue.
+132	Zoom for precise adjustments	Ampliar para ajustar con precisión	Für genaue Einstellungen zoomen
+133	Use the Timeline zoom controls. They change the display scale, not the show duration.	Usa los controles de zoom. Cambian la escala de visualización, no la duración del espectáculo.	Nutze die Zoom-Befehle der Timeline. Sie ändern den Maßstab, nicht die Dauer des Ablaufs.
+134	The waveform is a guide	La forma de onda es una referencia	Die Wellenform dient als Orientierung
+135	It helps locate attacks and silence. Some media have no decodable waveform; check their playback directly.	Ayuda a encontrar ataques y silencios. Algunos medios no ofrecen una forma de onda decodificable; comprueba directamente su reproducción.	Sie hilft beim Finden von Einsätzen und Stille. Für manche Medien gibt es keine dekodierbare Wellenform; prüfe die Wiedergabe dann direkt.
+136	07 · VIDEO AND VISUALS	07 · VÍDEO E IMÁGENES	07 · VIDEO UND BILDER
+137	Import and set up a video	Importar y ajustar un vídeo	Ein Video importieren und einstellen
+138	Use the same button as for music.	Se usa el mismo botón que para la música.	Verwende denselben Button wie für Musik.
+139	Video media provides a preview, IN / OUT and an audio button.	El vídeo dispone de vista previa, IN / OUT y botón de sonido.	Videomedien bieten Vorschau, IN / OUT und einen Ton-Button.
+140	Import at the right time	Importar en el momento correcto	Am richtigen Zeitpunkt importieren
+141	Seek to the required start, choose Music / Video and select your video file. Pilot creates its Cue.	Sitúa el espectáculo en el inicio deseado, elige Música / Vídeo y tu archivo. Pilot crea su Cue.	Gehe zum gewünschten Start, wähle Musik / Video und die Videodatei. Pilot erstellt die Cue.
+142	Check the preview	Comprobar la vista previa	Die Vorschau prüfen
+143	Use the file’s Play button to check the image and selected portion. Adjust IN and OUT if necessary.	Usa Reproducir en el archivo para comprobar la imagen y el fragmento útil. Ajusta IN y OUT si hace falta.	Prüfe Bild und Ausschnitt mit der Dateiwiedergabe. Passe IN und OUT bei Bedarf an.
+144	Decide whether to play the sound	Decidir si se reproduce el sonido	Entscheiden, ob der Ton spielt
+145	Video is muted on import. The speaker button disables or enables its audio.	El vídeo se importa silenciado. El botón de altavoz permite desactivar o activar su audio.	Videos werden stumm importiert. Der Lautsprecher-Button schaltet ihren Ton aus oder ein.
+146	The Cue visual is separate	La imagen de la Cue es distinta	Das Cue-Bild ist unabhängig
+147	An image added with Add visual is a reference in the Show list and PDF. The video file is media intended for playback.	Una imagen añadida con Añadir imagen es una referencia en Show y el PDF. El archivo de vídeo es un medio para reproducir.	Ein über Bild hinzufügen gewähltes Bild dient in Show und PDF als Orientierung. Die Videodatei selbst ist ein abzuspielendes Medium.
+148	Recognise the mute button	Reconocer el botón de silencio	Die Stummschalttaste erkennen
+149	Check the audio before opening video output.	Comprueba el sonido antes de abrir la salida de vídeo.	Prüfe den Ton, bevor du die Videoausgabe öffnest.
+150	Open the video Cue in Edit	Abrir la Cue de vídeo en Edit	Die Video-Cue in Edit öffnen
+151	Find the speaker button in its media settings.	Busca el botón de altavoz en los ajustes del medio.	Suche den Lautsprecher-Button in den Medieneinstellungen.
+152	Choose the required state	Elegir el estado deseado	Den gewünschten Zustand wählen
+153	Crossed-out speaker: muted video. Normal speaker: audio enabled. Click again to change state.	Altavoz tachado: vídeo silenciado. Altavoz normal: audio activado. Pulsa de nuevo para cambiar.	Durchgestrichener Lautsprecher: stumm. Normaler Lautsprecher: Ton erlaubt. Erneutes Klicken ändert den Zustand.
+154	Test the playback system	Probar el sistema de difusión	Auf der Wiedergabeanlage testen
+155	Listen with the music and other media. Avoid discovering unexpected video audio during the performance.	Escucha junto con la música y los demás medios. Evita descubrir audio inesperado durante la función.	Höre alles zusammen mit Musik und anderen Medien an. So überrascht dich kein Videoton während der Vorstellung.
+156	The purpose of reference images	El papel de las imágenes de referencia	Die Rolle von Orientierungsbildern
+157	Use a recognisable 16:9 visual. In Show, only the active visual darkens as the next Cue approaches.	Usa una imagen reconocible de 16:9. En Show, solo la imagen activa se oscurece al acercarse la siguiente Cue.	Nutze ein erkennbares Bild im Format 16:9. In Show wird nur das aktive Bild vor der nächsten Cue dunkler.
+158	08 · SAVE	08 · GUARDAR	08 · SPEICHERN
+159	Keep a portable copy	Conservar una copia portátil	Eine portable Kopie aufbewahren
+160	Use Save as… to get the show ZIP.	Usa Guardar como… para obtener el ZIP del espectáculo.	Mit Speichern unter… erhältst du das Ablauf-ZIP.
+161	Local saving and show export.	Guardado local y exportación del espectáculo.	Lokales Speichern und Ablaufexport.
+162	Click Save as…	Pulsar Guardar como…	Auf Speichern unter… klicken
+163	Let Pilot prepare the package. Follow the browser’s save or download dialog.	Espera a que Pilot prepare el paquete. Sigue la ventana de guardado o descarga del navegador.	Warte, bis Pilot das Paket erstellt hat. Folge dem Speicher- oder Download-Dialog des Browsers.
+164	Find the ZIP file	Encontrar el archivo ZIP	Die ZIP-Datei finden
+165	Choose a recognisable name and an easy-to-find folder. Check the download has finished.	Elige un nombre reconocible y una carpeta fácil de encontrar. Comprueba que termine la descarga.	Wähle einen eindeutigen Namen und einen leicht auffindbaren Ordner. Prüfe, ob der Download abgeschlossen ist.
+166	Keep the complete ZIP	Conservar el ZIP completo	Das vollständige ZIP aufbewahren
+167	It contains the show and required files. Transfer this file to another device or import it in Bridge.	Contiene el espectáculo y los archivos necesarios. Es el archivo para transferir a otro dispositivo o importar en Bridge.	Es enthält den Ablauf und die nötigen Dateien. Diese Datei überträgst du auf ein anderes Gerät oder importierst sie in Bridge.
+168	Local save ≠ backup copy	Guardado local ≠ copia de seguridad	Lokales Speichern ≠ Sicherungskopie
+169	Autosave helps recover work in this browser. It does not replace a separate ZIP and may disappear if site data is cleared.	El guardado automático recupera el trabajo en este navegador. No sustituye un ZIP aparte y puede desaparecer si se borran los datos del sitio.	Automatisches Speichern hilft in diesem Browser. Es ersetzt kein separates ZIP und kann beim Löschen der Websitedaten verloren gehen.
+170	08 · REOPEN AND TRANSFER	08 · REABRIR Y TRANSFERIR	08 · ÖFFNEN UND ÜBERTRAGEN
+171	Continue on another device	Continuar en otro dispositivo	Auf einem anderen Gerät fortsetzen
+172	The exported file saves you from rebuilding the show.	El archivo exportado evita reconstruir el espectáculo.	Mit der exportierten Datei musst du den Ablauf nicht neu erstellen.
+173	Pilot\nSave as…	Pilot\nGuardar como…	Pilot\nSpeichern unter…
+174	File\n.s2apilot.zip	Archivo\n.s2apilot.zip	Datei\n.s2apilot.zip
+175	Pilot\nOpen	Pilot\nAbrir	Pilot\nÖffnen
+176	Diagram: transferring a complete show.	Diagrama: transferir un espectáculo completo.	Schema: einen vollständigen Ablauf übertragen.
+177	Transfer the ZIP	Transferir el ZIP	Das ZIP übertragen
+178	Use your device’s usual method: shared folder, external storage, AirDrop or another file service.	Usa el medio habitual: carpeta compartida, almacenamiento externo, AirDrop u otro servicio de archivos.	Nutze eine übliche Methode: freigegebener Ordner, externer Speicher, AirDrop oder ein anderer Dateidienst.
+179	Click Open in Pilot	Pulsar Abrir en Pilot	In Pilot auf Öffnen klicken
+180	Select the received ZIP and let the media load. The file picker depends on your device.	Selecciona el ZIP recibido y espera a que carguen los medios. El selector depende del dispositivo.	Wähle das empfangene ZIP und warte, bis die Medien geladen sind. Der Auswahldialog hängt vom Gerät ab.
+181	Review and test the show	Revisar y probar el espectáculo	Den Ablauf prüfen und testen
+182	Check the title, Cues, visuals and audio/video playback before using it.	Comprueba el título, las Cues, las imágenes y la reproducción de audio/vídeo antes de usarlo.	Prüfe Titel, Cues, Bilder und Audio-/Videowiedergabe vor dem Einsatz.
+183	What about QLab?	¿Y para QLab?	Und für QLab?
+184	In the documented version, the ZIP may also contain Bridge in companion/. Select the show ZIP in Bridge, not the app installer ZIP.	En la versión documentada, el ZIP también puede contener Bridge en companion/. Selecciona en Bridge el ZIP del espectáculo, no el de instalación de la aplicación.	In der dokumentierten Version kann das ZIP auch Bridge in companion/ enthalten. Wähle in Bridge das Ablauf-ZIP und nicht das Installations-ZIP der App.
+185	09 · SHOW MODE	09 · MODO SHOW	09 · SHOW-MODUS
+186	Start and follow the show	Iniciar y seguir el espectáculo	Den Ablauf starten und verfolgen
+187	Switch to Show when preparation is complete.	Pasa a Show cuando termines la preparación.	Wechsle nach der Vorbereitung zu Show.
+188	Maverick: the countdown is prominent in the Timeline.	Maverick: la cuenta atrás destaca en la línea de tiempo.	Maverick: Der Countdown steht deutlich in der Timeline.
+189	The active and next Cues display their instructions.	La Cue activa y la siguiente muestran sus instrucciones.	Aktive und nächste Cue zeigen ihre Anweisungen.
+190	Return to the start	Volver al inicio	Zum Anfang zurückkehren
+191	Back to start resets the show to zero and stops playback.	Volver al inicio reinicia a cero y detiene la reproducción.	Zum Anfang setzt den Ablauf auf null und stoppt die Wiedergabe.
+192	Start with Play	Iniciar con Reproducir	Mit Wiedergabe starten
+193	The main button becomes Pause during playback. On a computer, Space also starts or pauses the show.	El botón general cambia a Pausa durante la reproducción. En ordenador, Espacio también inicia o pausa el espectáculo.	Während der Wiedergabe wird der Hauptbutton zu Pause. Am Computer startet oder pausiert auch die Leertaste den Ablauf.
+194	Read the active Cue and anticipate the next	Leer la activa y anticipar la siguiente	Die aktive Cue lesen und die nächste vorbereiten
+195	The blue glow marks the active Cue. Only the active and next Cues show descriptions.	El halo azul identifica la Cue activa. Solo la activa y la siguiente muestran descripciones.	Der blaue Schein markiert die aktive Cue. Beschreibungen erscheinen nur bei aktiver und nächster Cue.
+196	Avoid double presses	Evitar dobles pulsaciones	Doppelbetätigung vermeiden
+197	Play / Pause ignores extra presses for 0.5 seconds after activation. While typing in a field, Space keeps its normal role.	Reproducir / Pausa ignora pulsaciones adicionales durante 0,5 segundos. Al escribir en un campo, Espacio conserva su función normal.	Wiedergabe / Pause ignoriert weitere Betätigungen für 0,5 Sekunden. Beim Schreiben in einem Feld behält die Leertaste ihre normale Funktion.
+198	Anticipate the last ten seconds	Anticipar los diez últimos segundos	Die letzten zehn Sekunden vorbereiten
+199	The countdown is the main guide before the next Cue.	La cuenta atrás es la referencia principal antes de la siguiente Cue.	Der Countdown ist die wichtigste Orientierung vor der nächsten Cue.
+200	At 01:43, seven seconds remain until the next Cue.	En 01:43 faltan siete segundos para la siguiente Cue.	Bei 01:43 bleiben sieben Sekunden bis zur nächsten Cue.
+201	The next Cue turns red; the active visual darkens.	La siguiente Cue muestra la alerta roja; la imagen activa se oscurece.	Die nächste Cue warnt rot; das aktive Bild wird dunkler.
+202	Follow the red alert	Seguir la alerta roja	Die rote Warnung beachten
+203	From ten seconds, the timer turns red and the next Cue’s glow flashes. In Maverick, the countdown box follows the same alert.	Desde diez segundos, el cronómetro se vuelve rojo y el halo de la siguiente Cue parpadea. En Maverick, la caja del contador sigue la misma alerta.	Ab zehn Sekunden wird die Uhr rot und der Schein der nächsten Cue blinkt. In Maverick warnt das Countdown-Feld gleichzeitig.
+204	Prepare the next action	Preparar la siguiente acción	Die nächste Aktion vorbereiten
+205	The upcoming title and instructions remain readable. Only the active visual fades.	El título y las instrucciones siguientes siguen legibles. Solo se funde la imagen activa.	Titel und Anweisungen der nächsten Cue bleiben lesbar. Nur das aktive Bild wird ausgeblendet.
+206	Recognise the end	Reconocer el final	Das Ende erkennen
+207	After the final Cue, no further start is announced: the countdown shows --:--. Music end and final Cue time may differ.	Tras la última Cue no se anuncia otro inicio: el contador muestra --:--. El final de la música y la última Cue pueden no coincidir.	Nach der letzten Cue wird kein weiterer Start angekündigt: Der Countdown zeigt --:--. Musikende und letzte Cue müssen nicht zusammenfallen.
+208	10 · MAVERICK LAYOUT	10 · DISEÑO MAVERICK	10 · MAVERICK-LAYOUT
+209	The essentials in front of you	Lo esencial ante ti	Das Wesentliche im Blick
+210	Computer and landscape iPad: active left, next right.	Ordenador e iPad horizontal: activa a la izquierda, siguiente a la derecha.	Computer und iPad im Querformat: aktiv links, nächste rechts.
+211	Maverick: past Cues disappear from the visible list.	Maverick: las Cues anteriores desaparecen de la lista visible.	Maverick: Vergangene Cues verschwinden aus der sichtbaren Liste.
+212	Find the two large Cues	Identificar las dos Cues grandes	Die beiden großen Cues finden
+213	The active Cue has a blue glow. The next keeps its visual and instructions so you can prepare.	La activa tiene halo azul. La siguiente conserva imagen e instrucciones para prepararla.	Die aktive Cue hat einen blauen Schein. Die nächste behält Bild und Anweisungen zur Vorbereitung.
+214	Read the countdown at the top	Leer la cuenta atrás arriba	Den Countdown oben lesen
+215	In Maverick, it stays in the Timeline. The Cue number helps track progress through the show.	En Maverick permanece en la línea de tiempo. El número de Cue indica el avance del espectáculo.	In Maverick bleibt er in der Timeline. Die Cue-Nummer zeigt den Fortschritt im Ablauf.
+216	Follow the changing list	Seguir la renovación de la lista	Der wechselnden Liste folgen
+217	The list shows up to five Cues. Completed Cues are hidden; seeking back makes them available again.	La lista muestra hasta cinco Cues. Las terminadas se ocultan; al retroceder vuelven a aparecer.	Die Liste zeigt höchstens fünf Cues. Vergangene werden ausgeblendet; beim Zurückspringen werden sie wieder sichtbar.
+218	On narrower screens	En pantallas más estrechas	Auf schmaleren Bildschirmen
+219	On iPhone and portrait iPad, the layout becomes vertical. The order stays the same: active, next, then upcoming markers.	En iPhone e iPad vertical se adapta en columna. El orden sigue siendo: activa, siguiente y próximos puntos.	Auf iPhone und iPad im Hochformat wird die Ansicht vertikal. Die Reihenfolge bleibt: aktiv, nächste, danach kommende Marken.
+220	10 · ICEMAN LAYOUT	10 · DISEÑO ICEMAN	10 · ICEMAN-LAYOUT
+221	Keep the whole list	Conservar toda la lista	Die gesamte Liste behalten
+222	The active and next Cues expand; the others stay compact.	La activa y la siguiente se amplían; las demás siguen compactas.	Aktive und nächste Cue werden größer; die anderen bleiben kompakt.
+223	Past Cue: a compact row.	Cue anterior: una fila compacta.	Vergangene Cue: eine kompakte Zeile.
+224	Active Cue: detailed visual and instructions.	Cue activa: imagen e instrucciones detalladas.	Aktive Cue: großes Bild und Anweisungen.
+225	Next Cue: its countdown is inside its row.	Cue siguiente: su cuenta atrás está dentro de su fila.	Nächste Cue: Der Countdown steht in ihrer Zeile.
+226	Keep the context	Conservar el contexto	Den Zusammenhang behalten
+227	Past Cues remain listed. At each change, the old active Cue shrinks and the new next Cue expands.	Las Cues anteriores permanecen. En cada cambio, la antigua activa se reduce y la nueva siguiente se amplía.	Vergangene Cues bleiben in der Liste. Bei jedem Wechsel wird die bisher aktive Cue kleiner und die neue nächste größer.
+228	Let Pilot recenter	Dejar que Pilot recentre	Pilot zentrieren lassen
+229	The active and next Cues are brought into view when a Cue changes. You can scroll between changes.	La activa y la siguiente vuelven a la vista al cambiar de Cue. Puedes desplazarte entre cambios.	Aktive und nächste Cue werden beim Wechsel sichtbar gemacht. Zwischen den Wechseln kannst du scrollen.
+230	With a long list	Con una lista larga	Bei einer langen Liste
+231	If active + next exceeds the available height, Pilot aligns the top of the active Cue. Only these two Cues show descriptions.	Si activa + siguiente superan la altura disponible, Pilot alinea el inicio de la activa. Solo estas dos muestran descripciones.	Sind aktive und nächste Cue zusammen höher als der verfügbare Platz, richtet Pilot den Anfang der aktiven aus. Nur diese beiden zeigen Beschreibungen.
+232	10 · CHOOSE YOUR LAYOUT	10 · ELEGIR EL DISEÑO	10 · ANSICHT WÄHLEN
+233	Maverick or Iceman?	¿Maverick o Iceman?	Maverick oder Iceman?
+234	In Show, the Layout button sits beside the language selector.	En Show, Diseño está junto al selector de idioma.	In Show steht der Layout-Button neben der Sprachauswahl.
+235	1 · Layout: the button between language and video output.	1 · Diseño: el botón entre el idioma y la salida de vídeo.	1 · Layout: der Button zwischen Sprache und Videoausgabe.
+236	The layout choice in the real Pilot dialog.	La elección de diseño en la ventana real de Pilot.	Die Ansichtsauswahl im echten Pilot-Dialog.
+239	Focused view of current and upcoming Cues.	Vista centrada en las Cues actual y siguientes.	Konzentrierte Ansicht der aktuellen und kommenden Cues.
+240	View keeping the list and past Cues.	Vista que conserva la lista y las Cues anteriores.	Ansicht mit der gesamten Liste und vergangenen Cues.
+241	Countdown in the Timeline.	Cuenta atrás en la línea de tiempo.	Countdown in der Timeline.
+242	Countdown in the next Cue.	Cuenta atrás en la siguiente Cue.	Countdown in der nächsten Cue.
+243	Open Layout	Abrir Diseño	Layout öffnen
+244	Choose the display that suits how you follow the performance, then close the dialog.	Elige la vista adecuada a tu forma de seguir el espectáculo y cierra la ventana.	Wähle die für deine Arbeitsweise passende Ansicht und schließe den Dialog.
+245	Save your choice	Guardar tu elección	Die Auswahl speichern
+246	The layout is saved in the exported show ZIP. Export again to pass on a changed choice.	El diseño se guarda en el ZIP exportado. Exporta de nuevo para transmitir una elección distinta.	Die Ansicht wird im exportierten Ablauf-ZIP gespeichert. Exportiere erneut, um eine geänderte Auswahl weiterzugeben.
+247	11 · CUE SHEET PDF	11 · HOJA DE CUES PDF	11 · PDF-ABLAUFPLAN
+248	Open the preview before sharing	Abrir la vista previa antes de compartir	Vor dem Teilen die Vorschau öffnen
+249	The PDF is a cue sheet, separate from the editable ZIP.	El PDF es una hoja de Cues, distinta del ZIP editable.	Das PDF ist ein Ablaufplan, getrennt vom bearbeitbaren ZIP.
+250	Pilot’s PDF preview, with viewing and download controls.	La vista previa PDF de Pilot, con controles de consulta y descarga.	Pilots PDF-Vorschau mit Anzeige- und Download-Befehlen.
+251	Click Cue sheet PDF	Pulsar Hoja de Cues PDF	Auf PDF-Ablaufplan klicken
+252	In Edit, Pilot generates the sheet and opens its preview.	En Edit, Pilot genera la hoja y abre su vista previa.	In Edit erstellt Pilot den Plan und öffnet die Vorschau.
+253	Check, then download	Revisar y descargar	Prüfen und herunterladen
+254	Check titles, times, visuals and descriptions. Download from the preview to save and share the PDF.	Comprueba títulos, tiempos, imágenes y descripciones. Descarga desde la vista previa para conservar y compartir el PDF.	Prüfe Titel, Zeiten, Bilder und Beschreibungen. Lade das PDF in der Vorschau herunter, um es zu speichern und zu teilen.
+255	What the sheet contains	Qué contiene la hoja	Was der Plan enthält
+256	Example generated by Pilot from the demo show.	Ejemplo generado por Pilot con el espectáculo de demostración.	Von Pilot erzeugtes Beispiel mit dem Demo-Ablauf.
+257	First page of a sheet genuinely generated by Pilot.	Primera página de una hoja generada realmente por Pilot.	Erste Seite eines tatsächlich von Pilot erzeugten Plans.
+258	The header uses the <b>first available visual in Cue order</b>. The sheet gathers times, titles, instructions and reference images.	La cabecera usa la <b>primera imagen disponible en el orden de las Cues</b>. La hoja reúne tiempos, títulos, instrucciones e imágenes de referencia.	Die Kopfzeile verwendet das <b>erste verfügbare Bild in Cue-Reihenfolge</b>. Der Plan enthält Zeiten, Titel, Anweisungen und Orientierungsbilder.
+259	The PDF’s QR code	El código QR del PDF	Der QR-Code im PDF
+260	It opens the public S2A Pilot website. It does not share your show or control the performance.	Abre la web pública de S2A Pilot. No comparte tu espectáculo ni controla la función.	Er öffnet die öffentliche S2A Pilot-Website. Er teilt keinen Ablauf und steuert keine Vorstellung.
+261	12 · VIDEO OUTPUT	12 · SALIDA DE VÍDEO	12 · VIDEOAUSGABE
+262	Display video on another screen	Mostrar vídeo en otra pantalla	Video auf einem anderen Bildschirm zeigen
+263	In Safari on Mac, use a connected screen and an extended desktop.	En Safari en Mac, usa una pantalla conectada y un escritorio extendido.	Nutze in Safari auf dem Mac einen angeschlossenen Bildschirm mit erweitertem Schreibtisch.
+264	2 · Video output: the screen with an arrow. Layout is on its left.	2 · Salida de vídeo: la pantalla con una flecha. Diseño está a su izquierda.	2 · Videoausgabe: der Bildschirm mit Pfeil. Links davon steht Layout.
+265	Pilot in Show	Pilot en Show	Pilot in Show
+266	Separate\nvideo window	Ventana de vídeo\nindependiente	Separates\nVideofenster
+267	Playback\nscreen	Pantalla de\ndifusión	Ausgabe-\nbildschirm
+268	Diagram: move the video window onto the second screen.	Diagrama: mover la ventana de vídeo a la segunda pantalla.	Schema: Das Videofenster wird auf den zweiten Bildschirm verschoben.
+269	Prepare the screens	Preparar las pantallas	Die Bildschirme vorbereiten
+270	Connect the projector or monitor and set up an extended display in Mac settings.	Conecta el proyector o monitor y configura el escritorio extendido en los ajustes del Mac.	Verbinde Projektor oder Monitor und richte die Bildschirmerweiterung in den Mac-Einstellungen ein.
+271	Open Video output	Abrir Salida de vídeo	Videoausgabe öffnen
+272	In Show, click the output button. Allow the window to open if Safari asks.	En Show, pulsa el botón de salida. Si Safari lo pide, permite abrir la ventana.	Klicke in Show auf die Videoausgabe. Erlaube bei einer Safari-Rückfrage das Öffnen des Fensters.
+273	Position and test the window	Colocar y probar la ventana	Das Fenster platzieren und testen
+274	Move the window to the playback screen and enter fullscreen. Start the show to check the video begins correctly.	Mueve la ventana a la pantalla de difusión y activa pantalla completa. Inicia el espectáculo para comprobar el comienzo del vídeo.	Verschiebe das Fenster auf den Ausgabebildschirm und aktiviere Vollbild. Starte den Ablauf und prüfe den Videoeinsatz.
+275	Depending on the device	Según el dispositivo	Je nach Gerät
+276	This separate output applies to Safari on Mac. Mirroring differs from an extended desktop; iPhone and iPad do not offer this separate-output button.	La salida independiente descrita corresponde a Safari en Mac. Duplicar pantalla no equivale a escritorio extendido; iPhone e iPad no ofrecen este botón de salida independiente.	Die beschriebene separate Ausgabe betrifft Safari auf dem Mac. Spiegelung und Erweiterung sind verschieden; iPhone und iPad bieten diesen separaten Ausgabe-Button nicht.
+277	13 · BEFORE THE PERFORMANCE	13 · ANTES DEL ESPECTÁCULO	13 · VOR DER VORSTELLUNG
+278	Rehearse the whole show	Hacer un ensayo completo	Den gesamten Ablauf proben
+279	Check these items on the device you will actually use.	Marca estos puntos en el dispositivo que se usará realmente.	Prüfe diese Punkte auf dem tatsächlich verwendeten Gerät.
+280	The correct ZIP is open and the show name is right.	El ZIP correcto está abierto y el nombre es correcto.	Das richtige ZIP ist geöffnet und der Name stimmt.
+281	Cue times and instructions have been reviewed.	Se han revisado tiempos e instrucciones de las Cues.	Cue-Zeiten und Anweisungen wurden geprüft.
+282	Music and videos play with the correct sound.	La música y los vídeos se reproducen con el sonido correcto.	Musik und Videos spielen mit dem richtigen Ton.
+283	IN, OUT, Loop and fades have been tested.	Se han probado IN, OUT, Loop y fundidos.	IN, OUT, Loop und Fades wurden getestet.
+284	The Maverick / Iceman choice suits the user.	La elección Maverick / Iceman conviene al usuario.	Die Wahl Maverick / Iceman passt zur Arbeitsweise.
+285	The countdown and ten-second alerts are understood.	Se entienden la cuenta atrás y las alertas a diez segundos.	Countdown und Zehn-Sekunden-Warnung sind verstanden.
+286	External video output and fullscreen have been tested, if used.	Se han probado la pantalla externa y pantalla completa, si se usan.	Externe Videoausgabe und Vollbild wurden bei Bedarf getestet.
+287	The backup ZIP and PDF are in an accessible folder.	El ZIP de seguridad y el PDF están en una carpeta accesible.	Sicherungs-ZIP und PDF liegen in einem erreichbaren Ordner.
+288	Devices have power; sleep and notification settings suit the performance.	El equipo tiene alimentación; suspensión y notificaciones están ajustadas para la función.	Die Geräte sind versorgt; Ruhezustand und Mitteilungen sind für die Vorstellung eingestellt.
+289	Final check	Última comprobación	Letzte Kontrolle
+290	Return to the start, check the first Cue and prepare to launch. A full rehearsal checks files, timing and output together.	Vuelve al inicio, comprueba la primera Cue y prepara el lanzamiento. Un ensayo completo verifica archivos, tiempos y difusión juntos.	Gehe zum Anfang, prüfe die erste Cue und bereite den Start vor. Eine vollständige Probe prüft Dateien, Zeiten und Ausgabe gemeinsam.
+291	14 · DISCOVER BRIDGE	14 · DESCUBRIR BRIDGE	14 · BRIDGE KENNENLERNEN
+292	Go from Pilot to QLab	Pasar de Pilot a QLab	Von Pilot zu QLab wechseln
+293	S2A Pilot Bridge imports the show on a Mac running QLab 5.	S2A Pilot Bridge importa el espectáculo en un Mac con QLab 5.	S2A Pilot Bridge importiert den Ablauf auf einem Mac mit QLab 5.
+294	Pilot\nPrepare and export	Pilot\nPreparar y exportar	Pilot\nVorbereiten und exportieren
+295	Bridge\nImport the ZIP	Bridge\nImportar el ZIP	Bridge\nZIP importieren
+296	QLab 5\nRun the show	QLab 5\nReproducir el espectáculo	QLab 5\nAblauf abspielen
+297	Workflow diagram: Bridge connects the two apps.	Diagrama del recorrido: Bridge conecta las dos aplicaciones.	Ablaufschema: Bridge verbindet die beiden Apps.
+298	Prepare the file in Pilot	Preparar el archivo en Pilot	Die Datei in Pilot vorbereiten
+299	Finish the show and use Save as… to obtain its complete ZIP.	Finaliza el espectáculo y usa Guardar como… para obtener el ZIP completo.	Stelle den Ablauf fertig und exportiere mit Speichern unter… das vollständige ZIP.
+300	Install Bridge on the QLab Mac	Instalar Bridge en el Mac de QLab	Bridge auf dem QLab-Mac installieren
+301	Version 1.3.3 is a universal app for Intel and Apple Silicon Macs running macOS 13 or later.	La versión 1.3.3 es universal para Mac Intel y Apple Silicon, desde macOS 13.	Version 1.3.3 ist eine Universal-App für Intel- und Apple Silicon-Macs ab macOS 13.
+302	Two apps, two roles	Dos aplicaciones, dos funciones	Zwei Apps, zwei Aufgaben
+303	Pilot prepares and displays markers. Bridge transfers the show to QLab and provides a follow-along monitor. Start the imported show in QLab.	Pilot prepara y muestra los puntos. Bridge transfiere el espectáculo a QLab y ofrece un monitor de seguimiento. La reproducción del espectáculo importado se inicia en QLab.	Pilot bereitet Markierungen vor und zeigt sie an. Bridge überträgt den Ablauf nach QLab und bietet einen Begleitmonitor. Der importierte Ablauf wird in QLab gestartet.
+304	14 · INSTALL BRIDGE	14 · INSTALAR BRIDGE	14 · BRIDGE INSTALLIEREN
+305	Open the Mac app	Abrir la aplicación en Mac	Die Mac-App öffnen
+306	Keep the show ZIP intact for importing.	Conserva intacto el ZIP del espectáculo para importar.	Bewahre das Ablauf-ZIP zum Importieren unverändert auf.
+307	Download\nBridge	Descargar\nBridge	Bridge\nherunterladen
+308	Extract the\ninstaller ZIP	Extraer el ZIP\nde instalación	Installations-ZIP\nentpacken
+309	Move the app to\nApplications	Mover la app a\nAplicaciones	App nach\nProgramme verschieben
+310	Bridge installation diagram, not a macOS window screenshot.	Diagrama de instalación de Bridge, no una captura de ventana macOS.	Installationsschema für Bridge, keine Aufnahme eines macOS-Fensters.
+311	Get Bridge	Obtener Bridge	Bridge herunterladen
+312	Download the official installer from the S2A Pilot repository. In the documented version, a copy may also be in companion/ in the show ZIP.	Descarga el instalador oficial del repositorio S2A Pilot. En la versión documentada, puede haber una copia en companion/ del ZIP del espectáculo.	Lade den offiziellen Installer aus dem S2A Pilot-Repository. In der dokumentierten Version kann auch eine Kopie unter companion/ im Ablauf-ZIP liegen.
+313	Extract and open	Descomprimir y abrir	Entpacken und öffnen
+314	Extract the installer archive, move S2A Pilot Bridge into Applications and open it.	Extrae el archivo de instalación, mueve S2A Pilot Bridge a Aplicaciones y ábrelo.	Entpacke das Installationsarchiv, verschiebe S2A Pilot Bridge nach Programme und öffne es.
+315	Allow opening if macOS asks	Autorizar si macOS lo pide	Bei einer macOS-Rückfrage erlauben
+316	For this non-notarised app, macOS may block the first launch. After trying once, use System Settings > Privacy & Security > Open Anyway, if you recognise the downloaded app.	Al no estar notarizada, macOS puede bloquear la primera apertura. Tras intentarlo, usa Ajustes del Sistema > Privacidad y seguridad > Abrir igualmente, si reconoces la aplicación descargada.	Bei dieser nicht notarisierten App kann macOS den ersten Start blockieren. Nutze nach einem Versuch Systemeinstellungen > Datenschutz & Sicherheit > Dennoch öffnen, wenn du die heruntergeladene App kennst.
+317	Separate QLab permission	Permiso de QLab independiente	Separate QLab-Berechtigung
+318	Allow the connection when macOS asks whether Bridge may control QLab. If denied, check Privacy & Security > Automation.	Permite la conexión cuando macOS pregunte si Bridge puede controlar QLab. Si se deniega, revisa Privacidad y seguridad > Automatización.	Erlaube die Verbindung, wenn macOS nach der Steuerung von QLab fragt. Prüfe bei Ablehnung Datenschutz & Sicherheit > Automation.
+319	15 · IMPORT INTO QLAB	15 · IMPORTAR EN QLAB	15 · IN QLAB IMPORTIEREN
+320	Prepare the destination	Preparar el destino	Das Ziel vorbereiten
+321	QLab must be open and its workspace saved.	QLab debe estar abierto y su workspace guardado.	QLab muss geöffnet und der Workspace gespeichert sein.
+322	Open QLab 5	Abrir QLab 5	QLab 5 öffnen
+323	Open or create\na workspace	Abrir o crear\nun workspace	Workspace öffnen\noder erstellen
+324	Save the\nworkspace	Guardar el\nworkspace	Workspace\nspeichern
+325	Diagram: prepare the QLab document before importing.	Diagrama: preparar el documento QLab antes de importar.	Schema: Das QLab-Dokument vor dem Import vorbereiten.
+326	Open the correct workspace	Abrir el workspace correcto	Den richtigen Workspace öffnen
+327	In QLab 5, open the document that will receive the act, or create one.	En QLab 5, abre el documento que recibirá el número o crea uno.	Öffne oder erstelle in QLab 5 das Dokument, das die Darbietung aufnehmen soll.
+328	Save it on the Mac	Guardarlo en el Mac	Auf dem Mac speichern
+329	Give it a stable location. Bridge needs a saved workspace to organise associated files.	Elige una ubicación estable. Bridge necesita un workspace guardado para organizar los archivos asociados.	Wähle einen dauerhaften Speicherort. Bridge benötigt einen gespeicherten Workspace für die zugehörigen Dateien.
+330	Refresh in Bridge	Actualizar en Bridge	In Bridge aktualisieren
+331	Return to Bridge and use refresh in the QLab section. If several workspaces are open, choose the one that should receive the show.	Vuelve a Bridge y actualiza la zona QLab. Si hay varios workspaces abiertos, elige el que recibirá el espectáculo.	Wechsle zu Bridge und aktualisiere den QLab-Bereich. Wähle bei mehreren geöffneten Workspaces den gewünschten Ziel-Workspace.
+332	If import is unavailable	Si no se puede importar	Wenn Importieren nicht verfügbar ist
+333	Check a package is selected, QLab is open and the workspace saved. Wait for any operation already in progress.	Comprueba que haya un paquete, QLab esté abierto y el workspace guardado. Espera a que termine cualquier operación en curso.	Prüfe Paketauswahl, geöffnetes QLab und gespeicherten Workspace. Warte das Ende einer laufenden Aktion ab.
+334	Select the ZIP and confirm	Elegir el ZIP y confirmar	Das ZIP wählen und bestätigen
+335	Add… selects Pilot packages.	Añadir… sirve para seleccionar paquetes Pilot.	Hinzufügen… wählt Pilot-Pakete aus.
+336	Add…\nShow ZIP	Añadir…\nZIP del espectáculo	Hinzufügen…\nAblauf-ZIP
+337	Check the\nQLab workspace	Comprobar el\nworkspace QLab	QLab-Workspace\nprüfen
+338	Import into QLab\nthen confirm	Importar en QLab\ny confirmar	In QLab importieren\nund bestätigen
+339	Diagram of actual Bridge commands; not an interface screenshot.	Diagrama de los controles reales de Bridge; no es una captura de interfaz.	Schema der tatsächlichen Bridge-Befehle, keine Aufnahme der Oberfläche.
+340	Select the correct file	Seleccionar el archivo correcto	Die richtige Datei wählen
+341	Choose the ZIP exported by Pilot, not the PDF alone or the Bridge installer archive. You can add several packages.	Elige el ZIP exportado por Pilot, no el PDF solo ni el instalador de Bridge. Puedes añadir varios paquetes.	Wähle das von Pilot exportierte ZIP, nicht das einzelne PDF oder den Bridge-Installer. Du kannst mehrere Pakete hinzufügen.
+342	Read the destination	Leer el destino	Das Ziel prüfen
+343	Check the workspace name in the QLab section to avoid importing into another open show.	Comprueba el nombre del workspace en la zona QLab para no importar en otro espectáculo abierto.	Prüfe den Workspace-Namen im QLab-Bereich, damit der Import nicht in einem anderen geöffneten Ablauf landet.
+344	Import and read the confirmation	Importar y leer la confirmación	Importieren und Bestätigung lesen
+345	Click Import into QLab. The confirmation identifies packages and workspace. Check, confirm and wait for transfer to finish.	Pulsa Importar en QLab. La confirmación indica paquetes y workspace. Comprueba, confirma y espera a que termine.	Klicke auf In QLab importieren. Die Bestätigung nennt Pakete und Workspace. Prüfe, bestätige und warte das Übertragen ab.
+346	Avoid accidental duplicate imports	Evitar importaciones duplicadas	Unbeabsichtigten Doppelimport vermeiden
+347	Importing again may add another QLab group. Check the result before repeating the operation.	Importar de nuevo puede añadir otro grupo en QLab. Comprueba el resultado antes de repetir.	Ein erneuter Import kann eine weitere QLab-Gruppe hinzufügen. Prüfe das Ergebnis vor einer Wiederholung.
+348	15 · CHECK THE RESULT	15 · COMPROBAR EL RESULTADO	15 · ERGEBNIS PRÜFEN
+349	Check the QLab group	Comprobar el grupo en QLab	Die QLab-Gruppe prüfen
+350	Each package becomes a Timeline group in the workspace.	Cada paquete se convierte en un grupo Timeline del workspace.	Jedes Paket wird zu einer Timeline-Gruppe im Workspace.
+351	Act group	Grupo del número	Gruppe der Darbietung
+352	Imported Cues\nand times	Cues y tiempos\nimportados	Importierte Cues\nund Zeiten
+353	Media copied\nfor QLab	Medios copiados\npara QLab	Für QLab\nkopierte Medien
+354	Result diagram: a show organised in QLab.	Diagrama del resultado: un espectáculo organizado en QLab.	Ergebnisschema: ein geordneter Ablauf in QLab.
+355	Find the imported act	Localizar el número importado	Die importierte Darbietung finden
+356	Find its group in the workspace. Check names and Cue order.	Localiza su grupo en el workspace. Comprueba nombres y orden de Cues.	Suche die Gruppe im Workspace. Prüfe Namen und Cue-Reihenfolge.
+357	Check media and starts	Comprobar medios e inicios	Medien und Einsätze prüfen
+358	Test audio and video files in QLab, then check the show timings.	Prueba audio y vídeo en QLab y comprueba los tiempos del espectáculo.	Teste Audio- und Videodateien in QLab und prüfe die Ablaufzeiten.
+359	Save and rehearse	Guardar y ensayar	Speichern und proben
+360	Save the workspace after checking. Rehearse with the intended playback equipment.	Guarda el workspace tras comprobarlo. Ensaya con el equipo de difusión previsto.	Speichere den geprüften Workspace und probe auf der vorgesehenen Ausgabetechnik.
+361	Playback settings belong to QLab	Los ajustes de difusión son de QLab	Ausgabeeinstellungen gehören zu QLab
+362	Check audio outputs, video surfaces and levels in QLab. Bridge handles import; it does not replace these show settings.	Comprueba en QLab salidas de audio, superficies de vídeo y niveles. Bridge importa; no sustituye estos ajustes del espectáculo.	Prüfe Audioausgänge, Videoflächen und Pegel in QLab. Bridge übernimmt den Import und ersetzt diese Show-Einstellungen nicht.
+363	16 · BRIDGE MONITOR	16 · MONITOR DE BRIDGE	16 · BRIDGE-MONITOR
+364	Follow the act playing in QLab	Seguir el número reproducido en QLab	Die laufende QLab-Darbietung verfolgen
+365	The monitor displays markers for the imported act.	El monitor muestra los puntos del número importado.	Der Monitor zeigt Markierungen der importierten Darbietung.
+366	QLab plays the\nimported group	QLab reproduce el\ngrupo importado	QLab spielt die\nimportierte Gruppe
+367	Bridge follows\nthe linked act	Bridge sigue el\nnúmero asociado	Bridge folgt der\nverknüpften Darbietung
+368	Monitor displays\nthe next Cue	El monitor muestra\nla siguiente Cue	Der Monitor zeigt\ndie nächste Cue
+369	Follow-along diagram: playback controls stay in QLab.	Diagrama de seguimiento: los controles de reproducción siguen en QLab.	Begleitschema: Die Wiedergabebefehle bleiben in QLab.
+370	Open Monitor	Abrir Monitor	Monitor öffnen
+371	After importing and linking a show to the workspace, click Monitor in Bridge.	Tras importar y asociar el espectáculo al workspace, pulsa Monitor en Bridge.	Klicke nach Import und Verknüpfung des Ablaufs mit dem Workspace in Bridge auf Monitor.
+372	Start from QLab	Iniciar desde QLab	Aus QLab starten
+373	Play the group corresponding to the imported act. The monitor switches from waiting to following the show.	Reproduce el grupo del número importado. El monitor pasa de esperar a seguir el espectáculo.	Spiele die Gruppe der importierten Darbietung. Der Monitor wechselt vom Warten zur Begleitung des Ablaufs.
+374	Read the next marker	Leer el siguiente punto	Die nächste Markierung lesen
+375	The monitor shows the next Cue, its image, scheduled time and countdown. The alert turns red in the last ten seconds.	El monitor muestra la siguiente Cue, imagen, tiempo previsto y cuenta atrás. La alerta se vuelve roja en los diez últimos segundos.	Der Monitor zeigt nächste Cue, Bild, geplante Zeit und Countdown. In den letzten zehn Sekunden wird die Warnung rot.
+376	Always on top	Siempre en primer plano	Immer im Vordergrund
+377	This setting keeps the monitor above other windows. It follows the show and does not replace QLab’s transport.	Este ajuste mantiene el monitor sobre las demás ventanas. Es una pantalla de seguimiento y no sustituye el transporte de QLab.	Diese Einstellung hält den Monitor vor anderen Fenstern. Er begleitet den Ablauf und ersetzt nicht die Transportsteuerung von QLab.
+378	TROUBLESHOOTING · PILOT	SOLUCIÓN DE PROBLEMAS · PILOT	FEHLERHILFE · PILOT
+379	Quickly find the right action	Encontrar rápido la acción adecuada	Schnell den richtigen Schritt finden
+380	Start with the item that matches your situation.	Empieza por el punto que corresponda a tu caso.	Beginne mit dem Punkt, der zu deiner Situation passt.
+381	YOU NOTICE…	OBSERVAS…	DU BEMERKST…
+382	CHECK	COMPROBAR	PRÜFEN
+383	I cannot find my music.	No encuentro mi música.	Ich finde meine Musik nicht.
+384	Prepare an accessible file on the device, then use Music / Video in Edit.	Prepara un archivo accesible y usa Música / Vídeo en Edit.	Stelle eine erreichbare Datei auf dem Gerät bereit und nutze Musik / Video in Edit.
+385	The media starts at the wrong time.	El medio empieza en el momento incorrecto.	Das Medium startet zur falschen Zeit.
+386	Check its Cue time, then IN and OUT in the file.	Comprueba el tiempo de la Cue y después IN y OUT en el archivo.	Prüfe die Cue-Zeit und anschließend IN und OUT in der Datei.
+387	The video has no sound.	El vídeo no tiene sonido.	Das Video hat keinen Ton.
+388	Check its speaker button, then device and playback-system sound.	Comprueba el altavoz y después el sonido del dispositivo y de la difusión.	Prüfe den Lautsprecher-Button und dann den Ton von Gerät und Anlage.
+389	The active visual darkens.	La imagen activa se oscurece.	Das aktive Bild wird dunkel.
+390	The fade is expected in the ten seconds before the next Cue.	El fundido está previsto en los diez segundos anteriores a la siguiente Cue.	Das Ausblenden ist in den zehn Sekunden vor der nächsten Cue vorgesehen.
+391	I cannot see previous Cues.	No veo las Cues anteriores.	Ich sehe vergangene Cues nicht.
+392	Maverick hides them. Choose Iceman to keep the list.	Maverick las oculta. Elige Iceman para conservar la lista.	Maverick blendet sie aus. Wähle Iceman, um die Liste zu behalten.
+393	I cannot find my export.	No encuentro mi exportación.	Ich finde meinen Export nicht.
+394	Wait for preparation to finish, then check the chosen download or save folder.	Espera a que termine la preparación y revisa la carpeta de descarga o guardado.	Warte die Erstellung ab und prüfe den gewählten Download- oder Speicherordner.
+395	The PDF does not reopen as a project.	El PDF no se abre como proyecto.	Das PDF öffnet sich nicht als Projekt.
+396	Use the show ZIP with Open, not the PDF.	Usa el ZIP del espectáculo con Abrir, no el PDF.	Nutze mit Öffnen das Ablauf-ZIP, nicht das PDF.
+397	Keep a copy before troubleshooting	Conservar una copia antes de reparar	Vor der Fehlerbehebung eine Kopie sichern
+398	If the show is still open and readable, export a ZIP before clearing browser data or changing devices.	Si el espectáculo sigue abierto y legible, exporta un ZIP antes de borrar datos del navegador o cambiar de dispositivo.	Ist der Ablauf noch offen und lesbar, exportiere vor dem Löschen der Browserdaten oder einem Gerätewechsel ein ZIP.
+399	TROUBLESHOOTING · BRIDGE	SOLUCIÓN DE PROBLEMAS · BRIDGE	FEHLERHILFE · BRIDGE
+400	Check the QLab connection	Comprobar la conexión con QLab	Die QLab-Verbindung prüfen
+401	Most blockers involve the package or destination.	Los bloqueos principales afectan al paquete o al destino.	Die meisten Probleme betreffen Paket oder Ziel.
+402	SITUATION	SITUACIÓN	SITUATION
+403	ACTION	ACCIÓN	AKTION
+404	QLab is not detected.	No se detecta QLab.	QLab wird nicht erkannt.
+405	Open QLab 5 and the workspace, then refresh in Bridge.	Abre QLab 5 y el workspace; después actualiza en Bridge.	Öffne QLab 5 und den Workspace und aktualisiere dann in Bridge.
+406	Import into QLab is greyed out.	Importar en QLab está desactivado.	In QLab importieren ist ausgegraut.
+407	Select a package and a saved workspace; wait for any running operation.	Elige un paquete y un workspace guardado; espera cualquier operación en curso.	Wähle ein Paket und einen gespeicherten Workspace; warte eine laufende Aktion ab.
+408	The ZIP is rejected.	Se rechaza el ZIP.	Das ZIP wird abgelehnt.
+409	Check it is the complete show ZIP exported by Pilot, not a PDF.	Comprueba que sea el ZIP completo del espectáculo exportado por Pilot, no un PDF.	Prüfe, ob es das vollständige von Pilot exportierte Ablauf-ZIP und kein PDF ist.
+410	Bridge cannot control QLab.	Bridge no puede controlar QLab.	Bridge kann QLab nicht steuern.
+411	Check macOS Automation permission for Bridge to control QLab.	Comprueba el permiso Automatización de macOS para Bridge hacia QLab.	Prüfe die macOS-Automationsberechtigung von Bridge für QLab.
+412	The monitor keeps waiting.	El monitor sigue esperando.	Der Monitor wartet weiter.
+413	Check the show link and start the corresponding imported group in QLab.	Comprueba la asociación y reproduce el grupo importado correspondiente en QLab.	Prüfe die Ablaufverknüpfung und starte die zugehörige importierte Gruppe in QLab.
+414	Sound or picture goes to the wrong place.	El sonido o la imagen sale por el sitio incorrecto.	Ton oder Bild erscheinen am falschen Ausgang.
+415	Check QLab outputs and surfaces, then connected equipment.	Comprueba salidas y superficies de QLab y luego el equipo conectado.	Prüfe Ausgänge und Flächen in QLab sowie die angeschlossene Technik.
+416	When asking for help	Al pedir ayuda	Bei einer Hilfsanfrage
+417	Include Pilot, Bridge and QLab versions, what you clicked and the exact message. A screenshot and sample show help identify the problem.	Indica versiones de Pilot, Bridge y QLab, qué pulsaste y el mensaje exacto. Una captura y un ejemplo ayudan a entender el problema.	Nenne die Versionen von Pilot, Bridge und QLab, deine Klickfolge und die genaue Meldung. Eine Aufnahme und ein Beispielablauf helfen bei der Klärung.
+418	GLOSSARY	GLOSARIO	GLOSSAR
+419	Useful terms	Palabras útiles	Nützliche Begriffe
+420	Understand the interface without extra jargon.	Entender la interfaz sin jerga adicional.	Die Oberfläche ohne unnötigen Fachjargon verstehen.
+421	TERM	TÉRMINO	BEGRIFF
+422	MEANING	SIGNIFICADO	BEDEUTUNG
+423	Show	Espectáculo	Ablauf
+424	A sequence of markers, instructions and media for an act.	Secuencia de puntos, instrucciones y medios de un número.	Eine Folge von Zeitmarken, Anweisungen und Medien für eine Darbietung.
+426	A marker at a specific time in the show.	Un punto situado en un tiempo preciso del espectáculo.	Eine Markierung an einer bestimmten Ablaufzeit.
+428	A line of time representing the show sequence.	Línea de tiempo que representa el desarrollo del espectáculo.	Eine Zeitachse, die den Ablauf der Vorstellung darstellt.
+430	The white marker showing the current time.	La marca blanca que indica el tiempo actual.	Die weiße Markierung der aktuellen Zeit.
+432	A drawing of sound amplitude, useful for finding attacks and silence.	Dibujo de la amplitud del sonido, útil para encontrar ataques y silencios.	Darstellung der Lautstärkeamplitude zum Finden von Einsätzen und Stille.
+434	Start and end positions within the media file.	Posiciones de inicio y final dentro del archivo.	Anfangs- und Endposition innerhalb der Mediendatei.
+435	CUT / FADE	CUT / FUNDIDO	CUT / FADE
+436	Immediate start / gradual rise in sound.	Inicio directo / subida progresiva del sonido.	Direkter Start / langsames Einblenden des Tons.
+437	Visual	Imagen de referencia	Orientierungsbild
+438	A reference image associated with a Cue.	Imagen de referencia asociada a una Cue.	Ein einer Cue zugeordnetes Orientierungsbild.
+439	Package / ZIP	Paquete / ZIP	Paket / ZIP
+440	A portable archive containing the show and its files.	Archivo portátil que contiene el espectáculo y sus archivos.	Ein portables Archiv mit Ablauf und zugehörigen Dateien.
+441	QLab workspace	Workspace de QLab	QLab-Workspace
+442	A QLab document containing show groups, Cues and settings.	Documento QLab con grupos, Cues y ajustes del espectáculo.	Ein QLab-Dokument mit Gruppen, Cues und Show-Einstellungen.
+443	Timeline group	Grupo Timeline	Timeline-Gruppe
+444	A QLab group whose actions follow a timed arrangement.	Grupo QLab cuyas acciones siguen una organización temporal.	Eine QLab-Gruppe mit zeitlich angeordneten Aktionen.
+445	REFERENCES	REFERENCIAS	REFERENZEN
+446	Versions and resources	Versiones y recursos	Versionen und Ressourcen
+447	The manual edition is independent of app versions.	La edición del manual es independiente de las versiones de la aplicación.	Die Handbuchausgabe ist unabhängig von den App-Versionen.
+448	REFERENCE	REFERENCIA	REFERENZ
+449	DOCUMENTED VERSION	VERSIÓN DOCUMENTADA	DOKUMENTIERTE VERSION
+454	Manual	Manual	Handbuch
+455	Pilot screenshots	Capturas de Pilot	Pilot-Aufnahmen
+456	Safari 27.0.1 on Mac · French interface	Safari 27.0.1 en Mac · interfaz francesa	Safari 27.0.1 auf dem Mac · französische Oberfläche
+457	<b>Open Pilot:</b> <link href="https://s2a-production.com/S2A-Pilot/" color="#B64B0A">s2a-production.com/S2A-Pilot/</link>	<b>Abrir Pilot:</b> <link href="https://s2a-production.com/S2A-Pilot/" color="#B64B0A">s2a-production.com/S2A-Pilot/</link>	<b>Pilot öffnen:</b> <link href="https://s2a-production.com/S2A-Pilot/" color="#B64B0A">s2a-production.com/S2A-Pilot/</link>
+458	<b>Downloads and source:</b> <link href="https://github.com/soundviking/S2A-Pilot" color="#B64B0A">github.com/soundviking/S2A-Pilot</link>	<b>Descargas y código:</b> <link href="https://github.com/soundviking/S2A-Pilot" color="#B64B0A">github.com/soundviking/S2A-Pilot</link>	<b>Downloads und Quellcode:</b> <link href="https://github.com/soundviking/S2A-Pilot" color="#B64B0A">github.com/soundviking/S2A-Pilot</link>
+459	<b>macOS help for a blocked app:</b> <link href="https://support.apple.com/en-us/102445" color="#B64B0A">Apple documentation</link>.	<b>Ayuda macOS para una app bloqueada:</b> <link href="https://support.apple.com/es-es/102445" color="#B64B0A">documentación de Apple</link>.	<b>macOS-Hilfe bei blockierter App:</b> <link href="https://support.apple.com/de-de/102445" color="#B64B0A">Apple-Dokumentation</link>.
+460	Scope of this edition	Alcance de esta edición	Umfang dieser Ausgabe
+461	File selection screens vary by system. This is a general workflow. The Bridge section describes the published version; its illustrations are diagrams, not Safari captures of the native app. Copilot is not offered in this version.	Los selectores de archivos varían según el sistema. El recorrido es genérico. Bridge se describe según la versión publicada; sus ilustraciones son diagramas, no capturas Safari de la app nativa. Esta versión no ofrece Copilot.	Dateiauswahldialoge unterscheiden sich nach System. Der Ablauf ist allgemein gehalten. Der Bridge-Teil beschreibt die veröffentlichte Version; seine Bilder sind Diagramme, keine Safari-Aufnahmen der nativen App. Copilot ist in dieser Version nicht verfügbar.
+462	Screenshots were taken from Pilot 1.5.6. Capture references and layout sources are kept separately so sections can be updated without rebuilding the entire manual.	Las capturas se hicieron con Pilot 1.5.6. Las referencias y fuentes de maquetación se conservan aparte para actualizar secciones sin rehacer todo el manual.	Die Aufnahmen stammen aus Pilot 1.5.6. Bildreferenzen und Layoutquellen werden getrennt aufbewahrt, um Abschnitte einzeln aktualisieren zu können.

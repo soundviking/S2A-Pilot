@@ -1,0 +1,1452 @@
+[
+  {
+    "chapter": "BIENVENUE",
+    "title": "Préparez. Pilotez. Jouez.",
+    "subtitle": "Le mode d’emploi illustré de S2A Pilot et S2A Pilot Bridge.",
+    "blocks": [
+      {
+        "kind": "pic",
+        "id": "10-maverick",
+        "caption": "Pilot 1.5.6 · Conduite de démonstration · Safari sur Mac.",
+        "cap": 250,
+        "width": 511.27559055118115,
+        "marks": false
+      },
+      {
+        "kind": "p",
+        "text": "<b>De la première Cue au spectacle.</b> Créez une conduite, ajoutez vos médias et suivez les consignes en Show. Puis, si vous utilisez QLab, transférez votre travail avec Bridge."
+      },
+      {
+        "kind": "table",
+        "rows": [
+          [
+            "PILOT 1.5.6",
+            "BRIDGE 1.3.3"
+          ],
+          [
+            "Préparer et suivre une conduite dans le navigateur.",
+            "Importer la conduite dans QLab 5 sur Mac."
+          ]
+        ],
+        "widths": null
+      },
+      {
+        "kind": "note",
+        "title": "Édition 1.0 · 15 octobre 2026",
+        "text": "Un parcours générique, illustré avec la véritable interface de Pilot dans Safari sur Mac. Les fenêtres de choix et d’enregistrement des fichiers dépendent de votre appareil. Les illustrations de parcours Bridge sont des schémas explicatifs."
+      }
+    ]
+  },
+  {
+    "chapter": "SOMMAIRE",
+    "title": "Votre parcours",
+    "subtitle": "Les chapitres sont aussi accessibles dans les signets de ce PDF.",
+    "blocks": [
+      {
+        "kind": "toc"
+      },
+      {
+        "kind": "note",
+        "title": "Pour commencer rapidement",
+        "text": "Suivez les chapitres 02, 03, 04 et 08, puis passez en Show au chapitre 09. Vous pouvez lire la partie Bridge plus tard, uniquement si vous utilisez QLab."
+      }
+    ]
+  },
+  {
+    "chapter": "01 · DÉCOUVRIR PILOT",
+    "title": "Deux modes, une conduite",
+    "subtitle": "Edit sert à préparer. Show sert à suivre le spectacle.",
+    "blocks": [
+      {
+        "kind": "pic",
+        "id": "02-projet",
+        "caption": "En Edit, les commandes du projet restent au-dessus de la Timeline.",
+        "cap": 130,
+        "width": 511.27559055118115,
+        "marks": false
+      },
+      {
+        "kind": "pic",
+        "id": "06-timeline",
+        "caption": "La Timeline représente les temps, les Cues et les médias.",
+        "cap": 170,
+        "width": 511.27559055118115,
+        "marks": false
+      },
+      {
+        "kind": "step",
+        "number": 1,
+        "title": "Préparer en Edit",
+        "text": "Nommez la conduite, créez les Cues et ajoutez les fichiers. Une Cue est un repère de temps avec un titre, éventuellement des consignes, un visuel et des médias."
+      },
+      {
+        "kind": "step",
+        "number": 2,
+        "title": "Suivre en Show",
+        "text": "Les Cues actives et à venir deviennent plus lisibles. Les outils de modification sont masqués. Le bouton Edit permet de reprendre la préparation."
+      },
+      {
+        "kind": "note",
+        "title": "Une conduite n’est pas seulement un PDF",
+        "text": "Le ZIP conserve le projet et ses fichiers pour le rouvrir. Le PDF est une fiche de conduite à lire ou à imprimer."
+      }
+    ]
+  },
+  {
+    "chapter": "02 · PREMIÈRE CONDUITE",
+    "title": "Créer votre premier numéro",
+    "subtitle": "Exemple du manuel : une musique de 3 min 20 et six Cues.",
+    "blocks": [
+      {
+        "kind": "pic",
+        "id": "02-projet",
+        "caption": "Les commandes de création, d’ouverture et d’enregistrement.",
+        "cap": 140,
+        "width": 511.27559055118115,
+        "marks": {
+          "1": 1,
+          "2": 2
+        }
+      },
+      {
+        "kind": "step",
+        "number": 1,
+        "title": "Choisir Nouveau",
+        "text": "Commencez une conduite vide. Avant de remplacer un travail important, exportez-le avec Enregistrer sous…"
+      },
+      {
+        "kind": "step",
+        "number": 2,
+        "title": "Saisir le nom du numéro",
+        "text": "Remplacez le nom proposé par un titre reconnaissable, par exemple « Gala S2A - découverte »."
+      },
+      {
+        "kind": "step",
+        "number": 3,
+        "title": "Ajouter une première Cue",
+        "text": "Revenez à zéro avec le bouton retour au début, puis cliquez sur Cue. Ouvrez sa ligne pour lui donner un titre et des consignes."
+      },
+      {
+        "kind": "note",
+        "title": "Le temps donne le rythme",
+        "text": "Les Cues se déclenchent suivant leur position dans la conduite. Préparez leurs temps, puis testez le déroulement avant le spectacle."
+      }
+    ]
+  },
+  {
+    "chapter": "03 · CRÉER ET ORGANISER",
+    "title": "Renseigner une Cue",
+    "subtitle": "Cliquez sur sa ligne pour ouvrir ses réglages.",
+    "blocks": [
+      {
+        "kind": "pic",
+        "id": "03-editer",
+        "caption": "Une première Cue, ouverte en Edit.",
+        "cap": 170,
+        "width": 511.27559055118115,
+        "marks": {
+          "2": 1,
+          "3": 2,
+          "4": 3
+        }
+      },
+      {
+        "kind": "step",
+        "number": 1,
+        "title": "Indiquer le temps et le titre",
+        "text": "Le champ de temps fixe le début de la Cue. Le titre doit permettre de la reconnaître immédiatement : « Ouverture du rideau », « Ambiance bleue »…"
+      },
+      {
+        "kind": "step",
+        "number": 2,
+        "title": "Écrire une consigne utile",
+        "text": "Dans la description, précisez l’action attendue. Exemple : « Ouvrir le rideau. Lancer les lumières de face. »"
+      },
+      {
+        "kind": "step",
+        "number": 3,
+        "title": "Ajouter un visuel si nécessaire",
+        "text": "Ajouter visuel choisit une image de repérage. Elle aide à identifier le moment ; elle ne remplace pas un fichier audio ou vidéo à jouer."
+      },
+      {
+        "kind": "note",
+        "title": "Retrouver le panneau ouvert",
+        "text": "Pilot recentre la Cue sélectionnée pour faciliter la lecture. Si le panneau est très haut, son début est mis en vue. La saisie ne provoque pas de recentrage continu."
+      }
+    ]
+  },
+  {
+    "chapter": "03 · CRÉER ET ORGANISER",
+    "title": "Organiser sans se perdre",
+    "subtitle": "La liste suit les temps des Cues.",
+    "blocks": [
+      {
+        "kind": "pic",
+        "id": "03-liste",
+        "caption": "Six Cues, leurs temps et leurs titres.",
+        "cap": 240,
+        "width": 511.27559055118115,
+        "marks": false
+      },
+      {
+        "kind": "step",
+        "number": 1,
+        "title": "Ajuster la place d’une Cue",
+        "text": "Modifiez son temps ou utilisez sa poignée de déplacement. Vérifiez le temps après l’opération et relisez l’ordre obtenu."
+      },
+      {
+        "kind": "step",
+        "number": 2,
+        "title": "Dupliquer un repère",
+        "text": "Ouvrez la Cue et choisissez Dupliquer. La copie reprend les réglages ; donnez-lui ensuite son propre titre et son propre temps."
+      },
+      {
+        "kind": "step",
+        "number": 3,
+        "title": "Corriger une manipulation",
+        "text": "Les boutons Annuler et Rétablir de l’en-tête Edit permettent de revenir sur les modifications disponibles dans l’historique."
+      },
+      {
+        "kind": "note",
+        "title": "Numérotation automatique",
+        "text": "Le numéro sert à se repérer dans la liste. Gardez surtout des titres clairs et des temps cohérents."
+      }
+    ]
+  },
+  {
+    "chapter": "03 · CRÉER ET ORGANISER",
+    "title": "Supprimer une Cue",
+    "subtitle": "La poubelle est accessible directement dans chaque ligne Edit.",
+    "blocks": [
+      {
+        "kind": "pic",
+        "id": "03-suppression",
+        "caption": "Pilot demande confirmation dans une fenêtre au thème de l’application.",
+        "cap": 210,
+        "width": 400,
+        "marks": false
+      },
+      {
+        "kind": "step",
+        "number": 1,
+        "title": "Repérer la bonne ligne",
+        "text": "Vérifiez son numéro, son temps et son titre avant de cliquer sur la poubelle rouge."
+      },
+      {
+        "kind": "step",
+        "number": 2,
+        "title": "Lire la confirmation",
+        "text": "La fenêtre rappelle la Cue concernée. Choisissez Annuler pour la garder ou Supprimer pour confirmer."
+      },
+      {
+        "kind": "step",
+        "number": 3,
+        "title": "Contrôler la liste après suppression",
+        "text": "Relisez l’ordre des Cues et vérifiez que le média ou le repère nécessaire au spectacle n’a pas été retiré."
+      },
+      {
+        "kind": "note",
+        "title": "Avant une grande réorganisation",
+        "text": "Conservez un ZIP de la conduite. Il vous permettra de retrouver une version complète avec les médias."
+      }
+    ]
+  },
+  {
+    "chapter": "04 · AJOUTER UNE MUSIQUE",
+    "title": "Importer le fichier audio",
+    "subtitle": "Le bouton à utiliser s’appelle « Musique / Vidéo ».",
+    "blocks": [
+      {
+        "kind": "pic",
+        "id": "04-transport-vide",
+        "caption": "Les commandes d’import se trouvent dans la Timeline en Edit.",
+        "cap": 210,
+        "width": 511.27559055118115,
+        "marks": {
+          "1": 1,
+          "3": 2
+        }
+      },
+      {
+        "kind": "step",
+        "number": 1,
+        "title": "Choisir le moment de départ",
+        "text": "Le média sera placé au temps actuel. Pour une musique au début du numéro, utilisez d’abord le retour au début."
+      },
+      {
+        "kind": "step",
+        "number": 2,
+        "title": "Cliquer sur Musique / Vidéo",
+        "text": "Dans la fenêtre de choix de fichiers de votre appareil, retrouvez votre morceau et sélectionnez-le."
+      },
+      {
+        "kind": "step",
+        "number": 3,
+        "title": "Attendre le retour dans Pilot",
+        "text": "L’import crée une nouvelle Cue avec le média. Renommez-la si le nom du fichier n’est pas assez clair."
+      },
+      {
+        "kind": "note",
+        "title": "Préparer les fichiers",
+        "text": "La musique doit être disponible comme fichier sur l’appareil. Pilot n’offre pas d’accès direct à la bibliothèque de l’application Musique d’iOS."
+      }
+    ]
+  },
+  {
+    "chapter": "04 · AJOUTER UNE MUSIQUE",
+    "title": "Vérifier ce qui a été importé",
+    "subtitle": "Exemple : Ouverture-du-spectacle.wav, durée 03:20.",
+    "blocks": [
+      {
+        "kind": "pic",
+        "id": "04-audio",
+        "caption": "Un véritable fichier WAV de 3 min 20 importé dans Pilot.",
+        "cap": 220,
+        "width": 511.27559055118115,
+        "marks": false
+      },
+      {
+        "kind": "step",
+        "number": 1,
+        "title": "Lire le nom et la durée",
+        "text": "Le bandeau AUDIO affiche le fichier et sa durée utile. Vérifiez que vous avez choisi le bon morceau."
+      },
+      {
+        "kind": "step",
+        "number": 2,
+        "title": "Écouter le fichier seul",
+        "text": "Le petit bouton Lecture situé dans le média lance son aperçu. Il est indépendant de la lecture générale du spectacle."
+      },
+      {
+        "kind": "step",
+        "number": 3,
+        "title": "Tester la conduite complète",
+        "text": "Arrêtez l’aperçu, puis utilisez la lecture générale pour vérifier le départ au bon moment."
+      },
+      {
+        "kind": "note",
+        "title": "Un format accepté ne suffit pas",
+        "text": "La lecture dépend aussi du codec et du navigateur. Essayez vos fichiers sur l’appareil prévu pour le spectacle, avec le son réellement utilisé."
+      }
+    ]
+  },
+  {
+    "chapter": "05 · RÉGLER UN MÉDIA",
+    "title": "Choisir le début et la fin",
+    "subtitle": "IN et OUT désignent des positions à l’intérieur du fichier.",
+    "blocks": [
+      {
+        "kind": "pic",
+        "id": "05-trim",
+        "caption": "L’éditeur audio et les poignées de la waveform.",
+        "cap": 190,
+        "width": 511.27559055118115,
+        "marks": {
+          "2": 1,
+          "3": 2,
+          "1": 3
+        }
+      },
+      {
+        "kind": "step",
+        "number": 1,
+        "title": "Régler IN",
+        "text": "IN indique où commencer dans le fichier. À 00:00.0, Pilot utilise le début du morceau."
+      },
+      {
+        "kind": "step",
+        "number": 2,
+        "title": "Régler OUT",
+        "text": "OUT indique où arrêter la lecture du fichier. Dans cet exemple, 03:20.0 correspond à la fin de la musique."
+      },
+      {
+        "kind": "step",
+        "number": 3,
+        "title": "Écouter la portion choisie",
+        "text": "Utilisez la Lecture du média pour vérifier les points de coupe. Les poignées jaunes et le zoom de la waveform aident à affiner le réglage."
+      },
+      {
+        "kind": "note",
+        "title": "Deux temps différents",
+        "text": "Le temps de la Cue la place dans le spectacle. IN et OUT choisissent la partie du fichier jouée à partir de cette Cue."
+      }
+    ]
+  },
+  {
+    "chapter": "05 · RÉGLER UN MÉDIA",
+    "title": "CUT, FONDU et Loop",
+    "subtitle": "Choisissez comment le média entre et quelle portion il répète.",
+    "blocks": [
+      {
+        "kind": "pic",
+        "id": "05-fondu",
+        "caption": "FONDU avec une durée de trois secondes.",
+        "cap": 75,
+        "width": 230,
+        "marks": false
+      },
+      {
+        "kind": "table",
+        "rows": [
+          [
+            "RÉGLAGE",
+            "EFFET"
+          ],
+          [
+            "CUT",
+            "Démarrage direct du média audio."
+          ],
+          [
+            "FONDU",
+            "Montée progressive du son sur la durée indiquée."
+          ],
+          [
+            "Loop",
+            "Répétition de la portion délimitée par IN et OUT."
+          ]
+        ],
+        "widths": [
+          105,
+          406.27559055118115
+        ]
+      },
+      {
+        "kind": "pic",
+        "id": "05-loop",
+        "caption": "Exemple : IN à 00:10, OUT à 03:10 et Loop cochée.",
+        "cap": 140,
+        "width": 511.27559055118115,
+        "marks": false
+      },
+      {
+        "kind": "step",
+        "number": 1,
+        "title": "Choisir la transition audio",
+        "text": "Sélectionnez CUT ou FONDU. Avec FONDU, saisissez la durée voulue, puis écoutez le résultat."
+      },
+      {
+        "kind": "step",
+        "number": 2,
+        "title": "Activer Loop seulement si nécessaire",
+        "text": "Cochez Loop pour une ambiance répétée. Vérifiez les raccords et prévoyez le moment où vous arrêterez ou remplacerez cette ambiance."
+      }
+    ]
+  },
+  {
+    "chapter": "06 · TIMELINE EN EDIT",
+    "title": "Lire et déplacer les repères",
+    "subtitle": "La ligne blanche indique le temps courant de la conduite.",
+    "blocks": [
+      {
+        "kind": "pic",
+        "id": "06-timeline",
+        "caption": "Audio en vert, vidéo en rose, repères des Cues et waveform.",
+        "cap": 220,
+        "width": 511.27559055118115,
+        "marks": false
+      },
+      {
+        "kind": "step",
+        "number": 1,
+        "title": "Repérer le temps du spectacle",
+        "text": "Le chrono près de Lecture montre où vous êtes dans la conduite. Cliquez dans la Timeline pour changer de position."
+      },
+      {
+        "kind": "step",
+        "number": 2,
+        "title": "Sélectionner ou déplacer une Cue",
+        "text": "Un repère permet de retrouver sa Cue. En Edit, déplacer son repère change son temps. Relisez ensuite la valeur dans la Cue."
+      },
+      {
+        "kind": "step",
+        "number": 3,
+        "title": "Zoomer pour régler précisément",
+        "text": "Utilisez les commandes de zoom de la Timeline. Elles changent l’échelle d’affichage, sans changer la durée du spectacle."
+      },
+      {
+        "kind": "note",
+        "title": "La waveform est un repère",
+        "text": "Elle aide à retrouver une attaque ou un silence. Certains médias peuvent ne pas fournir de waveform décodable ; vérifiez alors directement leur lecture."
+      }
+    ]
+  },
+  {
+    "chapter": "07 · VIDÉO ET VISUELS",
+    "title": "Importer et régler une vidéo",
+    "subtitle": "Une vidéo se choisit avec le même bouton que la musique.",
+    "blocks": [
+      {
+        "kind": "pic",
+        "id": "07-video",
+        "caption": "Le média vidéo dispose d’un aperçu, de IN / OUT et du bouton de son.",
+        "cap": 210,
+        "width": 511.27559055118115,
+        "marks": false
+      },
+      {
+        "kind": "step",
+        "number": 1,
+        "title": "Importer au bon temps",
+        "text": "Placez la conduite au départ souhaité, puis choisissez Musique / Vidéo et votre fichier vidéo. Pilot crée sa Cue."
+      },
+      {
+        "kind": "step",
+        "number": 2,
+        "title": "Vérifier l’aperçu",
+        "text": "Utilisez la Lecture du fichier pour contrôler l’image et sa portion utile. Réglez IN et OUT si nécessaire."
+      },
+      {
+        "kind": "step",
+        "number": 3,
+        "title": "Décider si le son doit être joué",
+        "text": "La vidéo est muette à l’import. Le bouton haut-parleur permet de couper ou de réactiver son son."
+      },
+      {
+        "kind": "note",
+        "title": "Le visuel de la Cue est distinct",
+        "text": "Une image ajoutée avec Ajouter visuel sert de repère dans la liste Show et le PDF. Le fichier vidéo est, lui, un média destiné à être lu."
+      }
+    ]
+  },
+  {
+    "chapter": "07 · VIDÉO ET VISUELS",
+    "title": "Reconnaître le bouton muet",
+    "subtitle": "Vérifiez le son avant d’ouvrir la sortie vidéo.",
+    "blocks": [
+      {
+        "kind": "icons"
+      },
+      {
+        "kind": "step",
+        "number": 1,
+        "title": "Ouvrir la Cue vidéo en Edit",
+        "text": "Retrouvez le bouton haut-parleur dans les réglages de son média."
+      },
+      {
+        "kind": "step",
+        "number": 2,
+        "title": "Choisir l’état souhaité",
+        "text": "Haut-parleur barré : vidéo muette. Haut-parleur non barré : son autorisé. Cliquez à nouveau pour changer d’état."
+      },
+      {
+        "kind": "step",
+        "number": 3,
+        "title": "Tester sur le système de diffusion",
+        "text": "Écoutez l’ensemble avec la musique et les autres médias. Évitez de découvrir un son de vidéo inattendu pendant la représentation."
+      },
+      {
+        "kind": "note",
+        "title": "Le rôle des images de repérage",
+        "text": "Utilisez un visuel suffisamment reconnaissable, au format 16:9. En Show, seul le visuel actif s’assombrit progressivement à l’approche de la Cue suivante."
+      }
+    ]
+  },
+  {
+    "chapter": "08 · ENREGISTRER",
+    "title": "Conserver une copie portable",
+    "subtitle": "Utilisez Enregistrer sous… pour obtenir le ZIP de la conduite.",
+    "blocks": [
+      {
+        "kind": "pic",
+        "id": "08-sauvegarde",
+        "caption": "Sauvegarde locale et export de la conduite.",
+        "cap": 150,
+        "width": 511.27559055118115,
+        "marks": {
+          "1": 1
+        }
+      },
+      {
+        "kind": "step",
+        "number": 1,
+        "title": "Cliquer sur Enregistrer sous…",
+        "text": "Laissez Pilot préparer le package. Suivez la fenêtre d’enregistrement ou de téléchargement proposée par le navigateur."
+      },
+      {
+        "kind": "step",
+        "number": 2,
+        "title": "Retrouver le fichier ZIP",
+        "text": "Choisissez un nom reconnaissable et un dossier facile à retrouver. Vérifiez que le téléchargement est terminé."
+      },
+      {
+        "kind": "step",
+        "number": 3,
+        "title": "Garder le ZIP complet",
+        "text": "Il contient la conduite et les fichiers nécessaires. C’est ce fichier que vous pouvez transférer à un autre appareil ou importer dans Bridge."
+      },
+      {
+        "kind": "note",
+        "title": "Sauvegarde locale ≠ copie de secours",
+        "text": "La sauvegarde automatique aide à retrouver le travail dans ce navigateur. Elle ne remplace pas un ZIP conservé à part et peut disparaître si les données du site sont effacées."
+      }
+    ]
+  },
+  {
+    "chapter": "08 · ROUVRIR ET TRANSFÉRER",
+    "title": "Reprendre sur un autre appareil",
+    "subtitle": "Le fichier exporté évite de reconstruire la conduite.",
+    "blocks": [
+      {
+        "kind": "scheme",
+        "items": [
+          "Pilot\nEnregistrer sous…",
+          "Fichier\n.s2apilot.zip",
+          "Pilot\nOuvrir"
+        ],
+        "caption": "Schéma : transfert d’une conduite complète."
+      },
+      {
+        "kind": "step",
+        "number": 1,
+        "title": "Transférer le ZIP",
+        "text": "Copiez-le avec le moyen habituel de votre appareil : dossier partagé, stockage externe, AirDrop ou autre service de fichiers."
+      },
+      {
+        "kind": "step",
+        "number": 2,
+        "title": "Cliquer sur Ouvrir dans Pilot",
+        "text": "Sélectionnez le ZIP reçu et laissez les médias se charger. Le sélecteur dépend de votre appareil."
+      },
+      {
+        "kind": "step",
+        "number": 3,
+        "title": "Relire et essayer la conduite",
+        "text": "Vérifiez le titre, les Cues, les visuels et la lecture audio/vidéo avant de l’utiliser."
+      },
+      {
+        "kind": "note",
+        "title": "Et pour QLab ?",
+        "text": "Dans la version documentée, le ZIP peut aussi contenir Bridge dans companion/. Le ZIP de conduite est le fichier à sélectionner dans Bridge ; ne choisissez pas le ZIP d’installation de l’application."
+      }
+    ]
+  },
+  {
+    "chapter": "09 · MODE SHOW",
+    "title": "Lancer et suivre la conduite",
+    "subtitle": "Passez en Show quand la préparation est terminée.",
+    "blocks": [
+      {
+        "kind": "pic",
+        "id": "09-transport",
+        "caption": "Maverick : le décompte est en évidence dans la Timeline.",
+        "cap": 135,
+        "width": 511.27559055118115,
+        "marks": false
+      },
+      {
+        "kind": "pic",
+        "id": "10-maverick",
+        "caption": "La Cue active et la suivante affichent leurs consignes.",
+        "cap": 200,
+        "width": 511.27559055118115,
+        "marks": false
+      },
+      {
+        "kind": "step",
+        "number": 1,
+        "title": "Revenir au début",
+        "text": "Le bouton retour au début remet la conduite à zéro et arrête la lecture en cours."
+      },
+      {
+        "kind": "step",
+        "number": 2,
+        "title": "Lancer avec Lecture",
+        "text": "Le bouton général passe en Pause pendant la lecture. Sur ordinateur, la barre Espace permet aussi de lancer ou de mettre en pause."
+      },
+      {
+        "kind": "step",
+        "number": 3,
+        "title": "Lire l’active et anticiper la suivante",
+        "text": "Le halo bleu repère la Cue active. La description n’apparaît que pour l’active et la suivante."
+      },
+      {
+        "kind": "note",
+        "title": "Éviter le double appui",
+        "text": "Lecture / Pause ignore les appuis supplémentaires pendant 0,5 seconde après activation. Quand vous écrivez dans un champ, Espace conserve son rôle normal."
+      }
+    ]
+  },
+  {
+    "chapter": "09 · MODE SHOW",
+    "title": "Anticiper les dix dernières secondes",
+    "subtitle": "Le décompte est le repère principal avant la prochaine Cue.",
+    "blocks": [
+      {
+        "kind": "pic",
+        "id": "09-alerte",
+        "caption": "À 01:43, il reste sept secondes avant la Cue suivante.",
+        "cap": 115,
+        "width": 511.27559055118115,
+        "marks": false
+      },
+      {
+        "kind": "pic",
+        "id": "09-alerte-cues",
+        "caption": "La Cue suivante passe en alerte rouge ; le visuel actif s’assombrit.",
+        "cap": 200,
+        "width": 511.27559055118115,
+        "marks": false
+      },
+      {
+        "kind": "step",
+        "number": 1,
+        "title": "Suivre le rouge",
+        "text": "À partir de dix secondes, le chrono devient rouge et le halo de la Cue suivante clignote. En Maverick, la sous-box du décompte suit la même alerte."
+      },
+      {
+        "kind": "step",
+        "number": 2,
+        "title": "Préparer l’action suivante",
+        "text": "Le titre et les consignes de la Cue à venir restent lisibles. Le fondu du visuel concerne uniquement l’active."
+      },
+      {
+        "kind": "step",
+        "number": 3,
+        "title": "Reconnaître la fin",
+        "text": "Après la dernière Cue, aucun départ suivant n’est annoncé : le décompte affiche --:--. La fin de la musique et la dernière Cue ne sont pas forcément au même instant."
+      }
+    ]
+  },
+  {
+    "chapter": "10 · DISPOSITION MAVERICK",
+    "title": "L’essentiel devant vous",
+    "subtitle": "Sur ordinateur et iPad en paysage : active à gauche, suivante à droite.",
+    "blocks": [
+      {
+        "kind": "pic",
+        "id": "10-maverick",
+        "caption": "Maverick : les Cues passées disparaissent de la liste visible.",
+        "cap": 250,
+        "width": 511.27559055118115,
+        "marks": false
+      },
+      {
+        "kind": "step",
+        "number": 1,
+        "title": "Repérer les deux grandes Cues",
+        "text": "L’active porte le halo bleu. La suivante garde son visuel et ses consignes pour préparer sa venue."
+      },
+      {
+        "kind": "step",
+        "number": 2,
+        "title": "Lire le décompte en haut",
+        "text": "En Maverick, il reste dans la Timeline. Le numéro de Cue aide à situer l’avancement dans le show."
+      },
+      {
+        "kind": "step",
+        "number": 3,
+        "title": "Suivre le renouvellement de la liste",
+        "text": "La liste présente au maximum cinq Cues. Les Cues terminées sont masquées ; revenir dans le temps les rend de nouveau accessibles."
+      },
+      {
+        "kind": "note",
+        "title": "Sur les écrans plus étroits",
+        "text": "Sur iPhone et sur iPad en portrait, la présentation s’adapte verticalement. Le principe reste le même : active, suivante, puis les prochains repères."
+      }
+    ]
+  },
+  {
+    "chapter": "10 · DISPOSITION ICEMAN",
+    "title": "Garder la liste entière",
+    "subtitle": "L’active et la suivante s’agrandissent ; les autres Cues restent compactes.",
+    "blocks": [
+      {
+        "kind": "pic",
+        "id": "10-iceman-passee",
+        "caption": "Cue passée : une ligne compacte.",
+        "cap": 65,
+        "width": 511.27559055118115,
+        "marks": false
+      },
+      {
+        "kind": "pic",
+        "id": "10-iceman-active",
+        "caption": "Cue active : visuel et consignes détaillés.",
+        "cap": 140,
+        "width": 511.27559055118115,
+        "marks": false
+      },
+      {
+        "kind": "pic",
+        "id": "10-iceman-suivante",
+        "caption": "Cue suivante : son décompte est intégré à sa ligne.",
+        "cap": 140,
+        "width": 511.27559055118115,
+        "marks": false
+      },
+      {
+        "kind": "step",
+        "number": 1,
+        "title": "Conserver le contexte",
+        "text": "Les Cues passées restent dans la liste. À chaque changement, l’ancienne active se réduit et la nouvelle suivante s’agrandit."
+      },
+      {
+        "kind": "step",
+        "number": 2,
+        "title": "Laisser Pilot recentrer",
+        "text": "L’active et la suivante sont remises en vue au changement de Cue. Vous pouvez faire défiler la liste entre deux changements."
+      },
+      {
+        "kind": "note",
+        "title": "Avec une longue liste",
+        "text": "Si l’ensemble active + suivante dépasse la hauteur disponible, Pilot aligne le début de l’active. Les descriptions restent réservées à ces deux Cues."
+      }
+    ]
+  },
+  {
+    "chapter": "10 · CHOISIR SA DISPOSITION",
+    "title": "Maverick ou Iceman ?",
+    "subtitle": "Le bouton Disposition se trouve à côté du choix de langue, en Show.",
+    "blocks": [
+      {
+        "kind": "focus",
+        "id": "12-sortie",
+        "region": [
+          623.828125,
+          0,
+          783.828125,
+          40
+        ],
+        "width": 230,
+        "target": [
+          687.828125,
+          0,
+          40,
+          40
+        ],
+        "caption": "1 · Disposition : le bouton entre la langue et la sortie vidéo."
+      },
+      {
+        "kind": "pic",
+        "id": "10-disposition",
+        "caption": "Le choix de disposition dans la véritable fenêtre Pilot.",
+        "cap": 235,
+        "width": 330,
+        "marks": false
+      },
+      {
+        "kind": "table",
+        "rows": [
+          [
+            "MAVERICK",
+            "ICEMAN"
+          ],
+          [
+            "Vue concentrée sur les Cues en cours et à venir.",
+            "Vue qui conserve la liste et les Cues passées."
+          ],
+          [
+            "Décompte dans la Timeline.",
+            "Décompte dans la Cue suivante."
+          ]
+        ],
+        "widths": null
+      },
+      {
+        "kind": "step",
+        "number": 1,
+        "title": "Ouvrir Disposition",
+        "text": "Choisissez l’affichage adapté à votre façon de suivre le spectacle, puis fermez la fenêtre."
+      },
+      {
+        "kind": "step",
+        "number": 2,
+        "title": "Enregistrer votre choix",
+        "text": "La disposition est conservée avec la conduite dans le ZIP exporté. Faites un nouvel export si vous souhaitez transmettre ce choix."
+      }
+    ]
+  },
+  {
+    "chapter": "11 · CONDUITE PDF",
+    "title": "Ouvrir l’aperçu avant de partager",
+    "subtitle": "Le PDF est une fiche de conduite, distincte du ZIP éditable.",
+    "blocks": [
+      {
+        "kind": "pic",
+        "id": "11-apercu",
+        "caption": "L’aperçu PDF de Pilot, avec ses commandes de lecture et de téléchargement.",
+        "cap": 390,
+        "width": 410,
+        "marks": false
+      },
+      {
+        "kind": "step",
+        "number": 1,
+        "title": "Cliquer sur Conduite PDF",
+        "text": "Depuis Edit, Pilot génère la fiche et ouvre son aperçu."
+      },
+      {
+        "kind": "step",
+        "number": 2,
+        "title": "Vérifier puis télécharger",
+        "text": "Contrôlez les titres, temps, visuels et descriptions. Utilisez le téléchargement dans l’aperçu pour conserver et partager le PDF."
+      }
+    ]
+  },
+  {
+    "chapter": "11 · CONDUITE PDF",
+    "title": "Ce que contient la fiche",
+    "subtitle": "Exemple généré par Pilot avec la conduite de démonstration.",
+    "blocks": [
+      {
+        "kind": "pic",
+        "id": "technical",
+        "caption": "Première page d’une fiche réellement générée par Pilot.",
+        "cap": 410,
+        "width": 330,
+        "marks": false
+      },
+      {
+        "kind": "p",
+        "text": "L’en-tête utilise le <b>premier visuel disponible dans l’ordre des Cues</b>. La fiche rassemble les temps, titres, consignes et images de repérage."
+      },
+      {
+        "kind": "note",
+        "title": "Le QR code du PDF",
+        "text": "Il mène au site public de S2A Pilot. Il ne partage pas votre conduite et ne commande pas le spectacle."
+      }
+    ]
+  },
+  {
+    "chapter": "12 · SORTIE VIDÉO",
+    "title": "Afficher la vidéo sur un autre écran",
+    "subtitle": "Sur Safari Mac, utilisez un écran connecté et un bureau étendu.",
+    "blocks": [
+      {
+        "kind": "focus",
+        "id": "12-sortie",
+        "region": [
+          683.828125,
+          0,
+          783.828125,
+          40
+        ],
+        "width": 180,
+        "target": [
+          737.828125,
+          0,
+          40,
+          40
+        ],
+        "number": 2,
+        "caption": "2 · Sortie vidéo : l’écran avec une flèche. À gauche, Disposition."
+      },
+      {
+        "kind": "scheme",
+        "items": [
+          "Pilot en Show",
+          "Fenêtre vidéo\nséparée",
+          "Écran de\ndiffusion"
+        ],
+        "caption": "Schéma : la fenêtre vidéo est déplacée sur le deuxième écran."
+      },
+      {
+        "kind": "step",
+        "number": 1,
+        "title": "Préparer les écrans",
+        "text": "Connectez le projecteur ou le moniteur et configurez l’affichage étendu dans les réglages du Mac."
+      },
+      {
+        "kind": "step",
+        "number": 2,
+        "title": "Ouvrir Sortie vidéo",
+        "text": "En Show, cliquez sur le bouton de sortie. Si Safari le demande, autorisez l’ouverture de la fenêtre."
+      },
+      {
+        "kind": "step",
+        "number": 3,
+        "title": "Placer et tester la fenêtre",
+        "text": "Déplacez la fenêtre sur l’écran de diffusion, puis activez son plein écran. Lancez la conduite pour vérifier le bon départ de la vidéo."
+      },
+      {
+        "kind": "note",
+        "title": "Selon l’appareil",
+        "text": "La sortie séparée décrite ici concerne Safari sur Mac. Un écran recopié et un bureau étendu ne fonctionnent pas de la même façon ; l’iPhone ou l’iPad n’offre pas ce bouton de sortie séparée."
+      }
+    ]
+  },
+  {
+    "chapter": "13 · AVANT LE SPECTACLE",
+    "title": "Faire une répétition complète",
+    "subtitle": "Cochez ces points sur l’appareil qui sera réellement utilisé.",
+    "blocks": [
+      {
+        "kind": "check",
+        "items": [
+          "Le bon ZIP est ouvert et le nom de la conduite est correct.",
+          "Les temps et les consignes des Cues ont été relus.",
+          "Les musiques et les vidéos jouent avec le bon son.",
+          "IN, OUT, Loop et les fondus ont été essayés.",
+          "Le choix Maverick / Iceman convient à l’utilisateur.",
+          "Le décompte et les alertes à dix secondes sont compris.",
+          "L’écran vidéo externe et son plein écran ont été testés, si utilisés.",
+          "Le ZIP de secours et le PDF sont conservés dans un dossier accessible.",
+          "Le matériel est alimenté ; les réglages de veille et les notifications sont adaptés au spectacle."
+        ]
+      },
+      {
+        "kind": "note",
+        "title": "Dernier contrôle",
+        "text": "Revenez au début, vérifiez la première Cue et préparez le lancement. Une répétition complète permet de contrôler les fichiers, les temps et la diffusion ensemble."
+      }
+    ]
+  },
+  {
+    "chapter": "14 · DÉCOUVRIR BRIDGE",
+    "title": "Passer de Pilot à QLab",
+    "subtitle": "S2A Pilot Bridge importe la conduite sur un Mac équipé de QLab 5.",
+    "blocks": [
+      {
+        "kind": "bridgebrand"
+      },
+      {
+        "kind": "scheme",
+        "items": [
+          "Pilot\nPréparer et exporter",
+          "Bridge\nImporter le ZIP",
+          "QLab 5\nJouer la conduite"
+        ],
+        "caption": "Schéma de parcours : Bridge fait le lien entre les deux applications."
+      },
+      {
+        "kind": "step",
+        "number": 1,
+        "title": "Préparer le fichier dans Pilot",
+        "text": "Finalisez la conduite et utilisez Enregistrer sous… pour obtenir son ZIP complet."
+      },
+      {
+        "kind": "step",
+        "number": 2,
+        "title": "Installer Bridge sur le Mac QLab",
+        "text": "La version 1.3.3 est une application universelle pour Mac Intel et Apple Silicon, à partir de macOS 13."
+      },
+      {
+        "kind": "note",
+        "title": "Deux applications, deux rôles",
+        "text": "Pilot prépare et affiche les repères. Bridge transfère la conduite vers QLab et propose un visualiseur de suivi. Le lancement du spectacle importé se fait dans QLab."
+      }
+    ]
+  },
+  {
+    "chapter": "14 · INSTALLER BRIDGE",
+    "title": "Ouvrir l’application sur Mac",
+    "subtitle": "Conservez le ZIP de conduite intact pour l’import.",
+    "blocks": [
+      {
+        "kind": "scheme",
+        "items": [
+          "Téléchargement\nde Bridge",
+          "Extraire le ZIP\nd’installation",
+          "Placer l’app dans\nApplications"
+        ],
+        "caption": "Schéma d’installation de Bridge, pas une capture de fenêtre macOS."
+      },
+      {
+        "kind": "step",
+        "number": 1,
+        "title": "Récupérer Bridge",
+        "text": "Téléchargez l’installeur officiel depuis le dépôt S2A Pilot. Dans la version documentée, une copie peut aussi se trouver dans companion/ du ZIP de conduite."
+      },
+      {
+        "kind": "step",
+        "number": 2,
+        "title": "Décompresser et ouvrir",
+        "text": "Extrayez l’archive d’installation, placez S2A Pilot Bridge dans Applications et ouvrez-la."
+      },
+      {
+        "kind": "step",
+        "number": 3,
+        "title": "Autoriser si macOS le demande",
+        "text": "Pour cette application non notariée, macOS peut bloquer la première ouverture. Après une tentative, utilisez Réglages Système > Confidentialité et sécurité > Ouvrir quand même, si vous reconnaissez l’application téléchargée."
+      },
+      {
+        "kind": "note",
+        "title": "Autorisation QLab distincte",
+        "text": "Quand macOS demande si Bridge peut contrôler QLab, autorisez cette liaison. En cas de refus, vérifiez l’autorisation dans Confidentialité et sécurité > Automatisation."
+      }
+    ]
+  },
+  {
+    "chapter": "15 · IMPORTER DANS QLAB",
+    "title": "Préparer la destination",
+    "subtitle": "QLab doit être ouvert et son workspace enregistré.",
+    "blocks": [
+      {
+        "kind": "scheme",
+        "items": [
+          "Ouvrir QLab 5",
+          "Ouvrir ou créer\nun workspace",
+          "Enregistrer\nle workspace"
+        ],
+        "caption": "Schéma : préparer le document QLab avant d’importer."
+      },
+      {
+        "kind": "step",
+        "number": 1,
+        "title": "Ouvrir le bon workspace",
+        "text": "Dans QLab 5, ouvrez le document qui doit recevoir le numéro, ou créez-en un."
+      },
+      {
+        "kind": "step",
+        "number": 2,
+        "title": "L’enregistrer sur le Mac",
+        "text": "Donnez-lui un emplacement stable. Bridge a besoin d’un workspace enregistré pour organiser les fichiers associés."
+      },
+      {
+        "kind": "step",
+        "number": 3,
+        "title": "Actualiser dans Bridge",
+        "text": "Revenez dans Bridge et utilisez le bouton d’actualisation de la zone QLab. S’il y a plusieurs workspaces ouverts, sélectionnez celui qui doit recevoir la conduite."
+      },
+      {
+        "kind": "note",
+        "title": "Si le bouton d’import est indisponible",
+        "text": "Vérifiez qu’un package est sélectionné, que QLab est ouvert et que le workspace a été enregistré. Attendez aussi la fin d’une opération déjà en cours."
+      }
+    ]
+  },
+  {
+    "chapter": "15 · IMPORTER DANS QLAB",
+    "title": "Choisir le ZIP et confirmer",
+    "subtitle": "Le bouton Ajouter… sert à choisir les packages Pilot.",
+    "blocks": [
+      {
+        "kind": "scheme",
+        "items": [
+          "Ajouter…\nZIP de conduite",
+          "Vérifier le\nworkspace QLab",
+          "Importer dans QLab\npuis confirmer"
+        ],
+        "caption": "Schéma des commandes réelles de Bridge ; ce n’est pas une capture d’interface."
+      },
+      {
+        "kind": "step",
+        "number": 1,
+        "title": "Sélectionner le bon fichier",
+        "text": "Choisissez le ZIP exporté par Pilot. Ne sélectionnez ni le PDF seul, ni l’archive d’installation de Bridge. Plusieurs packages peuvent être ajoutés."
+      },
+      {
+        "kind": "step",
+        "number": 2,
+        "title": "Lire la destination",
+        "text": "Contrôlez le nom du workspace dans la zone QLab. La bonne destination évite d’importer dans un autre spectacle ouvert."
+      },
+      {
+        "kind": "step",
+        "number": 3,
+        "title": "Importer et lire la confirmation",
+        "text": "Cliquez sur Importer dans QLab. La confirmation rappelle les packages et le workspace concernés. Validez après vérification, puis attendez la fin du transfert."
+      },
+      {
+        "kind": "note",
+        "title": "Éviter les doubles imports involontaires",
+        "text": "Une nouvelle importation peut ajouter un nouveau groupe dans QLab. Vérifiez le résultat avant de relancer la même opération."
+      }
+    ]
+  },
+  {
+    "chapter": "15 · CONTRÔLER LE RÉSULTAT",
+    "title": "Vérifier le groupe dans QLab",
+    "subtitle": "Chaque package devient un groupe Timeline dans le workspace.",
+    "blocks": [
+      {
+        "kind": "scheme",
+        "items": [
+          "Groupe du numéro",
+          "Cues et temps\nimportés",
+          "Médias copiés\npour QLab"
+        ],
+        "caption": "Schéma du résultat : une conduite organisée dans QLab."
+      },
+      {
+        "kind": "step",
+        "number": 1,
+        "title": "Repérer le numéro importé",
+        "text": "Retrouvez son groupe dans le workspace. Vérifiez les noms et l’ordre des Cues."
+      },
+      {
+        "kind": "step",
+        "number": 2,
+        "title": "Contrôler les médias et les départs",
+        "text": "Essayez les fichiers audio et vidéo depuis QLab, puis contrôlez les temps utiles au spectacle."
+      },
+      {
+        "kind": "step",
+        "number": 3,
+        "title": "Enregistrer et répéter",
+        "text": "Enregistrez le workspace après contrôle. Faites une répétition sur le matériel de diffusion prévu."
+      },
+      {
+        "kind": "note",
+        "title": "Les réglages de diffusion appartiennent à QLab",
+        "text": "Vérifiez dans QLab les sorties audio, les surfaces vidéo et les niveaux nécessaires. Bridge assure l’import ; il ne remplace pas ces réglages de spectacle."
+      }
+    ]
+  },
+  {
+    "chapter": "16 · VISUALISEUR BRIDGE",
+    "title": "Suivre le numéro joué dans QLab",
+    "subtitle": "Le visualiseur affiche les repères du numéro importé.",
+    "blocks": [
+      {
+        "kind": "scheme",
+        "items": [
+          "QLab joue\nle groupe importé",
+          "Bridge suit\nle numéro associé",
+          "Le visualiseur affiche\nla Cue suivante"
+        ],
+        "caption": "Schéma de suivi : les commandes de lecture restent dans QLab."
+      },
+      {
+        "kind": "step",
+        "number": 1,
+        "title": "Ouvrir Visualiseur",
+        "text": "Après l’import et l’association d’une conduite au workspace, cliquez sur Visualiseur dans Bridge."
+      },
+      {
+        "kind": "step",
+        "number": 2,
+        "title": "Lancer depuis QLab",
+        "text": "Jouez le groupe correspondant au numéro importé. Le visualiseur passe de l’attente au suivi de cette conduite."
+      },
+      {
+        "kind": "step",
+        "number": 3,
+        "title": "Lire le prochain repère",
+        "text": "Le visualiseur présente la Cue suivante, son image, son temps prévu et le décompte. L’alerte devient rouge à l’approche des dix dernières secondes."
+      },
+      {
+        "kind": "note",
+        "title": "Toujours au premier plan",
+        "text": "Ce réglage permet de garder la fenêtre du visualiseur visible devant les autres. Le visualiseur est un affichage de suivi : il ne remplace pas le transport de QLab."
+      }
+    ]
+  },
+  {
+    "chapter": "DÉPANNAGE · PILOT",
+    "title": "Retrouver rapidement le bon geste",
+    "subtitle": "Commencez par le point qui correspond à votre situation.",
+    "blocks": [
+      {
+        "kind": "table",
+        "rows": [
+          [
+            "VOUS CONSTATEZ…",
+            "À VÉRIFIER"
+          ],
+          [
+            "Je ne retrouve pas ma musique.",
+            "Préparer un fichier accessible sur l’appareil, puis utiliser Musique / Vidéo en Edit."
+          ],
+          [
+            "Le média commence au mauvais moment.",
+            "Le temps de sa Cue, puis les valeurs IN et OUT dans le fichier."
+          ],
+          [
+            "La vidéo ne produit aucun son.",
+            "Son bouton haut-parleur, puis le son de l’appareil et de la diffusion."
+          ],
+          [
+            "Le visuel actif devient sombre.",
+            "Le fondu est prévu dans les dix secondes avant la Cue suivante."
+          ],
+          [
+            "Je ne vois plus les Cues précédentes.",
+            "Maverick les masque. Choisir Iceman pour conserver la liste."
+          ],
+          [
+            "Je ne trouve pas mon export.",
+            "Attendre la fin de préparation, puis vérifier le dossier de téléchargement ou d’enregistrement choisi."
+          ],
+          [
+            "Le PDF ne se rouvre pas comme un projet.",
+            "Utiliser le ZIP de conduite avec Ouvrir, et non le PDF."
+          ]
+        ],
+        "widths": [
+          188,
+          323.27559055118115
+        ]
+      },
+      {
+        "kind": "note",
+        "title": "Conserver une copie avant de dépanner",
+        "text": "Si la conduite est encore ouverte et lisible, exportez un ZIP avant d’effacer les données du navigateur ou de changer d’appareil."
+      }
+    ]
+  },
+  {
+    "chapter": "DÉPANNAGE · BRIDGE",
+    "title": "Vérifier la liaison avec QLab",
+    "subtitle": "Les principaux blocages concernent le package ou la destination.",
+    "blocks": [
+      {
+        "kind": "table",
+        "rows": [
+          [
+            "SITUATION",
+            "ACTION"
+          ],
+          [
+            "QLab n’est pas détecté.",
+            "Ouvrir QLab 5 et le workspace, puis actualiser dans Bridge."
+          ],
+          [
+            "Importer dans QLab est grisé.",
+            "Choisir un package et un workspace enregistré ; attendre la fin d’une opération en cours."
+          ],
+          [
+            "Le ZIP est refusé.",
+            "Vérifier qu’il s’agit du ZIP de conduite exporté par Pilot, complet et non remplacé par un PDF."
+          ],
+          [
+            "Bridge ne peut pas contrôler QLab.",
+            "Vérifier l’autorisation Automatisation de macOS pour Bridge vers QLab."
+          ],
+          [
+            "Le visualiseur reste en attente.",
+            "Vérifier l’association de la conduite et lancer le groupe importé correspondant dans QLab."
+          ],
+          [
+            "Le son ou l’image n’arrive pas au bon endroit.",
+            "Contrôler les sorties et surfaces dans QLab, puis le matériel connecté."
+          ]
+        ],
+        "widths": [
+          188,
+          323.27559055118115
+        ]
+      },
+      {
+        "kind": "note",
+        "title": "Pour demander de l’aide",
+        "text": "Indiquez les versions de Pilot, Bridge et QLab, ce que vous avez cliqué et le message exact. Une capture et un exemple de conduite permettent de comprendre plus vite le problème."
+      }
+    ]
+  },
+  {
+    "chapter": "LEXIQUE",
+    "title": "Les mots utiles",
+    "subtitle": "Des repères pour lire l’interface sans jargon supplémentaire.",
+    "blocks": [
+      {
+        "kind": "table",
+        "rows": [
+          [
+            "MOT",
+            "SIGNIFICATION"
+          ],
+          [
+            "Conduite",
+            "Suite de repères, de consignes et de médias pour un numéro."
+          ],
+          [
+            "Cue",
+            "Repère placé à un temps précis de la conduite."
+          ],
+          [
+            "Timeline",
+            "Ligne de temps représentant le déroulement du spectacle."
+          ],
+          [
+            "Playhead",
+            "Repère blanc indiquant le temps courant."
+          ],
+          [
+            "Waveform",
+            "Dessin de l’amplitude du son ; utile pour repérer attaques et silences."
+          ],
+          [
+            "IN / OUT",
+            "Positions de début et de fin dans le fichier média."
+          ],
+          [
+            "CUT / FONDU",
+            "Démarrage direct / montée progressive du son."
+          ],
+          [
+            "Loop",
+            "Répétition de la portion délimitée par IN et OUT."
+          ],
+          [
+            "Visuel",
+            "Image de repérage associée à une Cue."
+          ],
+          [
+            "Package / ZIP",
+            "Archive portable de la conduite et de ses fichiers."
+          ],
+          [
+            "Workspace QLab",
+            "Document QLab contenant les groupes, Cues et réglages du spectacle."
+          ],
+          [
+            "Groupe Timeline",
+            "Groupe QLab dans lequel les actions suivent une organisation temporelle."
+          ]
+        ],
+        "widths": [
+          112,
+          399.27559055118115
+        ]
+      }
+    ]
+  },
+  {
+    "chapter": "RÉFÉRENCES",
+    "title": "Versions et ressources",
+    "subtitle": "Une édition du manuel indépendante des versions de l’application.",
+    "blocks": [
+      {
+        "kind": "table",
+        "rows": [
+          [
+            "RÉFÉRENCE",
+            "VERSION DOCUMENTÉE"
+          ],
+          [
+            "S2A Pilot",
+            "1.5.6"
+          ],
+          [
+            "S2A Pilot Bridge",
+            "1.3.3"
+          ],
+          [
+            "Manuel",
+            "Édition 1.0 · 15 octobre 2026"
+          ],
+          [
+            "Captures Pilot",
+            "Safari 27.0.1 sur Mac · interface française"
+          ]
+        ],
+        "widths": [
+          180,
+          331.27559055118115
+        ]
+      },
+      {
+        "kind": "p",
+        "text": "<b>Ouvrir Pilot :</b> <link href=\"https://s2a-production.com/S2A-Pilot/\" color=\"#B64B0A\">s2a-production.com/S2A-Pilot/</link>"
+      },
+      {
+        "kind": "p",
+        "text": "<b>Téléchargements et sources :</b> <link href=\"https://github.com/soundviking/S2A-Pilot\" color=\"#B64B0A\">github.com/soundviking/S2A-Pilot</link>"
+      },
+      {
+        "kind": "p",
+        "text": "<b>Aide macOS pour une ouverture bloquée :</b> <link href=\"https://support.apple.com/fr-fr/102445\" color=\"#B64B0A\">documentation Apple</link>."
+      },
+      {
+        "kind": "note",
+        "title": "Périmètre de cette édition",
+        "text": "Les écrans de sélection de fichiers varient selon le système. Le parcours présenté reste générique. La partie Bridge décrit le fonctionnement de la version publiée ; ses illustrations sont des schémas, pas des captures Safari de l’application native. Copilot n’est pas proposé dans cette version."
+      },
+      {
+        "kind": "p",
+        "text": "Les captures ont été réalisées à partir de Pilot 1.5.6. Les références de capture et les sources de mise en page sont conservées séparément pour mettre à jour une section sans refaire le manuel entier."
+      }
+    ]
+  }
+]

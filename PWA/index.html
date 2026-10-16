@@ -6,7 +6,7 @@
 <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" name="viewport"/>
 <title>S2A Pilot</title>
 <script>if(window.navigator.standalone===true)document.documentElement.className+=' iosStandalone';</script>
-<link href="./icons/s2a-pilot-192.png?v=1.5.6" rel="icon" type="image/png"/>
+<link href="./icons/s2a-pilot-192.png?v=1.5.7" rel="icon" type="image/png"/>
 <style>
 :root{
   font-family: system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
@@ -567,7 +567,7 @@ body:not(.locked) .cueAccordion.expanded input:focus,body:not(.locked) .cueAccor
 
 html,body{overscroll-behavior-y:none;}
 
-/* V1.5.6 — sélection Cue ↔ timeline + companion 1.2.2 */
+/* V1.5.7 — sélection Cue ↔ timeline + companion 1.2.2 */
 .showOnly{display:none}
 body.locked .showOnly{display:flex}
 .preflightIntegrated{display:grid;gap:12px;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid #2b3240}
@@ -576,7 +576,7 @@ body.locked .showOnly{display:flex}
 body.locked .timelineCard{display:block}
 
 
-/* 1.5.6 : mêmes libellés et disposition adaptable */
+/* 1.5.7 : mêmes libellés et disposition adaptable */
 [hidden]{display:none!important}
 .timeline .tick:first-of-type{transform:none}.timeline .tick:last-of-type{transform:translateX(-100%)}
 .showVideoMonitor{display:none;grid-column:1/-1;order:100}
@@ -589,10 +589,10 @@ button{white-space:normal;touch-action:manipulation}
 @media(max-width:900px){main.spectaclePriorityLayout{display:flex!important;flex-direction:column!important;padding:12px!important}.card{width:100%;box-sizing:border-box}.appTopBar{flex-wrap:wrap;gap:12px}.row{flex-wrap:wrap}}
 @media(max-width:480px){main.spectaclePriorityLayout{padding:8px!important}.card{padding:12px!important}.cueEditGrid{grid-template-columns:1fr}.cueEditGrid .imageControls,.cueEditGrid>.danger{grid-column:1}.mediaAction{display:flex;flex-wrap:wrap}.mediaEditor{width:100%;min-width:0}.row button{flex:1 1 120px}.time{font-size:clamp(1.6rem,10vw,3rem)}.cueSummary{grid-template-columns:45px 70px minmax(0,1fr) 24px}.projectActions{width:100%}.appIdentity{min-width:0}.outputPrep{flex-wrap:wrap}input,textarea,select{max-width:100%;box-sizing:border-box}}
 
-/* 1.5.6 : visuels Show remplis sans déformation{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
+/* 1.5.7 : visuels Show remplis sans déformation{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
 
 
-/* 1.5.6 : audition et aperçu indépendants de la conduite */
+/* 1.5.7 : audition et aperçu indépendants de la conduite */
 .mediaEditorTop .mediaPreviewToggle{padding:6px 9px;font-size:.76rem;min-width:96px;white-space:nowrap}
 .mediaEditorField input[type=text]{min-width:0;width:78px}
 .mediaEditorMain{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;align-items:center}
@@ -626,7 +626,7 @@ button{white-space:normal;touch-action:manipulation}
 @media(max-width:480px){.modeSwitchBtn{min-width:50px;padding:8px 9px}}
 @media(prefers-reduced-motion:reduce){.modeSwitchBtn{transition:none}}
 
-/* 1.5.6 : zoom des médias et sortie vidéo uniquement dans l’en-tête Show */
+/* 1.5.7 : zoom des médias et sortie vidéo uniquement dans l’en-tête Show */
 .fileLabel.addMediaBtn{background:#246fd1;border-color:#2b7de7;color:#fff}.fileLabel.addMediaBtn:hover{background:#2d7bdf}
 .mediaEditorTimeline .mediaVisual{overflow-x:auto;overflow-y:hidden;scrollbar-width:thin;scrollbar-color:#5b7192 #11151d}
 .mediaVisualContent{position:relative;height:100%;min-width:100%;user-select:none;touch-action:none}
@@ -643,7 +643,7 @@ button{white-space:normal;touch-action:manipulation}
 .pdfPreviewDialog{width:min(1000px,94vw);height:90dvh;max-width:94vw;max-height:94dvh;padding:14px;border:1px solid #45536a;border-radius:14px;background:#111722;color:#fff}.pdfPreviewDialog::backdrop{background:#000a}.pdfPreviewLayout{height:100%;display:flex;flex-direction:column;gap:12px}.pdfPreviewToolbar{display:flex;align-items:center;flex-wrap:wrap;gap:10px}.pdfPreviewToolbar strong{flex:1;min-width:150px}.pdfPreviewToolbar a{display:inline-flex;align-items:center;padding:10px 12px;border-radius:8px;background:#246fd1;color:white;text-decoration:none}
 .pdfPreviewPages{flex:1;min-height:0;overflow:auto;display:flex;flex-direction:column;align-items:flex-start;gap:16px;background:#252f40;border-radius:8px;padding:12px;box-sizing:border-box;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}.pdfPreviewPage{flex-shrink:0;margin:0 auto;background:white;border-radius:4px;box-shadow:0 3px 12px #0006;overflow:hidden}.pdfPreviewPage svg{display:block;width:100%;height:auto}.pdfPreviewZoom{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.pdfPreviewZoom button{min-height:40px}.pdfPreviewZoom span{min-width:48px;text-align:center;font-size:.85rem}.pdfPreviewToolbar strong{overflow-wrap:anywhere}@media(max-width:480px){.pdfPreviewDialog{padding:9px}.pdfPreviewToolbar{gap:7px}.pdfPreviewToolbar strong{flex-basis:100%}.pdfPreviewPages{padding:8px}.pdfPreviewZoom{gap:6px}.pdfPreviewZoom button{padding:8px 10px}}
 
-/* 1.5.6 : repères et médias distincts ; aperçu global en Edit. */
+/* 1.5.7 : repères et médias distincts ; aperçu global en Edit. */
 #projectWaveform{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.8}
 #projectMediaTracks{position:absolute;inset:5px 0 22px;display:flex;flex-direction:column;gap:3px;min-height:0;overflow:hidden;pointer-events:none;z-index:1}
 .projectMediaBar{position:relative;flex-shrink:0;box-sizing:border-box;min-width:3px;height:20px;border-radius:5px;background:rgba(42,153,89,.28);border:1px solid rgba(101,210,142,.4);color:#d0f5df;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:2px 5px}
@@ -660,7 +660,7 @@ html,body{touch-action:pan-x pan-y}input,textarea,select{font-size:max(16px,1em)
  body.locked .card h2{margin-bottom:8px}
 }
 .cueMediaChip.video:not(.error){background:rgba(255,49,153,.30);border-color:rgba(255,92,177,.85);color:#ffd6ed}
-#updateNotice{order:-1;padding:10px 14px;background:#253748;border:1px solid #5584ad;border-radius:10px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}#updateNotice button{margin-left:auto}
+#updateNotice{order:-1;padding:10px 14px;background:#253748;border:1px solid #5584ad;border-radius:10px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}#updateNotice button{margin-left:auto}#updateNotice .updateContent{flex:1;min-width:180px}#updateNotice .updateSummary{margin:5px 0 0;font-size:.9rem;line-height:1.4;color:#d8e6f4;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
 
 .preflightCard{grid-template-columns:minmax(0,1fr);min-width:0}
 #generalTimelineViewport{min-width:0;width:100%;overflow-x:auto;overflow-y:hidden;margin:16px 0;scrollbar-width:thin;scrollbar-color:#5b7192 #11151d}
@@ -886,20 +886,20 @@ body.locked #timeline:focus-visible{outline:2px solid #66a8ff;outline-offset:4px
 <meta content="yes" name="apple-mobile-web-app-capable"/>
 <meta content="black" name="apple-mobile-web-app-status-bar-style"/>
 <meta content="S2A Pilot" name="apple-mobile-web-app-title"/>
-<link href="./icons/s2a-pilot-180.png?v=1.5.6" rel="apple-touch-icon"/>
+<link href="./icons/s2a-pilot-180.png?v=1.5.7" rel="apple-touch-icon"/>
 <link rel="stylesheet" href="./material-ui.css">
-<link rel="stylesheet" href="./quick-help.css?v=1.5.6">
-<link rel="stylesheet" href="./startup.css?v=1.5.6"></head>
-<body><script src="./startup.js?v=1.5.6"></script>
+<link rel="stylesheet" href="./quick-help.css?v=1.5.7">
+<link rel="stylesheet" href="./startup.css?v=1.5.7"></head>
+<body><script src="./i18n-catalog.js?v=1.5.7"></script><script src="./startup.js?v=1.5.7"></script>
 <main class="spectaclePriorityLayout">
 <div class="appTopBar">
-<img alt="Logo S2A Pilot" class="headerBrandLogo" src="./icons/s2a-pilot-192.png?v=1.5.6"/>
+<img alt="Logo S2A Pilot" class="headerBrandLogo" src="./icons/s2a-pilot-192.png?v=1.5.7"/>
 <div class="appIdentity">
   <strong>S2A Pilot</strong>
   <span class="appAttribution">(by S2A Production)</span>
-  <span class="appVersion">Version 1.5.6</span>
+  <span class="appVersion">Version 1.5.7</span>
 </div>
-<div class="headerActions"><div class="headerDisplayControls"><select id="languageSelect" aria-label="Language / Langue"><option value="fr">FR</option><option value="en">EN</option></select><button class="showOnly" id="showLayoutButton" type="button" aria-label="Disposition Show" aria-haspopup="dialog" title="Disposition Show"><svg fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M120-280v-400q0-33 23.5-56.5T200-760h560q33 0 56.5 23.5T840-680v400q0 33-23.5 56.5T760-200H200q-33 0-56.5-23.5T120-280Zm293-240h347v-160H413v160Zm214 240h133v-160H627v160Zm-214 0h134v-160H413v160Zm-213 0h133v-400H200v400Z"/></svg></button></div>
+<div class="headerActions"><div class="headerDisplayControls"><select id="languageSelect" aria-label="Langue"><option value="fr">FR</option><option value="en">EN</option><option value="es">ES</option><option value="de">DE</option></select><button class="showOnly" id="showLayoutButton" type="button" aria-label="Disposition Show" aria-haspopup="dialog" title="Disposition Show"><svg fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M120-280v-400q0-33 23.5-56.5T200-760h560q33 0 56.5 23.5T840-680v400q0 33-23.5 56.5T760-200H200q-33 0-56.5-23.5T120-280Zm293-240h347v-160H413v160Zm214 240h133v-160H627v160Zm-214 0h134v-160H413v160Zm-213 0h133v-400H200v400Z"/></svg></button></div>
 <div class="headerVideoOutput showOnly" hidden>
 <button aria-label="Préparer la sortie vidéo sur noir" class="videoOutputBigButton" id="videoOutputBtn" title="Ouvrir la sortie vidéo sur noir" type="button" data-material-action="screen_share" data-material-only=""><svg aria-hidden="true" class="videoOutputIcon" viewBox="0 0 92 62"><rect fill="none" height="38" rx="5" stroke="currentColor" stroke-width="4" width="56" x="6" y="5"></rect><rect fill="none" height="38" rx="5" stroke="currentColor" stroke-width="4" width="56" x="30" y="19"></rect></svg></button><div class="outputPrepText"><strong>SORTIE VIDÉO</strong><span id="videoOutputState">Disponible uniquement avec un affichage étendu</span></div></div>
 
@@ -991,12 +991,13 @@ body.locked #timeline:focus-visible{outline:2px solid #66a8ff;outline-offset:4px
 <dialog id="pdfPreviewDialog" class="pdfPreviewDialog" aria-labelledby="pdfPreviewTitle"><div class="pdfPreviewLayout"><div class="pdfPreviewToolbar"><strong id="pdfPreviewTitle">Conduite technique</strong><a id="pdfPreviewDownload">Télécharger</a><button id="pdfPreviewClose" type="button">Fermer</button></div><div class="pdfPreviewZoom" role="group" aria-label="Zoom de la conduite"><button id="pdfPreviewZoomOut" aria-label="Réduire le zoom de la conduite" type="button" data-material-action="zoom_out" data-material-only="">−</button><span id="pdfPreviewZoomLabel" aria-live="polite">100 %</span><button id="pdfPreviewZoomIn" aria-label="Agrandir le zoom de la conduite" type="button" data-material-action="zoom_in" data-material-only="">+</button><button id="pdfPreviewFit" type="button">Ajuster à l’écran</button></div><div id="pdfPreviewPages" class="pdfPreviewPages" tabindex="0" aria-label="Pages de la conduite technique"></div></div></dialog>
 <script>
 window.s2aBootReady=false;
-window.s2aReportBootError=function(message){if(window.s2aBootReady)return;var box=document.getElementById('startupError');if(!box){box=document.createElement('div');box.id='startupError';box.setAttribute('role','alert');box.style.cssText='padding:14px;border:1px solid #ff9ca4;border-radius:10px;background:#44232c;color:#fff;white-space:pre-wrap';document.querySelector('main').insertBefore(box,document.querySelector('main').firstChild);}var en=(navigator.language||'en').indexOf('fr')!==0;try{en=(localStorage.getItem('s2a-language')||(en?'en':'fr'))==='en';}catch(error){}box.textContent=(en?'S2A Pilot could not finish starting. Your local projects are preserved.\n':'Le démarrage de S2A Pilot est interrompu. Vos projets locaux sont conservés.\n')+message+'\n';var link=document.createElement('a');link.href='./actualiser.html?repair='+Date.now();link.textContent=en?'Refresh application files':'Actualiser les fichiers de l’application';link.style.color='#a9d2ff';box.appendChild(link);};
+window.s2aBootText=function(key){return window.S2AStrings?S2AStrings.text(key):key;};
+window.s2aReportBootError=function(message){if(window.s2aBootReady)return;var box=document.getElementById('startupError');if(!box){box=document.createElement('div');box.id='startupError';box.setAttribute('role','alert');box.style.cssText='padding:14px;border:1px solid #ff9ca4;border-radius:10px;background:#44232c;color:#fff;white-space:pre-wrap';document.querySelector('main').insertBefore(box,document.querySelector('main').firstChild);}box.textContent=window.s2aBootText('S2A Pilot n’a pas pu terminer son démarrage. Vos projets locaux sont conservés.')+'\n'+message+'\n';var link=document.createElement('a');link.href='./actualiser.html?repair='+Date.now();link.textContent=window.s2aBootText('Actualiser les fichiers de l’application');link.style.color='#a9d2ff';box.appendChild(link);};
 window.addEventListener('error',function(e){window.s2aReportBootError((e.message||'Chargement impossible')+' — '+(e.filename||'')+':'+(e.lineno||''));});
 </script>
 <script src="./material-ui.js"></script>
-<script src="./help-images.js?v=1.5.6"></script><script src="./quick-help.js?v=1.5.6"></script>
-<script src="./compatibility-loader.js?v=1.5.6"></script>
+<script src="./help-images.js?v=1.5.7"></script><script src="./quick-help.js?v=1.5.7"></script>
+<script src="./compatibility-loader.js?v=1.5.7"></script>
 <dialog id="showLayoutDialog" class="showLayoutDialog" aria-labelledby="showLayoutTitle">
 <h2 id="showLayoutTitle">Disposition Show</h2>
 <button type="button" class="showLayoutChoice" data-show-layout="maverick" aria-pressed="true"><strong>Maverick</strong><span>Cues côte à côte. Les Cues passées disparaissent.</span></button>

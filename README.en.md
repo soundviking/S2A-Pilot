@@ -1,26 +1,28 @@
-# S2A Pilot 1.5.6 / S2A Pilot Bridge 1.3.3
+# S2A Pilot 1.5.7 / S2A Pilot Bridge 1.3.4
 
 🇫🇷 [Français](README.md) | 🇬🇧 **English**
 
 ![S2A Pilot](assets/social-preview.png)
 
-[Published PWA 1.5.6](downloads/S2A-Pilot-V1.5.6-PWA.zip) · [Bridge 1.3.3 — Intel / Apple Silicon](downloads/S2A-Pilot-Bridge-1.3.3-macOS-Universel.zip)
+[Published PWA 1.5.7](downloads/S2A-Pilot-V1.5.7-PWA.zip) · [Bridge 1.3.4 — Intel / Apple Silicon](downloads/S2A-Pilot-Bridge-1.3.4-macOS-Universel.zip)
 
 # S2A Pilot — User guide
 
 The rights to S2A Pilot and S2A Pilot Bridge belong to the company S2A Production. These applications were developed by Antoine CLOPIER with assistance from ChatGPT.
 
-S2A Pilot prepares and runs multimedia shows. S2A Pilot Bridge imports its project packages into QLab 5. The app names and Edit / Show labels are the same in both languages.
+S2A Pilot prepares and runs multimedia shows. S2A Pilot Bridge imports its project packages into QLab 5. The app names and Edit / Show labels are the same in all four languages.
+
+Bridge shows the next Cue’s description below its visual and countdown, with scrolling for longer text.
 
 ## Language
 
-The web app uses the browser’s preferred language at first launch: French for French locales, English otherwise. Use FR / EN in the header, next to Edit / Show, to override this choice. The override is saved on this device. Titles, descriptions, visuals and media filenames belonging to your project are never translated. PDF exports and package installation instructions use the currently selected interface language.
+Pilot supports French, English, Spanish and German. The first supported browser language is used initially, with English as the fallback. Use FR / EN / ES / DE in the header to override it; the preference is saved on this device. User-authored show titles, Cue names, descriptions and media filenames are preserved. PDF exports and package notices follow the interface language.
 
-S2A Pilot Bridge uses the macOS preferred language at first launch and offers a Français / English switch in its header. Its manual preference is remembered independently from the web app.
+S2A Pilot Bridge uses the macOS preferred language at first launch and offers a Français / English / Español / Deutsch selector in its header. Its manual preference is remembered independently from the web app.
 
 ## Quick help
 
-On first launch, a four-step guide introduces show creation, Cue settings, Show mode and the layout selector. Page four, “Vanilla or chocolate?”, compares Maverick and Iceman with two actual screenshots of the same show. Actual application screenshots show a 3 minute 20 second audio track with its waveform and stage visuals. It appears before the installation prompt. The “?” button in Edit, to the left of Undo and Redo, opens it again. The guide and screenshots are available in French and English and bundled locally for offline use in browsers that support it. They also cover compatibility mode.
+On first launch, a four-step guide introduces show creation, Cue settings, Show mode and the layout selector. Page four, “Choose your layout”, compares Maverick and Iceman with two actual screenshots of the same show. Actual application screenshots show a 3 minute 20 second audio track with its waveform and stage visuals. It appears before the installation prompt. The “?” button in Edit, to the left of Undo and Redo, opens it again. The guide and screenshots are available in all four languages and bundled locally for offline use in browsers that support it. They also cover compatibility mode. “Illustrated user manual (PDF)” opens the manual in the selected language, downloaded on demand rather than bundled with the PWA.
 
 
 On iPhone, each Cue places its visual at the upper left, its title to the right and its description across the full width below. In Iceman, the next Cue keeps its countdown at the upper right, with its title and description below. Both styles use a smaller Timeline clock and a larger countdown. The startup halo fades before its edges to prevent clipping. On iPad in portrait, Iceman places the active and next Cue descriptions across the full width below, with the next countdown at the upper right. The compact Show transport keeps its controls, progress and clock on one row.
@@ -117,7 +119,7 @@ Older browsers use the full interface through an ES5 compatibility engine. Light
 
 ## Visual identity
 
-S2A Pilot uses cyan wings; S2A Pilot Bridge uses orange wings. The companion is now named S2A Pilot Bridge in both languages. The S2A Production logo is unchanged.
+S2A Pilot uses cyan wings; S2A Pilot Bridge uses orange wings. The companion is now named S2A Pilot Bridge in all four languages. The S2A Production logo is unchanged.
 
 
 Copilot sharing is suspended in this version. Pilot has no sharing button or PHP/Node relay; Bridge has no QR feature or bundled server. The multimedia export format is preserved for QLab import. When replacing an older deployment, remove its copilot-api.php, copilot-service/, copilot.html and Bridge sharing pages.

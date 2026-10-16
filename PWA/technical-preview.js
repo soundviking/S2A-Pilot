@@ -38,12 +38,12 @@ function svgPage(page,index,title){
   }
   throw new Error(tr('Instruction de conduite non reconnue'));
  }
- return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 595 842" width="595" height="842" role="img" aria-label="${escapeXml(`Page ${index+1} ${S2ALanguage.language==='en'?'of':'sur'} ${page.totalPages} — ${title}`)}"><title>${escapeXml(`${tr('Conduite technique')} — ${title} — page ${index+1}`)}</title><rect width="595" height="842" fill="white"/><g transform="translate(0 842) scale(1 -1)">${drawing.join('')}</g></svg>`;
+ return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 595 842" width="595" height="842" role="img" aria-label="${escapeXml(tr('Page {page} sur {total}',{page:index+1,total:page.totalPages})+' — '+title)}"><title>${escapeXml(`${tr('Conduite technique')} — ${title} — page ${index+1}`)}</title><rect width="595" height="842" fill="white"/><g transform="translate(0 842) scale(1 -1)">${drawing.join('')}</g></svg>`;
 }
 function mountTechnicalPreview(pages,title,controls){
  const {container,minus,plus,label,fit}=controls;let zoom=1,disposed=false;
  const fragment=document.createDocumentFragment(),elements=[];
- pages.forEach((page,index)=>{const element=document.createElement('article');element.className='pdfPreviewPage';element.setAttribute('aria-label',`Page ${index+1} ${S2ALanguage.language==='en'?'of':'sur'} ${pages.length}`);element.innerHTML=svgPage({...page,totalPages:pages.length},index,title);elements.push(element);fragment.append(element);});
+ pages.forEach((page,index)=>{const element=document.createElement('article');element.className='pdfPreviewPage';element.setAttribute('aria-label',tr('Page {page} sur {total}',{page:index+1,total:pages.length}));element.innerHTML=svgPage({...page,totalPages:pages.length},index,title);elements.push(element);fragment.append(element);});
  container.replaceChildren(fragment);
  function layout(){if(disposed)return;const padding=parseFloat(getComputedStyle(container).paddingLeft)*2,baseWidth=Math.min(794,Math.max(100,container.clientWidth-padding));for(const element of elements)element.style.width=`${Math.round(baseWidth*zoom)}px`;label.textContent=`${Math.round(zoom*100)} %`;minus.disabled=zoom<=1;plus.disabled=zoom>=3;}
  function change(value){const old=zoom;zoom=Math.max(1,Math.min(3,value));layout();container.scrollTop=container.scrollTop*zoom/old;}

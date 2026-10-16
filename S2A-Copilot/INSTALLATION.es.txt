@@ -1,0 +1,15 @@
+S2A PILOT BRIDGE 1.3.4 — INSTALACIÓN EN MAC
+
+Mac Intel y Apple Silicon — macOS 13 o posterior. Sin compilación. Aplicación firmada localmente, no notarizada por Apple.
+
+1. Descomprime el ZIP y mueve S2A Pilot Bridge.app a Aplicaciones. Sustituye la versión anterior si es necesario.
+2. Intenta abrir S2A Pilot Bridge una vez.
+3. Si macOS lo bloquea, cierra el aviso y abre Ajustes del Sistema > Privacidad y seguridad.
+4. En Seguridad, busca el aviso de S2A Pilot Bridge y pulsa Abrir igualmente.
+5. Autentícate si se solicita y confirma Abrir.
+
+Abrir igualmente aparece tras intentar abrir la aplicación. Si desaparece, inténtalo otra vez y vuelve a los ajustes. Una nueva versión puede requerir otra autorización. Autoriza solo la aplicación del repositorio oficial:
+https://github.com/soundviking/S2A-Pilot
+
+Al importar, permite también que S2A Pilot Bridge controle QLab. Es un permiso distinto.
+Instrucciones de Apple: https://support.apple.com/es-es/102445

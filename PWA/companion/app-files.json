@@ -1,5 +1,5 @@
 {
-  "version": "1.3.3",
+  "version": "1.3.4",
   "architectures": [
     "arm64",
     "x86_64"
@@ -13,7 +13,7 @@
     {
       "path": "S2A Pilot Bridge.app/Contents/MacOS/S2A Pilot Bridge",
       "mode": 33261,
-      "size": 3105648
+      "size": 3226928
     },
     {
       "path": "S2A Pilot Bridge.app/Contents/Resources/LICENSE",
@@ -26,9 +26,19 @@
       "size": 779147
     },
     {
+      "path": "S2A Pilot Bridge.app/Contents/Resources/de.lproj/InfoPlist.strings",
+      "mode": 33188,
+      "size": 134
+    },
+    {
       "path": "S2A Pilot Bridge.app/Contents/Resources/en.lproj/InfoPlist.strings",
       "mode": 33188,
       "size": 124
+    },
+    {
+      "path": "S2A Pilot Bridge.app/Contents/Resources/es.lproj/InfoPlist.strings",
+      "mode": 33188,
+      "size": 138
     },
     {
       "path": "S2A Pilot Bridge.app/Contents/Resources/fr.lproj/InfoPlist.strings",
@@ -36,9 +46,14 @@
       "size": 138
     },
     {
+      "path": "S2A Pilot Bridge.app/Contents/Resources/interface.json",
+      "mode": 33188,
+      "size": 60216
+    },
+    {
       "path": "S2A Pilot Bridge.app/Contents/_CodeSignature/CodeResources",
       "mode": 33188,
-      "size": 3422
+      "size": 4390
     }
   ]
 }

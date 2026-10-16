@@ -1,6 +1,6 @@
 """Package Pilot and the offline Bridge installer. No Copilot service or runtime."""
 from pathlib import Path
-import json, zipfile, plistlib
+import json, zipfile, plistlib, sys
 repo=Path(__file__).resolve().parents[1]
 pwa=repo/'PWA'
 app=repo/'S2A-Copilot/build/S2A Pilot Bridge.app'
@@ -19,11 +19,14 @@ with zipfile.ZipFile(archive_path,'w',zipfile.ZIP_STORED) as archive:
 for stale in companion.glob('S2A-Pilot-Bridge-*-app.zip'):
  if stale!=archive_path:stale.unlink()
 (companion/'app-files.json').write_text(json.dumps({'version':bridge,'architectures':['arm64','x86_64'],'files':entries},indent=2)+'\n')
+if '--companion-only' in sys.argv:
+ print(f'Prepared offline Bridge companion {bridge}; release downloads unchanged.')
+ sys.exit(0)
 bridge_zip=repo/f'downloads/S2A-Pilot-Bridge-{bridge}-macOS-Universel.zip'
 with zipfile.ZipFile(bridge_zip,'w',zipfile.ZIP_DEFLATED) as archive:
  for file in sorted(app.rglob('*')):
   if file.is_file():archive.write(file,'S2A Pilot Bridge.app/'+file.relative_to(app).as_posix())
- for name in ['INSTALLATION-S2A-Pilot-Bridge.txt','INSTALLATION.en.txt','LICENSE']:archive.write(repo/'S2A-Copilot'/name,name)
+ for name in ['INSTALLATION-S2A-Pilot-Bridge.txt','INSTALLATION.en.txt','INSTALLATION.es.txt','INSTALLATION.de.txt','LICENSE']:archive.write(repo/'S2A-Copilot'/name,name)
 pwa_zip=repo/f'downloads/S2A-Pilot-V{release}-PWA.zip'
 with zipfile.ZipFile(pwa_zip,'w',zipfile.ZIP_DEFLATED) as archive:
  for file in sorted(pwa.rglob('*')):

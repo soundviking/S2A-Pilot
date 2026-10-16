@@ -1,12 +1,13 @@
 """Decode a real Pilot ZIP with Bridge's production model; check its media and app."""
 from pathlib import Path
-import tempfile, subprocess, zipfile
+import tempfile, subprocess, zipfile, os
 repo=Path(__file__).resolve().parents[1]
 source=(repo/'S2A-Copilot/Sources/S2ACopilot.swift').read_text()
 model=source[source.index('struct ShowCueProject:'):source.index('struct QueuedShowCuePackage:')]
 with tempfile.TemporaryDirectory(prefix='s2a-bridge-export-') as folder:
  root=Path(folder)
- for browser in ['chromium','webkit']:
+ browsers=['chromium'] if os.environ.get('S2A_TEST_ENGINES')=='chromium' else ['chromium','webkit']
+ for browser in browsers:
   archive=Path('/tmp/s2a-lightweight-export-'+browser+'.zip')
   subprocess.run(['/usr/bin/ditto','-x','-k',str(archive),str(root/browser)],check=True)
   app=root/browser/'companion/S2A Pilot Bridge.app'
@@ -21,6 +22,7 @@ for argument in CommandLine.arguments.dropFirst() {
  precondition(project.multimediaActionCount == 2)
  for cue in project.cues {
   precondition(!(cue.description ?? "").isEmpty)
+  precondition(cue.monitorDescription == cue.description)
   if let path=cue.imagePath { precondition(FileManager.default.fileExists(atPath:root.appendingPathComponent(path).path)) }
   for action in cue.mediaActions ?? [] where !action.isStopAll {
    precondition(action.path != nil && action.isAudio)
@@ -31,4 +33,4 @@ for argument in CommandLine.arguments.dropFirst() {
  print("PASS Bridge production decoder: \\(project.title), \\(project.cues.count) cues, media and visuals exist, timing and audio settings preserved")
 }
 ''')
- subprocess.run(['swift',str(harness),str(root/'chromium'),str(root/'webkit')],check=True)
+ subprocess.run(['swift',str(harness),*[str(root/browser) for browser in browsers]],check=True)

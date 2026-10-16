@@ -1,0 +1,256 @@
+{
+  "pages": 35,
+  "characters": 29225,
+  "bytes": 6752565,
+  "sha256": "93de3164e559545c4c1266fd6d891a9bb01c1d7a90c1a3b6273d3192b2003be7",
+  "layout": [
+    {
+      "page": 1,
+      "title": "Préparez. Pilotez. Jouez.",
+      "content_top": 659.7097637795276,
+      "content_bottom": 225.3521649484537,
+      "image_scale": 1
+    },
+    {
+      "page": 2,
+      "title": "Votre parcours",
+      "content_top": 659.7097637795276,
+      "content_bottom": 122.46976377952764,
+      "image_scale": 1
+    },
+    {
+      "page": 3,
+      "title": "Deux modes, une conduite",
+      "content_top": 659.7097637795276,
+      "content_bottom": 123.55477861513141,
+      "image_scale": 1
+    },
+    {
+      "page": 4,
+      "title": "Créer votre premier numéro",
+      "content_top": 659.7097637795276,
+      "content_bottom": 266.6515027642821,
+      "image_scale": 1
+    },
+    {
+      "page": 5,
+      "title": "Renseigner une Cue",
+      "content_top": 659.7097637795276,
+      "content_bottom": 225.41132606768525,
+      "image_scale": 1
+    },
+    {
+      "page": 6,
+      "title": "Organiser sans se perdre",
+      "content_top": 659.7097637795276,
+      "content_bottom": 141.63077332220894,
+      "image_scale": 1
+    },
+    {
+      "page": 7,
+      "title": "Supprimer une Cue",
+      "content_top": 659.7097637795276,
+      "content_bottom": 239.33324204039724,
+      "image_scale": 1
+    },
+    {
+      "page": 8,
+      "title": "Importer le fichier audio",
+      "content_top": 659.7097637795276,
+      "content_bottom": 180.67825501388336,
+      "image_scale": 1
+    },
+    {
+      "page": 9,
+      "title": "Vérifier ce qui a été importé",
+      "content_top": 659.7097637795276,
+      "content_bottom": 236.98984473896803,
+      "image_scale": 1
+    },
+    {
+      "page": 10,
+      "title": "Choisir le début et la fin",
+      "content_top": 659.7097637795276,
+      "content_bottom": 248.4308210703993,
+      "image_scale": 1
+    },
+    {
+      "page": 11,
+      "title": "CUT, FONDU et Loop",
+      "content_top": 659.7097637795276,
+      "content_bottom": 166.3982567814847,
+      "image_scale": 1
+    },
+    {
+      "page": 12,
+      "title": "Lire et déplacer les repères",
+      "content_top": 659.7097637795276,
+      "content_bottom": 202.85303963037683,
+      "image_scale": 1
+    },
+    {
+      "page": 13,
+      "title": "Importer et régler une vidéo",
+      "content_top": 659.7097637795276,
+      "content_bottom": 246.24897637795283,
+      "image_scale": 1
+    },
+    {
+      "page": 14,
+      "title": "Reconnaître le bouton muet",
+      "content_top": 659.7097637795276,
+      "content_bottom": 260.3697637795276,
+      "image_scale": 1
+    },
+    {
+      "page": 15,
+      "title": "Conserver une copie portable",
+      "content_top": 659.7097637795276,
+      "content_bottom": 251.67150276428208,
+      "image_scale": 1
+    },
+    {
+      "page": 16,
+      "title": "Reprendre sur un autre appareil",
+      "content_top": 659.7097637795276,
+      "content_bottom": 282.3697637795276,
+      "image_scale": 1
+    },
+    {
+      "page": 17,
+      "title": "Lancer et suivre la conduite",
+      "content_top": 659.7097637795276,
+      "content_bottom": 75.23905187109348,
+      "image_scale": 1
+    },
+    {
+      "page": 18,
+      "title": "Anticiper les dix dernières secondes",
+      "content_top": 659.7097637795276,
+      "content_bottom": 157.47905187109347,
+      "image_scale": 1
+    },
+    {
+      "page": 19,
+      "title": "L’essentiel devant vous",
+      "content_top": 659.7097637795276,
+      "content_bottom": 197.05216494845365,
+      "image_scale": 1
+    },
+    {
+      "page": 20,
+      "title": "Garder la liste entière",
+      "content_top": 659.7097637795276,
+      "content_bottom": 143.84788944357922,
+      "image_scale": 1
+    },
+    {
+      "page": 21,
+      "title": "Maverick ou Iceman ?",
+      "content_top": 659.7097637795276,
+      "content_bottom": 71.42663877952764,
+      "image_scale": 0.8573749999999999
+    },
+    {
+      "page": 22,
+      "title": "Ouvrir l’aperçu avant de partager",
+      "content_top": 659.7097637795276,
+      "content_bottom": 146.09976377952762,
+      "image_scale": 1
+    },
+    {
+      "page": 23,
+      "title": "Ce que contient la fiche",
+      "content_top": 659.7097637795276,
+      "content_bottom": 103.60976377952761,
+      "image_scale": 1
+    },
+    {
+      "page": 24,
+      "title": "Afficher la vidéo sur un autre écran",
+      "content_top": 659.7097637795276,
+      "content_bottom": 181.8697637795276,
+      "image_scale": 1
+    },
+    {
+      "page": 25,
+      "title": "Faire une répétition complète",
+      "content_top": 659.7097637795276,
+      "content_bottom": 232.86976377952766,
+      "image_scale": 1
+    },
+    {
+      "page": 26,
+      "title": "Passer de Pilot à QLab",
+      "content_top": 659.7097637795276,
+      "content_bottom": 284.70976377952763,
+      "image_scale": 1
+    },
+    {
+      "page": 27,
+      "title": "Ouvrir l’application sur Mac",
+      "content_top": 659.7097637795276,
+      "content_bottom": 267.3897637795276,
+      "image_scale": 1
+    },
+    {
+      "page": 28,
+      "title": "Préparer la destination",
+      "content_top": 659.7097637795276,
+      "content_bottom": 282.3697637795276,
+      "image_scale": 1
+    },
+    {
+      "page": 29,
+      "title": "Choisir le ZIP et confirmer",
+      "content_top": 659.7097637795276,
+      "content_bottom": 267.3897637795276,
+      "image_scale": 1
+    },
+    {
+      "page": 30,
+      "title": "Vérifier le groupe dans QLab",
+      "content_top": 659.7097637795276,
+      "content_bottom": 312.32976377952764,
+      "image_scale": 1
+    },
+    {
+      "page": 31,
+      "title": "Suivre le numéro joué dans QLab",
+      "content_top": 659.7097637795276,
+      "content_bottom": 282.3697637795276,
+      "image_scale": 1
+    },
+    {
+      "page": 32,
+      "title": "Retrouver rapidement le bon geste",
+      "content_top": 659.7097637795276,
+      "content_bottom": 232.8697637795276,
+      "image_scale": 1
+    },
+    {
+      "page": 33,
+      "title": "Vérifier la liaison avec QLab",
+      "content_top": 659.7097637795276,
+      "content_bottom": 266.8697637795276,
+      "image_scale": 1
+    },
+    {
+      "page": 34,
+      "title": "Les mots utiles",
+      "content_top": 659.7097637795276,
+      "content_bottom": 201.1097637795276,
+      "image_scale": 1
+    },
+    {
+      "page": 35,
+      "title": "Versions et ressources",
+      "content_top": 659.7097637795276,
+      "content_bottom": 243.4497637795277,
+      "image_scale": 1
+    }
+  ],
+  "visual_review": "35 rendered pages inspected, no clipping or overlapping text",
+  "language": "de",
+  "toc_links": 19
+}

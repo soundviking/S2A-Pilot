@@ -1,0 +1,15 @@
+{
+  "version": "1.5.7",
+  "bridge": "1.3.4",
+  "date": "2026-10-16",
+  "checks": [
+    "Chrome: four languages, help images/manual links, user text preservation, PDF, localized update summary, phone width and reload",
+    "Chrome: ZIP save/import, media deduplication, native picker activation/cancellation, download fallback and offline export",
+    "Bridge: universal arm64/x86_64 build and local signature",
+    "Bridge production decoder: exported descriptions, media paths and timings preserved",
+    "Four illustrated 35-page manuals; Safari checks completed during translation preparation"
+  ],
+  "limitations": [
+    "No live QLab import or physical iPad/iPhone test"
+  ]
+}

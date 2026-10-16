@@ -21,3 +21,11 @@ test-pilot-export.cjs vérifie la sauvegarde, le PDF, les médias et leur réouv
 ## Recentrage des Cues
 
 test-cue-centering.cjs contrôle une conduite de 200 Cues dans Chrome et WebKit : Iceman sur ordinateur, iPad et iPhone simulés, défilement manuel, première/dernière Cue, changement de disposition et ouverture en Edit sans recentrage pendant la saisie. Définir S2A_TEST_URL pour le serveur local, S2A_PLAYWRIGHT pour le module Playwright et S2A_CHROME si Chrome doit être fourni explicitement.
+
+## Traductions et manuels
+
+Le catalogue commun est documenté dans `locales/README.md`. `test-locales.cjs` contrôle FR/EN/ES/DE, les textes utilisateur, l’aide, les liens PDF, le PDF technique, les notes de mise à jour et le retour après rechargement. `S2A_TEST_ENGINES=chromium` limite l’exécution à Chrome ; sans cette variable, Chrome et WebKit doivent être installés. Le visualiseur et le catalogue natifs sont également vérifiés avec `test-locales.swift`, compilé avec `S2A-Copilot/Sources/BridgeStrings.swift`.
+
+`capture-help-locales.cjs` produit de vraies captures des quatre interfaces et leurs copies hors ligne. Il utilise les médias de démonstration du dossier de travail du manuel. Il ne dessine pas de fausse interface.
+
+`python3 tools/serve-preview.py` sert uniquement en local l’application et les quatre manuels séparés. En production, le lien de l’aide télécharge le PDF depuis GitHub ; les PDF ne sont pas inclus dans la PWA. Avant publication, mettre à jour `PWA/version.json` : `releaseNotes` est un objet de résumés courts `fr/en/es/de`, affiché sur deux lignes au maximum dans l’annonce de nouvelle version. Un serveur sans ce champ reste compatible.

@@ -9,3 +9,5 @@
 .quickHelpLayout{margin:20px 0 0}.quickHelpLayout h3{margin-bottom:8px}.quickHelpLayout figcaption{margin:10px 0 0;color:#d5dce6}.quickHelpLayouts{min-width:0}
 
 .quickHelpLayoutIntro{display:flex;align-items:center;gap:12px}.quickHelpLayoutIcon{display:flex;align-items:center;justify-content:center;flex:0 0 44px;height:44px;box-sizing:border-box;background:#222b3a;border:1px solid #80b9ff;border-radius:10px;box-shadow:0 0 10px #438ae866;color:#f4f6f8}.quickHelpLayoutIcon svg{display:block;width:32px;height:32px}
+
+.quickHelpManual{display:inline-block;margin-top:18px;color:#a8ceff;text-decoration:underline;text-underline-offset:3px;line-height:1.5}.quickHelpManual:focus-visible{outline:2px solid #80b9ff;outline-offset:5px;border-radius:3px}

@@ -1,1 +1,9 @@
-{"version": "1.5.6"}
+{
+  "version": "1.5.7",
+  "releaseNotes": {
+    "fr": "Espagnol, allemand et manuels illustrés ajoutés. Bridge affiche aussi les descriptions des Cues.",
+    "en": "Spanish, German and illustrated manuals added. Bridge now shows Cue descriptions.",
+    "es": "Español, alemán y manuales ilustrados añadidos. Bridge muestra las descripciones de las Cues.",
+    "de": "Spanisch, Deutsch und bebilderte Anleitungen ergänzt. Bridge zeigt jetzt Cue-Beschreibungen."
+  }
+}

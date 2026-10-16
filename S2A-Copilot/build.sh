@@ -12,7 +12,7 @@ mkdir -p "$MACOS" "$RESOURCES"
 
 for S2A_ARCH in arm64 x86_64; do
   xcrun swiftc -parse-as-library \
-    "$ROOT/Sources/S2ACopilot.swift" \
+    "$ROOT/Sources/S2ACopilot.swift" "$ROOT/Sources/BridgeStrings.swift" \
     -o "$BUILD/S2ACopilot-$S2A_ARCH" \
     -framework SwiftUI -framework AppKit -framework Foundation \
     -module-cache-path "$BUILD/module-cache" \
@@ -48,9 +48,9 @@ cat > "$APP/Contents/Info.plist" <<'PLIST'
   <key>CFBundleIdentifier</key>
   <string>fr.s2aproduction.copilote</string>
   <key>CFBundleVersion</key>
-  <string>17</string>
+  <string>18</string>
   <key>CFBundleShortVersionString</key>
-  <string>1.3.3</string>
+  <string>1.3.4</string>
   <key>CFBundleExecutable</key>
   <string>S2A Pilot Bridge</string>
   <key>CFBundleIconFile</key>
@@ -63,9 +63,12 @@ cat > "$APP/Contents/Info.plist" <<'PLIST'
 </plist>
 PLIST
 
-mkdir -p "$RESOURCES/fr.lproj" "$RESOURCES/en.lproj"
+mkdir -p "$RESOURCES/fr.lproj" "$RESOURCES/en.lproj" "$RESOURCES/es.lproj" "$RESOURCES/de.lproj"
 printf '%s\n' '"NSAppleEventsUsageDescription" = "S2A Pilot Bridge doit contrôler QLab afin d’importer la conduite dans le workspace sélectionné.";' > "$RESOURCES/fr.lproj/InfoPlist.strings"
 printf '%s\n' '"NSAppleEventsUsageDescription" = "S2A Pilot Bridge needs to control QLab to import the show into the selected workspace.";' > "$RESOURCES/en.lproj/InfoPlist.strings"
+printf '%s\n' '"NSAppleEventsUsageDescription" = "S2A Pilot Bridge necesita controlar QLab para importar el espectáculo en el workspace seleccionado.";' > "$RESOURCES/es.lproj/InfoPlist.strings"
+printf '%s\n' '"NSAppleEventsUsageDescription" = "S2A Pilot Bridge muss QLab steuern, um den Ablauf in den ausgewählten Workspace zu importieren.";' > "$RESOURCES/de.lproj/InfoPlist.strings"
+cp "$ROOT/../locales/interface.json" "$RESOURCES/interface.json"
 cp "$ROOT/LICENSE" "$RESOURCES/LICENSE"
 chmod +x "$MACOS/S2A Pilot Bridge"
 

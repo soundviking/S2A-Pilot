@@ -1,10 +1,10 @@
-# S2A Pilot 1.5.6 / S2A Pilot Bridge 1.3.3
+# S2A Pilot 1.5.7 / S2A Pilot Bridge 1.3.4
 
 🇫🇷 **Français** | 🇬🇧 [English](README.en.md)
 
 ![S2A Pilot](assets/social-preview.png)
 
-[Version publiée : PWA 1.5.6](downloads/S2A-Pilot-V1.5.6-PWA.zip) · [Bridge 1.3.3 — Intel / Apple Silicon](downloads/S2A-Pilot-Bridge-1.3.3-macOS-Universel.zip)
+[Version publiée : PWA 1.5.7](downloads/S2A-Pilot-V1.5.7-PWA.zip) · [Bridge 1.3.4 — Intel / Apple Silicon](downloads/S2A-Pilot-Bridge-1.3.4-macOS-Universel.zip)
 
 # S2A Pilot — Guide utilisateur
 
@@ -14,13 +14,15 @@ Les droits sur S2A Pilot et S2A Pilot Bridge appartiennent à la société S2A P
 
 S2A Pilot prépare et joue des conduites multimédias. S2A Pilot Bridge importe leurs packages dans QLab 5.
 
+Bridge affiche la description de la prochaine Cue sous son visuel et son décompte ; les descriptions longues sont accessibles par défilement.
+
 ## Langue
 
-Au premier lancement, la PWA choisit le français si la langue principale du navigateur est française, sinon l’anglais. FR / EN dans l’en-tête permet de changer ce choix, mémorisé sur l’appareil. Bridge détecte la langue de macOS et propose Français / English. Les titres, descriptions et noms de médias des projets restent inchangés. Les PDF et notices exportés suivent la langue de l’interface.
+Pilot et Bridge proposent français, anglais, espagnol et allemand. La première langue compatible du navigateur ou de macOS est retenue, sinon l’anglais. Le choix manuel est mémorisé. Les titres, descriptions et noms de fichiers des projets restent inchangés. L’aide, les décomptes, les PDF et les notices exportées suivent la langue de l’interface.
 
 ## Aide rapide
 
-Au premier lancement, une aide en quatre étapes présente la création de la conduite, les réglages des Cues, le mode Show et le choix de disposition. La quatrième page « Vanille ou chocolat ? » compare Maverick et Iceman avec deux captures réelles de la même conduite. Les captures réelles montrent une musique de 3 min 20 avec sa waveform et des visuels de scène. Elle apparaît avant la proposition d’installation. Le bouton « ? », en Edit à gauche d’Annuler et Rétablir, permet de la rouvrir. L’aide et ses captures sont disponibles en français et en anglais, intégrées localement pour fonctionner hors ligne sur les navigateurs compatibles avec ce fonctionnement. Elles sont également adaptées au mode de compatibilité.
+Au premier lancement, une aide en quatre étapes présente la création de la conduite, les réglages des Cues, le mode Show et le choix de disposition. La quatrième page « Choisissez votre affichage » compare Maverick et Iceman avec deux captures réelles de la même conduite. Les captures réelles montrent une musique de 3 min 20 avec sa waveform et des visuels de scène. Elle apparaît avant la proposition d’installation. Le bouton « ? », en Edit à gauche d’Annuler et Rétablir, permet de la rouvrir. L’aide et ses captures sont disponibles dans les quatre langues, intégrées localement pour fonctionner hors ligne sur les navigateurs compatibles avec ce fonctionnement. Elles sont également adaptées au mode de compatibilité. Le lien « Mode d’emploi illustré (PDF) » ouvre le manuel dans la langue choisie, téléchargé à la demande pour ne pas alourdir la PWA.
 
 
 Sur iPhone, le visuel est en haut à gauche, le titre à sa droite et la description occupe toute la largeur en dessous. En Iceman, la Cue suivante réserve le haut droit au décompte et place son titre et sa description en dessous. Dans les deux styles, le chrono de la Timeline reste discret et le décompte est plus grand. Le halo de démarrage s’efface avant ses bords pour éviter toute coupure. En portrait sur iPad, Iceman place les descriptions de l’active et de la suivante sur toute la largeur en bas, avec le décompte en haut à droite de la suivante. En Show, le transport tient sur une ligne : Lecture/Pause (icône), Retour au début, progression et chrono. En Maverick, le décompte reste au-dessus ; en Iceman, il reste dans la Cue suivante.

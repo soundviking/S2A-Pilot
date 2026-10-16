@@ -1,0 +1,45 @@
+{
+  "date": "2026-10-16",
+  "languages": [
+    "fr",
+    "en",
+    "es",
+    "de"
+  ],
+  "ui_catalog_keys": 316,
+  "checks": {
+    "chrome_hot_switch_and_reload": "passed",
+    "actual_safari_27_hot_switch": "passed",
+    "user_text_preserved": "passed",
+    "help_four_languages": "passed",
+    "manual_targets_four_local_http_200": "passed",
+    "technical_pdf_four_languages": "passed",
+    "new_version_localized_summary": "passed",
+    "iphone_width_393": "passed",
+    "zip_save_import_offline_and_picker_fallback": "passed",
+    "bridge_production_package_decoder": "passed",
+    "bridge_universal_build_arm64_x86_64": "passed",
+    "bridge_countdown_time_window_title_and_stored_error_translations": "passed",
+    "manuals_35_pages_each_visual_review": "passed",
+    "bridge_export_description_preserved": "passed",
+    "bridge_monitor_normal_long_empty_description_native_render_525_640": "passed"
+  },
+  "limits": [
+    "No physical iPhone/iPad test",
+    "No live QLab import executed in this change"
+  ],
+  "sourceSHA256": {
+    "PWA/app.js": "35db51a6fbf6fae94f9087d6a931cf975f9c33a1b43f9c1743988f6da3dc6a21",
+    "PWA/i18n.js": "1af8f24d59bc3726bbb103d1e1b898924a5be29ddcdfdf7464aad4c2e39161b4",
+    "PWA/i18n-catalog.js": "fb1ae1ad2b18aa8f5c3edc8144fd9e07826f6fe1f9bdb9cde1a04a986aa9b7f4",
+    "PWA/quick-help.js": "05e50281b00c6fba06347e36aaa096f8087bee30d432a23a5eb8b9d6dda33e33",
+    "PWA/technical-preview.js": "a4c77a37ba127514d62f008f1310cf34dd3d50b80eb448644f179691686197b2",
+    "S2A-Copilot/Sources/BridgeStrings.swift": "9592ef83bad3e3e25454dc577241aea73dfb9e3c5b4ca26bb0bfcfcf9f501104",
+    "S2A-Copilot/Sources/S2ACopilot.swift": "237092cc25545dc75d9ffdb69d11ac79fe85566460b1ccd807977564e80be243",
+    "locales/interface.json": "b1bb94b793de3d37a30148bb2af75ee9cff2aeac6ceee12ed6eae9303b422559"
+  },
+  "release": {
+    "pilot": "1.5.7",
+    "bridge": "1.3.4"
+  }
+}

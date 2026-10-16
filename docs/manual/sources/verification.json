@@ -1,0 +1,30 @@
+{
+  "fr": {
+    "pages": 35,
+    "bytes": 6692362,
+    "sha256": "e26cb32d7b04f53d789a8631587bec50311afa221bf7dc8be0a42b8136607dd8",
+    "local_http": 200,
+    "visual_review": "35 rendered pages inspected; no clipping or overlapping text"
+  },
+  "en": {
+    "pages": 35,
+    "bytes": 6667080,
+    "sha256": "6a26a9eb2ce989b21109d8805c16f35ab1d16ad1f799c03dbf4fd9ab754f037b",
+    "local_http": 200,
+    "visual_review": "35 rendered pages inspected; no clipping or overlapping text"
+  },
+  "es": {
+    "pages": 35,
+    "bytes": 6700048,
+    "sha256": "75f37cb6a128fd42a1b79af486ff2fbf1180b5e4bd5b05eee626e1fa64fbe6eb",
+    "local_http": 200,
+    "visual_review": "35 rendered pages inspected; no clipping or overlapping text"
+  },
+  "de": {
+    "pages": 35,
+    "bytes": 6752565,
+    "sha256": "93de3164e559545c4c1266fd6d891a9bb01c1d7a90c1a3b6273d3192b2003be7",
+    "local_http": 200,
+    "visual_review": "35 rendered pages inspected; no clipping or overlapping text"
+  }
+}
