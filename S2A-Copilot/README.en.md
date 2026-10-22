@@ -1,4 +1,4 @@
-# S2A Pilot Bridge 1.4.4
+# S2A Pilot Bridge 1.4.5
 
 The rights to S2A Pilot and S2A Pilot Bridge belong to the company S2A Production. These applications were developed by Antoine CLOPIER with assistance from ChatGPT.
 

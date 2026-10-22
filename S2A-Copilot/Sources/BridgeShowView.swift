@@ -104,9 +104,9 @@ struct BridgeShowWebView: NSViewRepresentable {
                     mapped[imageKey] = path.hasPrefix("/") ? URL(fileURLWithPath:path) : folder.appendingPathComponent(path)
                 }
                 return ["id":String(cue.index),"time":cue.time,"name":cue.name,"description":cue.monitorDescription ?? "","editName":cue.name,"editDescription":cue.description ?? "","image":mapped[imageKey] == nil ? "" : imageKey]
-            } ?? current.map { [["id":$0.id,"time":0,"name":$0.name,"description":$0.notes,"editName":$0.qName,"editDescription":$0.notes,"image":""]] } ?? []
+            } ?? current.map { [["id":$0.id,"number":$0.number,"time":0,"name":$0.name,"description":$0.notes,"editName":$0.qName,"editDescription":$0.notes,"image":""]] } ?? []
             if imported == nil, current != nil, let standby = snapshot?.roots.first(where:{$0.id == snapshot?.standbyID}), standby.id != current?.id {
-                cues.append(["id":standby.id,"time":NSNull(),"name":standby.name,"description":standby.notes,"editName":standby.qName,"editDescription":standby.notes,"image":""])
+                cues.append(["id":standby.id,"number":standby.number,"time":NSNull(),"name":standby.name,"description":standby.notes,"editName":standby.qName,"editDescription":standby.notes,"image":""])
             }
             if !model.synchronizationLost { images.urls = mapped }
             let content:[String:Any] = ["id":imported?.groupID ?? current?.id ?? "", "title":imported.flatMap { show in snapshot?.roots.first(where: { $0.id == show.groupID })?.name } ?? imported?.title ?? current?.name ?? model.workspace?.name ?? "S2A Pilot Bridge", "duration":imported?.showDuration ?? current?.duration ?? 0,"generic":imported == nil,"cues":cues]

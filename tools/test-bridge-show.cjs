@@ -48,7 +48,7 @@ const assert=require('assert/strict'),fs=require('fs'),path=require('path');
  assert.ok(await page.locator('.flowItem').first().isDisabled());
  await render({...state,elapsed:0});
  await frame.waitForFunction(()=>document.querySelector('.showCountdownClock').textContent==='00:25');
- await render({...state,currentID:'intro'},{id:'intro',title:'Musique QLab',duration:200,generic:true,cues:[{id:'intro',time:0,name:'Accueil',description:'Notes',image:''},{id:'final',time:null,name:'Sortie',description:'Consigne suivante',image:''}]});
+ await render({...state,currentID:'intro'},{id:'intro',title:'Musique QLab',duration:200,generic:true,cues:[{id:'intro',number:'1.20',time:0,name:'Accueil',description:'Notes',image:''},{id:'final',number:'6.4',time:null,name:'Sortie',description:'Consigne suivante',image:''}]});
  await frame.waitForFunction(()=>document.querySelector('#showNextCountdown').hidden);
  assert.ok(!await frame.locator('#showNextCountdown').isVisible());
  assert.equal(await frame.locator('body.nextCueUrgent').count(),0);
@@ -65,6 +65,8 @@ const assert=require('assert/strict'),fs=require('fs'),path=require('path');
  }
  await page.setViewportSize({width:1500,height:950});
  const modeMessages=await page.evaluate(()=>nativeMessages.length);
+ assert.deepEqual(await frame.locator('.overviewNumber').allTextContents(),['1.20','6.4']);
+ assert.equal(await frame.locator('.isActive .overviewTime').textContent(),'');
  await render({...state,currentID:'intro',selectedID:'show',running:false}); // paused generic cue keeps Iceman
  assert.equal(await frame.locator('body.showLayoutIceman').count(),1);
  await render({...state,currentID:'',selectedID:'show',running:false},content); // standby selection cannot switch layouts
