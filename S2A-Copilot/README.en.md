@@ -1,4 +1,4 @@
-# S2A Pilot Bridge 1.4.3
+# S2A Pilot Bridge 1.4.4
 
 The rights to S2A Pilot and S2A Pilot Bridge belong to the company S2A Production. These applications were developed by Antoine CLOPIER with assistance from ChatGPT.
 
@@ -15,6 +15,10 @@ Show reuses Pilot’s Maverick layout: timeline, current and next cues, descript
 Successive imports resolve the workspace by ID. Imports retain media actions and one Wait clock; visual markers remain in Bridge. Legacy indexes without a clock ID remain readable. QLab supplies time, including pauses and seeks; connection loss freezes the last confirmed time and shows an explicit status.
 
 See the [illustrated manuals](../docs/manual/README.md).
+
+## Automatic layout
+
+The cue being followed in QLab determines the layout: Iceman for native QLab elements, with no countdown on the next cue; Maverick with the usual countdown for Pilot shows. Selection alone never switches layouts. Pausing preserves the layout, and synchronization loss does not trigger a switch.
 
 ## Show filters and window
 

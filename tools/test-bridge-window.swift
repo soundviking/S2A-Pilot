@@ -83,9 +83,25 @@ final class WindowTest: NSObject {
                         DispatchQueue.main.asyncAfter(deadline:.now()+0.2) {
                             precondition(self.window.level == .floating)
                             self.model.stopVisualMonitor()
-                            self.window.orderOut(nil)
-                            print("PASS actual Show view: topmost binding updates the native window level in both directions; no QLab connection used")
-                            exit(0)
+                            let snapshot = self.model.runtimeSnapshot!
+                            self.model.runtimeSnapshot = BridgeRuntimeSnapshot(standbyID:"v",selectedID:"p",roots:snapshot.roots.map { cue in
+                                BridgeRuntimeCue(id:cue.id,name:cue.name,kind:cue.kind,running:cue.id == "a",paused:false,elapsed:cue.id == "a" ? 17 : 0,duration:cue.duration,notes:cue.notes,number:cue.number,qName:cue.qName)
+                            },clocks:[:])
+                            self.model.currentRuntimeID = "a"
+                            self.model.activeShow = nil
+                            self.model.visualElapsed = 17
+                            self.model.visualRunning = true
+                            self.window.setContentSize(NSSize(width:1360,height:850))
+                            DispatchQueue.main.asyncAfter(deadline:.now()+0.4) {
+                                web.takeSnapshot(with:nil) { image,error in
+                                    precondition(image != nil && error == nil)
+                                    let png = NSBitmapImageRep(data:image!.tiffRepresentation!)!.representation(using:.png,properties:[:])!
+                                    try! png.write(to:URL(fileURLWithPath:"/tmp/s2a-bridge-iceman-native.png"))
+                                    self.window.orderOut(nil)
+                                    print("PASS actual Show view: topmost binding updates in both directions; generic QLab Iceman snapshot captured; no QLab connection used")
+                                    exit(0)
+                                }
+                            }
                         }
                     }
                 }

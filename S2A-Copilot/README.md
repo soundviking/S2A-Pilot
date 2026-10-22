@@ -1,4 +1,4 @@
-# S2A Pilot Bridge 1.4.3
+# S2A Pilot Bridge 1.4.4
 
 Les droits sur S2A Pilot et S2A Pilot Bridge appartiennent à la société S2A Production. Ces applications ont été développées par Antoine CLOPIER, avec l’aide de ChatGPT.
 
@@ -15,6 +15,10 @@ La vue Show reprend Maverick de Pilot : timeline, Cue active et suivante côte �
 Les imports successifs vérifient le workspace par ID. L’import conserve les actions médias et une horloge Wait unique ; les repères visuels restent dans Bridge. Les index antérieurs sans identifiant d’horloge restent lisibles. QLab fournit le temps : pause, reprise et déplacements sont reflétés ; une perte de communication fige le dernier temps confirmé et affiche « Synchronisation perdue ».
 
 Voir les [modes d’emploi illustrés](../docs/manual/README.md).
+
+## Disposition automatique
+
+La Cue réellement suivie dans QLab détermine l’affichage : Iceman pour un élément non issu de Pilot, sans décompte sur la suivante ; Maverick avec le décompte habituel pour une conduite Pilot. Une simple sélection ne change pas la disposition. La pause conserve l’affichage et une perte de synchronisation ne déclenche aucun basculement.
 
 ## Filtres et fenêtre Show
 

@@ -48,10 +48,34 @@ const assert=require('assert/strict'),fs=require('fs'),path=require('path');
  assert.ok(await page.locator('.flowItem').first().isDisabled());
  await render({...state,elapsed:0});
  await frame.waitForFunction(()=>document.querySelector('.showCountdownClock').textContent==='00:25');
- await render(state,{id:'intro',title:'Musique QLab',duration:200,generic:true,cues:[{id:'intro',time:0,name:'Accueil',description:'Notes',image:''},{id:'final',time:null,name:'Sortie',description:'',image:''}]});
+ await render({...state,currentID:'intro'},{id:'intro',title:'Musique QLab',duration:200,generic:true,cues:[{id:'intro',time:0,name:'Accueil',description:'Notes',image:''},{id:'final',time:null,name:'Sortie',description:'Consigne suivante',image:''}]});
  await frame.waitForFunction(()=>document.querySelector('#showNextCountdown').hidden);
  assert.ok(!await frame.locator('#showNextCountdown').isVisible());
  assert.equal(await frame.locator('body.nextCueUrgent').count(),0);
+ assert.equal(await frame.locator('body.showLayoutIceman').count(),1);
+ assert.equal(await frame.locator('.isNext .showCountdownClock').count(),0);
+ const stacked=await frame.locator('.isActive,.isNext').evaluateAll(xs=>xs.map(x=>{const r=x.getBoundingClientRect();return {x:r.x,y:r.y,width:r.width}}));
+ assert.equal(stacked[0].x,stacked[1].x);assert.ok(stacked[1].y>stacked[0].y);assert.equal(stacked[0].width,stacked[1].width);
+ for(const width of [1500,1100,820]){
+  await page.setViewportSize({width,height:900});
+  const rects=await frame.locator('.isNext .overviewHeading,.isNext .overviewDescription').evaluateAll(xs=>xs.map(x=>{const r=x.getBoundingClientRect();return {y:r.y,bottom:r.bottom}}));
+  assert.ok(rects[1].y>=rects[0].bottom-1,'Next cue description must not overlap its heading');
+  assert.ok(!await frame.locator('#showNextCountdown').isVisible());
+  await page.screenshot({path:'/tmp/s2a-bridge-iceman-'+width+'.png'});
+ }
+ await page.setViewportSize({width:1500,height:950});
+ const modeMessages=await page.evaluate(()=>nativeMessages.length);
+ await render({...state,currentID:'intro',selectedID:'show',running:false}); // paused generic cue keeps Iceman
+ assert.equal(await frame.locator('body.showLayoutIceman').count(),1);
+ await render({...state,currentID:'',selectedID:'show',running:false},content); // standby selection cannot switch layouts
+ assert.equal(await frame.locator('body.showLayoutIceman').count(),1);
+ await render({...state,currentID:'show',lost:true});
+ assert.equal(await frame.locator('body.showLayoutIceman').count(),1); // do not switch on an unconfirmed snapshot
+ await render(state,content); // actual Pilot playback restores Maverick and its countdown
+ await frame.waitForFunction(()=>!document.body.classList.contains('showLayoutIceman'));
+ assert.ok(await frame.locator('#showNextCountdown').isVisible());
+ assert.equal(await frame.locator('.showCountdownClock').innerText(),'00:05');
+ assert.equal(await page.evaluate(()=>nativeMessages.length),modeMessages);
  // A paused cue must not display a green Play.
  await render({...state,roots:state.roots.map(x=>({...x,paused:true}))},content);
  assert.equal(await page.locator('.play').count(),0);
@@ -71,5 +95,5 @@ const assert=require('assert/strict'),fs=require('fs'),path=require('path');
  assert.equal(await page.evaluate(()=>nativeMessages.length),before);
  assert.deepEqual(errors,[]);
  await browser.close();
- console.log('PASS Bridge Show: Maverick, timeline, independent selection/play, real numbers, no selection echo, auto-scroll, Pilot-only countdown, loss, pause/seek, zoom and 3 window widths');
+ console.log('PASS Bridge Show: automatic QLab Iceman / Pilot Maverick, selection/paused/lost guards, no QLab countdown, responsive Iceman, Maverick, timeline, independent selection/play, real numbers, no selection echo, auto-scroll, Pilot-only countdown, loss, pause/seek, zoom and 3 window widths');
 })().catch(e=>{console.error(e);process.exit(1)});
