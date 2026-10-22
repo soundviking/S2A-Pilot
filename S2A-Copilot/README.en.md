@@ -1,4 +1,4 @@
-# S2A Pilot Bridge 1.3.4
+# S2A Pilot Bridge 1.4.0
 
 The rights to S2A Pilot and S2A Pilot Bridge belong to the company S2A Production. These applications were developed by Antoine CLOPIER with assistance from ChatGPT.
 
@@ -10,7 +10,9 @@ Universal macOS app: Intel and Apple Silicon, macOS 13 or later. Uses the system
 
 Bridge automatically detects open QLab workspaces and lets you choose when several are open. Save the workspace before importing. Add multiple project packages to import each show into its own Timeline Group cue. The group retains its number and children use numbers such as 5.1, 5.2 and 5.3, avoiding existing numbers. Existing imports are not renumbered. The monitor follows imported shows and can stay on top.
 
-The monitor shows the next Cue, its visual, countdown and full-width description below. Long descriptions scroll within this area; empty descriptions add no extra space. User descriptions from Pilot remain untranslated.
+Show reuses Pilot’s Maverick layout: timeline, current and next cues, descriptions and expandable visuals. Click an image to enlarge it; click again or press Escape to return. The QLab running order displays actual cue numbers and keeps Pilot groups as one show. Green Play indicates playback; blue indicates selection. Clicking selects by unique ID without GO. Countdowns are limited to Pilot shows and the “Cue 1/2” counter is removed.
+
+Successive imports resolve the workspace by ID. Imports retain media actions and one Wait clock; visual markers remain in Bridge. Legacy indexes without a clock ID remain readable. QLab supplies time, including pauses and seeks; connection loss freezes the last confirmed time and shows an explicit status.
 
 See the [illustrated manuals](../docs/manual/README.md).
 

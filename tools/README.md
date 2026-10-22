@@ -29,3 +29,13 @@ Le catalogue commun est documenté dans `locales/README.md`. `test-locales.cjs` 
 `capture-help-locales.cjs` produit de vraies captures des quatre interfaces et leurs copies hors ligne. Il utilise les médias de démonstration du dossier de travail du manuel. Il ne dessine pas de fausse interface.
 
 `python3 tools/serve-preview.py` sert uniquement en local l’application et les quatre manuels séparés. En production, le lien de l’aide télécharge le PDF depuis GitHub ; les PDF ne sont pas inclus dans la PWA. Avant publication, mettre à jour `PWA/version.json` : `releaseNotes` est un objet de résumés courts `fr/en/es/de`, affiché sur deux lignes au maximum dans l’annonce de nouvelle version. Un serveur sans ce champ reste compatible.
+
+### Reconnaissance du workspace Bridge
+
+`test-bridge-workspaces.swift`, compilé avec `S2A-Copilot/Sources/BridgeWorkspaceQuery.swift`, contrôle les réponses de QLab simulées : cible sélectionnée, deux imports successifs, ordre des workspaces modifié, premier résultat vide, fermeture réelle, réponse invalide et absence de bascule vers un autre workspace. La requête AppleScript est compilée avec le dictionnaire de QLab installé. Ces tests ne constituent pas deux imports exécutés dans un vrai workspace QLab.
+
+## Bridge Show 1.4.0
+
+`python3 tools/test-bridge-navigation.py` vérifie les modèles runtime/workspace et compile les scripts AppleScript, sans les exécuter. `tools/test-bridge-show.cjs` teste l’interface Show empaquetée dans Chrome : Maverick, lecture/sélection, numéros, auto-scroll, zoom, pause/retour, décompte Pilot uniquement et trois largeurs. Il utilise le module Playwright disponible via `NODE_PATH` ou `S2A_PLAYWRIGHT` ; le navigateur peut être défini par `S2A_CHROME`.
+
+`python3 tools/package-release.py --bridge-only` produit uniquement le ZIP Bridge et laisse les archives et l’installateur embarqué de Pilot inchangés.

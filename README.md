@@ -1,10 +1,10 @@
-# S2A Pilot 1.5.7 / S2A Pilot Bridge 1.3.4
+# S2A Pilot 1.5.7 / S2A Pilot Bridge 1.4.0
 
 🇫🇷 **Français** | 🇬🇧 [English](README.en.md)
 
 ![S2A Pilot](assets/social-preview.png)
 
-[Version publiée : PWA 1.5.7](downloads/S2A-Pilot-V1.5.7-PWA.zip) · [Bridge 1.3.4 — Intel / Apple Silicon](downloads/S2A-Pilot-Bridge-1.3.4-macOS-Universel.zip)
+[Version publiée : PWA 1.5.7](downloads/S2A-Pilot-V1.5.7-PWA.zip) · [Bridge 1.4.0 — Intel / Apple Silicon](downloads/S2A-Pilot-Bridge-1.4.0-macOS-Universel.zip)
 
 # S2A Pilot — Guide utilisateur
 
@@ -14,7 +14,7 @@ Les droits sur S2A Pilot et S2A Pilot Bridge appartiennent à la société S2A P
 
 S2A Pilot prépare et joue des conduites multimédias. S2A Pilot Bridge importe leurs packages dans QLab 5.
 
-Bridge affiche la description de la prochaine Cue sous son visuel et son décompte ; les descriptions longues sont accessibles par défilement.
+Bridge 1.4.0 reprend la vue Show Maverick de Pilot : timeline, Cue active et suivante, descriptions et visuels agrandissables. Le déroulé QLab à gauche affiche les numéros réels, le Play vert et la sélection bleue, synchronisée sans GO. [Détails et validation Bridge](docs/bridge/lot-1-validation.md). La PWA 1.5.7 et son installateur Bridge embarqué 1.3.4 restent inchangés ; Bridge 1.4.0 se télécharge séparément.
 
 ## Langue
 

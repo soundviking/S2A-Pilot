@@ -125,18 +125,6 @@ struct QueuedShowCuePackage: Identifiable {
     let project: ShowCueProject
 }
 
-struct WorkspaceInfo: Identifiable, Equatable {
-    let id: String
-    let name: String
-    let workspacePath: String
-
-    var projectFolder: URL? {
-        guard !workspacePath.isEmpty else { return nil }
-        return URL(fileURLWithPath: workspacePath).deletingLastPathComponent()
-    }
-}
-
-
 struct SavedShowCue: Codable, Identifiable {
     let groupID: String
     let mediaID: String?
@@ -146,6 +134,7 @@ struct SavedShowCue: Codable, Identifiable {
     let imagePaths: [String: String]
     let importedAt: Date
     var showDuration: Double? = nil
+    var clockID: String? = nil
     var id: String { groupID }
 }
 
@@ -185,6 +174,12 @@ final class AppModel: ObservableObject {
     @Published var visualRunning = false
     @Published var visualStatus = BridgeText("En attente d’un numéro S2A Pilot")
     @Published var visualAlwaysOnTop = true
+    @Published var runtimeSnapshot: BridgeRuntimeSnapshot?
+    @Published var currentRuntimeID: String?
+    @Published var synchronizationLost = false
+    @Published var selectedBridgeID: String?
+    private let runtimeQueue = DispatchQueue(label: "fr.s2a.bridge.runtime", qos: .utility)
+    private var selectionRevision = 0
 
     private var workspaceTimer: Timer?
     private var workspaceRefreshInFlight = false
@@ -192,6 +187,7 @@ final class AppModel: ObservableObject {
     private var monitorTimer: Timer?
     private var monitorPollInFlight = false
     private var monitorGeneration = 0
+    private var lastRuntimeSuccess = Date()
 
     private var extractedURL: URL?
 
@@ -291,6 +287,9 @@ final class AppModel: ObservableObject {
         guard !isBusy, let info = availableWorkspaces.first(where: { $0.id == id }), info != workspace else { return }
         stopVisualMonitor()
         workspace = info
+        runtimeSnapshot = nil
+        currentRuntimeID = nil
+        selectedBridgeID = nil
         activeShow = nil
         visualRunning = false
         visualElapsed = 0
@@ -319,6 +318,9 @@ final class AppModel: ObservableObject {
                     if selected != self.workspace {
                         self.stopVisualMonitor()
                         self.workspace = selected
+                        self.runtimeSnapshot = nil
+                        self.currentRuntimeID = nil
+                        self.selectedBridgeID = nil
                         self.activeShow = nil
                         self.visualRunning = false
                         self.visualElapsed = 0
@@ -333,14 +335,17 @@ final class AppModel: ObservableObject {
                         self.visualRunning = false
                         self.visualElapsed = 0
                     }
-                    if shows.isEmpty {
-                        self.stopVisualMonitor()
-                    } else if self.monitorTimer == nil {
-                        self.startVisualMonitor()
+                    if selected != nil && self.monitorTimer == nil { self.startVisualMonitor() }
+                    if selected == nil {
+                        self.synchronizationLost = self.runtimeSnapshot != nil
+                        self.visualStatus = BridgeText(self.synchronizationLost ? "Synchronisation perdue" : "En attente d’un numéro S2A Pilot")
+                        self.stopVisualMonitor(); self.runtimeSnapshot = nil; self.currentRuntimeID = nil
                     }
                     if self.errorMessage == self.lastDetectionError { self.errorMessage = nil }
                     self.lastDetectionError = nil
                 case .failure(let error):
+                    self.synchronizationLost = true
+                    self.visualStatus = BridgeText("Synchronisation perdue")
                     self.availableWorkspaces = []
                     self.workspace = nil
                     self.savedShows = []
@@ -412,6 +417,7 @@ final class AppModel: ObservableObject {
                                     project: item.project,
                                     groupID: result.groupID,
                                     mediaID: result.mediaID,
+                                    clockID: result.clockID,
                                     imageURLs: result.imageURLs,
                                     workspace: current
                                 )
@@ -498,47 +504,24 @@ final class AppModel: ObservableObject {
         return (temp, project)
     }
 
-    private func qlabWorkspaces() throws -> [WorkspaceInfo] {
-        // Avoid launching QLab when no process is running.
-        guard !NSRunningApplication.runningApplications(withBundleIdentifier: "com.figure53.QLab.5").isEmpty else { return [] }
-        let script = """
-        tell application id "com.figure53.QLab.5"
-            set resultText to ""
-            repeat with w in workspaces
-                set wid to unique id of w
-                set wname to name of w
-                set wpath to ""
-                try
-                    set rawPath to path of w
-                    if rawPath is not missing value and rawPath is not "" then
-                        try
-                            set wpath to POSIX path of (rawPath as alias)
-                        on error
-                            set wpath to rawPath as text
-                        end try
-                    end if
-                end try
-                set resultText to resultText & wid & (ASCII character 31) & wname & (ASCII character 31) & wpath & (ASCII character 30)
-            end repeat
-            return resultText
-        end tell
-        """
-        let output = try run("/usr/bin/osascript", ["-e", script])
-        return output.components(separatedBy: "\u{1e}").compactMap { record in
-            let parts = record.components(separatedBy: "\u{1f}")
-            guard parts.count == 3, !parts[0].isEmpty else { return nil }
-            return WorkspaceInfo(id: parts[0], name: parts[1], workspacePath: parts[2])
+    private func qlabWorkspaces(id: String? = nil) throws -> [WorkspaceInfo] {
+        let output = try run("/usr/bin/osascript", ["-e", BridgeWorkspaceQuery.script(id: id)],timeout:8)
+        do {
+            return try BridgeWorkspaceQuery.parse(output)
+        } catch {
+            throw ShowCueError.commandFailed(BridgeText("La réponse de QLab est incomplète. Actualise la connexion puis réessaie."))
         }
     }
 
     private func qlabWorkspace(id: String) throws -> WorkspaceInfo {
-        guard let info = try qlabWorkspaces().first(where: { $0.id == id }) else {
+        do {
+            return try BridgeWorkspaceQuery.resolve(id: id) { try qlabWorkspaces(id: $0) }
+        } catch BridgeWorkspaceQuery.QueryError.workspaceClosed {
             throw ShowCueError.commandFailed(BridgeText("Le workspace sélectionné a été fermé. Choisis un workspace ouvert."))
         }
-        return info
     }
 
-    private func performImport(project: ShowCueProject, folder: URL, workspaceID: String) throws -> (groupID: String, mediaID: String?, imageURLs: [Int: URL]) {
+    private func performImport(project: ShowCueProject, folder: URL, workspaceID: String) throws -> (groupID: String, mediaID: String?, clockID: String?, imageURLs: [Int: URL]) {
         let current = try qlabWorkspace(id: workspaceID)
         guard current.id == workspaceID else { throw ShowCueError.commandFailed(BridgeText("Le workspace QLab sélectionné a été fermé.")) }
         guard let projectFolder = current.projectFolder else { throw ShowCueError.commandFailed(BridgeText("Le workspace QLab doit être enregistré avant l’import.")) }
@@ -593,8 +576,7 @@ final class AppModel: ObservableObject {
         lines.append("if (count of workspaces) is 0 then error \(asAppleString(L("Aucun workspace QLab n’est ouvert.")))")
         lines.append("set targetWorkspace to first workspace whose unique id is \(asAppleString(workspaceID))")
         lines.append("if (unique id of targetWorkspace) is not \(asAppleString(workspaceID)) then error \(asAppleString(L("Le workspace QLab sélectionné a été fermé.")))")
-        lines.append("make targetWorkspace type \"Group\"")
-        lines.append("set showGroup to last item of (selected of targetWorkspace as list)")
+        lines.append("set showGroup to my s2aMakeCue(targetWorkspace, \"Group\")")
         lines.append("set q name of showGroup to \(asAppleString(project.title))")
         lines.append("set mode of showGroup to timeline")
         lines.append("set importedGroupNumber to q number of showGroup as text")
@@ -609,8 +591,7 @@ final class AppModel: ObservableObject {
         func appendStop(target: String, at time: Double, label: String) {
             utilityCounter += 1
             let variable = "stopCue\(utilityCounter)"
-            lines.append("make targetWorkspace type \(asAppleString("Stop"))")
-            lines.append("set \(variable) to last item of (selected of targetWorkspace as list)")
+            lines.append("set \(variable) to my s2aMakeCue(targetWorkspace, \(asAppleString("Stop")))")
             lines.append("set q name of \(variable) to \(asAppleString(label))")
             lines.append("set cue target of \(variable) to \(target)")
             lines.append("set pre wait of \(variable) to \(qlabTime(time))")
@@ -619,8 +600,7 @@ final class AppModel: ObservableObject {
         func appendAudioFade(target: String, at time: Double, duration: Double, toDB: Double, stopWhenDone: Bool, label: String) {
             utilityCounter += 1
             let variable = "fadeCue\(utilityCounter)"
-            lines.append("make targetWorkspace type \(asAppleString("Fade"))")
-            lines.append("set \(variable) to last item of (selected of targetWorkspace as list)")
+            lines.append("set \(variable) to my s2aMakeCue(targetWorkspace, \(asAppleString("Fade")))")
             lines.append("set q name of \(variable) to \(asAppleString(label))")
             lines.append("set cue target of \(variable) to \(target)")
             lines.append("set pre wait of \(variable) to \(qlabTime(time))")
@@ -632,8 +612,7 @@ final class AppModel: ObservableObject {
         func appendVideoFade(target: String, at time: Double, duration: Double, stopWhenDone: Bool, label: String) {
             utilityCounter += 1
             let variable = "fadeCue\(utilityCounter)"
-            lines.append("make targetWorkspace type \(asAppleString("Fade"))")
-            lines.append("set \(variable) to last item of (selected of targetWorkspace as list)")
+            lines.append("set \(variable) to my s2aMakeCue(targetWorkspace, \(asAppleString("Fade")))")
             lines.append("set q name of \(variable) to \(asAppleString(label))")
             lines.append("set cue target of \(variable) to \(target)")
             lines.append("set pre wait of \(variable) to \(qlabTime(time))")
@@ -647,14 +626,6 @@ final class AppModel: ObservableObject {
         if project.isMultimedia {
             for cue in project.cues.sorted(by: { $0.time < $1.time }) {
                 let cueTime = qlabTime(cue.time)
-                lines.append("make targetWorkspace type \(asAppleString("Memo"))")
-                lines.append("set cueMemo to last item of (selected of targetWorkspace as list)")
-                lines.append("set q name of cueMemo to \(asAppleString(cue.qlabDisplayName))")
-                lines.append("set pre wait of cueMemo to \(cueTime)")
-                if let description = cue.description, !description.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                    lines.append("set notes of cueMemo to \(asAppleString(description))")
-                }
-                lines.append("move cueMemo to end of showGroup")
 
                 for action in (cue.mediaActions ?? []).filter({ $0.isStopAll }) {
                     if action.transition == "fade" {
@@ -703,8 +674,7 @@ final class AppModel: ObservableObject {
                         priorVideoVariables.removeAll()
                     }
 
-                    lines.append("make targetWorkspace type \(asAppleString(cueType))")
-                    lines.append("set \(variable) to last item of (selected of targetWorkspace as list)")
+                    lines.append("set \(variable) to my s2aMakeCue(targetWorkspace, \(asAppleString(cueType)))")
                     lines.append("set q name of \(variable) to \(asAppleString(mediaName))")
                     lines.append("set file target of \(variable) to (POSIX file \(asAppleString(destination.path)) as alias)")
                     lines.append("set pre wait of \(variable) to \(cueTime)")
@@ -739,15 +709,9 @@ final class AppModel: ObservableObject {
                 }
             }
 
-            lines.append("make targetWorkspace type \(asAppleString("Memo"))")
-            lines.append("set endMemo to last item of (selected of targetWorkspace as list)")
-            lines.append("set q name of endMemo to \(asAppleString("FIN DE CONDUITE S2A PILOT"))")
-            lines.append("set pre wait of endMemo to \(qlabTime(project.resolvedShowDuration))")
-            lines.append("move endMemo to end of showGroup")
         } else if let legacy = project.resolvedLegacyMedia, let destination = destinationForAction["legacy"] {
             let cueType = legacy.kind == "video" ? "Video" : "Audio"
-            lines.append("make targetWorkspace type \(asAppleString(cueType))")
-            lines.append("set legacyCue to last item of (selected of targetWorkspace as list)")
+            lines.append("set legacyCue to my s2aMakeCue(targetWorkspace, \(asAppleString(cueType)))")
             lines.append("set q name of legacyCue to \(asAppleString(project.title))")
             lines.append("set file target of legacyCue to (POSIX file \(asAppleString(destination.path)) as alias)")
             if legacy.kind == "video" && legacy.media.mutedOutput == true {
@@ -764,14 +728,15 @@ final class AppModel: ObservableObject {
             }
             lines.append("move legacyCue to end of showGroup")
             firstMediaVariable = "legacyCue"
-            for cue in project.cues.sorted(by: { $0.time < $1.time }) {
-                lines.append("make targetWorkspace type \"Memo\"")
-                lines.append("set cueMemo to last item of (selected of targetWorkspace as list)")
-                lines.append("set q name of cueMemo to \(asAppleString(cue.qlabDisplayName))")
-                lines.append("set pre wait of cueMemo to \(String(format: "%.3f", cue.time))")
-                lines.append("move cueMemo to end of showGroup")
-            }
         }
+
+        // One explicit QLab clock spans silent passages; visual repères stay in Bridge.
+        lines.append("set showClock to my s2aMakeCue(targetWorkspace, \(asAppleString("Wait")))")
+        lines.append("set continue mode of showClock to do_not_continue")
+        lines.append("set q name of showClock to \(asAppleString("S2A PILOT — HORLOGE DE CONDUITE"))")
+        lines.append("set pre wait of showClock to 0")
+        lines.append("set post wait of showClock to \(qlabTime(project.resolvedShowDuration))")
+        lines.append("move showClock to end of showGroup")
 
         lines.append("set importedChildren to cues of showGroup as list")
         lines.append("repeat with importedChild in importedChildren")
@@ -788,18 +753,34 @@ final class AppModel: ObservableObject {
         lines.append("set selected of targetWorkspace to {showGroup}")
 
         if let firstMediaVariable {
-            lines.append("return (uniqueID of showGroup as text) & tab & (uniqueID of \(firstMediaVariable) as text)")
+            lines.append("return (uniqueID of showGroup as text) & tab & (uniqueID of \(firstMediaVariable) as text) & tab & (uniqueID of showClock as text)")
         } else {
-            lines.append("return (uniqueID of showGroup as text) & tab & \"\"")
+            lines.append("return (uniqueID of showGroup as text) & tab & \"\" & tab & (uniqueID of showClock as text)")
         }
         lines.append("end tell")
+        lines.append("""
+        on s2aMakeCue(w, cueType)
+            tell application id "com.figure53.QLab.5"
+                set beforeIDs to uniqueID of cues of w
+                make w type cueType
+                set afterIDs to uniqueID of cues of w
+                set newIDs to {}
+                repeat with candidateID in afterIDs
+                    set candidateText to contents of candidateID as text
+                    if beforeIDs does not contain candidateText then set end of newIDs to candidateText
+                end repeat
+                if (count of newIDs) is not 1 then error "QLab did not confirm one newly created cue."
+                return cue id (first item of newIDs) of w
+            end tell
+        end s2aMakeCue
+        """)
         lines.append("on s2aGroupNumber(currentNumber, usedNumbers)\n    if currentNumber is not \"\" then return currentNumber\n    set candidate to 1\n    repeat while usedNumbers contains (candidate as text)\n        set candidate to candidate + 1\n    end repeat\n    return candidate as text\nend s2aGroupNumber\n\non s2aChildNumbers(groupNumber, usedNumbers, childCount)\n    set resultNumbers to {}\n    set stepIndex to 1\n    repeat childCount times\n        set candidate to groupNumber & \".\" & (stepIndex as text)\n        repeat while usedNumbers contains candidate\n            set stepIndex to stepIndex + 1\n            set candidate to groupNumber & \".\" & (stepIndex as text)\n        end repeat\n        set end of resultNumbers to candidate\n        set end of usedNumbers to candidate\n        set stepIndex to stepIndex + 1\n    end repeat\n    return resultNumbers\nend s2aChildNumbers")
 
         let output = try run("/usr/bin/osascript", ["-e", lines.joined(separator: "\n")])
         let ids = output.split(separator: "\t", omittingEmptySubsequences: false).map(String.init)
         guard let groupID = ids.first, !groupID.isEmpty else { throw ShowCueError.commandFailed(BridgeText("QLab n’a pas renvoyé l’identifiant du Group cue importé.")) }
         let mediaID = ids.count > 1 && !ids[1].isEmpty ? ids[1] : nil
-        return (groupID, project.isMultimedia ? nil : mediaID, imageDestinations)
+        return (groupID, project.isMultimedia ? nil : mediaID, ids.count > 2 ? ids[2] : nil, imageDestinations)
     }
 
     private func showCueDirectory(for workspace: WorkspaceInfo) throws -> URL {
@@ -813,7 +794,7 @@ final class AppModel: ObservableObject {
         try showCueDirectory(for: workspace).appendingPathComponent("index-" + safeFileName(workspace.id) + ".json")
     }
 
-    private func makeSavedShowRecord(project: ShowCueProject, groupID: String, mediaID: String?, imageURLs: [Int: URL], workspace: WorkspaceInfo) throws -> SavedShowCue {
+    private func makeSavedShowRecord(project: ShowCueProject, groupID: String, mediaID: String?, clockID: String?, imageURLs: [Int: URL], workspace: WorkspaceInfo) throws -> SavedShowCue {
         guard let projectFolder = workspace.projectFolder else {
             throw ShowCueError.commandFailed(BridgeText("Le workspace QLab doit être enregistré."))
         }
@@ -827,7 +808,7 @@ final class AppModel: ObservableObject {
                 relativeImages[String(cueIndex)] = fullPath
             }
         }
-        return SavedShowCue(groupID: groupID, mediaID: mediaID, audioID: project.resolvedLegacyMedia?.kind == "audio" ? mediaID : nil, title: project.title, cues: project.cues.sorted(by: { $0.time < $1.time }), imagePaths: relativeImages, importedAt: Date(), showDuration: project.resolvedShowDuration)
+        return SavedShowCue(groupID: groupID, mediaID: mediaID, audioID: project.resolvedLegacyMedia?.kind == "audio" ? mediaID : nil, title: project.title, cues: project.cues.sorted(by: { $0.time < $1.time }), imagePaths: relativeImages, importedAt: Date(), showDuration: project.resolvedShowDuration, clockID: clockID)
     }
 
     private func loadIndexData(for workspace: WorkspaceInfo) throws -> SavedShowCueIndex {
@@ -889,15 +870,17 @@ final class AppModel: ObservableObject {
     }
 
     func startVisualMonitor() {
-        monitorTimer?.invalidate()
-        guard workspace?.projectFolder != nil, !savedShows.isEmpty else {
-            activeShow = nil
-            visualRunning = false
-            visualElapsed = 0
-            visualStatus = BridgeText("En attente d’un numéro S2A Pilot")
-            return
+        stopVisualMonitor()
+        guard workspace != nil else { return }
+        lastRuntimeSuccess = Date()
+        monitorTimer = Timer.scheduledTimer(withTimeInterval:0.25,repeats:true) { [weak self] _ in
+            guard let self else { return }
+            if Date().timeIntervalSince(self.lastRuntimeSuccess) > 2 {
+                self.synchronizationLost = true; self.visualRunning = false
+                self.visualStatus = BridgeText("Synchronisation perdue")
+            }
+            self.pollVisualMonitor()
         }
-        monitorTimer = Timer.scheduledTimer(withTimeInterval: 0.25, repeats: true) { [weak self] _ in self?.pollVisualMonitor() }
         if let monitorTimer { RunLoop.main.add(monitorTimer, forMode: .common) }
         pollVisualMonitor()
     }
@@ -910,71 +893,70 @@ final class AppModel: ObservableObject {
     }
 
     private func pollVisualMonitor() {
-        guard !monitorPollInFlight, let workspace, !savedShows.isEmpty else { return }
+        guard !monitorPollInFlight, let workspace else { return }
         monitorPollInFlight = true
-        let workspaceID = workspace.id
         let generation = monitorGeneration
         let showsSnapshot = savedShows
+        let selectionRevision = selectionRevision
+        runtimeQueue.async {
+            let result = Result { () throws -> BridgeRuntimeSnapshot in
+                let script = BridgeRuntimeSnapshot.script(workspaceID:workspace.id,shows:showsSnapshot)
+                return try BridgeRuntimeSnapshot.parse(self.run("/usr/bin/osascript",["-e",script],timeout:8))
+            }
+            DispatchQueue.main.async {
+                guard self.monitorGeneration == generation, self.workspace?.id == workspace.id else { return }
+                self.monitorPollInFlight = false
+                guard self.selectionRevision == selectionRevision else { return }
+                switch result {
+                case .success(let snapshot):
+                    self.lastRuntimeSuccess = Date()
+                    self.synchronizationLost = false
+                    let previous = self.runtimeSnapshot
+                    let newlyStarted = snapshot.roots.last(where: { cue in
+                        cue.running && !cue.paused && previous?.roots.first(where:{$0.id == cue.id}).map({ !$0.running || $0.paused }) == true
+                    })
+                    let selected = newlyStarted ?? snapshot.current(previousID:self.currentRuntimeID)
+                    self.runtimeSnapshot = snapshot
+                    self.selectedBridgeID = snapshot.selectedID.isEmpty ? nil : snapshot.selectedID
+                    self.currentRuntimeID = selected?.id
+                    self.activeShow = showsSnapshot.first(where:{$0.groupID == (selected?.id ?? snapshot.standbyID)})
+                    let clock = selected.flatMap { snapshot.clocks[$0.id] } ?? selected
+                    self.visualElapsed = clock?.elapsed ?? 0
+                    self.visualRunning = clock.map { $0.running && !$0.paused } ?? false
+                    self.visualStatus = BridgeText(clock?.paused == true ? "Pause" : clock?.running == true ? "Lecture" : "En attente d’un numéro S2A Pilot")
+                case .failure:
+                    // Freeze the last confirmed position and make the loss explicit.
+                    self.synchronizationLost = true
+                    self.visualRunning = false
+                    self.visualStatus = BridgeText("Synchronisation perdue")
+                }
+            }
+        }
+    }
 
-        DispatchQueue.global(qos: .utility).async {
-            defer { DispatchQueue.main.async { guard self.monitorGeneration == generation else { return };  self.monitorPollInFlight = false } }
-            do {
-                var scriptLines: [String] = []
-                scriptLines.append("tell application id \"com.figure53.QLab.5\"")
-                scriptLines.append("if (count of workspaces) is 0 then return \"NO_WORKSPACE\"")
-                scriptLines.append("set matches to (workspaces whose unique id is \(self.asAppleString(workspaceID)))")
-                scriptLines.append("if (count of matches) is 0 then return \"WRONG_WORKSPACE\"")
-                scriptLines.append("set w to first item of matches")
-                scriptLines.append("if (unique id of w) is not \(self.asAppleString(workspaceID)) then return \"WRONG_WORKSPACE\"")
-                scriptLines.append("set resultText to \"\"")
-                for show in showsSnapshot {
-                    scriptLines.append("try")
-                    if let mediaID = show.mediaID, !mediaID.isEmpty {
-                        scriptLines.append("set trackedCue to cue id \(self.asAppleString(mediaID)) of w")
-                    } else if let audioID = show.audioID, !audioID.isEmpty {
-                        // Compatibilité avec les index audio créés avant la version 1.1.
-                        scriptLines.append("set trackedCue to cue id \(self.asAppleString(audioID)) of w")
-                    } else {
-                        // Compatibilité avec les index très anciens sans identifiant de média.
-                        scriptLines.append("set trackedCue to cue id \(self.asAppleString(show.groupID)) of w")
-                    }
-                    scriptLines.append("set resultText to resultText & \(self.asAppleString(show.groupID)) & tab & (running of trackedCue as text) & tab & (paused of trackedCue as text) & tab & (action elapsed of trackedCue as text) & linefeed")
-                    scriptLines.append("end try")
+    // Only explicit interaction writes selection; polling never calls this method.
+    func selectBridgeCue(_ id: String) {
+        guard let workspace, !synchronizationLost,
+              runtimeSnapshot?.roots.contains(where: { $0.id == id }) == true,
+              selectedBridgeID != id else { return }
+        selectionRevision += 1
+        let revision = selectionRevision
+        let generation = monitorGeneration
+        selectedBridgeID = id
+        runtimeQueue.async {
+            let valid = DispatchQueue.main.sync {
+                self.monitorGeneration == generation && self.selectionRevision == revision && self.workspace?.id == workspace.id
+            }
+            guard valid else { return }
+            let result = Result {
+                try self.run("/usr/bin/osascript", ["-e", BridgeRuntimeSnapshot.selectionScript(workspace: workspace.id, cue: id)], timeout: 8)
+            }
+            DispatchQueue.main.async {
+                guard self.monitorGeneration == generation, self.selectionRevision == revision else { return }
+                if case .failure(let error) = result {
+                    self.selectedBridgeID = nil
+                    self.errorMessage = BridgeText(error: error)
                 }
-                scriptLines.append("return resultText")
-                scriptLines.append("end tell")
-
-                let output = try self.run("/usr/bin/osascript", ["-e", scriptLines.joined(separator: "\n")])
-                if output == "NO_WORKSPACE" {
-                    DispatchQueue.main.async { guard self.monitorGeneration == generation else { return };  self.activeShow=nil; self.visualRunning=false; self.visualElapsed=0; self.visualStatus=BridgeText("QLab n’a aucun workspace ouvert") }
-                    return
-                }
-                if output == "WRONG_WORKSPACE" {
-                    DispatchQueue.main.async { guard self.monitorGeneration == generation else { return };  self.activeShow=nil; self.visualRunning=false; self.visualElapsed=0; self.visualStatus=BridgeText("Le workspace QLab sélectionné a été fermé") }
-                    return
-                }
-
-                struct RuntimeState { let id:String; let running:Bool; let paused:Bool; let elapsed:Double }
-                let states:[RuntimeState] = output.split(separator:"\n").compactMap { line in
-                    let f=line.split(separator:"\t",omittingEmptySubsequences:false).map(String.init)
-                    guard f.count >= 4 else { return nil }
-                    return RuntimeState(id:f[0], running:f[1].lowercased()=="true", paused:f[2].lowercased()=="true", elapsed:Double(f[3].replacingOccurrences(of:",",with:".")) ?? 0)
-                }
-                let live=states.filter{$0.running && !$0.paused}.sorted{$0.elapsed < $1.elapsed}.first
-                let pausedState=states.filter{$0.paused}.sorted{$0.elapsed < $1.elapsed}.first
-                let selected=live ?? pausedState
-
-                DispatchQueue.main.async { guard self.monitorGeneration == generation else { return };
-                    guard let selected, let show=showsSnapshot.first(where:{$0.groupID==selected.id}) else {
-                        self.activeShow=nil; self.visualRunning=false; self.visualElapsed=0; self.visualStatus=BridgeText("En attente d’un numéro S2A Pilot"); return
-                    }
-                    self.activeShow=show
-                    self.visualElapsed=max(0,selected.elapsed)
-                    self.visualRunning=selected.running && !selected.paused
-                    self.visualStatus=BridgeText(selected.paused ? "Pause" : "Lecture")
-                }
-            } catch {
-                DispatchQueue.main.async { guard self.monitorGeneration == generation else { return };  self.activeShow=nil; self.visualRunning=false; self.visualElapsed=0; self.visualStatus=BridgeText(joining: [BridgeText("Visualiseur indisponible : "), BridgeText(error:error)]) }
             }
         }
     }
@@ -1020,37 +1002,42 @@ final class AppModel: ObservableObject {
     }
 
     @discardableResult
-    private func run(_ executable: String, _ arguments: [String], stdin: String? = nil) throws -> String {
+    private func run(_ executable: String, _ arguments: [String], stdin: String? = nil, timeout: Double = 120) throws -> String {
         let process = Process()
         process.executableURL = URL(fileURLWithPath: executable)
         process.arguments = arguments
 
-        let out = Pipe()
-        let err = Pipe()
+        // Drain output to temporary files: large QLab replies must not fill a pipe
+        // while the parent waits for osascript to exit.
+        let directory = FileManager.default.temporaryDirectory.appendingPathComponent("S2ABridge-command-"+UUID().uuidString)
+        try FileManager.default.createDirectory(at:directory,withIntermediateDirectories:true)
+        defer { try? FileManager.default.removeItem(at:directory) }
+        let outURL = directory.appendingPathComponent("stdout"), errURL = directory.appendingPathComponent("stderr")
+        FileManager.default.createFile(atPath:outURL.path,contents:nil)
+        FileManager.default.createFile(atPath:errURL.path,contents:nil)
+        let out = try FileHandle(forWritingTo:outURL), err = try FileHandle(forWritingTo:errURL)
+        defer { try? out.close(); try? err.close() }
         process.standardOutput = out
         process.standardError = err
-
+        let finished = DispatchSemaphore(value:0)
+        process.terminationHandler = { _ in finished.signal() }
         if let stdin {
             let input = Pipe()
             process.standardInput = input
             try process.run()
-            input.fileHandleForWriting.write(stdin.data(using: .utf8)!)
+            input.fileHandleForWriting.write(stdin.data(using:.utf8)!)
             input.fileHandleForWriting.closeFile()
-        } else {
-            try process.run()
+        } else { try process.run() }
+        if finished.wait(timeout:.now()+timeout) == .timedOut {
+            process.terminate()
+            if finished.wait(timeout:.now()+1) == .timedOut { kill(process.processIdentifier,SIGKILL); process.waitUntilExit() }
+            throw ShowCueError.commandFailed(BridgeText("QLab ne répond pas. Vérifie ses fenêtres de dialogue puis réessaie."))
         }
-
-        process.waitUntilExit()
-
-        let outData = out.fileHandleForReading.readDataToEndOfFile()
-        let errData = err.fileHandleForReading.readDataToEndOfFile()
-        let stdout = String(data: outData, encoding: .utf8) ?? ""
-        let stderr = String(data: errData, encoding: .utf8) ?? ""
-
+        let stdout = String(data:try Data(contentsOf:outURL),encoding:.utf8) ?? ""
+        let stderr = String(data:try Data(contentsOf:errURL),encoding:.utf8) ?? ""
         guard process.terminationStatus == 0 else {
-            throw ShowCueError.commandFailed(BridgeText(raw: stderr.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? stdout : stderr))
+            throw ShowCueError.commandFailed(BridgeText(raw:stderr.trimmingCharacters(in:.whitespacesAndNewlines).isEmpty ? stdout : stderr))
         }
-
         return stdout.trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
@@ -1242,10 +1229,10 @@ struct ContentView: View {
                         model.startVisualMonitor()
                         openWindow(id: "visual-monitor")
                     } label: {
-                        Label(L("Visualiseur"), systemImage: "rectangle.on.rectangle")
+                        Label("Show", systemImage: "rectangle.on.rectangle")
                     }
                     .controlSize(.large)
-                    .disabled(model.savedShows.isEmpty)
+                    .disabled(model.workspace == nil || model.isBusy)
 
                     Spacer()
                 }
@@ -1274,184 +1261,6 @@ struct ContentView: View {
         }
     }
 }
-// One smooth pulse per second; driven by SwiftUI rather than a polling timer.
-struct UpcomingCueWarningGlow: View {
-    @Environment(\.accessibilityReduceMotion) private var reduceMotion
-    @State private var bright = false
-
-    private func startPulse() {
-        guard !reduceMotion else { return }
-        withAnimation(.easeInOut(duration: 0.5).repeatForever(autoreverses: true)) {
-            bright = true
-        }
-    }
-
-    var body: some View {
-        RoundedRectangle(cornerRadius: 14, style: .continuous)
-            .stroke(Color.red, lineWidth: 4)
-            .shadow(color: .red.opacity(0.9), radius: 8)
-            .shadow(color: .red.opacity(0.65), radius: 18)
-            .shadow(color: .red.opacity(0.4), radius: 28)
-            .opacity(reduceMotion || bright ? 1 : 0.18)
-            .allowsHitTesting(false)
-            .accessibilityHidden(true)
-            .onAppear { startPulse() }
-            .onChange(of: reduceMotion) { _ in
-                var transaction = Transaction()
-                transaction.disablesAnimations = true
-                withTransaction(transaction) { bright = false }
-                startPulse()
-            }
-    }
-}
-
-struct VisualMonitorView: View {
-    @ObservedObject var model: AppModel
-    @AppStorage("s2a-language") private var interfaceLanguage = defaultInterfaceLanguage
-        @State private var window: NSWindow?
-
-    private func shortTime(_ seconds: Double) -> String {
-        let total = max(0, Int(ceil(seconds)))
-
-        if total >= 60 {
-            return String(format: "%d:%02d", total / 60, total % 60)
-        }
-
-        return "\(total) s"
-    }
-
-    private func applyWindowLevel() {
-        guard let window else { return }
-        window.title = L("Visualiseur S2A Pilot Bridge")
-        window.level = model.visualAlwaysOnTop ? .floating : .normal
-        window.collectionBehavior = [.fullScreenAuxiliary]
-    }
-
-    var body: some View {
-        VStack(spacing: 14) {
-            HStack(spacing: 10) {
-                Circle()
-                    .fill(model.visualRunning ? Color.green : Color.orange)
-                    .frame(width: 9, height: 9)
-
-                VStack(alignment: .leading, spacing: 1) {
-                    Text(model.activeShow?.title ?? "S2A Pilot")
-                        .font(.headline)
-                    Text(model.visualStatus.localized)
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                }
-
-                Spacer()
-
-                Toggle(L("Toujours au premier plan"), isOn: $model.visualAlwaysOnTop)
-                    .toggleStyle(.switch)
-                    .controlSize(.small)
-                    .onChange(of: model.visualAlwaysOnTop) { _ in
-                        applyWindowLevel()
-                    }
-            }
-
-            Divider()
-
-            if let cue = model.nextVisualCue {
-                VStack(alignment: .leading, spacing: 12) {
-                    HStack(alignment: .top, spacing: 18) {
-                        VStack(alignment: .leading, spacing: 8) {
-                            Text(L("PROCHAINE CUE"))
-                                .font(.caption2)
-                                .fontWeight(.semibold)
-                                .foregroundStyle(.secondary)
-
-                            Text(cue.name)
-                                .font(.system(size: 20, weight: .semibold))
-                                .lineLimit(3)
-
-                            if let countdown = model.nextVisualCountdown {
-                                Text(L("dans {time}", ["time": shortTime(countdown)]))
-                                    .font(.system(size: 28, weight: .bold, design: .rounded))
-                                    .monospacedDigit()
-                                    .foregroundStyle(countdown <= 10.0 ? Color.red : Color.primary)
-                            }
-
-                            Text(L("Cue à {time}", ["time": cue.timeText]))
-                                .font(.callout)
-                                .foregroundStyle(.secondary)
-
-                            Spacer()
-                        }
-                        .frame(width: 205, alignment: .leading)
-
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 12, style: .continuous)
-                                .fill(.quaternary.opacity(0.5))
-
-                            if let imageURL = model.nextVisualImageURL,
-                               let image = NSImage(contentsOf: imageURL) {
-                                Image(nsImage: image)
-                                    .resizable()
-                                    .scaledToFit()
-                                    .padding(10)
-                            } else {
-                                VStack(spacing: 8) {
-                                    Image(systemName: "photo")
-                                        .font(.system(size: 34))
-                                        .foregroundStyle(.secondary)
-                                    Text(L("Aucun visuel"))
-                                        .font(.callout)
-                                        .foregroundStyle(.secondary)
-                                }
-                            }
-                        }
-                        .frame(minWidth: 245, minHeight: 170)
-                    }
-
-                    if let description = cue.monitorDescription {
-                        ScrollView(.vertical) {
-                            Text(description)
-                                .font(.body)
-                                .textSelection(.enabled)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .fixedSize(horizontal: false, vertical: true)
-                        }
-                        .frame(minHeight: 60, maxHeight: 140)
-                        .accessibilityLabel(L("Description / indication de conduite"))
-                    }
-                }
-                .padding(12)
-                .background(RoundedRectangle(cornerRadius: 14, style: .continuous).fill(.quaternary.opacity(0.25)))
-                .overlay {
-                    if let remaining = model.nextVisualCountdown, remaining <= 10.0 {
-                        UpcomingCueWarningGlow()
-                    }
-                }
-            } else {
-                VStack(spacing: 10) {
-                    Image(systemName: model.activeShow == nil ? "pause.circle" : "checkmark.circle")
-                        .font(.system(size: 42))
-                        .foregroundStyle(.secondary)
-
-                    Text(model.activeShow == nil ? L("En attente d’un numéro S2A Pilot") : L("Fin de conduite"))
-                        .font(.title3)
-                }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .padding(30)
-            }
-        }
-        .padding(16)
-        .frame(minWidth: 525, minHeight: 285)
-        .background(WindowAccessor { win in
-            window = win
-            applyWindowLevel()
-        })
-        .onAppear {
-            model.startVisualMonitor()
-            applyWindowLevel()
-        }
-        .onChange(of: interfaceLanguage) { _ in applyWindowLevel() }
-    }
-}
-
 struct WindowAccessor: NSViewRepresentable {
     let callback: (NSWindow?) -> Void
 
@@ -1511,6 +1320,6 @@ struct ShowCueForQLabApp: App {
         WindowGroup(L("Visualiseur S2A Pilot Bridge"), id: "visual-monitor") {
             VisualMonitorView(model: model)
         }
-        .defaultSize(width: 640, height: 440)
+        .defaultSize(width: 1360, height: 850)
     }
 }

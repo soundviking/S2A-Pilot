@@ -12,9 +12,9 @@ mkdir -p "$MACOS" "$RESOURCES"
 
 for S2A_ARCH in arm64 x86_64; do
   xcrun swiftc -parse-as-library \
-    "$ROOT/Sources/S2ACopilot.swift" "$ROOT/Sources/BridgeStrings.swift" \
+    "$ROOT/Sources/S2ACopilot.swift" "$ROOT/Sources/BridgeStrings.swift" "$ROOT/Sources/BridgeWorkspaceQuery.swift" "$ROOT/Sources/BridgeRuntime.swift" "$ROOT/Sources/BridgeShowView.swift" \
     -o "$BUILD/S2ACopilot-$S2A_ARCH" \
-    -framework SwiftUI -framework AppKit -framework Foundation \
+    -framework SwiftUI -framework AppKit -framework Foundation -framework WebKit \
     -module-cache-path "$BUILD/module-cache" \
     -target "$S2A_ARCH-apple-macos13.0"
 done
@@ -48,9 +48,9 @@ cat > "$APP/Contents/Info.plist" <<'PLIST'
   <key>CFBundleIdentifier</key>
   <string>fr.s2aproduction.copilote</string>
   <key>CFBundleVersion</key>
-  <string>18</string>
+  <string>19</string>
   <key>CFBundleShortVersionString</key>
-  <string>1.3.4</string>
+  <string>1.4.0</string>
   <key>CFBundleExecutable</key>
   <string>S2A Pilot Bridge</string>
   <key>CFBundleIconFile</key>
@@ -70,6 +70,7 @@ printf '%s\n' '"NSAppleEventsUsageDescription" = "S2A Pilot Bridge necesita cont
 printf '%s\n' '"NSAppleEventsUsageDescription" = "S2A Pilot Bridge muss QLab steuern, um den Ablauf in den ausgewählten Workspace zu importieren.";' > "$RESOURCES/de.lproj/InfoPlist.strings"
 cp "$ROOT/../locales/interface.json" "$RESOURCES/interface.json"
 cp "$ROOT/LICENSE" "$RESOURCES/LICENSE"
+python3 "$ROOT/../tools/build-bridge-show.py"
 chmod +x "$MACOS/S2A Pilot Bridge"
 
 /usr/bin/codesign --force --deep --sign - "$APP"

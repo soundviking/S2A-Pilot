@@ -1,4 +1,4 @@
-# S2A Pilot Bridge 1.3.4
+# S2A Pilot Bridge 1.4.0
 
 Les droits sur S2A Pilot et S2A Pilot Bridge appartiennent à la société S2A Production. Ces applications ont été développées par Antoine CLOPIER, avec l’aide de ChatGPT.
 
@@ -10,13 +10,15 @@ Application macOS universelle Intel et Apple Silicon, macOS 13 minimum. Langue d
 
 Les workspaces QLab ouverts sont détectés automatiquement ; un menu permet le choix si plusieurs sont ouverts. Enregistrer le workspace avant l’import. Plusieurs packages deviennent plusieurs groupes Timeline, numérotés avec leurs étapes : 5, 5.1, 5.2… Les numéros existants sont évités et les anciennes conduites ne sont pas renumérotées. Le visualiseur peut rester au premier plan.
 
-Le visualiseur affiche la prochaine Cue, son visuel, son décompte et sa description sur toute la largeur en dessous. Les descriptions longues défilent dans cette zone ; une description vide ne crée aucun espace supplémentaire. Les descriptions saisies dans Pilot sont conservées sans traduction.
+La vue Show reprend Maverick de Pilot : timeline, Cue active et suivante côte à côte, descriptions et visuels. Un clic agrandit une image, un second clic ou Échap revient à la vue normale. Le déroulé QLab conserve chaque groupe Pilot comme un numéro et affiche les numéros réels. Le Play vert indique la lecture et le halo bleu la sélection ; un clic sélectionne par ID sans GO. Le décompte est réservé aux conduites Pilot. Le compteur « Cue 1/2 » est supprimé.
+
+Les imports successifs vérifient le workspace par ID. L’import conserve les actions médias et une horloge Wait unique ; les repères visuels restent dans Bridge. Les index antérieurs sans identifiant d’horloge restent lisibles. QLab fournit le temps : pause, reprise et déplacements sont reflétés ; une perte de communication fige le dernier temps confirmé et affiche « Synchronisation perdue ».
 
 Voir les [modes d’emploi illustrés](../docs/manual/README.md).
 
 ## Vérifications
 
-Tests Chrome : création, édition, sauvegarde, langues, préservation des contenus, PDF, hors ligne, zoom et écrans simulés. Bridge : compilation universelle et signature locale. À confirmer sur appareils réels : Safari iPad, gestes tactiles, écran étendu, import QLab et exécution Intel.
+Modèles et scripts QLab vérifiés, tests Show dans Chrome à trois largeurs, rendu WebKit natif inspecté, compilation universelle et signature locale. La validation complète de conduite dans QLab 5 et l’exécution sur Intel physique restent à confirmer. Voir le [compte rendu](../docs/bridge/lot-1-validation.md).
 
 
 ## Compilation

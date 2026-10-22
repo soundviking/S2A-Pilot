@@ -1580,5 +1580,40 @@
     "en": "The workspace was closed during synchronization.",
     "es": "El workspace se ha cerrado durante la sincronización.",
     "de": "Der Workspace wurde während der Synchronisierung geschlossen."
+  },
+  "La réponse de QLab est incomplète. Actualise la connexion puis réessaie.": {
+    "en": "QLab returned an incomplete response. Refresh the connection and try again.",
+    "es": "QLab ha devuelto una respuesta incompleta. Actualiza la conexión e inténtalo de nuevo.",
+    "de": "QLab hat eine unvollständige Antwort zurückgegeben. Aktualisiere die Verbindung und versuche es erneut."
+  },
+  "Synchronisation perdue": {
+    "en": "Synchronization lost",
+    "es": "Sincronización perdida",
+    "de": "Synchronisierung verloren"
+  },
+  "Déroulé du spectacle": {
+    "en": "Show running order",
+    "es": "Orden del espectáculo",
+    "de": "Showablauf"
+  },
+  "Cliquer / toucher pour revenir": {
+    "en": "Click / tap to return",
+    "es": "Haz clic o toca para volver",
+    "de": "Zum Zurückkehren klicken / tippen"
+  },
+  "Agrandir le visuel": {
+    "en": "Enlarge visual",
+    "es": "Ampliar imagen",
+    "de": "Bild vergrößern"
+  },
+  "Cue QLab — déclenchement suivant au GO": {
+    "en": "QLab cue — next trigger on GO",
+    "es": "Cue de QLab — siguiente inicio con GO",
+    "de": "QLab-Cue — nächster Start mit GO"
+  },
+  "QLab ne répond pas. Vérifie ses fenêtres de dialogue puis réessaie.": {
+    "en": "QLab is not responding. Check its dialog windows and try again.",
+    "es": "QLab no responde. Revisa sus ventanas de diálogo e inténtalo de nuevo.",
+    "de": "QLab antwortet nicht. Prüfe seine Dialogfenster und versuche es erneut."
   }
 }

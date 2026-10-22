@@ -8,6 +8,17 @@ release=json.loads((pwa/'version.json').read_text())['version']
 bridge=plistlib.loads((app/'Contents/Info.plist').read_bytes())['CFBundleShortVersionString']
 assert not (app/'Contents/Resources/Copilot').exists()
 assert not list(pwa.rglob('*.php'))
+if '--bridge-only' in sys.argv:
+ bridge_zip=repo/f'downloads/S2A-Pilot-Bridge-{bridge}-macOS-Universel.zip'
+ with zipfile.ZipFile(bridge_zip,'w',zipfile.ZIP_DEFLATED) as archive:
+  for file in sorted(app.rglob('*')):
+   if file.is_file():archive.write(file,'S2A Pilot Bridge.app/'+file.relative_to(app).as_posix())
+  for name in ['INSTALLATION-S2A-Pilot-Bridge.txt','INSTALLATION.en.txt','INSTALLATION.es.txt','INSTALLATION.de.txt','LICENSE']:
+   archive.write(repo/'S2A-Copilot'/name,name)
+ with zipfile.ZipFile(bridge_zip) as archive:assert archive.testzip() is None
+ assert bridge_zip.stat().st_size<100*1024*1024
+ print(bridge_zip.name,round(bridge_zip.stat().st_size/1000000,2),'MB; verified; Pilot archives unchanged')
+ sys.exit(0)
 companion=pwa/'companion';companion.mkdir(exist_ok=True)
 archive_path=companion/f'S2A-Pilot-Bridge-{bridge}-app.zip'
 entries=[]
