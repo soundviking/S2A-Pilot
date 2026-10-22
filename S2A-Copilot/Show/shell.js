@@ -53,20 +53,25 @@ editor.addEventListener('cancel',event=>{event.preventDefault();closeEditor();})
 const frame=document.getElementById('show'),zoom=document.getElementById('zoom');
 function send(){if(latest&&frame.contentWindow)frame.contentWindow.postMessage({type:'s2a-bridge-state',state:latest,content},'*');}
 function closeZoom(notify=true){if(zoom.hidden)return;zoom.hidden=true;document.querySelector('.workspace').inert=false;zoom.querySelector('img').removeAttribute('src');if(notify)window.webkit?.messageHandlers.bridgeShow.postMessage({type:'zoom',open:false});previousFocus?.focus();}
-const flowFilter=document.getElementById('flowFilter');
-function chooseFilter(value){
+const flowFilter=document.getElementById('flowFilter'),filterTypes=['audio','video','pilot','network','other'];
+function chooseFilters(values){
  if(!latest)return;
- window.S2ABridge.render({...latest,filter:value},null);
- notify({type:'filter',value});
+ const filters=filterTypes.filter(type=>values.includes(type));
+ window.S2ABridge.render({...latest,filters},null);
+ notify({type:'filters',values:filters});
 }
-flowFilter.onchange=()=>chooseFilter(flowFilter.value);
-document.getElementById('showAll').onclick=()=>{chooseFilter('all');flowFilter.focus();};
+flowFilter.onchange=()=>chooseFilters([...flowFilter.querySelectorAll('input:checked')].map(input=>input.value));
+function showAll(){chooseFilters(filterTypes);document.getElementById('filterSummary').focus();}
+document.getElementById('showAll').onclick=showAll;
+document.getElementById('allTypes').onclick=showAll;
 window.S2ABridge={closeZoom,render(state,newContent){latest=state;if(newContent)content=newContent;document.documentElement.lang=state.language;document.getElementById('status').textContent=state.status;document.getElementById('status').classList.toggle('lost',state.lost);document.getElementById('flowTitle').textContent=state.labels.flow;
- const filter=state.filter||'all';flowFilter.value=filter;
+ const filters=filterTypes.filter(type=>(state.filters??filterTypes).includes(type)),filter=[...filters].sort().join(',');
  document.getElementById('filterLabel').textContent=state.labels.filter||'Type de Cue';
- const optionLabels={all:state.labels.allTypes||'Tous les types',audio:state.labels.audio||'Audio',video:state.labels.video||'Vidéo',pilot:'S2A Pilot',network:'Network',other:state.labels.other||'Autres'};
- for(const option of flowFilter.options)option.textContent=optionLabels[option.value];
- const visible=state.roots.filter(item=>filter==='all'||item.category===filter);
+ const optionLabels={audio:state.labels.audio||'Audio',video:state.labels.video||'Vidéo',pilot:'S2A Pilot',network:'Network',other:state.labels.other||'Autres'};
+ for(const input of flowFilter.querySelectorAll('input')){input.checked=filters.includes(input.value);input.nextElementSibling.textContent=optionLabels[input.value];}
+ document.getElementById('filterSummary').textContent=filters.length===filterTypes.length?(state.labels.allTypes||'Tous les types'):filters.length?filters.map(type=>optionLabels[type]).join(', '):(state.labels.noTypes||'Aucun type sélectionné');
+ document.getElementById('allTypes').textContent=state.labels.showAll||'Tout afficher';
+ const visible=state.roots.filter(item=>filters.length===filterTypes.length||filters.includes(item.category));
  const hiddenSelection=!!state.selectedID&&state.roots.some(item=>item.id===state.selectedID)&&!visible.some(item=>item.id===state.selectedID);
  const notice=document.getElementById('filterNotice');notice.hidden=!hiddenSelection;
  notice.querySelector('span').textContent=state.labels.selectionHidden||'La Cue sélectionnée est masquée par le filtre.';

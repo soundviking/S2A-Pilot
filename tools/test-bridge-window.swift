@@ -50,6 +50,11 @@ final class WindowTest: NSObject {
             let button = window.standardWindowButton(type)!
             precondition(button === originalButtons[i] && !button.isHidden && button.isEnabled)
         }
+        // Reproduce a scene restoring the light appearance on an already attached window.
+        let chrome = window.toolbar!.delegate as! BridgeWindowChrome
+        window.appearance = NSAppearance(named:.aqua)
+        chrome.configure(window:window,model:model)
+        precondition(window.appearance?.name == .darkAqua, "Repeated attachment must restore the dark bar")
         let height = window.frame.height - window.contentLayoutRect.height
         precondition(height <= 60, "The compact title bar should occupy one row")
         guard let web = findWebView(window.contentView!) else { fatalError("Show WebKit view missing") }
@@ -93,6 +98,7 @@ final class WindowTest: NSObject {
     static func main() throws {
         let app=NSApplication.shared
         app.setActivationPolicy(.accessory)
+        app.appearance = NSAppearance(named:.aqua)
         let test=WindowTest()
         try test.start()
         withExtendedLifetime(test) { app.run() }

@@ -1,4 +1,4 @@
-S2A PILOT BRIDGE 1.4.2 — INSTALACIÓN EN MAC
+S2A PILOT BRIDGE 1.4.3 — INSTALACIÓN EN MAC
 
 Mac Intel y Apple Silicon — macOS 13 o posterior. Sin compilación. Aplicación firmada localmente, no notarizada por Apple.
 

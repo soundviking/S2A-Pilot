@@ -1725,5 +1725,10 @@
     "en": "Video",
     "es": "Vídeo",
     "de": "Video"
+  },
+  "Aucun type sélectionné": {
+    "en": "No types selected",
+    "es": "Ningún tipo seleccionado",
+    "de": "Keine Typen ausgewählt"
   }
 }

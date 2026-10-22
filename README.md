@@ -1,10 +1,10 @@
-# S2A Pilot 1.5.7 / S2A Pilot Bridge 1.4.2
+# S2A Pilot 1.5.7 / S2A Pilot Bridge 1.4.3
 
 🇫🇷 **Français** | 🇬🇧 [English](README.en.md)
 
 ![S2A Pilot](assets/social-preview.png)
 
-[Version publiée : PWA 1.5.7](downloads/S2A-Pilot-V1.5.7-PWA.zip) · [Bridge 1.4.2 — Intel / Apple Silicon](downloads/S2A-Pilot-Bridge-1.4.2-macOS-Universel.zip)
+[Version publiée : PWA 1.5.7](downloads/S2A-Pilot-V1.5.7-PWA.zip) · [Bridge 1.4.3 — Intel / Apple Silicon](downloads/S2A-Pilot-Bridge-1.4.3-macOS-Universel.zip)
 
 # S2A Pilot — Guide utilisateur
 
@@ -14,7 +14,7 @@ Les droits sur S2A Pilot et S2A Pilot Bridge appartiennent à la société S2A P
 
 S2A Pilot prépare et joue des conduites multimédias. S2A Pilot Bridge importe leurs packages dans QLab 5.
 
-Bridge 1.4.2 reprend la vue Show Maverick de Pilot : timeline, Cue active et suivante, descriptions et visuels agrandissables. Le déroulé QLab à gauche affiche les numéros réels, le Play vert et la sélection bleue, synchronisée sans GO. [Vue Show et navigation](docs/bridge/lot-1-validation.md). Le lot 2 ajoute l’édition des noms et notes QLab ainsi que la sauvegarde des titres et descriptions Pilot : [détails et tests](docs/bridge/lot-2-validation.md). Le lot 3 ajoute les filtres du déroulé et une barre macOS native compacte : [validation interface](docs/bridge/lot-3-validation.md). La PWA 1.5.7 et son installateur Bridge embarqué 1.3.4 restent inchangés ; Bridge 1.4.2 se télécharge séparément.
+Bridge 1.4.3 reprend la vue Show Maverick de Pilot : timeline, Cue active et suivante, descriptions et visuels agrandissables. Le déroulé QLab à gauche affiche les numéros réels, le Play vert et la sélection bleue, synchronisée sans GO. [Vue Show et navigation](docs/bridge/lot-1-validation.md). Le lot 2 ajoute l’édition des noms et notes QLab ainsi que la sauvegarde des titres et descriptions Pilot : [détails et tests](docs/bridge/lot-2-validation.md). Le lot 3 ajoute les filtres du déroulé et une barre macOS native compacte : [validation interface](docs/bridge/lot-3-validation.md). Bridge 1.4.3 corrige la barre claire et permet de combiner plusieurs filtres : [correctifs](docs/bridge/correctifs-1.4.3.md). La PWA 1.5.7 et son installateur Bridge embarqué 1.3.4 restent inchangés ; Bridge 1.4.3 se télécharge séparément.
 
 ## Langue
 

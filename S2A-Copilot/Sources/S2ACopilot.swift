@@ -178,14 +178,14 @@ final class AppModel: ObservableObject {
     @Published var currentRuntimeID: String?
     @Published var synchronizationLost = false
     @Published var selectedBridgeID: String?
-    @Published private(set) var visualCueFilter: BridgeFlowFilter = .all
+    @Published private(set) var visualCueFilters: Set<BridgeFlowFilter> = BridgeFlowFilter.types
 
-    func setVisualCueFilter(_ filter: BridgeFlowFilter) {
-        guard visualCueFilter != filter else { return }
-        visualCueFilter = filter
-        preferences.set(filter.rawValue, forKey:"s2a-bridge-flow-filter")
+    func setVisualCueFilters(_ filters: Set<BridgeFlowFilter>) {
+        let chosen = filters.contains(.all) ? BridgeFlowFilter.types : filters.intersection(BridgeFlowFilter.types)
+        guard visualCueFilters != chosen else { return }
+        visualCueFilters = chosen
+        preferences.set(chosen.map(\.rawValue).sorted(), forKey:"s2a-bridge-flow-filters")
     }
-
     private let runtimeQueue = DispatchQueue(label: "fr.s2a.bridge.runtime", qos: .utility)
     private var selectionRevision = 0
     private var metadataRevision = 0
@@ -208,7 +208,7 @@ final class AppModel: ObservableObject {
     init(preferences: UserDefaults = .standard, commandExecutor: ((String, [String], String?, Double) throws -> String)? = nil) {
         self.preferences = preferences
         self.commandExecutor = commandExecutor
-        self.visualCueFilter = BridgeFlowFilter(rawValue: preferences.string(forKey:"s2a-bridge-flow-filter") ?? "all") ?? .all
+        self.visualCueFilters = BridgeFlowFilter.restored(from:preferences)
     }
 
     deinit {

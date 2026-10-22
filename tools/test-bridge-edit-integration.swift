@@ -12,12 +12,17 @@ import Foundation
         defer { preferences.removePersistentDomain(forName:suite) }
         let filtered = AppModel(preferences:preferences,commandExecutor:{ _,_,_,_ in fatalError("Filtering must never call QLab") })
         filtered.visualElapsed = 42
-        filtered.setVisualCueFilter(.audio)
-        precondition(preferences.string(forKey:"s2a-bridge-flow-filter") == "audio")
+        filtered.setVisualCueFilters([.audio,.pilot])
+        precondition(Set(preferences.stringArray(forKey:"s2a-bridge-flow-filters")!) == ["audio","pilot"])
         let reopened = AppModel(preferences:preferences)
-        precondition(reopened.visualCueFilter == .audio && filtered.visualElapsed == 42)
+        precondition(reopened.visualCueFilters == [.audio,.pilot] && filtered.visualElapsed == 42)
+        filtered.setVisualCueFilters([])
+        precondition(AppModel(preferences:preferences).visualCueFilters.isEmpty)
+        preferences.removeObject(forKey:"s2a-bridge-flow-filters")
+        preferences.set("audio",forKey:"s2a-bridge-flow-filter")
+        precondition(AppModel(preferences:preferences).visualCueFilters == [.audio])
         preferences.set("invalid",forKey:"s2a-bridge-flow-filter")
-        precondition(AppModel(preferences:preferences).visualCueFilter == .all)
+        precondition(AppModel(preferences:preferences).visualCueFilters == BridgeFlowFilter.types)
         precondition(BridgeFlowFilter.category(kind:"Audio",pilot:true) == .pilot)
         for kind in ["Audio","Mic"] { precondition(BridgeFlowFilter.category(kind:kind,pilot:false) == .audio) }
         for kind in ["Video","Camera","Text"] { precondition(BridgeFlowFilter.category(kind:kind,pilot:false) == .video) }

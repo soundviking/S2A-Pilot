@@ -45,9 +45,11 @@ final class BridgeWindowChrome: NSObject, ObservableObject, NSToolbarDelegate {
         window.title = "S2A Pilot Bridge — Show"
         window.level = model.visualAlwaysOnTop ? .floating : .normal
         window.collectionBehavior = [.fullScreenAuxiliary]
+        // SwiftUI can restore the scene appearance after the first attachment.
+        // Reapply this before the same-window guard, including on activation/updates.
+        window.appearance = NSAppearance(named: .darkAqua)
         guard self.window !== window else { return }
         self.window = window
-        window.appearance = NSAppearance(named: .darkAqua)
         window.titleVisibility = .hidden
         window.titlebarAppearsTransparent = false
         window.toolbarStyle = .unifiedCompact
