@@ -1685,5 +1685,45 @@
     "en": "Unable to save. Your text is preserved; check the connection and try again.",
     "es": "No se puede guardar. Se conserva el texto introducido; comprueba la conexión y vuelve a intentarlo.",
     "de": "Speichern fehlgeschlagen. Dein Text bleibt erhalten; prüfe die Verbindung und versuche es erneut."
+  },
+  "Type de Cue": {
+    "en": "Cue type",
+    "es": "Tipo de Cue",
+    "de": "Cue-Typ"
+  },
+  "Tous les types": {
+    "en": "All types",
+    "es": "Todos los tipos",
+    "de": "Alle Typen"
+  },
+  "Autres": {
+    "en": "Other",
+    "es": "Otros",
+    "de": "Sonstige"
+  },
+  "Aucune Cue pour ce filtre.": {
+    "en": "No cues match this filter.",
+    "es": "No hay Cues para este filtro.",
+    "de": "Keine Cues für diesen Filter."
+  },
+  "La Cue sélectionnée est masquée par le filtre.": {
+    "en": "The selected cue is hidden by the filter.",
+    "es": "El filtro oculta la Cue seleccionada.",
+    "de": "Die ausgewählte Cue ist durch den Filter ausgeblendet."
+  },
+  "Tout afficher": {
+    "en": "Show all",
+    "es": "Mostrar todo",
+    "de": "Alle anzeigen"
+  },
+  "Audio": {
+    "en": "Audio",
+    "es": "Audio",
+    "de": "Audio"
+  },
+  "Vidéo": {
+    "en": "Video",
+    "es": "Vídeo",
+    "de": "Video"
   }
 }

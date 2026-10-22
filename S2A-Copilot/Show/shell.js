@@ -53,11 +53,28 @@ editor.addEventListener('cancel',event=>{event.preventDefault();closeEditor();})
 const frame=document.getElementById('show'),zoom=document.getElementById('zoom');
 function send(){if(latest&&frame.contentWindow)frame.contentWindow.postMessage({type:'s2a-bridge-state',state:latest,content},'*');}
 function closeZoom(notify=true){if(zoom.hidden)return;zoom.hidden=true;document.querySelector('.workspace').inert=false;zoom.querySelector('img').removeAttribute('src');if(notify)window.webkit?.messageHandlers.bridgeShow.postMessage({type:'zoom',open:false});previousFocus?.focus();}
+const flowFilter=document.getElementById('flowFilter');
+function chooseFilter(value){
+ if(!latest)return;
+ window.S2ABridge.render({...latest,filter:value},null);
+ notify({type:'filter',value});
+}
+flowFilter.onchange=()=>chooseFilter(flowFilter.value);
+document.getElementById('showAll').onclick=()=>{chooseFilter('all');flowFilter.focus();};
 window.S2ABridge={closeZoom,render(state,newContent){latest=state;if(newContent)content=newContent;document.documentElement.lang=state.language;document.getElementById('status').textContent=state.status;document.getElementById('status').classList.toggle('lost',state.lost);document.getElementById('flowTitle').textContent=state.labels.flow;
- const key=JSON.stringify([state.roots,state.selectedID,state.lost,state.editBusy]);
+ const filter=state.filter||'all';flowFilter.value=filter;
+ document.getElementById('filterLabel').textContent=state.labels.filter||'Type de Cue';
+ const optionLabels={all:state.labels.allTypes||'Tous les types',audio:state.labels.audio||'Audio',video:state.labels.video||'Vidéo',pilot:'S2A Pilot',network:'Network',other:state.labels.other||'Autres'};
+ for(const option of flowFilter.options)option.textContent=optionLabels[option.value];
+ const visible=state.roots.filter(item=>filter==='all'||item.category===filter);
+ const hiddenSelection=!!state.selectedID&&state.roots.some(item=>item.id===state.selectedID)&&!visible.some(item=>item.id===state.selectedID);
+ const notice=document.getElementById('filterNotice');notice.hidden=!hiddenSelection;
+ notice.querySelector('span').textContent=state.labels.selectionHidden||'La Cue sélectionnée est masquée par le filtre.';
+ document.getElementById('showAll').textContent=state.labels.showAll||'Tout afficher';
+ const key=JSON.stringify([visible,state.selectedID,state.lost,state.editBusy,filter,state.language]);
  if(key!==lastFlow){
-  lastFlow=key;const host=document.getElementById('flow'),focused=document.activeElement?.dataset?.id;host.replaceChildren();
-  for(const item of state.roots){
+  lastFlow=key;const host=document.getElementById('flow');if(host.dataset.filter!==filter){delete host.dataset.follow;host.dataset.filter=filter;}const focused=document.activeElement?.dataset?.id;host.replaceChildren();
+  for(const item of visible){
    const row=document.createElement('button');row.type='button';row.disabled=state.lost;
    const selected=item.id===state.selectedID;
    row.className='flowItem'+(selected?' active':'')+(item.paused?' paused':'');row.dataset.id=item.id;
@@ -75,8 +92,8 @@ window.S2ABridge={closeZoom,render(state,newContent){latest=state;if(newContent)
    if(focused===item.id)row.focus({preventScroll:true});
   }
   const selected=host.querySelector('.active');if(selected&&host.dataset.follow!==state.selectedID){host.dataset.follow=state.selectedID;selected.scrollIntoView({block:'center',behavior:'instant'});}
-  if(!state.selectedID)delete host.dataset.follow;
-  if(!state.roots.length)host.textContent=state.labels.wait;
+  if(!selected)delete host.dataset.follow;
+  if(!visible.length)host.textContent=state.roots.length?(state.labels.noMatch||'Aucune Cue pour ce filtre.'):state.labels.wait;
  }
  updateEditor(state);send();}};
 frame.addEventListener('load',send);

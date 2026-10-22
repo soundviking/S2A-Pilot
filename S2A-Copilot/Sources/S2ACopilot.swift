@@ -178,6 +178,14 @@ final class AppModel: ObservableObject {
     @Published var currentRuntimeID: String?
     @Published var synchronizationLost = false
     @Published var selectedBridgeID: String?
+    @Published private(set) var visualCueFilter: BridgeFlowFilter = .all
+
+    func setVisualCueFilter(_ filter: BridgeFlowFilter) {
+        guard visualCueFilter != filter else { return }
+        visualCueFilter = filter
+        preferences.set(filter.rawValue, forKey:"s2a-bridge-flow-filter")
+    }
+
     private let runtimeQueue = DispatchQueue(label: "fr.s2a.bridge.runtime", qos: .utility)
     private var selectionRevision = 0
     private var metadataRevision = 0
@@ -195,8 +203,12 @@ final class AppModel: ObservableObject {
     private var extractedURL: URL?
     private let commandExecutor: ((String, [String], String?, Double) throws -> String)?
 
-    init(commandExecutor: ((String, [String], String?, Double) throws -> String)? = nil) {
+    private let preferences: UserDefaults
+
+    init(preferences: UserDefaults = .standard, commandExecutor: ((String, [String], String?, Double) throws -> String)? = nil) {
+        self.preferences = preferences
         self.commandExecutor = commandExecutor
+        self.visualCueFilter = BridgeFlowFilter(rawValue: preferences.string(forKey:"s2a-bridge-flow-filter") ?? "all") ?? .all
     }
 
     deinit {

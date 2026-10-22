@@ -45,3 +45,9 @@ Le catalogue commun est documenté dans `locales/README.md`. `test-locales.cjs` 
 `test-bridge-navigation.py` exécute également `test-bridge-editing.swift` (écriture atomique, réouverture, identités, conflits, métadonnées préservées) et `test-bridge-edit-integration.swift` (vrai AppModel avec connexion QLab injectée : sauvegarde réelle en dossier temporaire, renommage confirmé simulé, réponses périmées et changement de workspace). La commande d’édition est compilée avec le dictionnaire QLab ; seul le sérialiseur de texte est exécuté dans AppleScript, sans application cible.
 
 `test-bridge-editor.cjs` vérifie l’éditeur de Show : sauvegarde explicite, Annuler/Échap, texte multiligne, brouillon conservé pendant le polling et les erreurs, conflits externes, identifiants Pilot/QLab et absence de commandes de transport. Les écritures QLab y sont simulées.
+
+## Lot 3 — interface Bridge 1.4.2
+
+`test-bridge-filters.cjs` vérifie les six vues du déroulé, la sélection masquée, le retour à Tout afficher, les filtres vides et l’auto-scroll, sans commande QLab. La classification et la mémorisation du filtre sont testées dans `test-bridge-edit-integration.swift`, via `test-bridge-navigation.py` et un domaine de préférences temporaire.
+
+`python3 tools/test-bridge-window.py` compile les vrais composants Show dans une application temporaire avec connexion QLab simulée. Il vérifie les trois boutons macOS d’origine, la barre sombre compacte, la visibilité du switch à 1 360 et 820 px, la hauteur du contenu et les transitions `.normal`/`.floating`. Il produit des captures de la fenêtre et du contenu WebKit dans `/tmp/s2a-bridge-frame-*.png` et `/tmp/s2a-bridge-window-*.png`. Aucun workspace QLab n’est ouvert ou modifié.

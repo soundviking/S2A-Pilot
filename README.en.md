@@ -1,10 +1,10 @@
-# S2A Pilot 1.5.7 / S2A Pilot Bridge 1.4.1
+# S2A Pilot 1.5.7 / S2A Pilot Bridge 1.4.2
 
 🇫🇷 [Français](README.md) | 🇬🇧 **English**
 
 ![S2A Pilot](assets/social-preview.png)
 
-[Published PWA 1.5.7](downloads/S2A-Pilot-V1.5.7-PWA.zip) · [Bridge 1.4.1 — Intel / Apple Silicon](downloads/S2A-Pilot-Bridge-1.4.1-macOS-Universel.zip)
+[Published PWA 1.5.7](downloads/S2A-Pilot-V1.5.7-PWA.zip) · [Bridge 1.4.2 — Intel / Apple Silicon](downloads/S2A-Pilot-Bridge-1.4.2-macOS-Universel.zip)
 
 # S2A Pilot — User guide
 
@@ -12,7 +12,7 @@ The rights to S2A Pilot and S2A Pilot Bridge belong to the company S2A Productio
 
 S2A Pilot prepares and runs multimedia shows. S2A Pilot Bridge imports its project packages into QLab 5. The app names and Edit / Show labels are the same in all four languages.
 
-Bridge 1.4.1 restores Pilot’s Maverick Show layout with timeline, current/next cues and expandable visuals. The QLab running order shows real numbers, green Play and blue selection, synchronized without GO. [Show and navigation](docs/bridge/lot-1-validation.md). Cue names and notes can now be edited in QLab, while Pilot marker titles and descriptions are saved in Bridge: [editing validation](docs/bridge/lot-2-validation.md). Pilot 1.5.7 and its embedded Bridge 1.3.4 installer are unchanged; download Bridge 1.4.1 separately.
+Bridge 1.4.2 restores Pilot’s Maverick Show layout with timeline, current/next cues and expandable visuals. The QLab running order shows real numbers, green Play and blue selection, synchronized without GO. [Show and navigation](docs/bridge/lot-1-validation.md). Cue names and notes can now be edited in QLab, while Pilot marker titles and descriptions are saved in Bridge: [editing validation](docs/bridge/lot-2-validation.md). Running-order filters and a compact native macOS bar are covered in [interface validation](docs/bridge/lot-3-validation.md). Pilot 1.5.7 and its embedded Bridge 1.3.4 installer are unchanged; download Bridge 1.4.2 separately.
 
 ## Language
 

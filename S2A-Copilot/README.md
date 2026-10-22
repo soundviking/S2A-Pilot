@@ -1,4 +1,4 @@
-# S2A Pilot Bridge 1.4.1
+# S2A Pilot Bridge 1.4.2
 
 Les droits sur S2A Pilot et S2A Pilot Bridge appartiennent à la société S2A Production. Ces applications ont été développées par Antoine CLOPIER, avec l’aide de ChatGPT.
 
@@ -15,6 +15,12 @@ La vue Show reprend Maverick de Pilot : timeline, Cue active et suivante côte �
 Les imports successifs vérifient le workspace par ID. L’import conserve les actions médias et une horloge Wait unique ; les repères visuels restent dans Bridge. Les index antérieurs sans identifiant d’horloge restent lisibles. QLab fournit le temps : pause, reprise et déplacements sont reflétés ; une perte de communication fige le dernier temps confirmé et affiche « Synchronisation perdue ».
 
 Voir les [modes d’emploi illustrés](../docs/manual/README.md).
+
+## Filtres et fenêtre Show
+
+Le menu Type de Cue filtre le déroulé : Tous les types, Audio, Vidéo, S2A Pilot, Network et Autres. Un groupe Pilot reste un numéro, même s’il contient des médias. Le choix est mémorisé entre les lancements. Le filtre ne change ni la lecture, ni l’édition, ni la sélection QLab. Si la sélection est masquée, Tout afficher permet de la retrouver.
+
+La barre macOS sombre de Show est compacte et conserve les boutons rouge/jaune/vert natifs. Le switch Toujours au premier plan y est intégré, avec le statut de synchronisation. Le bandeau web redondant est supprimé ; le visualiseur utilise toute la hauteur disponible sous la barre native.
 
 ## Édition dans Show
 

@@ -7,6 +7,23 @@ import Foundation
             while !condition() && Date() < deadline { RunLoop.main.run(until: Date().addingTimeInterval(0.01)) }
             precondition(condition(), "Async operation timed out")
         }
+        let suite = "s2a-filter-tests-" + UUID().uuidString
+        let preferences = UserDefaults(suiteName:suite)!
+        defer { preferences.removePersistentDomain(forName:suite) }
+        let filtered = AppModel(preferences:preferences,commandExecutor:{ _,_,_,_ in fatalError("Filtering must never call QLab") })
+        filtered.visualElapsed = 42
+        filtered.setVisualCueFilter(.audio)
+        precondition(preferences.string(forKey:"s2a-bridge-flow-filter") == "audio")
+        let reopened = AppModel(preferences:preferences)
+        precondition(reopened.visualCueFilter == .audio && filtered.visualElapsed == 42)
+        preferences.set("invalid",forKey:"s2a-bridge-flow-filter")
+        precondition(AppModel(preferences:preferences).visualCueFilter == .all)
+        precondition(BridgeFlowFilter.category(kind:"Audio",pilot:true) == .pilot)
+        for kind in ["Audio","Mic"] { precondition(BridgeFlowFilter.category(kind:kind,pilot:false) == .audio) }
+        for kind in ["Video","Camera","Text"] { precondition(BridgeFlowFilter.category(kind:kind,pilot:false) == .video) }
+        precondition(BridgeFlowFilter.category(kind:"Network",pilot:false) == .network)
+        for kind in ["Group","Wait","MIDI","future-type"] { precondition(BridgeFlowFilter.category(kind:kind,pilot:false) == .other) }
+        print("PASS filters: categories, Pilot priority, preference persistence, invalid preference fallback and no QLab/clock mutation")
         let folder = URL(fileURLWithPath: CommandLine.arguments[1]).appendingPathComponent("native-edit-tests")
         let dataFolder = folder.appendingPathComponent("S2A Pilot")
         try FileManager.default.createDirectory(at: dataFolder, withIntermediateDirectories: true)

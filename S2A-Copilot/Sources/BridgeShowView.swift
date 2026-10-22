@@ -5,24 +5,18 @@ import WebKit
 struct VisualMonitorView: View {
     @ObservedObject var model: AppModel
     @AppStorage("s2a-language") private var language = defaultInterfaceLanguage
+    @StateObject private var chrome = BridgeWindowChrome()
     @State private var window: NSWindow?
-
-    private func updateWindow() {
-        window?.title = "S2A Pilot Bridge — Show"
-        window?.level = model.visualAlwaysOnTop ? .floating : .normal
-        window?.collectionBehavior = [.fullScreenAuxiliary]
-    }
 
     var body: some View {
         BridgeShowWebView(model:model,language:language)
             .frame(minWidth:820,minHeight:540)
-            .background(WindowAccessor { window = $0; updateWindow() })
-            .toolbar {
-                Toggle(L("Toujours au premier plan"),isOn:$model.visualAlwaysOnTop)
-                    .toggleStyle(.switch).controlSize(.small)
-            }
-            .onAppear { model.startVisualMonitor(); updateWindow() }
-            .onChange(of:model.visualAlwaysOnTop) { _ in updateWindow() }
+            .background(WindowAccessor { window in
+                self.window = window
+                chrome.configure(window:window,model:model)
+            })
+            .onAppear { model.startVisualMonitor(); chrome.configure(window:window,model:model) }
+            .onChange(of:model.visualAlwaysOnTop) { _ in chrome.configure(window:window,model:model) }
     }
 }
 
@@ -115,8 +109,8 @@ struct BridgeShowWebView: NSViewRepresentable {
             }
             if !model.synchronizationLost { images.urls = mapped }
             let content:[String:Any] = ["id":imported?.groupID ?? current?.id ?? "", "title":imported.flatMap { show in snapshot?.roots.first(where: { $0.id == show.groupID })?.name } ?? imported?.title ?? current?.name ?? model.workspace?.name ?? "S2A Pilot Bridge", "duration":imported?.showDuration ?? current?.duration ?? 0,"generic":imported == nil,"cues":cues]
-            let labels:[String:String] = ["flow":L("Déroulé du spectacle"),"wait":L("En attente d’un numéro S2A Pilot"),"close":L("Fermer"),"zoomBack":L("Cliquer / toucher pour revenir"),"zoom":L("Agrandir le visuel"),"noVisual":L("Aucun visuel"),"countdown":L("Décompte"),"native":L("Cue QLab — déclenchement suivant au GO"),"edit":L("Modifier"),"editTitle":L("Modifier la Cue"),"name":L("Nom"),"description":L("Description / indication de conduite"),"save":L("Enregistrer"),"cancel":L("Annuler"),"saving":L("Enregistrement…"),"pilotEdit":L("Repère Pilot : titre et description sauvegardés dans Bridge."),"qlabEdit":L("Nom et notes synchronisés avec QLab."),"workspaceChanged":L("Le workspace a changé. Rouvre l’édition de la Cue."),"changed":L("La Cue a été modifiée ailleurs. Rouvre l’édition avant de réessayer.")]
-            let state:[String:Any] = ["language":language,"workspaceID":model.workspace?.id ?? "","editBusy":model.bridgeEditInFlight,"editReply":model.bridgeEditReply?.json ?? [:],"status":model.visualStatus.localized,"lost":model.synchronizationLost,"elapsed":model.visualElapsed,"running":model.visualRunning,"currentID":model.currentRuntimeID ?? "","standbyID":snapshot?.standbyID ?? "","selectedID":model.selectedBridgeID ?? "","labels":labels,"roots":snapshot?.roots.map { cue in ["id":cue.id,"name":cue.name,"qName":cue.qName,"notes":cue.notes,"kind":cue.kind,"number":cue.number,"running":cue.running,"paused":cue.paused,"pilot":model.savedShows.contains(where:{$0.groupID == cue.id})] } ?? []]
+            let labels:[String:String] = ["flow":L("Déroulé du spectacle"),"filter":L("Type de Cue"),"allTypes":L("Tous les types"),"audio":L("Audio"),"video":L("Vidéo"),"pilot":"S2A Pilot","network":"Network","other":L("Autres"),"noMatch":L("Aucune Cue pour ce filtre."),"selectionHidden":L("La Cue sélectionnée est masquée par le filtre."),"showAll":L("Tout afficher"),"wait":L("En attente d’un numéro S2A Pilot"),"close":L("Fermer"),"zoomBack":L("Cliquer / toucher pour revenir"),"zoom":L("Agrandir le visuel"),"noVisual":L("Aucun visuel"),"countdown":L("Décompte"),"native":L("Cue QLab — déclenchement suivant au GO"),"edit":L("Modifier"),"editTitle":L("Modifier la Cue"),"name":L("Nom"),"description":L("Description / indication de conduite"),"save":L("Enregistrer"),"cancel":L("Annuler"),"saving":L("Enregistrement…"),"pilotEdit":L("Repère Pilot : titre et description sauvegardés dans Bridge."),"qlabEdit":L("Nom et notes synchronisés avec QLab."),"workspaceChanged":L("Le workspace a changé. Rouvre l’édition de la Cue."),"changed":L("La Cue a été modifiée ailleurs. Rouvre l’édition avant de réessayer.")]
+            let state:[String:Any] = ["language":language,"workspaceID":model.workspace?.id ?? "","filter":model.visualCueFilter.rawValue,"editBusy":model.bridgeEditInFlight,"editReply":model.bridgeEditReply?.json ?? [:],"status":model.visualStatus.localized,"lost":model.synchronizationLost,"elapsed":model.visualElapsed,"running":model.visualRunning,"currentID":model.currentRuntimeID ?? "","standbyID":snapshot?.standbyID ?? "","selectedID":model.selectedBridgeID ?? "","labels":labels,"roots":snapshot?.roots.map { cue in ["id":cue.id,"name":cue.name,"qName":cue.qName,"notes":cue.notes,"kind":cue.kind,"number":cue.number,"category":BridgeFlowFilter.category(kind:cue.kind,pilot:model.savedShows.contains(where:{$0.groupID == cue.id})).rawValue,"running":cue.running,"paused":cue.paused,"pilot":model.savedShows.contains(where:{$0.groupID == cue.id})] } ?? []]
             let serialized = model.synchronizationLost && !contentKey.isEmpty ? contentKey : json(content)
             pending = (json(state),serialized,serialized)
             flush()
@@ -141,6 +135,11 @@ struct BridgeShowWebView: NSViewRepresentable {
         }
         func userContentController(_ userContentController:WKUserContentController,didReceive message:WKScriptMessage) {
             guard message.frameInfo.isMainFrame, let body = message.body as? [String:Any] else { return }
+            if body["type"] as? String == "filter", let value = body["value"] as? String,
+               let filter = BridgeFlowFilter(rawValue:value) {
+                model?.setVisualCueFilter(filter)
+                return
+            }
             if body["type"] as? String == "select", let id = body["id"] as? String {
                 model?.selectBridgeCue(id)
                 return

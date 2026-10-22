@@ -16,7 +16,7 @@ with tempfile.TemporaryDirectory(prefix='s2a-bridge-checks-') as folder:
         ('runtime', [model, repo/'S2A-Copilot/Sources/BridgeRuntime.swift']),
         ('workspaces', [repo/'S2A-Copilot/Sources/BridgeWorkspaceQuery.swift']),
         ('editing', [model, repo/'S2A-Copilot/Sources/BridgeEditing.swift']),
-        ('edit-integration', [model, app_model, repo/'S2A-Copilot/Sources/BridgeEditing.swift', repo/'S2A-Copilot/Sources/BridgeRuntime.swift', repo/'S2A-Copilot/Sources/BridgeStrings.swift', repo/'S2A-Copilot/Sources/BridgeWorkspaceQuery.swift']),
+        ('edit-integration', [model, app_model, repo/'S2A-Copilot/Sources/BridgeFlowFilter.swift', repo/'S2A-Copilot/Sources/BridgeEditing.swift', repo/'S2A-Copilot/Sources/BridgeRuntime.swift', repo/'S2A-Copilot/Sources/BridgeStrings.swift', repo/'S2A-Copilot/Sources/BridgeWorkspaceQuery.swift']),
     ):
         binary = root / name
         subprocess.run(['xcrun', 'swiftc', '-module-cache-path', '/tmp/s2a-swift-cache',
