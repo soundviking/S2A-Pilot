@@ -39,3 +39,9 @@ Le catalogue commun est documenté dans `locales/README.md`. `test-locales.cjs` 
 `python3 tools/test-bridge-navigation.py` vérifie les modèles runtime/workspace et compile les scripts AppleScript, sans les exécuter. `tools/test-bridge-show.cjs` teste l’interface Show empaquetée dans Chrome : Maverick, lecture/sélection, numéros, auto-scroll, zoom, pause/retour, décompte Pilot uniquement et trois largeurs. Il utilise le module Playwright disponible via `NODE_PATH` ou `S2A_PLAYWRIGHT` ; le navigateur peut être défini par `S2A_CHROME`.
 
 `python3 tools/package-release.py --bridge-only` produit uniquement le ZIP Bridge et laisse les archives et l’installateur embarqué de Pilot inchangés.
+
+## Lot 2 — édition Bridge 1.4.1
+
+`test-bridge-navigation.py` exécute également `test-bridge-editing.swift` (écriture atomique, réouverture, identités, conflits, métadonnées préservées) et `test-bridge-edit-integration.swift` (vrai AppModel avec connexion QLab injectée : sauvegarde réelle en dossier temporaire, renommage confirmé simulé, réponses périmées et changement de workspace). La commande d’édition est compilée avec le dictionnaire QLab ; seul le sérialiseur de texte est exécuté dans AppleScript, sans application cible.
+
+`test-bridge-editor.cjs` vérifie l’éditeur de Show : sauvegarde explicite, Annuler/Échap, texte multiligne, brouillon conservé pendant le polling et les erreurs, conflits externes, identifiants Pilot/QLab et absence de commandes de transport. Les écritures QLab y sont simulées.

@@ -12,7 +12,7 @@ mkdir -p "$MACOS" "$RESOURCES"
 
 for S2A_ARCH in arm64 x86_64; do
   xcrun swiftc -parse-as-library \
-    "$ROOT/Sources/S2ACopilot.swift" "$ROOT/Sources/BridgeStrings.swift" "$ROOT/Sources/BridgeWorkspaceQuery.swift" "$ROOT/Sources/BridgeRuntime.swift" "$ROOT/Sources/BridgeShowView.swift" \
+    "$ROOT/Sources/S2ACopilot.swift" "$ROOT/Sources/BridgeStrings.swift" "$ROOT/Sources/BridgeWorkspaceQuery.swift" "$ROOT/Sources/BridgeRuntime.swift" "$ROOT/Sources/BridgeEditing.swift" "$ROOT/Sources/BridgeShowView.swift" \
     -o "$BUILD/S2ACopilot-$S2A_ARCH" \
     -framework SwiftUI -framework AppKit -framework Foundation -framework WebKit \
     -module-cache-path "$BUILD/module-cache" \
@@ -48,9 +48,9 @@ cat > "$APP/Contents/Info.plist" <<'PLIST'
   <key>CFBundleIdentifier</key>
   <string>fr.s2aproduction.copilote</string>
   <key>CFBundleVersion</key>
-  <string>19</string>
+  <string>20</string>
   <key>CFBundleShortVersionString</key>
-  <string>1.4.0</string>
+  <string>1.4.1</string>
   <key>CFBundleExecutable</key>
   <string>S2A Pilot Bridge</string>
   <key>CFBundleIconFile</key>

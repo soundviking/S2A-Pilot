@@ -1,4 +1,4 @@
-# S2A Pilot Bridge 1.4.0
+# S2A Pilot Bridge 1.4.1
 
 The rights to S2A Pilot and S2A Pilot Bridge belong to the company S2A Production. These applications were developed by Antoine CLOPIER with assistance from ChatGPT.
 
@@ -15,6 +15,12 @@ Show reuses Pilot’s Maverick layout: timeline, current and next cues, descript
 Successive imports resolve the workspace by ID. Imports retain media actions and one Wait clock; visual markers remain in Bridge. Legacy indexes without a clock ID remain readable. QLab supplies time, including pauses and seeks; connection loss freezes the last confirmed time and shows an explicit status.
 
 See the [illustrated manuals](../docs/manual/README.md).
+
+## Editing in Show
+
+Use the pencil in the running order to edit a QLab cue’s name and notes. QLab changes are reflected on the next synchronization check, including the Pilot show title. Save the workspace in QLab as usual to retain these changes after closing it.
+
+The pencil on a Pilot card edits the marker title and description, saved immediately in Bridge’s index next to the workspace. No Memo cue is recreated. Save confirms the edit; Cancel or Escape closes without writing. Playback continues while typing. External edits are detected and a save error preserves the draft. Targets keep their IDs, timing and media.
 
 ## Validation limits
 

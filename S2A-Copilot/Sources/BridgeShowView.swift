@@ -108,15 +108,15 @@ struct BridgeShowWebView: NSViewRepresentable {
                 if let path = imported?.imagePaths[String(cue.index)],let folder = model.workspace?.projectFolder {
                     mapped[imageKey] = path.hasPrefix("/") ? URL(fileURLWithPath:path) : folder.appendingPathComponent(path)
                 }
-                return ["id":String(cue.index),"time":cue.time,"name":cue.name,"description":cue.monitorDescription ?? "","image":mapped[imageKey] == nil ? "" : imageKey]
-            } ?? current.map { [["id":$0.id,"time":0,"name":$0.name,"description":$0.notes,"image":""]] } ?? []
+                return ["id":String(cue.index),"time":cue.time,"name":cue.name,"description":cue.monitorDescription ?? "","editName":cue.name,"editDescription":cue.description ?? "","image":mapped[imageKey] == nil ? "" : imageKey]
+            } ?? current.map { [["id":$0.id,"time":0,"name":$0.name,"description":$0.notes,"editName":$0.qName,"editDescription":$0.notes,"image":""]] } ?? []
             if imported == nil, current != nil, let standby = snapshot?.roots.first(where:{$0.id == snapshot?.standbyID}), standby.id != current?.id {
-                cues.append(["id":standby.id,"time":NSNull(),"name":standby.name,"description":standby.notes,"image":""])
+                cues.append(["id":standby.id,"time":NSNull(),"name":standby.name,"description":standby.notes,"editName":standby.qName,"editDescription":standby.notes,"image":""])
             }
             if !model.synchronizationLost { images.urls = mapped }
-            let content:[String:Any] = ["id":imported?.groupID ?? current?.id ?? "", "title":imported?.title ?? current?.name ?? model.workspace?.name ?? "S2A Pilot Bridge", "duration":imported?.showDuration ?? current?.duration ?? 0,"generic":imported == nil,"cues":cues]
-            let labels:[String:String] = ["flow":L("Déroulé du spectacle"),"wait":L("En attente d’un numéro S2A Pilot"),"close":L("Fermer"),"zoomBack":L("Cliquer / toucher pour revenir"),"zoom":L("Agrandir le visuel"),"noVisual":L("Aucun visuel"),"countdown":L("Décompte"),"native":L("Cue QLab — déclenchement suivant au GO")]
-            let state:[String:Any] = ["language":language,"status":model.visualStatus.localized,"lost":model.synchronizationLost,"elapsed":model.visualElapsed,"running":model.visualRunning,"currentID":model.currentRuntimeID ?? "","standbyID":snapshot?.standbyID ?? "","selectedID":model.selectedBridgeID ?? "","labels":labels,"roots":snapshot?.roots.map { cue in ["id":cue.id,"name":cue.name,"kind":cue.kind,"number":cue.number,"running":cue.running,"paused":cue.paused,"pilot":model.savedShows.contains(where:{$0.groupID == cue.id})] } ?? []]
+            let content:[String:Any] = ["id":imported?.groupID ?? current?.id ?? "", "title":imported.flatMap { show in snapshot?.roots.first(where: { $0.id == show.groupID })?.name } ?? imported?.title ?? current?.name ?? model.workspace?.name ?? "S2A Pilot Bridge", "duration":imported?.showDuration ?? current?.duration ?? 0,"generic":imported == nil,"cues":cues]
+            let labels:[String:String] = ["flow":L("Déroulé du spectacle"),"wait":L("En attente d’un numéro S2A Pilot"),"close":L("Fermer"),"zoomBack":L("Cliquer / toucher pour revenir"),"zoom":L("Agrandir le visuel"),"noVisual":L("Aucun visuel"),"countdown":L("Décompte"),"native":L("Cue QLab — déclenchement suivant au GO"),"edit":L("Modifier"),"editTitle":L("Modifier la Cue"),"name":L("Nom"),"description":L("Description / indication de conduite"),"save":L("Enregistrer"),"cancel":L("Annuler"),"saving":L("Enregistrement…"),"pilotEdit":L("Repère Pilot : titre et description sauvegardés dans Bridge."),"qlabEdit":L("Nom et notes synchronisés avec QLab."),"workspaceChanged":L("Le workspace a changé. Rouvre l’édition de la Cue."),"changed":L("La Cue a été modifiée ailleurs. Rouvre l’édition avant de réessayer.")]
+            let state:[String:Any] = ["language":language,"workspaceID":model.workspace?.id ?? "","editBusy":model.bridgeEditInFlight,"editReply":model.bridgeEditReply?.json ?? [:],"status":model.visualStatus.localized,"lost":model.synchronizationLost,"elapsed":model.visualElapsed,"running":model.visualRunning,"currentID":model.currentRuntimeID ?? "","standbyID":snapshot?.standbyID ?? "","selectedID":model.selectedBridgeID ?? "","labels":labels,"roots":snapshot?.roots.map { cue in ["id":cue.id,"name":cue.name,"qName":cue.qName,"notes":cue.notes,"kind":cue.kind,"number":cue.number,"running":cue.running,"paused":cue.paused,"pilot":model.savedShows.contains(where:{$0.groupID == cue.id})] } ?? []]
             let serialized = model.synchronizationLost && !contentKey.isEmpty ? contentKey : json(content)
             pending = (json(state),serialized,serialized)
             flush()
@@ -143,6 +143,11 @@ struct BridgeShowWebView: NSViewRepresentable {
             guard message.frameInfo.isMainFrame, let body = message.body as? [String:Any] else { return }
             if body["type"] as? String == "select", let id = body["id"] as? String {
                 model?.selectBridgeCue(id)
+                return
+            }
+            if body["type"] as? String == "edit", let data = try? JSONSerialization.data(withJSONObject: body),
+               let edit = try? JSONDecoder().decode(BridgeEditRequest.self, from: data) {
+                model?.editBridgeCue(edit)
                 return
             }
             guard body["type"] as? String == "zoom" else { return }

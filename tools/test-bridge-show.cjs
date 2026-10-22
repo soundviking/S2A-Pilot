@@ -31,7 +31,7 @@ const assert=require('assert/strict'),fs=require('fs'),path=require('path');
  await render({...state,selectedID:'show'});
  assert.equal(await page.locator('.flowItem.active .play').count(),1); // selection and play coexist
  assert.equal(await page.evaluate(()=>nativeMessages.length),1); // QLab echo produces no new command
- await frame.locator('.isActive button').click();
+ await frame.locator('.isActive .overviewVisual button').click();
  await page.locator('#zoom:not([hidden])').waitFor();
  assert.equal(await page.evaluate(()=>nativeMessages.at(-1).open),true);
  assert.equal(await page.locator('#zoom img').getAttribute('src'),image);

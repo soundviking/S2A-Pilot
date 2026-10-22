@@ -1,4 +1,4 @@
-# S2A Pilot Bridge 1.4.0
+# S2A Pilot Bridge 1.4.1
 
 Les droits sur S2A Pilot et S2A Pilot Bridge appartiennent à la société S2A Production. Ces applications ont été développées par Antoine CLOPIER, avec l’aide de ChatGPT.
 
@@ -16,9 +16,15 @@ Les imports successifs vérifient le workspace par ID. L’import conserve les a
 
 Voir les [modes d’emploi illustrés](../docs/manual/README.md).
 
+## Édition dans Show
+
+Le crayon du déroulé modifie le nom et les notes de la Cue QLab. Les changements faits dans QLab sont repris au prochain contrôle de synchronisation ; le titre du numéro Pilot suit aussi le nom du groupe. Sauvegarder le workspace dans QLab comme d’habitude pour conserver ces changements après sa fermeture.
+
+Le crayon d’une carte Pilot modifie le titre et la description du repère, sauvegardés immédiatement dans l’index Bridge à côté du workspace. Aucun Memo QLab n’est recréé. Enregistrer confirme l’édition ; Annuler et Échap la ferment sans écrire. La lecture continue pendant la saisie. Les modifications externes sont détectées ; une erreur de sauvegarde conserve le texte saisi. Aucun renommage ne dépend du nom, du numéro affiché ou du temps : la cible conserve ses identifiants.
+
 ## Vérifications
 
-Modèles et scripts QLab vérifiés, tests Show dans Chrome à trois largeurs, rendu WebKit natif inspecté, compilation universelle et signature locale. La validation complète de conduite dans QLab 5 et l’exécution sur Intel physique restent à confirmer. Voir le [compte rendu](../docs/bridge/lot-1-validation.md).
+Modèles et scripts QLab vérifiés, tests Show dans Chrome à trois largeurs, rendu WebKit natif inspecté, compilation universelle et signature locale. La validation complète de conduite dans QLab 5 et l’exécution sur Intel physique restent à confirmer. Voir les comptes rendus [Show/navigation](../docs/bridge/lot-1-validation.md) et [édition](../docs/bridge/lot-2-validation.md).
 
 
 ## Compilation

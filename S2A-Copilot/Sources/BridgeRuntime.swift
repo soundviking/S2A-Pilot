@@ -10,6 +10,7 @@ struct BridgeRuntimeCue: Identifiable, Equatable {
     let duration: Double
     let notes: String
     let number: String
+    let qName: String
     var active: Bool { running || paused }
 }
 
@@ -21,19 +22,25 @@ struct BridgeRuntimeSnapshot {
 
     enum ReadError: Error { case unavailable, invalidReply }
 
+    static func decodeField(_ field: String) -> String {
+        field.replacingOccurrences(of: "%1E", with: "\u{1e}")
+            .replacingOccurrences(of: "%1F", with: "\u{1f}")
+            .replacingOccurrences(of: "%25", with: "%")
+    }
+
     static func parse(_ output: String) throws -> Self {
         let records = output.trimmingCharacters(in:.newlines).components(separatedBy:"\u{1e}")
-        guard records.first == "S2A_RUNTIME_V2", records.count >= 4, records.last == "" else { throw ReadError.invalidReply }
+        guard records.first == "S2A_RUNTIME_V3", records.count >= 4, records.last == "" else { throw ReadError.invalidReply }
         let standby = records[1]
         let selected = records[2]
         var roots: [BridgeRuntimeCue] = [], clocks: [String:BridgeRuntimeCue] = [:]
         for record in records.dropFirst(3).dropLast() where !record.isEmpty {
             let f = record.components(separatedBy:"\u{1f}")
-            guard f.count == 11, ["R","C"].contains(f[0]), !f[1].isEmpty,
+            guard f.count == 12, ["R","C"].contains(f[0]), !f[1].isEmpty,
                   let running = Bool(f[4].lowercased()), let paused = Bool(f[5].lowercased()),
                   let elapsed = Double(f[6].replacingOccurrences(of:",",with:".")), elapsed.isFinite,
                   let duration = Double(f[7].replacingOccurrences(of:",",with:".")), duration.isFinite else { throw ReadError.invalidReply }
-            let cue = BridgeRuntimeCue(id:f[1],name:f[2],kind:f[3],running:running,paused:paused,elapsed:max(0,elapsed),duration:max(0,duration),notes:f[8],number:f[10])
+            let cue = BridgeRuntimeCue(id:f[1],name:decodeField(f[2]),kind:decodeField(f[3]),running:running,paused:paused,elapsed:max(0,elapsed),duration:max(0,duration),notes:decodeField(f[8]),number:decodeField(f[10]),qName:decodeField(f[11]))
             if f[0] == "R" { roots.append(cue) } else { clocks[f[9]] = cue }
         }
         return Self(standbyID:standby,selectedID:selected,roots:roots,clocks:clocks)
@@ -67,7 +74,7 @@ struct BridgeRuntimeSnapshot {
             set selectedCues to selected of w
             if (count of selectedCues) > 0 then set selectionID to uniqueID of (first item of selectedCues) as text
             if selectionID is "" then set selectionID to standby
-            set resultText to "S2A_RUNTIME_V2" & (ASCII character 30) & standby & (ASCII character 30) & selectionID & (ASCII character 30)
+            set resultText to "S2A_RUNTIME_V3" & (ASCII character 30) & standby & (ASCII character 30) & selectionID & (ASCII character 30)
             set rootIDs to uniqueID of cues of current cue list of w
             repeat with rootID in rootIDs
                 set resultText to resultText & my snapshotCue(cue id (contents of rootID) of w, "R", "")
@@ -87,15 +94,16 @@ struct BridgeRuntimeSnapshot {
                 set cueDuration to current duration of c as text
                 set cueNotes to my cleanText(notes of c)
                 set cueNumber to my cleanText(q number of c)
-                return category & sep & cueID & sep & cueName & sep & cueKind & sep & cueRunning & sep & cuePaused & sep & cueElapsed & sep & cueDuration & sep & cueNotes & sep & groupID & sep & cueNumber & (ASCII character 30)
+                set cueRawName to my cleanText(q name of c)
+                return category & sep & cueID & sep & cueName & sep & cueKind & sep & cueRunning & sep & cuePaused & sep & cueElapsed & sep & cueDuration & sep & cueNotes & sep & groupID & sep & cueNumber & sep & cueRawName & (ASCII character 30)
             end tell
         end snapshotCue
         on cleanText(value)
             set value to value as text
-            repeat with separatorCode in {30, 31}
-                set AppleScript's text item delimiters to ASCII character separatorCode
+            repeat with pair in {{"%", "%25"}, {ASCII character 30, "%1E"}, {ASCII character 31, "%1F"}}
+                set AppleScript's text item delimiters to item 1 of pair
                 set parts to text items of value
-                set AppleScript's text item delimiters to " "
+                set AppleScript's text item delimiters to item 2 of pair
                 set value to parts as text
             end repeat
             set AppleScript's text item delimiters to ""

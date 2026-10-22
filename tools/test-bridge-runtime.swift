@@ -1,20 +1,22 @@
 import Foundation
 @main struct RuntimeTests {
  static func main() throws {
-  func row(_ category:String,_ id:String,_ time:String,_ running:Bool,_ paused:Bool,_ group:String="") -> String { [category,id,"Nom <>&", "Group",String(running),String(paused),time,"200,1","Consigne\nmultiligne",group,"1.20"].joined(separator:"\u{1f}")+"\u{1e}" }
-  let source="S2A_RUNTIME_V2\u{1e}next\u{1e}selected\u{1e}"+row("R","show","65,25",true,false)+row("R","other","1,0",true,false)+row("C","clock","65,25",true,false,"show")
+  func row(_ category:String,_ id:String,_ time:String,_ running:Bool,_ paused:Bool,_ group:String="") -> String { [category,id,"Nom <>&", "Group",String(running),String(paused),time,"200,1","Consigne\nmultiligne",group,"1.20","Nom brut"].joined(separator:"\u{1f}")+"\u{1e}" }
+  let source="S2A_RUNTIME_V3\u{1e}next\u{1e}selected\u{1e}"+row("R","show","65,25",true,false)+row("R","other","1,0",true,false)+row("C","clock","65,25",true,false,"show")
   let snapshot=try BridgeRuntimeSnapshot.parse(source)
   precondition(snapshot.roots.count==2 && snapshot.standbyID=="next" && snapshot.selectedID=="selected" && snapshot.roots[0].number=="1.20")
   precondition(snapshot.clocks["show"]?.elapsed==65.25)
   precondition(snapshot.current(previousID:"show")?.id=="show")
   precondition(snapshot.roots[0].notes=="Consigne\nmultiligne")
-  let paused=try BridgeRuntimeSnapshot.parse("S2A_RUNTIME_V2\u{1e}next\u{1e}selected\u{1e}"+row("R","show","65,25",false,true))
+  let paused=try BridgeRuntimeSnapshot.parse("S2A_RUNTIME_V3\u{1e}next\u{1e}selected\u{1e}"+row("R","show","65,25",false,true))
   precondition(paused.current(previousID:"show")?.paused==true)
-  let backwards=try BridgeRuntimeSnapshot.parse("S2A_RUNTIME_V2\u{1e}next\u{1e}selected\u{1e}"+row("R","show","20,0",true,false))
+  let backwards=try BridgeRuntimeSnapshot.parse("S2A_RUNTIME_V3\u{1e}next\u{1e}selected\u{1e}"+row("R","show","20,0",true,false))
   precondition(backwards.current(previousID:"show")?.elapsed==20)
   for broken in ["",source.replacingOccurrences(of:"65,25",with:"invalid"),String(source.dropLast()),source.replacingOccurrences(of:"65,25",with:"nan")] {
    do { _=try BridgeRuntimeSnapshot.parse(broken);fatalError("Invalid time must not silently become zero") } catch BridgeRuntimeSnapshot.ReadError.invalidReply {}
   }
+  precondition(BridgeRuntimeSnapshot.decodeField("%251E%1E%1F") == "%1E\u{1e}\u{1f}")
+  precondition(snapshot.roots[0].qName == "Nom brut")
   let old=Data("{\"groupID\":\"old\",\"title\":\"Ancienne conduite\",\"cues\":[],\"imagePaths\":{},\"importedAt\":0}".utf8)
   let record=try JSONDecoder().decode(SavedShowCue.self,from:old)
   precondition(record.clockID==nil)

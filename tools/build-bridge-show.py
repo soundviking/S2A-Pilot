@@ -9,4 +9,4 @@ for f in (repo/'S2A-Copilot/Show').iterdir():
 html=(repo/'PWA/index.html').read_text()
 (out/'pilot-show.css').write_text('\n'.join(re.findall(r'<style[^>]*>(.*?)</style>',html,re.S)))
 shutil.copy2(repo/'S2A-Copilot/Resources/S2APilotBridgeIcon.png',out/'bridge.png')
-print('Bundled Pilot Maverick styles and read-only Bridge Show view')
+print('Bundled Pilot Maverick styles and Bridge Show assets')

@@ -44,8 +44,8 @@ struct ShowCueProject: Codable {
         let index: Int
         let time: Double
         let type: String?
-        let name: String
-        let description: String?
+        var name: String
+        var description: String?
         let isBase: Bool?
         let imagePath: String?
         let mediaActions: [MediaAction]?
@@ -130,7 +130,7 @@ struct SavedShowCue: Codable, Identifiable {
     let mediaID: String?
     let audioID: String? // Compatibilité avec les index créés avant la prise en charge vidéo.
     let title: String
-    let cues: [ShowCueProject.Cue]
+    var cues: [ShowCueProject.Cue]
     let imagePaths: [String: String]
     let importedAt: Date
     var showDuration: Double? = nil
@@ -180,6 +180,9 @@ final class AppModel: ObservableObject {
     @Published var selectedBridgeID: String?
     private let runtimeQueue = DispatchQueue(label: "fr.s2a.bridge.runtime", qos: .utility)
     private var selectionRevision = 0
+    private var metadataRevision = 0
+    @Published private(set) var bridgeEditInFlight = false
+    @Published private(set) var bridgeEditReply: BridgeEditReply?
 
     private var workspaceTimer: Timer?
     private var workspaceRefreshInFlight = false
@@ -190,6 +193,11 @@ final class AppModel: ObservableObject {
     private var lastRuntimeSuccess = Date()
 
     private var extractedURL: URL?
+    private let commandExecutor: ((String, [String], String?, Double) throws -> String)?
+
+    init(commandExecutor: ((String, [String], String?, Double) throws -> String)? = nil) {
+        self.commandExecutor = commandExecutor
+    }
 
     deinit {
         workspaceTimer?.invalidate()
@@ -301,6 +309,7 @@ final class AppModel: ObservableObject {
         guard !workspaceRefreshInFlight, !isBusy else { return }
         workspaceRefreshInFlight = true
         let selectionID = workspace?.id
+        let metadataRevision = metadataRevision
         DispatchQueue.global(qos: .utility).async {
             let result = Result { () throws -> ([WorkspaceInfo], WorkspaceInfo?, [SavedShowCue]) in
                 let infos = try self.qlabWorkspaces()
@@ -311,6 +320,7 @@ final class AppModel: ObservableObject {
             DispatchQueue.main.async {
                 self.workspaceRefreshInFlight = false
                 guard !self.isBusy else { return }
+                guard self.metadataRevision == metadataRevision else { self.refreshWorkspace(); return }
                 guard self.workspace?.id == selectionID else { self.refreshWorkspace(); return }
                 switch result {
                 case .success(let (infos, selected, shows)):
@@ -362,7 +372,7 @@ final class AppModel: ObservableObject {
     }
 
     func importIntoQLab() {
-        guard !packages.isEmpty, let selectedWorkspace = workspace else { return }
+        guard !bridgeEditInFlight, !packages.isEmpty, let selectedWorkspace = workspace else { return }
 
         isBusy = true
         errorMessage = nil
@@ -898,6 +908,7 @@ final class AppModel: ObservableObject {
         let generation = monitorGeneration
         let showsSnapshot = savedShows
         let selectionRevision = selectionRevision
+        let metadataRevision = metadataRevision
         runtimeQueue.async {
             let result = Result { () throws -> BridgeRuntimeSnapshot in
                 let script = BridgeRuntimeSnapshot.script(workspaceID:workspace.id,shows:showsSnapshot)
@@ -906,7 +917,7 @@ final class AppModel: ObservableObject {
             DispatchQueue.main.async {
                 guard self.monitorGeneration == generation, self.workspace?.id == workspace.id else { return }
                 self.monitorPollInFlight = false
-                guard self.selectionRevision == selectionRevision else { return }
+                guard self.selectionRevision == selectionRevision, self.metadataRevision == metadataRevision else { return }
                 switch result {
                 case .success(let snapshot):
                     self.lastRuntimeSuccess = Date()
@@ -919,7 +930,7 @@ final class AppModel: ObservableObject {
                     self.runtimeSnapshot = snapshot
                     self.selectedBridgeID = snapshot.selectedID.isEmpty ? nil : snapshot.selectedID
                     self.currentRuntimeID = selected?.id
-                    self.activeShow = showsSnapshot.first(where:{$0.groupID == (selected?.id ?? snapshot.standbyID)})
+                    self.activeShow = self.savedShows.first(where:{$0.groupID == (selected?.id ?? snapshot.standbyID)})
                     let clock = selected.flatMap { snapshot.clocks[$0.id] } ?? selected
                     self.visualElapsed = clock?.elapsed ?? 0
                     self.visualRunning = clock.map { $0.running && !$0.paused } ?? false
@@ -929,6 +940,73 @@ final class AppModel: ObservableObject {
                     self.synchronizationLost = true
                     self.visualRunning = false
                     self.visualStatus = BridgeText("Synchronisation perdue")
+                }
+            }
+        }
+    }
+
+    func editBridgeCue(_ edit: BridgeEditRequest) {
+        func reject(_ message: String) {
+            bridgeEditReply = BridgeEditReply(requestID: edit.requestID, success: false, message: L(message))
+        }
+        guard let workspace, workspace.id == edit.workspaceID else {
+            reject("Le workspace a changé. Rouvre l’édition de la Cue."); return
+        }
+        guard !isBusy, !bridgeEditInFlight else {
+            reject("Une opération est déjà en cours. Réessaie dans un instant."); return
+        }
+        if edit.kind == .qlab {
+            guard !synchronizationLost, runtimeSnapshot?.roots.contains(where: { $0.id == edit.cueID }) == true else {
+                reject("La Cue est indisponible. Actualise la connexion puis réessaie."); return
+            }
+        }
+        if edit.kind == .pilot {
+            guard savedShows.contains(where: { $0.groupID == edit.groupID && $0.cues.contains(where: { String($0.index) == edit.cueID }) }) else {
+                reject("La Cue est indisponible. Actualise la connexion puis réessaie."); return
+            }
+        }
+        let currentURL: URL?
+        let legacyURL: URL?
+        do {
+            try BridgeEditing.validate(edit)
+            currentURL = edit.kind == .pilot ? try indexURL(for: workspace) : nil
+            legacyURL = edit.kind == .pilot ? try showCueDirectory(for: workspace).appendingPathComponent("index.json") : nil
+        } catch { reject("Impossible d’enregistrer cette Cue."); return }
+        bridgeEditInFlight = true
+        bridgeEditReply = nil
+        metadataRevision += 1
+        runtimeQueue.async {
+            let result = Result { () throws -> SavedShowCueIndex? in
+                let current = DispatchQueue.main.sync { self.workspace?.id == workspace.id && !self.isBusy }
+                guard current else { throw BridgeEditing.EditError.workspaceChanged }
+                if edit.kind == .pilot, let currentURL, let legacyURL {
+                    return try BridgeEditing.savePilot(edit, currentURL: currentURL, legacyURL: legacyURL)
+                }
+                let reply = try self.run("/usr/bin/osascript", ["-"], stdin: BridgeEditing.script(edit), timeout: 8)
+                guard reply == "S2A_EDIT_OK" else { throw BridgeEditing.EditError.conflict }
+                return nil
+            }
+            DispatchQueue.main.async {
+                self.bridgeEditInFlight = false
+                self.metadataRevision += 1
+                guard self.workspace?.id == workspace.id else { return }
+                switch result {
+                case .success(let index):
+                    if let index {
+                        let liveIDs = Set(self.savedShows.map(\.groupID))
+                        self.savedShows = index.shows.filter { liveIDs.contains($0.groupID) }
+                        if let id = self.activeShow?.groupID {
+                            self.activeShow = self.savedShows.first(where: { $0.groupID == id })
+                        }
+                    }
+                    self.bridgeEditReply = BridgeEditReply(requestID: edit.requestID, success: true, message: L("Enregistré"))
+                    self.pollVisualMonitor()
+                case .failure(let error):
+                    let conflict = (error as? BridgeEditing.EditError) == .conflict || error.localizedDescription.contains("BRIDGE_EDIT_CONFLICT")
+                    let message = conflict
+                        ? L("La Cue a été modifiée ailleurs. Rouvre l’édition avant de réessayer.")
+                        : L("Impossible d’enregistrer. Le texte saisi est conservé ; vérifie la connexion et réessaie.")
+                    self.bridgeEditReply = BridgeEditReply(requestID: edit.requestID, success: false, message: message)
                 }
             }
         }
@@ -1003,6 +1081,7 @@ final class AppModel: ObservableObject {
 
     @discardableResult
     private func run(_ executable: String, _ arguments: [String], stdin: String? = nil, timeout: Double = 120) throws -> String {
+        if let commandExecutor { return try commandExecutor(executable, arguments, stdin, timeout) }
         let process = Process()
         process.executableURL = URL(fileURLWithPath: executable)
         process.arguments = arguments
@@ -1223,7 +1302,7 @@ struct ContentView: View {
                     }
                     .buttonStyle(.borderedProminent)
                     .controlSize(.large)
-                    .disabled(model.packages.isEmpty || model.workspace?.projectFolder == nil || model.isBusy)
+                    .disabled(model.packages.isEmpty || model.workspace?.projectFolder == nil || model.isBusy || model.bridgeEditInFlight)
 
                     Button {
                         model.startVisualMonitor()

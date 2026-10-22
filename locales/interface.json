@@ -1615,5 +1615,75 @@
     "en": "QLab is not responding. Check its dialog windows and try again.",
     "es": "QLab no responde. Revisa sus ventanas de diálogo e inténtalo de nuevo.",
     "de": "QLab antwortet nicht. Prüfe seine Dialogfenster und versuche es erneut."
+  },
+  "Modifier": {
+    "en": "Edit",
+    "es": "Editar",
+    "de": "Bearbeiten"
+  },
+  "Modifier la Cue": {
+    "en": "Edit cue",
+    "es": "Editar Cue",
+    "de": "Cue bearbeiten"
+  },
+  "Nom": {
+    "en": "Name",
+    "es": "Nombre",
+    "de": "Name"
+  },
+  "Enregistrer": {
+    "en": "Save",
+    "es": "Guardar",
+    "de": "Speichern"
+  },
+  "Enregistré": {
+    "en": "Saved",
+    "es": "Guardado",
+    "de": "Gespeichert"
+  },
+  "Enregistrement…": {
+    "en": "Saving…",
+    "es": "Guardando…",
+    "de": "Wird gespeichert…"
+  },
+  "Repère Pilot : titre et description sauvegardés dans Bridge.": {
+    "en": "Pilot marker: title and description saved in Bridge.",
+    "es": "Marcador Pilot: título y descripción guardados en Bridge.",
+    "de": "Pilot-Marker: Titel und Beschreibung werden in Bridge gespeichert."
+  },
+  "Nom et notes synchronisés avec QLab.": {
+    "en": "Name and notes synchronized with QLab.",
+    "es": "Nombre y notas sincronizados con QLab.",
+    "de": "Name und Notizen werden mit QLab synchronisiert."
+  },
+  "La Cue a été modifiée ailleurs. Rouvre l’édition avant de réessayer.": {
+    "en": "The cue was changed elsewhere. Reopen the editor before trying again.",
+    "es": "La Cue se ha modificado en otro lugar. Vuelve a abrir el editor antes de reintentarlo.",
+    "de": "Die Cue wurde an anderer Stelle geändert. Öffne den Editor erneut, bevor du es noch einmal versuchst."
+  },
+  "Le workspace a changé. Rouvre l’édition de la Cue.": {
+    "en": "The workspace changed. Reopen the cue editor.",
+    "es": "El workspace ha cambiado. Vuelve a abrir el editor de la Cue.",
+    "de": "Der Workspace wurde gewechselt. Öffne den Cue-Editor erneut."
+  },
+  "Une opération est déjà en cours. Réessaie dans un instant.": {
+    "en": "An operation is already in progress. Try again shortly.",
+    "es": "Ya hay una operación en curso. Vuelve a intentarlo en un momento.",
+    "de": "Ein Vorgang läuft bereits. Versuche es in Kürze erneut."
+  },
+  "La Cue est indisponible. Actualise la connexion puis réessaie.": {
+    "en": "The cue is unavailable. Refresh the connection and try again.",
+    "es": "La Cue no está disponible. Actualiza la conexión y vuelve a intentarlo.",
+    "de": "Die Cue ist nicht verfügbar. Aktualisiere die Verbindung und versuche es erneut."
+  },
+  "Impossible d’enregistrer cette Cue.": {
+    "en": "Unable to save this cue.",
+    "es": "No se puede guardar esta Cue.",
+    "de": "Diese Cue kann nicht gespeichert werden."
+  },
+  "Impossible d’enregistrer. Le texte saisi est conservé ; vérifie la connexion et réessaie.": {
+    "en": "Unable to save. Your text is preserved; check the connection and try again.",
+    "es": "No se puede guardar. Se conserva el texto introducido; comprueba la conexión y vuelve a intentarlo.",
+    "de": "Speichern fehlgeschlagen. Dein Text bleibt erhalten; prüfe die Verbindung und versuche es erneut."
   }
 }
