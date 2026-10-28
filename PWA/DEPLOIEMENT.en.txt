@@ -3,3 +3,5 @@ S2A PILOT 1.5.8 / BRIDGE 1.4.5
 Replace the whole application folder, including .htaccess, compat/ and Bridge/. Remove old copilot-api.php, copilot-service/, copilot/, copilot.html, copilot.js, copilot-ui.css, bridge.html, bridge-copilot.js and compat/copilot.es5.js. No PHP or Node server is needed. Purge the CDN cache; actualiser.html refreshes browser caches without deleting IndexedDB projects.
 
 Bridge without Copilot is included in Save as… exports for QLab import. Deploy Bridge/ in full.
+
+Include assets/tutorials/ with all four MP4 files and help-video.js. Videos load on demand rather than being precached; the server should support HTTP Range requests.

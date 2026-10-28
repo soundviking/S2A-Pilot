@@ -1,9 +1,9 @@
 {
   "version": "1.5.8",
   "releaseNotes": {
-    "fr": "Bridge 1.4.5 validée, incluse dans les exports : sélection QLab, édition, filtres et affichage Show.",
-    "en": "Validated Bridge 1.4.5 included in exports: QLab selection, editing, filters and Show view.",
-    "es": "Bridge 1.4.5 validado incluido en las exportaciones: selección QLab, edición, filtros y vista Show.",
-    "de": "Validierte Bridge 1.4.5 in Exporten enthalten: QLab-Auswahl, Bearbeitung, Filter und Show-Ansicht."
+    "fr": "Vidéos de première prise en main disponibles dans l’aide en quatre langues. Logo officiel harmonisé.",
+    "en": "Getting started videos available in Help in four languages. Official logo used throughout.",
+    "es": "Vídeos de primeros pasos disponibles en la ayuda en cuatro idiomas. Logotipo oficial unificado.",
+    "de": "Videos zu den ersten Schritten in der Hilfe in vier Sprachen. Einheitliches offizielles Logo."
   }
 }

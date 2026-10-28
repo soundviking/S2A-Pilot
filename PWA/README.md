@@ -22,6 +22,8 @@ Pilot et Bridge proposent français, anglais, espagnol et allemand. La première
 
 ## Aide rapide
 
+La dernière étape propose « Voir la vidéo : Première prise en main ». La vidéo sans musique suit la langue choisie (FR/EN/ES/DE) et s’ouvre dans une fenêtre superposée, sans barre de navigateur, avec fermeture par bouton, Échap ou clic à l’extérieur. Elle est chargée uniquement à la demande ; une connexion est nécessaire sur le site hébergé.
+
 Au premier lancement, une aide en quatre étapes présente la création de la conduite, les réglages des Cues, le mode Show et le choix de disposition. La quatrième page « Choisissez votre affichage » compare Maverick et Iceman avec deux captures réelles de la même conduite. Les captures réelles montrent une musique de 3 min 20 avec sa waveform et des visuels de scène. Elle apparaît avant la proposition d’installation. Le bouton « ? », en Edit à gauche d’Annuler et Rétablir, permet de la rouvrir. L’aide et ses captures sont disponibles dans les quatre langues, intégrées localement pour fonctionner hors ligne sur les navigateurs compatibles avec ce fonctionnement. Elles sont également adaptées au mode de compatibilité. Le lien « Mode d’emploi illustré (PDF) » ouvre le manuel dans la langue choisie, téléchargé à la demande pour ne pas alourdir la PWA.
 
 

@@ -1,5 +1,6 @@
-const CACHE_NAME='s2a-pilot-v1-5-8-official-logo-app-shell';
+const CACHE_NAME='s2a-pilot-v1-5-8-help-video-app-shell';
 const APP_SHELL=[
+ './help-video.js?v=1.5.8-video1',
  './assets/help/es-create.png?v=1.5.8',
  './assets/help/es-cue.png?v=1.5.8',
  './assets/help/es-show.png?v=1.5.8',
@@ -14,9 +15,9 @@ const APP_SHELL=[
  './Bridge/S2A-Pilot-Bridge-1.4.5-app.zip', './Bridge/app-files.json',
   './startup.js?v=1.5.8',
   './startup.css?v=1.5.8',
-  './quick-help.js?v=1.5.8',
+  './quick-help.js?v=1.5.8-video1',
   './help-images.js?v=1.5.8',
-  './quick-help.css?v=1.5.8',
+  './quick-help.css?v=1.5.8-video1',
   './assets/help/en-create.png?v=1.5.8',
   './assets/help/en-cue.png?v=1.5.8',
   './assets/help/en-show.png?v=1.5.8',
@@ -77,6 +78,8 @@ self.addEventListener('activate',(event)=>{
 
 self.addEventListener('fetch',(event)=>{
   if(event.request.method!=='GET') return;
+  // Video is streamed on demand. Let the server handle Range/206 for playback and seeking.
+  if(new URL(event.request.url).pathname.indexOf('/assets/tutorials/')!==-1)return;
   if(new URL(event.request.url).pathname.endsWith('/version.json')){event.respondWith(fetch(event.request,{cache:'no-store'}));return;}
   if(event.request.mode==='navigate'){
     event.respondWith(fetch(event.request,{cache:'no-store'}).then(response=>{if(!response.ok)throw new Error('Page indisponible');return response;}).catch(()=>caches.open(CACHE_NAME).then(cache=>cache.match(event.request,{ignoreSearch:true}).then(cached=>cached||cache.match('./index.html')))));return;
