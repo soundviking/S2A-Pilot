@@ -1,0 +1,17 @@
+{
+  "version": "1.5.8",
+  "bridge": "1.4.5",
+  "date": "2026-10-28",
+  "bridgeValidation": "User confirmed all tests pass",
+  "checks": [
+    "Chromium real export and reimport",
+    "Bridge embedded plist version 1.4.5",
+    "Embedded app signature",
+    "Offline export",
+    "Production Bridge decoder and media timing"
+  ],
+  "notChecked": [
+    "Live hosting deployment",
+    "WebKit in this release check"
+  ]
+}

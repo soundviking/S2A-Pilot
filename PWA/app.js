@@ -534,7 +534,7 @@ function readStoredZip(buffer){const bytes=new Uint8Array(buffer),view=new DataV
 function bytesToDataUrl(bytes,mime){let s='',ch=0x8000;for(let i=0;i<bytes.length;i+=ch)s+=String.fromCharCode(...bytes.subarray(i,Math.min(i+ch,bytes.length)));return`data:${mime};base64,${btoa(s)}`;}
 function mimeFromName(name){const e=(name.split('.').pop()||'').toLowerCase(),m={jpg:'image/jpeg',jpeg:'image/jpeg',png:'image/png',webp:'image/webp',mp3:'audio/mpeg',wav:'audio/wav',aif:'audio/aiff',aiff:'audio/aiff',m4a:'audio/mp4',aac:'audio/aac',flac:'audio/flac',ogg:'audio/ogg',mp4:'video/mp4',mov:'video/quicktime',m4v:'video/x-m4v',webm:'video/webm'};return m[e]||'application/octet-stream';}
 async function addCompiledCompanion(entries){
- const [archiveResponse,manifestResponse]=await Promise.all([fetch('./companion/S2A-Pilot-Bridge-1.3.4-app.zip',{cache:'no-store'}),fetch('./companion/app-files.json?v=1.3.4',{cache:'no-store'})]);
+ const [archiveResponse,manifestResponse]=await Promise.all([fetch('./companion/S2A-Pilot-Bridge-1.4.5-app.zip',{cache:'no-store'}),fetch('./companion/app-files.json?v=1.4.5',{cache:'no-store'})]);
  if(!archiveResponse.ok||!manifestResponse.ok)throw new Error(tr('S2A Pilot Bridge est indisponible. Vérifiez que tous les fichiers de la PWA ont été déployés.'));
  const [buffer,manifest]=await Promise.all([archiveResponse.arrayBuffer(),manifestResponse.json()]),files=readStoredZip(buffer);
  for(const file of manifest.files){
@@ -983,7 +983,7 @@ document.addEventListener('touchmove',e=>{if(e.touches.length>1)e.preventDefault
 document.addEventListener('wheel',e=>{if(e.ctrlKey)e.preventDefault();},{passive:false});
 
 // This manifest is requested from the network, outside the service-worker cache.
-const APP_VERSION='1.5.7';document.querySelector('.appVersion').textContent='Version '+APP_VERSION;let lastVersionCheck=0,versionCheckRunning=false;
+const APP_VERSION='1.5.8';document.querySelector('.appVersion').textContent='Version '+APP_VERSION;let lastVersionCheck=0,versionCheckRunning=false;
 const updateNotice=document.createElement('div');updateNotice.id='updateNotice';updateNotice.hidden=true;updateNotice.setAttribute('role','status');const updateText=document.createElement('span'),updateButton=document.createElement('button'),updateSummary=document.createElement('p');updateSummary.className='updateSummary';updateSummary.hidden=true;updateButton.type='button';updateButton.textContent=tr('Ouvrir la nouvelle version');updateText.className='updateVersionText';const updateContent=document.createElement('div');updateContent.className='updateContent';updateContent.append(updateText,updateSummary);updateNotice.append(updateContent,updateButton);const updateMain=document.querySelector('main');updateMain.insertBefore(updateNotice,updateMain.firstChild);
 function updateVersionButton(){const b=document.getElementById('updateNotice')?.querySelector('button');if(!b)return;b.disabled=locked||transportPlaying;b.title=b.disabled?tr('Quitter le mode Show et mettre la lecture en pause pour actualiser.'):'';}
 function versionIsNewer(a,b){const x=a.split('.').map(Number),y=b.split('.').map(Number);for(let i=0;i<3;i++){if(x[i]!==y[i])return x[i]>y[i];}return false;}

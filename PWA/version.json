@@ -1,9 +1,9 @@
 {
-  "version": "1.5.7",
+  "version": "1.5.8",
   "releaseNotes": {
-    "fr": "Espagnol, allemand et manuels illustrés ajoutés. Bridge affiche aussi les descriptions des Cues.",
-    "en": "Spanish, German and illustrated manuals added. Bridge now shows Cue descriptions.",
-    "es": "Español, alemán y manuales ilustrados añadidos. Bridge muestra las descripciones de las Cues.",
-    "de": "Spanisch, Deutsch und bebilderte Anleitungen ergänzt. Bridge zeigt jetzt Cue-Beschreibungen."
+    "fr": "Bridge 1.4.5 validée, incluse dans les exports : sélection QLab, édition, filtres et affichage Show.",
+    "en": "Validated Bridge 1.4.5 included in exports: QLab selection, editing, filters and Show view.",
+    "es": "Bridge 1.4.5 validado incluido en las exportaciones: selección QLab, edición, filtros y vista Show.",
+    "de": "Validierte Bridge 1.4.5 in Exporten enthalten: QLab-Auswahl, Bearbeitung, Filter und Show-Ansicht."
   }
 }
