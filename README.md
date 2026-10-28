@@ -61,7 +61,7 @@ La sortie vidéo apparaît uniquement en Show avec une vidéo. Son placement aut
 
 ## Sauvegarde et PDF
 
-Chaque modification est sauvegardée localement, y compris pendant la saisie. Ces données dépendent de l’appareil, du navigateur, du profil et de l’adresse du site. Enregistrer sous… produit un .s2apilot.zip portable avec médias, visuels, données et PDF. Bridge sans Copilot est inclus dans companion/ du ZIP de conduite et reste disponible sur GitHub. Ouvrir restaure un package. Garder les médias lors de l’import QLab.
+Chaque modification est sauvegardée localement, y compris pendant la saisie. Ces données dépendent de l’appareil, du navigateur, du profil et de l’adresse du site. Enregistrer sous… produit un .s2apilot.zip portable avec médias, visuels, données et PDF. Bridge sans Copilot est inclus dans Bridge/ du ZIP de conduite et reste disponible sur GitHub. Ouvrir restaure un package. Garder les médias lors de l’import QLab.
 
 Conduite PDF ouvre un aperçu intégré ; Télécharger crée le fichier. L’en-tête du PDF reprend le premier visuel disponible dans l’ordre chronologique des Cues, recadré en bandeau ; sans visuel, il conserve l’image par défaut. Un QR code au cadre arrondi avec un logo S2A Pilot agrandi dans la partie droite mène à https://s2a-production.com/S2A-Pilot/. L’aperçu, le PDF téléchargé et celui intégré au package utilisent le même bandeau et le même QR code, également hors ligne. Le PDF inclut des blocs arrondis, compteurs médias et cinq Cues standards par page. Les descriptions longues continuent sur les pages suivantes. Le temps écoulé et le temps restant entre parenthèses figurent pour chaque Cue. Le contenu saisi n’est pas traduit.
 
@@ -69,7 +69,7 @@ Conduite PDF ouvre un aperçu intégré ; Télécharger crée le fichier. L’en
 
 Sur Mac, décompresser et lancer Démarrer S2A Pilot.command ou Start S2A Pilot.command. Arrêter l’ancien serveur avant d’ouvrir un autre dossier. L’ouverture directe d’index.html permet l’aperçu PDF, mais le serveur local ou HTTPS est nécessaire pour toutes les fonctions et l’export des conduites.
 
-Déployer tout le contenu sur HTTPS, y compris .htaccess, i18n.js, les manifests, scripts, assets et icons. Déployer aussi le dossier companion/ requis pour l’export Bridge. Le serveur ouvre index.html comme page d’accueil ; partager l’adresse du dossier.
+Déployer tout le contenu sur HTTPS, y compris .htaccess, i18n.js, les manifests, scripts, assets et icons. Déployer aussi le dossier Bridge/ requis pour l’export Bridge. Le serveur ouvre index.html comme page d’accueil ; partager l’adresse du dossier.
 
 Purger Cloudflare après remplacement et supprimer les règles imposant un cache long aux fichiers HTML, JS, JSON et service worker. .htaccess empêche leur cache HTTP à l’origine Apache avec mod_headers ; une règle du CDN peut le remplacer. actualiser.html renouvelle les fichiers sans supprimer IndexedDB. Ne pas supprimer les données du site pour réparer une ancienne version.
 

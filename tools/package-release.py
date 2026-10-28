@@ -19,17 +19,17 @@ if '--bridge-only' in sys.argv:
  assert bridge_zip.stat().st_size<100*1024*1024
  print(bridge_zip.name,round(bridge_zip.stat().st_size/1000000,2),'MB; verified; Pilot archives unchanged')
  sys.exit(0)
-companion=pwa/'companion';companion.mkdir(exist_ok=True)
-archive_path=companion/f'S2A-Pilot-Bridge-{bridge}-app.zip'
+bridge_folder=pwa/'Bridge';bridge_folder.mkdir(exist_ok=True)
+archive_path=bridge_folder/f'S2A-Pilot-Bridge-{bridge}-app.zip'
 entries=[]
 with zipfile.ZipFile(archive_path,'w',zipfile.ZIP_STORED) as archive:
  for file in sorted(app.rglob('*')):
   if file.is_file():
    name='S2A Pilot Bridge.app/'+file.relative_to(app).as_posix()
    archive.write(file,name);entries.append({'path':name,'mode':file.stat().st_mode,'size':file.stat().st_size})
-for stale in companion.glob('S2A-Pilot-Bridge-*-app.zip'):
+for stale in bridge_folder.glob('S2A-Pilot-Bridge-*-app.zip'):
  if stale!=archive_path:stale.unlink()
-(companion/'app-files.json').write_text(json.dumps({'version':bridge,'architectures':['arm64','x86_64'],'files':entries},indent=2)+'\n')
+(bridge_folder/'app-files.json').write_text(json.dumps({'version':bridge,'architectures':['arm64','x86_64'],'files':entries},indent=2)+'\n')
 if '--companion-only' in sys.argv:
  print(f'Prepared offline Bridge companion {bridge}; release downloads unchanged.')
  sys.exit(0)

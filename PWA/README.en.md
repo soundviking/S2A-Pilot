@@ -67,7 +67,7 @@ The output button becomes red while the video window is active. Allow pop-ups if
 
 ## Save, open and export
 
-Edits are saved locally on this device, including text while typing. Local saves are specific to the browser, profile and site address. Use **Save as…** for a portable `.s2apilot.zip` backup and transfer. It includes show data, media, visuals and the PDF. S2A Pilot Bridge without Copilot is included in companion/ in the export and is also available on GitHub. Do not delete media folders before importing into QLab. Open restores a package.
+Edits are saved locally on this device, including text while typing. Local saves are specific to the browser, profile and site address. Use **Save as…** for a portable `.s2apilot.zip` backup and transfer. It includes show data, media, visuals and the PDF. S2A Pilot Bridge without Copilot is included in Bridge/ in the export and is also available on GitHub. Do not delete media folders before importing into QLab. Open restores a package.
 
 ## Cue sheet PDF
 
@@ -77,7 +77,7 @@ Edits are saved locally on this device, including text while typing. Local saves
 
 For local Mac testing, extract the PWA and run **Start S2A Pilot.command** (or its French equivalent). Stop any older local server before launching a new folder. Directly opening index.html supports PDF preview, but use the local launcher or HTTPS for all PWA features and show export.
 
-For hosting, deploy the complete folder contents over HTTPS, including hidden `.htaccess`, `i18n.js`, both manifest files, all code, icons, assets. Deploy companion/ as well: it supplies the Bridge installer for show exports. Configure index.html as the directory index, then share `/qlab/` without an index.html suffix.
+For hosting, deploy the complete folder contents over HTTPS, including hidden `.htaccess`, `i18n.js`, both manifest files, all code, icons, assets. Deploy Bridge/ as well: it supplies the Bridge installer for show exports. Configure index.html as the directory index, then share `/qlab/` without an index.html suffix.
 
 After deployment, purge Cloudflare’s cache for the app folder and remove rules forcing long cache lifetimes for HTML, JS, JSON or the service worker. The provided `.htaccess` applies no-store at an Apache origin with mod_headers; edge rules can override it. Open `actualiser.html` to replace old app caches without deleting IndexedDB projects. Do not clear site data to fix a stale version.
 

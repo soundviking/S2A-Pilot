@@ -10,7 +10,7 @@ with tempfile.TemporaryDirectory(prefix='s2a-bridge-export-') as folder:
  for browser in browsers:
   archive=Path('/tmp/s2a-lightweight-export-'+browser+'.zip')
   subprocess.run(['/usr/bin/ditto','-x','-k',str(archive),str(root/browser)],check=True)
-  app=root/browser/'companion/S2A Pilot Bridge.app'
+  app=root/browser/'Bridge/S2A Pilot Bridge.app'
   assert not (app/'Contents/Resources/Copilot').exists()
   subprocess.run(['/usr/bin/codesign','--verify','--deep','--strict',str(app)],check=True)
  harness=root/'validate.swift'
