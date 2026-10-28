@@ -1,4 +1,4 @@
-const CACHE_NAME='s2a-pilot-v1-5-8-bridge-folder-app-shell';
+const CACHE_NAME='s2a-pilot-v1-5-8-official-logo-app-shell';
 const APP_SHELL=[
  './assets/help/es-create.png?v=1.5.8',
  './assets/help/es-cue.png?v=1.5.8',
@@ -48,9 +48,9 @@ const APP_SHELL=[
   './assets/s2a-pilot-qr.png',
   './assets/s2a-pilot-qr.jpg',
   './assets/conduite-header.webp',
-  './icons/s2a-pilot-180.png?v=1.5.8',
-  './icons/s2a-pilot-192.png?v=1.5.8',
-  './icons/s2a-pilot-512.png?v=1.5.8',
+  './icons/s2a-pilot-180.png?v=1.5.8-logo2',
+  './icons/s2a-pilot-192.png?v=1.5.8-logo2',
+  './icons/s2a-pilot-512.png?v=1.5.8-logo2',
   './manifest.webmanifest',
   './manifest.en.webmanifest',
   './icons/s2a-pilot-192.png',
