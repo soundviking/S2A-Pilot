@@ -11,3 +11,13 @@
 .quickHelpLayoutIntro{display:flex;align-items:center;gap:12px}.quickHelpLayoutIcon{display:flex;align-items:center;justify-content:center;flex:0 0 44px;height:44px;box-sizing:border-box;background:#222b3a;border:1px solid #80b9ff;border-radius:10px;box-shadow:0 0 10px #438ae866;color:#f4f6f8}.quickHelpLayoutIcon svg{display:block;width:32px;height:32px}
 
 .quickHelpManual{display:inline-block;margin-top:18px;color:#a8ceff;text-decoration:underline;text-underline-offset:3px;line-height:1.5}.quickHelpManual:focus-visible{outline:2px solid #80b9ff;outline-offset:5px;border-radius:3px}
+
+.quickHelpVideoLink{display:block;margin-top:16px;padding:0;border:0;background:transparent;color:#a8ceff;text-decoration:underline;text-underline-offset:3px;line-height:1.5;text-align:left;font:inherit;cursor:pointer}
+.quickHelpVideoLink:hover{background:transparent;color:#fff}.quickHelpVideoLink:focus-visible{outline:2px solid #80b9ff;outline-offset:5px}
+.helpVideoOverlay{position:fixed;top:0;right:0;bottom:0;left:0;z-index:2500;display:flex;align-items:center;justify-content:center;box-sizing:border-box;padding:12px;background:rgba(0,0,0,.94)}
+.helpVideoOverlay[hidden],.helpVideoPanel [hidden]{display:none!important}
+.helpVideoPanel{position:relative;box-sizing:border-box;width:100%;max-width:1280px;background:#000;color:white;border-radius:10px;overflow:hidden;box-shadow:0 20px 70px #000}
+.helpVideoPlayer{display:block;width:100%;max-height:calc(100vh - 24px);max-height:calc(100dvh - 24px);object-fit:contain;background:#000}
+.helpVideoClose{position:absolute;top:10px;right:10px;z-index:2;padding:10px 16px;border:1px solid #b4c4d9;border-radius:20px;background:rgba(10,15,24,.9);color:#fff;font:600 15px/1.2 -apple-system,BlinkMacSystemFont,Arial,sans-serif;cursor:pointer}
+.helpVideoClose:focus-visible{outline:3px solid #80b9ff;outline-offset:-4px}.helpVideoStatus{margin:0;padding:20px 24px;color:#fff;font:16px/1.5 -apple-system,BlinkMacSystemFont,Arial,sans-serif}.helpVideoRetry{margin:0 24px 20px}
+@media(max-width:600px){.helpVideoOverlay{padding:0}.helpVideoPanel{border-radius:0}.helpVideoClose{top:8px;right:8px}.helpVideoPlayer{max-height:100vh;max-height:100dvh}}

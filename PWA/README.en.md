@@ -22,6 +22,8 @@ S2A Pilot Bridge uses the macOS preferred language at first launch and offers a 
 
 ## Quick help
 
+The last step offers “Watch the video: Getting started”. The silent video follows the selected language (FR/EN/ES/DE), opens in a chromeless overlay, and closes with the button, Escape or a click outside. It loads only on demand; the hosted site requires a connection.
+
 On first launch, a four-step guide introduces show creation, Cue settings, Show mode and the layout selector. Page four, “Choose your layout”, compares Maverick and Iceman with two actual screenshots of the same show. Actual application screenshots show a 3 minute 20 second audio track with its waveform and stage visuals. It appears before the installation prompt. The “?” button in Edit, to the left of Undo and Redo, opens it again. The guide and screenshots are available in all four languages and bundled locally for offline use in browsers that support it. They also cover compatibility mode. “Illustrated user manual (PDF)” opens the manual in the selected language, downloaded on demand rather than bundled with the PWA.
 
 

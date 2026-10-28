@@ -13,5 +13,25 @@
   "notChecked": [
     "Live hosting deployment",
     "WebKit in this release check"
-  ]
+  ],
+  "helpVideo": {
+    "languages": [
+      "fr",
+      "en",
+      "es",
+      "de"
+    ],
+    "step": 4,
+    "onDemand": true,
+    "audioTracks": 0,
+    "checks": [
+      "Playback and seek",
+      "Close, Escape and return focus",
+      "No show transport commands from player keyboard",
+      "Recoverable loading error",
+      "Mobile viewport",
+      "Legacy compatibility branch"
+    ],
+    "logoAudit": "Official rounded logo; QR verified with macOS Vision"
+  }
 }

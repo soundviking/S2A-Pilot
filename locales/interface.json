@@ -1730,5 +1730,30 @@
     "en": "No types selected",
     "es": "Ningún tipo seleccionado",
     "de": "Keine Typen ausgewählt"
+  },
+  "Première prise en main": {
+    "en": "Getting started",
+    "es": "Primeros pasos",
+    "de": "Erste Schritte"
+  },
+  "Voir la vidéo : Première prise en main": {
+    "en": "Watch the video: Getting started",
+    "es": "Ver el vídeo: Primeros pasos",
+    "de": "Video ansehen: Erste Schritte"
+  },
+  "La vidéo est indisponible. Vérifiez votre connexion puis réessayez.": {
+    "en": "The video is unavailable. Check your connection and try again.",
+    "es": "El vídeo no está disponible. Comprueba tu conexión e inténtalo de nuevo.",
+    "de": "Das Video ist nicht verfügbar. Prüfe deine Verbindung und versuche es erneut."
+  },
+  "Appuyez sur Lecture pour démarrer la vidéo.": {
+    "en": "Press Play to start the video.",
+    "es": "Pulsa Reproducir para iniciar el vídeo.",
+    "de": "Drücke Wiedergabe, um das Video zu starten."
+  },
+  "Réessayer": {
+    "en": "Try again",
+    "es": "Reintentar",
+    "de": "Erneut versuchen"
   }
 }
