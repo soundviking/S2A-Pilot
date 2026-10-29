@@ -137,3 +137,9 @@ Limite de validation de cette passe : le scénario complet `test-manual-conduct.
 - Zoom général réactivé en Manuel : la fenêtre initiale de 15 minutes reste ajustable, avec conservation du défilement tactile à deux doigts.
 - Sélection de liste : barre bleue lumineuse et étiquette en surbrillance dans la timeline générale ; la Cue sélectionnée a priorité sur les étiquettes voisines pour éviter son masquage.
 - Vérifications ciblées Chrome/WebKit : zoom, sélection, création indépendante, contrôle masqué en l’absence de séquence et gestes tactiles. Aucun push ni changement des versions stables.
+
+## Transport Show : récupération des anciennes Cues indépendantes
+
+Les anciennes Cues sans média audio et sans séquence sont reconnues comme principales muettes lors du rendu Manuel. Une Cue devenue musicale perd son ancien attribut muet. GO n’est plus désactivé silencieusement par la validation globale ou le préchargement : les validations restent appliquées au départ, la préparation conserve la demande de second GO après chargement, et les erreurs de médias apparaissent dans le statut Show. Les verrous de départ en cours restent actifs. Pause reste disponible seulement pour une séquence démarrée.
+
+`tools/test-manual-go-recovery.cjs` passe dans Chrome et WebKit : anciennes Cues indépendantes, départ, pause, recherche, reprise, retour au début, redémarrage, erreur de lien explicite et erreur de média visible. Les dernières corrections de superposition du temps de déplacement et de couleur jaune des repères musicaux sont incluses.

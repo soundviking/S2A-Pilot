@@ -980,6 +980,8 @@ function manualChildren(c){return c?orderedCues().filter(x=>x.parentMusicId===c.
 function updateManualRelative(c){if(conductType!=='manual'||!c.parentMusicId)return;const p=cues.find(x=>x.id===c.parentMusicId);if(p)c.relativeTime=roundTenth(c.time-p.time);}
 function syncManualLinks(){
  if(conductType!=='manual')return;
+ // Older beta projects stored independent silent Cues without a manual kind.
+ for(const c of cues){const audio=(c.mediaActions||[]).some(a=>a.kind==='audio');if(audio&&c.manualKind==='silent'){delete c.manualKind;delete c.manualDuration;}else if(!audio&&!c.parentMusicId&&c.manualKind!=='silent'){c.manualKind='silent';c.manualDuration=180;}}
  for(const c of cues){if(!c.parentMusicId||isManualMainCue(c))continue;const p=cues.find(x=>x.id===c.parentMusicId);if(p&&Number.isFinite(c.relativeTime))c.time=roundTenth(p.time+c.relativeTime);}
 }
 function manualIssues(){
@@ -1001,9 +1003,10 @@ function updateManualStatus(){
  const pauseButton=$('manualPauseBtn');pauseButton.hidden=conductType!=='manual'||!locked;pauseButton.disabled=!manualCurrentID||manualPending||manualPausePending;pauseButton.textContent=tr(manualPausedAt!==null?'Reprendre':'Pause');pauseButton.setAttribute('aria-label',pauseButton.textContent);
  const panel=$('manualShowStatus');if(!panel)return;panel.hidden=conductType!=='manual';
  if(conductType!=='manual')return;
- playBtn.disabled=manualPending||manualIssues().length>0||!allMediaActions().every(x=>preparedMedia.get(x.action.id)?.ready);
+ playBtn.disabled=manualPending||manualPausePending;
  const current=manualCurrent(),next=manualNextMusic();
  panel.textContent=(manualPausedAt!==null?tr('Pause')+' — '+(current?.name||''):transportPlaying?tr('EN LECTURE — {name}',{name:current?.name||''}):tr('EN ATTENTE DU GO'))+(next?' · '+tr('Prochain numéro : {name}',{name:next.name}):manualCompletedID&&!transportPlaying?' · '+tr('Fin de conduite'):'');
+ if(!transportPlaying&&preflightErrors.length)panel.textContent+=' · '+preflightErrors.map(x=>(x.item.action.name||x.item.cue.name)+' : '+x.error.message).join(' / ');
  playBtnLabel.textContent='GO';playBtn.setAttribute('aria-label',tr('GO — prochaine musique'));S2AMaterial.set(playBtnIcon,'play_arrow');
  if(locked&&!getNextCue())setShowText($('showCountdownClock'),tr('EN ATTENTE DU GO'));
 }
@@ -1023,7 +1026,7 @@ function setConductType(value){
 }
 async function manualGO(){
  if(manualPending||manualPausePending||performance.now()-manualLastGO<TRANSPORT_GUARD_MS)return;
- const issues=manualIssues();if(issues.length)throw new Error(issues.join('\n'));
+ syncManualLinks();const issues=manualIssues();if(issues.length)throw new Error(issues.join('\n'));
  const next=manualNextMusic();if(!next)return;
  manualPending=true;manualLastGO=performance.now();const previous=manualCurrentID||manualCompletedID;const generation=++transportCommandGeneration;
  try{

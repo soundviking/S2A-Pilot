@@ -79,7 +79,7 @@ textarea{resize:vertical}
 }
 .marker.dragging::after,.marker.dragging::before{background:#fff0a8}
 .marker.dragging{z-index:5}
-.cueDragTime{position:absolute;top:24px;left:6px;white-space:nowrap;font-size:12px;font-weight:800;font-variant-numeric:tabular-nums;color:#fff;background:#15314f;border:1px solid #66a8ff;border-radius:6px;padding:3px 6px;pointer-events:none}
+.cueDragTime{position:absolute;z-index:10;top:24px;left:6px;white-space:nowrap;font-size:12px;font-weight:800;font-variant-numeric:tabular-nums;color:#fff;background:#15314f;border:1px solid #66a8ff;border-radius:6px;padding:3px 6px;pointer-events:none}
 .cueEditActions{display:flex;flex-direction:column;gap:8px}
 @media(max-width:760px){.cueEditGrid .cueEditActions{grid-column:2}}
 @media(max-width:480px){.cueEditGrid .cueEditActions{grid-column:1;flex-direction:row;flex-wrap:wrap}}
@@ -875,7 +875,7 @@ body.locked #timeline:focus-visible{outline:2px solid #66a8ff;outline-offset:4px
 body:not(.locked) .marker.selectedCueMarker::after{background:#80b9ff;width:5px;left:4px;box-shadow:0 0 12px #509dff;z-index:4}
 .timelineCueBubble.selectedCueBubble{background:#223e61;color:#fff;border:2px solid #80b9ff;box-shadow:0 0 10px #509dff;z-index:10}
 .timelineCueBubble.selectedCueBubble::before{border-color:#80b9ff}
-.manualWaveTop::after{content:'';position:absolute;top:100%;left:0;height:240px;width:3px;background:#b58aff;box-shadow:0 0 4px #b58aff;pointer-events:none}
+.manualWaveTop::after{content:'';position:absolute;top:100%;left:0;height:240px;width:3px;background:#ffd166;box-shadow:0 0 4px #ffd166;pointer-events:none}
 
 /* Only loaded by the old-browser branch. Static colors and flex replace CSS variables/grid. */
 body{padding:0}main.spectaclePriorityLayout{display:block!important}
