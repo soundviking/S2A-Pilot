@@ -129,3 +129,11 @@ Vérification : `tools/test-manual-sequences.cjs` passe dans Chrome et WebKit (a
 Fichier de test ajouté : `tools/test-manual-sequences.cjs`. Archives bêta reconstruites, branche principale et distributions stables conservées, aucun push.
 
 Limite de validation de cette passe : le scénario complet `test-manual-conduct.cjs` passe dans Chrome. Dans WebKit, le passage audio vers la deuxième musique rencontre un délai dépassé, avec et sans simulation hors connexion (un message WebKitBlobResource a aussi été observé). Les tests ciblés des nouvelles séquences passent dans les deux moteurs ; le scénario audio complet WebKit doit être revérifié avant de déclarer cette bêta stable.
+
+## Ajustements Cue et sélection
+
+- Bouton « Numéro muet » retiré : « + Cue » crée par défaut une Cue principale muette, indépendante. Le menu affiche « Aucune séquence » sans champ de temps relatif. Le rattachement la transforme en sous-Cue ; le détachement restaure la Cue principale muette.
+- Appellation Cue conservée pour les ajouts à la tête de lecture et les nouvelles sous-Cues ; repère vertical rétabli sous chaque étiquette dans la waveform musicale.
+- Zoom général réactivé en Manuel : la fenêtre initiale de 15 minutes reste ajustable, avec conservation du défilement tactile à deux doigts.
+- Sélection de liste : barre bleue lumineuse et étiquette en surbrillance dans la timeline générale ; la Cue sélectionnée a priorité sur les étiquettes voisines pour éviter son masquage.
+- Vérifications ciblées Chrome/WebKit : zoom, sélection, création indépendante, contrôle masqué en l’absence de séquence et gestes tactiles. Aucun push ni changement des versions stables.

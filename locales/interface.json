@@ -1925,5 +1925,20 @@
     "en": "Starts on GO · internal cues follow each act.",
     "es": "Inicios con GO · cues sincronizados con cada número.",
     "de": "Starts per GO · interne Cues folgen jeder Nummer."
+  },
+  "+ Cue à la tête de lecture": {
+    "en": "+ Cue at playhead",
+    "es": "+ Cue en el cabezal",
+    "de": "+ Cue am Abspielkopf"
+  },
+  "Départs au GO · Cues synchronisées à chaque numéro.": {
+    "en": "GO starts · Cues synchronized with each act.",
+    "es": "Inicio con GO · Cues sincronizadas con cada número.",
+    "de": "Start mit GO · Cues mit jeder Nummer synchronisiert."
+  },
+  "Aucune séquence": {
+    "en": "No sequence",
+    "es": "Ninguna secuencia",
+    "de": "Keine Sequenz"
   }
 }

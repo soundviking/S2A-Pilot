@@ -880,6 +880,11 @@ body.locked #timeline:focus-visible{outline:2px solid #66a8ff;outline-offset:4px
 }
 
 
+
+body:not(.locked) .marker.selectedCueMarker::after{background:#80b9ff;width:5px;left:4px;box-shadow:0 0 12px #509dff;z-index:4}
+.timelineCueBubble.selectedCueBubble{background:#223e61;color:#fff;border:2px solid #80b9ff;box-shadow:0 0 10px #509dff;z-index:10}
+.timelineCueBubble.selectedCueBubble::before{border-color:#80b9ff}
+.manualWaveTop::after{content:'';position:absolute;top:100%;left:0;height:240px;width:3px;background:#b58aff;box-shadow:0 0 4px #b58aff;pointer-events:none}
 </style>
 <link href="./manifest.webmanifest" rel="manifest"/>
 <meta content="#111318" name="theme-color"/>
@@ -888,7 +893,7 @@ body.locked #timeline:focus-visible{outline:2px solid #66a8ff;outline-offset:4px
 <meta content="S2A Pilot" name="apple-mobile-web-app-title"/>
 <link href="./icons/s2a-pilot-180.png?v=1.6.0-logo2" rel="apple-touch-icon"/>
 <link rel="stylesheet" href="./material-ui.css">
-<link rel="stylesheet" href="./quick-help.css?v=1.6.0-layout5">
+<link rel="stylesheet" href="./quick-help.css?v=1.6.0-layout6">
 <link rel="stylesheet" href="./startup.css?v=1.6.0"><style>
 body.manualConduct{--accent:#b58aff}
 body.manualConduct:not(.locked) .cueAccordion.expanded{background:#1b1f27;border-color:#b58aff;box-shadow:0 0 0 1px #b58aff55}
@@ -932,7 +937,7 @@ body.manualConduct.locked #timeline #playhead{display:block!important;pointer-ev
 .projectMediaBar.silent{background:#b58aff22;border-color:#b58aff77;color:#e1cdff}
 body.manualConduct .showOverviewRow.isActive{border-color:#b58aff;box-shadow:0 0 20px #b58aff55}
 </style></head>
-<body><script src="./i18n-catalog.js?v=1.6.0-layout5"></script><script src="./startup.js?v=1.6.0"></script>
+<body><script src="./i18n-catalog.js?v=1.6.0-layout6"></script><script src="./startup.js?v=1.6.0"></script>
 <main class="spectaclePriorityLayout">
 <div class="appTopBar">
 <img alt="Logo S2A Pilot" class="headerBrandLogo" src="./icons/s2a-pilot-192.png?v=1.6.0-logo2"/>
@@ -979,7 +984,6 @@ body.manualConduct .showOverviewRow.isActive{border-color:#b58aff;box-shadow:0 0
 <button hidden id="manualPauseBtn" type="button">Pause</button>
 <button disabled="" id="restartBtn" title="Retour au début" aria-label="Retour au début" data-material-action="skip_previous" data-material-only="">⏮</button>
 <button class="editOnly" disabled="" id="addCueBtn" data-material-action="add_circle">Cue</button>
-<button class="editOnly" hidden id="addSilentMainBtn" type="button">+ Numéro muet</button>
 <button class="editOnly" id="addMediaGlobalBtn" type="button" data-material-action="music_note_add">Musique / Vidéo</button><input id="globalMediaFile" type="file" accept="audio/*,video/*,.mp3,.m4a,.aac,.wav,.aif,.aiff,.flac,.ogg,.mp4,.m4v,.mov,.webm" hidden>
 <span class="transportClock"><span class="time" id="clock">00:00.0</span>
 <span class="muted" id="duration">/ 00:00.0</span></span>
@@ -1040,8 +1044,8 @@ window.s2aReportBootError=function(message){if(window.s2aBootReady)return;var bo
 window.addEventListener('error',function(e){window.s2aReportBootError((e.message||'Chargement impossible')+' — '+(e.filename||'')+':'+(e.lineno||''));});
 </script>
 <script src="./material-ui.js"></script>
-<script src="./help-images.js?v=1.6.0"></script><script src="./quick-help.js?v=1.6.0-layout5"></script><script src="./help-video.js?v=1.6.0-video1"></script>
-<script src="./compatibility-loader.js?v=1.6.0-layout5"></script>
+<script src="./help-images.js?v=1.6.0"></script><script src="./quick-help.js?v=1.6.0-layout6"></script><script src="./help-video.js?v=1.6.0-video1"></script>
+<script src="./compatibility-loader.js?v=1.6.0-layout6"></script>
 <dialog id="showLayoutDialog" class="showLayoutDialog" aria-labelledby="showLayoutTitle">
 <h2 id="showLayoutTitle">Disposition Show</h2>
 <button type="button" class="showLayoutChoice" data-show-layout="maverick" aria-pressed="true"><strong>Maverick</strong><span>Cues côte à côte. Les Cues passées disparaissent.</span></button>
