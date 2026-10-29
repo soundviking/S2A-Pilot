@@ -115,3 +115,17 @@ Le script `package-release.py` refuse désormais de produire une distribution st
 Vérifications supplémentaires : arrêt/reprise de l’audio réel, recherche pendant pause et lecture, identité musicale inchangée, retrait visible, pause pendant crossfade, alignement sur quatre largeurs, dernière Cue de l’aide visible et libellé Edit inchangé en FR/EN/ES/DE.
 
 Fichiers concernés en plus de la première liste : `PWA/quick-help.js`, `PWA/quick-help.css`.
+
+## Séquences manuelles et timeline longue
+
+- Ajout de numéros principaux muets, avec durée réglable et sous-Cues synchronisées. Ils attendent le GO suivant comme les musiques ; pause et recherche restent disponibles.
+- Sélection d’une Cue : marqueur sélectionné dans la timeline et défilement pour le rendre visible. Les nouvelles musiques sont ajoutées après les séquences existantes.
+- Fenêtre de timeline de 15 minutes, défilement horizontal au-delà, deux niveaux de pistes alternés maximum. Sur écran tactile : un doigt sélectionne/déplace la tête, deux doigts déplacent la vue sans GO ni changement de position.
+- Suppression de « + Top interne » dans les musiques ; seul l’ajout à la tête de lecture est conservé. Le numéro muet dispose du même ajout à partir de la tête principale.
+- Export/import des séquences muettes et prise en charge Bridge bêta, build 16002 minimum pour ces projets. Aucun changement du chemin Autopilote groupe + audio + Wait Cue.
+
+Vérification : `tools/test-manual-sequences.cjs` passe dans Chrome et WebKit (aller-retour du projet, musique puis silence, sous-Cues, pause/recherche, attente du GO, fenêtre de 15 minutes, deux niveaux, sélection et ajout de musique). Les gestes tactiles à un/deux doigts sont vérifiés avec des événements tactiles Chromium ; essai matériel iPad encore nécessaire. `tools/test-manual-bridge.py` valide le modèle et compile les scripts avec QLab 5, sans exécuter une conduite dans QLab.
+
+Fichier de test ajouté : `tools/test-manual-sequences.cjs`. Archives bêta reconstruites, branche principale et distributions stables conservées, aucun push.
+
+Limite de validation de cette passe : le scénario complet `test-manual-conduct.cjs` passe dans Chrome. Dans WebKit, le passage audio vers la deuxième musique rencontre un délai dépassé, avec et sans simulation hors connexion (un message WebKitBlobResource a aussi été observé). Les tests ciblés des nouvelles séquences passent dans les deux moteurs ; le scénario audio complet WebKit doit être revérifié avant de déclarer cette bêta stable.

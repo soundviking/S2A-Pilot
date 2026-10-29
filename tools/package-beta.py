@@ -14,7 +14,7 @@ with zipfile.ZipFile(folder/f'S2A-Pilot-Bridge-{version}-app.zip','w',zipfile.ZI
  for p in sorted(app.rglob('*')):
   if p.is_file():
    name='S2A Pilot Bridge.app/'+p.relative_to(app).as_posix();z.write(p,name);files.append(dict(path=name,mode=p.stat().st_mode,size=p.stat().st_size))
-(folder/'app-files.json').write_text(json.dumps(dict(version=version,channel='beta',architectures=['arm64','x86_64'],files=files),indent=2)+'\n')
+(folder/'app-files.json').write_text(json.dumps(dict(version=version,build=info['CFBundleVersion'],channel='beta',architectures=['arm64','x86_64'],files=files),indent=2)+'\n')
 bridge=out/f'S2A-Pilot-Bridge-{version}-beta-macOS-Universel.zip'
 with zipfile.ZipFile(bridge,'w',zipfile.ZIP_DEFLATED) as z:
  for p in sorted(app.rglob('*')):

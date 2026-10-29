@@ -1885,5 +1885,45 @@
     "en": "Resume",
     "es": "Reanudar",
     "de": "Fortsetzen"
+  },
+  "Numéro muet": {
+    "en": "Silent act",
+    "es": "Número sin música",
+    "de": "Nummer ohne Musik"
+  },
+  "+ Numéro muet": {
+    "en": "+ Silent act",
+    "es": "+ Número sin música",
+    "de": "+ Nummer ohne Musik"
+  },
+  "NUMÉRO MUET · GO": {
+    "en": "SILENT ACT · GO",
+    "es": "NÚMERO SIN MÚSICA · GO",
+    "de": "NUMMER OHNE MUSIK · GO"
+  },
+  "Ajoutez une musique ou un numéro muet.": {
+    "en": "Add music or a silent act.",
+    "es": "Añade música o un número sin música.",
+    "de": "Musik oder eine Nummer ohne Musik hinzufügen."
+  },
+  "Prochain numéro : {name}": {
+    "en": "Next act: {name}",
+    "es": "Siguiente número: {name}",
+    "de": "Nächste Nummer: {name}"
+  },
+  "Séquence :": {
+    "en": "Sequence:",
+    "es": "Secuencia:",
+    "de": "Sequenz:"
+  },
+  "Choisir une séquence": {
+    "en": "Choose a sequence",
+    "es": "Elegir una secuencia",
+    "de": "Sequenz auswählen"
+  },
+  "Départs au GO · tops synchronisés à chaque numéro.": {
+    "en": "Starts on GO · internal cues follow each act.",
+    "es": "Inicios con GO · cues sincronizados con cada número.",
+    "de": "Starts per GO · interne Cues folgen jeder Nummer."
   }
 }

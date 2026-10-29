@@ -44,7 +44,9 @@ struct ShowCueProject: Codable {
         var idString: String? = nil
         var parentMusicId: String? = nil
         var relativeTime: Double? = nil
-        enum CodingKeys: String, CodingKey { case idString = "id", parentMusicId, relativeTime, index, time, type, name, description, isBase, imagePath, mediaActions }
+        var manualKind: String? = nil
+        var manualDuration: Double? = nil
+        enum CodingKeys: String, CodingKey { case idString = "id", parentMusicId, relativeTime, manualKind, manualDuration, index, time, type, name, description, isBase, imagePath, mediaActions }
         let index: Int
         let time: Double
         let type: String?
@@ -55,6 +57,12 @@ struct ShowCueProject: Codable {
         let mediaActions: [MediaAction]?
 
         var id: Int { index }
+        var isManualMain: Bool { manualKind == "silent" || (mediaActions ?? []).contains { $0.isAudio } }
+        var manualSpan: Double {
+            if manualKind == "silent" { return manualDuration ?? 0 }
+            guard let audio = mediaActions?.first(where: { $0.isAudio }) else { return 0 }
+            return (audio.end ?? 0) - audio.start
+        }
 
         var monitorDescription: String? {
             guard let text = description?.trimmingCharacters(in: .whitespacesAndNewlines), !text.isEmpty else { return nil }
@@ -100,31 +108,29 @@ struct ShowCueProject: Codable {
             throw ManualConductError(message: "Type de conduite inconnu : import annulé." )
         }
         guard isManual else { return [self] }
-        let music = cues.filter { ($0.mediaActions ?? []).contains { $0.isAudio } }.sorted { $0.time < $1.time }
+        let music = cues.filter(\.isManualMain).sorted { $0.time < $1.time }
         guard !music.isEmpty else { throw ManualConductError(message: "Conduite Manuel sans musique." ) }
         let ids = music.compactMap(\.idString)
         guard Set(ids).count == music.count else { throw ManualConductError(message: "Identifiants de musiques manquants ou dupliqués." ) }
         for cue in cues where !music.contains(where: { $0.index == cue.index }) {
             guard let parent = music.first(where: { $0.idString == cue.parentMusicId }),
-                  let relative = cue.relativeTime, relative.isFinite, relative >= 0,
-                  let action = parent.mediaActions?.first(where: { $0.isAudio }),
-                  relative <= (action.loop == true ? Double.infinity : (action.end ?? 0) - action.start) else {
+                  let relative = cue.relativeTime, relative.isFinite, relative >= 0, relative <= parent.manualSpan else {
                 throw ManualConductError(message: "Top sans rattachement valide : " + cue.name )
             }
         }
         let encoded = try JSONEncoder().encode(self)
         let source = try JSONSerialization.jsonObject(with: encoded) as! [String: Any]
         return try music.map { parent in
-            guard let audio = parent.mediaActions?.first(where: { $0.isAudio }),
-                  parent.mediaActions?.filter({ $0.isAudio }).count == 1, audio.loop != true,
-                  let end = audio.end, end > audio.start else {
+            let audio = parent.mediaActions?.filter { $0.isAudio } ?? []
+            guard parent.manualSpan.isFinite, parent.manualSpan > 0,
+                  (parent.manualKind == "silent" ? audio.isEmpty : audio.count == 1 && audio[0].loop != true) else {
                 throw ManualConductError(message: "Une musique principale sans boucle et une durée connues sont requises : " + parent.name )
             }
             var object = source
             object["title"] = title + " — " + parent.name
-            object["showDuration"] = end - audio.start
-            object["showDurationOverride"] = end - audio.start
-            let children = cues.filter { $0.index == parent.index || ($0.parentMusicId == parent.idString && !($0.mediaActions ?? []).contains(where: { $0.isAudio })) }
+            object["showDuration"] = parent.manualSpan
+            object["showDurationOverride"] = parent.manualSpan
+            let children = cues.filter { $0.index == parent.index || ($0.parentMusicId == parent.idString && !$0.isManualMain) }
             object["cues"] = try children.map { child -> [String: Any] in
                 let data = try JSONEncoder().encode(child)
                 var entry = try JSONSerialization.jsonObject(with: data) as! [String: Any]
