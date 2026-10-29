@@ -11,14 +11,14 @@ const videoOutputBtn=$('videoOutputBtn'),videoOutputState=$('videoOutputState');
 const startupProjectInfo=$('startupProjectInfo'),newProjectBtn=$('newProjectBtn'),playBtnIcon=$('playBtnIcon'),playBtnLabel=$('playBtnLabel');
 
 const DB_NAME='s2a-pilot-beta-1-6', META_STORE='autosave', ASSET_STORE='assets', LEGACY_MEDIA_STORE='media', META_KEY='latest', DB_VERSION=3;
-const DEFAULT_DURATION=300, HISTORY_LIMIT=100;
+const DEFAULT_DURATION=300, HISTORY_LIMIT=100, TRANSPORT_GUARD_MS=500;
 let cues=[],locked=false,transportTime=0,transportPlaying=false,transportEpoch=0,transportBase=0,lastTransportTime=0,rafId=0,transportCommandGeneration=0;
 let undoStack=[],redoStack=[],autosaveTimer=null,workspaceCommitted=false,currentProjectName=null;
 const manualGainNodes=new WeakMap();
 let runtimeAudio=new Map(),runtimeVideo=null,videoOutputWindow=null,assetUrlCache=new Map(),assetBlobCache=new Map();
 let preparedMedia=new Map(),preflightState='idle',preflightErrors=[],expandedCueId=null,seekGeneration=0,preflightPromise=null;
 let startupSaved=null,showDurationOverride=null,showLayout='maverick';
-let conductType='autopilot',manualCurrentID=null,manualCompletedID=null,manualPending=false,manualLastGO=-Infinity,manualFade=null;
+let conductType='autopilot',manualCurrentID=null,manualCompletedID=null,manualPending=false,manualLastGO=-Infinity,manualFade=null,manualPausedAt=null,manualPausePending=false;
 const mediaVisualCache=new Map();
 const generalTimelineViewport=$('generalTimelineViewport');let generalTimelineZoom=1;
 let timelineMediaGeneration=0,timelineMediaSignature='',timelineMediaTimer=null;
@@ -153,7 +153,7 @@ async function probeMedia(file){return new Promise(resolve=>{const kind=file.typ
 function clampTime(t){return Math.max(0,Math.min(Number(t)||0,projectDuration()));}
 function currentTransportTime(){if(conductType==='manual')return transportTime;return transportPlaying?clampTime(transportBase+(performance.now()-transportEpoch)/1000):transportTime;}
 function setTransportTime(t,rebuild=true){if(conductType==='manual'&&transportPlaying)return;transportTime=clampTime(t);transportBase=transportTime;transportEpoch=performance.now();lastTransportTime=transportTime;if(rebuild)rebuildMediaAtTime(transportTime,transportPlaying);updateTransport();}
-async function seekTransport(t){if(conductType==='manual'){if(transportPlaying)return;transportTime=clampTime(t);updateTransport();return;}const wasPlaying=transportPlaying,nt=clampTime(t);transportTime=nt;transportBase=nt;transportEpoch=performance.now();lastTransportTime=nt;updateTransport();await rebuildMediaAtTime(nt,wasPlaying);if(wasPlaying){transportBase=nt;transportEpoch=performance.now();lastTransportTime=nt;if(!rafId)rafId=requestAnimationFrame(animationLoop);}updateTransport();}
+async function seekTransport(t){if(conductType==='manual')return seekManualTransport(t);const wasPlaying=transportPlaying,nt=clampTime(t);transportTime=nt;transportBase=nt;transportEpoch=performance.now();lastTransportTime=nt;updateTransport();await rebuildMediaAtTime(nt,wasPlaying);if(wasPlaying){transportBase=nt;transportEpoch=performance.now();lastTransportTime=nt;if(!rafId)rafId=requestAnimationFrame(animationLoop);}updateTransport();}
 
 function allActions(kind){return indexedActions(kind);}
 let audioContext=null;async function ensureAudioContext(){if(!audioContext)audioContext=new(window.AudioContext||window.webkitAudioContext)();if(audioContext.state==='suspended')await audioContext.resume();return audioContext;}
@@ -532,7 +532,7 @@ function centerEditedCue(cueId){
  });
 }
 
-function renderCues(renderTl=true,onlyCueId=null){syncManualLinks();showOverviewSignature='';disposeMediaPreviews(onlyCueId);invalidateComputationCaches();ensureBaseCueInvariant();normalizeCueOrderAndNames();if(expandedCueId&&!cues.some(c=>c.id===expandedCueId))expandedCueId=null;if(!onlyCueId)cueList.innerHTML='';cueCount.textContent=`${cues.length} Cue${cues.length>1?'s':''}`;cues.forEach((cue,index)=>{if(onlyCueId&&cue.id!==onlyCueId)return;const previousRow=onlyCueId?cueList.querySelector(`[data-cue-id="${cue.id}"]`):null;const acc=document.createElement('div');acc.className='cueAccordion'+(expandedCueId===cue.id?' expanded':'');acc.dataset.cueId=cue.id;const summary=document.createElement('div');summary.className='cueSummary';summary.tabIndex=0;summary.setAttribute('role','button');summary.setAttribute('aria-expanded',expandedCueId===cue.id?'true':'false');const num=document.createElement('div');num.className='cueNumber';num.textContent=`CUE ${index+1}`;if(!locked){const handle=document.createElement('button');handle.type='button';handle.className='cueDragHandle';handle.textContent='⠿';handle.title=tr('Glisser pour déplacer la Cue et ajuster son temps (Alt + flèches au clavier)');handle.setAttribute('aria-label',tr('Déplacer ')+(cue.name||tr('la Cue')));handle.onclick=e=>e.stopPropagation();num.prepend(handle);attachCueDrag(handle,cue,acc);}const st=document.createElement('div');st.className='cueSummaryTime';st.textContent=conductType==='manual'&&cue.parentMusicId&&!(cue.mediaActions||[]).some(a=>a.kind==='audio')?'+'+fmt(cue.relativeTime):fmt(cue.time);const sm=document.createElement('div');sm.className='cueSummaryMain';const sn=document.createElement('div');sn.className='cueSummaryName';sn.textContent=cue.name||`Cue ${index+1}`;const sd=document.createElement('div');sd.className='cueSummaryDescription';sd.textContent=cue.description||((cue.mediaActions||[]).length?'':tr('Aucune indication'));sm.append(sn,sd);const chips=document.createElement('div');chips.className='cueSummaryMedia';for(const kind of ['audio','video']){const n=(cue.mediaActions||[]).filter(a=>a.kind===kind).length;if(n){const ch=document.createElement('span');ch.className='cueMediaChip '+kind+' '+cuePreparationClass(cue);ch.textContent=`${kind==='audio'?'AUDIO':tr('VIDÉO')}${n>1?' ×'+n:''}`;chips.append(ch);}}if((cue.mediaActions||[]).some(a=>a.kind==='stopAll')){const ch=document.createElement('span');ch.className='cueMediaChip stop';ch.textContent='STOP';chips.append(ch);}summary.append(num,st,sm,chips);const toggle=()=>{const previous=expandedCueId;expandedCueId=previous===cue.id?null:cue.id;if(previous&&previous!==cue.id)renderCues(false,previous);renderCues(false,cue.id);renderTimeline();centerEditedCue(expandedCueId);};summary.onclick=e=>{if(e.target.closest('button,input,select,textarea,label'))return;toggle();};summary.onkeydown=e=>{if(e.target.closest('button,input,select,textarea,label'))return;if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();}};
+function renderCues(renderTl=true,onlyCueId=null){syncManualLinks();showOverviewSignature='';disposeMediaPreviews(onlyCueId);invalidateComputationCaches();ensureBaseCueInvariant();normalizeCueOrderAndNames();if(expandedCueId&&!cues.some(c=>c.id===expandedCueId))expandedCueId=null;if(!onlyCueId)cueList.innerHTML='';cueCount.textContent=`${cues.length} Cue${cues.length>1?'s':''}`;cues.forEach((cue,index)=>{if(onlyCueId&&cue.id!==onlyCueId)return;const previousRow=onlyCueId?cueList.querySelector(`[data-cue-id="${cue.id}"]`):null;const acc=document.createElement('div');acc.className='cueAccordion'+(expandedCueId===cue.id?' expanded':'')+(isManualInternalCue(cue)?' manualInternalCue':'');acc.dataset.cueId=cue.id;const summary=document.createElement('div');summary.className='cueSummary';summary.tabIndex=0;summary.setAttribute('role','button');summary.setAttribute('aria-expanded',expandedCueId===cue.id?'true':'false');const num=document.createElement('div');num.className='cueNumber';num.textContent=`CUE ${index+1}`;if(!locked){const handle=document.createElement('button');handle.type='button';handle.className='cueDragHandle';handle.textContent='⠿';handle.title=tr('Glisser pour déplacer la Cue et ajuster son temps (Alt + flèches au clavier)');handle.setAttribute('aria-label',tr('Déplacer ')+(cue.name||tr('la Cue')));handle.onclick=e=>e.stopPropagation();num.prepend(handle);attachCueDrag(handle,cue,acc);}const st=document.createElement('div');st.className='cueSummaryTime';st.textContent=conductType==='manual'&&cue.parentMusicId&&!(cue.mediaActions||[]).some(a=>a.kind==='audio')?'+'+fmt(cue.relativeTime):fmt(cue.time);const sm=document.createElement('div');sm.className='cueSummaryMain';const sn=document.createElement('div');sn.className='cueSummaryName';sn.textContent=cue.name||`Cue ${index+1}`;const sd=document.createElement('div');sd.className='cueSummaryDescription';sd.textContent=cue.description||((cue.mediaActions||[]).length?'':tr('Aucune indication'));sm.append(sn,sd);const chips=document.createElement('div');chips.className='cueSummaryMedia';for(const kind of ['audio','video']){const n=(cue.mediaActions||[]).filter(a=>a.kind===kind).length;if(n){const ch=document.createElement('span');ch.className='cueMediaChip '+kind+' '+cuePreparationClass(cue);ch.textContent=`${kind==='audio'?'AUDIO':tr('VIDÉO')}${n>1?' ×'+n:''}`;chips.append(ch);}}if((cue.mediaActions||[]).some(a=>a.kind==='stopAll')){const ch=document.createElement('span');ch.className='cueMediaChip stop';ch.textContent='STOP';chips.append(ch);}summary.append(num,st,sm,chips);const toggle=()=>{const previous=expandedCueId;expandedCueId=previous===cue.id?null:cue.id;if(previous&&previous!==cue.id)renderCues(false,previous);renderCues(false,cue.id);renderTimeline();centerEditedCue(expandedCueId);};summary.onclick=e=>{if(e.target.closest('button,input,select,textarea,label'))return;toggle();};summary.onkeydown=e=>{if(e.target.closest('button,input,select,textarea,label'))return;if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();}};
 const details=document.createElement('div');details.className='cueDetails';const grid=document.createElement('div');grid.className='cueEditGrid';const ti=document.createElement('input');ti.className='timeInput'+(cue.isBase?' baseCueTime':'');ti.value=fmt(cue.time);ti.setAttribute('aria-label',tr('Temps de la Cue'));ti.title=tr('Exemples : 02:41.0 ou 02.41 pour 2 minutes 41 ; 02:41.5 pour les dixièmes.');ti.disabled=locked;const fields=document.createElement('div');fields.className='cueTextFields';const name=document.createElement('input');name.type='text';name.value=cue.name;name.disabled=locked;const desc=document.createElement('textarea');desc.className='cueDescription';desc.placeholder=tr('Description / indication de conduite');desc.value=cue.description||'';desc.disabled=locked;fields.append(name,desc);const imgc=document.createElement('div');imgc.className='imageControls';if(cue.imageDataUrl){const im=document.createElement('img');im.className='cueImageThumb';im.src=cue.imageDataUrl;imgc.append(im);}const il=document.createElement('label');il.className='fileLabel';S2AMaterial.button(il,'add_photo_alternate',cue.imageDataUrl?tr('Changer visuel'):tr('Ajouter visuel'));const ii=document.createElement('input');ii.type='file';ii.accept='image/*';ii.disabled=locked;ii.onchange=async()=>{const f=ii.files?.[0];if(!f)return;pushHistory();cue.imageDataUrl=await fileToDataURL(f);cue.imageName=f.name;expandedCueId=cue.id;renderCues();scheduleAutosave();};il.append(ii);imgc.append(il);if(cue.imageDataUrl){const ri=document.createElement('button');S2AMaterial.button(ri,'hide_image',tr('Retirer visuel'));ri.disabled=locked;ri.onclick=()=>{pushHistory();cue.imageDataUrl=null;cue.imageName=null;expandedCueId=cue.id;renderCues();scheduleAutosave();};imgc.append(ri);}const del=document.createElement('button');del.className='cueDeleteBtn';del.type='button';S2AMaterial.set(del,'delete');del.title=tr('Supprimer')+' CUE '+(index+1);del.setAttribute('aria-label',del.title);del.disabled=locked;del.onclick=async e=>{e.stopPropagation();if(locked)return;if(!await confirmCueDeletion(cue,index,del)||locked||!cues.includes(cue))return;pushHistory();cues.splice(cues.indexOf(cue),1);expandedCueId=null;invalidatePreflight();renderCues();scheduleAutosave();};const actions=document.createElement('div');actions.className='cueEditActions';const duplicate=document.createElement('button');duplicate.type='button';S2AMaterial.button(duplicate,'content_copy',tr('Dupliquer'));duplicate.disabled=locked;duplicate.onclick=()=>duplicateCue(cue);actions.append(duplicate);if(!locked)summary.append(del);grid.append(ti,fields,imgc,actions);const panel=document.createElement('div');panel.className='cueMediaPanel';const mh=document.createElement('div');mh.className='cueMediaHeader';const mt=document.createElement('div');mt.className='cueMediaTitle';mt.textContent=tr('MÉDIAS DÉCLENCHÉS PAR CETTE CUE');mh.append(mt);const list=document.createElement('div');list.className='mediaActionList';if(!(cue.mediaActions||[]).length){const empty=document.createElement('div');empty.className='cueMediaEmpty';empty.textContent=tr('Aucun média — cette Cue peut rester une simple indication de conduite.');list.append(empty);}else for(const a of cue.mediaActions)list.append(mediaActionElement(cue,a));panel.append(mh,list);details.append(grid);if((cue.mediaActions||[]).length)details.append(panel);acc.append(summary,details);if(previousRow)previousRow.replaceWith(acc);else cueList.append(acc);const commitTime=()=>{const t=parseTime(ti.value);if(t===null){ti.value=fmt(cue.time);return;}pushHistory();cue.time=Math.max(0,roundTenth(t));updateManualRelative(cue);normalizeCueOrderAndNames();expandedCueId=cue.id;renderCues();scheduleAutosave();};ti.onchange=commitTime;let nameBefore=null,descBefore=null;name.onfocus=()=>{nameBefore=captureEditableState();};desc.onfocus=()=>{descBefore=captureEditableState();};name.oninput=()=>{cue.name=name.value;updateShowPanels();scheduleAutosave();};desc.oninput=()=>{cue.description=desc.value;updateShowPanels();scheduleAutosave();};name.onchange=()=>{pushHistory(nameBefore||captureEditableState());cue.name=name.value;expandedCueId=cue.id;renderCues(true,cue.id);scheduleAutosave();};desc.onchange=()=>{pushHistory(descBefore||captureEditableState());cue.description=desc.value;updateShowPanels();scheduleAutosave();};});if(renderTl)renderTimeline();setEnabled();updateTransport();updateDurationEditor();updatePreflightUI();updateVideoOutputControls();renderManualEditor();}
 function fileToDataURL(file){return new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=()=>rej(r.error);r.readAsDataURL(file);});}
 
@@ -593,10 +593,11 @@ function startNewProject(){conductType='autopilot';resetManualRuntime();setShowL
 async function startup(){try{startupSaved=await readAutosave();}catch(e){console.warn(e);}if(startupSaved&&Array.isArray(startupSaved.cues)){const title=startupSaved.title?.trim()||tr('Projet sans nom');showSavedStatus({...startupSaved,title},'restored');try{await loadWorkspace(startupSaved);}catch(e){console.warn(e);startNewProject();}}else{startupProjectInfo.textContent=tr('Aucune sauvegarde locale détectée.');startNewProject();}}
 
 let spaceTransportPending=false,transportAcceptedAt=-Infinity;
+function showTransportGuard(){playBtn.classList.add('spaceGuard');setTimeout(()=>playBtn.classList.remove('spaceGuard'),TRANSPORT_GUARD_MS);}
 function toggleTransportGuarded(){
  if(conductType==='manual'){manualGO().catch(e=>alert(e.message));return;}
- if(spaceTransportPending||playBtn.disabled||performance.now()-transportAcceptedAt<500)return;
- transportAcceptedAt=performance.now();playBtn.classList.add('spaceGuard');setTimeout(()=>playBtn.classList.remove('spaceGuard'),500);
+ if(spaceTransportPending||playBtn.disabled||performance.now()-transportAcceptedAt<TRANSPORT_GUARD_MS)return;
+ transportAcceptedAt=performance.now();showTransportGuard();
  if(transportPlaying){pauseTransport();return;}
  spaceTransportPending=true;Promise.resolve(playTransport()).catch(console.warn).finally(()=>{spaceTransportPending=false;});
 }
@@ -619,6 +620,12 @@ timeline.addEventListener('pointerdown',e=>{
  const panOnly=e.pointerType==='touch'&&generalTimelineZoom>1&&e.target!==playhead;
  const startX=e.clientX,startY=e.clientY,rect=timeline.getBoundingClientRect(),duration=projectDuration(),original=currentTransportTime(),wasPlaying=transportPlaying;
  let dragging=false;timeline.setPointerCapture(e.pointerId);
+ if(conductType==='manual'){
+  const at=ev=>Math.max(0,Math.min(duration,(ev.clientX-rect.left)/rect.width*duration));
+  const move=ev=>{if(panOnly)return;if(!dragging&&Math.abs(ev.clientX-startX)<3)return;dragging=true;ev.preventDefault();seekManualTransport(at(ev)).catch(console.warn);};
+  const end=ev=>{timeline.removeEventListener('pointermove',move);timeline.removeEventListener('pointerup',end);timeline.removeEventListener('pointercancel',end);timeline.removeEventListener('lostpointercapture',end);if(panOnly)return;const tap=Math.abs(ev.clientX-startX)<5&&Math.abs(ev.clientY-startY)<5;if(dragging||tap)seekManualTransport(ev.type==='pointerup'?at(ev):original).catch(console.warn);};
+  timeline.addEventListener('pointermove',move);timeline.addEventListener('pointerup',end);timeline.addEventListener('pointercancel',end);timeline.addEventListener('lostpointercapture',end);return;
+ }
  const preview=ev=>{if(panOnly)return;if(!dragging&&Math.abs(ev.clientX-startX)<3&&Math.abs(ev.clientY-startY)<3)return;
   if(!dragging){dragging=true;pauseTransport();}ev.preventDefault();transportTime=Math.max(0,Math.min(duration,(ev.clientX-rect.left)/rect.width*duration));updateTransport();};
  const finish=ev=>{timeline.removeEventListener('pointermove',preview);timeline.removeEventListener('pointerup',finish);timeline.removeEventListener('pointercancel',finish);timeline.removeEventListener('lostpointercapture',finish);
@@ -959,6 +966,7 @@ if('serviceWorker' in navigator){
 
 
 // Manual conduct keeps the canonical chronological cue list; links add relative timing.
+function isManualInternalCue(cue){return conductType==='manual'&&!!cue.parentMusicId&&!(cue.mediaActions||[]).some(a=>a.kind==='audio');}
 function manualMusics(){return orderedCues().filter(c=>(c.mediaActions||[]).some(a=>a.kind==='audio'));}
 function manualDuration(c){const a=(c?.mediaActions||[]).find(a=>a.kind==='audio');return a?.loop?Infinity:mediaSegmentDuration(a);}
 function manualCurrent(){return cues.find(c=>c.id===manualCurrentID)||null;}
@@ -975,18 +983,20 @@ function manualIssues(){
  for(const c of cues){if(music.includes(c))continue;const p=music.find(p=>p.id===c.parentMusicId);if(!p||!Number.isFinite(c.relativeTime)||c.relativeTime<0||c.relativeTime> manualDuration(p))issues.push(c.name+' : '+tr('Choisissez une musique et un temps relatif valides.'));}
  return issues;
 }
-function resetManualRuntime(){manualCurrentID=null;manualCompletedID=null;manualFade=null;manualPending=false;manualLastGO=-Infinity;}
+function resetManualRuntime(){manualCurrentID=null;manualCompletedID=null;manualFade=null;manualPending=false;manualLastGO=-Infinity;manualPausedAt=null;manualPausePending=false;}
 function manualActiveCue(t){const p=manualCurrent()||cues.find(c=>c.id===manualCompletedID);if(!p)return null;return manualChildren(p).filter(c=>c.time<=t+.0001).pop()||p;}
-function manualNextTop(t){const p=manualCurrent();return transportPlaying&&p?manualChildren(p).find(c=>c.time>t+.0001)||null:null;}
+function manualNextTop(t){const p=manualCurrent();return (transportPlaying||manualPausedAt!==null)&&p?manualChildren(p).find(c=>c.time>t+.0001)||null:null;}
 function manualNextMusic(){const m=manualMusics(),id=manualCurrentID||manualCompletedID;return m[id?m.findIndex(c=>c.id===id)+1:0]||null;}
 function updateManualStatus(){
  document.body.classList.toggle('manualConduct',conductType==='manual');
+ playBtn.title=conductType==='manual'?tr('GO — prochaine musique')+' (Espace)':tr('Lecture / Pause (Espace)');
  const select=$('conductType');if(select){select.value=conductType;select.disabled=locked||transportPlaying;}
+ const pauseButton=$('manualPauseBtn');pauseButton.hidden=conductType!=='manual'||!locked;pauseButton.disabled=!manualCurrentID||manualPending||manualPausePending;pauseButton.textContent=tr(manualPausedAt!==null?'Reprendre':'Pause');pauseButton.setAttribute('aria-label',pauseButton.textContent);
  const panel=$('manualShowStatus');if(!panel)return;panel.hidden=conductType!=='manual';
  if(conductType!=='manual')return;
  playBtn.disabled=manualPending||manualIssues().length>0||!allMediaActions().every(x=>preparedMedia.get(x.action.id)?.ready);
  const current=manualCurrent(),next=manualNextMusic();
- panel.textContent=(transportPlaying?tr('EN LECTURE — {name}',{name:current?.name||''}):tr('EN ATTENTE DU GO'))+(next?' · '+tr('Prochaine musique : {name}',{name:next.name}):manualCompletedID&&!transportPlaying?' · '+tr('Fin de conduite'):'');
+ panel.textContent=(manualPausedAt!==null?tr('Pause')+' — '+(current?.name||''):transportPlaying?tr('EN LECTURE — {name}',{name:current?.name||''}):tr('EN ATTENTE DU GO'))+(next?' · '+tr('Prochaine musique : {name}',{name:next.name}):manualCompletedID&&!transportPlaying?' · '+tr('Fin de conduite'):'');
  playBtnLabel.textContent='GO';playBtn.setAttribute('aria-label',tr('GO — prochaine musique'));S2AMaterial.set(playBtnIcon,'play_arrow');
  if(locked&&!getNextCue())setShowText($('showCountdownClock'),tr('EN ATTENTE DU GO'));
 }
@@ -1005,7 +1015,7 @@ function setConductType(value){
  renderCues();scheduleAutosave();
 }
 async function manualGO(){
- if(manualPending||performance.now()-manualLastGO<600)return;
+ if(manualPending||manualPausePending||performance.now()-manualLastGO<TRANSPORT_GUARD_MS)return;
  const issues=manualIssues();if(issues.length)throw new Error(issues.join('\n'));
  const next=manualNextMusic();if(!next)return;
  manualPending=true;manualLastGO=performance.now();const previous=manualCurrentID||manualCompletedID;const generation=++transportCommandGeneration;
@@ -1019,19 +1029,49 @@ async function manualGO(){
   }
   // Safari requires play() inside the actual keyboard/touch event, before any await.
   const contextReady=ensureAudioContext();
-  const outgoing=[...runtimeAudio.values()];for(const rt of outgoing)delete rt.globalFadeStartedAt;manualFade=null;stopVideoRuntime();
+  const outgoing=[...runtimeAudio.values()].filter(rt=>!rt.el.paused);for(const rt of [...runtimeAudio.values()]){if(rt.el.paused)stopAudioRuntime(rt.item.action.id);else delete rt.globalFadeStartedAt;}manualPausedAt=null;manualFade=null;stopVideoRuntime();
   manualCurrentID=next.id;manualCompletedID=null;transportTime=transportBase=next.time;transportEpoch=performance.now();lastTransportTime=next.time;transportPlaying=true;
   const rt={item,el:prepared.el};runtimeAudio.set(primary.id,rt);rt.el.currentTime=Number(primary.inPoint)||0;setRuntimeGain(rt,outgoing.length?0:1);
   const started=rt.el.play();await Promise.all([contextReady,started]);
   if(generation!==transportCommandGeneration)return;
   if(!rt||rt.el.paused){transportPlaying=false;manualCurrentID=null;throw new Error(tr('La lecture audio n’a pas démarré. Relancez le GO.'));}
-  manualLastGO=performance.now();
+  manualLastGO=performance.now();showTransportGuard();
   if(outgoing.length)manualFade={started:performance.now(),incoming:rt,outgoing:outgoing.map(x=>({rt:x,gain:x.manualGainValue??x.el.volume}))};
   for(const c of [next,...manualChildren(next).filter(c=>c.relativeTime===0)]){
    const remaining={...c,mediaActions:(c.mediaActions||[]).filter(a=>a.id!==primary.id&&(c!==next||a.kind!=='stopAll'))};await onCueCrossed(remaining);
   }
   if(!rafId)rafId=requestAnimationFrame(animationLoop);showOverviewSignature='';updateTransport();
  }catch(error){if(generation===transportCommandGeneration){manualCurrentID=null;manualCompletedID=previous;manualFade=null;pauseTransport();stopAllRuntimeMedia();}throw error;}finally{manualPending=false;updateManualStatus();}
+}
+async function toggleManualPause(){
+ if(conductType!=='manual'||!locked||!manualCurrentID||manualPending||manualPausePending)return;
+ if(transportPlaying){manualPausedAt=performance.now();pauseTransport();updateManualStatus();return;}
+ if(manualPausedAt===null)return;
+ const pausedAt=manualPausedAt,generation=++transportCommandGeneration;manualPausePending=true;
+ try{
+  // Start media in the button event, just as GO does on Safari.
+  const contextReady=ensureAudioContext();transportPlaying=true;
+  const promises=[...runtimeAudio.values()].map(rt=>rt.el.play());if(runtimeVideo)promises.push(runtimeVideo.el.play());
+  await Promise.all([contextReady,...promises]);if(generation!==transportCommandGeneration)return;
+  if(manualFade)manualFade.started+=performance.now()-pausedAt;
+  manualPausedAt=null;transportBase=transportTime;transportEpoch=performance.now();lastTransportTime=transportTime;
+  if(!rafId)rafId=requestAnimationFrame(animationLoop);syncExternalVideo(true);updateTransport();
+ }catch(error){if(generation===transportCommandGeneration)pauseTransport();throw error;}
+ finally{manualPausePending=false;updateManualStatus();}
+}
+$('manualPauseBtn').addEventListener('click',()=>toggleManualPause().catch(e=>alert(e.message)));
+function seekManualTransport(target){
+ const parent=manualCurrent();if(!parent){transportTime=clampTime(target);updateTransport();return Promise.resolve();}
+ const action=(parent.mediaActions||[]).find(a=>a.kind==='audio'),rt=runtimeAudio.get(action?.id);if(!rt)return Promise.resolve();
+ const relative=Math.max(0,Math.min(Math.max(0,manualDuration(parent)-.05),(Number(target)||0)-parent.time)),position=parent.time+relative;
+ // Seeking never changes music, never issues GO and never pauses its audio element.
+ ++seekGeneration;manualFade=null;for(const id of [...runtimeAudio.keys()])if(id!==action.id)stopAudioRuntime(id);
+ delete rt.globalFadeStartedAt;setRuntimeGain(rt,1);rt.el.currentTime=(Number(action.inPoint)||0)+relative;
+ transportTime=transportBase=lastTransportTime=position;transportEpoch=performance.now();
+ const candidates=[parent,...manualChildren(parent)].filter(c=>c.time<=position+.0001);
+ const videos=candidates.flatMap(c=>(c.mediaActions||[]).filter(a=>a.kind==='video').map(a=>({cue:c,action:a,start:c.time}))),video=videos[videos.length-1];
+ const rebuild=video&&mediaIsActiveAt(video.action,position-video.start)?activateVideo(video,position-video.start,transportPlaying):Promise.resolve(stopVideoRuntime());
+ showOverviewSignature='';updateTransport();return Promise.resolve(rebuild).then(()=>syncExternalVideo(true));
 }
 function manualAnimationLoop(){
  rafId=0;if(!transportPlaying)return;const p=manualCurrent();if(!p)return;
@@ -1058,7 +1098,7 @@ function renderManualEditor(){
  if(!$('conductType')){
   const label=document.createElement('label');label.className='conductSelector editOnly';label.append(tr('Type de conduite :')+' ');
   const select=document.createElement('select');select.id='conductType';for(const [value,text] of [['autopilot','Autopilote'],['manual','Manuel']]){const o=document.createElement('option');o.value=value;o.textContent=tr(text);select.append(o);}select.onchange=()=>setConductType(select.value);label.append(select);
-  const hint=document.createElement('div');hint.id='conductHelp';hint.className='small editOnly';label.append(hint);document.querySelector('.showTitleWrap').after(label);
+  const hint=document.createElement('div');hint.id='conductHelp';hint.className='small editOnly conductHelp';const titleWrap=document.querySelector('.showTitleWrap'),row=document.createElement('div');row.className='projectHeadingRow';titleWrap.before(row);row.append(titleWrap,label);row.after(hint);
   const status=document.createElement('div');status.id='manualShowStatus';status.dataset.noI18n='true';status.setAttribute('role','status');document.querySelector('.timelineTransport').prepend(status);
  }
  updateManualStatus();$('conductHelp').textContent=conductType==='manual'?tr('Départs musicaux au GO · tops synchronisés à chaque morceau.'):tr('Conduite chronométrée automatique.');
@@ -1185,7 +1225,7 @@ function updateShowOverview(){
  host.replaceChildren();
  if(!ordered.length){const empty=document.createElement('div');empty.className='small muted';empty.textContent=tr('Aucune Cue');host.append(empty);}
  for(const cue of ordered){
-  const row=document.createElement('div');row.className='showOverviewRow'+(cue===active?' isActive':'')+(cue===next?' isNext':'');row.dataset.cueId=cue.id;
+  const row=document.createElement('div');row.className='showOverviewRow'+(cue===active?' isActive':'')+(cue===next?' isNext':'')+(isManualInternalCue(cue)?' manualInternalCue':'');row.dataset.cueId=cue.id;
   if(cue===active)row.setAttribute('aria-current','step');
   const number=document.createElement('span');number.className='overviewNumber';number.textContent=String(cues.indexOf(cue)+1);
   const visual=document.createElement('div');visual.className='overviewVisual';

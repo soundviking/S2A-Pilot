@@ -24,7 +24,7 @@ En Manuel, toute Cue contenant de l’audio est une musique principale nécessit
 
 Les tops peuvent être ajoutés depuis la musique ou à la tête de lecture du morceau, déplacés sur la waveform, rattachés à une musique et ajustés par temps relatif. Le nom, la description et le visuel restent éditables dans les contrôles existants. Les accents de Manuel sont violets ; le fond et le logo restent ceux de Pilot.
 
-La barre Espace et le bouton GO lancent la musique suivante. Pendant une musique, GO abandonne les tops restants et effectue un crossfade de trois secondes. Le moteur suit le temps audio réellement lu. Les répétitions clavier et les GO espacés de moins de 600 ms sont ignorés ; un GO pendant une préparation est également protégé. À la fin du morceau, le dernier top reste visible, la conduite attend GO et ne compte pas vers la musique suivante. Le bouton retour au début réinitialise la séquence.
+La barre Espace et le bouton GO lancent la musique suivante. Pendant une musique, GO abandonne les tops restants et effectue un crossfade de trois secondes. Le moteur suit le temps audio réellement lu. Les répétitions clavier et les GO espacés de moins de 500 ms sont ignorés ; un GO pendant une préparation est également protégé. À la fin du morceau, le dernier top reste visible, la conduite attend GO et ne compte pas vers la musique suivante. Le bouton retour au début réinitialise la séquence.
 
 Les médias sont préchargés en arrière-plan et à l’entrée en Show. Le bouton GO attend leur disponibilité. Si un GO clavier arrive avant la fin du chargement, il prépare les médias et demande un nouvel appui ; cela évite de démarrer le son hors du geste utilisateur sur Safari. Une erreur de départ ne saute pas la musique.
 
@@ -100,3 +100,18 @@ Le script `package-release.py` refuse désormais de produire une distribution st
 - `tools/test-manual-bridge.swift`
 - `tools/test-manual-conduct.cjs`
 - `tools/test-pilot-export.cjs`
+
+## Ajustements après le premier essai utilisateur
+
+- Étape 4 de l’aide : cadrage de la capture Iceman réduit sous la dernière Cue, sans modifier les images ni perdre la dernière ligne ; lien vidéo conservé dans les quatre langues.
+- Le choix Autopilote/Manuel est aligné à droite du nom du numéro, avec les contrôles sombres et arrondis de Pilot ; retour à la ligne sur téléphone. Les contrôles internes des Cues reprennent les mêmes couleurs et bordures, avec un violet discret.
+- Les tops internes sont en retrait de 28 px dans Edit et les deux présentations Show (16 px sur téléphone). Les musiques restent au niveau principal.
+- `Edit` reste identique dans les quatre langues.
+- Bouton Pause/Reprendre distinct à côté du GO en Show Manuel. Le temps et le décompte restent figés pendant la pause ; la reprise conserve aussi la progression d’un fondu interrompu. GO reste la musique suivante, y compris après une pause.
+- Une constante commune fixe la protection de transport à 500 ms en Autopilote et Manuel, avec le même halo de sécurité.
+- Le glissement, le clic et les flèches dans la timeline déplacent l’audio de la musique manuelle courante sans pause ni GO. La position reste dans ce morceau ; les tops sont recalculés et les tops futurs reprennent à leur position relative. Une recherche pendant une pause conserve la pause. Une recherche pendant un crossfade conserve la musique courante et termine la sortie de l’ancien morceau.
+- Cache bêta révisé pour que le navigateur récupère les nouveaux scripts et styles. Archives bêta reconstruites ; aucun remplacement des distributions stables.
+
+Vérifications supplémentaires : arrêt/reprise de l’audio réel, recherche pendant pause et lecture, identité musicale inchangée, retrait visible, pause pendant crossfade, alignement sur quatre largeurs, dernière Cue de l’aide visible et libellé Edit inchangé en FR/EN/ES/DE.
+
+Fichiers concernés en plus de la première liste : `PWA/quick-help.js`, `PWA/quick-help.css`.

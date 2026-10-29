@@ -1880,5 +1880,10 @@
     "en": "Manual conduct: use Bridge 1.6.0 beta included in this ZIP. Bridge 1.4.5 does not support Manual mode.",
     "es": "Conducción Manual: utiliza Bridge 1.6.0 beta incluido en este ZIP. Bridge 1.4.5 no admite el modo Manual.",
     "de": "Manueller Ablauf: Verwende Bridge 1.6.0 Beta aus dieser ZIP-Datei. Bridge 1.4.5 unterstützt den manuellen Modus nicht."
+  },
+  "Reprendre": {
+    "en": "Resume",
+    "es": "Reanudar",
+    "de": "Fortsetzen"
   }
 }

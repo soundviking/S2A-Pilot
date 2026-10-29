@@ -888,26 +888,42 @@ body.locked #timeline:focus-visible{outline:2px solid #66a8ff;outline-offset:4px
 <meta content="S2A Pilot" name="apple-mobile-web-app-title"/>
 <link href="./icons/s2a-pilot-180.png?v=1.6.0-logo2" rel="apple-touch-icon"/>
 <link rel="stylesheet" href="./material-ui.css">
-<link rel="stylesheet" href="./quick-help.css?v=1.6.0-video1">
+<link rel="stylesheet" href="./quick-help.css?v=1.6.0-layout3">
 <link rel="stylesheet" href="./startup.css?v=1.6.0"><style>
 body.manualConduct{--accent:#b58aff}
-body.manualConduct:not(.locked) .cueAccordion.expanded{background:#211b2e;border-color:#b58aff;box-shadow:0 0 0 1px #b58aff55}
+body.manualConduct:not(.locked) .cueAccordion.expanded{background:#1b1f27;border-color:#b58aff;box-shadow:0 0 0 1px #b58aff55}
 body.manualConduct.locked #timeline #progress{background:#b58aff;box-shadow:0 0 5px #b58aff66}
 body.manualConduct #playBtn{border-color:#b58aff;background:#40265a}
 body.manualConduct:not(.locked) .mediaSelection{background:#b58aff22;border-color:#b58aff}
-.conductSelector{display:block;margin:8px 0 12px}.conductSelector select{min-height:44px}.conductSelector .small{margin-top:6px}
-.manualCueTools{padding:12px;border:1px solid #b58aff66;border-radius:10px;margin-bottom:12px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-.manualCueTools select,.manualCueTools input,.manualCueTools button{min-height:44px}.manualRelative{width:100px}.manualTopList{flex-basis:100%;display:flex;gap:8px;flex-wrap:wrap}
-body.manualConduct:not(.locked) .cueAccordion.expanded>.cueSummary{background:#35274c}
+.projectHeadingRow{display:flex;align-items:flex-end;gap:14px;margin-bottom:5px}
+.projectCard .projectHeadingRow .showTitleWrap{flex:1 1 0;min-width:0;margin:0}
+.conductSelector{display:flex;flex-direction:column;gap:4px;flex:0 0 190px;margin:0;font-size:.76rem;color:var(--muted)}
+.conductSelector select{width:100%;height:46px;min-height:46px;box-sizing:border-box;font:750 .82rem -apple-system,BlinkMacSystemFont,Arial,sans-serif;color:#f4f6f8;background:#10151d;border:1px solid #3b4352;border-radius:11px;padding:8px 30px 8px 11px;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='m1 1 5 5 5-5' fill='none' stroke='%23a7b2c2' stroke-width='2'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
+.conductSelector select:focus-visible{outline:2px solid #89b9ef;outline-offset:2px}
+body.manualConduct .conductSelector select{border-color:#b58aff}
+.projectHeadingRow .showTitleInput{height:46px;min-height:46px;box-sizing:border-box}
+.conductHelp{margin:0 0 5px}
+@media(max-width:540px){.projectHeadingRow{flex-wrap:wrap;gap:8px}.projectCard .projectHeadingRow .showTitleWrap{flex-basis:100%}.conductSelector{flex-basis:190px}}
+.manualCueTools{padding:10px 0;border:0;border-bottom:1px solid #3b4352;border-radius:0;margin-bottom:10px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.manualCueTools select,.manualCueTools input,.manualCueTools button{min-height:44px}.manualRelative{width:100px;min-width:0;background:#0d1117;color:#f4f6f8;border:1px solid #394354;border-radius:7px;padding:6px 7px;font:700 .76rem ui-monospace,SFMono-Regular,Menlo,monospace}
+.manualCueTools select{max-width:100%;background:#0d1117;color:#f4f6f8;border:1px solid #394354;border-radius:7px;padding:6px 9px}
+.manualTopList button{font-size:.76rem;padding:6px 9px;border-radius:8px}.manualTopList{flex-basis:100%;display:flex;gap:8px;flex-wrap:wrap}
+body.manualConduct:not(.locked) .cueAccordion.expanded>.cueSummary{background:rgba(181,138,255,.10)}
+body.manualConduct:not(.locked) .cueAccordion.expanded .cueDetails{background:rgba(181,138,255,.04)}
 body.manualConduct .mediaZoomControls{flex-wrap:wrap}
 .mediaZoomControls button.manualAddTop{width:auto;max-width:calc(100% - 100px);min-height:36px;height:auto;padding:8px 10px;font-size:13px;line-height:1.2;white-space:normal}
 .manualWaveTop{position:absolute;top:4px;z-index:8;max-width:110px;padding:4px!important;background:#48286d!important;color:white!important;font-size:11px;touch-action:none;border-color:#b58aff!important;min-height:32px}
 #manualShowStatus{padding:10px;color:#d0afff;font-weight:650}#manualShowStatus[hidden]{display:none}
 body.manualConduct.locked #showCountdownClock{font-size:clamp(14px,2.8vw,30px);white-space:normal;overflow-wrap:anywhere;max-width:100%}
 body.manualConduct.locked #playBtnLabel{display:inline;font-size:13px}
+body.manualConduct .cueAccordion.manualInternalCue,body.manualConduct .showOverviewRow.manualInternalCue{margin-left:28px;border-left:2px solid #b58aff88}
+@media(max-width:540px){body.manualConduct .cueAccordion.manualInternalCue,body.manualConduct .showOverviewRow.manualInternalCue{margin-left:16px}}
+#manualPauseBtn[hidden]{display:none!important}
+body.locked .timelineTransport #manualPauseBtn{height:40px;min-width:72px;flex:0 0 auto;padding:8px 10px;font-size:13px}
+@media(max-width:540px){body.manualConduct.locked .timelineTransport>.row{flex-wrap:wrap}}
 body.manualConduct .showOverviewRow.isActive{border-color:#b58aff;box-shadow:0 0 20px #b58aff55}
 </style></head>
-<body><script src="./i18n-catalog.js?v=1.6.0"></script><script src="./startup.js?v=1.6.0"></script>
+<body><script src="./i18n-catalog.js?v=1.6.0-layout3"></script><script src="./startup.js?v=1.6.0"></script>
 <main class="spectaclePriorityLayout">
 <div class="appTopBar">
 <img alt="Logo S2A Pilot" class="headerBrandLogo" src="./icons/s2a-pilot-192.png?v=1.6.0-logo2"/>
@@ -926,7 +942,7 @@ body.manualConduct .showOverviewRow.isActive{border-color:#b58aff;box-shadow:0 0
 <button aria-label="Rétablir" class="historyIconBtn" disabled id="redoBtn" type="button" title="Rétablir (⇧⌘/Ctrl+Z)" data-material-action="redo" data-material-only=""><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m15 7 5 5-5 5"/><path d="M20 12h-9a7 7 0 0 0-7 7"/></svg></button>
 </div>
 <div class="modeSwitch" role="group" aria-label="Mode de travail">
-<button class="modeSwitchBtn active" id="editModeBtn" type="button" aria-pressed="true">Edit</button>
+<button class="modeSwitchBtn active" id="editModeBtn" data-no-i18n="true" type="button" aria-pressed="true">Edit</button>
 <button class="modeSwitchBtn" id="showModeBtn" type="button" aria-pressed="false">Show</button>
 </div></div>
 </div>
@@ -951,6 +967,7 @@ body.manualConduct .showOverviewRow.isActive{border-color:#b58aff;box-shadow:0 0
 <span class="showCuePosition" id="showCuePosition"></span>
 </div><div class="row">
 <button class="primary transportToggleBtn" disabled="" id="playBtn" type="button" title="Lecture / Pause (Espace)" aria-keyshortcuts="Space"><span aria-hidden="true" class="transportButtonIcon" id="playBtnIcon" data-material-action="play_arrow" data-material-only="">▶</span><span class="transportButtonLabel" id="playBtnLabel">Lecture</span></button>
+<button hidden id="manualPauseBtn" type="button">Pause</button>
 <button disabled="" id="restartBtn" title="Retour au début" aria-label="Retour au début" data-material-action="skip_previous" data-material-only="">⏮</button>
 <button class="editOnly" disabled="" id="addCueBtn" data-material-action="add_circle">Cue</button>
 <button class="editOnly" id="addMediaGlobalBtn" type="button" data-material-action="music_note_add">Musique / Vidéo</button><input id="globalMediaFile" type="file" accept="audio/*,video/*,.mp3,.m4a,.aac,.wav,.aif,.aiff,.flac,.ogg,.mp4,.m4v,.mov,.webm" hidden>
@@ -1013,8 +1030,8 @@ window.s2aReportBootError=function(message){if(window.s2aBootReady)return;var bo
 window.addEventListener('error',function(e){window.s2aReportBootError((e.message||'Chargement impossible')+' — '+(e.filename||'')+':'+(e.lineno||''));});
 </script>
 <script src="./material-ui.js"></script>
-<script src="./help-images.js?v=1.6.0"></script><script src="./quick-help.js?v=1.6.0-video1"></script><script src="./help-video.js?v=1.6.0-video1"></script>
-<script src="./compatibility-loader.js?v=1.6.0"></script>
+<script src="./help-images.js?v=1.6.0"></script><script src="./quick-help.js?v=1.6.0-layout3"></script><script src="./help-video.js?v=1.6.0-video1"></script>
+<script src="./compatibility-loader.js?v=1.6.0-layout3"></script>
 <dialog id="showLayoutDialog" class="showLayoutDialog" aria-labelledby="showLayoutTitle">
 <h2 id="showLayoutTitle">Disposition Show</h2>
 <button type="button" class="showLayoutChoice" data-show-layout="maverick" aria-pressed="true"><strong>Maverick</strong><span>Cues côte à côte. Les Cues passées disparaissent.</span></button>

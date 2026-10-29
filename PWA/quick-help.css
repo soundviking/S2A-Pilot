@@ -21,3 +21,7 @@
 .helpVideoClose{position:absolute;top:10px;right:10px;z-index:2;padding:10px 16px;border:1px solid #b4c4d9;border-radius:20px;background:rgba(10,15,24,.9);color:#fff;font:600 15px/1.2 -apple-system,BlinkMacSystemFont,Arial,sans-serif;cursor:pointer}
 .helpVideoClose:focus-visible{outline:3px solid #80b9ff;outline-offset:-4px}.helpVideoStatus{margin:0;padding:20px 24px;color:#fff;font:16px/1.5 -apple-system,BlinkMacSystemFont,Arial,sans-serif}.helpVideoRetry{margin:0 24px 20px}
 @media(max-width:600px){.helpVideoOverlay{padding:0}.helpVideoPanel{border-radius:0}.helpVideoClose{top:8px;right:8px}.helpVideoPlayer{max-height:100vh;max-height:100dvh}}
+
+/* Frame the real Iceman screenshot at the final Cue, leaving a short bottom margin. */
+.quickHelpScreenshotCrop{position:relative;height:0;padding-bottom:76.3158%;overflow:hidden;border:1px solid #394354;border-radius:8px;background:#1b1f27}
+.quickHelpScreenshotCrop .quickHelpScreenshot{position:absolute;top:0;left:0;width:100%;height:auto;border:0;border-radius:0}
