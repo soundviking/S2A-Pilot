@@ -41,6 +41,10 @@ struct ShowCueProject: Codable {
     }
 
     struct Cue: Codable, Identifiable {
+        var idString: String? = nil
+        var parentMusicId: String? = nil
+        var relativeTime: Double? = nil
+        enum CodingKeys: String, CodingKey { case idString = "id", parentMusicId, relativeTime, index, time, type, name, description, isBase, imagePath, mediaActions }
         let index: Int
         let time: Double
         let type: String?
@@ -72,6 +76,8 @@ struct ShowCueProject: Codable {
         }
     }
 
+    var conductType: String? = nil
+    var showLayout: String? = nil
     let format: String
     let version: Int
     let title: String
@@ -82,6 +88,52 @@ struct ShowCueProject: Codable {
     let video: LegacyMedia?
     let primaryMedia: String?
     let cues: [Cue]
+
+    var isManual: Bool { conductType == "manual" }
+
+    // Each manual music reuses the validated timeline importer and its Wait clock.
+    // Stable chronological exports still take the unmodified single-group path.
+    struct ManualConductError: LocalizedError { let message: String; var errorDescription: String? { message } }
+
+    func importSegments() throws -> [ShowCueProject] {
+        guard conductType == nil || conductType == "autopilot" || isManual else {
+            throw ManualConductError(message: "Type de conduite inconnu : import annulé." )
+        }
+        guard isManual else { return [self] }
+        let music = cues.filter { ($0.mediaActions ?? []).contains { $0.isAudio } }.sorted { $0.time < $1.time }
+        guard !music.isEmpty else { throw ManualConductError(message: "Conduite Manuel sans musique." ) }
+        let ids = music.compactMap(\.idString)
+        guard Set(ids).count == music.count else { throw ManualConductError(message: "Identifiants de musiques manquants ou dupliqués." ) }
+        for cue in cues where !music.contains(where: { $0.index == cue.index }) {
+            guard let parent = music.first(where: { $0.idString == cue.parentMusicId }),
+                  let relative = cue.relativeTime, relative.isFinite, relative >= 0,
+                  let action = parent.mediaActions?.first(where: { $0.isAudio }),
+                  relative <= (action.loop == true ? Double.infinity : (action.end ?? 0) - action.start) else {
+                throw ManualConductError(message: "Top sans rattachement valide : " + cue.name )
+            }
+        }
+        let encoded = try JSONEncoder().encode(self)
+        let source = try JSONSerialization.jsonObject(with: encoded) as! [String: Any]
+        return try music.map { parent in
+            guard let audio = parent.mediaActions?.first(where: { $0.isAudio }),
+                  parent.mediaActions?.filter({ $0.isAudio }).count == 1, audio.loop != true,
+                  let end = audio.end, end > audio.start else {
+                throw ManualConductError(message: "Une musique principale sans boucle et une durée connues sont requises : " + parent.name )
+            }
+            var object = source
+            object["title"] = title + " — " + parent.name
+            object["showDuration"] = end - audio.start
+            object["showDurationOverride"] = end - audio.start
+            let children = cues.filter { $0.index == parent.index || ($0.parentMusicId == parent.idString && !($0.mediaActions ?? []).contains(where: { $0.isAudio })) }
+            object["cues"] = try children.map { child -> [String: Any] in
+                let data = try JSONEncoder().encode(child)
+                var entry = try JSONSerialization.jsonObject(with: data) as! [String: Any]
+                entry["time"] = child.index == parent.index ? 0 : child.relativeTime!
+                return entry
+            }
+            return try JSONDecoder().decode(ShowCueProject.self, from: JSONSerialization.data(withJSONObject: object))
+        }
+    }
 
     var isMultimedia: Bool {
         format == "showcue-multimedia-package" || version >= 4 || cues.contains { !($0.mediaActions ?? []).isEmpty }
@@ -135,6 +187,8 @@ struct SavedShowCue: Codable, Identifiable {
     let importedAt: Date
     var showDuration: Double? = nil
     var clockID: String? = nil
+    var conductType: String? = nil
+    var showLayout: String? = nil
     var id: String { groupID }
 }
 
@@ -401,7 +455,8 @@ final class AppModel: ObservableObject {
                     alert.messageText = self.packages.count == 1
                         ? L("Importer « {title} » ?", ["title": self.packages[0].project.title])
                         : L("Importer {count} conduites S2A Pilot ?", ["count": String(self.packages.count)])
-                    alert.informativeText = L("Workspace QLab :") + "\n" + initial.name + "\n\n" + names + "\n\n" + L("Chaque numéro sera créé dans son propre Group cue Timeline.")
+                    let manualNotice = self.packages.contains(where: { $0.project.isManual }) ? "\n\nMANUEL : un GO QLab par musique. Les tops suivent le morceau ; aucun départ automatique de la musique suivante." : ""
+                    alert.informativeText = manualNotice + L("Workspace QLab :") + "\n" + initial.name + "\n\n" + names + "\n\n" + L("Chaque numéro sera créé dans son propre Group cue Timeline.")
                     alert.addButton(withTitle: L("Importer"))
                     alert.addButton(withTitle: L("Annuler"))
                     alert.alertStyle = .informational
@@ -429,14 +484,17 @@ final class AppModel: ObservableObject {
                                     throw ShowCueError.commandFailed(BridgeText("Le workspace QLab sélectionné a été fermé pendant l’import."))
                                 }
 
+                                var previousManualGroupID: String? = nil
+                                for segment in try item.project.importSegments() {
                                 let result = try self.performImport(
-                                    project: item.project,
+                                    project: segment,
                                     folder: item.extractedURL,
-                                    workspaceID: initial.id
+                                    workspaceID: initial.id,
+                                    previousManualGroupID: previousManualGroupID
                                 )
 
                                 let record = try self.makeSavedShowRecord(
-                                    project: item.project,
+                                    project: segment,
                                     groupID: result.groupID,
                                     mediaID: result.mediaID,
                                     clockID: result.clockID,
@@ -444,6 +502,8 @@ final class AppModel: ObservableObject {
                                     workspace: current
                                 )
                                 try self.saveShowRecord(record, for: current)
+                                if item.project.isManual { previousManualGroupID = result.groupID }
+                                }
                                 importedCount += 1
                                 DispatchQueue.main.sync { self.removePackage(item.id) }
                             }
@@ -523,6 +583,7 @@ final class AppModel: ObservableObject {
             throw ShowCueError.invalidPackage(BridgeText("Le package ne contient aucun média exploitable."))
         }
 
+        _ = try project.importSegments()
         return (temp, project)
     }
 
@@ -543,7 +604,7 @@ final class AppModel: ObservableObject {
         }
     }
 
-    private func performImport(project: ShowCueProject, folder: URL, workspaceID: String) throws -> (groupID: String, mediaID: String?, clockID: String?, imageURLs: [Int: URL]) {
+    private func performImport(project: ShowCueProject, folder: URL, workspaceID: String, previousManualGroupID: String? = nil) throws -> (groupID: String, mediaID: String?, clockID: String?, imageURLs: [Int: URL]) {
         let current = try qlabWorkspace(id: workspaceID)
         guard current.id == workspaceID else { throw ShowCueError.commandFailed(BridgeText("Le workspace QLab sélectionné a été fermé.")) }
         guard let projectFolder = current.projectFolder else { throw ShowCueError.commandFailed(BridgeText("Le workspace QLab doit être enregistré avant l’import.")) }
@@ -602,6 +663,17 @@ final class AppModel: ObservableObject {
         lines.append("set q name of showGroup to \(asAppleString(project.title))")
         lines.append("set mode of showGroup to timeline")
         lines.append("set importedGroupNumber to q number of showGroup as text")
+
+        if project.isManual {
+            lines.append("set continue mode of showGroup to do_not_continue")
+            if let previousManualGroupID {
+                lines.append("set previousManualGroup to cue id \(asAppleString(previousManualGroupID)) of targetWorkspace")
+                lines.append("set abandonPrevious to my s2aMakeCue(targetWorkspace, \(asAppleString("Stop")))")
+                lines.append("set cue target of abandonPrevious to previousManualGroup")
+                lines.append("set pre wait of abandonPrevious to 0")
+                lines.append("move abandonPrevious to beginning of showGroup")
+            }
+        }
 
         var firstMediaVariable: String? = nil
         var mediaCounter = 0
@@ -830,7 +902,7 @@ final class AppModel: ObservableObject {
                 relativeImages[String(cueIndex)] = fullPath
             }
         }
-        return SavedShowCue(groupID: groupID, mediaID: mediaID, audioID: project.resolvedLegacyMedia?.kind == "audio" ? mediaID : nil, title: project.title, cues: project.cues.sorted(by: { $0.time < $1.time }), imagePaths: relativeImages, importedAt: Date(), showDuration: project.resolvedShowDuration, clockID: clockID)
+        return SavedShowCue(groupID: groupID, mediaID: mediaID, audioID: project.resolvedLegacyMedia?.kind == "audio" ? mediaID : nil, title: project.title, cues: project.cues.sorted(by: { $0.time < $1.time }), imagePaths: relativeImages, importedAt: Date(), showDuration: project.resolvedShowDuration, clockID: clockID, conductType: project.conductType, showLayout: project.showLayout)
     }
 
     private func loadIndexData(for workspace: WorkspaceInfo) throws -> SavedShowCueIndex {
@@ -946,7 +1018,7 @@ final class AppModel: ObservableObject {
                     let clock = selected.flatMap { snapshot.clocks[$0.id] } ?? selected
                     self.visualElapsed = clock?.elapsed ?? 0
                     self.visualRunning = clock.map { $0.running && !$0.paused } ?? false
-                    self.visualStatus = BridgeText(clock?.paused == true ? "Pause" : clock?.running == true ? "Lecture" : "En attente d’un numéro S2A Pilot")
+                    self.visualStatus = BridgeText(self.activeShow?.conductType == "manual" && clock?.running != true && clock?.paused != true ? "EN ATTENTE DU GO" : clock?.paused == true ? "Pause" : clock?.running == true ? "Lecture" : "En attente d’un numéro S2A Pilot")
                 case .failure:
                     // Freeze the last confirmed position and make the loss explicit.
                     self.synchronizationLost = true
@@ -1160,6 +1232,8 @@ struct ContentView: View {
                 VStack(alignment: .leading, spacing: 3) {
                     Text("S2A Pilot Bridge")
                         .font(.system(size: 20, weight: .semibold))
+                    Text("Version " + (Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "—") + " bêta")
+                        .font(.caption).foregroundStyle(.secondary)
                     Text(L("Import de conduites S2A Pilot V5 dans QLab 5"))
                         .font(.subheadline)
                         .foregroundStyle(.secondary)

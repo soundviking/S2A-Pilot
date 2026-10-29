@@ -2,7 +2,7 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")" && pwd)"
-BUILD="$ROOT/build"
+BUILD="$ROOT/build-beta"
 APP="$BUILD/S2A Pilot Bridge.app"
 MACOS="$APP/Contents/MacOS"
 RESOURCES="$APP/Contents/Resources"
@@ -46,11 +46,11 @@ cat > "$APP/Contents/Info.plist" <<'PLIST'
   <key>CFBundleDisplayName</key>
   <string>S2A Pilot Bridge</string>
   <key>CFBundleIdentifier</key>
-  <string>fr.s2aproduction.copilote</string>
+  <string>fr.s2aproduction.bridge.beta</string>
   <key>CFBundleVersion</key>
-  <string>24</string>
+  <string>16001</string>
   <key>CFBundleShortVersionString</key>
-  <string>1.4.5</string>
+  <string>1.6.0</string>
   <key>CFBundleExecutable</key>
   <string>S2A Pilot Bridge</string>
   <key>CFBundleIconFile</key>
@@ -63,6 +63,15 @@ cat > "$APP/Contents/Info.plist" <<'PLIST'
 </plist>
 PLIST
 
+python3 - "$ROOT/../PWA/version.json" "$APP/Contents/Info.plist" <<'PYVERSION'
+import json,plistlib,sys
+version=json.load(open(sys.argv[1]))
+assert version['channel']=='beta'
+with open(sys.argv[2],'rb') as f: info=plistlib.load(f)
+info['CFBundleShortVersionString']=version['version']
+with open(sys.argv[2],'wb') as f:plistlib.dump(info,f)
+PYVERSION
+
 mkdir -p "$RESOURCES/fr.lproj" "$RESOURCES/en.lproj" "$RESOURCES/es.lproj" "$RESOURCES/de.lproj"
 printf '%s\n' '"NSAppleEventsUsageDescription" = "S2A Pilot Bridge doit contrôler QLab afin d’importer la conduite dans le workspace sélectionné.";' > "$RESOURCES/fr.lproj/InfoPlist.strings"
 printf '%s\n' '"NSAppleEventsUsageDescription" = "S2A Pilot Bridge needs to control QLab to import the show into the selected workspace.";' > "$RESOURCES/en.lproj/InfoPlist.strings"
@@ -70,7 +79,7 @@ printf '%s\n' '"NSAppleEventsUsageDescription" = "S2A Pilot Bridge necesita cont
 printf '%s\n' '"NSAppleEventsUsageDescription" = "S2A Pilot Bridge muss QLab steuern, um den Ablauf in den ausgewählten Workspace zu importieren.";' > "$RESOURCES/de.lproj/InfoPlist.strings"
 cp "$ROOT/../locales/interface.json" "$RESOURCES/interface.json"
 cp "$ROOT/LICENSE" "$RESOURCES/LICENSE"
-python3 "$ROOT/../tools/build-bridge-show.py"
+S2A_BRIDGE_BUILD="$BUILD" python3 "$ROOT/../tools/build-bridge-show.py"
 chmod +x "$MACOS/S2A Pilot Bridge"
 
 /usr/bin/codesign --force --deep --sign - "$APP"

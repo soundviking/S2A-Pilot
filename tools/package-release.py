@@ -3,6 +3,8 @@ from pathlib import Path
 import json, zipfile, plistlib, sys
 repo=Path(__file__).resolve().parents[1]
 pwa=repo/'PWA'
+if json.loads((pwa/'version.json').read_text()).get('channel') == 'beta':
+ raise SystemExit('Beta branch: use tools/package-beta.py; stable distributions must not be replaced.')
 app=repo/'S2A-Copilot/build/S2A Pilot Bridge.app'
 release=json.loads((pwa/'version.json').read_text())['version']
 bridge=plistlib.loads((app/'Contents/Info.plist').read_bytes())['CFBundleShortVersionString']

@@ -5,7 +5,7 @@ const assert=require('assert/strict'),fs=require('fs'),path=require('path');
  const page=await browser.newPage({viewport:{width:1500,height:950}}),errors=[];
  page.on('pageerror',e=>errors.push(e.message));
  await page.addInitScript(()=>{window.nativeMessages=[];window.webkit={messageHandlers:{bridgeShow:{postMessage:x=>nativeMessages.push(x)}}}});
- await page.goto('file://'+path.resolve('S2A-Copilot/build/S2A Pilot Bridge.app/Contents/Resources/Show/index.html'));
+ await page.goto('file://'+path.resolve(process.env.S2A_BRIDGE_SHOW||'S2A-Copilot/build/S2A Pilot Bridge.app/Contents/Resources/Show/index.html'));
  const image='data:image/png;base64,'+fs.readFileSync('PWA/icons/s2a-pilot-512.png').toString('base64');
  const state={language:'fr',status:'Lecture',lost:false,elapsed:20,running:true,currentID:'show',standbyID:'final',selectedID:'final',labels:{flow:'Déroulé du spectacle',wait:'En attente',close:'Fermer',zoomBack:'Cliquer pour revenir',zoom:'Agrandir',noVisual:'Aucun visuel',countdown:'Décompte',native:'Cue QLab — prochain GO'},roots:[{id:'intro',number:'1.20',kind:'Audio',name:'Accueil du public',running:true},{id:'show',number:'2',pilot:true,name:'Démonstration Pilot',running:true},{id:'final',number:'',kind:'Audio',name:'Sortie du public',running:false}]};
  const content={id:'show',title:'Démonstration Pilot',duration:200,generic:false,cues:[0,25,55,80,120,150,180].map((time,i)=>({id:String(i),time,name:['Ouverture','Entrée des artistes','Lumière ambre','Solo','Retour ensemble','Salut','Sortie'][i],description:'Consigne de scène '+i,image}))};
@@ -95,6 +95,13 @@ const assert=require('assert/strict'),fs=require('fs'),path=require('path');
  const selectedBox=await page.locator('.active').boundingBox();
  assert.ok(selectedBox.y>0&&selectedBox.y+selectedBox.height<=900);
  assert.equal(await page.evaluate(()=>nativeMessages.length),before);
+ const manual={...content,manual:true,cues:[{id:'1',number:'1',time:0,name:'Music'},{id:'4',number:'4',time:3,name:'Top'}]};
+ for(const layout of ['maverick','iceman']){
+  await render({...state,elapsed:0,running:false,status:'EN ATTENTE DU GO'},{...manual,showLayout:layout});await page.waitForTimeout(100);
+  assert.ok(!await frame.locator('#showNextCountdown').isVisible());assert.match(await frame.locator('#standbyNotice').innerText(),/ATTENTE DU GO/);
+  await render({...state,elapsed:1,running:true},{...manual,showLayout:layout});await page.waitForTimeout(100);
+  assert.ok(await frame.locator('#showNextCountdown').isVisible());assert.equal(await frame.locator('.showCountdownClock').innerText(),'00:02');assert.deepEqual(await frame.locator('.overviewNumber').allTextContents(),['1','4']);assert.equal(await frame.locator('body.showLayoutIceman').count(),layout==='iceman'?1:0);
+ }
  assert.deepEqual(errors,[]);
  await browser.close();
  console.log('PASS Bridge Show: automatic QLab Iceman / Pilot Maverick, selection/paused/lost guards, no QLab countdown, responsive Iceman, Maverick, timeline, independent selection/play, real numbers, no selection echo, auto-scroll, Pilot-only countdown, loss, pause/seek, zoom and 3 window widths');

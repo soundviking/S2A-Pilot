@@ -6,7 +6,7 @@
 <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" name="viewport"/>
 <title>S2A Pilot</title>
 <script>if(window.navigator.standalone===true)document.documentElement.className+=' iosStandalone';</script>
-<link href="./icons/s2a-pilot-192.png?v=1.5.8-logo2" rel="icon" type="image/png"/>
+<link href="./icons/s2a-pilot-192.png?v=1.6.0-logo2" rel="icon" type="image/png"/>
 <style>
 :root{
   font-family: system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
@@ -886,18 +886,35 @@ body.locked #timeline:focus-visible{outline:2px solid #66a8ff;outline-offset:4px
 <meta content="yes" name="apple-mobile-web-app-capable"/>
 <meta content="black" name="apple-mobile-web-app-status-bar-style"/>
 <meta content="S2A Pilot" name="apple-mobile-web-app-title"/>
-<link href="./icons/s2a-pilot-180.png?v=1.5.8-logo2" rel="apple-touch-icon"/>
+<link href="./icons/s2a-pilot-180.png?v=1.6.0-logo2" rel="apple-touch-icon"/>
 <link rel="stylesheet" href="./material-ui.css">
-<link rel="stylesheet" href="./quick-help.css?v=1.5.8-video1">
-<link rel="stylesheet" href="./startup.css?v=1.5.8"></head>
-<body><script src="./i18n-catalog.js?v=1.5.8"></script><script src="./startup.js?v=1.5.8"></script>
+<link rel="stylesheet" href="./quick-help.css?v=1.6.0-video1">
+<link rel="stylesheet" href="./startup.css?v=1.6.0"><style>
+body.manualConduct{--accent:#b58aff}
+body.manualConduct:not(.locked) .cueAccordion.expanded{background:#211b2e;border-color:#b58aff;box-shadow:0 0 0 1px #b58aff55}
+body.manualConduct.locked #timeline #progress{background:#b58aff;box-shadow:0 0 5px #b58aff66}
+body.manualConduct #playBtn{border-color:#b58aff;background:#40265a}
+body.manualConduct:not(.locked) .mediaSelection{background:#b58aff22;border-color:#b58aff}
+.conductSelector{display:block;margin:8px 0 12px}.conductSelector select{min-height:44px}.conductSelector .small{margin-top:6px}
+.manualCueTools{padding:12px;border:1px solid #b58aff66;border-radius:10px;margin-bottom:12px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.manualCueTools select,.manualCueTools input,.manualCueTools button{min-height:44px}.manualRelative{width:100px}.manualTopList{flex-basis:100%;display:flex;gap:8px;flex-wrap:wrap}
+body.manualConduct:not(.locked) .cueAccordion.expanded>.cueSummary{background:#35274c}
+body.manualConduct .mediaZoomControls{flex-wrap:wrap}
+.mediaZoomControls button.manualAddTop{width:auto;max-width:calc(100% - 100px);min-height:36px;height:auto;padding:8px 10px;font-size:13px;line-height:1.2;white-space:normal}
+.manualWaveTop{position:absolute;top:4px;z-index:8;max-width:110px;padding:4px!important;background:#48286d!important;color:white!important;font-size:11px;touch-action:none;border-color:#b58aff!important;min-height:32px}
+#manualShowStatus{padding:10px;color:#d0afff;font-weight:650}#manualShowStatus[hidden]{display:none}
+body.manualConduct.locked #showCountdownClock{font-size:clamp(14px,2.8vw,30px);white-space:normal;overflow-wrap:anywhere;max-width:100%}
+body.manualConduct.locked #playBtnLabel{display:inline;font-size:13px}
+body.manualConduct .showOverviewRow.isActive{border-color:#b58aff;box-shadow:0 0 20px #b58aff55}
+</style></head>
+<body><script src="./i18n-catalog.js?v=1.6.0"></script><script src="./startup.js?v=1.6.0"></script>
 <main class="spectaclePriorityLayout">
 <div class="appTopBar">
-<img alt="Logo S2A Pilot" class="headerBrandLogo" src="./icons/s2a-pilot-192.png?v=1.5.8-logo2"/>
+<img alt="Logo S2A Pilot" class="headerBrandLogo" src="./icons/s2a-pilot-192.png?v=1.6.0-logo2"/>
 <div class="appIdentity">
   <strong>S2A Pilot</strong>
   <span class="appAttribution">(by S2A Production)</span>
-  <span class="appVersion">Version 1.5.8</span>
+  <span class="appVersion">Version 1.6.0 bêta</span>
 </div>
 <div class="headerActions"><div class="headerDisplayControls"><select id="languageSelect" aria-label="Langue"><option value="fr">FR</option><option value="en">EN</option><option value="es">ES</option><option value="de">DE</option></select><button class="showOnly" id="showLayoutButton" type="button" aria-label="Disposition Show" aria-haspopup="dialog" title="Disposition Show"><svg fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M120-280v-400q0-33 23.5-56.5T200-760h560q33 0 56.5 23.5T840-680v400q0 33-23.5 56.5T760-200H200q-33 0-56.5-23.5T120-280Zm293-240h347v-160H413v160Zm214 240h133v-160H627v160Zm-214 0h134v-160H413v160Zm-213 0h133v-400H200v400Z"/></svg></button></div>
 <div class="headerVideoOutput showOnly" hidden>
@@ -996,8 +1013,8 @@ window.s2aReportBootError=function(message){if(window.s2aBootReady)return;var bo
 window.addEventListener('error',function(e){window.s2aReportBootError((e.message||'Chargement impossible')+' — '+(e.filename||'')+':'+(e.lineno||''));});
 </script>
 <script src="./material-ui.js"></script>
-<script src="./help-images.js?v=1.5.8"></script><script src="./quick-help.js?v=1.5.8-video1"></script><script src="./help-video.js?v=1.5.8-video1"></script>
-<script src="./compatibility-loader.js?v=1.5.8"></script>
+<script src="./help-images.js?v=1.6.0"></script><script src="./quick-help.js?v=1.6.0-video1"></script><script src="./help-video.js?v=1.6.0-video1"></script>
+<script src="./compatibility-loader.js?v=1.6.0"></script>
 <dialog id="showLayoutDialog" class="showLayoutDialog" aria-labelledby="showLayoutTitle">
 <h2 id="showLayoutTitle">Disposition Show</h2>
 <button type="button" class="showLayoutChoice" data-show-layout="maverick" aria-pressed="true"><strong>Maverick</strong><span>Cues côte à côte. Les Cues passées disparaissent.</span></button>

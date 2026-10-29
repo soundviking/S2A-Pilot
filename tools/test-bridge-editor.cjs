@@ -5,7 +5,7 @@ const assert=require('assert/strict'),path=require('path');
  const page=await browser.newPage({viewport:{width:1400,height:900}}),errors=[];
  page.on('pageerror',e=>errors.push(e.message));
  await page.addInitScript(()=>{window.nativeMessages=[];window.webkit={messageHandlers:{bridgeShow:{postMessage:x=>nativeMessages.push(x)}}}});
- await page.goto('file://'+path.resolve('S2A-Copilot/build/S2A Pilot Bridge.app/Contents/Resources/Show/index.html'));
+ await page.goto('file://'+path.resolve(process.env.S2A_BRIDGE_SHOW||'S2A-Copilot/build/S2A Pilot Bridge.app/Contents/Resources/Show/index.html'));
  const labels={flow:'Déroulé',wait:'En attente',edit:'Modifier',editTitle:'Modifier la Cue',name:'Nom',description:'Description',save:'Enregistrer',cancel:'Annuler',saving:'Enregistrement…',pilotEdit:'Repère Pilot : titre et description sauvegardés dans Bridge.',qlabEdit:'Nom et notes synchronisés avec QLab.',changed:'La Cue a été modifiée ailleurs.',workspaceChanged:'Le workspace a changé.'};
  const state={workspaceID:'workspace',language:'fr',status:'Lecture',elapsed:10,running:true,lost:false,currentID:'group',selectedID:'group',standbyID:'group',labels,editBusy:false,roots:[{id:'group',number:'2',name:'Titre QLab',qName:'Titre QLab',notes:'Notes\noriginales',kind:'Group',pilot:true,running:true},{id:'audio',number:'3',name:'Musique',qName:'',notes:'',kind:'Audio'}]};
  const content={id:'group',title:'Titre QLab',duration:90,generic:false,cues:[{id:'7',time:0,name:'Repère identique',description:'Consigne',editName:'Repère identique',editDescription:'  Consigne\noriginale  ',image:''},{id:'8',time:20,name:'Repère identique',description:'Deuxième repère',image:''}]};
@@ -47,6 +47,7 @@ const assert=require('assert/strict'),path=require('path');
  await page.locator('#editCancel').click();
  // Pilot cues keep their group/index identity even with identical names.
  await render(state,content);
+ await frame.waitForFunction(()=>document.querySelector('.showOverviewRow')?.dataset.id==='7');
  await frame.locator('.editCue').first().click();
  assert.equal(await page.locator('#editDescription').inputValue(),'  Consigne\noriginale  ');
  await page.locator('#editDescription').fill('Consigne sauvegardée\n新');

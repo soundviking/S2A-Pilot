@@ -1755,5 +1755,130 @@
     "en": "Try again",
     "es": "Reintentar",
     "de": "Erneut versuchen"
+  },
+  "Autopilote": {
+    "en": "Autopilot",
+    "es": "Automático",
+    "de": "Autopilot"
+  },
+  "Manuel": {
+    "en": "Manual",
+    "es": "Manual",
+    "de": "Manuell"
+  },
+  "Type de conduite :": {
+    "en": "Conduct type:",
+    "es": "Tipo de conducción:",
+    "de": "Ablaufart:"
+  },
+  "Départs musicaux au GO · tops synchronisés à chaque morceau.": {
+    "en": "Music starts on GO · internal cues follow each track.",
+    "es": "Música al GO · cues sincronizados con cada pista.",
+    "de": "Musikstart per GO · interne Cues folgen jedem Titel."
+  },
+  "Conduite chronométrée automatique.": {
+    "en": "Automatic timed show.",
+    "es": "Conducción automática cronometrada.",
+    "de": "Automatischer zeitgesteuerter Ablauf."
+  },
+  "EN ATTENTE DU GO": {
+    "en": "WAITING FOR GO",
+    "es": "ESPERANDO GO",
+    "de": "WARTEN AUF GO"
+  },
+  "EN LECTURE — {name}": {
+    "en": "PLAYING — {name}",
+    "es": "EN REPRODUCCIÓN — {name}",
+    "de": "WIEDERGABE — {name}"
+  },
+  "Prochaine musique : {name}": {
+    "en": "Next track: {name}",
+    "es": "Siguiente pista: {name}",
+    "de": "Nächster Titel: {name}"
+  },
+  "GO — prochaine musique": {
+    "en": "GO — next track",
+    "es": "GO — siguiente pista",
+    "de": "GO — nächster Titel"
+  },
+  "MUSIQUE · GO": {
+    "en": "MUSIC · GO",
+    "es": "MÚSICA · GO",
+    "de": "MUSIK · GO"
+  },
+  "+ Top interne": {
+    "en": "+ Internal cue",
+    "es": "+ Cue interno",
+    "de": "+ Interner Cue"
+  },
+  "+ Top à la tête de lecture": {
+    "en": "+ Cue at playhead",
+    "es": "+ Cue en el cabezal",
+    "de": "+ Cue am Abspielkopf"
+  },
+  "Musique :": {
+    "en": "Music:",
+    "es": "Música:",
+    "de": "Musik:"
+  },
+  "Choisir une musique": {
+    "en": "Choose a track",
+    "es": "Elegir una pista",
+    "de": "Titel auswählen"
+  },
+  "Temps relatif dans la musique": {
+    "en": "Relative time in track",
+    "es": "Tiempo relativo en la pista",
+    "de": "Relative Zeit im Titel"
+  },
+  "À vérifier :": {
+    "en": "Check:",
+    "es": "Revisar:",
+    "de": "Prüfen:"
+  },
+  "Ajoutez une musique pour utiliser le mode Manuel.": {
+    "en": "Add a track to use Manual mode.",
+    "es": "Añade una pista para usar el modo Manual.",
+    "de": "Füge einen Titel für den manuellen Modus hinzu."
+  },
+  "Préparez tous les médias avant le GO.": {
+    "en": "Prepare all media before GO.",
+    "es": "Prepara todos los medios antes del GO.",
+    "de": "Alle Medien vor GO vorbereiten."
+  },
+  "La lecture audio n’a pas démarré. Relancez le GO.": {
+    "en": "Audio did not start. Try GO again.",
+    "es": "El audio no se ha iniciado. Repite GO.",
+    "de": "Audio wurde nicht gestartet. GO erneut auslösen."
+  },
+  "Une seule musique principale par Cue.": {
+    "en": "One main track per Cue.",
+    "es": "Una pista principal por Cue.",
+    "de": "Ein Haupttitel pro Cue."
+  },
+  "Durée audio inconnue.": {
+    "en": "Unknown audio duration.",
+    "es": "Duración de audio desconocida.",
+    "de": "Unbekannte Audiodauer."
+  },
+  "Choisissez une musique et un temps relatif valides.": {
+    "en": "Choose a valid track and relative time.",
+    "es": "Elige una pista y un tiempo relativo válidos.",
+    "de": "Gültigen Titel und relative Zeit auswählen."
+  },
+  "Désactivez Loop pour une musique en mode Manuel.": {
+    "en": "Disable Loop for a track in Manual mode.",
+    "es": "Desactiva Loop para una pista en modo Manual.",
+    "de": "Loop für einen Titel im manuellen Modus deaktivieren."
+  },
+  "Médias prêts. Appuyez sur GO.": {
+    "en": "Media ready. Press GO.",
+    "es": "Medios listos. Pulsa GO.",
+    "de": "Medien bereit. GO drücken."
+  },
+  "Conduite Manuel : utilisez Bridge 1.6.0 bêta inclus dans ce ZIP. Bridge 1.4.5 ne connaît pas le mode Manuel.": {
+    "en": "Manual conduct: use Bridge 1.6.0 beta included in this ZIP. Bridge 1.4.5 does not support Manual mode.",
+    "es": "Conducción Manual: utiliza Bridge 1.6.0 beta incluido en este ZIP. Bridge 1.4.5 no admite el modo Manual.",
+    "de": "Manueller Ablauf: Verwende Bridge 1.6.0 Beta aus dieser ZIP-Datei. Bridge 1.4.5 unterstützt den manuellen Modus nicht."
   }
 }

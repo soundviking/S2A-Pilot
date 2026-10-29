@@ -1,6 +1,6 @@
 {
-  "name": "S2A Pilot",
-  "short_name": "S2A Pilot",
+  "name": "S2A Pilot 1.6.0 bêta",
+  "short_name": "Pilot bêta",
   "description": "Eigenständige Multimedia-Shows vorbereiten und steuern.",
   "start_url": "./",
   "scope": "./",
@@ -22,6 +22,6 @@
       "purpose": "any"
     }
   ],
-  "id": "./index.html",
+  "id": "./beta-1.6.0",
   "lang": "de"
 }

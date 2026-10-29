@@ -1,9 +1,10 @@
 {
-  "version": "1.5.8",
+  "version": "1.6.0",
   "releaseNotes": {
-    "fr": "Vidéos de première prise en main disponibles dans l’aide en quatre langues. Logo officiel harmonisé.",
-    "en": "Getting started videos available in Help in four languages. Official logo used throughout.",
-    "es": "Vídeos de primeros pasos disponibles en la ayuda en cuatro idiomas. Logotipo oficial unificado.",
-    "de": "Videos zu den ersten Schritten in der Hilfe in vier Sprachen. Einheitliches offizielles Logo."
-  }
+    "fr": "Bêta : types de conduite Autopilote / Manuel, tops internes et GO.",
+    "en": "Beta: Autopilot / Manual conduct, internal cues and GO.",
+    "es": "Beta: conducción automática / manual, cues internos y GO.",
+    "de": "Beta: Autopilot / manuell, interne Cues und GO."
+  },
+  "channel": "beta"
 }

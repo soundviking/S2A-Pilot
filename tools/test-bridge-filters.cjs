@@ -5,7 +5,7 @@ const assert=require('assert/strict'),path=require('path');
  const page=await browser.newPage({viewport:{width:1100,height:850}}),errors=[];
  page.on('pageerror',e=>errors.push(e.message));
  await page.addInitScript(()=>{window.nativeMessages=[];window.webkit={messageHandlers:{bridgeShow:{postMessage:x=>nativeMessages.push(x)}}}});
- await page.goto('file://'+path.resolve('S2A-Copilot/build/S2A Pilot Bridge.app/Contents/Resources/Show/index.html'));
+ await page.goto('file://'+path.resolve(process.env.S2A_BRIDGE_SHOW||'S2A-Copilot/build/S2A Pilot Bridge.app/Contents/Resources/Show/index.html'));
  const roots=[['a','audio','Audio'],['v','video','Video'],['p','pilot','Group'],['n','network','Network'],['o','other','Wait']].map(([id,category,kind],i)=>({id,category,kind,name:'Cue '+id,number:String(i+1),running:id==='p',pilot:id==='p'}));
  const state={workspaceID:'test',filters:['audio','video','pilot','network','other'],language:'fr',status:'Lecture',lost:false,elapsed:8,running:true,currentID:'p',selectedID:'p',standbyID:'n',labels:{flow:'Déroulé',filter:'Type de Cue',allTypes:'Tous les types',wait:'En attente',noMatch:'Aucune Cue pour ce filtre.',selectionHidden:'La Cue sélectionnée est masquée par le filtre.',showAll:'Tout afficher'},roots};
  const setFilters=async values=>{if(!await page.locator('#filterMenu').evaluate(x=>x.open))await page.locator('#filterSummary').click();for(const value of ['audio','video','pilot','network','other'])await page.locator('#flowFilter input[value="'+value+'"]').setChecked(values.includes(value));};
