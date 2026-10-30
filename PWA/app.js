@@ -18,6 +18,7 @@ const manualGainNodes=new WeakMap();
 let runtimeAudio=new Map(),runtimeVideo=null,videoOutputWindow=null,assetUrlCache=new Map(),assetBlobCache=new Map();
 let preparedMedia=new Map(),preflightState='idle',preflightErrors=[],expandedCueId=null,seekGeneration=0,preflightPromise=null;
 let startupSaved=null,showDurationOverride=null,showLayout='maverick';
+let manualArmedID=null,manualArmExplicit=false;
 let conductType='autopilot',manualCurrentID=null,manualCompletedID=null,manualPending=false,manualLastGO=-Infinity,manualFade=null,manualPausedAt=null,manualPausePending=false;
 const mediaVisualCache=new Map();
 const generalTimelineViewport=$('generalTimelineViewport');let generalTimelineZoom=1;
@@ -294,7 +295,7 @@ function renderTimeline(){
  applyManualTimelineWindow();
  invalidateComputationCaches();timeline.querySelectorAll('.marker,.tick').forEach(e=>e.remove());const d=projectDuration();
  const ticks=4*generalTimelineZoom;for(let i=0;i<=ticks;i++){const tick=document.createElement('span');tick.className='tick';tick.style.left=`${i/ticks*100}%`;tick.textContent=fmtDisplay(d*i/ticks);timeline.appendChild(tick);}
- for(const cue of cues){
+ for(const cue of (locked&&conductType==='manual'?manualMusics():cues)){
   const marker=document.createElement('div');marker.className='marker'+(expandedCueId===cue.id?' selectedCueMarker':'');marker.dataset.cueId=cue.id;marker.dataset.number=String(orderedCues().findIndex(c=>c.id===cue.id)+1);marker.style.left=`${cue.time/d*100}%`;marker.title=`${fmt(cue.time)} — ${cue.name}`;
   marker.addEventListener('pointerdown',e=>{
    if(locked||e.button!==0||manualTimelinePan)return;e.preventDefault();e.stopPropagation();
@@ -369,7 +370,7 @@ function setTransportPresentation(){
  if(locked){timeline.setAttribute('role','slider');timeline.setAttribute('aria-label',tr('Position dans la conduite'));}
  else{timeline.removeAttribute('role');timeline.setAttribute('aria-label',tr('Timeline audio'));}
 }
-function applyLockState(){playBtn.dataset.transportState='';if(!locked)scheduleIcemanCenter();setTransportPresentation();timeline.style.touchAction=conductType==='manual'?'none':generalTimelineZoom>1?'pan-x':'none';if(locked){generalTimelineZoom=1;timeline.style.width='100%';generalTimelineViewport.scrollLeft=0;updateGeneralZoomControls();}updateVersionButton();document.body.classList.toggle('locked',locked);editModeBtn.classList.toggle('active',!locked);showModeBtn.classList.toggle('active',locked);editModeBtn.setAttribute('aria-pressed',String(!locked));showModeBtn.setAttribute('aria-pressed',String(locked));showTitle.disabled=locked;openProjectBtn.disabled=locked;addCueBtn.disabled=locked;$('addMediaGlobalBtn').disabled=locked;$('globalMediaFile').disabled=locked;saveAsBtn.disabled=locked||savingProject;if(locked&&preflightState!=='ready')prepareShowMedia(false).catch(console.warn);renderCues();if(locked)requestAnimationFrame(fitShowCueList);syncVideoSurfaces();updateHistoryButtons();}
+function applyLockState(){if(locked&&conductType==='manual'&&!document.body.classList.contains('locked'))setShowLayout('iceman',false);playBtn.dataset.transportState='';if(!locked)scheduleIcemanCenter();setTransportPresentation();timeline.style.touchAction=conductType==='manual'?'none':generalTimelineZoom>1?'pan-x':'none';if(locked){generalTimelineZoom=1;timeline.style.width='100%';generalTimelineViewport.scrollLeft=0;updateGeneralZoomControls();}updateVersionButton();document.body.classList.toggle('locked',locked);editModeBtn.classList.toggle('active',!locked);showModeBtn.classList.toggle('active',locked);editModeBtn.setAttribute('aria-pressed',String(!locked));showModeBtn.setAttribute('aria-pressed',String(locked));showTitle.disabled=locked;openProjectBtn.disabled=locked;addCueBtn.disabled=locked;$('addMediaGlobalBtn').disabled=locked;$('globalMediaFile').disabled=locked;saveAsBtn.disabled=locked||savingProject;if(locked&&preflightState!=='ready')prepareShowMedia(false).catch(console.warn);renderCues();if(locked)requestAnimationFrame(fitShowCueList);syncVideoSurfaces();updateHistoryButtons();}
 function setEnabled(){playBtn.disabled=false;restartBtn.disabled=false;addCueBtn.disabled=locked;$('addMediaGlobalBtn').disabled=locked;$('globalMediaFile').disabled=locked;saveAsBtn.disabled=locked||savingProject;openProjectBtn.disabled=locked;}
 
 async function addMediaToCue(cue,file){const screenCheck=file.type.startsWith('video/')?checkScreensForAddedVideo():Promise.resolve(false);const before=captureEditableState();const probe=await probeMedia(file);const key=await storeAsset(file);pushHistory(before);if(!cues.includes(cue))cues.push(cue);cue.mediaActions=cue.mediaActions||[];cue.mediaActions.push(normalizeMediaAction({id:uuid(),kind:probe.kind,assetKey:key,name:file.name,mime:file.type,size:file.size,duration:probe.duration,inPoint:0,outPoint:probe.duration,loop:false,transition:probe.kind==='audio'&&!(cue.time===0&&!cues.some(c=>c!==cue&&c.time===0))?'fade':'cut',fadeDuration:3,muted:true}));expandedCueId=cue.id;invalidatePreflight();renderCues();scheduleAutosave();await screenCheck;}
@@ -652,7 +653,7 @@ timeline.addEventListener('pointerdown',e=>{
  const startX=e.clientX,startY=e.clientY,rect=timeline.getBoundingClientRect(),duration=projectDuration(),original=currentTransportTime(),wasPlaying=transportPlaying;
  let dragging=false;timeline.setPointerCapture(e.pointerId);
  if(conductType==='manual'){
-  const at=ev=>Math.max(0,Math.min(duration,(ev.clientX-rect.left)/rect.width*duration));
+  const at=ev=>{const time=Math.max(0,Math.min(duration,(ev.clientX-rect.left)/rect.width*duration));if(locked&&!manualCurrentID){const nearby=manualMusics().find(c=>Math.abs(c.time/duration*rect.width-(ev.clientX-rect.left))<=7);if(nearby)return nearby.time;}return time;};
   const move=ev=>{if(panOnly||manualTimelinePan)return;if(!dragging&&Math.abs(ev.clientX-startX)<3)return;dragging=true;ev.preventDefault();if(manualPanOrigin)manualPanOrigin.sought=true;seekManualTransport(at(ev)).catch(console.warn);};
   const end=ev=>{timeline.removeEventListener('pointermove',move);timeline.removeEventListener('pointerup',end);timeline.removeEventListener('pointercancel',end);timeline.removeEventListener('lostpointercapture',end);if(panOnly||manualTimelinePan||ev.s2aPanCancellation)return;const tap=Math.abs(ev.clientX-startX)<5&&Math.abs(ev.clientY-startY)<5;if(dragging||tap)seekManualTransport(ev.type==='pointerup'?at(ev):original).catch(console.warn);};
   timeline.addEventListener('pointermove',move);timeline.addEventListener('pointerup',end);timeline.addEventListener('pointercancel',end);timeline.addEventListener('lostpointercapture',end);return;
@@ -1018,10 +1019,19 @@ function manualIssues(){
  for(const c of cues){if(music.includes(c))continue;const p=music.find(p=>p.id===c.parentMusicId);if(!p||!Number.isFinite(c.relativeTime)||c.relativeTime<0||c.relativeTime> manualDuration(p))issues.push(c.name+' : '+tr('Choisissez une musique et un temps relatif valides.'));}
  return issues;
 }
-function resetManualRuntime(){manualCurrentID=null;manualCompletedID=null;manualFade=null;manualPending=false;manualLastGO=-Infinity;manualPausedAt=null;manualPausePending=false;}
+function resetManualRuntime(){manualArmedID=null;manualArmExplicit=false;manualCurrentID=null;manualCompletedID=null;manualFade=null;manualPending=false;manualLastGO=-Infinity;manualPausedAt=null;manualPausePending=false;}
 function manualActiveCue(t){const p=manualCurrent()||cues.find(c=>c.id===manualCompletedID);if(!p)return null;return manualChildren(p).filter(c=>c.time<=t+.0001).pop()||p;}
 function manualNextTop(t){const p=manualCurrent();return (transportPlaying||manualPausedAt!==null)&&p?manualChildren(p).find(c=>c.time>t+.0001)||null:null;}
-function manualNextMusic(){const m=manualMusics(),id=manualCurrentID||manualCompletedID;return m[id?m.findIndex(c=>c.id===id)+1:0]||null;}
+function manualNextMusic(){const m=manualMusics();if(manualArmExplicit)return m.find(c=>c.id===manualArmedID)||null;const id=manualCurrentID||manualCompletedID;return m[id?m.findIndex(c=>c.id===id)+1:0]||null;}
+function armManualCue(id){
+ if(conductType!=='manual'||!locked||manualPending||escapeFading)return;
+ const cue=manualMusics().find(c=>c.id===id);if(!cue)return;
+ manualArmedID=cue.id;manualArmExplicit=true;showOverviewSignature='';updateTransport();
+}
+function armManualCueAtTime(time){
+ manualArmedID=manualMusics().find(c=>c.time>=time-.0001)?.id||null;manualArmExplicit=true;showOverviewSignature='';
+}
+
 function updateManualStatus(){
  document.body.classList.toggle('manualConduct',conductType==='manual');
  playBtn.title=conductType==='manual'?tr('GO — prochaine musique')+' (Espace)':tr('Lecture / Pause (Espace)');
@@ -1032,6 +1042,7 @@ function updateManualStatus(){
  if(conductType!=='manual'){playBtn.disabled=escapeFading;return;}
  playBtn.disabled=escapeFading||manualPending||manualPausePending;
  const current=manualCurrent(),next=manualNextMusic();
+ timeline.querySelectorAll('.marker').forEach(marker=>marker.classList.toggle('armedMainCue',manualArmExplicit&&marker.dataset.cueId===manualArmedID));
  panel.textContent=(manualPausedAt!==null?tr('Pause')+' — '+(current?.name||''):transportPlaying?tr('EN LECTURE — {name}',{name:current?.name||''}):tr('EN ATTENTE DU GO'))+(next?' · '+tr('Prochain numéro : {name}',{name:next.name}):manualCompletedID&&!transportPlaying?' · '+tr('Fin de conduite'):'');
  if(!transportPlaying&&preflightErrors.length)panel.textContent+=' · '+preflightErrors.map(x=>(x.item.action.name||x.item.cue.name)+' : '+x.error.message).join(' / ');
  playBtnLabel.textContent='GO';playBtn.setAttribute('aria-label',tr('GO — prochaine musique'));S2AMaterial.set(playBtnIcon,'play_arrow');
@@ -1066,13 +1077,13 @@ async function manualGO(){
   }
   // Safari requires play() inside the actual keyboard/touch event, before any await.
   const contextReady=ensureAudioContext();
-  const outgoing=[...runtimeAudio.values()].filter(rt=>!rt.el.paused);for(const rt of [...runtimeAudio.values()]){if(rt.el.paused)stopAudioRuntime(rt.item.action.id);else delete rt.globalFadeStartedAt;}manualPausedAt=null;manualFade=null;stopVideoRuntime();
+  const outgoing=[...runtimeAudio.values()].filter(rt=>!rt.el.paused&&rt.item.action.id!==primary?.id);for(const rt of [...runtimeAudio.values()]){if(rt.el.paused)stopAudioRuntime(rt.item.action.id);else delete rt.globalFadeStartedAt;}manualPausedAt=null;manualFade=null;stopVideoRuntime();
   manualCurrentID=next.id;manualCompletedID=null;transportTime=transportBase=next.time;transportEpoch=performance.now();lastTransportTime=next.time;transportPlaying=true;
   const rt=primary?{item,el:prepared.el}:null;if(rt){runtimeAudio.set(primary.id,rt);rt.el.currentTime=Number(primary.inPoint)||0;setRuntimeGain(rt,outgoing.length?0:1);}
   const started=rt?rt.el.play():Promise.resolve();await Promise.all([contextReady,started]);
   if(generation!==transportCommandGeneration)return;
   if(primary&&(!rt||rt.el.paused)){transportPlaying=false;manualCurrentID=null;throw new Error(tr('La lecture audio n’a pas démarré. Relancez le GO.'));}
-  manualLastGO=performance.now();showTransportGuard();
+  manualArmedID=null;manualArmExplicit=false;manualLastGO=performance.now();showTransportGuard();
   if(outgoing.length)manualFade={started:performance.now(),incoming:rt,outgoing:outgoing.map(x=>({rt:x,gain:x.manualGainValue??x.el.volume}))};
   for(const c of [next,...manualChildren(next).filter(c=>c.relativeTime===0)]){
    const remaining={...c,mediaActions:(c.mediaActions||[]).filter(a=>a.id!==primary?.id&&(c!==next||a.kind!=='stopAll'))};await onCueCrossed(remaining);
@@ -1098,7 +1109,8 @@ async function toggleManualPause(){
 }
 $('manualPauseBtn').addEventListener('click',()=>toggleManualPause().catch(e=>alert(e.message)));
 function seekManualTransport(target){
- const parent=manualCurrent();if(!parent){transportTime=clampTime(target);updateTransport();return Promise.resolve();}
+ if(escapeFading)return Promise.resolve();
+ const parent=manualCurrent();if(!parent){transportTime=clampTime(target);if(locked)armManualCueAtTime(transportTime);updateTransport();return Promise.resolve();}
  const action=(parent.mediaActions||[]).find(a=>a.kind==='audio'),rt=runtimeAudio.get(action?.id);if(!rt&&parent.manualKind!=='silent')return Promise.resolve();
  const relative=Math.max(0,Math.min(Math.max(0,manualDuration(parent)-.05),(Number(target)||0)-parent.time)),position=parent.time+relative;
  // Seeking never changes music, never issues GO and never pauses its audio element.
@@ -1168,11 +1180,11 @@ function centerTimelineCue(id){if(!id)return;const cue=cues.find(c=>c.id===id);i
 generalTimelineViewport.addEventListener('pointerdown',e=>{
  if(conductType!=='manual'||e.pointerType!=='touch')return;
  manualTimelineTouches.set(e.pointerId,{x:e.clientX,target:e.target});
- if(manualTimelineTouches.size===1)manualPanOrigin={time:currentTransportTime(),at:performance.now(),playing:transportPlaying};
+ if(manualTimelineTouches.size===1)manualPanOrigin={time:currentTransportTime(),at:performance.now(),playing:transportPlaying,armedID:manualArmedID,armExplicit:manualArmExplicit};
  if(manualTimelineTouches.size===2){
   manualTimelinePan=true;const contacts=[...manualTimelineTouches.values()];manualPanOrigin={...manualPanOrigin,x:(contacts[0].x+contacts[1].x)/2,scroll:generalTimelineViewport.scrollLeft};
   for(const [id,contact] of manualTimelineTouches){const cancel=new Event('pointercancel',{bubbles:true});cancel.pointerId=id;cancel.pointerType='touch';cancel.s2aPanCancellation=true;contact.target.dispatchEvent(cancel);if(contact.target.hasPointerCapture?.(id))contact.target.releasePointerCapture(id);}
-  if(manualPanOrigin.sought)seekManualTransport(manualPanOrigin.time+(manualPanOrigin.playing?(performance.now()-manualPanOrigin.at)/1000:0)).catch(console.warn);
+  if(manualPanOrigin.sought){seekManualTransport(manualPanOrigin.time+(manualPanOrigin.playing?(performance.now()-manualPanOrigin.at)/1000:0)).catch(console.warn);manualArmedID=manualPanOrigin.armedID;manualArmExplicit=manualPanOrigin.armExplicit;showOverviewSignature='';updateTransport();}
  }
 },true);
 generalTimelineViewport.addEventListener('pointermove',e=>{
@@ -1262,13 +1274,13 @@ if(window.S2AQuickHelp)S2AQuickHelp.start();
 
 function scheduleIcemanCenter(force=false){
  if(!locked||showLayout!=='iceman'){icemanFocusSignature='';cancelAnimationFrame(icemanCenterFrame);$('showCueOverviewRows').style.removeProperty('padding-bottom');return;}
- const host=$('showCueOverviewRows'),active=host.querySelector('.isActive'),next=host.querySelector('.isNext');
+ const host=$('showCueOverviewRows'),active=(!transportPlaying&&host.querySelector('.isArmed'))||host.querySelector('.isActive'),next=host.querySelector('.isNext');
  const signature=JSON.stringify([active?.dataset.cueId,next?.dataset.cueId]);
  if(!force&&signature===icemanFocusSignature)return;icemanFocusSignature=signature;
  cancelAnimationFrame(icemanCenterFrame);icemanCenterFrame=requestAnimationFrame(()=>{
   if(!locked||showLayout!=='iceman')return;
-  const first=host.querySelector('.isActive')||host.querySelector('.isNext');if(!first)return;
-  const last=host.querySelector('.isNext')||first,card=$('preflightCard'),a=first.getBoundingClientRect(),b=last.getBoundingClientRect();
+  const first=(!transportPlaying&&host.querySelector('.isArmed'))||host.querySelector('.isActive')||host.querySelector('.isNext');if(!first)return;
+  const last=first.classList.contains('isArmed')?first:host.querySelector('.isNext')||first,card=$('preflightCard'),a=first.getBoundingClientRect(),b=last.getBoundingClientRect();
   const inset=parseFloat(getComputedStyle(card).top)||0,top=inset+card.getBoundingClientRect().height+18;
   const bottom=window.visualViewport?window.visualViewport.offsetTop+window.visualViewport.height:window.innerHeight;
   const space=Math.max(0,bottom-top),height=b.bottom-a.top;
@@ -1281,7 +1293,7 @@ function scheduleIcemanCenter(force=false){
 function updateShowOverview(){
  const host=$('showCueOverviewRows');if(!host||!locked)return;
  const ordered=orderedCues(),active=getActiveCue(),next=getNextCue();
- const key=JSON.stringify([showLayout,S2ALanguage.language,active?.id,next?.id,ordered.map(c=>[c.id,c.name,c.description,c.time,c.imageDataUrl?.length,(c.mediaActions||[]).map(a=>a.kind)])]);
+ const key=JSON.stringify([manualArmedID,manualArmExplicit,showLayout,S2ALanguage.language,active?.id,next?.id,ordered.map(c=>[c.id,c.name,c.description,c.time,c.imageDataUrl?.length,(c.mediaActions||[]).map(a=>a.kind)])]);
  if(key===showOverviewSignature)return;showOverviewSignature=key;
  const previousRows=new Map(Array.from(host.querySelectorAll('.showOverviewRow')).map(row=>[row.dataset.cueId,row]));
  document.querySelector('.showTransportHeader').append($('showNextCountdown'));
@@ -1289,6 +1301,10 @@ function updateShowOverview(){
  if(!ordered.length){const empty=document.createElement('div');empty.className='small muted';empty.textContent=tr('Aucune Cue');host.append(empty);}
  for(const cue of ordered){
   const row=document.createElement('div');row.className='showOverviewRow'+(cue===active?' isActive':'')+(cue===next?' isNext':'')+(isManualInternalCue(cue)?' manualInternalCue':'');row.dataset.cueId=cue.id;
+  if(conductType==='manual'&&isManualMainCue(cue)){
+   row.classList.toggle('isArmed',manualArmExplicit&&manualArmedID===cue.id);row.tabIndex=0;row.setAttribute('role','button');row.setAttribute('aria-pressed',String(manualArmExplicit&&manualArmedID===cue.id));row.title=tr('Sélectionner pour le prochain GO');
+   row.onclick=()=>armManualCue(cue.id);row.onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();e.stopPropagation();armManualCue(cue.id);}};
+  }
   if(cue===active)row.setAttribute('aria-current','step');
   const number=document.createElement('span');number.className='overviewNumber';number.textContent=String(cues.indexOf(cue)+1);
   const visual=document.createElement('div');visual.className='overviewVisual';

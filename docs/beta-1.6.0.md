@@ -150,3 +150,12 @@ Les anciennes Cues sans média audio et sans séquence sont reconnues comme prin
 - Sélecteur de conduite compact (145 px) et champs de titre/sélecteur de 38 px de haut.
 - Échap pendant la lecture arrête avec un fondu de trois secondes en Manuel et Autopilote. Les départs de Cues sont suspendus pendant le fondu ; le retour au début l’annule. La fermeture des dialogues et la saisie dans les champs conservent la priorité sur ce raccourci.
 - Vérification avec audio réel, dans Chrome et WebKit : changements de mode, Nouveau, état Edit, baisse progressive du gain, arrêt complet, annulation par retour au début. Test : `tools/test-pilot-modes-escape.cjs`.
+
+## Répétition et sélection du prochain GO en Show Manuel
+
+- Entrer en Show Manuel choisit Iceman par défaut ; l’autre disposition reste accessible.
+- Cliquer sur une Cue principale prépare son départ sans lire ni interrompre la musique courante. La sélection est encadrée en bleu et annoncée dans « Prochain numéro ». Entrée sélectionne au clavier ; Espace conserve GO. Les sous-Cues ne préparent pas un nouveau numéro.
+- GO consomme cette sélection puis revient à l’ordre établi à partir du numéro choisi. Après Échap, la même Cue peut être resélectionnée et relancée depuis son début, même si l’ordre naturel proposait la suivante. Relancer la musique déjà en lecture ne crée pas de fondu qui arrête sa propre source.
+- À l’arrêt, la tête de lecture prépare la première Cue principale à sa position ou après elle. Au-delà du dernier départ, GO ne relance pas arbitrairement un numéro. En lecture ou en pause de transport, la recherche dans la musique courante conserve le comportement existant. Le déplacement à deux doigts conserve aussi la sélection préparée.
+- Timeline Show Manuel : seuls les points des Cues principales apparaissent ; la timeline Edit et l’Autopilote conservent tous leurs repères.
+- `tools/test-manual-show-selection.cjs` vérifie dans Chrome et WebKit, avec audio : attente naturelle du GO, répétition après fondu Échap, choix hors ordre, sélection pendant la lecture, clavier, reprise du même morceau, recherche continue, préparation par la tête, retour au début et repères principaux uniquement.

@@ -1940,5 +1940,10 @@
     "en": "No sequence",
     "es": "Ninguna secuencia",
     "de": "Keine Sequenz"
+  },
+  "Sélectionner pour le prochain GO": {
+    "en": "Select for the next GO",
+    "es": "Seleccionar para el próximo GO",
+    "de": "Für das nächste GO auswählen"
   }
 }
