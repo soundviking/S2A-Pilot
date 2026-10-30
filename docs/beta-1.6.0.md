@@ -143,3 +143,10 @@ Limite de validation de cette passe : le scénario complet `test-manual-conduct.
 Les anciennes Cues sans média audio et sans séquence sont reconnues comme principales muettes lors du rendu Manuel. Une Cue devenue musicale perd son ancien attribut muet. GO n’est plus désactivé silencieusement par la validation globale ou le préchargement : les validations restent appliquées au départ, la préparation conserve la demande de second GO après chargement, et les erreurs de médias apparaissent dans le statut Show. Les verrous de départ en cours restent actifs. Pause reste disponible seulement pour une séquence démarrée.
 
 `tools/test-manual-go-recovery.cjs` passe dans Chrome et WebKit : anciennes Cues indépendantes, départ, pause, recherche, reprise, retour au début, redémarrage, erreur de lien explicite et erreur de média visible. Les dernières corrections de superposition du temps de déplacement et de couleur jaune des repères musicaux sont incluses.
+
+## Cohérence Edit/Show et arrêt progressif
+
+- Nouveau force l’état Edit et remet la conduite en Autopilote. Un changement de type de conduite réapplique la présentation et réinitialise le libellé du transport : GO ne reste plus affiché en Autopilote.
+- Sélecteur de conduite compact (145 px) et champs de titre/sélecteur de 38 px de haut.
+- Échap pendant la lecture arrête avec un fondu de trois secondes en Manuel et Autopilote. Les départs de Cues sont suspendus pendant le fondu ; le retour au début l’annule. La fermeture des dialogues et la saisie dans les champs conservent la priorité sur ce raccourci.
+- Vérification avec audio réel, dans Chrome et WebKit : changements de mode, Nouveau, état Edit, baisse progressive du gain, arrêt complet, annulation par retour au début. Test : `tools/test-pilot-modes-escape.cjs`.
