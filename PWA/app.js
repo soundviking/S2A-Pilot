@@ -551,7 +551,7 @@ function readStoredZip(buffer){const bytes=new Uint8Array(buffer),view=new DataV
 function bytesToDataUrl(bytes,mime){let s='',ch=0x8000;for(let i=0;i<bytes.length;i+=ch)s+=String.fromCharCode(...bytes.subarray(i,Math.min(i+ch,bytes.length)));return`data:${mime};base64,${btoa(s)}`;}
 function mimeFromName(name){const e=(name.split('.').pop()||'').toLowerCase(),m={jpg:'image/jpeg',jpeg:'image/jpeg',png:'image/png',webp:'image/webp',mp3:'audio/mpeg',wav:'audio/wav',aif:'audio/aiff',aiff:'audio/aiff',m4a:'audio/mp4',aac:'audio/aac',flac:'audio/flac',ogg:'audio/ogg',mp4:'video/mp4',mov:'video/quicktime',m4v:'video/x-m4v',webm:'video/webm'};return m[e]||'application/octet-stream';}
 async function addCompiledCompanion(entries){
- const [archiveResponse,manifestResponse]=await Promise.all([fetch('./Bridge/S2A-Pilot-Bridge-1.6.0-app.zip',{cache:'no-store'}),fetch('./Bridge/app-files.json?v=1.6.0',{cache:'no-store'})]);
+ const [archiveResponse,manifestResponse]=await Promise.all([fetch('./Bridge/S2A-Pilot-Bridge-1.6.1-app.zip',{cache:'no-store'}),fetch('./Bridge/app-files.json?v=1.6.1',{cache:'no-store'})]);
  if(!archiveResponse.ok||!manifestResponse.ok)throw new Error(tr('S2A Pilot Bridge est indisponible. Vérifiez que tous les fichiers de la PWA ont été déployés.'));
  const [buffer,manifest]=await Promise.all([archiveResponse.arrayBuffer(),manifestResponse.json()]),files=readStoredZip(buffer);
  for(const file of manifest.files){
@@ -561,7 +561,7 @@ async function addCompiledCompanion(entries){
  }
  entries.push({name:'Bridge/INSTALLATION.txt',data:new TextEncoder().encode(tr('bridge.installation',{version:manifest.version}))});
 }
-async function buildProjectPackage(){if(conductType==='manual'&&manualIssues().length)throw new Error(manualIssues().join('\n'));ensureBaseCueInvariant();const title=showTitle.value.trim()||tr('Projet S2A Pilot'),entries=[],project={format:'showcue-multimedia-package',version:5,showLayout,conductType,applicationVersion:APP_VERSION,minimumBridgeBuild:conductType==='manual'?(cues.some(c=>c.manualKind==='silent')?16002:16001):24,minimumBridgeVersion:conductType==='manual'?'1.6.0':'1.4.5',title,showDuration:roundTenth(projectDuration()),showDurationOverride:Number.isFinite(showDurationOverride)?roundTenth(showDurationOverride):null,cues:[]},assetPaths=new Map();for(let i=0;i<cues.length;i++){const c=cues[i],pc={manualKind:c.manualKind||null,manualDuration:c.manualDuration??null,id:c.id,parentMusicId:c.parentMusicId||null,relativeTime:Number.isFinite(c.relativeTime)?c.relativeTime:null,index:i+1,time:roundTenth(c.time),name:c.name,description:c.description||'',isBase:!!c.isBase,imagePath:null,mediaActions:[]};if(c.imageDataUrl){const p=`images/${String(i+1).padStart(2,'0')}-${safeFileName(c.imageName||'cue.jpg')}`;entries.push({name:p,data:dataUrlToBytes(c.imageDataUrl)});pc.imagePath=p;}for(const a of(c.mediaActions||[])){if(a.kind==='stopAll'){pc.mediaActions.push({...a,assetKey:undefined});continue;}let p=assetPaths.get(a.assetKey);if(!p){const blob=await getAsset(a.assetKey);if(!blob)throw new Error(`${tr("Média introuvable : ")}${a.name}`);p=`media/${a.id}-${safeFileName(a.name)}`;assetPaths.set(a.assetKey,p);entries.push({name:p,data:new Uint8Array(await blob.arrayBuffer())});}pc.mediaActions.push({...a,path:p,assetKey:undefined});}project.cues.push(pc);}const enc=new TextEncoder();await addCompiledCompanion(entries);entries.push({name:'conduite.json',data:enc.encode(JSON.stringify(project,null,2))});const pdf=await buildTechnicalPdfBytes();entries.push({name:`documents/${safeFileName(title)}-conduite-technique.pdf`,data:pdf.bytes});entries.push({name:'LISEZ-MOI-Technicien.txt',data:enc.encode((conductType==='manual'?tr('Conduite Manuel : utilisez Bridge 1.6.0 bêta inclus dans ce ZIP. Bridge 1.4.5 ne connaît pas le mode Manuel.')+'\n\n':'')+tr('export.readme',{title,count:project.cues.length}))});return{blob:await makeZip(entries),suggestedName:`${safeFileName(title)}.s2apilot.zip`};}
+async function buildProjectPackage(){if(conductType==='manual'&&manualIssues().length)throw new Error(manualIssues().join('\n'));ensureBaseCueInvariant();const title=showTitle.value.trim()||tr('Projet S2A Pilot'),entries=[],project={format:'showcue-multimedia-package',version:5,showLayout,conductType,applicationVersion:APP_VERSION,minimumBridgeBuild:conductType==='manual'?(cues.some(c=>c.manualKind==='silent')?16002:16001):24,minimumBridgeVersion:conductType==='manual'?'1.6.0':'1.4.5',title,showDuration:roundTenth(projectDuration()),showDurationOverride:Number.isFinite(showDurationOverride)?roundTenth(showDurationOverride):null,cues:[]},assetPaths=new Map();for(let i=0;i<cues.length;i++){const c=cues[i],pc={manualKind:c.manualKind||null,manualDuration:c.manualDuration??null,id:c.id,parentMusicId:c.parentMusicId||null,relativeTime:Number.isFinite(c.relativeTime)?c.relativeTime:null,index:i+1,time:roundTenth(c.time),name:c.name,description:c.description||'',isBase:!!c.isBase,imagePath:null,mediaActions:[]};if(c.imageDataUrl){const p=`images/${String(i+1).padStart(2,'0')}-${safeFileName(c.imageName||'cue.jpg')}`;entries.push({name:p,data:dataUrlToBytes(c.imageDataUrl)});pc.imagePath=p;}for(const a of(c.mediaActions||[])){if(a.kind==='stopAll'){pc.mediaActions.push({...a,assetKey:undefined});continue;}let p=assetPaths.get(a.assetKey);if(!p){const blob=await getAsset(a.assetKey);if(!blob)throw new Error(`${tr("Média introuvable : ")}${a.name}`);p=`media/${a.id}-${safeFileName(a.name)}`;assetPaths.set(a.assetKey,p);entries.push({name:p,data:new Uint8Array(await blob.arrayBuffer())});}pc.mediaActions.push({...a,path:p,assetKey:undefined});}project.cues.push(pc);}const enc=new TextEncoder();await addCompiledCompanion(entries);entries.push({name:'conduite.json',data:enc.encode(JSON.stringify(project,null,2))});const pdf=await buildTechnicalPdfBytes();entries.push({name:`documents/${safeFileName(title)}-conduite-technique.pdf`,data:pdf.bytes});entries.push({name:'LISEZ-MOI-Technicien.txt',data:enc.encode((conductType==='manual'?tr('Conduite Manuel : utilisez Bridge 1.6.1 bêta inclus dans ce ZIP. Bridge 1.4.5 ne connaît pas le mode Manuel.')+'\n\n':'')+tr('export.readme',{title,count:project.cues.length}))});return{blob:await makeZip(entries),suggestedName:`${safeFileName(title)}.s2apilot.zip`};}
 function downloadBlob(blob,name){const u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),2000);}
 let savingProject=false;
 async function saveProject(){
@@ -609,20 +609,31 @@ function toggleTransportGuarded(){
  spaceTransportPending=true;Promise.resolve(playTransport()).catch(console.warn).finally(()=>{spaceTransportPending=false;});
 }
 
+function updateGoFadeHalo(progress=null){
+ const visible=progress!==null&&conductType==='manual';
+ playBtn.classList.toggle('fadeStopping',visible);
+ let ring=playBtn.querySelector('.goFadeHalo');
+ if(!visible){if(ring)ring.remove();return;}
+ if(!ring){
+  const ns='http://www.w3.org/2000/svg';ring=document.createElementNS(ns,'svg');ring.classList.add('goFadeHalo');ring.setAttribute('viewBox','0 0 100 40');ring.setAttribute('preserveAspectRatio','none');ring.setAttribute('aria-hidden','true');ring.setAttribute('focusable','false');
+  for(const kind of ['goFadeTrack','goFadeProgress']){const path=document.createElementNS(ns,'path');path.classList.add(kind);path.setAttribute('d','M50 2 H88 A10 10 0 0 1 98 12 V28 A10 10 0 0 1 88 38 H12 A10 10 0 0 1 2 28 V12 A10 10 0 0 1 12 2 H50');path.setAttribute('pathLength','100');ring.append(path);}playBtn.append(ring);
+ }
+ const value=Math.max(0,Math.min(1,progress));const path=ring.querySelector('.goFadeProgress'),offset=String(100*(1-value));path.setAttribute('stroke-dashoffset',offset);path.style.setProperty('stroke-dashoffset',offset);ring.dataset.progress=String(value);
+}
 function fadeOutAndStop(){
  if(escapeFading||!transportPlaying)return;
- escapeFading=true;const generation=++transportCommandGeneration,started=performance.now();
+ escapeFading=true;updateGoFadeHalo(0);const generation=++transportCommandGeneration,started=performance.now();
  cancelAnimationFrame(rafId);rafId=0;
  const audio=[...runtimeAudio.values()].map(rt=>({rt,gain:rt.manualGainValue??rt.el.volume})),video=runtimeVideo,opacity=video?.opacity??1;
  updateTransport();
  const step=now=>{
-  if(generation!==transportCommandGeneration){escapeFading=false;for(const x of audio)if(runtimeAudio.get(x.rt.item.action.id)===x.rt)setRuntimeGain(x.rt,x.gain);updateTransport();return;}
-  const factor=Math.max(0,1-(now-started)/3000);
+  if(generation!==transportCommandGeneration){escapeFading=false;updateGoFadeHalo();for(const x of audio)if(runtimeAudio.get(x.rt.item.action.id)===x.rt)setRuntimeGain(x.rt,x.gain);updateTransport();return;}
+  const factor=Math.max(0,1-(now-started)/3000);updateGoFadeHalo(1-factor);
   for(const x of audio)setRuntimeGain(x.rt,x.gain*factor);
   if(video&&runtimeVideo===video){video.opacity=opacity*factor;video.el.style.opacity=String(video.opacity);syncExternalVideo();}
   if(factor>0){requestAnimationFrame(step);return;}
   if(conductType==='manual'){manualCompletedID=manualCurrentID||manualCompletedID;manualCurrentID=null;manualPausedAt=null;manualFade=null;}
-  escapeFading=false;pauseTransport();stopAllRuntimeMedia();updateTransport();
+  escapeFading=false;updateGoFadeHalo();pauseTransport();stopAllRuntimeMedia();updateTransport();
  };
  requestAnimationFrame(step);
 }
@@ -1019,7 +1030,7 @@ function manualIssues(){
  for(const c of cues){if(music.includes(c))continue;const p=music.find(p=>p.id===c.parentMusicId);if(!p||!Number.isFinite(c.relativeTime)||c.relativeTime<0||c.relativeTime> manualDuration(p))issues.push(c.name+' : '+tr('Choisissez une musique et un temps relatif valides.'));}
  return issues;
 }
-function resetManualRuntime(){manualArmedID=null;manualArmExplicit=false;manualCurrentID=null;manualCompletedID=null;manualFade=null;manualPending=false;manualPendingGeneration=null;manualLastGO=-Infinity;manualPausedAt=null;manualPausePending=false;}
+function resetManualRuntime(){updateGoFadeHalo();manualArmedID=null;manualArmExplicit=false;manualCurrentID=null;manualCompletedID=null;manualFade=null;manualPending=false;manualPendingGeneration=null;manualLastGO=-Infinity;manualPausedAt=null;manualPausePending=false;}
 function manualActiveCue(t){const p=manualCurrent()||cues.find(c=>c.id===manualCompletedID);if(!p)return null;return manualChildren(p).filter(c=>c.time<=t+.0001).pop()||p;}
 function manualNextTop(t){const p=manualCurrent();return (transportPlaying||manualPausedAt!==null)&&p?manualChildren(p).find(c=>c.time>t+.0001)||null:null;}
 function manualNextMusic(){const m=manualMusics();if(manualArmExplicit)return m.find(c=>c.id===manualArmedID)||null;const id=manualCurrentID||manualCompletedID;return m[id?m.findIndex(c=>c.id===id)+1:0]||null;}
@@ -1250,7 +1261,7 @@ document.addEventListener('touchmove',e=>{if(e.touches.length>1)e.preventDefault
 document.addEventListener('wheel',e=>{if(e.ctrlKey)e.preventDefault();},{passive:false});
 
 // This manifest is requested from the network, outside the service-worker cache.
-const APP_VERSION='1.6.0';document.querySelector('.appVersion').textContent='Version '+APP_VERSION+' bêta';let lastVersionCheck=0,versionCheckRunning=false;
+const APP_VERSION='1.6.1';document.querySelector('.appVersion').textContent='Version '+APP_VERSION+' bêta';let lastVersionCheck=0,versionCheckRunning=false;
 const updateNotice=document.createElement('div');updateNotice.id='updateNotice';updateNotice.hidden=true;updateNotice.setAttribute('role','status');const updateText=document.createElement('span'),updateButton=document.createElement('button'),updateSummary=document.createElement('p');updateSummary.className='updateSummary';updateSummary.hidden=true;updateButton.type='button';updateButton.textContent=tr('Ouvrir la nouvelle version');updateText.className='updateVersionText';const updateContent=document.createElement('div');updateContent.className='updateContent';updateContent.append(updateText,updateSummary);updateNotice.append(updateContent,updateButton);const updateMain=document.querySelector('main');updateMain.insertBefore(updateNotice,updateMain.firstChild);
 function updateVersionButton(){const b=document.getElementById('updateNotice')?.querySelector('button');if(!b)return;b.disabled=locked||transportPlaying;b.title=b.disabled?tr('Quitter le mode Show et mettre la lecture en pause pour actualiser.'):'';}
 function versionIsNewer(a,b){const x=a.split('.').map(Number),y=b.split('.').map(Number);for(let i=0;i<3;i++){if(x[i]!==y[i])return x[i]>y[i];}return false;}

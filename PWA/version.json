@@ -1,10 +1,10 @@
 {
-  "version": "1.6.0",
+  "version": "1.6.1",
   "releaseNotes": {
-    "fr": "Bêta : types de conduite Autopilote / Manuel, tops internes et GO.",
-    "en": "Beta: Autopilot / Manual conduct, internal cues and GO.",
-    "es": "Beta: conducción automática / manual, cues internos y GO.",
-    "de": "Beta: Autopilot / manuell, interne Cues und GO."
+    "fr": "Bêta : redémarrage audio fiabilisé, bouton Autopilote/Manuel et halo du fondu Échap.",
+    "en": "Beta: reliable audio restart, Autopilot/Manual toggle and Escape fade halo.",
+    "es": "Beta: reinicio de audio mejorado, botón Automático/Manual y halo del fundido con Escape.",
+    "de": "Beta: zuverlässiger Audio-Neustart, Autopilot/Manuell-Schalter und Escape-Ausblendring."
   },
   "channel": "beta"
 }

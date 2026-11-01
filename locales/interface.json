@@ -1945,5 +1945,10 @@
     "en": "Select for the next GO",
     "es": "Seleccionar para el próximo GO",
     "de": "Für das nächste GO auswählen"
+  },
+  "Conduite Manuel : utilisez Bridge 1.6.1 bêta inclus dans ce ZIP. Bridge 1.4.5 ne connaît pas le mode Manuel.": {
+    "en": "Manual conduct: use Bridge 1.6.1 beta included in this ZIP. Bridge 1.4.5 does not support Manual mode.",
+    "es": "Conducción Manual: utiliza Bridge 1.6.1 beta incluido en este ZIP. Bridge 1.4.5 no admite el modo Manual.",
+    "de": "Manueller Ablauf: Verwende Bridge 1.6.1 Beta aus dieser ZIP-Datei. Bridge 1.4.5 unterstützt den manuellen Modus nicht."
   }
 }

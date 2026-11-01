@@ -9,3 +9,5 @@ User decision — 28 October 2026:
 - Before modifying files or pushing, verify the current branch. If on `main`, switch to an appropriate beta branch first.
 - Clearly label beta artifacts and keep them separate from the stable Pilot/Bridge releases.
 - Authorization to push beta work does not authorize production deployment or promotion to stable.
+
+Current beta delivery, requested by the user on 2 November 2026: Pilot / Bridge 1.6.1 beta. Keep it separate from stable releases.
