@@ -893,7 +893,7 @@ body:not(.locked) .marker.selectedCueMarker::after{background:#80b9ff;width:5px;
 <meta content="S2A Pilot" name="apple-mobile-web-app-title"/>
 <link href="./icons/s2a-pilot-180.png?v=1.6.0-logo2" rel="apple-touch-icon"/>
 <link rel="stylesheet" href="./material-ui.css">
-<link rel="stylesheet" href="./quick-help.css?v=1.6.0-layout12">
+<link rel="stylesheet" href="./quick-help.css?v=1.6.0-layout15">
 <link rel="stylesheet" href="./startup.css?v=1.6.0"><style>
 body.manualConduct{--accent:#b58aff}
 body.manualConduct:not(.locked) .cueAccordion.expanded{background:#1b1f27;border-color:#b58aff;box-shadow:0 0 0 1px #b58aff55}
@@ -903,9 +903,11 @@ body.manualConduct:not(.locked) .mediaSelection{background:#b58aff22;border-colo
 .projectHeadingRow{display:flex;align-items:flex-end;gap:14px;margin-bottom:5px}
 .projectCard .projectHeadingRow .showTitleWrap{flex:1 1 0;min-width:0;margin:0}
 .conductSelector{display:flex;flex-direction:column;gap:4px;flex:0 0 145px;margin:0;font-size:.76rem;color:var(--muted)}
-.conductSelector select{width:100%;height:38px;min-height:38px;box-sizing:border-box;font:750 .82rem -apple-system,BlinkMacSystemFont,Arial,sans-serif;color:#f4f6f8;background:#10151d;border:1px solid #3b4352;border-radius:11px;padding:8px 30px 8px 11px;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='m1 1 5 5 5-5' fill='none' stroke='%23a7b2c2' stroke-width='2'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
-.conductSelector select:focus-visible{outline:2px solid #89b9ef;outline-offset:2px}
-body.manualConduct .conductSelector select{border-color:#b58aff}
+.conductModeButton{width:100%;height:38px;min-height:38px;box-sizing:border-box;font:750 .82rem -apple-system,BlinkMacSystemFont,Arial,sans-serif;color:#f4f6f8;background:linear-gradient(180deg,#40566c,#223344);border:1px solid #4f657c;border-top-color:#91a5bb;border-bottom-color:#111b27;border-radius:11px;padding:8px 12px;box-shadow:inset 0 1px 0 #ffffff35,inset 0 -2px 0 #00000045,0 3px 6px #00000035;cursor:pointer;transition:box-shadow .15s,transform .08s}
+.conductModeButton:active:not(:disabled){transform:translateY(1px);box-shadow:inset 0 2px 4px #00000055}
+.conductModeButton:disabled{cursor:default;opacity:.55}
+.conductModeButton:focus-visible{outline:2px solid #89b9ef;outline-offset:2px}
+body.manualConduct .conductModeButton{background:linear-gradient(180deg,#74508f,#402653);border-color:#8d6ca6;border-top-color:#d2b4ed;border-bottom-color:#291635;box-shadow:inset 0 1px 0 #ffffff35,inset 0 -2px 0 #00000045,0 3px 6px #00000035}
 .projectHeadingRow .showTitleInput{height:38px;min-height:38px;box-sizing:border-box}
 .conductHelp{margin:0 0 5px}
 @media(max-width:540px){.projectHeadingRow{flex-wrap:wrap;gap:8px}.projectCard .projectHeadingRow .showTitleWrap{flex-basis:100%}.conductSelector{flex-basis:145px}}
@@ -943,7 +945,7 @@ body.manualConduct.locked .showOverviewRow[role="button"]{cursor:pointer}
 body.manualConduct.locked .showOverviewRow.isArmed{outline:2px solid #80b9ff;outline-offset:-2px;box-shadow:0 0 14px #509dff66}
 body.manualConduct.locked .showOverviewRow[role="button"]:focus-visible{outline:2px solid #80b9ff;outline-offset:2px}
 </style></head>
-<body><script src="./i18n-catalog.js?v=1.6.0-layout12"></script><script src="./startup.js?v=1.6.0"></script>
+<body><script src="./i18n-catalog.js?v=1.6.0-layout15"></script><script src="./startup.js?v=1.6.0"></script>
 <main class="spectaclePriorityLayout">
 <div class="appTopBar">
 <img alt="Logo S2A Pilot" class="headerBrandLogo" src="./icons/s2a-pilot-192.png?v=1.6.0-logo2"/>
@@ -1050,8 +1052,8 @@ window.s2aReportBootError=function(message){if(window.s2aBootReady)return;var bo
 window.addEventListener('error',function(e){window.s2aReportBootError((e.message||'Chargement impossible')+' — '+(e.filename||'')+':'+(e.lineno||''));});
 </script>
 <script src="./material-ui.js"></script>
-<script src="./help-images.js?v=1.6.0"></script><script src="./quick-help.js?v=1.6.0-layout12"></script><script src="./help-video.js?v=1.6.0-video1"></script>
-<script src="./compatibility-loader.js?v=1.6.0-layout12"></script>
+<script src="./help-images.js?v=1.6.0"></script><script src="./quick-help.js?v=1.6.0-layout15"></script><script src="./help-video.js?v=1.6.0-video1"></script>
+<script src="./compatibility-loader.js?v=1.6.0-layout15"></script>
 <dialog id="showLayoutDialog" class="showLayoutDialog" aria-labelledby="showLayoutTitle">
 <h2 id="showLayoutTitle">Disposition Show</h2>
 <button type="button" class="showLayoutChoice" data-show-layout="maverick" aria-pressed="true"><strong>Maverick</strong><span>Cues côte à côte. Les Cues passées disparaissent.</span></button>

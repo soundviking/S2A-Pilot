@@ -10,9 +10,9 @@ const {chromium,webkit}=require('playwright'),assert=require('node:assert/strict
   cues=[];for(const [id,time,duration] of [['music1',0,8],['music2',10,5],['music3',20,1]]){const file=wave(duration),key=await storeAsset(file);cues.push({...newBaseCue(),id,time,name:id,mediaActions:[normalizeMediaAction({id:'a'+id,kind:'audio',assetKey:key,name:id+'.wav',duration,inPoint:0,outPoint:duration})]});}
   cues.push({...newBaseCue(),id:'top1',time:1,name:'Blue'},{...newBaseCue(),id:'top2',time:4,name:'Skipped'},{...newBaseCue(),id:'top3',time:11,name:'Final'});renderCues();
  });
- await page.selectOption('#conductType','manual');assert.equal(await page.evaluate(()=>cues.find(c=>c.id==='top1').relativeTime),1);
- const original=await page.evaluate(()=>JSON.stringify(cues));await page.selectOption('#conductType','autopilot');assert.equal(await page.evaluate(()=>JSON.stringify(cues)),original);await page.selectOption('#conductType','manual');
- await page.evaluate(async()=>{await writeAutosave();await loadWorkspace(await readAutosave());});assert.equal(await page.inputValue('#conductType'),'manual');
+ await page.locator('#conductType').click();assert.equal(await page.evaluate(()=>cues.find(c=>c.id==='top1').relativeTime),1);
+ const original=await page.evaluate(()=>JSON.stringify(cues));await page.locator('#conductType').click();assert.equal(await page.evaluate(()=>JSON.stringify(cues)),original);await page.locator('#conductType').click();
+ await page.evaluate(async()=>{await writeAutosave();await loadWorkspace(await readAutosave());});assert.equal(await page.locator('#conductType').evaluate(el=>el.value),'manual');
  await page.evaluate(async()=>{const pack=await buildProjectPackage(),entries=readStoredZip(await pack.blob.arrayBuffer()),manifest=JSON.parse(new TextDecoder().decode(entries.get('conduite.json')));if(manifest.conductType!=='manual'||manifest.cues.find(c=>c.id==='top1').parentMusicId!=='music1')throw Error('manual export metadata');await importPackage(new File([pack.blob],'manual.s2apilot.zip'));if(conductType!=='manual'||cues.find(c=>c.id==='top1').relativeTime!==1)throw Error('manual import');});
  await page.evaluate(()=>{expandedCueId='music1';renderCues();});
  const musicRow=page.locator('.cueAccordion[data-cue-id="music1"]');await musicRow.locator('.mediaVisual').scrollIntoViewIfNeeded();const wave=await musicRow.locator('.mediaVisual').boundingBox();await page.touchscreen.tap(wave.x+wave.width*.35,wave.y+wave.height*.7);await musicRow.getByText('+ Cue à la tête de lecture',{exact:true}).click();

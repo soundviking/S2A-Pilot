@@ -159,3 +159,20 @@ Les anciennes Cues sans média audio et sans séquence sont reconnues comme prin
 - À l’arrêt, la tête de lecture prépare la première Cue principale à sa position ou après elle. Au-delà du dernier départ, GO ne relance pas arbitrairement un numéro. En lecture ou en pause de transport, la recherche dans la musique courante conserve le comportement existant. Le déplacement à deux doigts conserve aussi la sélection préparée.
 - Timeline Show Manuel : seuls les points des Cues principales apparaissent ; la timeline Edit et l’Autopilote conservent tous leurs repères.
 - `tools/test-manual-show-selection.cjs` vérifie dans Chrome et WebKit, avec audio : attente naturelle du GO, répétition après fondu Échap, choix hors ordre, sélection pendant la lecture, clavier, reprise du même morceau, recherche continue, préparation par la tête, retour au début et repères principaux uniquement.
+
+## Redémarrage audio après Échap
+
+Le lecteur audio préchargé est réutilisé entre les GO. Demander `currentTime = inPoint` ne garantit pas que le navigateur a déjà terminé la recherche quand `play()` est appelé. Le départ manuel coupe donc d’abord le gain, met la source en pause et attend la fin effective du déplacement ainsi que la confirmation de lecture avant d’ouvrir le volume. `play()` reste appelé dans l’événement utilisateur pour Safari. L’horloge et les sous-Cues ne reprennent qu’après cette préparation ; le fondu vers le nouveau morceau commence à ce moment. Les opérations annulées ne peuvent plus libérer le verrou d’un nouveau départ.
+
+Test `tools/test-manual-audio-restart.cjs` dans Chrome et WebKit : A → Échap → B → Échap → A, avec audio WAV et point d’entrée non nul. Une recherche native volontairement retardée de 650 ms vérifie que l’ancienne position reste inaudible (gain nul), sans déclencher de sous-Cue ; le son n’est ouvert qu’au point d’entrée réel. Vérification du redémarrage du morceau courant et du retour au début. Pas de validation acoustique sur iPad matériel dans cette passe.
+
+## Bouton unique de conduite
+
+Le menu Autopilote/Manuel est remplacé par un bouton unique avec relief : bleu/gris en Autopilote, violet en Manuel. Clic ou activation clavier bascule le type ; son état est annoncé avec aria-pressed et son libellé suit les quatre langues. Le verrouillage en Show et pendant la lecture reste actif. Les tests existants utilisent désormais ce bouton et attendent la fin du départ audio avant de préparer une autre Cue. Test ciblé : `tools/test-conduct-button.cjs`.
+
+## Priorités conseillées avant la prochaine livraison
+
+1. Stabiliser le transport audio réel, notamment Safari/iPad et les répétitions avec Échap, avant d’ajouter des fonctions.
+2. Rendre lisibles et cohérents les états Cue en lecture / prochain GO sélectionné / pause / préparation des médias.
+3. Nettoyer progressivement les transitions de transport, les annulations asynchrones et les styles redondants, en conservant les tests ; éviter une réécriture globale à ce stade.
+4. Valider sur matériel iPad, Android, télécommande Bluetooth et QLab, puis vérifier ouverture, sauvegarde et export des projets existants avant promotion de la bêta.
