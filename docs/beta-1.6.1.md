@@ -18,3 +18,13 @@ Cette livraison bêta conserve les évolutions 1.6.0 et ajoute le retour visuel 
 ## Validation
 
 `tools/test-manual-fade-halo.cjs` passe dans Chrome et WebKit : progression réellement dessinée, synchronisation avec le gain audio, fin du fondu, annulation, verrou GO, absence en Autopilote et métadonnées Pilot/Bridge. Inspection visuelle effectuée ; archives ZIP contrôlées. Essai matériel iPad encore nécessaire.
+
+## Ajustements après l’enregistrement utilisateur
+
+- Au GO, le lecteur est désormais rechargé avec `load()` pour réinitialiser le décodeur et les données déjà en file d’attente. Le volume reste coupé jusqu’au nouveau chargement des métadonnées, au déplacement vers le point d’entrée et à la confirmation de lecture. Cela couvre aussi les MP3 ; le test initial en WAV ne suffisait pas à reproduire les conditions de Safari.
+- Le préchargement périodique ne remplace plus une source audio/vidéo active pendant son démarrage.
+- La position de conduite suit la musique pendant les trois secondes du fondu, puis reste sur la position d’arrêt.
+- Le mode Manuel prend le nom visible « Mode Go » (type interne `manual` conservé pour la compatibilité des projets).
+- En Show, les Cues principales et leurs sous-Cues sont regroupées, même avec des horaires qui se chevauchent. Les principales portent la mention « Principale · GO » ; les sous-Cues sont numérotées 1.1, 1.2… et présentent un retrait et des branches de liaison. L’Autopilote conserve son affichage chronologique.
+
+Vérifications : redémarrage A/Échap/B/Échap/A en MP3 dans Chrome et WebKit, réinitialisation native observée, gain coupé pendant un déplacement retardé ; halo et annulation vérifiés dans WebKit ; test `tools/test-go-show-tree.cjs` pour l’arborescence, la numérotation, la sélection des principales et les petits écrans. Une confirmation avec les fichiers réels dans Safari reste nécessaire avant de déclarer le problème sonore définitivement résolu.

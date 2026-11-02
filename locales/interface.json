@@ -1762,9 +1762,10 @@
     "de": "Autopilot"
   },
   "Manuel": {
-    "en": "Manual",
-    "es": "Manual",
-    "de": "Manuell"
+    "fr": "Mode Go",
+    "en": "Go Mode",
+    "es": "Modo Go",
+    "de": "Go-Modus"
   },
   "Type de conduite :": {
     "en": "Conduct type:",
@@ -1879,7 +1880,8 @@
   "Conduite Manuel : utilisez Bridge 1.6.0 bêta inclus dans ce ZIP. Bridge 1.4.5 ne connaît pas le mode Manuel.": {
     "en": "Manual conduct: use Bridge 1.6.0 beta included in this ZIP. Bridge 1.4.5 does not support Manual mode.",
     "es": "Conducción Manual: utiliza Bridge 1.6.0 beta incluido en este ZIP. Bridge 1.4.5 no admite el modo Manual.",
-    "de": "Manueller Ablauf: Verwende Bridge 1.6.0 Beta aus dieser ZIP-Datei. Bridge 1.4.5 unterstützt den manuellen Modus nicht."
+    "de": "Manueller Ablauf: Verwende Bridge 1.6.0 Beta aus dieser ZIP-Datei. Bridge 1.4.5 unterstützt den manuellen Modus nicht.",
+    "fr": "Mode Go : utilisez Bridge 1.6.0 bêta inclus dans ce ZIP. Bridge 1.4.5 ne connaît pas le Mode Go."
   },
   "Reprendre": {
     "en": "Resume",
@@ -1949,6 +1951,17 @@
   "Conduite Manuel : utilisez Bridge 1.6.1 bêta inclus dans ce ZIP. Bridge 1.4.5 ne connaît pas le mode Manuel.": {
     "en": "Manual conduct: use Bridge 1.6.1 beta included in this ZIP. Bridge 1.4.5 does not support Manual mode.",
     "es": "Conducción Manual: utiliza Bridge 1.6.1 beta incluido en este ZIP. Bridge 1.4.5 no admite el modo Manual.",
-    "de": "Manueller Ablauf: Verwende Bridge 1.6.1 Beta aus dieser ZIP-Datei. Bridge 1.4.5 unterstützt den manuellen Modus nicht."
+    "de": "Manueller Ablauf: Verwende Bridge 1.6.1 Beta aus dieser ZIP-Datei. Bridge 1.4.5 unterstützt den manuellen Modus nicht.",
+    "fr": "Mode Go : utilisez Bridge 1.6.1 bêta inclus dans ce ZIP. Bridge 1.4.5 ne connaît pas le Mode Go."
+  },
+  "Principale · GO": {
+    "en": "Main · GO",
+    "es": "Principal · GO",
+    "de": "Haupt-Cue · GO"
+  },
+  "Sous-Cue": {
+    "en": "Sub-Cue",
+    "es": "Sub-Cue",
+    "de": "Unter-Cue"
   }
 }

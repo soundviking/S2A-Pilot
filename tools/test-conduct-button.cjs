@@ -8,7 +8,7 @@ const {chromium,webkit}=require('playwright'),assert=require('node:assert/strict
   await button.click();assert.equal(await p.evaluate(()=>conductType),'manual');assert.equal(await button.getAttribute('aria-pressed'),'true');await p.waitForFunction(previous=>getComputedStyle(document.getElementById('conductType')).backgroundImage!==previous,automatic);assert.notEqual(await button.evaluate(el=>getComputedStyle(el).backgroundImage),automatic);assert((await button.innerText()).length>0);
   await button.focus();await p.keyboard.press('Space');assert.equal(await p.evaluate(()=>conductType),'autopilot');assert.equal(await p.evaluate(()=>transportPlaying),false);
  }
- await p.selectOption('#languageSelect','fr');assert.equal(await button.innerText(),'Autopilote');await button.click();assert.equal(await button.innerText(),'Manuel');
+ await p.selectOption('#languageSelect','fr');assert.equal(await button.innerText(),'Autopilote');await button.click();assert.equal(await button.innerText(),'Mode Go');
  for(const width of[390,768,1024]){await p.setViewportSize({width,height:900});assert(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));}
  await p.setViewportSize({width:1024,height:900});await p.screenshot({path:'/tmp/pilot-conduct-button-'+engine.name()+'.png',fullPage:true});
  await p.locator('#showModeBtn').click();assert(await button.isDisabled());assert.equal(await p.evaluate(()=>conductType),'manual');console.log('PASS',engine.name(),'single beveled toggle, purple manual theme, four languages, keyboard, responsive layout and Show lock');await b.close();

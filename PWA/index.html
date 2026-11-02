@@ -893,7 +893,7 @@ body:not(.locked) .marker.selectedCueMarker::after{background:#80b9ff;width:5px;
 <meta content="S2A Pilot" name="apple-mobile-web-app-title"/>
 <link href="./icons/s2a-pilot-180.png?v=1.6.1-logo2" rel="apple-touch-icon"/>
 <link rel="stylesheet" href="./material-ui.css">
-<link rel="stylesheet" href="./quick-help.css?v=1.6.1-fade-halo2">
+<link rel="stylesheet" href="./quick-help.css?v=1.6.1-go-tree2">
 <link rel="stylesheet" href="./startup.css?v=1.6.1"><style>
 body.manualConduct{--accent:#b58aff}
 body.manualConduct:not(.locked) .cueAccordion.expanded{background:#1b1f27;border-color:#b58aff;box-shadow:0 0 0 1px #b58aff55}
@@ -950,8 +950,18 @@ body.manualConduct.locked .showOverviewRow[role="button"]:focus-visible{outline:
 .goFadeHalo path{fill:none;stroke-width:3;vector-effect:non-scaling-stroke}
 .goFadeHalo .goFadeTrack{stroke:#b58aff33}
 .goFadeHalo .goFadeProgress{stroke:#dfc5ff;stroke-linecap:round;stroke-dasharray:100;stroke-dashoffset:100}
+
+body.manualConduct.locked .showOverviewRow.manualPrincipalCue{border-left:4px solid #b58aff;background:#1a202c}
+body.manualConduct.locked .showOverviewRow .overviewKind{display:block;font-size:10px;font-weight:750;line-height:1.5;letter-spacing:.08em;text-transform:uppercase;color:#c3a2e5;margin-bottom:3px}
+body.manualConduct.locked .showOverviewRow.manualInternalCue{position:relative;margin-left:48px;border-left:2px solid #647086;background:#121720}
+body.manualConduct.locked .showOverviewRow.manualInternalCue::before{content:'';position:absolute;left:-25px;top:-14px;bottom:-14px;border-left:2px solid #647086;pointer-events:none}
+body.manualConduct.locked .showOverviewRow.manualInternalCue.lastInternalCue::before{bottom:50%}
+body.manualConduct.locked .showOverviewRow.manualInternalCue::after{content:'';position:absolute;left:-25px;top:50%;width:23px;border-top:2px solid #647086;pointer-events:none}
+body.manualConduct.locked .showOverviewRow.manualInternalCue .overviewKind{color:#aab7cc}
+body.manualConduct.locked .showOverviewRow.manualInternalCue .overviewNumber{font-size:12px;white-space:nowrap}
+@media(max-width:540px){body.manualConduct.locked .showOverviewRow.manualInternalCue{margin-left:28px}body.manualConduct.locked .showOverviewRow.manualInternalCue::before{left:-17px}body.manualConduct.locked .showOverviewRow.manualInternalCue::after{left:-17px;width:15px}body.manualConduct.locked .showOverviewRow.manualInternalCue .overviewNumber{font-size:10px}}
 </style></head>
-<body><script src="./i18n-catalog.js?v=1.6.1-fade-halo2"></script><script src="./startup.js?v=1.6.1"></script>
+<body><script src="./i18n-catalog.js?v=1.6.1-go-tree2"></script><script src="./startup.js?v=1.6.1"></script>
 <main class="spectaclePriorityLayout">
 <div class="appTopBar">
 <img alt="Logo S2A Pilot" class="headerBrandLogo" src="./icons/s2a-pilot-192.png?v=1.6.1-logo2"/>
@@ -1058,8 +1068,8 @@ window.s2aReportBootError=function(message){if(window.s2aBootReady)return;var bo
 window.addEventListener('error',function(e){window.s2aReportBootError((e.message||'Chargement impossible')+' — '+(e.filename||'')+':'+(e.lineno||''));});
 </script>
 <script src="./material-ui.js"></script>
-<script src="./help-images.js?v=1.6.1"></script><script src="./quick-help.js?v=1.6.1-fade-halo2"></script><script src="./help-video.js?v=1.6.1-video1"></script>
-<script src="./compatibility-loader.js?v=1.6.1-fade-halo2"></script>
+<script src="./help-images.js?v=1.6.1"></script><script src="./quick-help.js?v=1.6.1-go-tree2"></script><script src="./help-video.js?v=1.6.1-video1"></script>
+<script src="./compatibility-loader.js?v=1.6.1-go-tree2"></script>
 <dialog id="showLayoutDialog" class="showLayoutDialog" aria-labelledby="showLayoutTitle">
 <h2 id="showLayoutTitle">Disposition Show</h2>
 <button type="button" class="showLayoutChoice" data-show-layout="maverick" aria-pressed="true"><strong>Maverick</strong><span>Cues côte à côte. Les Cues passées disparaissent.</span></button>

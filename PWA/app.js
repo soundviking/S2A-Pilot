@@ -103,7 +103,7 @@ function reconcilePreparedMedia(){const items=allMediaActions(),ids=new Map(item
 }
 function invalidatePreflight(){invalidateComputationCaches();preflightState='idle';preflightErrors=[];reconcilePreparedMedia();scheduleMediaMaintenance();}
 function updatePreflightUI(){for(const row of cueList.querySelectorAll('.cueAccordion')){const cue=cues.find(c=>c.id===row.dataset.cueId);if(!cue)continue;const state=cuePreparationClass(cue);for(const chip of row.querySelectorAll('.cueMediaChip:not(.stop)')){chip.classList.toggle('ready',state==='ready');chip.classList.toggle('error',state==='error');}}if(conductType==='manual')updateManualStatus();}
-function scheduleMediaMaintenance(delay=200){clearTimeout(mediaMaintenanceTimer);if(document.hidden||!allMediaActions().length)return;mediaMaintenanceTimer=setTimeout(async()=>{try{reconcilePreparedMedia();for(const p of preparedMedia.values())if(p.el.error||p.el.readyState<2)p.ready=false;await prepareShowMedia();}catch(e){console.warn(e);}finally{scheduleMediaMaintenance(30000);}},delay);}
+function scheduleMediaMaintenance(delay=200){clearTimeout(mediaMaintenanceTimer);if(document.hidden||!allMediaActions().length)return;mediaMaintenanceTimer=setTimeout(async()=>{try{reconcilePreparedMedia();for(const p of preparedMedia.values())if(!runtimeAudio.has(p.item.action.id)&&runtimeVideo?.item.action.id!==p.item.action.id&&(p.el.error||p.el.readyState<2))p.ready=false;await prepareShowMedia();}catch(e){console.warn(e);}finally{scheduleMediaMaintenance(30000);}},delay);}
 document.addEventListener('visibilitychange',()=>scheduleMediaMaintenance());
 function waitMediaReady(el,kind,timeout=10000){return new Promise((resolve,reject)=>{let done=false;const finish=(ok,err)=>{if(done)return;done=true;clearTimeout(timer);el.removeEventListener('loadeddata',ready);el.removeEventListener('canplay',ready);el.removeEventListener('error',fail);ok?resolve():reject(err||new Error(tr('Média non décodable')));};const ready=()=>finish(true);const fail=()=>finish(false,new Error(tr('Média non décodable par ce navigateur')));const timer=setTimeout(()=>{if(el.readyState>=2)finish(true);else finish(false,new Error(tr('Délai de préchargement dépassé')));},timeout);el.addEventListener('loadeddata',ready,{once:true});el.addEventListener('canplay',ready,{once:true});el.addEventListener('error',fail,{once:true});if(el.readyState>=2)finish(true);else el.load();});}
 async function prepareOneMedia(item){let existing=preparedMedia.get(item.action.id);if(existing?.ready)return existing;if(existing?.pending)return existing.pending;if(existing){releasePrepared(existing);preparedMedia.delete(item.action.id);}
@@ -624,12 +624,13 @@ function fadeOutAndStop(){
  if(escapeFading||!transportPlaying)return;
  escapeFading=true;updateGoFadeHalo(0);const generation=++transportCommandGeneration,started=performance.now();
  cancelAnimationFrame(rafId);rafId=0;
- const audio=[...runtimeAudio.values()].map(rt=>({rt,gain:rt.manualGainValue??rt.el.volume})),video=runtimeVideo,opacity=video?.opacity??1;
+ const audio=[...runtimeAudio.values()].map(rt=>({rt,gain:rt.manualGainValue??rt.el.volume})),video=runtimeVideo,opacity=video?.opacity??1,fadeCue=conductType==='manual'?manualCurrent():null,fadeTime=currentTransportTime();
  updateTransport();
  const step=now=>{
   if(generation!==transportCommandGeneration){escapeFading=false;updateGoFadeHalo();for(const x of audio)if(runtimeAudio.get(x.rt.item.action.id)===x.rt)setRuntimeGain(x.rt,x.gain);updateTransport();return;}
   const factor=Math.max(0,1-(now-started)/3000);updateGoFadeHalo(1-factor);
   for(const x of audio)setRuntimeGain(x.rt,x.gain*factor);
+  if(fadeCue){const main=audio.find(x=>x.rt.item.cue.id===fadeCue.id),elapsed=main?Math.max(0,main.rt.el.currentTime-(Number(main.rt.item.action.inPoint)||0)):fadeTime-fadeCue.time+(now-started)/1000;transportTime=transportBase=fadeCue.time+Math.min(manualDuration(fadeCue),elapsed);lastTransportTime=transportTime;if(now-lastDisplayUpdate>=60){lastDisplayUpdate=now;updateTransport();}}
   if(video&&runtimeVideo===video){video.opacity=opacity*factor;video.el.style.opacity=String(video.opacity);syncExternalVideo();}
   if(factor>0){requestAnimationFrame(step);return;}
   if(conductType==='manual'){manualCompletedID=manualCurrentID||manualCompletedID;manualCurrentID=null;manualPausedAt=null;manualFade=null;}
@@ -1079,14 +1080,17 @@ function rewindManualAudio(rt,target){
  rt.el.pause();setRuntimeGain(rt,0);
  return new Promise((resolve,reject)=>{
   let done=false;
-  const finish=error=>{if(done)return;done=true;clearTimeout(timer);rt.el.removeEventListener('seeked',ready);rt.el.removeEventListener('error',fail);error?reject(error):resolve();};
-  const ready=()=>{if(!rt.el.seeking)finish();};
+  const finish=error=>{if(done)return;done=true;clearTimeout(timer);rt.el.removeEventListener('loadedmetadata',seek);rt.el.removeEventListener('seeked',ready);rt.el.removeEventListener('error',fail);error?reject(error):resolve();};
+  const ready=()=>{if(rt.el.readyState>=1&&!rt.el.seeking)finish();};
+  const seek=()=>{try{rt.el.currentTime=target;if(!rt.el.seeking&&Math.abs(rt.el.currentTime-target)<.05)ready();}catch(error){finish(error);}};
   const fail=()=>finish(new Error(tr('Média non décodable par ce navigateur')));
   const timer=setTimeout(()=>finish(new Error(tr('Délai de préchargement dépassé'))),10000);
-  rt.el.addEventListener('seeked',ready);rt.el.addEventListener('error',fail);
-  try{rt.el.currentTime=target;if(!rt.el.seeking&&Math.abs(rt.el.currentTime-target)<.05)finish();}catch(error){finish(error);}
+  rt.el.addEventListener('loadedmetadata',seek);rt.el.addEventListener('seeked',ready);rt.el.addEventListener('error',fail);
+  // Reset the decoder and queued samples as well as the playback position (Safari).
+  try{rt.el.load();if(rt.el.readyState>=1)seek();}catch(error){finish(error);}
  });
 }
+
 async function manualGO(){
  if(escapeFading||manualPending||manualPausePending||performance.now()-manualLastGO<TRANSPORT_GUARD_MS)return;
  syncManualLinks();const issues=manualIssues();if(issues.length)throw new Error(issues.join('\n'));
@@ -1320,7 +1324,8 @@ function scheduleIcemanCenter(force=false){
 
 function updateShowOverview(){
  const host=$('showCueOverviewRows');if(!host||!locked)return;
- const ordered=orderedCues(),active=getActiveCue(),next=getNextCue();
+ const principals=conductType==='manual'?manualMusics():[],grouped=principals.flatMap(parent=>[parent,...manualChildren(parent)]),shownIDs=new Set(grouped.map(c=>c.id));
+ const ordered=conductType==='manual'?[...grouped,...orderedCues().filter(c=>!shownIDs.has(c.id))]:orderedCues(),active=getActiveCue(),next=getNextCue();
  const key=JSON.stringify([manualArmedID,manualArmExplicit,showLayout,S2ALanguage.language,active?.id,next?.id,ordered.map(c=>[c.id,c.name,c.description,c.time,c.imageDataUrl?.length,(c.mediaActions||[]).map(a=>a.kind)])]);
  if(key===showOverviewSignature)return;showOverviewSignature=key;
  const previousRows=new Map(Array.from(host.querySelectorAll('.showOverviewRow')).map(row=>[row.dataset.cueId,row]));
@@ -1330,14 +1335,15 @@ function updateShowOverview(){
  for(const cue of ordered){
   const row=document.createElement('div');row.className='showOverviewRow'+(cue===active?' isActive':'')+(cue===next?' isNext':'')+(isManualInternalCue(cue)?' manualInternalCue':'');row.dataset.cueId=cue.id;
   if(conductType==='manual'&&isManualMainCue(cue)){
-   row.classList.toggle('isArmed',manualArmExplicit&&manualArmedID===cue.id);row.tabIndex=0;row.setAttribute('role','button');row.setAttribute('aria-pressed',String(manualArmExplicit&&manualArmedID===cue.id));row.title=tr('Sélectionner pour le prochain GO');
+   row.classList.add('manualPrincipalCue');row.classList.toggle('isArmed',manualArmExplicit&&manualArmedID===cue.id);row.tabIndex=0;row.setAttribute('role','button');row.setAttribute('aria-pressed',String(manualArmExplicit&&manualArmedID===cue.id));row.title=tr('Sélectionner pour le prochain GO');
    row.onclick=()=>armManualCue(cue.id);row.onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();e.stopPropagation();armManualCue(cue.id);}};
   }
   if(cue===active)row.setAttribute('aria-current','step');
   const number=document.createElement('span');number.className='overviewNumber';number.textContent=String(cues.indexOf(cue)+1);
+  if(conductType==='manual'){const parent=isManualMainCue(cue)?cue:principals.find(p=>p.id===cue.parentMusicId),root=principals.indexOf(parent)+1;if(parent&&root){const children=manualChildren(parent);number.textContent=cue===parent?String(root):root+'.'+(children.indexOf(cue)+1);if(cue!==parent&&children.at(-1)===cue)row.classList.add('lastInternalCue');row.dataset.parentCueId=cue===parent?'':parent.id;}}
   const visual=document.createElement('div');visual.className='overviewVisual';
   if(cue.imageDataUrl){const previousImage=previousRows.get(cue.id)?.querySelector('.overviewVisual img'),img=previousImage?.getAttribute('src')===cue.imageDataUrl?previousImage:document.createElement('img');img.src=cue.imageDataUrl;img.alt='';if(cue!==active)img.style.removeProperty('opacity');visual.append(img);}else{visual.classList.add('showOverviewPlaceholder');visual.setAttribute('aria-label',tr('Aucun visuel'));if(cue===active)visual.textContent=tr('Pas de visuel');}
-  const content=document.createElement('div');content.className='overviewContent';const name=document.createElement('div');name.className='overviewName';name.textContent=cue.name||'Cue';content.append(name);
+  const content=document.createElement('div');content.className='overviewContent';const name=document.createElement('div');name.className='overviewName';name.textContent=cue.name||'Cue';if(conductType==='manual'){const kind=document.createElement('span');kind.className='overviewKind';kind.textContent=tr(isManualMainCue(cue)?'Principale · GO':'Sous-Cue');name.prepend(kind);}content.append(name);
   if(cue===active||cue===next){const description=document.createElement('div');description.className='overviewDescription';description.textContent=String(cue.description||'').trim()?cue.description:tr('Pas de description');content.append(description);}
   const time=document.createElement('time');time.className='overviewTime';time.textContent=conductType==='manual'?(isManualInternalCue(cue)?'+'+fmtDisplay(cue.relativeTime):'GO'):fmtDisplay(cue.time);
   row.append(number,visual,time,content);
