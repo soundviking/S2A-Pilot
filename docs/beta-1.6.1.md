@@ -28,3 +28,9 @@ Cette livraison bêta conserve les évolutions 1.6.0 et ajoute le retour visuel 
 - En Show, les Cues principales et leurs sous-Cues sont regroupées, même avec des horaires qui se chevauchent. Les principales portent la mention « Principale · GO » ; les sous-Cues sont numérotées 1.1, 1.2… et présentent un retrait et des branches de liaison. L’Autopilote conserve son affichage chronologique.
 
 Vérifications : redémarrage A/Échap/B/Échap/A en MP3 dans Chrome et WebKit, réinitialisation native observée, gain coupé pendant un déplacement retardé ; halo et annulation vérifiés dans WebKit ; test `tools/test-go-show-tree.cjs` pour l’arborescence, la numérotation, la sélection des principales et les petits écrans. Une confirmation avec les fichiers réels dans Safari reste nécessaire avant de déclarer le problème sonore définitivement résolu.
+
+## Arborescence également en Edit
+
+Le Mode Go partage désormais l’ordre d’affichage des Cues entre Edit et Show : principales regroupées avec leurs sous-Cues, branches visuelles et numéros 1 / 1.1 / 1.2. La sélection d’une sous-Cue en Edit continue de mettre son repère en surbrillance dans la timeline. L’Autopilote restaure l’ordre chronologique plat et les numéros 1, 2, 3… dans les deux vues. Cette présentation ne modifie ni les identifiants ni les temps ni les liens enregistrés.
+
+Le test `tools/test-go-show-tree.cjs` passe dans Chrome et WebKit : regroupement avec chevauchement d’horaires, numérotation Edit/Show, bascule Autopilote et retour, conservation des données, sélection du marqueur et absence de débordement aux largeurs 1024 / 768 / 390 px.
