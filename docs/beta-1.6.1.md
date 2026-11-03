@@ -34,3 +34,17 @@ Vérifications : redémarrage A/Échap/B/Échap/A en MP3 dans Chrome et WebKit, 
 Le Mode Go partage désormais l’ordre d’affichage des Cues entre Edit et Show : principales regroupées avec leurs sous-Cues, branches visuelles et numéros 1 / 1.1 / 1.2. La sélection d’une sous-Cue en Edit continue de mettre son repère en surbrillance dans la timeline. L’Autopilote restaure l’ordre chronologique plat et les numéros 1, 2, 3… dans les deux vues. Cette présentation ne modifie ni les identifiants ni les temps ni les liens enregistrés.
 
 Le test `tools/test-go-show-tree.cjs` passe dans Chrome et WebKit : regroupement avec chevauchement d’horaires, numérotation Edit/Show, bascule Autopilote et retour, conservation des données, sélection du marqueur et absence de débordement aux largeurs 1024 / 768 / 390 px.
+
+## Retour Edit du 2 novembre — traité le 3 novembre
+
+Retour utilisateur du 2 novembre 2026 : le comportement de la touche Échap en mode Edit ne fonctionne pas correctement. Vérifier notamment le rendu et le dimensionnement du halo de fondu autour du bouton GO, dont la taille diffère du mode Show ; le lien avec ce dimensionnement reste une hypothèse à confirmer. L’utilisateur demande de traiter ce point lors de la prochaine modification, sans correction immédiate.
+
+## Nettoyage et correction Edit — 3 novembre 2026
+
+- Échap déclenche le fondu depuis les champs de titre et de description, sans modifier le texte. Les dialogues conservent la priorité : Échap les ferme d’abord.
+- Le contour de GO utilise sa taille et son rayon réels ; il suit les changements de dimensions pendant le fondu.
+- Suppression d’un rafraîchissement Show effectué deux fois par mise à jour du transport.
+- Cache commun des parents, enfants, numéros et médias, invalidé lors des modifications du projet. Suppression de code d’édition inaccessible.
+- Mesure ciblée sur 600 Cues (60 principales, neuf enfants chacune, cinq échantillons de dix parcours) : médiane de 61,5 ms avant à 0,9 ms après, checksum identique 136500. Ce microbenchmark ne mesure pas la fluidité globale ni les performances sur iPad.
+
+Vérifications : `tools/test-edit-escape.cjs` et `tools/test-go-show-tree.cjs` dans Chrome/WebKit, redémarrage MP3 après Échap et export PDF/ZIP avec Bridge inclus. La version reste 1.6.1 bêta.
