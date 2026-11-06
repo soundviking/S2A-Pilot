@@ -22,4 +22,4 @@ header("Content-Security-Policy: default-src 'self'; img-src 'self' data:; scrip
 </section>
 </main>
 <dialog id="topDialog" aria-labelledby="topDialogTitle"><form id="topForm"><h2 id="topDialogTitle">Ajouter un Top</h2><label id="topCueField" hidden>Cue QLab<select id="topCue"></select></label><label for="topTime">Temps (minutes:secondes)</label><input id="topTime" inputmode="decimal" required placeholder="03:20"><label for="topText">Consigne Backstage</label><textarea id="topText" maxlength="500" rows="4" required placeholder="Rapporter la chaise de jardin"></textarea><p id="topError" role="status"></p><div class="topActions"><button id="saveTop" type="submit">Enregistrer</button><button id="deleteTop" type="button" hidden>Supprimer</button><button id="cancelTop" type="button">Annuler</button></div></form></dialog>
-<script src="viewer.js?v=1.6.19-backstage1"></script></body></html>
+<script src="viewer.js?v=1.6.23-top-order1"></script></body></html>

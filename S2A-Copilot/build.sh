@@ -48,9 +48,9 @@ cat > "$APP/Contents/Info.plist" <<'PLIST'
   <key>CFBundleIdentifier</key>
   <string>fr.s2aproduction.bridge.beta</string>
   <key>CFBundleVersion</key>
-  <string>18201</string>
+  <string>18301</string>
   <key>CFBundleShortVersionString</key>
-  <string>1.6.22</string>
+  <string>1.6.23</string>
   <key>CFBundleExecutable</key>
   <string>S2A Pilot Bridge</string>
   <key>CFBundleIconFile</key>

@@ -7,7 +7,7 @@
   "target": "ES5 / Safari 9",
   "sourceSHA256": {
     "i18n.js": "1af8f24d59bc3726bbb103d1e1b898924a5be29ddcdfdf7464aad4c2e39161b4",
-    "app.js": "76bea33a87aecd7efac31c6ccd076bdba827eff96fd9df77fe97b8ab8c19135b",
+    "app.js": "ad0533b889785dd4b9708ccdace52458000e1c0bc5f11219473c8a17e8a22c3d",
     "technical-preview.js": "a4c77a37ba127514d62f008f1310cf34dd3d50b80eb448644f179691686197b2"
   }
 }

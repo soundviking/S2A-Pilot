@@ -97,6 +97,10 @@ function renderRows(state){
  }
 }
 function topFeedback(message){$('backstageFeedback').textContent=message;}
+function orderBridgeTops(tops,roots){
+ const order=new Map(roots.map((cue,index)=>[cue.id,index]));
+ return [...tops].sort((a,b)=>(order.get(a.cueID)??roots.length)-(order.get(b.cueID)??roots.length)||a.time-b.time);
+}
 function renderTopList(tops,roots=[]){
  if(dragTop||dragSaving)return;
  const key=JSON.stringify([tops,roots.map(c=>[c.id,c.number,c.name])]);if(key===topsSignature)return;topsSignature=key;$('topList').replaceChildren();
@@ -210,7 +214,8 @@ function paint(){
  const state=stale&&!source.bridge?displayState(source,position):source;lastPosition=position;
  $('transport').textContent=atBoundary?(source.manual?'En attente du GO — confirmation de Pilot nécessaire':'Fin de conduite'):state.resumeWait?'En attente du GO — reprendre la bande-son':state.fading?'Fondu en cours…':running?(stale?'Lecture estimée · hors ligne':'En lecture'):state.waiting?'En attente du GO':'En pause';
  const cues=state.cues||[],roots=state.bridge?cues.filter(c=>!c.child):[];
- const allTops=backstage?(latest.tops||[]):[];
+ const sharedTops=backstage?(latest.tops||[]):[];
+ const allTops=state.bridge?orderBridgeTops(sharedTops,roots):sharedTops;
  const tops=state.bridge?allTops.filter(top=>top.cueID===state.current&&state.current):allTops;
  const timelineCues=state.bridge?cues.filter(c=>c.child):cues;
  const currentCue=roots.find(c=>c.id===state.current);
