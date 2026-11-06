@@ -556,7 +556,7 @@ body:not(.locked) .cueAccordion.expanded input:focus,body:not(.locked) .cueAccor
 .transportButtonIcon{display:inline-flex;align-items:center;justify-content:center;min-width:1em}
 @media(max-width:680px){.projectActions .pdfTechBtn{margin-left:0}.projectActions{align-items:stretch}.projectActions button{flex:1 1 auto}}
 
-html,body{overscroll-behavior-y:none;}
+html,body{overscroll-behavior:none;}
 
 /* V1.5.8 — sélection Cue ↔ timeline + companion 1.2.2 */
 .showOnly{display:none}
@@ -678,7 +678,9 @@ body.locked .timelineCard{order:1}
 #restartBtn{flex:0 0 44px;width:44px;min-width:44px;height:calc(1.25em + 22px);padding:10px 0;font-size:inherit;display:inline-flex;align-items:center;justify-content:center}
 
 /* Compact general-timeline titles. */
-#generalTimelineViewport{position:relative;padding-bottom:31px}
+#generalTimelineViewport{position:relative}
+body:not(.locked) #timelineEditFrame{position:relative;padding-bottom:31px;margin-bottom:16px}
+body:not(.locked) #timelineEditFrame #generalTimelineViewport{margin-bottom:0}
 #timelineCueLabels{position:absolute;left:0;right:0;bottom:4px;height:22px;pointer-events:none}
 .marker::before,body.locked .marker::before,.marker.selectedCueMarker::before{display:none!important}
 .timelineCueBubble{position:absolute;box-sizing:border-box;height:22px;padding:2px 7px;border:1px solid #ae8d49;border-radius:6px;background:#353026;color:#ffe4a4;font:600 12px/16px system-ui;white-space:nowrap;max-width:160px}
@@ -857,7 +859,7 @@ body.locked #playBtnLabel{display:none}
 body.locked .transportClock{display:flex;gap:5px;align-items:baseline;flex:none;white-space:nowrap}
 body.locked .timelineTransport #clock{font-size:1rem;line-height:1.2;font-variant-numeric:tabular-nums}
 body.locked .timelineTransport #duration{font-size:.75rem}
-body.locked #generalTimelineViewport{flex:1 1 0%;min-width:24px;width:auto;margin:0;padding:0;overflow:visible}
+body.locked #generalTimelineViewport{flex:1 1 0%;min-width:24px;width:auto;margin:0;padding:0;overflow-x:auto;overflow-y:hidden}
 body.locked #generalTimelineViewport #timeline{height:24px!important;min-height:24px;border:0;border-radius:0;background:transparent;overflow:visible;cursor:pointer;touch-action:none}
 body.locked #timeline::before{content:'';position:absolute;left:0;right:0;top:10px;height:4px;background:#454d5b;border-radius:3px}
 body.locked #timeline #progress{inset:10px auto auto 0;height:4px;border-radius:3px;background:#66a8ff;box-shadow:0 0 5px rgba(102,168,255,0.400);z-index:1}
@@ -876,6 +878,10 @@ body:not(.locked) .marker.selectedCueMarker::after{background:#80b9ff;width:5px;
 .timelineCueBubble.selectedCueBubble{background:#223e61;color:#fff;border:2px solid #80b9ff;box-shadow:0 0 10px #509dff;z-index:10}
 .timelineCueBubble.selectedCueBubble::before{border-color:#80b9ff}
 .manualWaveTop::after{content:'';position:absolute;top:100%;left:0;height:240px;width:3px;background:#ffd166;box-shadow:0 0 4px #ffd166;pointer-events:none}
+.cueMediaChip.loop,.cueMediaChip.ltc{color:#8fc5ff;border-color:#448bd1;background:rgba(57,128,205,.18);}
+.showOverviewRow.manualInternalCue.isArmed{outline:2px solid #8fc5ff;outline-offset:-2px;}
+.showOverviewRow.isKeyboardSelected{outline:2px solid #80b9ff;outline-offset:-2px}
+.copilotMemberConnected{color:#52d69a}.copilotMemberDisconnected{color:#ff737b}
 
 /* Only loaded by the old-browser branch. Static colors and flex replace CSS variables/grid. */
 body{padding:0}main.spectaclePriorityLayout{display:block!important}

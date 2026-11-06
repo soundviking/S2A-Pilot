@@ -1,10 +1,11 @@
 {
-  "version": "1.6.1",
+  "version": "1.6.22",
   "releaseNotes": {
-    "fr": "Bêta : redémarrage audio fiabilisé, bouton Autopilote/Manuel et halo du fondu Échap.",
-    "en": "Beta: reliable audio restart, Autopilot/Manual toggle and Escape fade halo.",
-    "es": "Beta: reinicio de audio mejorado, botón Automático/Manual y halo del fundido con Escape.",
-    "de": "Beta: zuverlässiger Audio-Neustart, Autopilot/Manuell-Schalter und Escape-Ausblendring."
+    "fr": "Bridge adopte le logo Copilot et le bouton QR à l’effet aluminium de Pilot.",
+    "en": "Bridge adopts the Copilot logo and Pilot’s aluminum-style QR button.",
+    "es": "Bridge adopta el logotipo de Copilot y el botón QR de Pilot con efecto aluminio.",
+    "de": "Bridge übernimmt das Copilot-Logo und die QR-Schaltfläche von Pilot in Aluminiumoptik."
   },
-  "channel": "beta"
+  "channel": "beta",
+  "revision": "bridge-copilot-brand1"
 }

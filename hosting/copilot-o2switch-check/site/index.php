@@ -14,7 +14,13 @@ function copilot_private_parent($directory) {
 }
 function copilot_checks() {
     $checks = array();
-    $checks[] = array('id'=>'php', 'ok'=>version_compare(PHP_VERSION, '8.2.0', '>='), 'label'=>'PHP disponible', 'detail'=>'Version '.PHP_MAJOR_VERSION.'.'.PHP_MINOR_VERSION.' — PHP 8.2 minimum, 8.3 ou 8.4 conseillé.');
+    $checks[] = array('id'=>'php', 'ok'=>version_compare(PHP_VERSION, '8.2.0', '>='), 'label'=>'PHP disponible', 'detail'=>'Version complète : '.PHP_VERSION.' — vérifiez aussi le niveau de correctif ci-dessous.');
+    // October 2026 upstream RCE fixes. Vendor backports require hosting confirmation.
+    $minimums = array('8.2'=>'8.2.35', '8.3'=>'8.3.36', '8.4'=>'8.4.27', '8.5'=>'8.5.12');
+    $branch = PHP_MAJOR_VERSION.'.'.PHP_MINOR_VERSION;
+    $minimum = isset($minimums[$branch]) ? $minimums[$branch] : null;
+    $patched = $minimum !== null && version_compare(PHP_VERSION, $minimum, '>=');
+    $checks[] = array('id'=>'php_security', 'ok'=>$patched, 'label'=>'Correctifs PHP du 21 octobre 2026', 'detail'=>$patched ? 'Le numéro de version inclut ces correctifs amont. Cela ne constitue pas un audit complet du serveur.' : 'À confirmer auprès d’o2switch : PHP 8.5.12, 8.4.27, 8.3.36 ou 8.2.35 minimum selon la branche, ou correctifs équivalents appliqués par l’hébergeur.');
     $https = (!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) !== 'off') || (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == 443);
     $checks[] = array('id'=>'https','ok'=>$https,'label'=>'Adresse sécurisée','detail'=>$https?'La page est ouverte en HTTPS.':'Ouvrez cette même adresse avec https://. Sur un serveur de test local, ce point reste normalement à vérifier.');
     $sqlite = false;
@@ -41,7 +47,7 @@ function copilot_checks() {
 $checks = copilot_checks();
 $ready = true;
 foreach ($checks as $check) if (!$check['ok']) $ready = false;
-$report = array('product'=>'S2A Copilot — préparation bêta', 'package'=>'hosting-check-1', 'scope'=>'hosting_check_only', 'connected_to_pilot'=>false, 'ready_for_next_step'=>$ready, 'checks'=>$checks);
+$report = array('product'=>'S2A Copilot — préparation bêta', 'package'=>'hosting-check-2', 'scope'=>'hosting_check_only', 'connected_to_pilot'=>false, 'ready_for_next_step'=>$ready, 'checks'=>$checks);
 if (isset($_GET['check'])) {
     header('Content-Type: application/json; charset=utf-8');
     echo json_encode($report, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);

@@ -159,12 +159,16 @@ struct ShowCueProject: Codable {
         return nil
     }
 
+    func loops(_ action: MediaAction) -> Bool {
+        action.loop == true && (!action.isAudio || isManual)
+    }
+
     var resolvedShowDuration: Double {
         if let showDuration, showDuration > 0 { return showDuration }
         if let showDurationOverride, showDurationOverride > 0 { return showDurationOverride }
         var lastFinite = cues.map(\.time).max() ?? 0
         for cue in cues {
-            for action in cue.mediaActions ?? [] where !action.isStopAll && action.loop != true {
+            for action in cue.mediaActions ?? [] where !action.isStopAll && !loops(action) {
                 let end = action.end ?? action.duration ?? 0
                 let segment = max(0, end - action.start)
                 lastFinite = max(lastFinite, cue.time + segment)
@@ -665,6 +669,7 @@ final class AppModel: ObservableObject {
         lines.append("if (count of workspaces) is 0 then error \(asAppleString(L("Aucun workspace QLab n’est ouvert.")))")
         lines.append("set targetWorkspace to first workspace whose unique id is \(asAppleString(workspaceID))")
         lines.append("if (unique id of targetWorkspace) is not \(asAppleString(workspaceID)) then error \(asAppleString(L("Le workspace QLab sélectionné a été fermé.")))")
+        lines.append("if (count of selected of targetWorkspace) > 1 then error \(asAppleString(L("Sélectionne une seule Cue dans QLab avant l’import.")))")
         lines.append("set showGroup to my s2aMakeCue(targetWorkspace, \"Group\")")
         lines.append("set q name of showGroup to \(asAppleString(project.title))")
         lines.append("set mode of showGroup to timeline")
@@ -780,7 +785,7 @@ final class AppModel: ObservableObject {
                     lines.append("set pre wait of \(variable) to \(cueTime)")
                     lines.append("set start time of \(variable) to \(qlabTime(action.start))")
                     if let actionEnd = action.end { lines.append("set end time of \(variable) to \(qlabTime(actionEnd))") }
-                    lines.append("set infinite loop of \(variable) to \(action.loop == true ? "true" : "false")")
+                    lines.append("set infinite loop of \(variable) to \(project.loops(action) ? "true" : "false")")
                     if action.isVideo && action.muted == true {
                         // Une vidéo déclarée muette dans S2A Pilot doit rester muette dans QLab.
                         // La méthode la plus robuste consiste à dépatcher sa sortie audio (0 = none).
@@ -1414,7 +1419,10 @@ struct ContentView: View {
             if let error = model.errorMessage {
                 HStack(alignment: .top, spacing: 10) {
                     Image(systemName: "exclamationmark.triangle.fill").foregroundStyle(.red)
-                    Text(error.localized).font(.callout).textSelection(.enabled)
+                    Text(error.localized)
+                        .font(.callout)
+                        .textSelection(.enabled)
+                        .fixedSize(horizontal: false, vertical: true)
                     Spacer()
                     Button { model.errorMessage = nil } label: { Image(systemName: "xmark.circle.fill") }
                         .buttonStyle(.plain)

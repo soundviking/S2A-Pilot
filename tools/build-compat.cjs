@@ -1,6 +1,7 @@
 /* Build once on a computer; Babel is never loaded by the PWA. */
 const fs=require('fs'),path=require('path'),crypto=require('crypto');
 const vendor=path.resolve(process.argv[2]||'../compat-vendor'),root=path.resolve(process.argv[3]||'PWA'),out=path.join(root,'compat');
+require('./embed-technical-preview.cjs')(root);
 const babel=require(path.join(vendor,'babel.min.js'));fs.mkdirSync(out,{recursive:true});
 fs.copyFileSync(path.join(vendor,'core-js-bundle/LICENSE'),path.join(out,'LICENSE-core-js.txt'));
 fs.copyFileSync(path.join(vendor,'whatwg-fetch/LICENSE'),path.join(out,'LICENSE-fetch.txt'));

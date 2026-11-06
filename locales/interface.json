@@ -1838,9 +1838,10 @@
     "de": "Prüfen:"
   },
   "Ajoutez une musique pour utiliser le mode Manuel.": {
-    "en": "Add a track to use Manual mode.",
-    "es": "Añade una pista para usar el modo Manual.",
-    "de": "Füge einen Titel für den manuellen Modus hinzu."
+    "en": "Add a track to use Go Mode.",
+    "es": "Añade una pista para usar el Modo Go.",
+    "de": "Füge einen Titel für den Go-Modus hinzu.",
+    "fr": "Ajoutez une musique pour utiliser le Mode Go."
   },
   "Préparez tous les médias avant le GO.": {
     "en": "Prepare all media before GO.",
@@ -1868,9 +1869,10 @@
     "de": "Gültigen Titel und relative Zeit auswählen."
   },
   "Désactivez Loop pour une musique en mode Manuel.": {
-    "en": "Disable Loop for a track in Manual mode.",
-    "es": "Desactiva Loop para una pista en modo Manual.",
-    "de": "Loop für einen Titel im manuellen Modus deaktivieren."
+    "en": "Disable Loop for a track in Go Mode.",
+    "es": "Desactiva Loop para una pista en Modo Go.",
+    "de": "Loop für einen Titel im Go-Modus deaktivieren.",
+    "fr": "Désactivez Loop pour une musique en Mode Go."
   },
   "Médias prêts. Appuyez sur GO.": {
     "en": "Media ready. Press GO.",
@@ -1878,9 +1880,9 @@
     "de": "Medien bereit. GO drücken."
   },
   "Conduite Manuel : utilisez Bridge 1.6.0 bêta inclus dans ce ZIP. Bridge 1.4.5 ne connaît pas le mode Manuel.": {
-    "en": "Manual conduct: use Bridge 1.6.0 beta included in this ZIP. Bridge 1.4.5 does not support Manual mode.",
-    "es": "Conducción Manual: utiliza Bridge 1.6.0 beta incluido en este ZIP. Bridge 1.4.5 no admite el modo Manual.",
-    "de": "Manueller Ablauf: Verwende Bridge 1.6.0 Beta aus dieser ZIP-Datei. Bridge 1.4.5 unterstützt den manuellen Modus nicht.",
+    "en": "Go Mode conduct: use Bridge 1.6.0 beta included in this ZIP. Bridge 1.4.5 does not support Go Mode.",
+    "es": "Conducción Manual: utiliza Bridge 1.6.0 beta incluido en este ZIP. Bridge 1.4.5 no admite el Modo Go.",
+    "de": "Go-Modus-Ablauf: Verwende Bridge 1.6.0 Beta aus dieser ZIP-Datei. Bridge 1.4.5 unterstützt den Go-Modus nicht.",
     "fr": "Mode Go : utilisez Bridge 1.6.0 bêta inclus dans ce ZIP. Bridge 1.4.5 ne connaît pas le Mode Go."
   },
   "Reprendre": {
@@ -1949,19 +1951,150 @@
     "de": "Für das nächste GO auswählen"
   },
   "Conduite Manuel : utilisez Bridge 1.6.1 bêta inclus dans ce ZIP. Bridge 1.4.5 ne connaît pas le mode Manuel.": {
-    "en": "Manual conduct: use Bridge 1.6.1 beta included in this ZIP. Bridge 1.4.5 does not support Manual mode.",
-    "es": "Conducción Manual: utiliza Bridge 1.6.1 beta incluido en este ZIP. Bridge 1.4.5 no admite el modo Manual.",
-    "de": "Manueller Ablauf: Verwende Bridge 1.6.1 Beta aus dieser ZIP-Datei. Bridge 1.4.5 unterstützt den manuellen Modus nicht.",
+    "en": "Go Mode conduct: use Bridge 1.6.1 beta included in this ZIP. Bridge 1.4.5 does not support Go Mode.",
+    "es": "Conducción Manual: utiliza Bridge 1.6.1 beta incluido en este ZIP. Bridge 1.4.5 no admite el Modo Go.",
+    "de": "Go-Modus-Ablauf: Verwende Bridge 1.6.1 Beta aus dieser ZIP-Datei. Bridge 1.4.5 unterstützt den Go-Modus nicht.",
     "fr": "Mode Go : utilisez Bridge 1.6.1 bêta inclus dans ce ZIP. Bridge 1.4.5 ne connaît pas le Mode Go."
   },
   "Principale · GO": {
-    "en": "Main · GO",
-    "es": "Principal · GO",
-    "de": "Haupt-Cue · GO"
+    "fr": "Go",
+    "en": "Go",
+    "es": "Go",
+    "de": "Go"
   },
   "Sous-Cue": {
-    "en": "Sub-Cue",
-    "es": "Sub-Cue",
-    "de": "Unter-Cue"
+    "fr": "Next",
+    "en": "Next",
+    "es": "Next",
+    "de": "Next"
+  },
+  "Conduite Manuel : utilisez Bridge 1.6.2 bêta inclus dans ce ZIP. Bridge 1.4.5 ne connaît pas le mode Manuel.": {
+    "en": "Go Mode conduct: use Bridge 1.6.2 beta included in this ZIP. Bridge 1.4.5 does not support Go Mode.",
+    "es": "Conducción Manual: utiliza Bridge 1.6.2 beta incluido en este ZIP. Bridge 1.4.5 no admite el Modo Go.",
+    "de": "Go-Modus-Ablauf: Verwende Bridge 1.6.2 Beta aus dieser ZIP-Datei. Bridge 1.4.5 unterstützt den Go-Modus nicht.",
+    "fr": "Mode Go : utilisez Bridge 1.6.2 bêta inclus dans ce ZIP. Bridge 1.4.5 ne connaît pas le Mode Go."
+  },
+  "Copilot — bêta": {
+    "en": "Copilot — beta",
+    "es": "Copilot — beta",
+    "de": "Copilot — Beta"
+  },
+  "Partage de l’affichage Show sur téléphone ou tablette, sans contrôle à distance.": {
+    "en": "Share the Show display on a phone or tablet, without remote control.",
+    "es": "Comparte la vista Show en un teléfono o tableta, sin control remoto.",
+    "de": "Show-Anzeige auf Smartphone oder Tablet teilen, ohne Fernsteuerung."
+  },
+  "Le partage par QR code n’est pas encore activé. La première étape consiste à vérifier l’hébergement.": {
+    "en": "QR sharing is not enabled yet. First, check the hosting setup.",
+    "es": "El uso compartido por QR aún no está activado. Primero, comprueba el alojamiento.",
+    "de": "QR-Freigabe ist noch nicht aktiviert. Zuerst das Hosting prüfen."
+  },
+  "Vérifier l’hébergement Copilot": {
+    "en": "Check Copilot hosting",
+    "es": "Comprobar el alojamiento de Copilot",
+    "de": "Copilot-Hosting prüfen"
+  },
+  "Attendre GO": {
+    "fr": "Wait",
+    "en": "Wait",
+    "es": "Wait",
+    "de": "Wait"
+  },
+  "Sous-Cue · Attendre GO": {
+    "fr": "Wait",
+    "en": "Wait",
+    "es": "Wait",
+    "de": "Wait"
+  },
+  "En attente du GO — reprendre la bande-son": {
+    "en": "Waiting for GO — resume the soundtrack",
+    "es": "Esperando GO — reanudar la pista",
+    "de": "Warten auf GO — Tonspur fortsetzen"
+  },
+  "GO — reprendre la bande-son": {
+    "en": "GO — resume the soundtrack",
+    "es": "GO — reanudar la pista",
+    "de": "GO — Tonspur fortsetzen"
+  },
+  "Mettre la bande-son en pause à cette Cue ; Espace reprend la même bande-son.": {
+    "en": "Pause the soundtrack at this Cue; Space resumes the same soundtrack.",
+    "es": "Pausar la pista en esta Cue; Espacio reanuda la misma pista.",
+    "de": "Tonspur bei dieser Cue pausieren; Leertaste setzt dieselbe Tonspur fort."
+  },
+  "Conduite Manuel : utilisez Bridge 1.6.3 bêta inclus dans ce ZIP. Bridge 1.4.5 ne connaît pas le mode Manuel.": {
+    "en": "Go Mode conduct: use Bridge 1.6.3 beta included in this ZIP. Bridge 1.4.5 does not support Go Mode.",
+    "es": "Conducción Manual: utiliza Bridge 1.6.3 beta incluido en este ZIP. Bridge 1.4.5 no admite el Modo Go.",
+    "de": "Go-Modus-Ablauf: Verwende Bridge 1.6.3 Beta aus dieser ZIP-Datei. Bridge 1.4.5 unterstützt den Go-Modus nicht.",
+    "fr": "Mode Go : utilisez Bridge 1.6.3 bêta inclus dans ce ZIP. Bridge 1.4.5 ne connaît pas le Mode Go."
+  },
+  "Prochain GO : {name}": {
+    "en": "Next GO: {name}",
+    "es": "Siguiente GO: {name}",
+    "de": "Nächstes GO: {name}"
+  },
+  "GO — prochain repère Attendre GO": {
+    "en": "GO — next Wait for GO marker",
+    "es": "GO — siguiente marcador Esperar GO",
+    "de": "GO — nächste Auf GO warten-Markierung"
+  },
+  "Conduite Manuel : utilisez Bridge 1.6.4 bêta inclus dans ce ZIP. Bridge 1.4.5 ne connaît pas le mode Manuel.": {
+    "en": "Go Mode conduct: use Bridge 1.6.4 beta included in this ZIP. Bridge 1.4.5 does not support Go Mode.",
+    "es": "Conducción Manual: utiliza Bridge 1.6.4 beta incluido en este ZIP. Bridge 1.4.5 no admite el Modo Go.",
+    "de": "Go-Modus-Ablauf: Verwende Bridge 1.6.4 Beta aus dieser ZIP-Datei. Bridge 1.4.5 unterstützt den Go-Modus nicht.",
+    "fr": "Mode Go : utilisez Bridge 1.6.4 bêta inclus dans ce ZIP. Bridge 1.4.5 ne connaît pas le Mode Go."
+  },
+  "Conduite Mode Go : utilisez Bridge 1.6.4 bêta inclus dans ce ZIP. Bridge 1.4.5 ne connaît pas le Mode Go.": {
+    "en": "Go Mode conduct: use Bridge 1.6.4 beta included in this ZIP. Bridge 1.4.5 does not support Go Mode.",
+    "es": "Conducción Manual: utiliza Bridge 1.6.4 beta incluido en este ZIP. Bridge 1.4.5 no admite el Modo Go.",
+    "de": "Go-Modus-Ablauf: Verwende Bridge 1.6.4 Beta aus dieser ZIP-Datei. Bridge 1.4.5 unterstützt den Go-Modus nicht.",
+    "fr": "Mode Go : utilisez Bridge 1.6.4 bêta inclus dans ce ZIP. Bridge 1.4.5 ne connaît pas le Mode Go."
+  },
+  "Go": {
+    "fr": "Go",
+    "en": "Go",
+    "es": "Go",
+    "de": "Go"
+  },
+  "Next": {
+    "fr": "Next",
+    "en": "Next",
+    "es": "Next",
+    "de": "Next"
+  },
+  "Wait": {
+    "fr": "Wait",
+    "en": "Wait",
+    "es": "Wait",
+    "de": "Wait"
+  },
+  "GO — prochain repère Wait": {
+    "en": "GO — next Wait marker",
+    "es": "GO — siguiente marcador Wait",
+    "de": "GO — nächste Wait-Marke"
+  },
+  "Mode Go : Go lance une Cue principale ; Next suit la timeline ; Wait met la bande-son en attente du prochain GO.": {
+    "en": "Go Mode: Go starts a main Cue; Next follows the timeline; Wait pauses the soundtrack until the next GO.",
+    "es": "Modo Go: Go inicia una Cue principal; Next sigue la línea de tiempo; Wait pausa el audio hasta el próximo GO.",
+    "de": "Go-Modus: Go startet eine Haupt-Cue; Next folgt der Timeline; Wait pausiert den Ton bis zum nächsten GO."
+  },
+  "LTC : sélectionnez une sortie USB avec au moins 4 canaux, puis rechargez Pilot.": {
+    "en": "LTC: select a USB output with at least 4 channels, then reload Pilot.",
+    "es": "LTC: selecciona una salida USB de al menos 4 canales y recarga Pilot.",
+    "de": "LTC: Wähle einen USB-Ausgang mit mindestens 4 Kanälen und lade Pilot neu."
+  },
+  "LTC bêta : choisissez un fichier audio de 10 minutes maximum.": {
+    "en": "LTC beta: choose an audio file up to 10 minutes.",
+    "es": "LTC beta: elige un archivo de audio de hasta 10 minutos.",
+    "de": "LTC-Beta: Wähle eine Audiodatei mit höchstens 10 Minuten."
+  },
+  "LTC bêta : choisissez un fichier mono ou stéréo de 10 minutes maximum.": {
+    "en": "LTC beta: choose a mono or stereo file up to 10 minutes.",
+    "es": "LTC beta: elige un archivo mono o estéreo de hasta 10 minutos.",
+    "de": "LTC-Beta: Wähle eine Mono- oder Stereodatei mit höchstens 10 Minuten."
+  },
+  "Générer LTC": {
+    "en": "Generate LTC",
+    "es": "Generar LTC",
+    "de": "LTC erzeugen"
   }
 }
