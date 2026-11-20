@@ -13,6 +13,7 @@ async function verify(legacy){
  const w=dom.window, context=dom.getInternalVMContext();
  const run=source=>vm.runInContext(source,context);
  Object.assign(w,{indexedDB:new IDBFactory(),TextEncoder,TextDecoder,File,Blob,structuredClone,ResizeObserver:class{observe(){} disconnect(){}},scrollTo(){},matchMedia:()=>({matches:false,addEventListener(){},addListener(){}})});
+ w.HTMLDialogElement.prototype.close=function(){this.open=false;};w.HTMLDialogElement.prototype.showModal=function(){this.open=true;};
  w.HTMLElement.prototype.scrollIntoView=function(){};
  w.HTMLCanvasElement.prototype.getContext=function(){return new Proxy({},{get:(target,key)=>target[key]??(key==='measureText'?(()=>({width:10})):(()=>{}))});};
  w.HTMLMediaElement.prototype.pause=function(){};
@@ -31,7 +32,7 @@ async function verify(legacy){
   const row=id=>cueList.querySelector('[data-cue-id="'+id+'"]');
   const picker=id=>document.querySelector('[data-go-cue="'+id+'"] input[type=color]');
   const color=(id,value)=>{const input=picker(id);input.value=value;input.dispatchEvent(new Event('change',{bubbles:true}));};
-  assert(APP_VERSION==='1.11.7','wrong version');
+  assert(APP_VERSION==='1.11.8','wrong version');
   assert(picker('parent')&&picker('other')&&!picker('child'),'only root pickers');
   assert(!card('parent').style.backgroundImage&&!row('child').classList.contains('goCueColored'),'old project default');
   color('parent','#ffdd00');
@@ -64,7 +65,7 @@ async function verify(legacy){
   const packageData=await buildProjectPackage();
   const entries=readStoredZip(await packageData.blob.arrayBuffer());
   const manifest=JSON.parse(new TextDecoder().decode(entries.get('conduite.json')));
-  assert(manifest.applicationVersion==='1.11.7'&&manifest.cues[0].goColor==='#1378cc','export color/version');
+  assert(manifest.applicationVersion==='1.11.8'&&manifest.cues[0].goColor==='#1378cc','export color/version');
   assert(String(entries.get(manifest.cues[0].mediaActions[0].path))===String(audioBytes),'media bytes exported');
   assert(!manifest.cues[1].goColor&&manifest.cues[1].parentMusicId==='parent','export hierarchy');
   rebuildMediaAtTime=async()=>{};
@@ -103,9 +104,23 @@ async function verify(legacy){
   assert(badges.length===2,'one badge per media kind');assert(badges[0].querySelector('svg')&&badges[1].querySelector('svg'),'international media pictograms');
   assert(!document.querySelector('[data-cue-id="go-b"] .liveMediaBadges'),'no media badge for silent cue');
 
+  const songA={id:'song-a',name:'Song A',time:0,mediaActions:[{id:'audio-a',kind:'audio',duration:100,inPoint:0,outPoint:100}]};
+  const hold={id:'hold',name:'GO marker',time:100,manualKind:'silent',manualDuration:180,mediaActions:[]};
+  const songB={id:'song-b',name:'Song B',time:280,mediaActions:[{id:'audio-b',kind:'audio',duration:120,inPoint:0,outPoint:120}]};
+  cues=[songA,hold,songB];invalidateComputationCaches();conductType='manual';locked=true;manualCurrentID=songA.id;
+  transportPlaying=false;manualPausedAt=5;transportTime=transportBase=5;
+  assert(liveFinishProjection().remaining===95,'current song end ignores later GO holds');
+  assert(liveShowFinishProjection().remaining===215,'show end includes future music and excludes indefinite GO marker');
+  updateLiveFinish();assert($('liveFinishEstimate').textContent.includes(' (')&&!$('liveFinishEstimate').textContent.includes('hors attente'),'parenthetical forecast without GO suffix');
+  for(const lang of ['fr','en','es','de']){S2ALanguage.setLanguage(lang);updateLiveFinish();assert(!$('liveFinishEstimate').textContent.includes('{time}'),'finish placeholders translated');}
+  songB.mediaActions[0].loop=true;invalidateComputationCaches();assert(liveShowFinishProjection().remaining===null,'looping future song is indeterminate');assert(liveFinishProjection().remaining===95,'unknown future does not hide current song finish');
+  delete songB.mediaActions[0].loop;songB.mediaActions[0].duration=0;songB.mediaActions[0].outPoint=0;assert(liveShowFinishProjection().remaining===null,'missing future duration is indeterminate');songB.mediaActions[0].duration=120;songB.mediaActions[0].outPoint=120;manualCurrentID=songB.id;transportTime=300;assert(liveFinishProjection().remaining===100&&liveShowFinishProjection().remaining===100,'last song estimates agree');
+  manualCurrentID=null;manualCompletedID=null;manualPausedAt=null;transportTime=0;assert(liveShowFinishProjection().remaining===220,'before show sums all music');
+  locked=false;assert(liveShowFinishProjection()===null,'show forecast only in spectacle mode');locked=true;
+  conductType='autopilot';assert(liveShowFinishProjection()===null,'automatic timeline calculation preserved');
   return {version:APP_VERSION,localeLabels};
  })()`);
- try { console.log(legacy?'ES5':'Modern',await tests,errors); } finally{w.close();}
+ try { console.log(legacy?'ES5':'Modern',await tests,errors);assert.equal(errors.length,0,'No uncaught DOM errors'); } finally{w.close();}
 }
 acorn.parse(read('compat/app.es5.js'),{ecmaVersion:5});
 verify(false).then(()=>verify(true)).catch(error=>{console.error(error);process.exitCode=1});

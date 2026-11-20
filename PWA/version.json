@@ -1,11 +1,11 @@
 {
-  "version": "1.11.7",
+  "version": "1.11.8",
   "releaseNotes": {
-    "fr": "Mode spectacle : le halo bleu indique automatiquement la prochaine cible GO, avec une luminosité harmonisée avec Copilot. Pastilles Audio/Vidéo ajoutées aux cues Live.",
-    "en": "Show mode: the blue glow automatically highlights the next GO target, with brightness aligned with Copilot. Audio/Video badges added to Live cues.",
-    "es": "Modo espectáculo: el halo azul señala automáticamente la siguiente cue GO, con el brillo de Copilot. Se añaden distintivos Audio/Vídeo a las cues Live.",
-    "de": "Show-Modus: Der blaue Lichtschein markiert automatisch das nächste GO-Ziel und entspricht der Helligkeit von Copilot. Audio-/Video-Anzeigen für Live-Cues ergänzt."
+    "fr": "Mode spectacle : fin de la musique en cours et fin probable du spectacle entre parenthèses, calculée sur les durées restantes.",
+    "en": "Show mode: current music finish and estimated show finish in parentheses, based on remaining durations.",
+    "es": "Modo espectáculo: fin de la música actual y fin probable del espectáculo entre paréntesis, según las duraciones restantes.",
+    "de": "Show-Modus: Ende der aktuellen Musik und voraussichtliches Show-Ende in Klammern anhand der verbleibenden Dauer."
   },
   "channel": "beta",
-  "revision": "automatic-go-focus"
+  "revision": "live-show-finish"
 }

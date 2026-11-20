@@ -715,13 +715,25 @@ function liveFinishProjection(){
   const remaining=Math.max(0,projectDuration()-time);
   return remaining>0?{remaining,waiting:false}:null;
  }
+ const current=manualCurrent(),first=current||manualNextMusic();
+ if(!first)return null;
+ const duration=manualDuration(first);
+ if(!Number.isFinite(duration)||duration<=0||manualHoldsAtStart(first))return {remaining:null,waiting:true};
+ const primary=manualPrimaryAudio(first);
+ const lead=current?remainingLtcLead(runtimeAudio.get(primary?.id)):manualCrossfadeLeadDuration(first);
+ return {remaining:Math.max(0,first.time+duration-(current?time:first.time))+lead,waiting:!!manualWaitCueID||!transportPlaying};
+}
+function liveShowFinishProjection(){
+ if(!locked||conductType!=='manual'||!cues.length)return null;
+ const time=currentTransportTime();
  const roots=manualMusics(),current=manualCurrent(),first=current||manualNextMusic();
  if(!first)return null;
  const queue=roots.slice(roots.indexOf(first));
  let remaining=0,waiting=!!manualWaitCueID||(!current&&!transportPlaying);
  for(const [index,cue] of queue.entries()){
   const duration=manualDuration(cue);
-  if(!Number.isFinite(duration)||manualHoldsAtStart(cue))return {remaining:null,waiting:true};
+  if(manualHoldsAtStart(cue))continue;
+  if(!Number.isFinite(duration)||duration<=0)return {remaining:null,waiting:true};
   const position=cue===current?time:cue.time;
   const primary=manualPrimaryAudio(cue);
   const lead=cue===current?remainingLtcLead(runtimeAudio.get(primary?.id)):manualCrossfadeLeadDuration(cue);
@@ -743,13 +755,18 @@ function updateLiveFinish(){
  const label=$('liveFinishEstimate'),projection=liveFinishProjection();
  label.hidden=!projection;
  if(!projection)return;
- if(projection.remaining===null){setShowText(label,tr('Fin indéterminée'));return;}
+
  if(liveFinishLocale!==S2ALanguage.locale||!liveFinishFormatter){
   liveFinishLocale=S2ALanguage.locale;
   liveFinishFormatter=new Intl.DateTimeFormat(liveFinishLocale,{hour:'numeric',minute:'2-digit'});
  }
- const end=liveFinishFormatter.format(Date.now()+projection.remaining*1000);
- const estimate=tr('Fin estimée : {time}',{time:end});
+ const now=Date.now(),format=remaining=>liveFinishFormatter.format(now+remaining*1000);
+ const estimate=projection.remaining===null?tr('Fin indéterminée'):tr('Fin estimée : {time}',{time:format(projection.remaining)});
+ if(conductType==='manual'){
+  const show=liveShowFinishProjection();
+  const total=show?(show.remaining===null?tr('fin probable du spectacle indéterminée'):tr('fin probable du spectacle : {time}',{time:format(show.remaining)})):'';
+  setShowText(label,estimate+(total?' ('+total+')':''));return;
+ }
  const notes=[estimate];
  if(!transportPlaying&&(conductType!=='manual'||manualCurrent())&&!manualWaitCueID)notes.push(tr('si reprise maintenant'));
  if(projection.waiting)notes.push(tr('hors attente GO'));
@@ -5905,7 +5922,7 @@ if(typeof ResizeObserver==='function'){
 }
 
 // This manifest is requested from the network, outside the service-worker cache.
-const APP_VERSION='1.11.7',BRIDGE_VERSION='1.6.33';document.querySelector('.appVersion').textContent='Version '+APP_VERSION+' bêta';let lastVersionCheck=0,versionCheckRunning=false;
+const APP_VERSION='1.11.8',BRIDGE_VERSION='1.6.33';document.querySelector('.appVersion').textContent='Version '+APP_VERSION+' bêta';let lastVersionCheck=0,versionCheckRunning=false;
 const updateNotice=document.createElement('div');updateNotice.id='updateNotice';updateNotice.hidden=true;updateNotice.setAttribute('role','status');const updateText=document.createElement('span'),updateButton=document.createElement('button'),updateSummary=document.createElement('p');updateSummary.className='updateSummary';updateSummary.hidden=true;updateButton.type='button';updateButton.textContent=tr('Ouvrir la nouvelle version');updateText.className='updateVersionText';const updateContent=document.createElement('div');updateContent.className='updateContent';updateContent.append(updateText,updateSummary);updateNotice.append(updateContent,updateButton);const updateMain=document.querySelector('main');updateMain.insertBefore(updateNotice,updateMain.firstChild);
 function updateVersionButton(){const b=document.getElementById('updateNotice')?.querySelector('button');if(!b)return;b.disabled=locked||transportPlaying;b.title=b.disabled?tr('Quitter le mode Show et mettre la lecture en pause pour actualiser.'):'';}
 function versionIsNewer(a,b){const x=a.split('.').map(Number),y=b.split('.').map(Number);for(let i=0;i<3;i++){if(x[i]!==y[i])return x[i]>y[i];}return false;}
