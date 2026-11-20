@@ -14,4 +14,7 @@ assert.equal($('title').parentElement,$('liveFinishEstimate').parentElement,'Fin
 assert.ok(fs.readFileSync('S2A-Copilot/Show/show.html','utf8').includes('.transportClock{margin-left:auto;justify-content:flex-end;text-align:right'));
 for(const button of w.document.querySelectorAll('.editCue'))assert.ok(button.parentElement.classList.contains('showOverviewRow'),'Pencils anchor to the whole card, including the next/countdown card');
 const css=fs.readFileSync('S2A-Copilot/Show/show.html','utf8');assert.ok(css.includes('.showOverviewRow>.editCue{position:absolute;top:10px;right:10px;'));
+const editorDom=new JSDOM(fs.readFileSync('S2A-Copilot/Show/index.html','utf8'));
+for(const id of ['editDescription','editDescriptionLabel']){const el=editorDom.window.document.getElementById(id);el.hidden=true;assert.equal(editorDom.window.getComputedStyle(el).display,'none','Typed cue hides redundant general description '+id);el.hidden=false;assert.notEqual(editorDom.window.getComputedStyle(el).display,'none','Untyped and QLab cues retain editable description '+id);}
+editorDom.window.close();
 w.close();console.log('PASS Bridge categories: defaults/custom, per-type colors and descriptions, visible-cue countdown, colored timeline, clear filter and Pilot-aligned heading/clock');
