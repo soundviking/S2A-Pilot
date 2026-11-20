@@ -1,11 +1,13 @@
-S2A PILOT 1.11.2 BETA / BRIDGE 1.6.29 — UPDATE
+S2A PILOT 1.11.3 BETA / BRIDGE 1.6.30 BETA — UPDATE
 
-Back up the installed files and keep earlier release archives. Extract the Pilot ZIP and copy its contents into the existing Pilot directory, replacing matching files. Do not delete the remote directory.
-Preserve the existing copilot/config.php and the relay’s private storage. Neither private configuration nor server logs are included in this release.
-Upload all updated files together, including copilot/, compat/, diagnostics/, Bridge/, index.html, app.js, i18n-catalog.js, copilot-host.js, toolbox.css, service-worker.js and version.json. Clear any CDN cache if necessary and refresh Pilot while playback is stopped. The displayed version must be 1.11.2 beta.
+Back up the installed files and preserve previous release archives. Extract the Pilot ZIP and copy its contents into the existing Pilot directory, replacing matching files. Preserve copilot/config.php and the relay's private storage. Private configuration and server logs are excluded.
 
-Each new Copilot share receives a random four-digit remote control code. Change it in the Copilot popup and select Apply. Only Remote control users need this code. It is never included in the QR link or shared show state. Changing the code removes previous remote grants and cancels pending commands; affected users must select Remote control again and enter the new code. Five incorrect guesses from one network address trigger a five-minute lockout.
+Update copilot/ and Bridge 1.6.30 together. Clear any CDN cache if needed, then refresh Pilot while playback is stopped. Pilot must display 1.11.3 beta. Install Bridge from its separate ZIP or the copy bundled with Pilot.
 
-Install Bridge 1.6.29 from the separate ZIP or the copy included with Pilot. It retains both Intel and Apple Silicon architectures, opens Show in Iceman, and uses the amber BRIDGE icon with cyan wings.
-Database migrations preserve invitations, members and Backstage notes. Older Pilot shares cannot accept remote commands until the host configures a code.
-This release has been prepared for installation and has not been deployed automatically.
+In Bridge Show, open Copilot. Enable remote controls, change the four-digit code if needed, then select Apply. Pilot does not need to be open. On a phone, scan the QR code and choose Remote control; enter the code to access QLab GO, play/pause, previous/next and root-cue selection. Selection alone does not start playback.
+
+Changing the code removes existing control grants and cancels pending commands. Affected users must select Remote control again and enter the new code. Five incorrect guesses from one network address trigger a five-minute lockout. The PIN is never part of the QR link or shared show state. Older Bridge versions remain read-only.
+
+Copilot uses one halo, preferring the timed child cue. Each new active cue is placed 20 px below the timeline; manual scrolling remains free between cue changes. Bridge Show uses Iceman and displays the estimated finish of the remaining running order, excluding GO waits. Paused estimates assume an immediate resume. Unknown durations are stated explicitly, and estimates are hidden when synchronization is lost.
+
+Relay migrations preserve invitations, members and Backstage notes. Beta changes remain separate from main. No production deployment is performed automatically.

@@ -1,5 +1,7 @@
 {
-  "version": "1.4.5",
+  "version": "1.6.30",
+  "build": "18803",
+  "channel": "beta",
   "architectures": [
     "arm64",
     "x86_64"
@@ -8,12 +10,12 @@
     {
       "path": "S2A Pilot Bridge.app/Contents/Info.plist",
       "mode": 33188,
-      "size": 881
+      "size": 870
     },
     {
       "path": "S2A Pilot Bridge.app/Contents/MacOS/S2A Pilot Bridge",
       "mode": 33261,
-      "size": 3461648
+      "size": 4114128
     },
     {
       "path": "S2A Pilot Bridge.app/Contents/Resources/LICENSE",
@@ -23,37 +25,52 @@
     {
       "path": "S2A Pilot Bridge.app/Contents/Resources/S2APilotBridgeIcon.icns",
       "mode": 33188,
-      "size": 779147
+      "size": 2295065
     },
     {
       "path": "S2A Pilot Bridge.app/Contents/Resources/Show/bridge.png",
       "mode": 33188,
-      "size": 248605
+      "size": 1898373
+    },
+    {
+      "path": "S2A Pilot Bridge.app/Contents/Resources/Show/copilot-dialog.css",
+      "mode": 33188,
+      "size": 4487
+    },
+    {
+      "path": "S2A Pilot Bridge.app/Contents/Resources/Show/copilot-logo.png",
+      "mode": 33188,
+      "size": 92487
     },
     {
       "path": "S2A Pilot Bridge.app/Contents/Resources/Show/index.html",
       "mode": 33188,
-      "size": 6733
+      "size": 9755
     },
     {
       "path": "S2A Pilot Bridge.app/Contents/Resources/Show/pilot-show.css",
       "mode": 33188,
-      "size": 61964
+      "size": 104801
+    },
+    {
+      "path": "S2A Pilot Bridge.app/Contents/Resources/Show/qrcode.js",
+      "mode": 33188,
+      "size": 33168
     },
     {
       "path": "S2A Pilot Bridge.app/Contents/Resources/Show/shell.js",
       "mode": 33188,
-      "size": 10193
+      "size": 14263
     },
     {
       "path": "S2A Pilot Bridge.app/Contents/Resources/Show/show.html",
       "mode": 33188,
-      "size": 3702
+      "size": 3911
     },
     {
       "path": "S2A Pilot Bridge.app/Contents/Resources/Show/show.js",
       "mode": 33188,
-      "size": 4476
+      "size": 6006
     },
     {
       "path": "S2A Pilot Bridge.app/Contents/Resources/de.lproj/InfoPlist.strings",
@@ -78,12 +95,12 @@
     {
       "path": "S2A Pilot Bridge.app/Contents/Resources/interface.json",
       "mode": 33188,
-      "size": 65703
+      "size": 180196
     },
     {
       "path": "S2A Pilot Bridge.app/Contents/_CodeSignature/CodeResources",
       "mode": 33188,
-      "size": 5802
+      "size": 6536
     }
   ]
 }

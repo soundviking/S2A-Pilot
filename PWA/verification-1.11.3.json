@@ -1,0 +1,38 @@
+{
+  "pilot": "1.11.3",
+  "bridge": "1.6.30",
+  "bridge_remote_control_implemented": true,
+  "checks": {
+    "relay_pin_admission_rotation_lockout": "passed",
+    "legacy_bridge_read_only": "passed",
+    "bridge_root_only_commands_and_instance_validation": "passed",
+    "single_child_priority_halo": "passed",
+    "live_clock_child_refresh": "passed",
+    "cue_change_only_follow_20px": "passed",
+    "pin_not_in_qr_or_shared_state": "passed",
+    "iceman_all_show_modes": "passed",
+    "finish_projection_pause_unknown_and_source_loss": "passed",
+    "translations": [
+      "fr",
+      "en",
+      "es",
+      "de"
+    ],
+    "universal_compile_arm64_x86_64": "passed",
+    "apple_codesign_strict": "passed",
+    "native_regressions": "passed",
+    "remote_applescript_compiled_with_qlab_dictionary": "passed",
+    "packaged_bridge_popup_pin_controls": "passed"
+  },
+  "native_macos_build": "passed",
+  "real_qlab_show_executed": false,
+  "physical_phone_tested": false,
+  "sha256": {
+    "app.js": "b488a13253ff044910bfd3e9e8f8473324ad60895223b2abad2434b3d369c04b",
+    "copilot-host.js": "738aad5e8648fcc5b7730c3f2f5a8a4a61e687235fa146fde5e7518fc1abb8b1",
+    "copilot/api.php": "12f8852e8059ffc1b00f47c4d59dd82f36442bffa45db0c6b893d37f759ec441",
+    "copilot/viewer.js": "17b5cf3e53fac392e03ac42d50a7c776b85a910cb1fc1d9264c9796a304ca9e1"
+  },
+  "native_ci_commit": "4965100abda41a4d01435639a7e49e13a1057468",
+  "native_ci_run": "https://github.com/soundviking/S2A-Pilot/actions/runs/44726245621"
+}
