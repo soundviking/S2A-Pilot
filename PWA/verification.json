@@ -18,21 +18,27 @@
       "es",
       "de"
     ],
-    "universal_compile_arm64_x86_64": "pending",
-    "apple_codesign_strict": "pending",
-    "native_regressions": "pending",
-    "remote_applescript_compiled_with_qlab_dictionary": "pending",
+    "universal_compile_arm64_x86_64": "passed",
+    "apple_codesign_strict": "passed",
+    "native_regressions": "passed",
+    "remote_applescript_compiled_with_qlab_dictionary": "passed",
     "packaged_bridge_popup_pin_controls": "passed",
     "countdown_one_pulse_per_second_shared_phase": "passed",
-    "countdown_stable_on_poll_pause_and_source_loss": "passed"
+    "countdown_stable_on_poll_pause_and_source_loss": "passed",
+    "bridge_idle_selection_only_without_current_cue": "passed",
+    "pilot_selection_behavior_unchanged": "passed",
+    "finish_current_number_screenshot_42_seconds": "passed",
+    "modern_macos_icon_catalog": "passed"
   },
-  "native_macos_build": "pending",
+  "native_macos_build": "passed",
   "real_qlab_show_executed": false,
   "physical_phone_tested": false,
   "sha256": {
     "app.js": "afe73e98040f4aaf42a751636458e7daf53fd47f84078b596900900d61f5b267",
     "copilot-host.js": "738aad5e8648fcc5b7730c3f2f5a8a4a61e687235fa146fde5e7518fc1abb8b1",
-    "copilot/api.php": "12f8852e8059ffc1b00f47c4d59dd82f36442bffa45db0c6b893d37f759ec441",
-    "copilot/viewer.js": "17b5cf3e53fac392e03ac42d50a7c776b85a910cb1fc1d9264c9796a304ca9e1"
-  }
+    "copilot/api.php": "b2b84986f1365a42ead45d1eccb0c0e3ca0ef07773a553bbd18756d835852218",
+    "copilot/viewer.js": "7868d4b7bc233860a5c3675ef8d7ec91dd42e334430e5b8800ebe1ff2b028f02"
+  },
+  "native_ci_commit": "6929b328b632199737bd04ad4665f894f179a678",
+  "native_ci_run": "https://github.com/soundviking/S2A-Pilot/actions/runs/44732320270"
 }

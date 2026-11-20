@@ -1,6 +1,6 @@
 {
-  "version": "1.6.30",
-  "build": "18803",
+  "version": "1.6.31",
+  "build": "18804",
   "channel": "beta",
   "architectures": [
     "arm64",
@@ -10,12 +10,17 @@
     {
       "path": "S2A Pilot Bridge.app/Contents/Info.plist",
       "mode": 33188,
-      "size": 870
+      "size": 936
     },
     {
       "path": "S2A Pilot Bridge.app/Contents/MacOS/S2A Pilot Bridge",
       "mode": 33261,
-      "size": 4114128
+      "size": 4148256
+    },
+    {
+      "path": "S2A Pilot Bridge.app/Contents/Resources/Assets.car",
+      "mode": 33188,
+      "size": 3490536
     },
     {
       "path": "S2A Pilot Bridge.app/Contents/Resources/LICENSE",
@@ -25,7 +30,7 @@
     {
       "path": "S2A Pilot Bridge.app/Contents/Resources/S2APilotBridgeIcon.icns",
       "mode": 33188,
-      "size": 2295065
+      "size": 92950
     },
     {
       "path": "S2A Pilot Bridge.app/Contents/Resources/Show/bridge.png",
@@ -65,12 +70,12 @@
     {
       "path": "S2A Pilot Bridge.app/Contents/Resources/Show/show.html",
       "mode": 33188,
-      "size": 3911
+      "size": 3824
     },
     {
       "path": "S2A Pilot Bridge.app/Contents/Resources/Show/show.js",
       "mode": 33188,
-      "size": 6006
+      "size": 6641
     },
     {
       "path": "S2A Pilot Bridge.app/Contents/Resources/de.lproj/InfoPlist.strings",
@@ -100,7 +105,7 @@
     {
       "path": "S2A Pilot Bridge.app/Contents/_CodeSignature/CodeResources",
       "mode": 33188,
-      "size": 6536
+      "size": 6762
     }
   ]
 }
