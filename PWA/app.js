@@ -3972,6 +3972,11 @@ function manualAutomaticNext(cue,primary){
  return index>=0?roots[index+1]||null:null;
 }
 function manualNextMusic(){const m=manualMusics();if(manualArmExplicit){const selected=cues.find(c=>c.id===manualArmedID);return m.find(c=>c.id===selected?.id||c.id===selected?.parentMusicId)||null;}const id=manualCurrentID||manualCompletedID;return m[id?m.findIndex(c=>c.id===id)+1:0]||null;}
+function manualGoTarget(){
+ if(manualArmExplicit)return cues.find(c=>c.id===manualArmedID)||null;
+ if(manualWaitCueID)return cues.find(c=>c.id===manualWaitCueID)||null;
+ return nextManualWait()||manualNextMusic();
+}
 function armManualCue(id){
  if(conductType!=='manual'||!locked||manualPending||escapeFading)return;
  const cue=cues.find(c=>c.id===id);if(!cue)return;
@@ -5900,7 +5905,7 @@ if(typeof ResizeObserver==='function'){
 }
 
 // This manifest is requested from the network, outside the service-worker cache.
-const APP_VERSION='1.11.6',BRIDGE_VERSION='1.6.33';document.querySelector('.appVersion').textContent='Version '+APP_VERSION+' bêta';let lastVersionCheck=0,versionCheckRunning=false;
+const APP_VERSION='1.11.7',BRIDGE_VERSION='1.6.33';document.querySelector('.appVersion').textContent='Version '+APP_VERSION+' bêta';let lastVersionCheck=0,versionCheckRunning=false;
 const updateNotice=document.createElement('div');updateNotice.id='updateNotice';updateNotice.hidden=true;updateNotice.setAttribute('role','status');const updateText=document.createElement('span'),updateButton=document.createElement('button'),updateSummary=document.createElement('p');updateSummary.className='updateSummary';updateSummary.hidden=true;updateButton.type='button';updateButton.textContent=tr('Ouvrir la nouvelle version');updateText.className='updateVersionText';const updateContent=document.createElement('div');updateContent.className='updateContent';updateContent.append(updateText,updateSummary);updateNotice.append(updateContent,updateButton);const updateMain=document.querySelector('main');updateMain.insertBefore(updateNotice,updateMain.firstChild);
 function updateVersionButton(){const b=document.getElementById('updateNotice')?.querySelector('button');if(!b)return;b.disabled=locked||transportPlaying;b.title=b.disabled?tr('Quitter le mode Show et mettre la lecture en pause pour actualiser.'):'';}
 function versionIsNewer(a,b){const x=a.split('.').map(Number),y=b.split('.').map(Number);for(let i=0;i<3;i++){if(x[i]!==y[i])return x[i]>y[i];}return false;}
@@ -6119,11 +6124,11 @@ function liveCountdownTarget(time=currentTransportTime()){
 
 function updateShowOverview(){
  const host=$('showCueOverviewRows');if(!host||!locked)return;
- const filter=cueTypeVisibility(),principals=conductType==='manual'?manualMusics():[],ordered=cueViewOrder().filter(cue=>!filter||filter.visible.has(cue.id)),active=getActiveCue(),timedNext=liveCountdownTarget()?.cue;
+ const filter=cueTypeVisibility(),principals=conductType==='manual'?manualMusics():[],ordered=cueViewOrder().filter(cue=>!filter||filter.visible.has(cue.id)),active=getActiveCue(),timedNext=liveCountdownTarget()?.cue,goTarget=conductType==='manual'?manualGoTarget():null;
  const following=nextLiveVisibleCue(ordered,timedNext),next=following===active?null:following;
  const members=cueGroupMembership(),activeGroup=groupForCue(active,members),nextGroup=groupForCue(next,members);
  let previousGroup=null;
- const key=JSON.stringify([autoShowSelectedCueId,manualArmedID,manualArmExplicit,showLayout,S2ALanguage.language,active?.id,next?.id,timedNext?.id,cueGroups,customCueTypes,filter?Array.from(filter.matches):null,ordered.map(c=>[c.id,c.name,cueDescriptionLines(c,filter?.selected),c.time,c.imageDataUrl?.length,c.goColor,c.parentMusicId,rawCueTypeIds(c),(c.mediaActions||[]).map(a=>a.kind)])]);
+ const key=JSON.stringify([autoShowSelectedCueId,manualArmedID,manualArmExplicit,goTarget?.id,showLayout,S2ALanguage.language,active?.id,next?.id,timedNext?.id,cueGroups,customCueTypes,filter?Array.from(filter.matches):null,ordered.map(c=>[c.id,c.name,cueDescriptionLines(c,filter?.selected),c.time,c.imageDataUrl?.length,c.goColor,c.parentMusicId,rawCueTypeIds(c),(c.mediaActions||[]).map(a=>a.kind)])]);
  if(key===showOverviewSignature)return;showOverviewSignature=key;
  const groupLabel=$('liveCueGroupLabel');
  groupLabel.hidden=!activeGroup;setShowText(groupLabel,activeGroup?.name||'');
@@ -6141,11 +6146,23 @@ function updateShowOverview(){
   if(folded)continue;
   const row=document.createElement('div');applyCueGroupStyle(row,group);row.className='showOverviewRow'+(cue===active?' isActive':'')+(cue===next?' isNext':'')+(isManualInternalCue(cue)?' manualInternalCue':'');row.dataset.cueId=cue.id;row.dataset.cueTime=cue.time;
   row.classList.toggle('cueTypeContext',!!(filter&&!filter.matches.has(cue.id)));
+  const mediaKinds=['audio','video'].filter(kind=>(cue.mediaActions||[]).some(action=>action.kind===kind));
+  if(mediaKinds.length){
+   row.classList.add('hasLiveMediaBadges');
+   const badges=document.createElement('div');badges.className='liveMediaBadges';
+   for(const kind of mediaKinds){
+    const badge=document.createElement('span');badge.className='cueMediaChip '+kind;
+    const icon=document.createElement('span');icon.setAttribute('aria-hidden','true');S2AMaterial.set(icon,kind==='audio'?'volume_up':'videocam');
+    const label=document.createElement('span');label.className='liveMediaBadgeLabel';label.textContent=tr(kind==='audio'?'Audio':'Vidéo');badge.setAttribute('aria-label',label.textContent);badge.append(icon,label);badges.append(badge);
+   }
+   row.append(badges);
+  }
+
   row.classList.toggle('isKeyboardSelected',conductType!=='manual'&&autoShowSelectedCueId===cue.id);
   if(conductType==='manual'){
    if(isManualMainCue(cue))row.classList.add('manualPrincipalCue');
    applyGoCueColor(row,cue);
-   row.classList.toggle('isArmed',manualArmExplicit&&manualArmedID===cue.id);row.tabIndex=0;row.setAttribute('role','button');row.setAttribute('aria-pressed',String(manualArmExplicit&&manualArmedID===cue.id));row.title=tr('Sélectionner pour le prochain GO');
+   row.classList.toggle('isArmed',goTarget===cue);row.tabIndex=0;row.setAttribute('role','button');row.setAttribute('aria-pressed',String(goTarget===cue));row.title=tr('Sélectionner pour le prochain GO');
    row.onclick=()=>armManualCue(cue.id);
   }
   if(cue===active)row.setAttribute('aria-current','step');
