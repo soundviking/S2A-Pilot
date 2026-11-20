@@ -27,6 +27,8 @@ jobs:
           NODE_PATH="$RUNNER_TEMP/bridge-ui-test/node_modules" node tools/test-bridge-countdown.cjs
           NODE_PATH="$RUNNER_TEMP/bridge-ui-test/node_modules" node tools/test-copilot-follow.cjs
           NODE_PATH="$RUNNER_TEMP/bridge-ui-test/node_modules" node tools/test-bridge-time-editor.cjs
+          NODE_PATH="$RUNNER_TEMP/bridge-ui-test/node_modules" node tools/test-bridge-types.cjs
+          NODE_PATH="$RUNNER_TEMP/bridge-ui-test/node_modules" node tools/test-copilot-types.cjs
       - name: Validate AppleScript with the official QLab dictionary
         run: |
           curl --fail --location --retry 2 https://qlab.app/downloads/QLab.dmg -o "$RUNNER_TEMP/QLab.dmg"

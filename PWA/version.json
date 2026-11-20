@@ -1,10 +1,10 @@
 {
   "version": "1.11.5",
   "releaseNotes": {
-    "fr": "Bridge : modification et sauvegarde du temps des repères depuis le crayon.",
-    "en": "Bridge: edit and save marker times from the pencil editor.",
-    "es": "Bridge: edita y guarda el tiempo de los marcadores desde el lápiz.",
-    "de": "Bridge: Markierungszeiten im Stift-Editor ändern und speichern."
+    "fr": "Bridge : repères modifiables, types et couleurs Pilot, préparation du prochain GO et vignettes avec logo.",
+    "en": "Bridge: editable marker times, Pilot cue types and colors, next GO preparation and logo placeholders.",
+    "es": "Bridge: tiempos editables, tipos y colores Pilot, preparación del siguiente GO y miniaturas con logo.",
+    "de": "Bridge: editierbare Markierungen, Pilot-Typen und Farben, nächster GO und Logo-Vorschaubilder."
   },
   "channel": "beta",
   "revision": "bridge-marker-time"

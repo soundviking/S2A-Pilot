@@ -1,6 +1,6 @@
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
 const elements={liveFinishEstimate:{hidden:true,textContent:''}};
-const context={document:{getElementById:id=>elements[id]},window:{addEventListener(){}},parent:{postMessage(){}},setInterval(){},requestAnimationFrame(){},Intl,Date};
+const context={document:{getElementById:id=>elements[id]||(elements[id]={})},window:{addEventListener(){}},parent:{postMessage(){}},setInterval(){},requestAnimationFrame(){},Intl,Date};
 vm.createContext(context);
 const source=fs.readFileSync('S2A-Copilot/Show/show.js','utf8').replace(/\}\)\(\);\s*$/, 'globalThis.qa={finishProjection,finish(s,c){content=c;renderFinish(s);}};})();');
 vm.runInContext(source,context);

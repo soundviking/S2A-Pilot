@@ -211,3 +211,5 @@ body.isRemoteControl{height:100vh;height:var(--phone-viewport-height,100dvh);ove
 #remotePinDialog::backdrop{background:#000a}#remotePinForm{display:grid;gap:12px}
 #remotePinForm h2{font-size:1.2rem;margin:0}#remotePinForm input{width:100%;font:inherit;padding:12px;background:#111720;color:inherit;border:1px solid #65728a;border-radius:8px;letter-spacing:.3em}
 #remotePinError{color:#ff9299;margin:0}#remotePinError:empty{display:none}
+
+.showOverviewPlaceholder{display:flex;align-items:center;justify-content:center}.showOverviewPlaceholder img.pilotCuePlaceholder{width:44%!important;height:72%!important;max-width:120px!important;max-height:120px!important;object-fit:contain!important;opacity:1!important;border-radius:0!important}

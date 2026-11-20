@@ -2,6 +2,8 @@ import SwiftUI
 import AppKit
 import Foundation
 struct ShowCueProject: Codable {
+    struct CueType: Codable { let id: String; let name: String; let color: String }
+
     struct LegacyMedia: Codable {
         let fileName: String
         let originalFileName: String?
@@ -46,7 +48,10 @@ struct ShowCueProject: Codable {
         var relativeTime: Double? = nil
         var manualKind: String? = nil
         var manualDuration: Double? = nil
-        enum CodingKeys: String, CodingKey { case idString = "id", parentMusicId, relativeTime, manualKind, manualDuration, index, time, type, name, description, isBase, imagePath, mediaActions }
+        var cueTypeId: String? = nil
+        var cueTypeIds: [String]? = nil
+        var typeDescriptions: [String:String]? = nil
+        enum CodingKeys: String, CodingKey { case cueTypeId, cueTypeIds, typeDescriptions, idString = "id", parentMusicId, relativeTime, manualKind, manualDuration, index, time, type, name, description, isBase, imagePath, mediaActions }
         let index: Int
         var time: Double
         let type: String?
@@ -84,6 +89,7 @@ struct ShowCueProject: Codable {
         }
     }
 
+    var customCueTypes: [CueType]? = nil
     var conductType: String? = nil
     var showLayout: String? = nil
     let format: String
@@ -199,6 +205,7 @@ struct SavedShowCue: Codable, Identifiable {
     var clockID: String? = nil
     var conductType: String? = nil
     var showLayout: String? = nil
+    var customCueTypes: [ShowCueProject.CueType]? = nil
     var id: String { groupID }
 }
 
@@ -913,7 +920,7 @@ final class AppModel: ObservableObject {
                 relativeImages[String(cueIndex)] = fullPath
             }
         }
-        return SavedShowCue(groupID: groupID, mediaID: mediaID, audioID: project.resolvedLegacyMedia?.kind == "audio" ? mediaID : nil, title: project.title, cues: project.cues.sorted(by: { $0.time < $1.time }), imagePaths: relativeImages, importedAt: Date(), showDuration: project.resolvedShowDuration, clockID: clockID, conductType: project.conductType, showLayout: project.showLayout)
+        return SavedShowCue(groupID: groupID, mediaID: mediaID, audioID: project.resolvedLegacyMedia?.kind == "audio" ? mediaID : nil, title: project.title, cues: project.cues.sorted(by: { $0.time < $1.time }), imagePaths: relativeImages, importedAt: Date(), showDuration: project.resolvedShowDuration, clockID: clockID, conductType: project.conductType, showLayout: project.showLayout, customCueTypes: project.customCueTypes)
     }
 
     private func loadIndexData(for workspace: WorkspaceInfo) throws -> SavedShowCueIndex {

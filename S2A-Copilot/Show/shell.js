@@ -22,6 +22,15 @@ function openEditor(target){
  document.getElementById('editNameLabel').textContent=l.name||'Nom';document.getElementById('editDescriptionLabel').textContent=l.description||'Description';
  document.getElementById('editCancel').textContent=l.cancel||'Annuler';document.getElementById('editSave').textContent=l.save||'Enregistrer';
  document.getElementById('editError').textContent='';editName.value=target.name;editDescription.value=target.description;
+ const typedHost=document.getElementById('editTypedFields');typedHost.replaceChildren();
+ const typed=target.kind==='pilot'&&target.typeDescriptions&&Object.keys(target.typeDescriptions).length>0;
+ editDescription.hidden=!!typed;document.getElementById('editDescriptionLabel').hidden=!!typed;
+ if(typed)for(const type of content?.cueTypes||[]){
+  if(!(target.cueTypeIds||[]).includes(type.id))continue;
+  const label=document.createElement('label'),input=document.createElement('textarea');
+  label.textContent=type.name;label.style.color=type.color;input.value=target.typeDescriptions[type.id]||'';input.dataset.typeId=type.id;
+  input.id='edit-type-'+type.id;label.htmlFor=input.id;typedHost.append(label,input);
+ }
  document.getElementById('editTimeField').hidden=target.kind!=='pilot';
  document.getElementById('editTimeLabel').textContent=l.cueTime||'Temps du repère';
  document.getElementById('editTimeHelp').textContent=l.cueTimeHelp||'Recale le repère dans Bridge et Copilot. Les médias QLab conservent leur programmation.';
@@ -29,12 +38,12 @@ function openEditor(target){
  updateEditorControls(false);editor.showModal();editName.focus();
 }
 function closeEditor(){if(editPending)return;editor.close();editing=null;editFocus?.focus();}
-function updateEditorControls(disabled){for(const id of ['editName','editTime','editDescription','editSave','editCancel'])document.getElementById(id).disabled=disabled;}
+function updateEditorControls(disabled){document.querySelectorAll('#editTypedFields textarea').forEach(input=>input.disabled=disabled);for(const id of ['editName','editTime','editDescription','editSave','editCancel'])document.getElementById(id).disabled=disabled;}
 function openRootEditor(id){const cue=latest.roots.find(x=>x.id===id);if(cue&&!latest.lost)openEditor({kind:'qlab',cueID:id,name:cue.qName??cue.name,description:cue.notes??''});}
 function openShowEditor(id,contentID){
  if(!content||contentID!==content.id)return;const cue=content.cues.find(x=>x.id===id);if(!cue)return;
  if(content.generic){openRootEditor(id);return;}
- openEditor({kind:'pilot',groupID:content.id,cueID:id,name:cue.editName??cue.name,description:cue.editDescription??cue.description??'',time:cue.time,duration:content.duration});
+ openEditor({kind:'pilot',groupID:content.id,cueID:id,name:cue.editName??cue.name,description:cue.editDescription??cue.description??'',time:cue.time,duration:content.duration,cueTypeIds:cue.cueTypeIds||[],typeDescriptions:cue.typeDescriptions??null});
 }
 function updateEditor(state){
  if(!editing)return;
@@ -49,7 +58,7 @@ function updateEditor(state){
   const current=editing.kind==='qlab'?state.roots.find(x=>x.id===editing.cueID):content?.id===editing.groupID?content.cues.find(x=>x.id===editing.cueID):null;
   const name=editing.kind==='qlab'?(current?.qName??current?.name):(current?.editName??current?.name);
   const description=editing.kind==='qlab'?(current?.notes??''):(current?.editDescription??current?.description??'');
-  const conflict=current&&(name!==editing.name||description!==editing.description||(editing.kind==='pilot'&&Math.abs(current.time-editing.time)>=.0005));
+  const conflict=current&&(name!==editing.name||description!==editing.description||(editing.kind==='pilot'&&Math.abs(current.time-editing.time)>=.0005)||(editing.typeDescriptions&&JSON.stringify(current.typeDescriptions)!==JSON.stringify(editing.typeDescriptions)));
   const unavailable=editing.kind==='qlab'&&(!current||state.lost);
   document.getElementById('editSave').disabled=!!(conflict||unavailable||state.editBusy);
   if(conflict)document.getElementById('editError').textContent=state.labels.changed;
@@ -61,8 +70,10 @@ document.getElementById('editForm').addEventListener('submit',event=>{
  if(editing.kind==='pilot'&&(time===null||Number(editing.duration)>0&&time>Number(editing.duration))){document.getElementById('editError').textContent=latest.labels.invalidTime||'Temps invalide : utilisez un repère entre le début et la fin du numéro.';editTime.focus();return;}
  editPending=Date.now().toString(36)+'-'+Math.random().toString(36).slice(2);
  updateEditorControls(true);document.getElementById('editError').textContent=latest.labels.saving||'Enregistrement…';
+ const typeDescriptions=editing.typeDescriptions?{...editing.typeDescriptions}:null;
+ if(typeDescriptions)for(const input of document.querySelectorAll('#editTypedFields textarea'))typeDescriptions[input.dataset.typeId]=input.value;
  notify({type:'edit',requestID:editPending,workspaceID:editing.workspaceID,kind:editing.kind,cueID:editing.cueID,groupID:editing.groupID??null,
- name:editName.value,description:editDescription.value,expectedName:editing.name,expectedDescription:editing.description,...(editing.kind==='pilot'?{time,expectedTime:editing.time}:{})});
+ name:editName.value,description:editDescription.value,expectedName:editing.name,expectedDescription:editing.description,...(editing.kind==='pilot'?{time,expectedTime:editing.time}:{}),...(typeDescriptions?{typeDescriptions,expectedTypeDescriptions:editing.typeDescriptions}:{})});
 });
 document.getElementById('editCancel').onclick=closeEditor;
 editor.addEventListener('cancel',event=>{event.preventDefault();closeEditor();});

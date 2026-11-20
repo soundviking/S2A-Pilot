@@ -225,7 +225,7 @@ $('remoteCueTypeFilter').addEventListener('toggle',()=>{
  updateStickyDeckHeight();
 });
 function remoteCueTypeBadge(type){
- const badge=document.createElement('span');badge.className='remoteCueTypeBadge';badge.textContent=type.name;
+ const badge=document.createElement('span');badge.className='remoteCueTypeBadge';badge.textContent=pinText(type.name);
  if(/^#[0-9a-f]{6}$/i.test(type.color))badge.style.color=type.color;
  return badge;
 }
@@ -237,7 +237,7 @@ function setRemoteCueTypes(selected){
  paint();
 }
 function updateRemoteCueTypes(state,usable){
- const filter=$('remoteCueTypeFilter'),types=!state.bridge&&Array.isArray(state.cueTypes)?state.cueTypes:[];
+ const filter=$('remoteCueTypeFilter'),types=Array.isArray(state.cueTypes)?state.cueTypes:[];
  filter.hidden=!usable||!types.length;
  const key=JSON.stringify(types);
  if(key===remoteCueTypeSignature)return;
@@ -259,7 +259,7 @@ function syncRemoteCueTypeChoices(){
  const inputs=$('remoteCueTypeChoices').querySelectorAll('input');
  const selected=cueTypeSelection?Array.from(inputs).filter(input=>cueTypeSelection.has(input.value)).length:0;
  const filtered=cueTypeSelection&&(!cueTypeSelection.size||selected>0);
- $('remoteCueTypeFilterLabel').textContent='Filtrer les Cues'+(filtered?' ('+selected+')':'');
+ $('remoteCueTypeFilterLabel').textContent=pinText('Filtrer les Cues')+(filtered?' ('+selected+')':'');
  for(const input of inputs)input.checked=!filtered||cueTypeSelection.has(input.value);
 }
 function remoteCueIds(cue,types){
@@ -301,7 +301,11 @@ function remoteCueDescription(cue,display){
  return cue.description||'';
 }
 function visibleRemoteNext(state,display){
- if(state.bridge||display.cues.some(cue=>cue.id===state.next))return state.next;
+ if(state.bridge){
+  if(display.cues.some(cue=>cue.id===state.next))return state.next;
+  return display.cues.find(cue=>cue.child&&cue.parentCueId===(state.current||state.preview)&&cue.time>(Number(state.time)||0)+.0001)?.id||'';
+ }
+ if(display.cues.some(cue=>cue.id===state.next))return state.next;
  const time=Number(state.time)||0;
  if(!state.manual)return display.cues.find(cue=>cue.time>time+.0001)?.id;
  const active=(state.cues||[]).find(cue=>cue.id===state.active);
@@ -389,7 +393,7 @@ function renderRows(state,display,next,automatic,groupFor){
   const visual=document.createElement('div');visual.className='overviewVisual';
   const imageSource=cue.image||(state.images||{})[cue.imageKey];
   if(imageSource){const image=document.createElement('img');image.src=imageSource;image.alt='';visual.append(image);}
-  else {visual.classList.add('showOverviewPlaceholder');if(row.classList.contains('active')||row.classList.contains('next'))visual.textContent='Pas de visuel';}
+  else {visual.classList.add('showOverviewPlaceholder');const logo=document.createElement('img');logo.className='pilotCuePlaceholder';logo.src='../icons/s2a-pilot-512.png';logo.alt='';visual.append(logo);}
   const time=document.createElement('span');time.className='overviewTime';
   time.textContent=cue.child?'+'+clock(cue.time):state.manual?'GO':state.bridge?'':clock(cue.time);
   const details=document.createElement('div');details.className='overviewContent';
@@ -398,7 +402,11 @@ function renderRows(state,display,next,automatic,groupFor){
   if(badges.length){
    const group=document.createElement('span');group.className='remoteCueTypeBadges';group.append(...badges);h.prepend(group,' ');
   }
-  const desc=document.createElement('p');desc.className='overviewDescription';desc.textContent=remoteCueDescription(cue,display);
+  const desc=document.createElement('div');desc.className='overviewDescription';
+  const typed=remoteCueIds(cue,display.types).filter(id=>!display.filtered||cueTypeSelection.has(id));
+  if(cue.typeDescriptions&&typed.length){
+   for(const id of typed){const text=cue.typeDescriptions[id];if(!text)continue;const line=document.createElement('div');line.textContent=text;line.style.color=display.types.get(id).color;desc.append(line);}
+  }else{desc.textContent=remoteCueDescription(cue,display);if(typed.length===1)desc.style.color=display.types.get(typed[0]).color;}
   if(isRemote()&&cue.id===state.remoteArmed){
    const prepared=document.createElement('span');prepared.className='remotePreparedBadge';prepared.textContent='Prête pour GO';details.append(prepared);
   }
@@ -406,7 +414,7 @@ function renderRows(state,display,next,automatic,groupFor){
   if(!state.bridge&&row.classList.contains('active')){
    const progress=document.createElement('span');progress.className='remoteLiveCueProgress';progress.setAttribute('aria-hidden','true');row.append(progress);
   }
-  if(!automatic&&cue.id===state.next){const box=document.createElement('div');box.className='showNextCountdown';box.setAttribute('role','timer');box.setAttribute('aria-label','Décompte');const label=document.createElement('span');label.className='showCountdownLabel';label.textContent='Décompte';const time=document.createElement('time');time.className='showCountdownClock';box.append(label,time);row.append(box);}
+  if(!automatic&&cue.id===(state.bridge?next:state.next)){const box=document.createElement('div');box.className='showNextCountdown';box.setAttribute('role','timer');box.setAttribute('aria-label','Décompte');const label=document.createElement('span');label.className='showCountdownLabel';label.textContent='Décompte';const time=document.createElement('time');time.className='showCountdownClock';box.append(label,time);row.append(box);}
   if(cue.id===state.waiting){
    const waiting=document.createElement('span');waiting.className='remoteWaitingGo';waiting.textContent='Prochain GO';
    h.prepend(waiting);
@@ -483,8 +491,8 @@ function renderTimeline(cues,duration,backstage,tops,state,types){
   const marker=document.createElement('span'),main=(state.manual||state.bridge)&&!cue.child;
   marker.className='remoteCueMarker'+(main?' principal':' child');
   marker.style.left=Math.min(100,cue.time/duration*100)+'%';marker.title='Cue '+cue.number+' — '+cue.name;
-  if(!state.bridge){
-   if(main)marker.style.backgroundColor=/^#[0-9a-f]{6}$/i.test(cue.goColor)?cue.goColor:'#ffd166';
+  {
+   if(main&&!state.bridge)marker.style.backgroundColor=/^#[0-9a-f]{6}$/i.test(cue.goColor)?cue.goColor:'#ffd166';
    else{
     const colors=remoteCueIds(cue,types).map(id=>types.get(id).color).filter(color=>/^#[0-9a-f]{6}$/i.test(color));
     marker.style.backgroundColor=colors[0]||'#fff';
@@ -590,7 +598,7 @@ function paint(){
  const nextSummary=transition?upcoming:backstage?null:display.cues.find(cue=>cue.id===nextCue&&cue.id!==state.active);
  const remaining=transition?Math.max(0,transition.time-(transition.running?position:Number(source.time)||0)):Infinity;
  updateRemoteNextCue(nextSummary,transition,remaining,running&&transition?.running);
- const timelineCues=state.bridge?cues.filter(c=>c.child):display.cues;
+ const timelineCues=state.bridge?display.cues.filter(c=>c.child):display.cues;
  const durationCues=state.bridge?timelineCues:cues;
  const currentCue=roots.find(c=>c.id===(state.current||state.preview||state.selected));
  if(state.bridge)$('transport').textContent=currentCue?[currentCue.number,currentCue.name,...(!state.current?[pinText('En attente du GO')]:[])].filter(Boolean).join(' · '):'En attente du GO';
@@ -630,7 +638,7 @@ function paint(){
   }
 
  }else{
-  renderRows(state,display,nextCue,!!transition,groupFor);followCueChange(state);updateRemoteCueProgress(state,source,position);const next=cues.find(c=>c.id===state.next),el=$('rows').querySelector('.showCountdownClock');
+  renderRows(state,display,nextCue,!!transition,groupFor);followCueChange(state);updateRemoteCueProgress(state,source,position);const next=cues.find(c=>c.id===(state.bridge?nextCue:state.next)),el=$('rows').querySelector('.showCountdownClock');
   if(el&&next){const remaining=Math.max(0,next.time-position);el.textContent=state.bridge&&stale?'—':clock(remaining);el.dataset.remaining=String(remaining);pulse(el.closest('article'),running&&remaining<=10.0001,remaining);}
  }
  if(running&&!$('topDialog').open&&!dragTop&&!dragSaving){const viewport=$('remoteTimelineViewport'),x=position/duration*$('remoteTimeline').clientWidth;if(x<viewport.scrollLeft+20||x>viewport.scrollLeft+viewport.clientWidth-20)viewport.scrollLeft=Math.max(0,x-viewport.clientWidth/3);}

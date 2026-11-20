@@ -77,6 +77,21 @@ import Foundation
         }
         var zero = timed; zero.time = 0
         try check(BridgeEditing.applying(zero,to:baseline).shows[0].cues.first?.time == 0)
+        var categorized = baseline
+        categorized.shows[0].cues[0].cueTypeIds = ["light","effect"]
+        categorized.shows[0].cues[0].typeDescriptions = ["light":"LX","effect":"FX"]
+        categorized.shows[0].customCueTypes = [.init(id:"custom-stage",name:"Plateau",color:"#22ffaa")]
+        let categoryCopy = try decoder.decode(SavedShowCueIndex.self,from:encoder.encode(categorized))
+        precondition(categoryCopy.shows[0].cues[0].cueTypeIds == ["light","effect"])
+        precondition(categoryCopy.shows[0].customCueTypes?.first?.id == "custom-stage")
+        var typedEdit = edit(); typedEdit.typeDescriptions = ["light":"New LX","effect":"FX"]
+        typedEdit.expectedTypeDescriptions = ["light":"LX","effect":"FX"]
+        let typedResult = try BridgeEditing.applying(typedEdit,to:categorized)
+        precondition(typedResult.shows[0].cues[0].typeDescriptions?["light"] == "New LX")
+        typedEdit.expectedTypeDescriptions = [:]
+        do { _ = try BridgeEditing.applying(typedEdit,to:categorized); fatalError("Stale type descriptions must conflict") }
+        catch BridgeEditing.EditError.conflict {}
+        print("PASS type metadata: old-index compatibility, roundtrip IDs/custom colors, per-type editing and conflict guards")
         print("PASS cue time: millisecond precision, stable IDs, reorder, atomic save/reopen, stale-time rejection, bounds and media/clock preservation")
         print("PASS Bridge editing: ID identity, duplicate names, multiline/Unicode, atomic persistence, reopen, legacy index, missing/conflicting targets, empty text, write failure and unchanged timing/media/clock")
     }

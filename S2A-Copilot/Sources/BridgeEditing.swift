@@ -13,6 +13,8 @@ struct BridgeEditRequest: Decodable {
     let expectedDescription: String
     var time: Double? = nil
     var expectedTime: Double? = nil
+    var typeDescriptions: [String:String]? = nil
+    var expectedTypeDescriptions: [String:String]? = nil
 }
 
 struct BridgeEditReply {
@@ -40,6 +42,11 @@ enum BridgeEditing {
         guard !edit.requestID.isEmpty, !edit.workspaceID.isEmpty, !edit.cueID.isEmpty,
               ![edit.name, edit.description, edit.expectedName, edit.expectedDescription].contains(where: { $0.contains("\0") }) else {
             throw EditError.invalidText
+        }
+        if let descriptions = edit.typeDescriptions {
+            guard edit.kind == .pilot, descriptions.count <= 400,
+                  descriptions.values.allSatisfy({ !$0.contains("\0") }),
+                  descriptions.values.reduce(0, { $0 + $1.utf8.count }) <= 6000 else { throw EditError.invalidText }
         }
         if let time = edit.time {
             guard edit.kind == .pilot, time.isFinite, time >= 0, time <= 864000,
@@ -98,9 +105,15 @@ enum BridgeEditing {
             guard let expected = edit.expectedTime, abs(cue.time-expected) < 0.0005 else { throw EditError.conflict }
             if let duration = index.shows[showIndex].showDuration, duration > 0, time > duration { throw EditError.invalidTime }
         }
+        if let descriptions = edit.typeDescriptions {
+            guard edit.expectedTypeDescriptions == (cue.typeDescriptions ?? [:]) else { throw EditError.conflict }
+            let allowed = Set((cue.cueTypeIds ?? cue.cueTypeId.map { [$0] } ?? []) + Array((cue.typeDescriptions ?? [:]).keys))
+            guard Set(descriptions.keys).isSubset(of:allowed) else { throw EditError.invalidText }
+        }
         var updated = index
         updated.shows[showIndex].cues[cueIndex].name = edit.name
         updated.shows[showIndex].cues[cueIndex].description = edit.description
+        if let descriptions = edit.typeDescriptions { updated.shows[showIndex].cues[cueIndex].typeDescriptions = descriptions }
         if let time = edit.time {
             updated.shows[showIndex].cues[cueIndex].time = time
             if cue.parentMusicId != nil { updated.shows[showIndex].cues[cueIndex].relativeTime = time }

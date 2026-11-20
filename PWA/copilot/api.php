@@ -247,7 +247,7 @@ try {
      $clean['sourceLost']=($state['sourceLost']??false)===true;
     }
     $types=$state['cueTypes']??null;$knownTypes=[];
-    if(!$clean['bridge']&&is_array($types)){
+    if(is_array($types)){
      $clean['cueTypes']=[];
      foreach(array_slice($types,0,400) as $type){
       if(!is_array($type))continue;
@@ -289,7 +289,7 @@ try {
      }
      $goColor=$cue['goColor']??null;
      if(!$clean['bridge']&&$clean['manual']&&!$cleanCue['child']&&is_string($goColor)&&preg_match('/^#[0-9a-f]{6}$/Di',$goColor))$cleanCue['goColor']=$goColor;
-     if(!$clean['bridge']&&is_array($cue['typeDescriptions']??null)){
+     if(is_array($cue['typeDescriptions']??null)&&(!$clean['bridge']||count($cueTypes)>0)){
       $descriptions=[];$lines=[];$bytes=0;
       foreach($cueTypes as $typeId){
        $text=$cue['typeDescriptions'][$typeId]??null;

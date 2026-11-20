@@ -14,6 +14,10 @@ $('editCancel').click();w.S2ABridge.render(state,content);w.qa.openShowEditor('7
 for(const value of ['-1','00:60','1:2:3','abc','00:91','1.1234']){$('editTime').value=value;const count=requests.length;$('editForm').dispatchEvent(new w.Event('submit',{cancelable:true}));assert.equal(requests.length,count,value);assert.ok($('editError').textContent);}
 assert.equal(w.qa.parseCueTime('01:02.345'),62.345);assert.equal(w.qa.parseCueTime('12,5'),12.5);assert.equal(w.qa.parseCueTime('00:00'),0);
 $('editCancel').click();w.qa.openRootEditor('group');assert.equal($('editTimeField').hidden,true,'A QLab GO cue has no absolute marker time');
+$('editCancel').click();const typedCue={...cue,cueTypeIds:['light','sound'],typeDescriptions:{light:'LX',sound:'Audio'}},typedContent={...content,cueTypes:[{id:'light',name:'Light',color:'#ffd166'},{id:'sound',name:'Sound',color:'#8fc5ff'}],cues:[typedCue]};
+w.S2ABridge.render(state,typedContent);w.qa.openShowEditor('7','group');assert.equal($('editDescription').hidden,true);assert.equal($('editTypedFields').querySelectorAll('textarea').length,2);
+$('editTypedFields').querySelector('[data-type-id="light"]').value='New LX';$('editForm').dispatchEvent(new w.Event('submit',{cancelable:true}));const typedRequest=requests.at(-1);assert.equal(typedRequest.typeDescriptions.light,'New LX');assert.equal(typedRequest.typeDescriptions.sound,'Audio');assert.equal(typedRequest.expectedTypeDescriptions.light,'LX');
+w.S2ABridge.render({...state,editReply:{requestID:typedRequest.requestID,success:true}},typedContent);
 const flowState={...state,roots:[{id:'old',name:'Old',category:'pilot'},{id:'next',name:'Next',category:'pilot'}],currentID:'old',standbyID:'next',selectedID:'next'};
 w.S2ABridge.render(flowState,content);assert.equal(w.document.querySelector('.flowItem.active').dataset.id,'old','Playing cue owns Bridge flow focus');
 w.S2ABridge.render({...flowState,currentID:'',selectedID:'old'},content);assert.equal(w.document.querySelector('.flowItem.active').dataset.id,'next','Escape prepares the armed next GO even if selection stays on old show');

@@ -1,0 +1,15 @@
+const {JSDOM}=require('jsdom');const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
+const dom=new JSDOM(fs.readFileSync('S2A-Copilot/Show/show.html','utf8'),{url:'https://bridge.test/',runScripts:'outside-only',pretendToBeVisual:true});const w=dom.window,$=id=>w.document.getElementById(id);w.requestAnimationFrame=()=>1;w.setInterval=()=>1;
+let source=fs.readFileSync('S2A-Copilot/Show/show.js','utf8').replace(/\}\)\(\);\s*$/,'window.qa={render};})();');vm.runInContext(source,dom.getInternalVMContext());
+const types=[{id:'none',name:'Sans type',color:'#aeb8c6'},{id:'sound',name:'Son',color:'#8fc5ff'},{id:'light',name:'Lumière',color:'#ffd166'},{id:'effect',name:'FX',color:'#ff838b'},{id:'custom-stage',name:'Plateau',color:'#22ffaa'}];
+const cues=[{id:'a',time:0,name:'A',cueTypeIds:['light','sound'],typeDescriptions:{light:'LX only',sound:'Audio only'}},{id:'b',time:20,name:'B',cueTypeIds:['effect'],description:'FX'},{id:'c',time:30,name:'C',cueTypeIds:['light'],typeDescriptions:{light:'Light next'}},{id:'d',time:40,name:'D',description:'Untyped'}];
+const state={language:'fr',elapsed:10,running:true,lost:false,labels:{},roots:[]},content={id:'show',title:'Show',duration:60,cueTypes:types,cues};w.qa.render(state,content);
+assert.ok(w.document.querySelector('.showOverviewPlaceholder img.pilotCuePlaceholder'));assert.equal(w.document.querySelector('.showOverviewPlaceholder').style.width,'');assert.ok(w.document.querySelector('.pilotCuePlaceholder').src.endsWith('pilot-placeholder.png'));
+assert.equal($('cueTypeFilter').hidden,false);assert.equal($('cueTypeChoices').querySelectorAll('input').length,5);
+assert.equal(w.document.querySelector('[data-id="a"] .overviewDescription').children[0].style.color,'rgb(255, 209, 102)');assert.equal(w.document.querySelector('.marker[data-id="b"]').style.backgroundColor,'rgb(255, 131, 139)');
+for(const input of $('cueTypeChoices').querySelectorAll('input'))input.checked=input.value==='light';$('cueTypeChoices').querySelector('input').dispatchEvent(new w.Event('change'));
+assert.deepEqual([...$('showCueOverviewRows').children].map(x=>x.dataset.id),['a','c']);assert.ok(!w.document.querySelector('.overviewDescription').textContent.includes('Audio only'));assert.equal(w.document.querySelector('.showCountdownClock').textContent,'00:20','Countdown follows the next visible light cue');assert.equal($('timeline').querySelectorAll('.marker').length,1);
+$('cueTypeAll').click();assert.equal($('showCueOverviewRows').children.length,4);
+assert.equal($('title').parentElement,$('liveFinishEstimate').parentElement,'Finish estimate sits under the title');assert.ok($('title').compareDocumentPosition($('liveFinishEstimate'))&w.Node.DOCUMENT_POSITION_FOLLOWING);
+assert.ok(fs.readFileSync('S2A-Copilot/Show/show.html','utf8').includes('.transportClock{margin-left:auto;justify-content:flex-end;text-align:right'));
+w.close();console.log('PASS Bridge categories: defaults/custom, per-type colors and descriptions, visible-cue countdown, colored timeline, clear filter and Pilot-aligned heading/clock');

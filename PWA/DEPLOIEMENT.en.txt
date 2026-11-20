@@ -13,3 +13,5 @@ Copilot uses one halo, preferring the timed child cue. Only for Bridge, when no 
 Relay migrations preserve invitations, members and Backstage notes. Beta changes remain separate from main. No production deployment is performed automatically.
 
 Marker editing: use the pencil in Show to set minutes:seconds.milliseconds. The marker time is saved in Bridge and shared with Copilot; QLab media keep their existing schedule.
+
+Cue types: new imports preserve types and per-type descriptions. Reimport older numbers from their Pilot export to recover metadata discarded by older Bridge versions. Filters affect display only, never QLab playback.
