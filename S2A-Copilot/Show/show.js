@@ -1,18 +1,13 @@
 (function(){
-'use strict';let lastContent='',lastRows='',state=null,content=null;
+'use strict';let lastContent='',lastRows='',state=null,content=null,pulseSample=null;
 const $=id=>document.getElementById(id),fmt=t=>{const s=Math.max(0,Math.floor(t||0));return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');};
 function make(tag,cls,text){const el=document.createElement(tag);if(cls)el.className=cls;if(text!==undefined)el.textContent=text;return el;}
-function finishProjection(s){
- if(s.lost)return null;
- const roots=s.roots||[],current=roots.findIndex(c=>c.id===s.currentID);
- const first=current>=0?current:roots.findIndex(c=>c.id===s.standbyID);
- if(first<0)return null;
- let remaining=0;
- for(let i=first;i<roots.length;i++){
-  const cue=roots[i],duration=Number(cue.duration);
-  if(!Number.isFinite(duration)||duration<0||duration===0&&(cue.pilot||/^(audio|video|group)$/i.test(cue.kind||'')))return {remaining:null};
-  remaining+=Math.max(0,duration-(i===current?Number(s.elapsed)||0:0));
- }
+function finishProjection(s,c=content){
+ if(s.lost||!c||!c.id)return null;
+ // Pilot Show displays one imported number: its finish cannot include later QLab roots.
+ const duration=Number(c.duration),elapsed=Math.max(0,Number(s.elapsed)||0);
+ if(!Number.isFinite(duration)||duration<=0)return {remaining:null};
+ const remaining=Math.max(0,duration-elapsed);
  return remaining>0?{remaining}:null;
 }
 function renderFinish(s){
@@ -25,17 +20,28 @@ function renderFinish(s){
  notes.push(s.labels.excludingGO||'hors attente GO');
  label.textContent=notes.join(' · ');
 }
-function render(s,c){state=s;renderFinish(s);if(c)content=c;if(!content)return;document.documentElement.lang=s.language;document.body.classList.add('showLayoutIceman');document.body.classList.toggle('manualConduct',!!content.manual);const cues=content.cues||[],t=s.elapsed,d=content.duration||0;let active=-1;for(let i=0;i<cues.length;i++)if(Number.isFinite(cues[i].time)&&cues[i].time<=t+.0001)active=i;const next=cues[active+1]||null,countdown=!content.generic&&(!content.manual||s.running)&&next&&Number.isFinite(next.time)?Math.max(0,next.time-t):null,urgent=!s.lost&&countdown!==null&&countdown<=10;
+function countdownPulse(now){
+ const sample=pulseSample;
+ const remaining=sample?Math.max(0,sample.remaining-(sample.running?(now-sample.at)/1000:0)):Infinity;
+ const urgent=!!sample?.running&&remaining>0&&remaining<=10;
+ document.body.classList.toggle('nextCueUrgent',urgent);
+ $('showNextCountdown').classList.toggle('isUrgent',urgent);
+ document.body.style.setProperty('--bridge-cue-beat',String(urgent ? .12+.88*(.5+.5*Math.cos(2*Math.PI*remaining)) : 0));
+}
+function animateCountdown(now){countdownPulse(now);requestAnimationFrame(animateCountdown);}
+function render(s,c){state=s;if(c)content=c;if(!content)return;renderFinish(s);document.documentElement.lang=s.language;document.body.classList.add('showLayoutIceman');document.body.classList.toggle('manualConduct',!!content.manual);const cues=content.cues||[],t=s.elapsed,d=content.duration||0;let active=-1;for(let i=0;i<cues.length;i++)if(Number.isFinite(cues[i].time)&&cues[i].time<=t+.0001)active=i;const next=cues[active+1]||null,countdown=!content.generic&&(!content.manual||s.running)&&next&&Number.isFinite(next.time)?Math.max(0,next.time-t):null,urgent=s.running&&!s.lost&&countdown!==null&&countdown>0&&countdown<=10;
+ pulseSample=countdown===null?null:{remaining:countdown,at:performance.now(),running:s.running&&!s.lost};countdownPulse(performance.now());
  document.body.classList.toggle('nextCueUrgent',urgent);document.body.classList.toggle('lost',s.lost);$('title').textContent=content.title||s.labels.wait;$('clock').textContent=fmt(t);$('duration').textContent=d?'/ '+fmt(d):'';$('progress').style.width=(d?Math.min(100,t/d*100):0)+'%';$('showNextCountdown').hidden=!!content.generic||(content.manual&&(!s.running||!next));$('showNextCountdown').classList.toggle('isUrgent',urgent);document.querySelector('.showCountdownLabel').textContent=s.labels.countdown;document.querySelector('.showCountdownClock').textContent=countdown===null?'--:--':fmt(Math.ceil(countdown));$('standbyNotice').textContent=content.generic?s.labels.native:content.manual&&!s.running?s.status:'';
  const key=JSON.stringify([content,active,s.language]);if(key!==lastRows){lastRows=key;const host=$('showCueOverviewRows');document.querySelector('.showTransportHeader').append($('showNextCountdown'));host.replaceChildren();const start=Math.max(0,active);for(let i=start;i<Math.min(cues.length,start+5);i++){const cue=cues[i],isActive=i===active,isNext=i===active+1,row=make('div','showOverviewRow'+(isActive?' isActive':'')+(isNext?' isNext':''));row.dataset.id=cue.id;row.append(make('span','overviewNumber',content.generic?(cue.number||''):content.manual?(cue.number||String(i+1)):String(i+1)));if(isActive)row.setAttribute('aria-current','step');const visual=make('div','overviewVisual');if(cue.image){const button=make('button');button.type='button';button.setAttribute('aria-label',s.labels.zoom+' — '+cue.name);const img=make('img');img.src=cue.image;img.alt=cue.name;button.append(img);button.onclick=()=>parent.postMessage({type:'s2a-show-zoom',src:cue.image,title:cue.name},'*');visual.append(button);}else{visual.classList.add('showOverviewPlaceholder');if(isActive||isNext)visual.textContent=s.labels.noVisual;}
  row.append(visual,make('time','overviewTime',content.generic?(isNext?'GO':''):(cue.time===null?'GO':fmt(cue.time))));const text=make('div','overviewContent');const heading=make('div','overviewHeading');heading.append(make('div','overviewName',cue.name));
  const edit=make('button','editCue','✎');edit.type='button';edit.disabled=s.editBusy||s.lost;edit.setAttribute('aria-label',(s.labels.edit||'Modifier')+' — '+cue.name);
  edit.onclick=()=>parent.postMessage({type:'s2a-show-edit',id:cue.id,contentID:content.id},'*');heading.append(edit);text.append(heading);if((isActive||isNext)&&cue.description?.trim())text.append(make('div','overviewDescription',cue.description));row.append(text);if(isNext)row.append(make('span','overviewBeat'));host.append(row);}if(!cues.length)host.append(make('div','muted',s.labels.wait));document.querySelector('.showCueOverview').classList.toggle('hasHiddenCues',cues.length-start>5);}
- if(!content.generic&&next){const nextRow=document.querySelector('.isNext');if(nextRow)nextRow.append($('showNextCountdown'));}
+ if(!content.generic&&next){const nextRow=document.querySelector('.isNext');if(nextRow&&$('showNextCountdown').parentElement!==nextRow)nextRow.append($('showNextCountdown'));}
  const timeline=$('timeline'),signature=JSON.stringify([content.id,cues.map(x=>[x.id,x.time]),active]);if(signature!==lastContent){lastContent=signature;timeline.querySelectorAll('.marker').forEach(x=>x.remove());for(const cue of cues.filter(x=>Number.isFinite(x.time)&&x.time>t)){const dot=make('div','marker');dot.style.left=(d?cue.time/d*100:0)+'%';timeline.append(dot);}}
  document.querySelectorAll('.editCue').forEach(button=>button.disabled=!!(s.editBusy||s.lost));
  const image=document.querySelector('.isActive .overviewVisual img');if(image)image.style.opacity=String(countdown!==null&&countdown<=10?Math.max(0,countdown/10):1);
 }
 window.addEventListener('message',e=>{if(e.source!==parent||e.data?.type!=='s2a-bridge-state')return;render(e.data.state,e.data.content);});parent.postMessage({type:'s2a-show-ready'},'*');
+requestAnimationFrame(animateCountdown);
 setInterval(()=>{if(state)renderFinish(state);},1000);
 })();

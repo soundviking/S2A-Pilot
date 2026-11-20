@@ -1,0 +1,20 @@
+const {JSDOM}=require('jsdom');
+const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
+const dom=new JSDOM(fs.readFileSync('S2A-Copilot/Show/show.html','utf8'),{url:'https://bridge.test/',runScripts:'outside-only',pretendToBeVisual:true});
+const w=dom.window;let now=0;Object.defineProperty(w.performance,'now',{value:()=>now});w.requestAnimationFrame=()=>1;w.setInterval=()=>1;
+const source=fs.readFileSync('S2A-Copilot/Show/show.js','utf8').replace(/\}\)\(\);\s*$/,'window.qa={render,countdownPulse};})();');vm.runInContext(source,dom.getInternalVMContext());
+const content={id:'show',title:'Show',duration:120,generic:false,manual:false,cues:[{id:'a',time:0,name:'A'},{id:'b',time:20,name:'B'},{id:'c',time:40,name:'C'}]};
+const state={language:'fr',elapsed:10,running:true,lost:false,labels:{countdown:'Décompte'},roots:[]};
+w.qa.render(state,content);const countdown=w.document.getElementById('showNextCountdown'),row=countdown.parentElement;
+const pulse=()=>Number(w.document.body.style.getPropertyValue('--bridge-cue-beat'));
+assert.equal(pulse(),1,'Pulse peaks exactly on a countdown second');
+now=500;w.qa.countdownPulse(now);assert.ok(Math.abs(pulse()-.12)<1e-9,'One trough between consecutive seconds');
+now=1000;w.qa.countdownPulse(now);assert.equal(pulse(),1,'Next peak is exactly one second later');
+let moves=0;const append=w.Element.prototype.append;w.Element.prototype.append=function(...args){if(args.includes(countdown))moves++;return append.apply(this,args);};
+for(let i=1;i<=12;i++){now=1000+i*83;w.qa.render({...state,elapsed:10+now/1000},null);}
+assert.equal(moves,0,'Polling cannot move the countdown or restart its pulse');assert.equal(countdown.parentElement,row);
+w.qa.render({...state,running:false,elapsed:12},null);assert.equal(pulse(),0);assert.ok(!w.document.body.classList.contains('nextCueUrgent'));
+w.qa.render({...state,lost:true,elapsed:12},null);assert.equal(pulse(),0);
+w.qa.render({...state,elapsed:21},null);assert.ok(countdown.parentElement!==row,'Changing cue relocates the countdown once');assert.equal(moves,2,'Only a real cue change detaches and attaches the countdown');
+const css=fs.readFileSync('S2A-Copilot/Show/show.html','utf8');assert.ok(css.includes('opacity:var(--bridge-cue-beat,0)'));assert.ok(!css.includes('animation:bridgeUrgent'));assert.ok(css.includes('prefers-reduced-motion'));
+w.close();console.log('PASS one pulse per countdown second, shared phase, stable DOM, cue transition, pause and lost-source stop');

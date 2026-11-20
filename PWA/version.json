@@ -1,11 +1,11 @@
 {
-  "version": "1.11.3",
+  "version": "1.11.4",
   "releaseNotes": {
-    "fr": "Télécommande QLab sécurisée depuis Bridge 1.6.30, sans ouvrir Pilot.",
-    "en": "Secure QLab remote control from Bridge 1.6.30, without opening Pilot.",
-    "es": "Control remoto seguro de QLab desde Bridge 1.6.30, sin abrir Pilot.",
-    "de": "Sichere QLab-Fernbedienung über Bridge 1.6.30, ohne Pilot zu öffnen."
+    "fr": "Clignotement du décompte Bridge régulier et synchronisé avec le halo de la cue suivante.",
+    "en": "Bridge countdown pulses steadily and in sync with the next cue halo.",
+    "es": "El parpadeo de Bridge se sincroniza con el halo de la siguiente cue.",
+    "de": "Bridge-Countdown und Halo des nächsten Cues pulsieren synchron."
   },
   "channel": "beta",
-  "revision": "bridge-remote-pin"
+  "revision": "bridge-countdown-pulse"
 }
