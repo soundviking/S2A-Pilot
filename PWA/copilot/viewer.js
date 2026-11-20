@@ -302,6 +302,11 @@ function remoteCueDescription(cue,display){
 }
 function visibleRemoteNext(state,display){
  if(state.bridge){
+  if(!state.current){
+   const parent=state.preview||state.queued||state.selected;
+   // Before GO, zero is a start marker, not an already-played cue.
+   return display.cues.find(cue=>cue.child&&cue.parentCueId===parent)?.id||'';
+  }
   if(display.cues.some(cue=>cue.id===state.next))return state.next;
   return display.cues.find(cue=>cue.child&&cue.parentCueId===(state.current||state.preview)&&cue.time>(Number(state.time)||0)+.0001)?.id||'';
  }

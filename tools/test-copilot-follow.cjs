@@ -37,4 +37,10 @@ w.qa.render({...state,selected:'following'});assert.deepEqual(active(),['child3'
 w.qa.render({...idle,bridge:false,manual:true});assert.deepEqual(active(),[],'Pilot-only never follows the QLab selection');
 w.qa.render({...idle,sourceLost:true});assert.deepEqual(active(),[],'A lost source cannot invent an idle selection');
 w.qa.render({...idle,preview:'',queued:'following',selected:'root'});assert.deepEqual(active(),['following'],'Idle Bridge uses the armed next GO when selection stays on the stopped root');
+const previewCues=[{id:'preview',name:'Prepared number',time:0},{id:'preview:1',name:'Cue 1',number:'1',time:0,child:true,parentCueId:'preview',description:'First cue'},{id:'preview:2',name:'Cue 2',number:'2',time:92,child:true,parentCueId:'preview',description:'Second cue'}];
+const prepared={schema:1,bridge:true,show:true,current:'',preview:'preview',queued:'preview',selected:'preview',active:'',next:'',playing:false,time:0,duration:286,cues:previewCues};
+w.qa.render(prepared);assert.equal($('rows').querySelector('.isNext')?.dataset.id,'preview:1','Before GO the zero-time first child is expanded');assert.equal($('remoteNextCueName').textContent,'Cue 1');
+w.qa.render({...prepared,next:'preview:2'});assert.equal($('rows').querySelector('.isNext')?.dataset.id,'preview:1','Idle previews ignore a stale next pointer');
+w.qa.render({...prepared,current:'preview',active:'preview:1',next:'preview:2',playing:true});assert.equal($('rows').querySelector('.isNext')?.dataset.id,'preview:2','After GO the following child becomes next');
+w.qa.render({...prepared,current:'preview',active:'preview:1',next:'preview:2',playing:false,time:40});assert.equal($('rows').querySelector('.isNext')?.dataset.id,'preview:2','Pause must not rewind to the first cue');
 assert.deepEqual(errors,[]);w.close();console.log('PASS Single child-priority halo; cue-change-only follow; no reset for selection, clock, redraw, resize or compact view.');

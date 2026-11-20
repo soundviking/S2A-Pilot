@@ -1,11 +1,11 @@
 {
-  "version": "1.11.5",
+  "version": "1.11.6",
   "releaseNotes": {
-    "fr": "Bridge : repères modifiables, types et couleurs Pilot, préparation du prochain GO et vignettes avec logo.",
-    "en": "Bridge: editable marker times, Pilot cue types and colors, next GO preparation and logo placeholders.",
-    "es": "Bridge: tiempos editables, tipos y colores Pilot, preparación del siguiente GO y miniaturas con logo.",
-    "de": "Bridge: editierbare Markierungen, Pilot-Typen und Farben, nächster GO und Logo-Vorschaubilder."
+    "fr": "Copilot avec Bridge : prépare la première cue du numéro, même à 00:00, avant le GO.",
+    "en": "Copilot with Bridge: preview the first cue, including at 00:00, before GO.",
+    "es": "Copilot con Bridge: prepara la primera cue, incluso a 00:00, antes del GO.",
+    "de": "Copilot mit Bridge: Vor GO den ersten Cue anzeigen, auch bei 00:00."
   },
   "channel": "beta",
-  "revision": "bridge-marker-time"
+  "revision": "copilot-preview-first-cue"
 }

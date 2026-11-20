@@ -1,10 +1,10 @@
-S2A PILOT 1.11.5 BÊTA / BRIDGE 1.6.32 BÊTA — MISE À JOUR
+S2A PILOT 1.11.6 BÊTA / BRIDGE 1.6.32 BÊTA — MISE À JOUR
 
 1. Sauvegardez les fichiers actuellement déployés et conservez les anciennes archives.
-2. Décompressez S2A-Pilot-1.11.5-beta.zip et envoyez son contenu dans le dossier actuel de Pilot, en remplaçant les fichiers de même nom. Ne supprimez pas le dossier distant.
+2. Décompressez S2A-Pilot-1.11.6-beta.zip et envoyez son contenu dans le dossier actuel de Pilot, en remplaçant les fichiers de même nom. Ne supprimez pas le dossier distant.
 3. Conservez impérativement copilot/config.php et le stockage privé du relais. Cette livraison ne contient ni votre configuration privée ni les journaux serveur.
 4. Le relais copilot/ et Bridge 1.6.32 doivent être mis à jour ensemble pour utiliser la nouvelle télécommande QLab. Les anciennes versions de Bridge restent en lecture seule sur le relais.
-5. Après installation, purgez le cache CDN si nécessaire, puis actualisez Pilot hors lecture. La version affichée doit être 1.11.5 bêta. actualiser.html permet de renouveler le cache sans effacer les projets locaux.
+5. Après installation, purgez le cache CDN si nécessaire, puis actualisez Pilot hors lecture. La version affichée doit être 1.11.6 bêta. actualiser.html permet de renouveler le cache sans effacer les projets locaux.
 6. Installez Bridge 1.6.32 depuis son ZIP ou la copie incluse dans Pilot. Dans Bridge, ouvrez Show, puis Copilot. Le popup présente l'autorisation des télécommandes et le code de quatre chiffres. Modifiez le code puis cliquez sur Appliquer. Pilot n'a pas besoin d'être ouvert.
 7. Sur le téléphone, scannez le QR code et choisissez Télécommande. Le code est demandé pour accéder aux commandes QLab : GO, lecture/pause, cue précédente/suivante et sélection d'une cue principale. La sélection seule ne lance pas la cue.
 8. Un changement de code retire les anciennes autorisations et annule les commandes en attente. Sélectionnez à nouveau Télécommande sur les appareils concernés et saisissez le nouveau code. Cinq codes incorrects depuis une même adresse réseau entraînent une attente de cinq minutes. Le code n'est jamais dans le QR ni dans la conduite partagée.
@@ -17,3 +17,5 @@ La branche GitHub bêta reste distincte de main. Cette livraison n'est pas dépl
 Édition des repères : le crayon du Show donne accès au temps en minutes:secondes.millisecondes. Ce temps est enregistré dans Bridge et partagé avec Copilot ; les médias QLab conservent leur programmation.
 
 Types de cues : les nouveaux imports conservent les types et les descriptions par type. Les anciens imports, qui avaient perdu ces métadonnées, doivent être réimportés depuis leur export Pilot pour les retrouver. Les filtres modifient uniquement l’affichage, pas la lecture QLab.
+
+Ce correctif concerne uniquement Copilot. Bridge 1.6.32 ne nécessite pas de réinstallation. Après mise à jour des fichiers Pilot et copilot/, actualisez Copilot sur les appareils connectés.

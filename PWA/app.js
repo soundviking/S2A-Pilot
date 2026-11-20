@@ -5900,7 +5900,7 @@ if(typeof ResizeObserver==='function'){
 }
 
 // This manifest is requested from the network, outside the service-worker cache.
-const APP_VERSION='1.11.5',BRIDGE_VERSION='1.6.32';document.querySelector('.appVersion').textContent='Version '+APP_VERSION+' bêta';let lastVersionCheck=0,versionCheckRunning=false;
+const APP_VERSION='1.11.6',BRIDGE_VERSION='1.6.32';document.querySelector('.appVersion').textContent='Version '+APP_VERSION+' bêta';let lastVersionCheck=0,versionCheckRunning=false;
 const updateNotice=document.createElement('div');updateNotice.id='updateNotice';updateNotice.hidden=true;updateNotice.setAttribute('role','status');const updateText=document.createElement('span'),updateButton=document.createElement('button'),updateSummary=document.createElement('p');updateSummary.className='updateSummary';updateSummary.hidden=true;updateButton.type='button';updateButton.textContent=tr('Ouvrir la nouvelle version');updateText.className='updateVersionText';const updateContent=document.createElement('div');updateContent.className='updateContent';updateContent.append(updateText,updateSummary);updateNotice.append(updateContent,updateButton);const updateMain=document.querySelector('main');updateMain.insertBefore(updateNotice,updateMain.firstChild);
 function updateVersionButton(){const b=document.getElementById('updateNotice')?.querySelector('button');if(!b)return;b.disabled=locked||transportPlaying;b.title=b.disabled?tr('Quitter le mode Show et mettre la lecture en pause pour actualiser.'):'';}
 function versionIsNewer(a,b){const x=a.split('.').map(Number),y=b.split('.').map(Number);for(let i=0;i<3;i++){if(x[i]!==y[i])return x[i]>y[i];}return false;}
