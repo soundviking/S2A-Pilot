@@ -10,12 +10,36 @@ function finishProjection(s,c=content){
  const remaining=Math.max(0,duration-elapsed);
  return remaining>0?{remaining}:null;
 }
+function showFinishProjection(s){
+ if(s.lost)return null;
+ const roots=s.roots||[],current=roots.findIndex(c=>c.id===s.currentID);
+ let first=current;
+ if(first<0)first=roots.findIndex(c=>c.id===s.standbyID);
+ if(first<0)first=roots.findIndex(c=>c.id===s.selectedID);
+ if(first<0)return null;
+ let remaining=0;
+ for(let i=first;i<roots.length;i++){
+  const cue=roots[i];
+  // An imported number is one timeline, even when it contains several media.
+  if(!cue.pilot&&cue.category!=='pilot'&&!/^(audio|video)$/i.test(cue.kind||''))continue;
+  const duration=Number(cue.duration);
+  if(!Number.isFinite(duration)||duration<=0)return {remaining:null};
+  remaining+=Math.max(0,duration-(i===current?(Number(s.elapsed)||0):0));
+ }
+ return remaining>0?{remaining}:null;
+}
 function renderFinish(s){
  const label=$('liveFinishEstimate'),projection=finishProjection(s);label.hidden=!projection;
  if(!projection)return;
- if(projection.remaining===null){label.textContent=s.labels.finishUnknown||'Fin indéterminée';return;}
- const time=new Intl.DateTimeFormat(s.language,{hour:'numeric',minute:'2-digit'}).format(Date.now()+projection.remaining*1000);
- label.textContent=(s.labels.finishEstimate||'Fin estimée : {time}').replace('{time}',time);
+ const formatter=new Intl.DateTimeFormat(s.language,{hour:'numeric',minute:'2-digit'}),now=Date.now();
+ const format=remaining=>formatter.format(now+remaining*1000);
+ let text=projection.remaining===null?(s.labels.finishUnknown||'Fin indéterminée'):(s.labels.finishEstimate||'Fin estimée : {time}').replace('{time}',format(projection.remaining));
+ const show=showFinishProjection(s);
+ if(show){
+  const total=show.remaining===null?(s.labels.showFinishUnknown||'fin probable du spectacle indéterminée'):(s.labels.showFinishEstimate||'fin probable du spectacle : {time}').replace('{time}',format(show.remaining));
+  text+=' ('+total+')';
+ }
+ label.textContent=text;
 }
 function countdownPulse(now){
  const sample=pulseSample;

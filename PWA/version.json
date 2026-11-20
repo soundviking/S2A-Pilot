@@ -1,10 +1,10 @@
 {
   "version": "1.11.6",
   "releaseNotes": {
-    "fr": "Copilot prépare la première cue à 00:00 ; Bridge garde le crayon en haut à droite, même avec le décompte.",
-    "en": "Copilot previews the first cue at 00:00; Bridge keeps the pencil at the top right, including countdown cards.",
-    "es": "Copilot prepara la primera cue a 00:00; Bridge mantiene el lápiz arriba a la derecha, también con cuenta atrás.",
-    "de": "Copilot zeigt den ersten Cue bei 00:00; der Bridge-Stift bleibt auch mit Countdown oben rechts."
+    "fr": "Copilot prépare la première cue ; Bridge aligne le crayon et affiche la fin probable du spectacle entre parenthèses.",
+    "en": "Copilot previews the first cue; Bridge aligns edit pencils and adds the estimated show finish in parentheses.",
+    "es": "Copilot prepara la primera cue; Bridge alinea el lápiz y añade el fin probable del espectáculo entre paréntesis.",
+    "de": "Copilot zeigt den ersten Cue; Bridge richtet den Stift aus und ergänzt die Show-Endzeit in Klammern."
   },
   "channel": "beta",
   "revision": "copilot-preview-first-cue"

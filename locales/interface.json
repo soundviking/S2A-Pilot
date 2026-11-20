@@ -5282,5 +5282,15 @@
     "en": "Invalid time: place the marker between the start and end of the number.",
     "es": "Tiempo inválido: sitúa el marcador entre el inicio y el final del número.",
     "de": "Ungültige Zeit: Die Markierung muss zwischen Anfang und Ende der Nummer liegen."
+  },
+  "fin probable du spectacle : {time}": {
+    "en": "estimated show finish: {time}",
+    "es": "fin probable del espectáculo: {time}",
+    "de": "voraussichtliches Show-Ende: {time}"
+  },
+  "fin probable du spectacle indéterminée": {
+    "en": "show finish unknown",
+    "es": "fin del espectáculo indeterminado",
+    "de": "Show-Endzeit unbekannt"
   }
 }

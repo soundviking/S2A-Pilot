@@ -40,7 +40,9 @@
     "bridge_idle_preview_first_visible_cue_including_zero": "passed",
     "bridge_idle_preview_stale_next_pointer": "passed",
     "bridge_idle_preview_filters_playback_pause": "passed",
-    "bridge_pencil_top_right_countdown_and_other_cards": "passed"
+    "bridge_pencil_top_right_countdown_and_other_cards": "passed",
+    "show_finish_remaining_music_projection": "passed",
+    "finish_line_no_go_or_resume_suffix": "passed"
   },
   "native_macos_build": "pending",
   "real_qlab_show_executed": false,
