@@ -1,11 +1,11 @@
 {
-  "version": "1.11.4",
+  "version": "1.11.5",
   "releaseNotes": {
-    "fr": "Bridge : pulsation calée sur les secondes, fin du numéro affiché et prévisualisation QLab à l’arrêt.",
-    "en": "Bridge: second-aligned pulses, displayed-number finish time and idle QLab selection preview.",
-    "es": "Bridge: pulsos por segundo, fin del número mostrado y vista previa QLab en reposo.",
-    "de": "Bridge: Sekundentakt, Endzeit der angezeigten Nummer und QLab-Vorschau im Leerlauf."
+    "fr": "Bridge : modification et sauvegarde du temps des repères depuis le crayon.",
+    "en": "Bridge: edit and save marker times from the pencil editor.",
+    "es": "Bridge: edita y guarda el tiempo de los marcadores desde el lápiz.",
+    "de": "Bridge: Markierungszeiten im Stift-Editor ändern und speichern."
   },
   "channel": "beta",
-  "revision": "bridge-countdown-pulse"
+  "revision": "bridge-marker-time"
 }

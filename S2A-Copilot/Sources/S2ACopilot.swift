@@ -48,7 +48,7 @@ struct ShowCueProject: Codable {
         var manualDuration: Double? = nil
         enum CodingKeys: String, CodingKey { case idString = "id", parentMusicId, relativeTime, manualKind, manualDuration, index, time, type, name, description, isBase, imagePath, mediaActions }
         let index: Int
-        let time: Double
+        var time: Double
         let type: String?
         var name: String
         var description: String?
@@ -1066,7 +1066,8 @@ final class AppModel: ObservableObject {
             try BridgeEditing.validate(edit)
             currentURL = edit.kind == .pilot ? try indexURL(for: workspace) : nil
             legacyURL = edit.kind == .pilot ? try showCueDirectory(for: workspace).appendingPathComponent("index.json") : nil
-        } catch { reject("Impossible d’enregistrer cette Cue."); return }
+        } catch BridgeEditing.EditError.invalidTime { reject("Temps invalide : utilisez un repère entre le début et la fin du numéro."); return }
+        catch { reject("Impossible d’enregistrer cette Cue."); return }
         bridgeEditInFlight = true
         bridgeEditReply = nil
         metadataRevision += 1
@@ -1098,7 +1099,8 @@ final class AppModel: ObservableObject {
                     self.pollVisualMonitor()
                 case .failure(let error):
                     let conflict = (error as? BridgeEditing.EditError) == .conflict || error.localizedDescription.contains("BRIDGE_EDIT_CONFLICT")
-                    let message = conflict
+                    let invalidTime = (error as? BridgeEditing.EditError) == .invalidTime
+                    let message = invalidTime ? L("Temps invalide : utilisez un repère entre le début et la fin du numéro.") : conflict
                         ? L("La Cue a été modifiée ailleurs. Rouvre l’édition avant de réessayer.")
                         : L("Impossible d’enregistrer. Le texte saisi est conservé ; vérifie la connexion et réessaie.")
                     self.bridgeEditReply = BridgeEditReply(requestID: edit.requestID, success: false, message: message)

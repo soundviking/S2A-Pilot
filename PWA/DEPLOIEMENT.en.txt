@@ -1,8 +1,8 @@
-S2A PILOT 1.11.4 BETA / BRIDGE 1.6.31 BETA — UPDATE
+S2A PILOT 1.11.5 BETA / BRIDGE 1.6.32 BETA — UPDATE
 
 Back up the installed files and preserve previous release archives. Extract the Pilot ZIP and copy its contents into the existing Pilot directory, replacing matching files. Preserve copilot/config.php and the relay's private storage. Private configuration and server logs are excluded.
 
-Update copilot/ and Bridge 1.6.31 together. Clear any CDN cache if needed, then refresh Pilot while playback is stopped. Pilot must display 1.11.4 beta. Install Bridge from its separate ZIP or the copy bundled with Pilot.
+Update copilot/ and Bridge 1.6.32 together. Clear any CDN cache if needed, then refresh Pilot while playback is stopped. Pilot must display 1.11.5 beta. Install Bridge from its separate ZIP or the copy bundled with Pilot.
 
 In Bridge Show, open Copilot. Enable remote controls, change the four-digit code if needed, then select Apply. Pilot does not need to be open. On a phone, scan the QR code and choose Remote control; enter the code to access QLab GO, play/pause, previous/next and root-cue selection. Selection alone does not start playback.
 
@@ -11,3 +11,5 @@ Changing the code removes existing control grants and cancels pending commands. 
 Copilot uses one halo, preferring the timed child cue. Only for Bridge, when no cue is playing or paused, QLab selection previews the selected number and timeline. Pilot-only behavior is unchanged. Each new active cue is placed 20 px below the timeline; manual scrolling remains free between cue changes. Bridge Show uses Iceman and displays the estimated finish of the currently displayed number (later QLab numbers are excluded), excluding GO waits. Paused estimates assume an immediate resume. Unknown durations are stated explicitly, and estimates are hidden when synchronization is lost.
 
 Relay migrations preserve invitations, members and Backstage notes. Beta changes remain separate from main. No production deployment is performed automatically.
+
+Marker editing: use the pencil in Show to set minutes:seconds.milliseconds. The marker time is saved in Bridge and shared with Copilot; QLab media keep their existing schedule.

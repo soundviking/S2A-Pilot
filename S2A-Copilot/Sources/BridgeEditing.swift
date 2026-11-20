@@ -11,6 +11,8 @@ struct BridgeEditRequest: Decodable {
     let description: String
     let expectedName: String
     let expectedDescription: String
+    var time: Double? = nil
+    var expectedTime: Double? = nil
 }
 
 struct BridgeEditReply {
@@ -21,7 +23,7 @@ struct BridgeEditReply {
 }
 
 enum BridgeEditing {
-    enum EditError: Error, Equatable { case missingCue, conflict, invalidText, workspaceChanged }
+    enum EditError: Error, Equatable { case missingCue, conflict, invalidText, invalidTime, workspaceChanged }
 
     // Keep line endings and quotes intact; editable notes are never interpolated as code.
     static func literal(_ value: String) -> String {
@@ -38,6 +40,10 @@ enum BridgeEditing {
         guard !edit.requestID.isEmpty, !edit.workspaceID.isEmpty, !edit.cueID.isEmpty,
               ![edit.name, edit.description, edit.expectedName, edit.expectedDescription].contains(where: { $0.contains("\0") }) else {
             throw EditError.invalidText
+        }
+        if let time = edit.time {
+            guard edit.kind == .pilot, time.isFinite, time >= 0, time <= 864000,
+                  let expected = edit.expectedTime, expected.isFinite, expected >= 0 else { throw EditError.invalidTime }
         }
         if edit.kind == .pilot {
             guard edit.groupID?.isEmpty == false, Int(edit.cueID) != nil else { throw EditError.missingCue }
@@ -88,9 +94,18 @@ enum BridgeEditing {
         guard cue.name == edit.expectedName, (cue.description ?? "") == edit.expectedDescription else {
             throw EditError.conflict
         }
+        if let time = edit.time {
+            guard let expected = edit.expectedTime, abs(cue.time-expected) < 0.0005 else { throw EditError.conflict }
+            if let duration = index.shows[showIndex].showDuration, duration > 0, time > duration { throw EditError.invalidTime }
+        }
         var updated = index
         updated.shows[showIndex].cues[cueIndex].name = edit.name
         updated.shows[showIndex].cues[cueIndex].description = edit.description
+        if let time = edit.time {
+            updated.shows[showIndex].cues[cueIndex].time = time
+            if cue.parentMusicId != nil { updated.shows[showIndex].cues[cueIndex].relativeTime = time }
+            updated.shows[showIndex].cues.sort { $0.time == $1.time ? $0.index < $1.index : $0.time < $1.time }
+        }
         return updated
     }
 

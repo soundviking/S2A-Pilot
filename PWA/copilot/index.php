@@ -4,7 +4,7 @@ header('Referrer-Policy: no-referrer');
 header('X-Content-Type-Options: nosniff');
 header("Content-Security-Policy: default-src 'self'; img-src 'self' data:; script-src 'self'; style-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'");
 ?><!doctype html>
-<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>S2A Copilot — bêta</title><link rel="icon" href="copilot-logo.png"><link rel="stylesheet" href="viewer.css?v=1.11.4-bridge-remote"><link rel="stylesheet" href="pilot-show-cards.css?v=1.6.19"></head>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>S2A Copilot — bêta</title><link rel="icon" href="copilot-logo.png"><link rel="stylesheet" href="viewer.css?v=1.11.5-bridge-remote"><link rel="stylesheet" href="pilot-show-cards.css?v=1.6.19"></head>
 <body><main>
 <header><img src="copilot-logo.png" alt="S2A Copilot"><div><strong>S2A Copilot · bêta</strong><p>Conduite en direct</p></div><time id="backstageCountdown" role="timer" aria-label="Temps avant le prochain Top" hidden></time><button type="button" title="Copier le diagnostic de connexion" id="connectionIndicator" class="connectionIndicator joining" role="status" aria-live="polite"><span id="connectionLabel">À rejoindre</span></button></header>
 <p id="status" role="status">Connexion au partage…</p>
@@ -50,7 +50,7 @@ header("Content-Security-Policy: default-src 'self'; img-src 'self' data:; scrip
 <p>Version, environnement, emplacements dans le code et dernières actions techniques.</p></details>
 </main>
 <dialog id="topDialog" aria-labelledby="topDialogTitle"><form id="topForm"><h2 id="topDialogTitle">Ajouter un Top</h2><label id="topCueField" hidden>Cue QLab<select id="topCue"></select></label><label for="topTime">Temps (minutes:secondes)</label><input id="topTime" inputmode="decimal" required placeholder="03:20"><label for="topText">Consigne Backstage</label><textarea id="topText" maxlength="500" rows="4" required placeholder="Rapporter la chaise de jardin"></textarea><p id="topError" role="status"></p><div class="topActions"><button id="saveTop" type="submit">Enregistrer</button><button id="deleteTop" type="button" hidden>Supprimer</button><button id="cancelTop" type="button">Annuler</button></div></form></dialog>
-<script src="../diagnostics/report.js?v=1.11.4" data-version="1.11.4" data-surface="Copilot"></script>
+<script src="../diagnostics/report.js?v=1.11.5" data-version="1.11.5" data-surface="Copilot"></script>
 <dialog id="remotePinDialog" aria-labelledby="remotePinTitle"><form id="remotePinForm"><h2 id="remotePinTitle" data-pin-i18n="Code télécommande">Code télécommande</h2><label for="switchRemotePin" data-pin-i18n="Saisissez exactement 4 chiffres.">Saisissez exactement 4 chiffres.</label><input id="switchRemotePin" type="password" inputmode="numeric" pattern="[0-9]{4}" maxlength="4" autocomplete="off" required><p id="remotePinError" role="status" aria-live="polite"></p><div class="topActions"><button type="submit" data-pin-i18n="Déverrouiller">Déverrouiller</button><button id="remotePinCancel" type="button" data-pin-i18n="Annuler">Annuler</button></div></form></dialog>
-<script src="../i18n-catalog.js?v=1.11.4"></script>
-<script src="viewer.js?v=1.11.4-bridge-remote"></script></body></html>
+<script src="../i18n-catalog.js?v=1.11.5"></script>
+<script src="viewer.js?v=1.11.5-bridge-remote"></script></body></html>

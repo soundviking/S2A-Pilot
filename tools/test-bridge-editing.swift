@@ -56,6 +56,28 @@ import Foundation
         let literalText = qlab.name + "\n" + qlab.description + " 音 %25 <>&"
         try ("return (" + BridgeEditing.literal(literalText) + ")").write(to:folder.appendingPathComponent("literal.applescript"),atomically:true,encoding:.utf8)
         try Data((literalText+"\n").utf8).write(to:folder.appendingPathComponent("literal.expected"))
+        var timed = edit("Cue identique","  Consigne originale\nligne 2  ")
+        timed.time = 25.125; timed.expectedTime = 12.5
+        let retimed = try BridgeEditing.applying(timed,to:baseline)
+        precondition(retimed.shows[0].cues.map(\.index) == [8,7])
+        precondition(retimed.shows[0].cues.first(where:{$0.index == 7})?.time == 25.125)
+        let timedURL = folder.appendingPathComponent("retimed.json")
+        _ = try BridgeEditing.savePilot(timed,currentURL:timedURL,legacyURL:legacy)
+        let persisted = try decoder.decode(SavedShowCueIndex.self,from:Data(contentsOf:timedURL))
+        precondition(persisted.shows[0].cues.last?.time == 25.125)
+        precondition(persisted.shows[0].clockID == baseline.shows[0].clockID)
+        precondition(persisted.shows[0].cues.last?.mediaActions?.first?.path == "audio/test.wav")
+        var staleTime = timed; staleTime.expectedTime = 12.6
+        do { _ = try BridgeEditing.applying(staleTime,to:baseline); fatalError("Stale time must conflict") }
+        catch BridgeEditing.EditError.conflict {}
+        for time in [-1.0,91.0,Double.infinity,Double.nan] {
+            var bad = timed; bad.time = time
+            do { _ = try BridgeEditing.applying(bad,to:baseline); fatalError("Invalid time accepted") }
+            catch BridgeEditing.EditError.invalidTime {}
+        }
+        var zero = timed; zero.time = 0
+        try check(BridgeEditing.applying(zero,to:baseline).shows[0].cues.first?.time == 0)
+        print("PASS cue time: millisecond precision, stable IDs, reorder, atomic save/reopen, stale-time rejection, bounds and media/clock preservation")
         print("PASS Bridge editing: ID identity, duplicate names, multiline/Unicode, atomic persistence, reopen, legacy index, missing/conflicting targets, empty text, write failure and unchanged timing/media/clock")
     }
 }

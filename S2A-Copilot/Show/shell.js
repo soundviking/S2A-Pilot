@@ -2,8 +2,18 @@
 'use strict';
 let latest=null,content=null,lastFlow='',previousFocus=null;
 let editing=null,editPending=null,editFocus=null;
+const editTime=document.getElementById('editTime');
 const editor=document.getElementById('editor'),editName=document.getElementById('editName'),editDescription=document.getElementById('editDescription');
 function notify(message){window.webkit?.messageHandlers.bridgeShow.postMessage(message);}
+function parseCueTime(value){
+ const text=value.trim().replace(',','.');
+ if(!/^(?:\d+:)?\d+(?:\.\d{1,3})?$/.test(text))return null;
+ const parts=text.split(':'),seconds=Number(parts.at(-1));
+ if(parts.length>1&&seconds>=60)return null;
+ const time=(parts.length>1?Number(parts[0])*60:0)+seconds;
+ return Number.isFinite(time)&&time>=0&&time<=864000?Math.round(time*1000)/1000:null;
+}
+function formatCueTime(time){const ms=Math.round(time*1000);return String(Math.floor(ms/60000)).padStart(2,'0')+':'+String(Math.floor(ms/1000)%60).padStart(2,'0')+'.'+String(ms%1000).padStart(3,'0');}
 function openEditor(target){
  if(!latest||editor.open||zoom&&!zoom.hidden)return;
  editFocus=document.activeElement;editing={...target,workspaceID:latest.workspaceID};editPending=null;
@@ -12,15 +22,19 @@ function openEditor(target){
  document.getElementById('editNameLabel').textContent=l.name||'Nom';document.getElementById('editDescriptionLabel').textContent=l.description||'Description';
  document.getElementById('editCancel').textContent=l.cancel||'Annuler';document.getElementById('editSave').textContent=l.save||'Enregistrer';
  document.getElementById('editError').textContent='';editName.value=target.name;editDescription.value=target.description;
+ document.getElementById('editTimeField').hidden=target.kind!=='pilot';
+ document.getElementById('editTimeLabel').textContent=l.cueTime||'Temps du repère';
+ document.getElementById('editTimeHelp').textContent=l.cueTimeHelp||'Recale le repère dans Bridge et Copilot. Les médias QLab conservent leur programmation.';
+ editTime.value=target.kind==='pilot'?formatCueTime(target.time):'';
  updateEditorControls(false);editor.showModal();editName.focus();
 }
 function closeEditor(){if(editPending)return;editor.close();editing=null;editFocus?.focus();}
-function updateEditorControls(disabled){for(const id of ['editName','editDescription','editSave','editCancel'])document.getElementById(id).disabled=disabled;}
+function updateEditorControls(disabled){for(const id of ['editName','editTime','editDescription','editSave','editCancel'])document.getElementById(id).disabled=disabled;}
 function openRootEditor(id){const cue=latest.roots.find(x=>x.id===id);if(cue&&!latest.lost)openEditor({kind:'qlab',cueID:id,name:cue.qName??cue.name,description:cue.notes??''});}
 function openShowEditor(id,contentID){
  if(!content||contentID!==content.id)return;const cue=content.cues.find(x=>x.id===id);if(!cue)return;
  if(content.generic){openRootEditor(id);return;}
- openEditor({kind:'pilot',groupID:content.id,cueID:id,name:cue.editName??cue.name,description:cue.editDescription??cue.description??''});
+ openEditor({kind:'pilot',groupID:content.id,cueID:id,name:cue.editName??cue.name,description:cue.editDescription??cue.description??'',time:cue.time});
 }
 function updateEditor(state){
  if(!editing)return;
@@ -35,7 +49,7 @@ function updateEditor(state){
   const current=editing.kind==='qlab'?state.roots.find(x=>x.id===editing.cueID):content?.id===editing.groupID?content.cues.find(x=>x.id===editing.cueID):null;
   const name=editing.kind==='qlab'?(current?.qName??current?.name):(current?.editName??current?.name);
   const description=editing.kind==='qlab'?(current?.notes??''):(current?.editDescription??current?.description??'');
-  const conflict=current&&(name!==editing.name||description!==editing.description);
+  const conflict=current&&(name!==editing.name||description!==editing.description||(editing.kind==='pilot'&&Math.abs(current.time-editing.time)>=.0005));
   const unavailable=editing.kind==='qlab'&&(!current||state.lost);
   document.getElementById('editSave').disabled=!!(conflict||unavailable||state.editBusy);
   if(conflict)document.getElementById('editError').textContent=state.labels.changed;
@@ -43,10 +57,12 @@ function updateEditor(state){
 }
 document.getElementById('editForm').addEventListener('submit',event=>{
  event.preventDefault();if(!editing||editPending||document.getElementById('editSave').disabled)return;
+ const time=editing.kind==='pilot'?parseCueTime(editTime.value):null;
+ if(editing.kind==='pilot'&&(time===null||Number(content?.duration)>0&&time>Number(content.duration))){document.getElementById('editError').textContent=latest.labels.invalidTime||'Temps invalide : utilisez un repère entre le début et la fin du numéro.';editTime.focus();return;}
  editPending=Date.now().toString(36)+'-'+Math.random().toString(36).slice(2);
  updateEditorControls(true);document.getElementById('editError').textContent=latest.labels.saving||'Enregistrement…';
  notify({type:'edit',requestID:editPending,workspaceID:editing.workspaceID,kind:editing.kind,cueID:editing.cueID,groupID:editing.groupID??null,
- name:editName.value,description:editDescription.value,expectedName:editing.name,expectedDescription:editing.description});
+ name:editName.value,description:editDescription.value,expectedName:editing.name,expectedDescription:editing.description,...(editing.kind==='pilot'?{time,expectedTime:editing.time}:{})});
 });
 document.getElementById('editCancel').onclick=closeEditor;
 editor.addEventListener('cancel',event=>{event.preventDefault();closeEditor();});

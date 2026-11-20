@@ -1,0 +1,17 @@
+const {JSDOM}=require('jsdom');
+const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
+const dom=new JSDOM(fs.readFileSync('S2A-Copilot/Show/index.html','utf8'),{url:'https://bridge.test/',runScripts:'outside-only',pretendToBeVisual:true});
+const w=dom.window,$=id=>w.document.getElementById(id),requests=[];
+w.HTMLElement.prototype.scrollIntoView=function(){};w.HTMLDialogElement.prototype.showModal=function(){this.open=true;};w.HTMLDialogElement.prototype.close=function(){this.open=false;};w.webkit={messageHandlers:{bridgeShow:{postMessage:msg=>requests.push(msg)}}};
+let source=fs.readFileSync('S2A-Copilot/Show/shell.js','utf8').replace(/\}\)\(\);\s*$/,'window.qa={openShowEditor,openRootEditor,parseCueTime};})();');vm.runInContext(source,dom.getInternalVMContext());
+const cue={id:'7',time:12.5,name:'Cue',description:'Description'},content={id:'group',duration:90,cues:[cue],generic:false},state={workspaceID:'workspace',language:'fr',roots:[{id:'group',name:'Show',qName:'Show',notes:'',category:'pilot'}],labels:{},lost:false,editBusy:false};
+w.S2ABridge.render(state,content);w.qa.openShowEditor('7','group');assert.equal($('editTime').value,'00:12.500');assert.equal($('editTimeField').hidden,false);
+$('editTime').value='00:25,125';w.S2ABridge.render(state,content);assert.equal($('editTime').value,'00:25,125','Polling preserves drafts');
+$('editForm').dispatchEvent(new w.Event('submit',{cancelable:true}));const request=requests.find(x=>x.type==='edit');assert.equal(request.time,25.125);assert.equal(request.expectedTime,12.5);assert.equal(request.cueID,'7');assert.equal(request.groupID,'group');
+w.S2ABridge.render({...state,editReply:{requestID:request.requestID,success:false,message:'Retry'}},content);assert.equal($('editTime').value,'00:25,125');assert.equal($('editSave').disabled,false);
+w.S2ABridge.render(state,{...content,cues:[{...cue,time:13}]});assert.equal($('editSave').disabled,true,'Concurrent timing changes cannot be overwritten');
+$('editCancel').click();w.S2ABridge.render(state,content);w.qa.openShowEditor('7','group');
+for(const value of ['-1','00:60','1:2:3','abc','00:91','1.1234']){$('editTime').value=value;const count=requests.length;$('editForm').dispatchEvent(new w.Event('submit',{cancelable:true}));assert.equal(requests.length,count,value);assert.ok($('editError').textContent);}
+assert.equal(w.qa.parseCueTime('01:02.345'),62.345);assert.equal(w.qa.parseCueTime('12,5'),12.5);assert.equal(w.qa.parseCueTime('00:00'),0);
+$('editCancel').click();w.qa.openRootEditor('group');assert.equal($('editTimeField').hidden,true,'A QLab GO cue has no absolute marker time');
+w.close();console.log('PASS time editor: precise input, polling preservation, validated payload, retry, conflicts, invalid/bounded times and QLab root distinction');

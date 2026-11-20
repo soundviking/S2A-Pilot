@@ -5263,9 +5263,24 @@
     "es": "Actualiza el relé Copilot para activar los mandos de Bridge.",
     "de": "Copilot-Relay aktualisieren, um Bridge-Fernbedienungen zu aktivieren."
   },
-  "Conduite Spectacle : utilisez Bridge 1.6.31 bêta inclus dans ce ZIP. Bridge 1.4.5 ne connaît pas le mode Spectacle.": {
-    "en": "Show rundown: use Bridge 1.6.31 beta included in this ZIP. Bridge 1.4.5 does not support Show mode.",
-    "es": "Guion de espectáculo: usa Bridge 1.6.31 beta incluido en este ZIP. Bridge 1.4.5 no admite el modo Espectáculo.",
-    "de": "Show-Ablauf: Verwende die in diesem ZIP enthaltene Bridge 1.6.31 Beta. Bridge 1.4.5 unterstützt den Show-Modus nicht."
+  "Conduite Spectacle : utilisez Bridge 1.6.32 bêta inclus dans ce ZIP. Bridge 1.4.5 ne connaît pas le mode Spectacle.": {
+    "en": "Show rundown: use Bridge 1.6.32 beta included in this ZIP. Bridge 1.4.5 does not support Show mode.",
+    "es": "Guion de espectáculo: usa Bridge 1.6.32 beta incluido en este ZIP. Bridge 1.4.5 no admite el modo Espectáculo.",
+    "de": "Show-Ablauf: Verwende die in diesem ZIP enthaltene Bridge 1.6.32 Beta. Bridge 1.4.5 unterstützt den Show-Modus nicht."
+  },
+  "Temps du repère": {
+    "en": "Marker time",
+    "es": "Tiempo del marcador",
+    "de": "Markierungszeit"
+  },
+  "Recale le repère dans Bridge et Copilot. Les médias QLab conservent leur programmation.": {
+    "en": "Retimes the marker in Bridge and Copilot. QLab media keep their existing schedule.",
+    "es": "Reajusta el marcador en Bridge y Copilot. Los medios QLab conservan su programación.",
+    "de": "Verschiebt die Markierung in Bridge und Copilot. QLab-Medien behalten ihre Zeitplanung."
+  },
+  "Temps invalide : utilisez un repère entre le début et la fin du numéro.": {
+    "en": "Invalid time: place the marker between the start and end of the number.",
+    "es": "Tiempo inválido: sitúa el marcador entre el inicio y el final del número.",
+    "de": "Ungültige Zeit: Die Markierung muss zwischen Anfang und Ende der Nummer liegen."
   }
 }

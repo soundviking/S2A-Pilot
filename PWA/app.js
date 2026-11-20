@@ -2220,7 +2220,7 @@ async function buildProjectPackage(librarySnapshot=false){if(!librarySnapshot&&w
  }
  if(hasVisualNumbers)await addBridgeActPackages(entries,project,enc);
  Object.assign(project,storedManualCueListView());
- await addCompiledCompanion(entries);entries.push({name:'conduite.json',data:enc.encode(JSON.stringify(project,null,2))});const pdf=await buildTechnicalPdfBytes();entries.push({name:`documents/${safeFileName(title)}-conduite-technique.pdf`,data:pdf.bytes});entries.push({name:'LISEZ-MOI-Technicien.txt',data:enc.encode((conductType==='manual'?tr(hasVisualNumbers?'Pour Bridge, décompressez ce ZIP et importez ensemble les fichiers numérotés du dossier Bridge/Numeros. Dans QLab, placez le départ sur le premier groupe. Un GO lance chaque numéro.':'Conduite Spectacle : utilisez Bridge 1.6.31 bêta inclus dans ce ZIP. Bridge 1.4.5 ne connaît pas le mode Spectacle.')+'\n\n':'')+tr('export.readme',{title,count:project.cues.length}))});return{blob:await makeZip(entries),suggestedName:`${safeFileName(title)}.s2apilot.zip`};}
+ await addCompiledCompanion(entries);entries.push({name:'conduite.json',data:enc.encode(JSON.stringify(project,null,2))});const pdf=await buildTechnicalPdfBytes();entries.push({name:`documents/${safeFileName(title)}-conduite-technique.pdf`,data:pdf.bytes});entries.push({name:'LISEZ-MOI-Technicien.txt',data:enc.encode((conductType==='manual'?tr(hasVisualNumbers?'Pour Bridge, décompressez ce ZIP et importez ensemble les fichiers numérotés du dossier Bridge/Numeros. Dans QLab, placez le départ sur le premier groupe. Un GO lance chaque numéro.':'Conduite Spectacle : utilisez Bridge 1.6.32 bêta inclus dans ce ZIP. Bridge 1.4.5 ne connaît pas le mode Spectacle.')+'\n\n':'')+tr('export.readme',{title,count:project.cues.length}))});return{blob:await makeZip(entries),suggestedName:`${safeFileName(title)}.s2apilot.zip`};}
 async function decodeVisualNumber(m,entries,fileName,assets){
   if(m.conductType==='manual'||!Array.isArray(m.cues)||!m.cues.length)throw new Error(tr('Choisissez un fichier exporté depuis le mode Numéro visuel.'));
   const children=await decodeProjectCues(m,entries,assets);
@@ -2861,7 +2861,7 @@ const shortcutSpecs=[
  ['next','Cue suivante / avance rapide',[['next','ArrowRight'],['forward','F9']]],
  ['previous','Cue précédente / recul rapide',[['previous','ArrowLeft'],['rewind','F7']]]
 ];
-// Keep the existing storage slots so custom keys from 1.6.31 are preserved.
+// Keep the existing storage slots so custom keys from 1.6.32 are preserved.
 const shortcutSlots=shortcutSpecs.reduce(function(slots,spec){return slots.concat(spec[2]);},[]);
 const shortcutAliases={
  ' ':'Space',Spacebar:'Space',Esc:'Escape',NumpadEnter:'Enter',Left:'ArrowLeft',Right:'ArrowRight',
@@ -5900,7 +5900,7 @@ if(typeof ResizeObserver==='function'){
 }
 
 // This manifest is requested from the network, outside the service-worker cache.
-const APP_VERSION='1.11.4',BRIDGE_VERSION='1.6.31';document.querySelector('.appVersion').textContent='Version '+APP_VERSION+' bêta';let lastVersionCheck=0,versionCheckRunning=false;
+const APP_VERSION='1.11.5',BRIDGE_VERSION='1.6.32';document.querySelector('.appVersion').textContent='Version '+APP_VERSION+' bêta';let lastVersionCheck=0,versionCheckRunning=false;
 const updateNotice=document.createElement('div');updateNotice.id='updateNotice';updateNotice.hidden=true;updateNotice.setAttribute('role','status');const updateText=document.createElement('span'),updateButton=document.createElement('button'),updateSummary=document.createElement('p');updateSummary.className='updateSummary';updateSummary.hidden=true;updateButton.type='button';updateButton.textContent=tr('Ouvrir la nouvelle version');updateText.className='updateVersionText';const updateContent=document.createElement('div');updateContent.className='updateContent';updateContent.append(updateText,updateSummary);updateNotice.append(updateContent,updateButton);const updateMain=document.querySelector('main');updateMain.insertBefore(updateNotice,updateMain.firstChild);
 function updateVersionButton(){const b=document.getElementById('updateNotice')?.querySelector('button');if(!b)return;b.disabled=locked||transportPlaying;b.title=b.disabled?tr('Quitter le mode Show et mettre la lecture en pause pour actualiser.'):'';}
 function versionIsNewer(a,b){const x=a.split('.').map(Number),y=b.split('.').map(Number);for(let i=0;i<3;i++){if(x[i]!==y[i])return x[i]>y[i];}return false;}
