@@ -1,0 +1,17 @@
+const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
+const elements={liveFinishEstimate:{hidden:true,textContent:''}};
+const context={document:{getElementById:id=>elements[id]},window:{addEventListener(){}},parent:{postMessage(){}},setInterval(){},Intl,Date};
+vm.createContext(context);
+const source=fs.readFileSync('S2A-Copilot/Show/show.js','utf8').replace(/\}\)\(\);\s*$/, 'globalThis.qa={finishProjection,renderFinish};})();');
+vm.runInContext(source,context);
+const state={language:'en',currentID:'a',standbyID:'b',elapsed:30,running:true,lost:false,labels:{finishEstimate:'Estimated finish: {time}',excludingGO:'excluding GO waits',ifResume:'if resumed now',finishUnknown:'Unknown'},roots:[{id:'a',kind:'Audio',duration:120},{id:'b',kind:'Video',duration:60}]};
+assert.equal(context.qa.finishProjection(state).remaining,150);
+assert.equal(context.qa.finishProjection({...state,currentID:'b',elapsed:10}).remaining,50);
+assert.equal(context.qa.finishProjection({...state,currentID:'',elapsed:30}).remaining,60,'Standby clock must not subtract elapsed time from the next cue');
+assert.equal(context.qa.finishProjection({...state,lost:true}),null);
+assert.equal(context.qa.finishProjection({...state,currentID:'',standbyID:''}),null);
+assert.equal(context.qa.finishProjection({...state,roots:[{id:'a',kind:'Group',duration:0}]}).remaining,null,'Unknown durations must not invent an end time');
+context.qa.renderFinish(state);assert.match(elements.liveFinishEstimate.textContent,/Estimated finish: .*excluding GO waits/);assert.equal(elements.liveFinishEstimate.hidden,false);
+context.qa.renderFinish({...state,running:false});assert.match(elements.liveFinishEstimate.textContent,/if resumed now/);
+context.qa.renderFinish({...state,lost:true});assert.equal(elements.liveFinishEstimate.hidden,true);
+console.log('PASS Bridge finish estimate: current elapsed time, standby, pause, unknown duration and synchronization loss');

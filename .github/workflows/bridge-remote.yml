@@ -1,0 +1,43 @@
+name: Bridge remote control
+on:
+  pull_request:
+    branches: [beta/copilot-qr]
+    types: [opened, synchronize, reopened]
+permissions:
+  contents: read
+jobs:
+  macos:
+    runs-on: macos-14
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - name: Compile universal Bridge and verify signature
+        run: zsh S2A-Copilot/build.sh
+      - name: Native command and regression tests
+        run: |
+          mkdir -p "$RUNNER_TEMP/remote-tests"
+          xcrun swiftc -swift-version 5 S2A-Copilot/Sources/BridgeRemoteControl.swift tools/test-bridge-remote.swift -o "$RUNNER_TEMP/remote-tests/test-remote"
+          "$RUNNER_TEMP/remote-tests/test-remote" "$RUNNER_TEMP/remote-tests"
+          python3 tools/test-bridge-native-ci.py
+          node tools/test-bridge-finish.cjs
+      - name: Validate AppleScript with the official QLab dictionary
+        run: |
+          curl --fail --location --retry 2 https://qlab.app/downloads/QLab.dmg -o "$RUNNER_TEMP/QLab.dmg"
+          mkdir -p "$RUNNER_TEMP/QLabVolume"
+          hdiutil attach "$RUNNER_TEMP/QLab.dmg" -nobrowse -mountpoint "$RUNNER_TEMP/QLabVolume"
+          sudo ditto "$RUNNER_TEMP/QLabVolume/QLab.app" /Applications/QLab.app
+          hdiutil detach "$RUNNER_TEMP/QLabVolume"
+          /System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -f /Applications/QLab.app
+          for script in "$RUNNER_TEMP"/remote-tests/remote-*.applescript; do
+            osacompile -o "${script%.applescript}.scpt" "$script"
+          done
+      - name: Package Bridge
+        run: python3 tools/package-bridge-remote.py
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: Bridge-1.6.30
+          path: dist/bridge-remote/
+          retention-days: 14

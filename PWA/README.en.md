@@ -51,15 +51,17 @@ New audio on the first Cue at zero uses Cut by default. Other newly added audio 
 
 The selector beside the language offers **Maverick** (default) and **Iceman**. Maverick keeps the current layout and hides past Cues. The layout selector appears only in Show. Layout, video output and Edit/Show controls have matching heights. Iceman visuals measure 22.5% of the screen width (75% of their previous size), retaining 16:9. Iceman uses full-width rows, keeps past Cues compact and places the countdown inside the next Cue. The choice is saved locally and in the project ZIP; older projects default to Maverick.
 
-Media bands appear on the timeline: green for audio, pink for video. The combined waveform reflects audible media. The timeline height adapts to its media bands. Main timeline zoom is available only in Edit, up to ×32; Show uses a single compact row: Play/Pause icon, Back to start icon, thin progress bar, elapsed time. Only future Cues appear as small dots; waveform, media bands and labels remain available in Edit.
+Media bands appear on the timeline: green for audio, pink for video. The combined waveform reflects audible media. The timeline height adapts to its media bands. Main timeline zoom is available only in Edit, up to ×32; Show has a centered transport with the full-width timeline directly below. Only future Cues appear as small dots; waveform, media bands and labels remain available in Edit.
 
-Use Play / Pause, or press Space. The keyboard shortcut is ignored while typing, inside dialogs or when another control owns Space. Holding it does not repeatedly toggle playback. Back to start pauses playback, stops running media and returns to zero.
+The transport has separate Play or GO and Pause buttons. Space pauses or resumes playback. The keyboard shortcut is ignored while typing, inside dialogs or when another control owns Space. Holding it does not repeatedly toggle playback. Back to start pauses playback, stops running media and returns to zero.
 
 On a computer or an iPad in landscape, the active Cue occupies the left half of the list and the next Cue the right half; the remaining Cues appear below. iPad portrait and both iPhone orientations retain the vertical layout.
 
 The compact transport stays pinned while you scroll. Maverick keeps the countdown centered above this row; Iceman keeps it inside the next Cue. Without a next Cue, it displays --:--. At ten seconds, the clock turns red and its panel pulses together with the next Cue halo, in time with the remaining seconds; the active Cue’s blue halo fades out.
 
 In Maverick, Show displays up to five Cues and automatically follows playback without an inner touch scroll. The active Cue is always the first visible row. Cue changes are immediate, without movement or resizing animations. The order is number, visual, Cue time, title and description. Active and next Cues have equally sized 16:9 visuals, titles and descriptions. The visuals measure 30% of the screen width in the vertical layout and 15% in the two-column layout. Descriptions appear only on these two Cues, with “No description” when empty. Audio/Video badges appear only in Edit. The active visual fades to black during the last ten seconds before the next Cue; it follows the show time, including pause and seeking, and stays fully visible when there is no next Cue. Past Cues remain in the project and reappear when seeking backward. A bottom fade hides the continuation beyond the five-Cue window. The timeline can seek in Show; Cue markers remain non-editable. The video monitor appears only if the show contains video.
+
+In Edit and Show, tap ←/→ or F7/F9 to select the adjacent Cue. Hold the key to seek backward or forward. The on-screen arrows support the same short and sustained presses with touch or a mouse. F8 and the media playback controls control playback. In GO mode, Space pauses or resumes the current sequence, and Enter sends GO. Keyboard shortcuts depend on which commands the keyboard and operating system deliver to the browser.
 
 ## External video output
 
@@ -125,3 +127,9 @@ S2A Pilot uses cyan wings; S2A Pilot Bridge uses orange wings. The companion is 
 
 
 Copilot sharing is suspended in this version. Pilot has no sharing button or PHP/Node relay; Bridge has no QR feature or bundled server. The multimedia export format is preserved for QLab import. When replacing an older deployment, remove its copilot-api.php, copilot-service/, copilot.html and Bridge sharing pages.
+
+## Local integrations in 1.10.29
+
+- **Offline Copilot:** Start Pilot with the macOS launcher and enter the host's private IPv4 address. Install Python 3 and PHP 8.1+ with PDO SQLite beforehand. Scan the Copilot QR code from the same private Wi-Fi. The local HTTP share ends when the launcher stops.
+- **Flic 2:** Configure the button as an HID keyboard in the Flic app. The keyboard settings display Pilot's current shortcuts. Keep Pilot in the foreground.
+- **OSC output:** In Toolbox > OSC, enter a private IPv4 address and UDP port, test a message and enable automatic Live output. Edit OSC messages in each Cue, one line per message, with an optional JSON array of arguments. Example: `/cue/12/level [1, 0.5, "red"]`. The log tracks UDP sends and local errors. UDP sends provide no equipment acknowledgement. Enable automatic output again after each reload.

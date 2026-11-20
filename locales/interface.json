@@ -1,4 +1,1985 @@
 {
+  "À faire…": {
+    "en": "To do…",
+    "es": "Por hacer…",
+    "de": "Zu erledigen…"
+  },
+  "Renommer": {
+    "en": "Rename",
+    "es": "Cambiar nombre",
+    "de": "Umbenennen"
+  },
+  "Viser un point": {
+    "en": "Aim at a point",
+    "es": "Apuntar a un punto",
+    "de": "Punkt anvisieren"
+  },
+  "Cliquez sur le sol ou un décor pour viser ce point. Échap pour annuler.": {
+    "en": "Click the floor or scenery to aim. Escape cancels.",
+    "es": "Haz clic en el suelo o decorado para apuntar. Escape para cancelar.",
+    "de": "Boden oder Kulisse anklicken. Escape zum Abbrechen."
+  },
+  "Cliquez sur une surface du sol ou d’un décor.": {
+    "en": "Click a floor or scenery surface.",
+    "es": "Haz clic en una superficie del suelo o decorado.",
+    "de": "Eine Boden- oder Kulissenfläche anklicken."
+  },
+  "Commander Pilot depuis un téléphone": {
+    "en": "Control Pilot from a phone",
+    "es": "Controlar Pilot desde un teléfono",
+    "de": "Pilot vom Handy steuern"
+  },
+  "Autoriser les télécommandes": {
+    "en": "Allow remote controls",
+    "es": "Permitir mandos a distancia",
+    "de": "Fernbedienungen zulassen"
+  },
+  "Sur le téléphone, ouvrez le lien ou scannez le QR code, puis choisissez Télécommande.": {
+    "en": "On your phone, open the link or scan the QR code, then choose Remote control.",
+    "es": "Abre el enlace o escanea el QR en el teléfono y elige Mando a distancia.",
+    "de": "Link öffnen oder QR-Code am Handy scannen und Fernbedienung wählen."
+  },
+  "Inclinaison": {
+    "en": "Tilt",
+    "es": "Inclinación",
+    "de": "Neigung"
+  },
+  "Inclinaison (°)": {
+    "en": "Tilt (°)",
+    "es": "Inclinación (°)",
+    "de": "Neigung (°)"
+  },
+  "Inclinaison du projecteur": {
+    "en": "Fixture tilt",
+    "es": "Inclinación del proyector",
+    "de": "Scheinwerferneigung"
+  },
+  "-90° vers le sol · 0° horizontal · +90° vers le haut": {
+    "en": "-90° down · 0° horizontal · +90° up",
+    "es": "-90° al suelo · 0° horizontal · +90° hacia arriba",
+    "de": "-90° abwärts · 0° waagerecht · +90° aufwärts"
+  },
+  "Sol": {
+    "en": "Floor",
+    "es": "Suelo",
+    "de": "Boden"
+  },
+  "Horizontal": {
+    "en": "Horizontal",
+    "es": "Horizontal",
+    "de": "Waagerecht"
+  },
+  "Haut": {
+    "en": "Up",
+    "es": "Arriba",
+    "de": "Aufwärts"
+  },
+  "Visée automatique": {
+    "en": "Automatic aiming",
+    "es": "Apuntado automático",
+    "de": "Automatische Ausrichtung"
+  },
+  "Visée manuelle": {
+    "en": "Manual aiming",
+    "es": "Apuntado manual",
+    "de": "Manuelle Ausrichtung"
+  },
+  "Point éclairé - X {x} m · Y {y} m · H {z} m": {
+    "en": "Lit point - X {x} m · Y {y} m · H {z} m",
+    "es": "Punto iluminado - X {x} m · Y {y} m · H {z} m",
+    "de": "Lichtpunkt - X {x} m · Y {y} m · H {z} m"
+  },
+  "Orientation - 0° vers le public · 90° à gauche · 180° vers le fond · 270° à droite": {
+    "en": "Orientation - 0° towards audience · 90° left · 180° upstage · 270° right",
+    "es": "Orientación - 0° al público · 90° izquierda · 180° al fondo · 270° derecha",
+    "de": "Ausrichtung - 0° zum Publikum · 90° links · 180° nach hinten · 270° rechts"
+  },
+  "Lyre beam": {
+    "en": "Beam moving head",
+    "es": "Cabeza móvil beam",
+    "de": "Beam-Moving-Head"
+  },
+  "Scénographie": {
+    "en": "Scenery",
+    "es": "Escenografía",
+    "de": "Bühnenbild"
+  },
+  "Pendrillon": {
+    "en": "Stage leg",
+    "es": "Pata de escenario",
+    "de": "Seitenschal"
+  },
+  "Rideau de fond": {
+    "en": "Backdrop curtain",
+    "es": "Telón de fondo",
+    "de": "Hintergrundvorhang"
+  },
+  "Spider": {
+    "en": "Pop-up display frame",
+    "es": "Estructura pop-up",
+    "de": "Pop-up-Rahmen"
+  },
+  "Largeur (m)": {
+    "en": "Width (m)",
+    "es": "Anchura (m)",
+    "de": "Breite (m)"
+  },
+  "Hauteur du rideau (m)": {
+    "en": "Cloth height (m)",
+    "es": "Altura de la tela (m)",
+    "de": "Vorhanghöhe (m)"
+  },
+  "Habillage": {
+    "en": "Covering",
+    "es": "Revestimiento",
+    "de": "Bespannung"
+  },
+  "Rideau noir": {
+    "en": "Black cloth",
+    "es": "Tela negra",
+    "de": "Schwarzer Stoff"
+  },
+  "Bâche personnalisée": {
+    "en": "Custom banner",
+    "es": "Lona personalizada",
+    "de": "Eigenes Banner"
+  },
+  "Visuel de la bâche": {
+    "en": "Banner artwork",
+    "es": "Diseño de la lona",
+    "de": "Bannermotiv"
+  },
+  "Retirer le visuel": {
+    "en": "Remove artwork",
+    "es": "Quitar imagen",
+    "de": "Motiv entfernen"
+  },
+  "Chargement du visuel…": {
+    "en": "Loading artwork…",
+    "es": "Cargando imagen…",
+    "de": "Motiv wird geladen…"
+  },
+  "Choisissez une image JPG, PNG ou WebP de moins de 20 Mo.": {
+    "en": "Choose a JPG, PNG or WebP image under 20 MB.",
+    "es": "Elige una imagen JPG, PNG o WebP de menos de 20 MB.",
+    "de": "JPG-, PNG- oder WebP-Bild unter 20 MB auswählen."
+  },
+  "Impossible de lire cette image.": {
+    "en": "Unable to read this image.",
+    "es": "No se puede leer esta imagen.",
+    "de": "Dieses Bild kann nicht gelesen werden."
+  },
+  "Le visuel est trop volumineux.": {
+    "en": "The artwork is too large.",
+    "es": "La imagen es demasiado grande.",
+    "de": "Das Motiv ist zu groß."
+  },
+  "Visuel enregistré avec le spectacle.": {
+    "en": "Artwork saved with the show.",
+    "es": "Imagen guardada con el espectáculo.",
+    "de": "Motiv mit der Show gespeichert."
+  },
+  "Dimensions": {
+    "en": "Dimensions",
+    "es": "Dimensiones",
+    "de": "Maße"
+  },
+  "Couleurs du rendu": {
+    "en": "Render colours",
+    "es": "Colores de la vista",
+    "de": "Darstellungsfarben"
+  },
+  "Couleurs des projecteurs": {
+    "en": "Fixture colours",
+    "es": "Colores de los proyectores",
+    "de": "Scheinwerferfarben"
+  },
+  "Bleu et ambre": {
+    "en": "Blue and amber",
+    "es": "Azul y ámbar",
+    "de": "Blau und Amber"
+  },
+  "Bleu": {
+    "en": "Blue",
+    "es": "Azul",
+    "de": "Blau"
+  },
+  "Ambre": {
+    "en": "Amber",
+    "es": "Ámbar",
+    "de": "Amber"
+  },
+  "Machine à brouillard": {
+    "en": "Haze machine",
+    "es": "Máquina de bruma",
+    "de": "Dunstmaschine"
+  },
+  "Rendu scénique": {
+    "en": "Stage render",
+    "es": "Vista escénica",
+    "de": "Bühnenansicht"
+  },
+  "Couleur du faisceau": {
+    "en": "Beam colour",
+    "es": "Color del haz",
+    "de": "Lichtfarbe"
+  },
+  "Rendu illustratif des faisceaux et effets. Tournez la vue pour explorer la scène.": {
+    "en": "Illustrative beams and effects. Rotate the view to explore the stage.",
+    "es": "Vista ilustrativa de haces y efectos. Gira la vista para explorar la escena.",
+    "de": "Illustrative Strahlen und Effekte. Ansicht drehen, um die Bühne zu erkunden."
+  },
+  "Visualisation illustrative des faisceaux et effets.": {
+    "en": "Illustrative view of beams and effects.",
+    "es": "Vista ilustrativa de haces y efectos.",
+    "de": "Illustrative Darstellung von Lichtstrahlen und Effekten."
+  },
+  "Par LED": {
+    "en": "LED Par",
+    "es": "Par LED",
+    "de": "LED-Par"
+  },
+  "PC": {
+    "en": "PC",
+    "es": "PC",
+    "de": "PC"
+  },
+  "Machine à neige": {
+    "en": "Snow machine",
+    "es": "Máquina de nieve",
+    "de": "Schneemaschine"
+  },
+  "Nombre de canaux": {
+    "en": "Number of channels",
+    "es": "Número de canales",
+    "de": "Anzahl der Kanäle"
+  },
+  "Canaux utilisés : {start} à {end}": {
+    "en": "Channels used: {start} to {end}",
+    "es": "Canales utilizados: {start} a {end}",
+    "de": "Verwendete Kanäle: {start} bis {end}"
+  },
+  "Vérifier le patch DMX": {
+    "en": "Check DMX patch",
+    "es": "Verificar el patch DMX",
+    "de": "DMX-Patch prüfen"
+  },
+  "Univers {universe} - {device} dépasse le canal 512 ({start} à {end}).": {
+    "en": "Universe {universe} - {device} exceeds channel 512 ({start} to {end}).",
+    "es": "Universo {universe} - {device} supera el canal 512 ({start} a {end}).",
+    "de": "Universum {universe} - {device} überschreitet Kanal 512 ({start} bis {end})."
+  },
+  "Univers {universe} - chevauchement des canaux {start} à {end}.": {
+    "en": "Universe {universe} - channels {start} to {end} overlap.",
+    "es": "Universo {universe} - solapamiento de canales {start} a {end}.",
+    "de": "Universum {universe} - Überschneidung der Kanäle {start} bis {end}."
+  },
+  "Univers DMX": {
+    "en": "DMX universe",
+    "es": "Universo DMX",
+    "de": "DMX-Universum"
+  },
+  "Adresse DMX": {
+    "en": "DMX address",
+    "es": "Dirección DMX",
+    "de": "DMX-Adresse"
+  },
+  "Circuit": {
+    "en": "Circuit",
+    "es": "Circuito",
+    "de": "Stromkreis"
+  },
+  "Plan de feu": {
+    "en": "Lighting plot",
+    "es": "Plano de iluminación",
+    "de": "Lichtplan"
+  },
+  "Projecteurs, effets et supports en 2D et 3D": {
+    "en": "Fixtures, effects and stands in 2D and 3D",
+    "es": "Proyectores, efectos y soportes en 2D y 3D",
+    "de": "Scheinwerfer, Effekte und Stative in 2D und 3D"
+  },
+  "Largeur de scène (m)": {
+    "en": "Stage width (m)",
+    "es": "Anchura del escenario (m)",
+    "de": "Bühnenbreite (m)"
+  },
+  "Profondeur (m)": {
+    "en": "Depth (m)",
+    "es": "Profundidad (m)",
+    "de": "Tiefe (m)"
+  },
+  "Grille de 1 m": {
+    "en": "1 m grid",
+    "es": "Cuadrícula de 1 m",
+    "de": "1-m-Raster"
+  },
+  "Vue 2D": {
+    "en": "2D view",
+    "es": "Vista 2D",
+    "de": "2D-Ansicht"
+  },
+  "Vue 3D": {
+    "en": "3D view",
+    "es": "Vista 3D",
+    "de": "3D-Ansicht"
+  },
+  "Tourner la vue": {
+    "en": "Rotate view",
+    "es": "Girar la vista",
+    "de": "Ansicht drehen"
+  },
+  "Glissez un appareil sur le plan ou saisissez sa position en mètres.": {
+    "en": "Drag a fixture on the plot or enter its position in metres.",
+    "es": "Arrastra un equipo en el plano o introduce su posición en metros.",
+    "de": "Gerät im Plan verschieben oder Position in Metern eingeben."
+  },
+  "Tournez la vue pour vérifier les hauteurs et l’implantation.": {
+    "en": "Rotate the view to check heights and placement.",
+    "es": "Gira la vista para comprobar las alturas y la colocación.",
+    "de": "Ansicht drehen, um Höhen und Positionen zu prüfen."
+  },
+  "Dimensions de la scène": {
+    "en": "Stage dimensions",
+    "es": "Dimensiones del escenario",
+    "de": "Bühnenmaße"
+  },
+  "Hauteur disponible (m)": {
+    "en": "Available height (m)",
+    "es": "Altura disponible (m)",
+    "de": "Verfügbare Höhe (m)"
+  },
+  "Ajouter un appareil": {
+    "en": "Add equipment",
+    "es": "Añadir equipo",
+    "de": "Gerät hinzufügen"
+  },
+  "Type d’appareil": {
+    "en": "Equipment type",
+    "es": "Tipo de equipo",
+    "de": "Gerätetyp"
+  },
+  "Appareil sélectionné": {
+    "en": "Selected equipment",
+    "es": "Equipo seleccionado",
+    "de": "Ausgewähltes Gerät"
+  },
+  "Réglages de l’appareil": {
+    "en": "Equipment settings",
+    "es": "Ajustes del equipo",
+    "de": "Geräteeinstellungen"
+  },
+  "X depuis la gauche (m)": {
+    "en": "X from left (m)",
+    "es": "X desde la izquierda (m)",
+    "de": "X von links (m)"
+  },
+  "Y depuis le fond (m)": {
+    "en": "Y from upstage (m)",
+    "es": "Y desde el fondo (m)",
+    "de": "Y von hinten (m)"
+  },
+  "Hauteur de pose (m)": {
+    "en": "Mounting height (m)",
+    "es": "Altura de montaje (m)",
+    "de": "Montagehöhe (m)"
+  },
+  "Hauteur du support (m)": {
+    "en": "Stand height (m)",
+    "es": "Altura del soporte (m)",
+    "de": "Stativhöhe (m)"
+  },
+  "Orientation (°)": {
+    "en": "Orientation (°)",
+    "es": "Orientación (°)",
+    "de": "Ausrichtung (°)"
+  },
+  "Support": {
+    "en": "Stand",
+    "es": "Soporte",
+    "de": "Stativ"
+  },
+  "Sans support": {
+    "en": "No stand",
+    "es": "Sin soporte",
+    "de": "Ohne Stativ"
+  },
+  "Supprimer l’appareil": {
+    "en": "Remove equipment",
+    "es": "Eliminar equipo",
+    "de": "Gerät entfernen"
+  },
+  "Projecteurs": {
+    "en": "Fixtures",
+    "es": "Proyectores",
+    "de": "Scheinwerfer"
+  },
+  "Effets": {
+    "en": "Effects",
+    "es": "Efectos",
+    "de": "Effekte"
+  },
+  "Supports": {
+    "en": "Stands",
+    "es": "Soportes",
+    "de": "Stative"
+  },
+  "Lyre wash": {
+    "en": "Wash moving head",
+    "es": "Cabeza móvil wash",
+    "de": "Wash-Moving-Head"
+  },
+  "Lyre spot": {
+    "en": "Spot moving head",
+    "es": "Cabeza móvil spot",
+    "de": "Spot-Moving-Head"
+  },
+  "PAR LED": {
+    "en": "LED PAR",
+    "es": "PAR LED",
+    "de": "LED-PAR"
+  },
+  "Découpe": {
+    "en": "Profile spotlight",
+    "es": "Proyector de recorte",
+    "de": "Profilscheinwerfer"
+  },
+  "PC de face": {
+    "en": "PC front light",
+    "es": "PC frontal",
+    "de": "PC-Frontscheinwerfer"
+  },
+  "Barre LED": {
+    "en": "LED bar",
+    "es": "Barra LED",
+    "de": "LED-Leiste"
+  },
+  "Sunstrip": {
+    "en": "Sunstrip",
+    "es": "Sunstrip",
+    "de": "Sunstrip"
+  },
+  "Machine à fumée": {
+    "en": "Fog machine",
+    "es": "Máquina de humo",
+    "de": "Nebelmaschine"
+  },
+  "Machine à étincelles": {
+    "en": "Spark machine",
+    "es": "Máquina de chispas",
+    "de": "Funkenmaschine"
+  },
+  "Geyser de fumée": {
+    "en": "Fog geyser",
+    "es": "Géiser de humo",
+    "de": "Nebelgeyser"
+  },
+  "Pied Gravity": {
+    "en": "Gravity stand",
+    "es": "Soporte Gravity",
+    "de": "Gravity-Stativ"
+  },
+  "Totem": {
+    "en": "Truss tower",
+    "es": "Tótem de truss",
+    "de": "Traversenturm"
+  },
+  "Enceinte": {
+    "en": "Speaker",
+    "es": "Altavoz",
+    "de": "Lautsprecher"
+  },
+  "Liste des appareils": {
+    "en": "Equipment list",
+    "es": "Lista de equipos",
+    "de": "Geräteliste"
+  },
+  "X depuis la gauche vue du public, Y depuis le fond, H depuis le plateau.": {
+    "en": "X from audience left, Y from upstage, H from stage floor.",
+    "es": "X desde la izquierda del público, Y desde el fondo, H desde el suelo del escenario.",
+    "de": "X von links aus Publikumssicht, Y von hinten, H ab Bühnenboden."
+  },
+  "Croix": {
+    "en": "Cross",
+    "es": "Cruz",
+    "de": "Kreuz"
+  },
+  "Personnage": {
+    "en": "Person",
+    "es": "Persona",
+    "de": "Person"
+  },
+  "Modèles enregistrés": {
+    "en": "Saved templates",
+    "es": "Plantillas guardadas",
+    "de": "Gespeicherte Vorlagen"
+  },
+  "Aucun modèle enregistré.": {
+    "en": "No templates saved.",
+    "es": "No hay plantillas guardadas.",
+    "de": "Keine Vorlagen gespeichert."
+  },
+  "1 rubrique": {
+    "en": "1 section",
+    "es": "1 sección",
+    "de": "1 Abschnitt"
+  },
+  "{count} rubriques": {
+    "en": "{count} sections",
+    "es": "{count} secciones",
+    "de": "{count} Abschnitte"
+  },
+  "1 élément": {
+    "en": "1 item",
+    "es": "1 elemento",
+    "de": "1 Punkt"
+  },
+  "{count} éléments": {
+    "en": "{count} items",
+    "es": "{count} elementos",
+    "de": "{count} Punkte"
+  },
+  "Tout décocher": {
+    "en": "Uncheck all",
+    "es": "Desmarcar todo",
+    "de": "Alles abwählen"
+  },
+  "Modèles de checklist": {
+    "en": "Checklist templates",
+    "es": "Plantillas de listas",
+    "de": "Checklisten-Vorlagen"
+  },
+  "Modèle enregistré": {
+    "en": "Saved template",
+    "es": "Plantilla guardada",
+    "de": "Gespeicherte Vorlage"
+  },
+  "Ajouter le modèle": {
+    "en": "Add template",
+    "es": "Añadir plantilla",
+    "de": "Vorlage hinzufügen"
+  },
+  "Supprimer le modèle": {
+    "en": "Delete template",
+    "es": "Eliminar plantilla",
+    "de": "Vorlage löschen"
+  },
+  "Nom du modèle": {
+    "en": "Template name",
+    "es": "Nombre de la plantilla",
+    "de": "Vorlagenname"
+  },
+  "Enregistrer comme modèle": {
+    "en": "Save as template",
+    "es": "Guardar como plantilla",
+    "de": "Als Vorlage speichern"
+  },
+  "Les modèles sont disponibles dans les autres spectacles de ce navigateur.": {
+    "en": "Templates are available to other shows in this browser.",
+    "es": "Las plantillas están disponibles en otros espectáculos de este navegador.",
+    "de": "Vorlagen sind in anderen Shows in diesem Browser verfügbar."
+  },
+  "Fiche de séquence": {
+    "en": "Sequence sheet",
+    "es": "Ficha de secuencia",
+    "de": "Sequenzblatt"
+  },
+  "Sous-Cues": {
+    "en": "Sub-Cues",
+    "es": "Sub-Cues",
+    "de": "Unter-Cues"
+  },
+  "Médias": {
+    "en": "Media",
+    "es": "Medios",
+    "de": "Medien"
+  },
+  "Notes de séquence": {
+    "en": "Sequence notes",
+    "es": "Notas de secuencia",
+    "de": "Sequenznotizen"
+  },
+  "Checklist liée": {
+    "en": "Linked checklist",
+    "es": "Lista vinculada",
+    "de": "Verknüpfte Checkliste"
+  },
+  "Lier des éléments": {
+    "en": "Link items",
+    "es": "Vincular elementos",
+    "de": "Punkte verknüpfen"
+  },
+  "Choisir un modèle": {
+    "en": "Choose a template",
+    "es": "Elegir plantilla",
+    "de": "Vorlage auswählen"
+  },
+  "Donnez un nom au modèle.": {
+    "en": "Name the template.",
+    "es": "Ponle un nombre a la plantilla.",
+    "de": "Gib der Vorlage einen Namen."
+  },
+  "Un modèle porte déjà ce nom.": {
+    "en": "A template already has that name.",
+    "es": "Ya existe una plantilla con ese nombre.",
+    "de": "Eine Vorlage trägt bereits diesen Namen."
+  },
+  "La bibliothèque contient déjà 30 modèles.": {
+    "en": "The library already contains 30 templates.",
+    "es": "La biblioteca ya contiene 30 plantillas.",
+    "de": "Die Bibliothek enthält bereits 30 Vorlagen."
+  },
+  "Impossible d’enregistrer les modèles sur cet appareil.": {
+    "en": "Templates could not be saved on this device.",
+    "es": "No se pueden guardar las plantillas en este dispositivo.",
+    "de": "Vorlagen konnten auf diesem Gerät nicht gespeichert werden."
+  },
+  "Modèle enregistré.": {
+    "en": "Template saved.",
+    "es": "Plantilla guardada.",
+    "de": "Vorlage gespeichert."
+  },
+  "Ce modèle dépasse la limite de 50 rubriques.": {
+    "en": "This template would exceed the 50-section limit.",
+    "es": "Esta plantilla superaría el límite de 50 secciones.",
+    "de": "Diese Vorlage würde das Limit von 50 Abschnitten überschreiten."
+  },
+  "Modèle ajouté à la checklist.": {
+    "en": "Template added to the checklist.",
+    "es": "Plantilla añadida a la lista.",
+    "de": "Vorlage zur Checkliste hinzugefügt."
+  },
+  "Supprimer ce modèle ?": {
+    "en": "Delete this template?",
+    "es": "¿Eliminar esta plantilla?",
+    "de": "Diese Vorlage löschen?"
+  },
+  "Modèle supprimé.": {
+    "en": "Template deleted.",
+    "es": "Plantilla eliminada.",
+    "de": "Vorlage gelöscht."
+  },
+  "Toutes les cases ont été décochées.": {
+    "en": "All items have been unchecked.",
+    "es": "Se han desmarcado todas las casillas.",
+    "de": "Alle Punkte wurden abgewählt."
+  },
+  "Aucun élément lié.": {
+    "en": "No linked items.",
+    "es": "No hay elementos vinculados.",
+    "de": "Keine verknüpften Punkte."
+  },
+  "Ajoutez d’abord des éléments à la checklist.": {
+    "en": "Add items to the checklist first.",
+    "es": "Añade primero elementos a la lista.",
+    "de": "Füge zuerst Punkte zur Checkliste hinzu."
+  },
+  "Aucune sous-Cue.": {
+    "en": "No sub-Cues.",
+    "es": "No hay sub-Cues.",
+    "de": "Keine Unter-Cues."
+  },
+  "Aucun média.": {
+    "en": "No media.",
+    "es": "No hay medios.",
+    "de": "Keine Medien."
+  },
+  "Version, environnement, emplacements dans le code et dernières actions techniques. Les noms, notes et médias restent sur cet appareil.": {
+    "en": "Version, environment, code locations and recent technical actions. Names, notes and media stay on this device.",
+    "es": "Versión, entorno, ubicaciones en el código y acciones técnicas recientes. Los nombres, las notas y los medios permanecen en este dispositivo.",
+    "de": "Version, Umgebung, Codepositionen und letzte technische Aktionen. Namen, Notizen und Medien bleiben auf diesem Gerät."
+  },
+  "Flight case": {
+    "en": "Flight case",
+    "es": "Maleta de transporte",
+    "de": "Flightcase"
+  },
+  "Multiprise": {
+    "en": "Power strip",
+    "es": "Regleta",
+    "de": "Steckdosenleiste"
+  },
+  "Rallonge": {
+    "en": "Extension cord",
+    "es": "Alargador",
+    "de": "Verlängerungskabel"
+  },
+  "Piles": {
+    "en": "Batteries",
+    "es": "Pilas",
+    "de": "Batterien"
+  },
+  "Chargeur": {
+    "en": "Charger",
+    "es": "Cargador",
+    "de": "Ladegerät"
+  },
+  "Adaptateur": {
+    "en": "Adapter",
+    "es": "Adaptador",
+    "de": "Adapter"
+  },
+  "Clé USB": {
+    "en": "USB drive",
+    "es": "Memoria USB",
+    "de": "USB-Stick"
+  },
+  "Pied de micro": {
+    "en": "Microphone stand",
+    "es": "Pie de micrófono",
+    "de": "Mikrofonständer"
+  },
+  "Gants": {
+    "en": "Gloves",
+    "es": "Guantes",
+    "de": "Handschuhe"
+  },
+  "Lampe torche": {
+    "en": "Flashlight",
+    "es": "Linterna",
+    "de": "Taschenlampe"
+  },
+  "Choisir une icône": {
+    "en": "Choose an icon",
+    "es": "Elegir un icono",
+    "de": "Symbol auswählen"
+  },
+  "Ampoule": {
+    "en": "Light bulb",
+    "es": "Bombilla",
+    "de": "Glühbirne"
+  },
+  "Prise électrique": {
+    "en": "Power plug",
+    "es": "Enchufe",
+    "de": "Stecker"
+  },
+  "Table": {
+    "en": "Table",
+    "es": "Mesa",
+    "de": "Tisch"
+  },
+  "Chaise": {
+    "en": "Chair",
+    "es": "Silla",
+    "de": "Stuhl"
+  },
+  "Stylo": {
+    "en": "Pen",
+    "es": "Bolígrafo",
+    "de": "Stift"
+  },
+  "Ordinateur": {
+    "en": "Computer",
+    "es": "Ordenador",
+    "de": "Computer"
+  },
+  "Casque audio": {
+    "en": "Headphones",
+    "es": "Auriculares",
+    "de": "Kopfhörer"
+  },
+  "Horloge": {
+    "en": "Clock",
+    "es": "Reloj",
+    "de": "Uhr"
+  },
+  "Clé": {
+    "en": "Key",
+    "es": "Llave",
+    "de": "Schlüssel"
+  },
+  "Ruban adhésif": {
+    "en": "Tape",
+    "es": "Cinta adhesiva",
+    "de": "Klebeband"
+  },
+  "Bouteille": {
+    "en": "Bottle",
+    "es": "Botella",
+    "de": "Flasche"
+  },
+  "Premiers secours": {
+    "en": "First aid",
+    "es": "Primeros auxilios",
+    "de": "Erste Hilfe"
+  },
+  "Rideau": {
+    "en": "Curtain",
+    "es": "Cortina",
+    "de": "Vorhang"
+  },
+  "Carton": {
+    "en": "Box",
+    "es": "Caja",
+    "de": "Karton"
+  },
+  "Boîte à outils": {
+    "en": "Toolbox",
+    "es": "Caja de herramientas",
+    "de": "Werkzeugkasten"
+  },
+  "Plan de scène": {
+    "en": "Stage plan",
+    "es": "Plano de escenario",
+    "de": "Bühnenplan"
+  },
+  "Implantation 2D et export PDF": {
+    "en": "2D layout and PDF export",
+    "es": "Diseño 2D y exportación PDF",
+    "de": "2D-Plan und PDF-Export"
+  },
+  "Conduite de spectacle": {
+    "en": "Show cue sheet",
+    "es": "Guion del espectáculo",
+    "de": "Showablauf"
+  },
+  "Consulter et télécharger la conduite PDF": {
+    "en": "View and download the cue sheet PDF",
+    "es": "Ver y descargar el guion en PDF",
+    "de": "Ablauf-PDF ansehen und herunterladen"
+  },
+  "Mise à niveau audio": {
+    "en": "Audio level matching",
+    "es": "Nivelación de audio",
+    "de": "Lautstärkeanpassung"
+  },
+  "Équilibrer le volume des pistes": {
+    "en": "Match track loudness",
+    "es": "Equilibrar el volumen de las pistas",
+    "de": "Lautstärke der Spuren angleichen"
+  },
+  "Préparer un PDF à cocher": {
+    "en": "Create a fillable PDF checklist",
+    "es": "Crear un PDF con casillas interactivas",
+    "de": "Ausfüllbare PDF-Checkliste erstellen"
+  },
+  "Plan de scène vu du dessus": {
+    "en": "Overhead stage plan",
+    "es": "Vista cenital del escenario",
+    "de": "Bühnenplan in Draufsicht"
+  },
+  "Ajouter un objet": {
+    "en": "Add an object",
+    "es": "Añadir un objeto",
+    "de": "Objekt hinzufügen"
+  },
+  "Rond": {
+    "en": "Circle",
+    "es": "Círculo",
+    "de": "Kreis"
+  },
+  "Carré": {
+    "en": "Square",
+    "es": "Cuadrado",
+    "de": "Quadrat"
+  },
+  "Triangle": {
+    "en": "Triangle",
+    "es": "Triángulo",
+    "de": "Dreieck"
+  },
+  "Position du public": {
+    "en": "Audience position",
+    "es": "Posición del público",
+    "de": "Position des Publikums"
+  },
+  "En bas du plan": {
+    "en": "Bottom of plan",
+    "es": "Parte inferior",
+    "de": "Unten im Plan"
+  },
+  "En haut du plan": {
+    "en": "Top of plan",
+    "es": "Parte superior",
+    "de": "Oben im Plan"
+  },
+  "Objet sélectionné": {
+    "en": "Selected object",
+    "es": "Objeto seleccionado",
+    "de": "Ausgewähltes Objekt"
+  },
+  "Aucun objet sélectionné": {
+    "en": "No object selected",
+    "es": "Ningún objeto seleccionado",
+    "de": "Kein Objekt ausgewählt"
+  },
+  "Libellé": {
+    "en": "Label",
+    "es": "Etiqueta",
+    "de": "Beschriftung"
+  },
+  "Taille": {
+    "en": "Size",
+    "es": "Tamaño",
+    "de": "Größe"
+  },
+  "Rotation (°)": {
+    "en": "Rotation (°)",
+    "es": "Rotación (°)",
+    "de": "Drehung (°)"
+  },
+  "Position X (%)": {
+    "en": "X position (%)",
+    "es": "Posición X (%)",
+    "de": "X-Position (%)"
+  },
+  "Position Y (%)": {
+    "en": "Y position (%)",
+    "es": "Posición Y (%)",
+    "de": "Y-Position (%)"
+  },
+  "Supprimer l’objet": {
+    "en": "Delete object",
+    "es": "Eliminar objeto",
+    "de": "Objekt löschen"
+  },
+  "Télécharger le PDF": {
+    "en": "Download PDF",
+    "es": "Descargar PDF",
+    "de": "PDF herunterladen"
+  },
+  "Checklist": {
+    "en": "Checklist",
+    "es": "Lista de verificación",
+    "de": "Checkliste"
+  },
+  "Titre de la checklist": {
+    "en": "Checklist title",
+    "es": "Título de la lista",
+    "de": "Titel der Checkliste"
+  },
+  "Avant le spectacle": {
+    "en": "Before the show",
+    "es": "Antes del espectáculo",
+    "de": "Vor der Show"
+  },
+  "+ Rubrique": {
+    "en": "+ Section",
+    "es": "+ Sección",
+    "de": "+ Abschnitt"
+  },
+  "Télécharger le PDF interactif": {
+    "en": "Download fillable PDF",
+    "es": "Descargar PDF interactivo",
+    "de": "Ausfüllbares PDF herunterladen"
+  },
+  "Pilot mesure le volume perçu des passages utilisés et ajuste le gain de lecture. Les fichiers et les réglages manuels restent intacts.": {
+    "en": "Pilot measures the loudness of the used sections and adjusts playback gain. Files and manual settings are preserved.",
+    "es": "Pilot mide el volumen percibido de los fragmentos utilizados y ajusta la ganancia de reproducción. Se conservan los archivos y ajustes manuales.",
+    "de": "Pilot misst die Lautheit der verwendeten Abschnitte und passt den Wiedergabepegel an. Dateien und manuelle Einstellungen bleiben erhalten."
+  },
+  "Cible de départ -18 LUFS, abaissée si nécessaire pour garder une marge de crête sur chaque piste.": {
+    "en": "Starting target -18 LUFS, reduced as needed to preserve peak headroom per track.",
+    "es": "Objetivo inicial -18 LUFS, reducido si es necesario para conservar margen de pico por pista.",
+    "de": "Ausgangsziel -18 LUFS, bei Bedarf reduziert, um die Spitzenreserve pro Spur zu erhalten."
+  },
+  "Retirer la mise à niveau": {
+    "en": "Remove level matching",
+    "es": "Quitar la nivelación",
+    "de": "Lautstärkeanpassung entfernen"
+  },
+  "Équilibrer les pistes": {
+    "en": "Match tracks",
+    "es": "Equilibrar las pistas",
+    "de": "Spuren angleichen"
+  },
+  "PLATEAU": {
+    "en": "STAGE",
+    "es": "ESCENARIO",
+    "de": "BÜHNE"
+  },
+  "FOND DE SCÈNE": {
+    "en": "UPSTAGE",
+    "es": "FONDO DEL ESCENARIO",
+    "de": "BÜHNENHINTERGRUND"
+  },
+  "ACCÈS SCÈNE": {
+    "en": "STAGE ENTRY",
+    "es": "ACCESO AL ESCENARIO",
+    "de": "BÜHNENZUGANG"
+  },
+  "COULISSES": {
+    "en": "WINGS",
+    "es": "BASTIDORES",
+    "de": "SEITENBÜHNE"
+  },
+  "PUBLIC": {
+    "en": "AUDIENCE",
+    "es": "PÚBLICO",
+    "de": "PUBLIKUM"
+  },
+  "Implantation du plateau - vue du dessus": {
+    "en": "Stage layout - overhead view",
+    "es": "Implantación del escenario - vista cenital",
+    "de": "Bühnenaufbau - Draufsicht"
+  },
+  "Plan indicatif - non à l’échelle": {
+    "en": "Reference plan - not to scale",
+    "es": "Plano orientativo - sin escala",
+    "de": "Übersichtsplan - nicht maßstabsgetreu"
+  },
+  "Titre de la rubrique": {
+    "en": "Section title",
+    "es": "Título de la sección",
+    "de": "Abschnittstitel"
+  },
+  "Rubrique": {
+    "en": "Section",
+    "es": "Sección",
+    "de": "Abschnitt"
+  },
+  "Icône": {
+    "en": "Icon",
+    "es": "Icono",
+    "de": "Symbol"
+  },
+  "Supprimer la rubrique": {
+    "en": "Delete section",
+    "es": "Eliminar sección",
+    "de": "Abschnitt löschen"
+  },
+  "Cocher cet élément": {
+    "en": "Check this item",
+    "es": "Marcar este elemento",
+    "de": "Diesen Punkt abhaken"
+  },
+  "Élément de checklist": {
+    "en": "Checklist item",
+    "es": "Elemento de la lista",
+    "de": "Checklistenpunkt"
+  },
+  "Supprimer cet élément": {
+    "en": "Delete this item",
+    "es": "Eliminar este elemento",
+    "de": "Diesen Punkt löschen"
+  },
+  "+ Élément": {
+    "en": "+ Item",
+    "es": "+ Elemento",
+    "de": "+ Punkt"
+  },
+  "Ajoutez au moins un élément à la checklist.": {
+    "en": "Add at least one checklist item.",
+    "es": "Añade al menos un elemento a la lista.",
+    "de": "Füge mindestens einen Checklistenpunkt hinzu."
+  },
+  "Création du PDF…": {
+    "en": "Creating PDF…",
+    "es": "Creando PDF…",
+    "de": "PDF wird erstellt…"
+  },
+  "PDF prêt.": {
+    "en": "PDF ready.",
+    "es": "PDF listo.",
+    "de": "PDF fertig."
+  },
+  "Passage silencieux ou vide": {
+    "en": "Silent or empty section",
+    "es": "Fragmento silencioso o vacío",
+    "de": "Stiller oder leerer Abschnitt"
+  },
+  "Piste mono ou stéréo requise": {
+    "en": "Mono or stereo track required",
+    "es": "Se necesita una pista mono o estéreo",
+    "de": "Mono- oder Stereospur erforderlich"
+  },
+  "Piste illisible dans ce navigateur": {
+    "en": "Track cannot be read in this browser",
+    "es": "El navegador no puede leer la pista",
+    "de": "Spur kann in diesem Browser nicht gelesen werden"
+  },
+  "Analyse audio indisponible.": {
+    "en": "Audio analysis is unavailable.",
+    "es": "Análisis de audio no disponible.",
+    "de": "Audioanalyse nicht verfügbar."
+  },
+  "Analyse des pistes {current}/{total}": {
+    "en": "Analyzing tracks {current}/{total}",
+    "es": "Analizando pistas {current}/{total}",
+    "de": "Spuren werden analysiert {current}/{total}"
+  },
+  "Aucune piste n’a pu être équilibrée.": {
+    "en": "No tracks could be matched.",
+    "es": "No se pudo equilibrar ninguna pista.",
+    "de": "Keine Spur konnte angeglichen werden."
+  },
+  "Le projet a changé. Relancez l’analyse.": {
+    "en": "The project changed. Run the analysis again.",
+    "es": "El proyecto cambió. Repite el análisis.",
+    "de": "Das Projekt wurde geändert. Starte die Analyse erneut."
+  },
+  "{count} piste(s) équilibrée(s) · cible {target} LUFS": {
+    "en": "{count} track(s) matched · target {target} LUFS",
+    "es": "{count} pista(s) equilibrada(s) · objetivo {target} LUFS",
+    "de": "{count} Spur(en) angeglichen · Ziel {target} LUFS"
+  },
+  "{count} piste(s) limitée(s)": {
+    "en": "{count} track(s) limited",
+    "es": "{count} pista(s) limitada(s)",
+    "de": "{count} Spur(en) begrenzt"
+  },
+  "{count} piste(s) ignorée(s)": {
+    "en": "{count} track(s) skipped",
+    "es": "{count} pista(s) omitida(s)",
+    "de": "{count} Spur(en) übersprungen"
+  },
+  "Aucune piste audio dans ce projet.": {
+    "en": "No audio tracks in this project.",
+    "es": "No hay pistas de audio en este proyecto.",
+    "de": "Dieses Projekt enthält keine Audiospuren."
+  },
+  "Mettez la lecture en pause avant d’équilibrer les pistes.": {
+    "en": "Pause playback before matching tracks.",
+    "es": "Pausa la reproducción antes de equilibrar las pistas.",
+    "de": "Pausiere die Wiedergabe vor dem Angleichen."
+  },
+  "Mise à niveau retirée.": {
+    "en": "Level matching removed.",
+    "es": "Nivelación eliminada.",
+    "de": "Lautstärkeanpassung entfernt."
+  },
+  "Auto {gain} dB": {
+    "en": "Auto {gain} dB",
+    "es": "Auto {gain} dB",
+    "de": "Auto {gain} dB"
+  },
+  "Plateau": {
+    "en": "Stage",
+    "es": "Escenario",
+    "de": "Bühne"
+  },
+  "Micro": {
+    "en": "Microphone",
+    "es": "Micrófono",
+    "de": "Mikrofon"
+  },
+  "Câbles": {
+    "en": "Cables",
+    "es": "Cables",
+    "de": "Kabel"
+  },
+  "Alimentation": {
+    "en": "Power",
+    "es": "Alimentación",
+    "de": "Stromversorgung"
+  },
+  "Sécurité": {
+    "en": "Safety",
+    "es": "Seguridad",
+    "de": "Sicherheit"
+  },
+  "Costumes": {
+    "en": "Costumes",
+    "es": "Vestuario",
+    "de": "Kostüme"
+  },
+  "Accessoires": {
+    "en": "Props",
+    "es": "Utilería",
+    "de": "Requisiten"
+  },
+  "Transport": {
+    "en": "Transport",
+    "es": "Transporte",
+    "de": "Transport"
+  },
+  "Loge": {
+    "en": "Dressing room",
+    "es": "Camerino",
+    "de": "Garderobe"
+  },
+  "Régie": {
+    "en": "Control booth",
+    "es": "Control técnico",
+    "de": "Regie"
+  },
+  "Réseau": {
+    "en": "Network",
+    "es": "Red",
+    "de": "Netzwerk"
+  },
+  "Montage": {
+    "en": "Setup",
+    "es": "Montaje",
+    "de": "Aufbau"
+  },
+  "Contrôle": {
+    "en": "Check",
+    "es": "Comprobación",
+    "de": "Kontrolle"
+  },
+  "Enchaîner en auto": {
+    "en": "Auto-next",
+    "es": "Encadenar",
+    "de": "Weiterspielen"
+  },
+  "Créer un groupe": {
+    "en": "Create group",
+    "es": "Crear grupo",
+    "de": "Gruppe erstellen"
+  },
+  "Modifier le groupe": {
+    "en": "Edit group",
+    "es": "Editar grupo",
+    "de": "Gruppe bearbeiten"
+  },
+  "Modifier le groupe {name}": {
+    "en": "Edit group {name}",
+    "es": "Editar grupo {name}",
+    "de": "Gruppe {name} bearbeiten"
+  },
+  "Nom du groupe": {
+    "en": "Group name",
+    "es": "Nombre del grupo",
+    "de": "Gruppenname"
+  },
+  "Couleur du groupe": {
+    "en": "Group color",
+    "es": "Color del grupo",
+    "de": "Gruppenfarbe"
+  },
+  "Dissoudre le groupe": {
+    "en": "Ungroup Cues",
+    "es": "Desagrupar Cues",
+    "de": "Cue-Gruppe auflösen"
+  },
+  "Sélectionnez au moins deux Cues principales consécutives.": {
+    "en": "Select at least two consecutive main Cues.",
+    "es": "Selecciona al menos dos Cues principales consecutivas.",
+    "de": "Wählen Sie mindestens zwei aufeinanderfolgende Haupt-Cues."
+  },
+  "Attendre un GO": {
+    "en": "Wait for GO",
+    "es": "Esperar GO",
+    "de": "Auf GO warten"
+  },
+  "Enchaîner automatiquement": {
+    "en": "Play next automatically",
+    "es": "Reproducir siguiente automáticamente",
+    "de": "Automatisch weiterspielen"
+  },
+  "Fondu enchaîné": {
+    "en": "Crossfade",
+    "es": "Fundido cruzado",
+    "de": "Überblenden"
+  },
+  "Transition vers {cue}": {
+    "en": "Transition to {cue}",
+    "es": "Transición a {cue}",
+    "de": "Übergang zu {cue}"
+  },
+  "Sortie audio non autorisée. Cliquez sur « Détecter les sorties » pour réessayer.": {
+    "en": "Audio output permission denied. Click “Detect outputs” to try again.",
+    "es": "Salida de audio no autorizada. Pulsa «Detectar salidas» para volver a intentarlo.",
+    "de": "Audioausgang nicht freigegeben. Klicken Sie auf „Ausgänge erkennen“, um es erneut zu versuchen."
+  },
+  "Sortie audio introuvable. Rebranchez la carte son puis cliquez sur « Détecter les sorties ».": {
+    "en": "Audio output not found. Reconnect the audio interface, then click “Detect outputs”.",
+    "es": "No se encuentra la salida de audio. Vuelve a conectar la interfaz y pulsa «Detectar salidas».",
+    "de": "Audioausgang nicht gefunden. Schließen Sie das Audiointerface erneut an und klicken Sie auf „Ausgänge erkennen“."
+  },
+  "Enchaîne suivante": {
+    "en": "Play next",
+    "es": "Reproducir siguiente",
+    "de": "Nächste abspielen"
+  },
+  "Afficher le temps écoulé": {
+    "en": "Show elapsed time",
+    "es": "Mostrar tiempo transcurrido",
+    "de": "Vergangene Zeit anzeigen"
+  },
+  "Afficher le temps restant": {
+    "en": "Show remaining time",
+    "es": "Mostrar tiempo restante",
+    "de": "Verbleibende Zeit anzeigen"
+  },
+  "Enchaîner la piste suivante": {
+    "en": "Auto-play the next track",
+    "es": "Reproducir la siguiente pista automáticamente",
+    "de": "Nächste Spur automatisch abspielen"
+  },
+  "Fichiers non importés": {
+    "en": "Files not imported",
+    "es": "Archivos no importados",
+    "de": "Dateien nicht importiert"
+  },
+  "Pré-roll LTC · {seconds} s": {
+    "en": "LTC pre-roll · {seconds} s",
+    "es": "Pre-roll LTC · {seconds} s",
+    "de": "LTC-Vorlauf · {seconds} s"
+  },
+  "Pré-roll LTC en pause · {seconds} s": {
+    "en": "LTC pre-roll paused · {seconds} s",
+    "es": "Pre-roll LTC en pausa · {seconds} s",
+    "de": "LTC-Vorlauf pausiert · {seconds} s"
+  },
+  "Durée du test LTC": {
+    "en": "LTC test duration",
+    "es": "Duración de la prueba LTC",
+    "de": "Dauer des LTC-Tests"
+  },
+  "Pré-roll LTC": {
+    "en": "LTC pre-roll",
+    "es": "Pre-roll LTC",
+    "de": "LTC-Vorlauf"
+  },
+  "Le LTC démarre avant la musique, qui entre au timecode indiqué.": {
+    "en": "LTC starts before the music, which enters at the specified timecode.",
+    "es": "El LTC comienza antes de la música, que entra en el código de tiempo indicado.",
+    "de": "LTC startet vor der Musik, die beim angegebenen Timecode einsetzt."
+  },
+  "Tester le LTC": {
+    "en": "Test LTC",
+    "es": "Probar LTC",
+    "de": "LTC testen"
+  },
+  "Envoi du LTC de test…": {
+    "en": "Sending test LTC…",
+    "es": "Enviando LTC de prueba…",
+    "de": "LTC-Testsignal wird gesendet…"
+  },
+  "Impossible de jouer le LTC sur cette sortie.": {
+    "en": "Could not play LTC on this output.",
+    "es": "No se pudo reproducir LTC en esta salida.",
+    "de": "LTC kann auf diesem Ausgang nicht abgespielt werden."
+  },
+  "LTC de test envoyé sur le canal 3.": {
+    "en": "Test LTC sent to channel 3.",
+    "es": "LTC de prueba enviado al canal 3.",
+    "de": "LTC-Testsignal an Kanal 3 gesendet."
+  },
+  "Position stéréo": {
+    "en": "Stereo position",
+    "es": "Posición estéreo",
+    "de": "Stereoposition"
+  },
+  "Gauche": {
+    "en": "Left",
+    "es": "Izquierda",
+    "de": "Links"
+  },
+  "Centre": {
+    "en": "Center",
+    "es": "Centro",
+    "de": "Mitte"
+  },
+  "Droite": {
+    "en": "Right",
+    "es": "Derecha",
+    "de": "Rechts"
+  },
+  "Tester gauche": {
+    "en": "Test left",
+    "es": "Probar izquierda",
+    "de": "Links testen"
+  },
+  "Tester droite": {
+    "en": "Test right",
+    "es": "Probar derecha",
+    "de": "Rechts testen"
+  },
+  "Son de test envoyé à gauche.": {
+    "en": "Test tone sent to the left channel.",
+    "es": "Sonido de prueba enviado al canal izquierdo.",
+    "de": "Testton an den linken Kanal gesendet."
+  },
+  "Son de test envoyé à droite.": {
+    "en": "Test tone sent to the right channel.",
+    "es": "Sonido de prueba enviado al canal derecho.",
+    "de": "Testton an den rechten Kanal gesendet."
+  },
+  "Cette sortie doit être en stéréo pour tester gauche et droite séparément.": {
+    "en": "This output must be stereo to test left and right separately.",
+    "es": "La salida debe ser estéreo para probar izquierda y derecha por separado.",
+    "de": "Für getrennte Tests links und rechts muss der Ausgang stereo sein."
+  },
+  "Tester la sortie": {
+    "en": "Test output",
+    "es": "Probar salida",
+    "de": "Ausgang testen"
+  },
+  "Mettez la lecture en pause avant de tester la sortie.": {
+    "en": "Pause playback before testing the output.",
+    "es": "Pausa la reproducción antes de probar la salida.",
+    "de": "Pausiere die Wiedergabe, bevor du den Ausgang testest."
+  },
+  "Lecture du son de test…": {
+    "en": "Playing test tone…",
+    "es": "Reproduciendo sonido de prueba…",
+    "de": "Testton wird abgespielt…"
+  },
+  "Son de test envoyé à la sortie sélectionnée.": {
+    "en": "Test tone sent to the selected output.",
+    "es": "Sonido de prueba enviado a la salida seleccionada.",
+    "de": "Testton an den gewählten Ausgang gesendet."
+  },
+  "Impossible de jouer le son de test sur cette sortie.": {
+    "en": "Could not play the test tone on this output.",
+    "es": "No se pudo reproducir el sonido de prueba en esta salida.",
+    "de": "Der Testton konnte auf diesem Ausgang nicht abgespielt werden."
+  },
+  "Sortie audio": {
+    "en": "Audio output",
+    "es": "Salida de audio",
+    "de": "Audioausgang"
+  },
+  "Sortie de Pilot": {
+    "en": "Pilot output",
+    "es": "Salida de Pilot",
+    "de": "Pilot-Ausgang"
+  },
+  "Sortie système": {
+    "en": "System output",
+    "es": "Salida del sistema",
+    "de": "Systemausgang"
+  },
+  "Détecter les sorties": {
+    "en": "Detect outputs",
+    "es": "Detectar salidas",
+    "de": "Ausgänge erkennen"
+  },
+  "Sortie audio {number}": {
+    "en": "Audio output {number}",
+    "es": "Salida de audio {number}",
+    "de": "Audioausgang {number}"
+  },
+  "Carte son sélectionnée": {
+    "en": "Selected audio device",
+    "es": "Dispositivo de audio seleccionado",
+    "de": "Gewähltes Audiogerät"
+  },
+  "Ce navigateur ne permet pas de séparer toute la sortie audio de Pilot.": {
+    "en": "This browser cannot route all Pilot audio separately.",
+    "es": "Este navegador no permite separar toda la salida de audio de Pilot.",
+    "de": "Dieser Browser kann nicht den gesamten Pilot-Ton getrennt ausgeben."
+  },
+  "Choisissez une sortie pour Pilot.": {
+    "en": "Choose an output for Pilot.",
+    "es": "Elige una salida para Pilot.",
+    "de": "Wähle einen Ausgang für Pilot."
+  },
+  "Si la carte son ne figure pas dans la liste, autorisez la détection. Le navigateur peut demander l’accès au micro pour afficher les sorties.": {
+    "en": "If your audio interface is missing, allow detection. The browser may ask for microphone access to list outputs.",
+    "es": "Si falta la interfaz, autoriza la detección. El navegador puede pedir acceso al micrófono para mostrar las salidas.",
+    "de": "Wenn das Audiointerface fehlt, erlaube die Erkennung. Der Browser fragt eventuell nach Mikrofonzugriff, um Ausgänge aufzulisten."
+  },
+  "Sortie Pilot indépendante active.": {
+    "en": "Independent Pilot output active.",
+    "es": "Salida independiente de Pilot activa.",
+    "de": "Separater Pilot-Ausgang aktiv."
+  },
+  "Sortie Pilot indisponible. Choisissez une sortie avant de lancer la lecture.": {
+    "en": "Pilot output unavailable. Choose an output before starting playback.",
+    "es": "Salida de Pilot no disponible. Elige una salida antes de reproducir.",
+    "de": "Pilot-Ausgang nicht verfügbar. Wähle vor der Wiedergabe einen Ausgang."
+  },
+  "Pilot utilise la sortie système.": {
+    "en": "Pilot uses the system output.",
+    "es": "Pilot usa la salida del sistema.",
+    "de": "Pilot nutzt den Systemausgang."
+  },
+  "Sortie Pilot déconnectée. Lecture suspendue.": {
+    "en": "Pilot output disconnected. Playback paused.",
+    "es": "Salida de Pilot desconectada. Reproducción en pausa.",
+    "de": "Pilot-Ausgang getrennt. Wiedergabe pausiert."
+  },
+  "Mettez la lecture en pause avant de changer la sortie audio.": {
+    "en": "Pause playback before changing the audio output.",
+    "es": "Pausa la reproducción antes de cambiar la salida de audio.",
+    "de": "Pausiere die Wiedergabe, bevor du den Audioausgang wechselst."
+  },
+  "Le LTC exige une sortie audio avec au moins quatre canaux.": {
+    "en": "LTC requires an audio output with at least four channels.",
+    "es": "LTC requiere una salida de audio de al menos cuatro canales.",
+    "de": "LTC benötigt einen Audioausgang mit mindestens vier Kanälen."
+  },
+  "Impossible de sélectionner cette sortie. Vérifiez le branchement et les autorisations.": {
+    "en": "Could not select this output. Check the connection and permissions.",
+    "es": "No se pudo elegir esta salida. Comprueba la conexión y los permisos.",
+    "de": "Der Ausgang konnte nicht gewählt werden. Prüfe Verbindung und Berechtigungen."
+  },
+  "Accès aux sorties audio refusé ou indisponible.": {
+    "en": "Audio output access denied or unavailable.",
+    "es": "Acceso a las salidas de audio denegado o no disponible.",
+    "de": "Zugriff auf Audioausgänge verweigert oder nicht verfügbar."
+  },
+  "Boucle": {
+    "en": "Loop",
+    "es": "Bucle",
+    "de": "Schleife"
+  },
+  "Jouer par-dessus": {
+    "en": "Play over",
+    "es": "Superponer",
+    "de": "Überlagern"
+  },
+  "Lance cette piste pendant que celle en cours continue de jouer.": {
+    "en": "Starts this track while the current one keeps playing.",
+    "es": "Inicia esta pista mientras la que está en curso sigue sonando.",
+    "de": "Startet diese Spur, während die laufende Spur weiterspielt."
+  },
+  "Voir les sous-Cues": {
+    "en": "Go to a sub-cue",
+    "es": "Ir a una subcue",
+    "de": "Zu einer Unter-Cue springen"
+  },
+  "Verrouiller la ligne de volume": {
+    "en": "Lock the volume line",
+    "es": "Bloquear la línea de volumen",
+    "de": "Lautstärkelinie sperren"
+  },
+  "Déverrouiller la ligne de volume": {
+    "en": "Unlock the volume line",
+    "es": "Desbloquear la línea de volumen",
+    "de": "Lautstärkelinie entsperren"
+  },
+  "Tout désélectionner": {
+    "en": "Deselect all",
+    "es": "Deseleccionar todo",
+    "de": "Alles abwählen"
+  },
+  "Pistes superposées": {
+    "en": "Overlaid tracks",
+    "es": "Pistas superpuestas",
+    "de": "Überlagerte Spuren"
+  },
+  "Pistes audio": {
+    "en": "Audio tracks",
+    "es": "Pistas de audio",
+    "de": "Audiospuren"
+  },
+  "Aucune piste audio en cours": {
+    "en": "No audio tracks playing",
+    "es": "No hay pistas de audio activas",
+    "de": "Keine aktiven Audiospuren"
+  },
+  "Fondu en cours": {
+    "en": "Fading out",
+    "es": "Fundido en curso",
+    "de": "Wird ausgeblendet"
+  },
+  "Arrêter · {seconds} s": {
+    "en": "Stop · {seconds} s",
+    "es": "Detener · {seconds} s",
+    "de": "Stopp · {seconds} s"
+  },
+  "Superposer à la piste en cours": {
+    "en": "Play over the current track",
+    "es": "Superponer a la pista en curso",
+    "de": "Über der laufenden Spur abspielen"
+  },
+  "Superposition": {
+    "en": "Overlay",
+    "es": "Superposición",
+    "de": "Überlagerung"
+  },
+  "Volume de sortie de la piste": {
+    "en": "Track output volume",
+    "es": "Volumen de salida de la pista",
+    "de": "Ausgangslautstärke der Spur"
+  },
+  "Rattacher les sous-Cues": {
+    "en": "Reconnect sub-cues",
+    "es": "Volver a vincular subcues",
+    "de": "Unter-Cues zuordnen"
+  },
+  "Groupe de sous-Cues": {
+    "en": "Sub-cue group",
+    "es": "Grupo de subcues",
+    "de": "Gruppe der Unter-Cues"
+  },
+  "Numéro de destination": {
+    "en": "Destination act",
+    "es": "Número de destino",
+    "de": "Zielnummer"
+  },
+  "Choisir un numéro": {
+    "en": "Choose an act",
+    "es": "Elige un número",
+    "de": "Nummer wählen"
+  },
+  "Rattacher": {
+    "en": "Reconnect",
+    "es": "Vincular",
+    "de": "Zuordnen"
+  },
+  "Groupe {number} · {count} sous-Cue(s) · {name}": {
+    "en": "Group {number} · {count} sub-cue(s) · {name}",
+    "es": "Grupo {number} · {count} subcue(s) · {name}",
+    "de": "Gruppe {number} · {count} Unter-Cue(s) · {name}"
+  },
+  "Certains temps relatifs sont manquants ou invalides.": {
+    "en": "Some relative times are missing or invalid.",
+    "es": "Faltan algunos tiempos relativos o no son válidos.",
+    "de": "Einige relative Zeiten fehlen oder sind ungültig."
+  },
+  "Ce numéro est trop court pour conserver tous les temps relatifs.": {
+    "en": "This act is too short to preserve every relative time.",
+    "es": "Este número es demasiado corto para conservar todos los tiempos relativos.",
+    "de": "Diese Nummer ist zu kurz, um alle relativen Zeiten beizubehalten."
+  },
+  "waveCue.choice.child": {
+    "fr": "Sous-Cue",
+    "en": "Sub-cue",
+    "es": "Subcue",
+    "de": "Unter-Cue"
+  },
+  "Réduire le zoom de la waveform": {
+    "en": "Zoom out of the waveform",
+    "es": "Alejar la forma de onda",
+    "de": "Wellenform verkleinern"
+  },
+  "Agrandir le zoom de la waveform": {
+    "en": "Zoom in on the waveform",
+    "es": "Acercar la forma de onda",
+    "de": "Wellenform vergrößern"
+  },
+  "Vue d’ensemble du spectacle": {
+    "en": "Show overview",
+    "es": "Vista general del espectáculo",
+    "de": "Show-Übersicht"
+  },
+  "Cues à proximité": {
+    "en": "Nearby cues",
+    "es": "Cues cercanas",
+    "de": "Nahe Cues"
+  },
+  "{count} Cues à cet endroit": {
+    "en": "{count} cues at this position",
+    "es": "{count} cues en esta posición",
+    "de": "{count} Cues an dieser Stelle"
+  },
+  "Pour Bridge, décompressez ce ZIP et importez ensemble les fichiers numérotés du dossier Bridge/Numeros. Dans QLab, placez le départ sur le premier groupe. Un GO lance chaque numéro.": {
+    "en": "For Bridge, unzip this file and import the numbered files from Bridge/Numeros together. In QLab, set the playhead on the first group. One GO starts each act.",
+    "es": "Para Bridge, descomprime este ZIP e importa juntos los archivos numerados de Bridge/Numeros. En QLab, sitúa el cabezal en el primer grupo. Cada GO inicia un número.",
+    "de": "Entpacke für Bridge diese ZIP-Datei und importiere die nummerierten Dateien aus Bridge/Numeros zusammen. Setze den Playhead in QLab auf die erste Gruppe. Ein GO startet jeweils eine Nummer."
+  },
+  "Fin du numéro": {
+    "en": "End of act",
+    "es": "Fin del número",
+    "de": "Ende der Nummer"
+  },
+  "Spectacle : GO lance un numéro. Next suit la timeline. Wait met la bande-son en attente du prochain GO.": {
+    "en": "Show: GO starts an act. Next follows the timeline. Wait pauses the soundtrack until the next GO.",
+    "es": "Espectáculo: GO inicia un número. Next sigue la línea de tiempo. Wait pausa la banda sonora hasta el siguiente GO.",
+    "de": "Show: GO startet eine Nummer. Next folgt der Zeitleiste. Wait pausiert die Tonspur bis zum nächsten GO."
+  },
+  "Cliquez sur une touche pour modifier son raccourci. La commande GO fonctionne uniquement en mode Spectacle.": {
+    "en": "Click a key to change its shortcut. GO works in Show mode only.",
+    "es": "Haz clic en una tecla para cambiar su atajo. GO solo funciona en modo Espectáculo.",
+    "de": "Klicke auf eine Taste, um ihr Kürzel zu ändern. GO funktioniert nur im Show-Modus."
+  },
+  "Ouvrez cette conduite dans S2A Pilot 1.7.21 ou une version ultérieure pour lire les numéros visuels intégrés.": {
+    "en": "Open this rundown in S2A Pilot 1.7.21 or later to play the embedded visual acts.",
+    "es": "Abre este guion en S2A Pilot 1.7.21 o posterior para reproducir los números visuales integrados.",
+    "de": "Öffne diesen Ablauf in S2A Pilot 1.7.21 oder neuer, um die eingebetteten visuellen Nummern abzuspielen."
+  },
+  "Spectacle": {
+    "en": "Show",
+    "es": "Espectáculo",
+    "de": "Show"
+  },
+  "Numéro visuel": {
+    "en": "Visual Act",
+    "es": "Número visual",
+    "de": "Visuelle Nummer"
+  },
+  "Ajouter des numéros visuels": {
+    "en": "Add visual acts",
+    "es": "Añadir números visuales",
+    "de": "Visuelle Nummern hinzufügen"
+  },
+  "Choisissez un fichier exporté depuis le mode Numéro visuel.": {
+    "en": "Choose a file exported from Visual Act mode.",
+    "es": "Elige un archivo exportado desde el modo Número visual.",
+    "de": "Wähle eine aus dem Modus Visuelle Nummer exportierte Datei."
+  },
+  "Le spectacle a changé pendant l’import. Réessayez.": {
+    "en": "The show changed during import. Try again.",
+    "es": "El espectáculo cambió durante la importación. Inténtalo de nuevo.",
+    "de": "Die Show wurde beim Import geändert. Versuche es erneut."
+  },
+  "Impossible d’ajouter les numéros : ": {
+    "en": "Could not add the acts: ",
+    "es": "No se pudieron añadir los números: ",
+    "de": "Die Nummern konnten nicht hinzugefügt werden: "
+  },
+  "Supprimer ce numéro et toutes ses Cues ?": {
+    "en": "Delete this act and all its cues?",
+    "es": "¿Eliminar este número y todas sus cues?",
+    "de": "Diese Nummer und alle zugehörigen Cues löschen?"
+  },
+  "GO - prochain numéro": {
+    "en": "GO - next act",
+    "es": "GO - siguiente número",
+    "de": "GO - nächste Nummer"
+  },
+  "Choisir la couleur de la Cue": {
+    "en": "Choose cue color",
+    "es": "Elegir el color de la cue",
+    "de": "Cue-Farbe auswählen"
+  },
+  "La lecture audio n’a pas démarré.": {
+    "en": "Audio playback did not start.",
+    "es": "La reproducción de audio no se inició.",
+    "de": "Die Audiowiedergabe wurde nicht gestartet."
+  },
+  "Tout replier": {
+    "en": "Collapse all",
+    "es": "Plegar todo",
+    "de": "Alle einklappen"
+  },
+  "Tout déplier": {
+    "en": "Expand all",
+    "es": "Desplegar todo",
+    "de": "Alle ausklappen"
+  },
+  "Afficher les sous-Cues": {
+    "en": "Show sub-cues",
+    "es": "Mostrar subcues",
+    "de": "Unter-Cues anzeigen"
+  },
+  "Masquer les sous-Cues": {
+    "en": "Hide sub-cues",
+    "es": "Ocultar subcues",
+    "de": "Unter-Cues ausblenden"
+  },
+  "Réduire les blocs": {
+    "en": "Zoom out on blocks",
+    "es": "Reducir los bloques",
+    "de": "Blöcke verkleinern"
+  },
+  "Agrandir les blocs": {
+    "en": "Zoom in on blocks",
+    "es": "Ampliar los bloques",
+    "de": "Blöcke vergrößern"
+  },
+  "Glisser pour réordonner dans le même média": {
+    "en": "Drag to reorder within the same media",
+    "es": "Arrastra para reordenar dentro del mismo medio",
+    "de": "Zum Umsortieren innerhalb desselben Mediums ziehen"
+  },
+  "+ Ajouter une Cue": {
+    "en": "+ Add a cue",
+    "es": "+ Añadir una cue",
+    "de": "+ Cue hinzufügen"
+  },
+  "Glisser pour déplacer le bloc et ses Cues": {
+    "en": "Drag to move the block and its cues",
+    "es": "Arrastra para mover el bloque y sus cues",
+    "de": "Block und zugehörige Cues verschieben"
+  },
+  "Durée {time}": {
+    "en": "Duration {time}",
+    "es": "Duración {time}",
+    "de": "Dauer {time}"
+  },
+  "Déroulé GO": {
+    "en": "GO sequence",
+    "es": "Secuencia GO",
+    "de": "GO-Ablauf"
+  },
+  "Faire défiler vers la gauche": {
+    "en": "Scroll left",
+    "es": "Desplazar a la izquierda",
+    "de": "Nach links scrollen"
+  },
+  "Faire défiler vers la droite": {
+    "en": "Scroll right",
+    "es": "Desplazar a la derecha",
+    "de": "Nach rechts scrollen"
+  },
+  "+ Musique / Vidéo": {
+    "en": "+ Music / Video",
+    "es": "+ Música / Vídeo",
+    "de": "+ Musik / Video"
+  },
+  "+ Cue": {
+    "en": "+ Cue",
+    "es": "+ Cue",
+    "de": "+ Cue"
+  },
+  "Musique": {
+    "en": "Music",
+    "es": "Música",
+    "de": "Musik"
+  },
+  "Fondu {seconds} s": {
+    "en": "Fade {seconds} s",
+    "es": "Fundido de {seconds} s",
+    "de": "Blende {seconds} s"
+  },
+  "Arrêt immédiat": {
+    "en": "Immediate stop",
+    "es": "Parada inmediata",
+    "de": "Sofortiger Stopp"
+  },
+  "Durée du fondu d’arrêt": {
+    "en": "Stop fade duration",
+    "es": "Duración del fundido de parada",
+    "de": "Dauer der Stoppblende"
+  },
+  "Arrêt avec fondu": {
+    "en": "Stop with fade",
+    "es": "Parar con fundido",
+    "de": "Stopp mit Blende"
+  },
+  "Durée du fondu": {
+    "en": "Fade duration",
+    "es": "Duración del fundido",
+    "de": "Blenddauer"
+  },
+  "Choisissez une durée de 0,1 à 60 secondes.": {
+    "en": "Choose a duration from 0.1 to 60 seconds.",
+    "es": "Elige una duración de 0,1 a 60 segundos.",
+    "de": "Wähle eine Dauer von 0,1 bis 60 Sekunden."
+  },
+  "Durée du fondu enregistrée.": {
+    "en": "Fade duration saved.",
+    "es": "Duración del fundido guardada.",
+    "de": "Blenddauer gespeichert."
+  },
+  "Raccourci clavier": {
+    "en": "Keyboard shortcuts",
+    "es": "Atajos de teclado",
+    "de": "Tastenkürzel"
+  },
+  "Cliquez sur une touche pour modifier son raccourci. La commande GO fonctionne uniquement en mode manuel.": {
+    "en": "Click a key to change its shortcut. GO works only in manual mode.",
+    "es": "Haz clic en una tecla para cambiar su atajo. GO solo funciona en modo manual.",
+    "de": "Klicke auf eine Taste, um ihr Kürzel zu ändern. GO funktioniert nur im manuellen Modus."
+  },
+  "Rétablir par défaut": {
+    "en": "Restore defaults",
+    "es": "Restaurar valores por defecto",
+    "de": "Standard wiederherstellen"
+  },
+  "Raccourcis clavier": {
+    "en": "Keyboard shortcuts",
+    "es": "Atajos de teclado",
+    "de": "Tastenkürzel"
+  },
+  "Cliquez sur un raccourci pour le modifier. GO s’applique au mode manuel.": {
+    "en": "Select a shortcut to change it. GO applies in manual mode.",
+    "es": "Selecciona un atajo para cambiarlo. GO se aplica en modo manual.",
+    "de": "Wähle ein Kürzel zum Ändern aus. GO gilt im manuellen Modus."
+  },
+  "GO - fondu de 2 s": {
+    "en": "GO - 2 s fade",
+    "es": "GO - fundido de 2 s",
+    "de": "GO - 2 s Blende"
+  },
+  "Arrêt — fondu de 3 s": {
+    "en": "Stop — 3 s fade",
+    "es": "Parar — fundido de 3 s",
+    "de": "Stopp — 3 s Blende"
+  },
+  "Cue suivante / avance rapide": {
+    "en": "Next cue / fast forward",
+    "es": "Cue siguiente / avance rápido",
+    "de": "Nächste Cue / Vorspulen"
+  },
+  "Cue précédente / recul rapide": {
+    "en": "Previous cue / rewind",
+    "es": "Cue anterior / retroceso rápido",
+    "de": "Vorherige Cue / Zurückspulen"
+  },
+  "Lecture / Pause (multimédia)": {
+    "en": "Play / Pause (media)",
+    "es": "Reproducir / Pausar (multimedia)",
+    "de": "Wiedergabe / Pause (Medien)"
+  },
+  "Espace": {
+    "en": "Space",
+    "es": "Espacio",
+    "de": "Leertaste"
+  },
+  "Entrée": {
+    "en": "Enter",
+    "es": "Intro",
+    "de": "Eingabe"
+  },
+  "Échap": {
+    "en": "Esc",
+    "es": "Esc",
+    "de": "Esc"
+  },
+  "Rétablir les raccourcis par défaut": {
+    "en": "Restore default shortcuts",
+    "es": "Restaurar atajos por defecto",
+    "de": "Standardkürzel wiederherstellen"
+  },
+  "Appuyez sur une touche…": {
+    "en": "Press a key…",
+    "es": "Pulsa una tecla…",
+    "de": "Taste drücken…"
+  },
+  "Appuyez sur la touche à attribuer. Cliquez de nouveau pour annuler.": {
+    "en": "Press the key to assign. Click again to cancel.",
+    "es": "Pulsa la tecla que quieras asignar. Pulsa de nuevo para cancelar.",
+    "de": "Drücke die gewünschte Taste. Zum Abbrechen erneut klicken."
+  },
+  "Choisissez une touche seule, sans modificateur.": {
+    "en": "Choose a single key without modifiers.",
+    "es": "Elige una sola tecla sin modificadores.",
+    "de": "Wähle eine einzelne Taste ohne Modifikatoren."
+  },
+  "Cette touche est déjà attribuée.": {
+    "en": "This key is already assigned.",
+    "es": "Esta tecla ya está asignada.",
+    "de": "Diese Taste ist bereits belegt."
+  },
+  "Raccourci enregistré.": {
+    "en": "Shortcut saved.",
+    "es": "Atajo guardado.",
+    "de": "Kürzel gespeichert."
+  },
+  "Raccourcis par défaut rétablis.": {
+    "en": "Default shortcuts restored.",
+    "es": "Atajos por defecto restaurados.",
+    "de": "Standardkürzel wiederhergestellt."
+  },
+  "Raccourcis modifiés pour cette session.": {
+    "en": "Shortcuts changed for this session.",
+    "es": "Atajos cambiados para esta sesión.",
+    "de": "Kürzel für diese Sitzung geändert."
+  },
+  "Commandes de lecture": {
+    "en": "Playback controls",
+    "es": "Controles de reproducción",
+    "de": "Wiedergabesteuerung"
+  },
+  "Cue précédente · Maintenir pour reculer": {
+    "en": "Previous cue · Hold to rewind",
+    "es": "Cue anterior · Mantener para retroceder",
+    "de": "Vorheriger Cue · Zum Zurückspulen halten"
+  },
+  "Cue suivante · Maintenir pour avancer": {
+    "en": "Next cue · Hold to fast-forward",
+    "es": "Cue siguiente · Mantener para avanzar",
+    "de": "Nächster Cue · Zum Vorspulen halten"
+  },
+  "(Entrée)": {
+    "en": "(Enter)",
+    "es": "(Intro)",
+    "de": "(Eingabetaste)"
+  },
+  "Cue précédente": {
+    "en": "Previous cue",
+    "es": "Cue anterior",
+    "de": "Vorheriger Cue"
+  },
+  "Cue suivante": {
+    "en": "Next cue",
+    "es": "Cue siguiente",
+    "de": "Nächster Cue"
+  },
+  "Navigation des cues": {
+    "en": "Cue navigation",
+    "es": "Navegación entre cues",
+    "de": "Cue-Navigation"
+  },
   "S2A Pilot Bridge est indisponible. Vérifiez que tous les fichiers de la PWA ont été déployés.": {
     "en": "S2A Pilot Bridge is unavailable. Check that all PWA files have been deployed.",
     "es": "S2A Pilot Bridge no está disponible. Comprueba que se hayan publicado todos los archivos de la PWA.",
@@ -2096,5 +4077,1195 @@
     "en": "Generate LTC",
     "es": "Generar LTC",
     "de": "LTC erzeugen"
+  },
+  "Départ LTC (HH:MM:SS:II)": {
+    "en": "LTC start (HH:MM:SS:FF)",
+    "es": "Inicio LTC (HH:MM:SS:FF)",
+    "de": "LTC-Start (HH:MM:SS:FF)"
+  },
+  "Adresse LTC invalide (HH:MM:SS:II, images de 00 à 24).": {
+    "en": "Invalid LTC address (HH:MM:SS:FF, frames 00–24).",
+    "es": "Dirección LTC no válida (HH:MM:SS:FF, fotogramas 00–24).",
+    "de": "Ungültige LTC-Adresse (HH:MM:SS:FF, Bilder 00–24)."
+  },
+  "Garder en fond": {
+    "en": "Keep playing in background",
+    "es": "Mantener como fondo",
+    "de": "Im Hintergrund weiterlaufen lassen"
+  },
+  "Arrêter le fond": {
+    "en": "Stop background audio",
+    "es": "Detener el fondo",
+    "de": "Hintergrundaudio stoppen"
+  },
+  "Ajouter une Cue": {
+    "en": "Add a cue",
+    "es": "Añadir una cue",
+    "de": "Cue hinzufügen"
+  },
+  "Cue principale": {
+    "en": "Main cue",
+    "es": "Cue principal",
+    "de": "Haupt-Cue"
+  },
+  "Sous-Cue du numéro « {name} ».": {
+    "en": "Sub-cue of “{name}”.",
+    "es": "Subcue del número «{name}».",
+    "de": "Unter-Cue der Nummer „{name}“."
+  },
+  "Une sous-Cue doit être placée dans un numéro.": {
+    "en": "A sub-cue must be placed within an act.",
+    "es": "Una subcue debe colocarse dentro de un número.",
+    "de": "Ein Unter-Cue muss innerhalb einer Nummer liegen."
+  },
+  "Remplacer la piste": {
+    "en": "Replace track",
+    "es": "Sustituir pista",
+    "de": "Tonspur ersetzen"
+  },
+  "Choisissez un fichier audio.": {
+    "en": "Choose an audio file.",
+    "es": "Elige un archivo de audio.",
+    "de": "Wähle eine Audiodatei."
+  },
+  "Impossible de remplacer la piste : ": {
+    "en": "Could not replace the track: ",
+    "es": "No se pudo sustituir la pista: ",
+    "de": "Tonspur konnte nicht ersetzt werden: "
+  },
+  "{count} sous-Cue(s) dépassaient la nouvelle durée. Elles ont été rapprochées de la fin pour te permettre de les recaler.": {
+    "en": "{count} sub-cue(s) exceeded the new duration. They were moved near the end so you can adjust them.",
+    "es": "{count} subcue(s) superaban la nueva duración. Se movieron cerca del final para que puedas ajustarlas.",
+    "de": "{count} Unter-Cue(s) lagen hinter der neuen Dauer. Sie wurden ans Ende verschoben und können neu platziert werden."
+  },
+  "Mode Spectacle": {
+    "en": "Show mode",
+    "es": "Modo Espectáculo",
+    "de": "Show-Modus"
+  },
+  "Mode numéro visuel": {
+    "en": "Visual Act mode",
+    "es": "Modo número visual",
+    "de": "Modus Visuelle Nummer"
+  },
+  "Recaler le début à 00:00": {
+    "en": "Align start to 00:00",
+    "es": "Alinear el inicio a 00:00",
+    "de": "Beginn auf 00:00 ausrichten"
+  },
+  "Sans type": {
+    "en": "Unassigned",
+    "es": "Sin tipo",
+    "de": "Ohne Typ"
+  },
+  "Lumière": {
+    "en": "Lighting",
+    "es": "Iluminación",
+    "de": "Licht"
+  },
+  "Son": {
+    "en": "Sound",
+    "es": "Sonido",
+    "de": "Ton"
+  },
+  "Effet": {
+    "en": "Effect",
+    "es": "Efecto",
+    "de": "Effekt"
+  },
+  "Télécommande": {
+    "en": "Remote control",
+    "es": "Mando a distancia",
+    "de": "Fernsteuerung"
+  },
+  "Filtrer les Cues": {
+    "en": "Filter cues",
+    "es": "Filtrar cues",
+    "de": "Cues filtern"
+  },
+  "Créer un type": {
+    "en": "Create a type",
+    "es": "Crear un tipo",
+    "de": "Typ erstellen"
+  },
+  "Nom du type": {
+    "en": "Type name",
+    "es": "Nombre del tipo",
+    "de": "Typname"
+  },
+  "Couleur du type": {
+    "en": "Type color",
+    "es": "Color del tipo",
+    "de": "Typfarbe"
+  },
+  "Créer et assigner": {
+    "en": "Create and assign",
+    "es": "Crear y asignar",
+    "de": "Erstellen und zuweisen"
+  },
+  "Ce type existe déjà.": {
+    "en": "This type already exists.",
+    "es": "Este tipo ya existe.",
+    "de": "Dieser Typ existiert bereits."
+  },
+  "Aucune Cue pour ces types.": {
+    "en": "No cues match these types.",
+    "es": "No hay cues para estos tipos.",
+    "de": "Keine Cues für diese Typen."
+  },
+  "Gérer les types": {
+    "en": "Manage types",
+    "es": "Gestionar tipos",
+    "de": "Typen verwalten"
+  },
+  "Type personnalisé": {
+    "en": "Custom type",
+    "es": "Tipo personalizado",
+    "de": "Benutzerdefinierter Typ"
+  },
+  "Nouveau type": {
+    "en": "New type",
+    "es": "Nuevo tipo",
+    "de": "Neuer Typ"
+  },
+  "Supprimer le type": {
+    "en": "Delete type",
+    "es": "Eliminar tipo",
+    "de": "Typ löschen"
+  },
+  "Indiquez un nom de type.": {
+    "en": "Enter a type name.",
+    "es": "Indica un nombre para el tipo.",
+    "de": "Gib einen Typnamen ein."
+  },
+  "Choisissez une couleur valide.": {
+    "en": "Choose a valid color.",
+    "es": "Elige un color válido.",
+    "de": "Wähle eine gültige Farbe."
+  },
+  "Supprimer ce type ? Ses Cues passeront en Sans type.": {
+    "en": "Delete this type? Its cues will become unassigned.",
+    "es": "¿Eliminar este tipo? Sus cues quedarán sin tipo.",
+    "de": "Diesen Typ löschen? Seine Cues werden typfrei."
+  },
+  "Sélection multiple": {
+    "en": "Select multiple",
+    "es": "Selección múltiple",
+    "de": "Mehrfachauswahl"
+  },
+  "Attribuer un type": {
+    "en": "Assign a type",
+    "es": "Asignar un tipo",
+    "de": "Typ zuweisen"
+  },
+  "Sélectionner la Cue": {
+    "en": "Select cue",
+    "es": "Seleccionar cue",
+    "de": "Cue auswählen"
+  },
+  "1 Cue sélectionnée": {
+    "en": "1 cue selected",
+    "es": "1 cue seleccionada",
+    "de": "1 Cue ausgewählt"
+  },
+  "{count} Cues sélectionnées": {
+    "en": "{count} cues selected",
+    "es": "{count} cues seleccionadas",
+    "de": "{count} Cues ausgewählt"
+  },
+  "Description {type}": {
+    "en": "{type} description",
+    "es": "Descripción {type}",
+    "de": "Beschreibung {type}"
+  },
+  "Appliquer": {
+    "en": "Apply",
+    "es": "Aplicar",
+    "de": "Anwenden"
+  },
+  "Types à exporter": {
+    "en": "Types to export",
+    "es": "Tipos para exportar",
+    "de": "Zu exportierende Typen"
+  },
+  "Types exportés": {
+    "en": "Exported types",
+    "es": "Tipos exportados",
+    "de": "Exportierte Typen"
+  },
+  "Tout sélectionner": {
+    "en": "Select all",
+    "es": "Seleccionar todo",
+    "de": "Alle auswählen"
+  },
+  "Afficher le PDF": {
+    "en": "Preview PDF",
+    "es": "Ver PDF",
+    "de": "PDF anzeigen"
+  },
+  "Envoyer les rapports d’erreur techniques": {
+    "en": "Send technical error reports",
+    "es": "Enviar informes técnicos de errores",
+    "de": "Technische Fehlerberichte senden"
+  },
+  "Version, navigateur et emplacement de l’erreur dans le code. Les projets et les médias restent sur cet appareil.": {
+    "en": "Version, browser and location of the error in the code. Projects and media stay on this device.",
+    "es": "Versión, navegador y ubicación del error en el código. Los proyectos y medios permanecen en este dispositivo.",
+    "de": "Version, Browser und Fehlerstelle im Code. Projekte und Medien bleiben auf diesem Gerät."
+  },
+  "Ajouter la préparation du spectacle": {
+    "en": "Add show preparation",
+    "es": "Añadir la preparación del espectáculo",
+    "de": "Showvorbereitung hinzufügen"
+  },
+  "Avancement de la checklist": {
+    "en": "Checklist progress",
+    "es": "Progreso de la lista",
+    "de": "Fortschritt der Checkliste"
+  },
+  "Matériel à emporter": {
+    "en": "Equipment to pack",
+    "es": "Material que llevar",
+    "de": "Einzupackende Ausrüstung"
+  },
+  "Installation sur place": {
+    "en": "On-site setup",
+    "es": "Montaje en el lugar",
+    "de": "Aufbau vor Ort"
+  },
+  "Vérifications avant spectacle": {
+    "en": "Pre-show checks",
+    "es": "Comprobaciones antes del espectáculo",
+    "de": "Kontrollen vor der Show"
+  },
+  "Préparer les accessoires et costumes": {
+    "en": "Pack props and costumes",
+    "es": "Preparar accesorios y vestuario",
+    "de": "Requisiten und Kostüme einpacken"
+  },
+  "Vérifier le microphone et la télécommande": {
+    "en": "Check the microphone and remote",
+    "es": "Comprobar el micrófono y el mando",
+    "de": "Mikrofon und Fernbedienung prüfen"
+  },
+  "Emporter les câbles et adaptateurs audio": {
+    "en": "Pack audio cables and adapters",
+    "es": "Llevar cables y adaptadores de audio",
+    "de": "Audiokabel und Adapter einpacken"
+  },
+  "Positionner les accessoires": {
+    "en": "Place the props",
+    "es": "Colocar los accesorios",
+    "de": "Requisiten platzieren"
+  },
+  "Brancher la sonorisation et vérifier le retour": {
+    "en": "Connect the sound system and check monitoring",
+    "es": "Conectar el sonido y comprobar el retorno",
+    "de": "Tonanlage anschließen und Monitoring prüfen"
+  },
+  "Connecter la télécommande et tester les déclenchements": {
+    "en": "Connect the remote and test triggers",
+    "es": "Conectar el mando y probar los disparos",
+    "de": "Fernbedienung verbinden und Auslösung testen"
+  },
+  "Vérifier les médias hors connexion": {
+    "en": "Check media offline",
+    "es": "Comprobar los medios sin conexión",
+    "de": "Medien offline prüfen"
+  },
+  "Vérifier les batteries": {
+    "en": "Check the batteries",
+    "es": "Comprobar las baterías",
+    "de": "Batterien prüfen"
+  },
+  "Contrôler la sortie et le niveau audio": {
+    "en": "Check audio output and level",
+    "es": "Comprobar la salida y el nivel de audio",
+    "de": "Audioausgang und Pegel prüfen"
+  },
+  "Contrôler les cues et tester le GO": {
+    "en": "Check cues and test GO",
+    "es": "Comprobar los cues y probar GO",
+    "de": "Cues prüfen und GO testen"
+  },
+  "Les éléments de préparation sont déjà présents.": {
+    "en": "The preparation items are already in the checklist.",
+    "es": "Los elementos de preparación ya están en la lista.",
+    "de": "Die Vorbereitungspunkte sind bereits vorhanden."
+  },
+  "La checklist a atteint sa limite de rubriques ou d’éléments.": {
+    "en": "The checklist has reached its section or item limit.",
+    "es": "La lista ha alcanzado el límite de secciones o elementos.",
+    "de": "Das Limit für Abschnitte oder Punkte ist erreicht."
+  },
+  "Éléments de préparation ajoutés.": {
+    "en": "Preparation items added.",
+    "es": "Elementos de preparación añadidos.",
+    "de": "Vorbereitungspunkte hinzugefügt."
+  },
+  "Bibliothèque de numéros": {
+    "en": "Act library",
+    "es": "Biblioteca de números",
+    "de": "Nummernbibliothek"
+  },
+  "Médias indisponibles avant la lecture": {
+    "en": "Media unavailable before playback",
+    "es": "Archivos no disponibles antes de reproducir",
+    "de": "Medien vor der Wiedergabe nicht verfügbar"
+  },
+  "Fichier manquant": {
+    "en": "Missing file",
+    "es": "Archivo ausente",
+    "de": "Datei fehlt"
+  },
+  "Média non préparé": {
+    "en": "Media not prepared",
+    "es": "Archivo no preparado",
+    "de": "Medium nicht vorbereitet"
+  },
+  "Enregistrer le numéro ouvert": {
+    "en": "Save current act",
+    "es": "Guardar el número abierto",
+    "de": "Offene Nummer speichern"
+  },
+  "Passez en mode Spectacle pour ajouter une copie.": {
+    "en": "Switch to Show mode to add a copy.",
+    "es": "Cambia al modo Espectáculo para añadir una copia.",
+    "de": "Zum Hinzufügen einer Kopie in den Showmodus wechseln."
+  },
+  "Aucun numéro enregistré sur cet appareil.": {
+    "en": "No acts saved on this device.",
+    "es": "No hay números guardados en este dispositivo.",
+    "de": "Auf diesem Gerät sind keine Nummern gespeichert."
+  },
+  "Ajouter une copie": {
+    "en": "Add a copy",
+    "es": "Añadir una copia",
+    "de": "Kopie hinzufügen"
+  },
+  "Retirer": {
+    "en": "Remove",
+    "es": "Retirar",
+    "de": "Entfernen"
+  },
+  "Retirer ce numéro de la bibliothèque ?": {
+    "en": "Remove this act from the library?",
+    "es": "¿Retirar este número de la biblioteca?",
+    "de": "Diese Nummer aus der Bibliothek entfernen?"
+  },
+  "Numéro indisponible dans la bibliothèque.": {
+    "en": "Act unavailable in the library.",
+    "es": "Número no disponible en la biblioteca.",
+    "de": "Nummer in der Bibliothek nicht verfügbar."
+  },
+  "Copie ajoutée au spectacle.": {
+    "en": "Copy added to the show.",
+    "es": "Copia añadida al espectáculo.",
+    "de": "Kopie zur Show hinzugefügt."
+  },
+  "Numéro retiré de la bibliothèque.": {
+    "en": "Act removed from the library.",
+    "es": "Número retirado de la biblioteca.",
+    "de": "Nummer aus der Bibliothek entfernt."
+  },
+  "Numéro enregistré dans la bibliothèque.": {
+    "en": "Act saved to the library.",
+    "es": "Número guardado en la biblioteca.",
+    "de": "Nummer in der Bibliothek gespeichert."
+  },
+  "Traitement en cours…": {
+    "en": "Working…",
+    "es": "Procesando…",
+    "de": "Wird verarbeitet…"
+  },
+  "Préparation du numéro": {
+    "en": "Act preparation",
+    "es": "Preparación del número",
+    "de": "Vorbereitung der Nummer"
+  },
+  "Générer depuis les numéros": {
+    "en": "Generate from acts",
+    "es": "Generar desde los números",
+    "de": "Aus Nummern erstellen"
+  },
+  "Consignes d’installation": {
+    "en": "Setup instructions",
+    "es": "Instrucciones de montaje",
+    "de": "Aufbauanweisungen"
+  },
+  "Un élément par ligne": {
+    "en": "One item per line",
+    "es": "Un elemento por línea",
+    "de": "Ein Element pro Zeile"
+  },
+  "Une consigne par ligne": {
+    "en": "One instruction per line",
+    "es": "Una instrucción por línea",
+    "de": "Eine Anweisung pro Zeile"
+  },
+  "Aucun matériel ni aucune consigne renseignés.": {
+    "en": "No equipment or setup instructions entered.",
+    "es": "No se ha indicado material ni instrucciones.",
+    "de": "Keine Ausrüstung oder Aufbauanweisungen eingetragen."
+  },
+  "La checklist contient déjà les éléments des numéros.": {
+    "en": "The checklist already contains the acts’ items.",
+    "es": "La lista ya contiene los elementos de los números.",
+    "de": "Die Checkliste enthält bereits die Punkte der Nummern."
+  },
+  "Checklist complétée à partir des numéros.": {
+    "en": "Checklist updated from acts.",
+    "es": "Lista completada a partir de los números.",
+    "de": "Checkliste aus Nummern ergänzt."
+  },
+  "Maximum : 120 lignes par champ et 240 caractères par ligne.": {
+    "en": "Limit: 120 lines per field and 240 characters per line.",
+    "es": "Máximo: 120 líneas por campo y 240 caracteres por línea.",
+    "de": "Maximal 120 Zeilen pro Feld und 240 Zeichen pro Zeile."
+  },
+  "Rattacher aux numéros": {
+    "en": "Link to acts",
+    "es": "Vincular a los números",
+    "de": "Mit Nummern verknüpfen"
+  },
+  "Détacher": {
+    "en": "Unlink",
+    "es": "Desvincular",
+    "de": "Verknüpfung lösen"
+  },
+  "Utilisé par {acts}": {
+    "en": "Used by {acts}",
+    "es": "Usado por {acts}",
+    "de": "Verwendet von {acts}"
+  },
+  "Filtrer par numéro": {
+    "en": "Filter by act",
+    "es": "Filtrar por número",
+    "de": "Nach Nummer filtern"
+  },
+  "Tous les numéros": {
+    "en": "All acts",
+    "es": "Todos los números",
+    "de": "Alle Nummern"
+  },
+  "Aucun élément de checklist pour ce numéro.": {
+    "en": "No checklist items for this act.",
+    "es": "No hay elementos de la lista para este número.",
+    "de": "Keine Checklistenpunkte für diese Nummer."
+  },
+  "Télécharger les PDF par numéro (ZIP)": {
+    "en": "Download PDFs by act (ZIP)",
+    "es": "Descargar PDF por número (ZIP)",
+    "de": "PDFs je Nummer herunterladen (ZIP)"
+  },
+  "Création du ZIP…": {
+    "en": "Creating ZIP…",
+    "es": "Creando ZIP…",
+    "de": "ZIP wird erstellt…"
+  },
+  "ZIP prêt.": {
+    "en": "ZIP ready.",
+    "es": "ZIP listo.",
+    "de": "ZIP bereit."
+  },
+  "Numéros à exporter": {
+    "en": "Acts to export",
+    "es": "Números para exportar",
+    "de": "Zu exportierende Nummern"
+  },
+  "Exporter le ZIP": {
+    "en": "Export ZIP",
+    "es": "Exportar ZIP",
+    "de": "ZIP exportieren"
+  },
+  "Checklist récapitulative": {
+    "en": "Checklist summary",
+    "es": "Resumen de la lista",
+    "de": "Checklistenübersicht"
+  },
+  "Numéros sélectionnés": {
+    "en": "Selected acts",
+    "es": "Números seleccionados",
+    "de": "Ausgewählte Nummern"
+  },
+  "Aucun élément de checklist pour ces numéros.": {
+    "en": "No checklist items for these acts.",
+    "es": "No hay elementos de la lista para estos números.",
+    "de": "Keine Checklistenpunkte für diese Nummern."
+  },
+  "Télécharger le récapitulatif seul": {
+    "en": "Download summary only",
+    "es": "Descargar solo el resumen",
+    "de": "Nur die Übersicht herunterladen"
+  },
+  "Réimporter les coches du PDF": {
+    "en": "Import checkmarks from PDF",
+    "es": "Importar las casillas del PDF",
+    "de": "Häkchen aus PDF importieren"
+  },
+  "Lecteur PDF indisponible.": {
+    "en": "PDF reader unavailable.",
+    "es": "Lector de PDF no disponible.",
+    "de": "PDF-Leser nicht verfügbar."
+  },
+  "Lecture du PDF…": {
+    "en": "Reading PDF…",
+    "es": "Leyendo PDF…",
+    "de": "PDF wird gelesen…"
+  },
+  "Le PDF dépasse 64 Mo.": {
+    "en": "The PDF exceeds 64 MB.",
+    "es": "El PDF supera los 64 MB.",
+    "de": "Die PDF-Datei ist größer als 64 MB."
+  },
+  "Impossible de lire les cases interactives de ce PDF.": {
+    "en": "Could not read the interactive checkboxes in this PDF.",
+    "es": "No se pudieron leer las casillas interactivas del PDF.",
+    "de": "Die interaktiven Kontrollkästchen dieser PDF-Datei konnten nicht gelesen werden."
+  },
+  "Choisissez un PDF récapitulatif interactif exporté par Pilot 1.10.15 ou ultérieur.": {
+    "en": "Choose an interactive summary PDF exported by Pilot 1.10.15 or later.",
+    "es": "Selecciona un PDF resumen interactivo exportado por Pilot 1.10.15 o posterior.",
+    "de": "Wähle ein interaktives Übersichts-PDF aus Pilot 1.10.15 oder neuer."
+  },
+  "Ce PDF appartient à un autre spectacle.": {
+    "en": "This PDF belongs to another show.",
+    "es": "Este PDF pertenece a otro espectáculo.",
+    "de": "Diese PDF-Datei gehört zu einer anderen Show."
+  },
+  "{count} case(s) mise(s) à jour.": {
+    "en": "{count} checkbox(es) updated.",
+    "es": "{count} casilla(s) actualizada(s).",
+    "de": "{count} Kontrollkästchen aktualisiert."
+  },
+  "{count} ligne(s) modifiée(s) ou supprimée(s) ignorée(s).": {
+    "en": "{count} renamed or removed item(s) skipped.",
+    "es": "Se omitieron {count} elemento(s) renombrado(s) o eliminado(s).",
+    "de": "{count} umbenannte oder entfernte Einträge übersprungen."
+  },
+  "Changements proposés par le PDF": {
+    "en": "Changes from the PDF",
+    "es": "Cambios propuestos por el PDF",
+    "de": "Vorgeschlagene Änderungen aus dem PDF"
+  },
+  "Sélectionnez les changements à appliquer.": {
+    "en": "Select the changes to apply.",
+    "es": "Selecciona los cambios que quieres aplicar.",
+    "de": "Wähle die Änderungen aus, die übernommen werden sollen."
+  },
+  "Appliquer la sélection": {
+    "en": "Apply selection",
+    "es": "Aplicar selección",
+    "de": "Auswahl übernehmen"
+  },
+  "Cocher": {
+    "en": "Check",
+    "es": "Marcar",
+    "de": "Ankreuzen"
+  },
+  "Décocher": {
+    "en": "Uncheck",
+    "es": "Desmarcar",
+    "de": "Häkchen entfernen"
+  },
+  "Aucun changement à appliquer.": {
+    "en": "No changes to apply.",
+    "es": "No hay cambios que aplicar.",
+    "de": "Keine Änderungen zum Übernehmen."
+  },
+  "Réimporter les coches des PDF": {
+    "en": "Import checkmarks from PDFs",
+    "es": "Importar las casillas de los PDF",
+    "de": "Häkchen aus PDFs importieren"
+  },
+  "Conflit entre PDF": {
+    "en": "Conflicting PDFs",
+    "es": "Conflicto entre PDF",
+    "de": "Konflikt zwischen PDFs"
+  },
+  "Garder la coche actuelle": {
+    "en": "Keep current state",
+    "es": "Mantener el estado actual",
+    "de": "Aktuellen Zustand beibehalten"
+  },
+  "Choisissez un PDF de checklist compatible exporté par Pilot.": {
+    "en": "Choose a compatible checklist PDF exported by Pilot.",
+    "es": "Selecciona un PDF de lista compatible exportado por Pilot.",
+    "de": "Wähle ein kompatibles Checklisten-PDF aus Pilot."
+  },
+  "Lecture des PDF…": {
+    "en": "Reading PDFs…",
+    "es": "Leyendo los PDF…",
+    "de": "PDFs werden gelesen…"
+  },
+  "PDF prioritaire": {
+    "en": "Priority PDF",
+    "es": "PDF prioritario",
+    "de": "Bevorzugtes PDF"
+  },
+  "Choisir un PDF": {
+    "en": "Choose a PDF",
+    "es": "Elegir un PDF",
+    "de": "PDF auswählen"
+  },
+  "Ordre de priorité des PDF": {
+    "en": "PDF priority order",
+    "es": "Orden de prioridad de los PDF",
+    "de": "Reihenfolge der PDF-Priorität"
+  },
+  "Utiliser cet ordre": {
+    "en": "Use this order",
+    "es": "Usar este orden",
+    "de": "Diese Reihenfolge verwenden"
+  },
+  "Monter le PDF": {
+    "en": "Move PDF up",
+    "es": "Subir PDF",
+    "de": "PDF nach oben verschieben"
+  },
+  "Descendre le PDF": {
+    "en": "Move PDF down",
+    "es": "Bajar PDF",
+    "de": "PDF nach unten verschieben"
+  },
+  "PDF retenu · {file}": {
+    "en": "Selected PDF · {file}",
+    "es": "PDF elegido · {file}",
+    "de": "Gewähltes PDF · {file}"
+  },
+  "Choix manuel · PDF proposé {file}": {
+    "en": "Manual override · Suggested PDF {file}",
+    "es": "Cambio manual · PDF propuesto {file}",
+    "de": "Manuelle Auswahl · Vorgeschlagenes PDF {file}"
+  },
+  "Choix manuel": {
+    "en": "Manual choice",
+    "es": "Elección manual",
+    "de": "Manuelle Auswahl"
+  },
+  "Historique des imports PDF": {
+    "en": "PDF import history",
+    "es": "Historial de importaciones PDF",
+    "de": "Verlauf der PDF-Importe"
+  },
+  "Import": {
+    "en": "Import",
+    "es": "Importación",
+    "de": "Import"
+  },
+  "Rechercher un changement": {
+    "en": "Search changes",
+    "es": "Buscar un cambio",
+    "de": "Änderung suchen"
+  },
+  "Afficher seulement les choix manuels": {
+    "en": "Show manual choices only",
+    "es": "Mostrar solo cambios manuales",
+    "de": "Nur manuelle Änderungen anzeigen"
+  },
+  "Afficher seulement les conflits": {
+    "en": "Show conflicts only",
+    "es": "Mostrar solo los conflictos",
+    "de": "Nur Konflikte anzeigen"
+  },
+  "Changements hors conflit": {
+    "en": "Changes without conflicts",
+    "es": "Cambios sin conflictos",
+    "de": "Änderungen ohne Konflikte"
+  },
+  "Télécharger le relevé CSV": {
+    "en": "Download CSV report",
+    "es": "Descargar informe CSV",
+    "de": "CSV-Bericht herunterladen"
+  },
+  "Aucun changement trouvé.": {
+    "en": "No changes found.",
+    "es": "No se encontraron cambios.",
+    "de": "Keine Änderungen gefunden."
+  },
+  "{checked} cochée(s) · {unchecked} décochée(s) · {manual} choix manuel(s)": {
+    "en": "{checked} checked · {unchecked} unchecked · {manual} manual",
+    "es": "{checked} marcadas · {unchecked} desmarcadas · {manual} manuales",
+    "de": "{checked} aktiviert · {unchecked} deaktiviert · {manual} manuell"
+  },
+  "PDF importés · {files}": {
+    "en": "Imported PDFs · {files}",
+    "es": "PDF importados · {files}",
+    "de": "Importierte PDFs · {files}"
+  },
+  "Ordre utilisé · {files}": {
+    "en": "Order used · {files}",
+    "es": "Orden utilizado · {files}",
+    "de": "Verwendete Reihenfolge · {files}"
+  },
+  "Modification": {
+    "en": "Change",
+    "es": "Cambio",
+    "de": "Änderung"
+  },
+  "Source": {
+    "en": "Source",
+    "es": "Origen",
+    "de": "Quelle"
+  },
+  "Annuler cet import…": {
+    "en": "Reverse this import…",
+    "es": "Deshacer esta importación…",
+    "de": "Diesen Import rückgängig machen…"
+  },
+  "Cases à restaurer": {
+    "en": "Checkboxes to restore",
+    "es": "Casillas para restaurar",
+    "de": "Wiederherzustellende Kontrollkästchen"
+  },
+  "Restaurer la sélection": {
+    "en": "Restore selection",
+    "es": "Restaurar selección",
+    "de": "Auswahl wiederherstellen"
+  },
+  "Déjà restaurée": {
+    "en": "Already restored",
+    "es": "Ya restaurada",
+    "de": "Bereits wiederhergestellt"
+  },
+  "Import antérieur à la restauration": {
+    "en": "Import predates restoration support",
+    "es": "Importación anterior a esta función",
+    "de": "Import vor Einführung der Wiederherstellung"
+  },
+  "Ligne supprimée": {
+    "en": "Item deleted",
+    "es": "Elemento eliminado",
+    "de": "Eintrag gelöscht"
+  },
+  "Modifiée depuis l’import": {
+    "en": "Changed since import",
+    "es": "Modificada desde la importación",
+    "de": "Seit dem Import geändert"
+  },
+  "{count} case(s) restaurée(s).": {
+    "en": "{count} checkbox(es) restored.",
+    "es": "{count} casilla(s) restaurada(s).",
+    "de": "{count} Kontrollkästchen wiederhergestellt."
+  },
+  "{count} changement(s) récent(s) protégé(s).": {
+    "en": "{count} later change(s) protected.",
+    "es": "{count} cambio(s) posterior(es) protegido(s).",
+    "de": "{count} spätere Änderungen geschützt."
+  },
+  "Compacte": {
+    "en": "Compact",
+    "es": "Compacta",
+    "de": "Kompakt"
+  },
+  "Liste resserrée avec les descriptions, les visuels et le suivi de lecture.": {
+    "en": "Compact list with descriptions, visuals and playback tracking.",
+    "es": "Lista compacta con descripciones, imágenes y seguimiento de reproducción.",
+    "de": "Kompakte Liste mit Beschreibungen, Bildern und Wiedergabeverfolgung."
+  },
+  "Protection contre les doubles GO": {
+    "en": "Double-GO protection",
+    "es": "Protección contra GO duplicado",
+    "de": "Doppel-GO-Schutz"
+  },
+  "Délai entre deux GO manuels": {
+    "en": "Delay between manual GOs",
+    "es": "Intervalo entre GO manuales",
+    "de": "Abstand zwischen manuellen GOs"
+  },
+  "0 ms désactive le délai. Les enchaînements automatiques suivent leurs réglages.": {
+    "en": "0 ms disables the delay. Automatic transitions use their own settings.",
+    "es": "0 ms desactiva el intervalo. Las transiciones automáticas conservan sus ajustes.",
+    "de": "0 ms deaktiviert den Abstand. Automatische Übergänge behalten ihre Einstellungen."
+  },
+  "Réglage conservé pour cette session.": {
+    "en": "Setting kept for this session.",
+    "es": "Ajuste guardado para esta sesión.",
+    "de": "Einstellung für diese Sitzung gespeichert."
+  },
+  "Préparer la liste": {
+    "en": "Prepare the checklist",
+    "es": "Preparar la lista",
+    "de": "Checkliste vorbereiten"
+  },
+  "Ajoutez une rubrique pour commencer, ou utilisez un modèle.": {
+    "en": "Add a section to get started, or use a template.",
+    "es": "Añade una sección para empezar o utiliza una plantilla.",
+    "de": "Erstelle einen Abschnitt oder verwende eine Vorlage."
+  },
+  "+ Ajouter une rubrique": {
+    "en": "+ Add a section",
+    "es": "+ Añadir sección",
+    "de": "+ Abschnitt hinzufügen"
+  },
+  "Options PDF": {
+    "en": "PDF options",
+    "es": "Opciones PDF",
+    "de": "PDF-Optionen"
+  },
+  "Vérification avant spectacle": {
+    "en": "Pre-show check",
+    "es": "Comprobación antes del espectáculo",
+    "de": "Check vor der Show"
+  },
+  "Médias, sortie audio et LTC": {
+    "en": "Media, audio output and LTC",
+    "es": "Medios, salida de audio y LTC",
+    "de": "Medien, Audioausgang und LTC"
+  },
+  "Vérifier les médias": {
+    "en": "Check media",
+    "es": "Comprobar medios",
+    "de": "Medien prüfen"
+  },
+  "Ouvrir les réglages audio": {
+    "en": "Open audio settings",
+    "es": "Abrir ajustes de audio",
+    "de": "Audioeinstellungen öffnen"
+  },
+  "{ready} / {total} médias prêts": {
+    "en": "{ready} / {total} media files ready",
+    "es": "{ready} / {total} archivos listos",
+    "de": "{ready} / {total} Medien bereit"
+  },
+  "Aucun média dans ce projet.": {
+    "en": "No media in this project.",
+    "es": "No hay medios en este proyecto.",
+    "de": "Keine Medien in diesem Projekt."
+  },
+  "{count} piste(s) avec LTC. Testez le signal dans les réglages audio.": {
+    "en": "{count} track(s) with LTC. Test the signal in audio settings.",
+    "es": "{count} pista(s) con LTC. Prueba la señal en los ajustes de audio.",
+    "de": "{count} Spur(en) mit LTC. Signal in den Audioeinstellungen testen."
+  },
+  "Aucune piste avec LTC.": {
+    "en": "No tracks with LTC.",
+    "es": "No hay pistas con LTC.",
+    "de": "Keine Spuren mit LTC."
+  },
+  "Vérification des médias…": {
+    "en": "Checking media…",
+    "es": "Comprobando medios…",
+    "de": "Medien werden geprüft…"
+  },
+  "Tous les médias sont prêts.": {
+    "en": "All media is ready.",
+    "es": "Todos los medios están listos.",
+    "de": "Alle Medien sind bereit."
+  },
+  "Certains médias restent indisponibles.": {
+    "en": "Some media is still unavailable.",
+    "es": "Algunos medios siguen sin estar disponibles.",
+    "de": "Einige Medien sind weiterhin nicht verfügbar."
+  },
+  "La vérification des médias a échoué.": {
+    "en": "Media check failed.",
+    "es": "Falló la comprobación de medios.",
+    "de": "Medienprüfung fehlgeschlagen."
+  },
+  "Fin indéterminée": {
+    "en": "Finish time unknown",
+    "es": "Hora de finalización desconocida",
+    "de": "Endzeit unbekannt"
+  },
+  "Fin estimée : {time}": {
+    "en": "Estimated finish: {time}",
+    "es": "Fin estimado: {time}",
+    "de": "Voraussichtliches Ende: {time}"
+  },
+  "hors attente GO": {
+    "en": "excluding GO waits",
+    "es": "sin contar las esperas de GO",
+    "de": "ohne GO-Wartezeiten"
+  },
+  "si reprise maintenant": {
+    "en": "if resumed now",
+    "es": "si se reanuda ahora",
+    "de": "bei Fortsetzung jetzt"
+  },
+  "Mettre à jour un numéro": {
+    "en": "Update an act",
+    "es": "Actualizar un número",
+    "de": "Nummer aktualisieren"
+  },
+  "Numéro à mettre à jour": {
+    "en": "Act to update",
+    "es": "Número que se actualizará",
+    "de": "Zu aktualisierende Nummer"
+  },
+  "Choisir un numéro du spectacle": {
+    "en": "Choose an act in the show",
+    "es": "Elige un número del espectáculo",
+    "de": "Nummer aus der Show wählen"
+  },
+  "Appliquer la mise à jour": {
+    "en": "Apply update",
+    "es": "Aplicar la actualización",
+    "de": "Aktualisierung anwenden"
+  },
+  "Numéro mis à jour.": {
+    "en": "Act updated.",
+    "es": "Número actualizado.",
+    "de": "Nummer aktualisiert."
+  },
+  "La nouvelle version remplace les sous-Cues, leurs médias et la préparation de ce numéro. Les Cues suivantes sont décalées si la durée change.": {
+    "en": "The new version replaces this act’s sub-cues, media and preparation. Following Cues shift if the duration changes.",
+    "es": "La nueva versión sustituye las subcues, sus medios y la preparación del número. Las cues siguientes se desplazan si cambia la duración.",
+    "de": "Die neue Version ersetzt Unter-Cues, Medien und Vorbereitung dieser Nummer. Ändert sich die Dauer, verschieben sich nachfolgende Cues."
+  },
+  "Durée : {before} → {after}": {
+    "en": "Duration: {before} → {after}",
+    "es": "Duración: {before} → {after}",
+    "de": "Dauer: {before} → {after}"
+  },
+  "Remplacer : {cue}": {
+    "en": "Replace: {cue}",
+    "es": "Sustituir: {cue}",
+    "de": "Ersetzen: {cue}"
+  },
+  "Ajouter : {cue}": {
+    "en": "Add: {cue}",
+    "es": "Añadir: {cue}",
+    "de": "Hinzufügen: {cue}"
+  },
+  "Retirer : {cue}": {
+    "en": "Remove: {cue}",
+    "es": "Retirar: {cue}",
+    "de": "Entfernen: {cue}"
+  },
+  "Raccourcis du bouton Bluetooth": {
+    "en": "Bluetooth button shortcuts",
+    "es": "Atajos del botón Bluetooth",
+    "de": "Bluetooth-Tastenkürzel"
+  },
+  "Envoyer des commandes sur le réseau": {
+    "en": "Send commands over the network",
+    "es": "Enviar comandos por la red",
+    "de": "Befehle über das Netzwerk senden"
+  },
+  "Dans l’application Flic, configurez votre Flic 2 en mode clavier HID, puis associez chaque geste à une touche. Gardez Pilot au premier plan.": {
+    "en": "In the Flic app, configure your Flic 2 as an HID keyboard and assign a key to each gesture. Keep Pilot in the foreground.",
+    "es": "Configura el Flic 2 como teclado HID y asigna una tecla a cada gesto en la app Flic. Mantén Pilot en primer plano.",
+    "de": "Flic 2 in der Flic-App als HID-Tastatur einrichten und jedem Tastendruck eine Taste zuweisen. Pilot im Vordergrund halten."
+  },
+  "GO en Live": {
+    "en": "GO in Live",
+    "es": "GO en Live",
+    "de": "GO in Live"
+  },
+  "Modifier les raccourcis": {
+    "en": "Edit shortcuts",
+    "es": "Editar atajos",
+    "de": "Tastenkürzel bearbeiten"
+  },
+  "IPv4 de destination": {
+    "en": "Destination IPv4",
+    "es": "IPv4 de destino",
+    "de": "IPv4-Zieladresse"
+  },
+  "Port UDP": {
+    "en": "UDP port",
+    "es": "Puerto UDP",
+    "de": "UDP-Port"
+  },
+  "Message de test": {
+    "en": "Test message",
+    "es": "Mensaje de prueba",
+    "de": "Testnachricht"
+  },
+  "Envoyer un test OSC": {
+    "en": "Send OSC test",
+    "es": "Enviar prueba OSC",
+    "de": "OSC-Test senden"
+  },
+  "Envoyer les messages des Cues en Live": {
+    "en": "Send Cue messages in Live",
+    "es": "Enviar mensajes de Cue en Live",
+    "de": "Cue-Nachrichten in Live senden"
+  },
+  "Journal OSC": {
+    "en": "OSC log",
+    "es": "Registro OSC",
+    "de": "OSC-Protokoll"
+  },
+  "Messages OSC de la Cue": {
+    "en": "Cue OSC messages",
+    "es": "Mensajes OSC de la Cue",
+    "de": "OSC-Nachrichten der Cue"
+  },
+  "Un message par ligne. Arguments facultatifs au format JSON.": {
+    "en": "One message per line. Optional arguments use JSON.",
+    "es": "Un mensaje por línea. Argumentos opcionales en JSON.",
+    "de": "Eine Nachricht pro Zeile. Optionale Argumente im JSON-Format."
+  },
+  "Maximum de huit messages OSC par Cue.": {
+    "en": "Up to eight OSC messages per Cue.",
+    "es": "Hasta ocho mensajes OSC por Cue.",
+    "de": "Bis zu acht OSC-Nachrichten pro Cue."
+  },
+  "Adresse OSC invalide.": {
+    "en": "Invalid OSC address.",
+    "es": "Dirección OSC no válida.",
+    "de": "Ungültige OSC-Adresse."
+  },
+  "Arguments OSC invalides.": {
+    "en": "Invalid OSC arguments.",
+    "es": "Argumentos OSC no válidos.",
+    "de": "Ungültige OSC-Argumente."
+  },
+  "Vérifiez le format des messages OSC.": {
+    "en": "Check the OSC message format.",
+    "es": "Comprueba el formato de los mensajes OSC.",
+    "de": "Format der OSC-Nachrichten prüfen."
+  },
+  "Messages OSC invalides.": {
+    "en": "Invalid OSC messages.",
+    "es": "Mensajes OSC no válidos.",
+    "de": "Ungültige OSC-Nachrichten."
+  },
+  "Lancez Pilot depuis le lanceur local.": {
+    "en": "Start Pilot from the local launcher.",
+    "es": "Abre Pilot con el iniciador local.",
+    "de": "Pilot über den lokalen Starter öffnen."
+  },
+  "Envoi OSC indisponible.": {
+    "en": "OSC output unavailable.",
+    "es": "Envío OSC no disponible.",
+    "de": "OSC-Ausgabe nicht verfügbar."
+  },
+  "Envoyé en UDP": {
+    "en": "Sent over UDP",
+    "es": "Enviado por UDP",
+    "de": "Über UDP gesendet"
+  },
+  "Envoi automatique actif en Live.": {
+    "en": "Automatic output active in Live.",
+    "es": "Envío automático activo en Live.",
+    "de": "Automatische Ausgabe in Live aktiv."
+  },
+  "Réactivez l’envoi pour utiliser cette destination.": {
+    "en": "Enable output again to use this destination.",
+    "es": "Reactiva el envío para usar este destino.",
+    "de": "Ausgabe für dieses Ziel erneut aktivieren."
+  },
+  "Délai dépassé à la lecture du fichier.": {
+    "en": "Reading the file timed out.",
+    "es": "Se agotó el tiempo al leer el archivo.",
+    "de": "Zeitlimit beim Lesen der Datei überschritten."
+  },
+  "Format non pris en charge par ce navigateur.": {
+    "en": "Format unsupported by this browser.",
+    "es": "Formato no compatible con este navegador.",
+    "de": "Format wird von diesem Browser nicht unterstützt."
+  },
+  "Le fichier ne fournit pas de durée valide.": {
+    "en": "The file has no valid duration.",
+    "es": "El archivo no tiene una duración válida.",
+    "de": "Die Datei hat keine gültige Dauer."
+  },
+  "Impossible de lire le fichier.": {
+    "en": "Could not read the file.",
+    "es": "No se pudo leer el archivo.",
+    "de": "Die Datei konnte nicht gelesen werden."
+  },
+  "Code télécommande": {
+    "en": "Remote control code",
+    "es": "Código del mando",
+    "de": "Fernbedienungscode"
+  },
+  "Déverrouiller": {
+    "en": "Unlock",
+    "es": "Desbloquear",
+    "de": "Entsperren"
+  },
+  "Saisissez exactement 4 chiffres.": {
+    "en": "Enter exactly 4 digits.",
+    "es": "Introduce exactamente 4 dígitos.",
+    "de": "Gib genau 4 Ziffern ein."
+  },
+  "Code télécommande incorrect.": {
+    "en": "Incorrect remote control code.",
+    "es": "Código del mando incorrecto.",
+    "de": "Falscher Fernbedienungscode."
+  },
+  "Trop de codes incorrects. Réessayez dans 5 minutes.": {
+    "en": "Too many incorrect codes. Try again in 5 minutes.",
+    "es": "Demasiados códigos incorrectos. Inténtalo de nuevo en 5 minutos.",
+    "de": "Zu viele falsche Codes. Versuche es in 5 Minuten erneut."
+  },
+  "Configurez le code télécommande dans Pilot.": {
+    "en": "Set the remote control code in Pilot.",
+    "es": "Configura el código del mando en Pilot.",
+    "de": "Richte den Fernbedienungscode in Pilot ein."
+  },
+  "Saisissez à nouveau le code télécommande.": {
+    "en": "Enter the remote control code again.",
+    "es": "Vuelve a introducir el código del mando.",
+    "de": "Gib den Fernbedienungscode erneut ein."
+  },
+  "Code enregistré. Les télécommandes doivent se reconnecter.": {
+    "en": "Code saved. Remote controls must reconnect.",
+    "es": "Código guardado. Los mandos deben volver a conectarse.",
+    "de": "Code gespeichert. Fernbedienungen müssen sich erneut verbinden."
+  },
+  "Conduite Spectacle : utilisez Bridge 1.6.30 bêta inclus dans ce ZIP. Bridge 1.4.5 ne connaît pas le mode Spectacle.": {
+    "en": "Show rundown: use Bridge 1.6.30 beta included in this ZIP. Bridge 1.4.5 does not support Show mode.",
+    "es": "Guion de espectáculo: usa Bridge 1.6.30 beta incluido en este ZIP. Bridge 1.4.5 no admite el modo Espectáculo.",
+    "de": "Show-Ablauf: Verwende die in diesem ZIP enthaltene Bridge 1.6.30 Beta. Bridge 1.4.5 unterstützt den Show-Modus nicht."
+  },
+  "Enregistrement du code…": {
+    "en": "Saving the code…",
+    "es": "Guardando el código…",
+    "de": "Code wird gespeichert…"
+  },
+  "Code télécommande enregistré.": {
+    "en": "Remote control code saved.",
+    "es": "Código del mando guardado.",
+    "de": "Fernbedienungscode gespeichert."
+  },
+  "Partage actif · Régie, Backstage et Télécommande": {
+    "en": "Sharing active · Technician, Backstage and Remote control",
+    "es": "Compartición activa · Técnico, Backstage y Mando",
+    "de": "Freigabe aktiv · Technik, Backstage und Fernbedienung"
+  },
+  "Commande refusée. Vérifiez Bridge.": {
+    "en": "Command rejected. Check Bridge.",
+    "es": "Orden rechazada. Comprueba Bridge.",
+    "de": "Befehl abgelehnt. Bridge prüfen."
+  },
+  "Envoi non confirmé. Vérifiez Bridge avant de réessayer.": {
+    "en": "Delivery unconfirmed. Check Bridge before trying again.",
+    "es": "Envío sin confirmar. Comprueba Bridge antes de reintentar.",
+    "de": "Übertragung unbestätigt. Vor erneutem Versuch Bridge prüfen."
+  },
+  "Activez les télécommandes dans Bridge.": {
+    "en": "Enable remote controls in Bridge.",
+    "es": "Activa los mandos a distancia en Bridge.",
+    "de": "Fernbedienungen in Bridge aktivieren."
+  },
+  "Prête à commander QLab.": {
+    "en": "Ready to control QLab.",
+    "es": "Lista para controlar QLab.",
+    "de": "Bereit zur Steuerung von QLab."
+  },
+  "Envoi à Bridge…": {
+    "en": "Sending to Bridge…",
+    "es": "Enviando a Bridge…",
+    "de": "Senden an Bridge…"
+  },
+  "Configurez le code télécommande dans Bridge.": {
+    "en": "Set the remote control code in Bridge.",
+    "es": "Configura el código del mando en Bridge.",
+    "de": "Fernbedienungscode in Bridge einrichten."
+  },
+  "Les télécommandes sont désactivées dans Bridge.": {
+    "en": "Remote controls are disabled in Bridge.",
+    "es": "Los mandos están desactivados en Bridge.",
+    "de": "Fernbedienungen sind in Bridge deaktiviert."
+  },
+  "Mettez le relais Copilot à jour pour activer les télécommandes Bridge.": {
+    "en": "Update the Copilot relay to enable Bridge remote controls.",
+    "es": "Actualiza el relé Copilot para activar los mandos de Bridge.",
+    "de": "Copilot-Relay aktualisieren, um Bridge-Fernbedienungen zu aktivieren."
   }
 }

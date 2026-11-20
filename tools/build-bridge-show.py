@@ -9,7 +9,7 @@ for f in (repo/'S2A-Copilot/Show').iterdir():
 html=(repo/'PWA/index.html').read_text()
 (out/'pilot-show.css').write_text('\n'.join(re.findall(r'<style[^>]*>(.*?)</style>',html,re.S)))
 shutil.copy2(repo/'S2A-Copilot/Resources/S2APilotBridgeIcon.png',out/'bridge.png')
-print('Bundled Pilot Maverick styles and Bridge Show assets')
+print('Bundled Pilot Iceman styles and Bridge Show assets')
 
 shutil.copy2(repo/'PWA/copilot-assets/qrcode.js',out/'qrcode.js')
 
@@ -19,5 +19,5 @@ shell=out/'index.html'
 shell.write_text(shell.read_text().replace('<!-- COPILOT_DIALOG -->',dialog))
 rules=[line for line in html.splitlines() if line.startswith(('#copilotDialog','.copilotDialogHeading','#copilotQr','.copilotMemberConnected'))]
 rules.extend(line.replace('#copilotButton','#shareBridge') for line in html.splitlines() if line.startswith('#copilotButton'))
-(out/'copilot-dialog.css').write_text('\n'.join(rules))
+(out/'copilot-dialog.css').write_text('\n'.join(rules)+'\n'+(repo/'S2A-Copilot/Show/copilot-dialog.css').read_text())
 shutil.copy2(repo/'PWA/copilot-assets/copilot-logo.png',out/'copilot-logo.png')

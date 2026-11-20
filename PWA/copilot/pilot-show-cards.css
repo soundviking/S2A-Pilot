@@ -1,0 +1,23 @@
+.showOverviewRow{position:relative;display:grid;grid-template-columns:32px 64px 70px minmax(0,1fr);gap:14px;min-height:64px;padding:12px;border:1px solid #343b47;border-radius:12px;background:#141922;transition:box-shadow .7s ease,border-color .7s ease,background-color .7s ease}
+.showOverviewRow .overviewNumber{font-size:15px;color:#9fb7d1}.showOverviewRow .overviewName{font-size:18px;font-weight:700;color:#f4f6f8}.showOverviewRow .overviewTime{font-size:13px}.overviewContent{min-width:0}
+.showOverviewRow .overviewVisual{width:64px;height:36px;aspect-ratio:16/9;min-width:0;overflow:hidden;border-radius:8px;display:flex;align-items:center;justify-content:center}.showOverviewRow .overviewVisual img{width:100%;height:100%;object-fit:cover;border-radius:inherit}.showOverviewRow .showOverviewPlaceholder{background:#080a0d;border:1px solid #343b47;font-size:12px;text-align:center;color:#9da7b5}
+/* Active and next use the same visual size and typography. */
+.showOverviewRow.isActive,.showOverviewRow.isNext{grid-template-columns:32px 30vw 70px minmax(0,1fr)}
+.showOverviewRow.isActive{background:#1b2636;border-color:#9acbff;box-shadow:inset 0 0 18px #4597ff33,0 0 10px 2px #4395ffaa,0 0 26px 4px #2c7eff66}
+.showOverviewRow.isActive .overviewVisual,.showOverviewRow.isNext .overviewVisual{align-self:start;width:100%;height:auto;aspect-ratio:16/9;background:#000}
+.showOverviewRow.isActive .overviewName,.showOverviewRow.isNext .overviewName{font-size:clamp(1.4rem,3vw,2rem)}
+.overviewDescription{margin-top:10px;white-space:pre-wrap;overflow-wrap:anywhere;font-size:17px;line-height:1.4;color:#d5dce6}
+body.nextCueUrgent .showOverviewRow.isActive{border-color:#343b47;background:#141922;box-shadow:inset 0 0 18px #4597ff00,0 0 10px 2px #4395ff00,0 0 26px 4px #2c7eff00}
+.overviewBeat{position:absolute;inset:-1px;pointer-events:none;border:1px solid #ff9b96;border-radius:inherit;box-shadow:inset 0 0 12px #ff453a33,0 0 10px 2px #ff453aaa,0 0 24px 3px #ff2d2d66;opacity:0}
+body.locked main.spectaclePriorityLayout{max-width:none!important}
+/* Show order: number, visual, cue time, title/description. */
+.showOverviewRow.isActive .overviewNumber,.showOverviewRow.isNext .overviewNumber{grid-column:1;grid-row:1}
+.showOverviewRow.isActive .overviewVisual,.showOverviewRow.isNext .overviewVisual{grid-column:2;grid-row:1}
+.showOverviewRow.isActive .overviewTime,.showOverviewRow.isNext .overviewTime{grid-column:3;grid-row:1}
+.showOverviewRow.isActive .overviewContent,.showOverviewRow.isNext .overviewContent{grid-column:4;grid-row:1}
+.overviewName{overflow-wrap:anywhere}
+@media(max-width:1100px){.showOverviewRow.isActive,.showOverviewRow.isNext{grid-template-columns:24px 30vw 58px minmax(0,1fr)}}
+@media(max-width:760px){.showOverviewRow{grid-template-columns:24px 64px 58px minmax(0,1fr);gap:10px}.showOverviewRow.isActive,.showOverviewRow.isNext{grid-template-columns:24px 30vw 48px minmax(0,1fr)}.showOverviewRow .overviewName{font-size:16px}.showOverviewRow .overviewTime{font-size:12px}.overviewDescription{font-size:15px}}
+@media(max-width:480px){.showOverviewRow{grid-template-columns:20px 48px 48px minmax(0,1fr);gap:6px;padding:10px}.showOverviewRow .overviewVisual{width:48px;height:27px}.showOverviewRow.isActive,.showOverviewRow.isNext{grid-template-columns:20px 30vw 42px minmax(0,1fr)}.showOverviewRow .overviewNumber{font-size:12px}.showOverviewRow.isActive .overviewName,.showOverviewRow.isNext .overviewName{font-size:18px}}
+@media(prefers-reduced-motion:reduce){.showOverviewRow{transition:none}}
+

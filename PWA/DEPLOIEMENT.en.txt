@@ -1,7 +1,11 @@
-S2A PILOT 1.5.8 / BRIDGE 1.4.5
+S2A PILOT 1.11.2 BETA / BRIDGE 1.6.29 — UPDATE
 
-Replace the whole application folder, including .htaccess, compat/ and Bridge/. Remove old copilot-api.php, copilot-service/, copilot/, copilot.html, copilot.js, copilot-ui.css, bridge.html, bridge-copilot.js and compat/copilot.es5.js. No PHP or Node server is needed. Purge the CDN cache; actualiser.html refreshes browser caches without deleting IndexedDB projects.
+Back up the installed files and keep earlier release archives. Extract the Pilot ZIP and copy its contents into the existing Pilot directory, replacing matching files. Do not delete the remote directory.
+Preserve the existing copilot/config.php and the relay’s private storage. Neither private configuration nor server logs are included in this release.
+Upload all updated files together, including copilot/, compat/, diagnostics/, Bridge/, index.html, app.js, i18n-catalog.js, copilot-host.js, toolbox.css, service-worker.js and version.json. Clear any CDN cache if necessary and refresh Pilot while playback is stopped. The displayed version must be 1.11.2 beta.
 
-Bridge without Copilot is included in Save as… exports for QLab import. Deploy Bridge/ in full.
+Each new Copilot share receives a random four-digit remote control code. Change it in the Copilot popup and select Apply. Only Remote control users need this code. It is never included in the QR link or shared show state. Changing the code removes previous remote grants and cancels pending commands; affected users must select Remote control again and enter the new code. Five incorrect guesses from one network address trigger a five-minute lockout.
 
-Include assets/tutorials/ with all four MP4 files and help-video.js. Videos load on demand rather than being precached; the server should support HTTP Range requests.
+Install Bridge 1.6.29 from the separate ZIP or the copy included with Pilot. It retains both Intel and Apple Silicon architectures, opens Show in Iceman, and uses the amber BRIDGE icon with cyan wings.
+Database migrations preserve invitations, members and Backstage notes. Older Pilot shares cannot accept remote commands until the host configures a code.
+This release has been prepared for installation and has not been deployed automatically.

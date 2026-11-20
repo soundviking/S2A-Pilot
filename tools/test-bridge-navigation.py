@@ -13,16 +13,17 @@ with tempfile.TemporaryDirectory(prefix='s2a-bridge-checks-') as folder:
     app_model = root / 'AppModel.swift'
     app_model.write_text('import Foundation\nimport AppKit\nimport Combine\n' + source[source.index('enum ShowCueError:'):source.index('struct ContentView:')])
     for name, inputs in (
+        ('remote', [repo/'S2A-Copilot/Sources/BridgeRemoteControl.swift']),
         ('runtime', [model, repo/'S2A-Copilot/Sources/BridgeRuntime.swift']),
         ('workspaces', [repo/'S2A-Copilot/Sources/BridgeWorkspaceQuery.swift']),
         ('editing', [model, repo/'S2A-Copilot/Sources/BridgeEditing.swift']),
-        ('edit-integration', [model, app_model, repo/'S2A-Copilot/Sources/BridgeFlowFilter.swift', repo/'S2A-Copilot/Sources/BridgeEditing.swift', repo/'S2A-Copilot/Sources/BridgeRuntime.swift', repo/'S2A-Copilot/Sources/BridgeStrings.swift', repo/'S2A-Copilot/Sources/BridgeWorkspaceQuery.swift']),
+        ('edit-integration', [model, app_model, repo/'S2A-Copilot/Sources/BridgeRemoteControl.swift', repo/'S2A-Copilot/Sources/BridgeFlowFilter.swift', repo/'S2A-Copilot/Sources/BridgeEditing.swift', repo/'S2A-Copilot/Sources/BridgeRuntime.swift', repo/'S2A-Copilot/Sources/BridgeStrings.swift', repo/'S2A-Copilot/Sources/BridgeWorkspaceQuery.swift']),
     ):
         binary = root / name
         subprocess.run(['xcrun', 'swiftc', '-module-cache-path', '/tmp/s2a-swift-cache',
                         *map(str, inputs), str(repo/f'tools/test-bridge-{name}.swift'), '-o', str(binary)], check=True)
         subprocess.run([str(binary), str(root if name != 'workspaces' else root/'workspace.applescript')], check=True)
-    for name in ('runtime', 'selection', 'workspace', 'editing'):
+    for name in ('runtime', 'selection', 'workspace', 'editing', 'remote-go', 'remote-play', 'remote-next', 'remote-previous', 'remote-select'):
         subprocess.run(['/usr/bin/osacompile', '-o', str(root/(name+'.scpt')),
                         str(root/(name+'.applescript'))], check=True)
     literal = subprocess.check_output(['/usr/bin/osascript', str(root/'literal.applescript')])

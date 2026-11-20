@@ -1107,6 +1107,51 @@ final class AppModel: ObservableObject {
         }
     }
 
+    @MainActor
+    func performBridgeRemote(_ command: BridgeRemoteRequest, workspaceID: String,
+                             playheadID: String, deadline: Double,
+                             permitted: @escaping () -> Bool) async -> String {
+        guard permitted(), workspace?.id == workspaceID, !synchronizationLost,
+              !isBusy, !bridgeEditInFlight, let snapshot = runtimeSnapshot,
+              snapshot.standbyID == playheadID else { return "rejected" }
+        let target: String
+        switch command.action {
+        case .select:
+            guard snapshot.roots.contains(where: { $0.id == command.cueID }) else { return "rejected" }
+            target = command.cueID
+        case .next, .previous:
+            guard let index = snapshot.roots.firstIndex(where: { $0.id == playheadID }) else { return "rejected" }
+            let next = index + (command.action == .next ? 1 : -1)
+            guard snapshot.roots.indices.contains(next) else { return "rejected" }
+            target = snapshot.roots[next].id
+        default: target = ""
+        }
+        let script: String
+        do {
+            script = try BridgeRemoteScript.make(action:command.action,workspace:workspaceID,
+                expectedPlayhead:playheadID,active:currentRuntimeID ?? "",target:target,pause:visualRunning)
+        } catch { return "rejected" }
+        let generation = monitorGeneration
+        return await withCheckedContinuation { continuation in
+            runtimeQueue.async {
+                let valid = DispatchQueue.main.sync {
+                    permitted() && self.monitorGeneration == generation && self.workspace?.id == workspaceID &&
+                    !self.synchronizationLost && !self.isBusy && !self.bridgeEditInFlight &&
+                    ProcessInfo.processInfo.systemUptime < deadline
+                }
+                guard valid else { continuation.resume(returning:"rejected"); return }
+                let result = Result { try self.run("/usr/bin/osascript",["-"],stdin:script,timeout:3) }
+                DispatchQueue.main.async {
+                    if case .success(let reply) = result, reply == "S2A_REMOTE_OK" {
+                        self.pollVisualMonitor()
+                        continuation.resume(returning:"done")
+                    } else { continuation.resume(returning:"rejected") }
+                }
+            }
+        }
+    }
+
+
     // Only explicit interaction writes selection; polling never calls this method.
     func selectBridgeCue(_ id: String) {
         guard let workspace, !synchronizationLost,

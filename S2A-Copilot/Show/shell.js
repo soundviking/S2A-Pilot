@@ -100,8 +100,15 @@ window.S2ABridge={closeZoom,render(state,newContent){latest=state;if(newContent)
   if(!selected)delete host.dataset.follow;
   if(!visible.length)host.textContent=state.roots.length?(state.labels.noMatch||'Aucune Cue pour ce filtre.'):state.labels.wait;
  }
+ shareElement('bridgeRemoteAllowedLabel').textContent=state.labels.allowRemote||'Autoriser les télécommandes';
+ shareElement('bridgeRemotePinLabel').textContent=state.labels.remoteCode||'Code télécommande';
+ shareElement('bridgeRemoteSave').textContent=state.labels.apply||'Appliquer';
  updateEditor(state);send();}};
+let confirmedRemotePin='';
 const shareElement=id=>document.getElementById(id);
+function saveRemoteSettings(){notify({type:'remoteSettings',pin:shareElement('bridgeRemotePin').value,enabled:shareElement('bridgeRemoteEnabled').checked});}
+shareElement('bridgeRemoteSave').onclick=saveRemoteSettings;
+shareElement('bridgeRemoteEnabled').onchange=saveRemoteSettings;
 const shareDialog=shareElement('copilotDialog'),shareLink=shareElement('copilotLink'),shareQR=shareElement('copilotQr');
 shareElement('shareBridge').onclick=()=>{shareDialog.showModal();notify({type:'share'});};
 for(const [id,type] of Object.entries({copilotStart:'share',copilotCopy:'copyShare',copilotStop:'stopShare',copilotLock:'lockShare',copilotHealth:'healthShare',copilotDiagnostic:'diagnoseShare'})){
@@ -114,7 +121,10 @@ shareDialog.addEventListener('click',e=>{
  if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)shareDialog.close();
 });
 shareElement('copilotSetup').querySelector('a').onclick=e=>{e.preventDefault();notify({type:'hostingHelp'});};
-window.S2ABridge.shareStatus=({message,link,active})=>{
+window.S2ABridge.shareStatus=({message,link,active,remotePin='',remoteEnabled=false,remoteSettingsBusy=false})=>{
+ if(remotePin!==confirmedRemotePin){shareElement('bridgeRemotePin').value=remotePin;confirmedRemotePin=remotePin;}
+ shareElement('bridgeRemoteEnabled').checked=remoteEnabled;
+ for(const id of ['bridgeRemoteSave','bridgeRemoteEnabled','bridgeRemotePin'])shareElement(id).disabled=remoteSettingsBusy||!active;
  const status=shareElement('copilotStatus');status.textContent=message;
  const prefix=['Partage actif','Partage arrêté'].find(text=>message.startsWith(text));
  if(prefix){
@@ -142,7 +152,7 @@ window.S2ABridge.shareMembers=({viewers,locked,now})=>{
   row.style.setProperty('--member-hue',hash%360);
   status.className=connected(member)?'copilotMemberConnected':'copilotMemberDisconnected';
   status.textContent=connected(member)?'connecté':'déconnecté';
-  label.append(member.name+' · '+(member.role==='backstage'?'Backstage':'Régie')+' · ',status);
+  label.append(member.name+' · '+(member.role==='remote'?'Télécommande':member.role==='backstage'?'Backstage':'Régie')+' · ',status);
   button.type='button';button.textContent='Retirer';button.onclick=()=>notify({type:'revokeShare',id:member.id});
   row.append(label,button);list.append(row);
  }

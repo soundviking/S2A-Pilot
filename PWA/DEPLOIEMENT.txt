@@ -1,7 +1,17 @@
-S2A PILOT 1.5.8 / BRIDGE 1.4.5
+S2A PILOT 1.11.2 BÊTA / BRIDGE 1.6.29 — MISE À JOUR
 
-Remplacer le dossier complet, dont .htaccess, compat/ et Bridge/. Supprimer les anciens copilot-api.php, copilot-service/, copilot/, copilot.html, copilot.js, copilot-ui.css, bridge.html, bridge-copilot.js et compat/copilot.es5.js. Aucun serveur PHP ou Node nécessaire. Purger le cache CDN ; actualiser.html renouvelle le cache navigateur sans effacer les projets IndexedDB.
+1. Sauvegardez les fichiers actuellement déployés et conservez vos anciennes archives.
+2. Décompressez S2A-Pilot-1.11.2-beta.zip. Envoyez son contenu dans le dossier actuel de Pilot, en remplaçant les fichiers de même nom. Ne supprimez pas le dossier distant.
+3. Conservez impérativement le fichier copilot/config.php déjà installé et le stockage privé du relais. Cette livraison ne contient ni votre configuration ni les journaux serveur.
+4. Remplacez ensemble index.html, app.js, i18n-catalog.js, copilot-host.js, copilot/, compat/, diagnostics/, toolbox.css, service-worker.js, version.json et Bridge/. L’archive complète contient aussi leurs autres dépendances.
+5. Purgez le cache CDN si nécessaire, puis actualisez Pilot hors lecture. La version affichée doit être 1.11.2 bêta. actualiser.html reste disponible pour renouveler le cache sans effacer les projets locaux.
+6. Dans le popup Copilot, un code aléatoire de quatre chiffres est créé pour chaque nouveau partage. Vous pouvez le remplacer puis cliquer sur Appliquer. Seuls les utilisateurs du mode Télécommande doivent le saisir. Il n’apparaît pas dans le QR code ni dans la conduite partagée.
+7. Les anciens accès télécommande sont retirés lorsque le code change. Sur les téléphones concernés, sélectionnez à nouveau Télécommande et entrez le nouveau code. Après cinq codes incorrects depuis une même adresse réseau, attendez cinq minutes avant de réessayer.
+8. Installez Bridge 1.6.29 depuis le ZIP séparé, ou utilisez la copie incluse dans Pilot. L’application conserve les architectures Intel et Apple Silicon. Son mode Show utilise Iceman et son icône porte BRIDGE sur fond ambre avec deux ailes cyan.
 
-Bridge sans Copilot est inclus dans Enregistrer sous… pour importer dans QLab. Déployer tout le dossier Bridge/.
+Les mises à jour de la base Copilot sont additives : liens de partage, membres et annotations Backstage sont conservés. Les anciens partages Pilot restent sans commande à distance tant qu’un code n’est pas configuré par l’hôte.
 
-Inclure assets/tutorials/ et ses quatre MP4, ainsi que help-video.js. Les vidéos ne sont pas précachées : lecture à la demande, prise en charge des requêtes HTTP Range par le serveur.
+Le dossier old n’est pas nécessaire aux fichiers d’application de cette livraison. Vous pouvez conserver ses archives hors du serveur.
+Cette livraison est préparée pour installation ; elle n’a pas été déployée automatiquement.
+
+Correction 1.11.2 : un seul halo et suivi au changement de cue. Bridge 1.6.29 est inchangé ; la télécommande QLab directe dans Bridge reste à implémenter dans les sources natives.

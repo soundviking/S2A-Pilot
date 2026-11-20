@@ -1,11 +1,11 @@
 {
-  "version": "1.6.23",
+  "version": "1.11.3",
   "releaseNotes": {
-    "fr": "Les Tops Backstage de Bridge suivent l’ordre des cues dans QLab.",
-    "en": "Bridge Backstage Tops follow QLab cue list order.",
-    "es": "Los Tops de Backstage de Bridge siguen el orden de las cues de QLab.",
-    "de": "Die Backstage-Tops in Bridge folgen der Cue-Reihenfolge in QLab."
+    "fr": "Télécommande QLab sécurisée depuis Bridge 1.6.30, sans ouvrir Pilot.",
+    "en": "Secure QLab remote control from Bridge 1.6.30, without opening Pilot.",
+    "es": "Control remoto seguro de QLab desde Bridge 1.6.30, sin abrir Pilot.",
+    "de": "Sichere QLab-Fernbedienung über Bridge 1.6.30, ohne Pilot zu öffnen."
   },
   "channel": "beta",
-  "revision": "bridge-top-order1"
+  "revision": "bridge-remote-pin"
 }

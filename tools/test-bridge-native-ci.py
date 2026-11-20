@@ -1,0 +1,26 @@
+"""Run production runtime/workspace tests and compile AppleScripts without executing them."""
+from pathlib import Path
+import subprocess
+import tempfile
+
+repo = Path(__file__).resolve().parents[1]
+source = (repo / 'S2A-Copilot/Sources/S2ACopilot.swift').read_text()
+models = source[source.index('struct ShowCueProject:'):source.index('enum ShowCueError:')]
+with tempfile.TemporaryDirectory(prefix='s2a-bridge-checks-') as folder:
+    root = Path(folder)
+    model = root / 'Models.swift'
+    model.write_text('import Foundation\n' + models)
+    app_model = root / 'AppModel.swift'
+    app_model.write_text('import Foundation\nimport AppKit\nimport Combine\n' + source[source.index('enum ShowCueError:'):source.index('struct ContentView:')])
+    for name, inputs in (
+        ('remote', [repo/'S2A-Copilot/Sources/BridgeRemoteControl.swift']),
+        ('runtime', [model, repo/'S2A-Copilot/Sources/BridgeRuntime.swift']),
+        ('workspaces', [repo/'S2A-Copilot/Sources/BridgeWorkspaceQuery.swift']),
+        ('editing', [model, repo/'S2A-Copilot/Sources/BridgeEditing.swift']),
+        ('edit-integration', [model, app_model, repo/'S2A-Copilot/Sources/BridgeRemoteControl.swift', repo/'S2A-Copilot/Sources/BridgeFlowFilter.swift', repo/'S2A-Copilot/Sources/BridgeEditing.swift', repo/'S2A-Copilot/Sources/BridgeRuntime.swift', repo/'S2A-Copilot/Sources/BridgeStrings.swift', repo/'S2A-Copilot/Sources/BridgeWorkspaceQuery.swift']),
+    ):
+        binary = root / name
+        subprocess.run(['xcrun', 'swiftc', '-module-cache-path', '/tmp/s2a-swift-cache',
+                        *map(str, inputs), str(repo/f'tools/test-bridge-{name}.swift'), '-o', str(binary)], check=True)
+        subprocess.run([str(binary), str(root if name != 'workspaces' else root/'workspace.applescript')], check=True)
+    print('PASS native regression tests; QLab execution is simulated')

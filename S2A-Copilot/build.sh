@@ -11,8 +11,8 @@ rm -rf "$BUILD"
 mkdir -p "$MACOS" "$RESOURCES"
 
 for S2A_ARCH in arm64 x86_64; do
-  xcrun swiftc -parse-as-library \
-    "$ROOT/Sources/S2ACopilot.swift" "$ROOT/Sources/BridgeStrings.swift" "$ROOT/Sources/BridgeWorkspaceQuery.swift" "$ROOT/Sources/BridgeRuntime.swift" "$ROOT/Sources/BridgeEditing.swift" "$ROOT/Sources/BridgeFlowFilter.swift" "$ROOT/Sources/BridgeWindowChrome.swift" "$ROOT/Sources/BridgeShowView.swift" \
+  xcrun swiftc -swift-version 5 -parse-as-library \
+    "$ROOT/Sources/S2ACopilot.swift" "$ROOT/Sources/BridgeStrings.swift" "$ROOT/Sources/BridgeWorkspaceQuery.swift" "$ROOT/Sources/BridgeRuntime.swift" "$ROOT/Sources/BridgeEditing.swift" "$ROOT/Sources/BridgeFlowFilter.swift" "$ROOT/Sources/BridgeWindowChrome.swift" "$ROOT/Sources/BridgeShowView.swift" "$ROOT/Sources/BridgeRemoteControl.swift" \
     -o "$BUILD/S2ACopilot-$S2A_ARCH" \
     -framework SwiftUI -framework AppKit -framework Foundation -framework WebKit \
     -module-cache-path "$BUILD/module-cache" \
@@ -48,9 +48,9 @@ cat > "$APP/Contents/Info.plist" <<'PLIST'
   <key>CFBundleIdentifier</key>
   <string>fr.s2aproduction.bridge.beta</string>
   <key>CFBundleVersion</key>
-  <string>18301</string>
+  <string>18803</string>
   <key>CFBundleShortVersionString</key>
-  <string>1.6.23</string>
+  <string>1.6.30</string>
   <key>CFBundleExecutable</key>
   <string>S2A Pilot Bridge</string>
   <key>CFBundleIconFile</key>
@@ -63,12 +63,13 @@ cat > "$APP/Contents/Info.plist" <<'PLIST'
 </plist>
 PLIST
 
-python3 - "$ROOT/../PWA/version.json" "$APP/Contents/Info.plist" <<'PYVERSION'
+python3 - "$ROOT/version.json" "$APP/Contents/Info.plist" <<'PYVERSION'
 import json,plistlib,sys
 version=json.load(open(sys.argv[1]))
 assert version['channel']=='beta'
 with open(sys.argv[2],'rb') as f: info=plistlib.load(f)
 info['CFBundleShortVersionString']=version['version']
+info['CFBundleVersion']=str(version['build'])
 with open(sys.argv[2],'wb') as f:plistlib.dump(info,f)
 PYVERSION
 

@@ -1,8 +1,11 @@
-const CACHE_NAME='s2a-pilot-beta-1-6-23-bridge-top-order1-app-shell';
+const CACHE_NAME='s2a-pilot-beta-1-11-3-bridge-remote-app-shell';
 const APP_SHELL=[
+ './toolbox.css?v=1.11.3-bridge-remote',
+ './diagnostics/report.js?v=1.11.3',
  './copilot-assets/copilot-logo.png',
  './zip-assets/pako_inflate.min.js?v=2.1.0',
- './copilot-host.js?v=1.6.23-bridge-top-order1', './copilot-assets/qrcode.js?v=1.6.23-bridge-top-order1',
+ './pdf-assets/pdf-lib.min.js?v=1.17.1',
+ './copilot-host.js?v=1.11.3-bridge-remote', './copilot-assets/qrcode.js?v=1.11.3-bridge-remote',
  './help-video.js?v=1.6.4-video1',
  './assets/help/es-create.png?v=1.6.4',
  './assets/help/es-cue.png?v=1.6.4',
@@ -14,13 +17,13 @@ const APP_SHELL=[
  './assets/help/de-show.png?v=1.6.4',
  './assets/help/de-maverick.png?v=1.6.4',
  './assets/help/de-iceman.png?v=1.6.4',
- './i18n-catalog.js?v=1.6.23-bridge-top-order1', './manifest.es.webmanifest', './manifest.de.webmanifest',
- './Bridge/S2A-Pilot-Bridge-1.6.4-app.zip', './Bridge/app-files.json',
-  './startup.js?v=1.6.23-bridge-top-order1',
+ './i18n-catalog.js?v=1.11.3-bridge-remote', './manifest.es.webmanifest', './manifest.de.webmanifest',
+ './Bridge/S2A-Pilot-Bridge-1.6.30-app.zip', './Bridge/app-files.json?v=1.6.30',
+  './startup.js?v=1.11.3-bridge-remote',
   './startup.css?v=1.6.4',
-  './quick-help.js?v=1.6.23-bridge-top-order1',
+  './quick-help.js?v=1.11.3-bridge-remote',
   './help-images.js?v=1.6.4',
-  './quick-help.css?v=1.6.23-bridge-top-order1',
+  './quick-help.css?v=1.11.3-bridge-remote',
   './assets/help/en-create.png?v=1.6.4',
   './assets/help/en-cue.png?v=1.6.4',
   './assets/help/en-show.png?v=1.6.4',
@@ -36,15 +39,15 @@ const APP_SHELL=[
   './compat/polyfills.js?v=1.6.4',
   './compat/adapters.js?v=1.6.4',
   './compat/i18n.es5.js?v=1.6.4',
-  './compat/app.es5.js?v=1.6.23-bridge-top-order1',
+  './compat/app.es5.js?v=1.11.3-bridge-remote',
   './compat/technical-preview.es5.js?v=1.6.4',
-  './compat/compat-ui.css?v=1.6.23-bridge-top-order1',
+  './compat/compat-ui.css?v=1.11.3-bridge-remote',
   './compat/conduite-header.jpg',
   './compat/technical-header-data.js?v=1.6.4',
   './',
   './index.html',
-  './compatibility-loader.js?v=1.6.23-bridge-top-order1',
-  './app.js?v=1.6.23-bridge-top-order1',
+  './compatibility-loader.js?v=1.11.3-bridge-remote',
+  './app.js?v=1.11.3-bridge-remote',
   './i18n.js?v=1.6.4',
   './technical-preview.js?v=1.6.4',
   './technical-header-data.js?v=1.6.4',
@@ -52,9 +55,9 @@ const APP_SHELL=[
   './assets/s2a-pilot-qr.png',
   './assets/s2a-pilot-qr.jpg',
   './assets/conduite-header.webp',
-  './icons/s2a-pilot-180.png?v=1.6.23-bridge-top-order1',
-  './icons/s2a-pilot-192.png?v=1.6.23-bridge-top-order1',
-  './icons/s2a-pilot-512.png?v=1.6.23-bridge-top-order1',
+  './icons/s2a-pilot-180.png?v=1.11.3-bridge-remote',
+  './icons/s2a-pilot-192.png?v=1.11.3-bridge-remote',
+  './icons/s2a-pilot-512.png?v=1.11.3-bridge-remote',
   './manifest.webmanifest',
   './manifest.en.webmanifest',
   './icons/s2a-pilot-192.png',
@@ -80,7 +83,7 @@ self.addEventListener('activate',(event)=>{
 });
 
 self.addEventListener('fetch',(event)=>{
-  if(event.request.method!=='GET') return;
+  if(event.request.method!=='GET'||new URL(event.request.url).pathname.startsWith('/pilot-local/')) return;
   // Copilot PHP diagnostics and relay must never use the Pilot offline shell/cache.
   const requestUrl=new URL(event.request.url),appScope=new URL(self.registration.scope);
   if(requestUrl.origin!==appScope.origin)return;

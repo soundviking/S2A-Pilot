@@ -1,0 +1,311 @@
+.pilotToolDialog{box-sizing:border-box;width:min(540px,calc(100vw - 24px));max-height:86vh;max-height:86dvh;padding:0 16px 16px;border:1px solid #45536a;border-radius:15px;background:#1b1f27;color:#f4f6f8;overflow:auto;overscroll-behavior:contain}
+.pilotToolDialog::backdrop{background:#080c14b0}
+.pilotToolWide{width:min(1050px,calc(100vw - 24px))}
+.pilotToolDialog>header{display:flex;align-items:center;justify-content:space-between;gap:8px;position:sticky;top:0;z-index:2;background:#1b1f27;padding:10px 0;margin-bottom:8px;border-bottom:1px solid #3b4554}
+.pilotToolDialog h2{font-size:1.18rem;margin:0;text-transform:none;letter-spacing:normal}
+.pilotToolClose{border-radius:50%;width:40px;height:40px;padding:0;font-size:1.4rem;flex:none}
+.pilotToolCards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,205px),1fr));gap:10px}
+.pilotToolCards button{display:flex;flex-direction:column;text-align:left;align-items:flex-start;justify-content:center;gap:5px;min-height:72px;border-radius:10px}
+.pilotToolCards span{font-size:.8rem;color:#b5c2d2}
+.pilotToolDialog footer{display:flex;flex-wrap:wrap;justify-content:flex-end;align-items:center;gap:8px;margin-top:12px}
+.pilotToolDialog footer p{flex:1 1 170px;margin:0;font-size:.83rem}
+.pilotToolDialog label{display:grid;gap:4px;font-size:.84rem;color:#c7d3e5}
+.pilotToolDialog input:not([type=checkbox]):not([type=radio]),.pilotToolDialog select{width:100%;min-width:0;font-size:16px}
+.pilotToolDialog input[type=color]{padding:2px;min-height:36px}
+.stageToolLayout{display:grid;grid-template-columns:minmax(0,1fr) 235px;grid-template-rows:max-content 1fr;grid-template-areas:"plan controls" "plan pdf";gap:9px 12px;align-items:start}
+.stagePreview{grid-area:plan;min-width:0;display:grid;gap:9px}
+.stageToolControls{grid-area:controls}
+.stagePdfActions{grid-area:pdf;display:grid;gap:5px;min-width:0}
+.stagePdfActions p{margin:0}
+.stagePdfActions p:empty{display:none}
+#stagePlanCanvas{display:block;width:100%;height:auto;border-radius:8px;touch-action:none;background:#f2f5fa}
+.stageToolControls,.stageToolControls fieldset{display:grid;gap:9px;min-width:0}
+.stageToolControls fieldset{padding:9px;border:1px solid #425067;border-radius:8px;margin:0}
+.stageToolControls fieldset:disabled{opacity:.6}
+.stageObjectGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.toolInline{display:flex;flex-wrap:wrap;align-items:center;gap:5px}
+#stageShapes button{font-size:.8rem;padding:6px;min-height:40px}
+#stageShapes span,#stageShapes svg{color:#b894ff;vertical-align:middle}
+.checklistToolSection{border:1px solid #3c4759;border-radius:10px;margin:10px 0;padding:10px;background:#181e29}
+.checklistSectionHeader{display:grid;grid-template-columns:minmax(0,1fr) auto auto;align-items:end;gap:8px;margin-bottom:8px}
+#pilotToolboxButton{display:inline-flex;align-items:center;justify-content:center;gap:7px}
+.toolboxEntryIcon{width:19px;height:19px;flex:none}
+.checklistIcon{width:26px;height:26px;flex:none;color:#c1a2ff}
+.checklistCategory{display:grid;gap:4px}
+.checklistIconCaption{font-size:.84rem;color:#c7d3e5}
+.checklistIconTrigger{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:42px;padding:4px 10px}
+.checklistIconChevron{width:7px;height:7px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:translateY(-2px) rotate(45deg)}
+.checklistIconTrigger[aria-expanded="true"] .checklistIconChevron{transform:translateY(2px) rotate(225deg)}
+.checklistIconGallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(44px,1fr));gap:5px;margin:6px 0 10px;padding:7px;border:1px solid #4a4663;border-radius:8px;background:#121722}
+.checklistIconGallery[hidden]{display:none}
+.checklistIconGallery button{display:grid;place-items:center;min-height:44px;min-width:0;padding:4px}
+.checklistIconGallery button[aria-pressed="true"]{border-color:#b593f5;background:#362950}
+.checklistItem{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:8px;margin-bottom:6px}
+.checklistItem input[type=checkbox]{width:20px;height:20px}
+.checklistDelete{padding:4px 8px;min-height:36px}
+#levelMatchSkipped{max-height:180px;overflow:auto;font-size:.8rem;margin:4px 0;padding-left:18px}
+@media(max-width:690px){.stageToolLayout{grid-template-columns:minmax(0,1fr);grid-template-rows:auto;grid-template-areas:"pdf" "plan" "controls"}.stagePdfActions button{justify-self:end}.stageToolControls{grid-template-columns:repeat(2,minmax(0,1fr))}.stageToolControls fieldset,#stageShapes{grid-column:1/-1}}
+@media(max-width:440px){.pilotToolDialog{padding-inline:10px}.checklistIcon{width:24px}}
+
+.trackAutoGain{font-size:.73rem;color:#c4b2ef;border:1px solid #58496f;border-radius:6px;padding:3px 5px;white-space:nowrap}
+
+.appAttribution a{color:inherit;text-underline-offset:2px}
+.appAttribution a:hover,.appAttribution a:focus-visible{color:#b7d6ff}
+.trackPanField{display:inline-flex;gap:4px;align-items:center;padding:0 4px;color:#aebed3}
+.trackPanSide{display:flex;align-items:center;gap:2px;font-size:.7rem;font-weight:750}
+.trackPanSide svg{width:14px;height:14px}
+.trackPanSide[data-side="R"] svg{order:2;transform:scaleX(-1)}
+.trackPanField[data-pan="-1"] [data-side="L"],.trackPanField[data-pan="1"] [data-side="R"]{color:#d8c6ff}
+.trackPanRail{position:relative;display:flex;align-items:center;width:62px;height:36px}
+.trackPanRail::before{content:'';position:absolute;left:6px;right:6px;top:50%;height:2px;background:#657692;pointer-events:none}
+.trackPanRail::after{content:'';position:absolute;left:50%;top:calc(50% - 6px);width:1px;height:13px;background:#b1a1c7;pointer-events:none}
+.trackPanField[data-pan="0"] .trackPanRail::after{background:#e2caff}
+.trackPanRail input[type=range]{position:relative;z-index:1;-webkit-appearance:none;appearance:none;width:100%;height:32px;min-width:0;margin:0;padding:0;border:0;background:transparent;cursor:pointer}
+.trackPanRail input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border:2px solid #d7c5f2;border-radius:50%;background:#644e8b}
+.trackPanRail input[type=range]::-moz-range-thumb{width:11px;height:11px;border:2px solid #d7c5f2;border-radius:50%;background:#644e8b}
+.trackPanRail input[type=range]:focus-visible{outline:2px solid #a7caff;border-radius:5px}
+#goWaveTrack:focus-visible{outline:2px solid #a7caff;outline-offset:2px}
+@media(max-width:620px){
+ .appTopBar .appAttribution{display:inline;grid-area:attribution}
+ .appTopBar .appIdentity{display:grid;grid-template-columns:auto auto auto;grid-template-areas:"name settings copilot" "attribution version version";column-gap:5px;row-gap:2px}
+ .appIdentity>strong{grid-area:name}
+ .appIdentity>.appVersion{grid-area:version;font-size:.62rem}
+ .appIdentity>#shortcutSettingsButton{grid-area:settings}
+ .appIdentity>#copilotButton{grid-area:copilot}
+ .appIdentity .appAttribution{font-size:.62rem}
+}
+.checklistControls{margin:8px 0}
+.checklistTemplates,.sequenceSheetPanel{border:1px solid #3c4759;border-radius:10px;background:#181e29;padding:10px;margin:10px 0}
+.checklistTemplates summary,#sequenceSheetLinkPicker summary{cursor:pointer;color:#c7d9f2;font-weight:650}
+.checklistTemplateRow{display:flex;align-items:end;flex-wrap:wrap;gap:8px;margin-top:8px}
+.checklistTemplateRow label{flex:1 1 165px;min-width:0}
+.checklistTemplateRow button{min-height:44px}
+.checklistTemplateLibrary{min-width:0;border:0;margin:10px 0;padding:0}
+.checklistTemplateLibrary legend{padding:0;color:#aebdd3;font-size:.8rem;font-weight:650}
+#checklistTemplateCards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,200px),1fr));gap:8px}
+.pilotToolDialog .checklistTemplateCard{display:flex;align-items:center;gap:10px;min-width:0;min-height:58px;padding:9px 11px;border:1px solid #45536a;border-radius:10px;background:#222c3c;cursor:pointer}
+.checklistTemplateCard input[type=radio]{width:19px;height:19px;margin:0;flex:none;accent-color:#b58aff}
+.pilotToolDialog .checklistTemplateCard:hover,.pilotToolDialog .checklistTemplateCard:focus-within{border-color:#a7caff}
+.pilotToolDialog .checklistTemplateCard.isSelected{background:#382c53;border-color:#ad89ed}
+.checklistTemplateInfo{display:grid;gap:3px;min-width:0;overflow-wrap:anywhere}
+.checklistTemplateInfo strong{color:#f4f6f8}
+.checklistTemplateInfo small{color:#bbcae0;font-size:.73rem}
+.checklistTemplateSave{padding-top:10px;border-top:1px solid #3c4759}
+@media(max-width:480px){.checklistTemplateRow button{flex:1 1 auto}}
+@media(min-width:691px) and (max-height:560px){.stageToolLayout{grid-template-areas:"plan pdf" "plan controls"}}
+#checklistTemplateStatus:empty{display:none}
+.sequenceSheetGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.sequenceSheetPanel h3{margin:0 0 6px;font-size:.92rem}
+.sequenceSheetPanel ul{margin:0;padding-left:18px;overflow-wrap:anywhere}
+#sequenceCueName{font-weight:750;color:#dac8ff;overflow-wrap:anywhere}
+.sequenceSheetNotes textarea{width:100%;resize:vertical}
+#sequenceSheetLinked,#sequenceSheetChoices{margin:8px 0}
+#sequenceSheetLinked label,#sequenceSheetChoices label{display:flex;align-items:center;gap:8px;min-height:34px;overflow-wrap:anywhere}
+#sequenceSheetLinked input,#sequenceSheetChoices input{flex:none;width:17px;height:17px}
+#sequenceSheetChoices fieldset{border:1px solid #3c4759;border-radius:6px;margin:7px 0}
+@media(max-width:600px){.sequenceSheetGrid{grid-template-columns:minmax(0,1fr);gap:0}}
+
+.stageMeasurements{grid-template-columns:repeat(3,minmax(0,1fr));align-items:end}
+.pilotToolDialog .toolCheck{display:flex;align-items:center;min-height:40px;gap:7px;cursor:pointer}
+.toolCheck input{width:18px;height:18px;margin:0;flex:none;accent-color:#b58aff}
+.lightingLayout{display:grid;grid-template-columns:minmax(0,1fr) minmax(230px,270px);gap:14px;align-items:start}
+.lightingPreview,.lightingControls{display:grid;min-width:0;gap:8px}
+.lightingToolbar{display:flex;align-items:center;flex-wrap:wrap;gap:7px}
+.lightingToolbar button,.lightingAdd button,.lightingControls>fieldset button{min-height:42px}
+.lightingToolbar button[aria-pressed="true"]{border-color:#b99ae9;background:#3d3057}
+#lightingPdf{margin-left:auto}
+#lightingPdfStatus,#lightingHint{margin:0}
+#lightingPdfStatus:empty{display:none}
+#lightingCanvas{display:block;width:100%;height:auto;border:1px solid #3c4d69;border-radius:11px;background:#111926;touch-action:none;box-sizing:border-box}
+.lightingControls fieldset{display:grid;gap:7px;margin:0;min-width:0;border:1px solid #425067;border-radius:9px;padding:8px}
+.lightingControls fieldset:disabled{opacity:.6}
+.lightingControls legend{color:#d8c7f7;font-size:.85rem;font-weight:650;padding:0 4px}
+.lightingInputs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+.lightingAdd{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:6px}
+@media(max-width:710px){.lightingLayout{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:420px){.stageMeasurements{grid-template-columns:repeat(2,minmax(0,1fr))}.stageMeasurements .toolCheck{grid-column:1/-1}}
+
+#lightingPatch[hidden]{display:none}
+.lightingCircuit{grid-column:1/-1}
+
+#lightingPatchWarnings{border:1px solid #b78a45;border-radius:9px;background:#322719;color:#ffe1ab;padding:10px}
+#lightingPatchWarnings[hidden]{display:none}
+#lightingPatchWarnings h3{margin:0 0 6px;font-size:.9rem}
+#lightingPatchWarningList{margin:0;padding-left:18px;font-size:.82rem;max-height:200px;overflow:auto}
+#lightingPatchWarningList li{padding:4px 0;overflow-wrap:anywhere}
+#lightingPatchWarningList button{font-size:.8rem;padding:5px 8px;margin:5px 4px 0 0;min-height:36px;max-width:100%;white-space:normal;overflow-wrap:anywhere}
+#lightingChannelRange{align-self:end;overflow-wrap:anywhere;margin:0 0 8px;color:#c7d9f2}
+#lightingChannelRange:empty{display:none}
+
+#lightingBeamColorLabel[hidden]{display:none}
+.lightingToolbar>.toolInline{min-width:0}
+
+#lightingSceneryFields[hidden],#lightingBannerFields[hidden],#lightingBannerUpload[hidden],#lightingBannerRemove[hidden]{display:none}
+#lightingBannerFields,#lightingBannerUpload{display:grid;gap:8px;min-width:0}
+#lightingBannerStatus{margin:0;overflow-wrap:anywhere}
+#lightingBannerStatus:empty{display:none}
+#lightingBannerFile{max-width:100%;box-sizing:border-box}
+
+#lightingPaletteLabel[hidden]{display:none}
+#lightingPaletteLabel{max-width:270px}
+#lightingBeamColorLabel{display:grid;gap:6px}
+
+#lightingAimFields[hidden]{display:none}
+#lightingAimFields{display:grid;gap:7px;border:1px solid #4c4566;padding:9px;border-radius:9px;min-width:0;background:#191e2c}
+#lightingAimFields p{margin:0;overflow-wrap:anywhere}
+#lightingTiltRange{padding:0;min-height:34px;accent-color:#b58aff;box-sizing:border-box}
+#lightingAimFields button{font-size:.8rem;padding:6px 8px;min-height:38px}
+
+#lightingCanvas.lightingPickArmed{cursor:crosshair;border-color:#d2b7ff}
+#lightingAimPick[aria-pressed=true]{background:#52346f;border-color:#d2b7ff}
+#lightingAimPick[hidden]{display:none}
+#copilotSharing .toolCheck{display:flex;gap:8px;align-items:center}
+#copilotSharing #copilotRemoteEnabled{width:20px;margin:0;flex:none}
+
+.checklistControls{flex-wrap:wrap}
+.checklistProgress{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:10px;margin:8px 0;color:#b8c9e0;font-size:.875rem}
+.checklistProgress[hidden]{display:none}
+.checklistProgress progress{width:100%;height:.75rem;accent-color:#a690f1}
+
+#actLibraryList{list-style:none;padding:0;margin:12px 0}
+#actLibraryList li{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid #3c4759}
+#actLibraryList strong{flex:1 1 10rem;min-width:0;overflow-wrap:anywhere}
+.mediaPreflightNotice{width:100%;min-width:0;padding:10px 12px;border:1px solid #9c5b43;border-radius:8px;background:#31211f;color:#ffddd1}
+.mediaPreflightNotice h3{margin:0;font-size:.95rem}
+.mediaPreflightNotice ul{margin:5px 0 0;padding-inline-start:1.2rem;max-height:9rem;overflow:auto;overflow-wrap:anywhere}
+
+.actPreparationForm{display:grid;gap:12px}
+.actPreparationForm textarea{display:block;width:100%;min-width:0;box-sizing:border-box;margin-top:5px;resize:vertical}
+#actPreparationName{overflow-wrap:anywhere}
+
+.checklistActLink{grid-column:2;justify-self:start;min-height:32px;padding:4px 8px;font-size:.82rem}
+
+.checklistActUsage{grid-column:2/-1;color:#b8c9e0;overflow-wrap:anywhere}
+
+#checklistActFilter{display:block;width:100%;min-width:0;margin-top:4px}
+
+#checklistActZipFields{min-width:0;margin:12px 0 0;padding:12px;border:1px solid #3c4759;border-radius:8px}
+#checklistActZipChoices{display:grid;gap:4px;max-height:15rem;overflow:auto;margin:8px 0}
+#checklistActZipChoices label{display:flex;align-items:center;gap:8px;min-height:36px;overflow-wrap:anywhere}
+#checklistActZipChoices input{width:20px;height:20px;flex:none}
+
+#checklistImportFields{min-width:0;margin:12px 0 0;padding:12px;border:1px solid #3c4759;border-radius:8px}
+#checklistImportChanges{display:grid;gap:4px;max-height:16rem;overflow:auto;margin:8px 0}
+#checklistImportChanges label{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:8px;min-height:40px;overflow-wrap:anywhere}
+#checklistImportChanges input{width:20px;height:20px}
+#checklistImportChanges small{display:block;color:#b8c9e0}
+.checklistImportCheck{color:#a9e6be}
+.checklistImportUncheck{color:#f4c49e}
+
+#checklistImportChanges .checklistImportConflict{grid-template-columns:minmax(0,1fr);gap:4px;padding-block:5px}
+.checklistImportConflict strong{display:block;color:#f4c49e}
+.checklistImportConflict select{justify-self:start;max-width:100%}
+
+#checklistImportPriority{margin:6px 0;padding-inline-start:1.6rem;max-height:12rem;overflow:auto}
+#checklistImportPriority li{margin:3px 0;overflow-wrap:anywhere}
+#checklistImportPriority button{margin-inline-start:4px;min-width:36px;min-height:36px;padding:4px}
+
+#checklistImportChanges .checklistImportProvenance{color:#a9e6be;font-weight:650}
+#checklistImportChanges .checklistImportProvenance.isManual{color:#f4c49e}
+
+.checklistImportToggle:not([hidden]){display:flex;align-items:center;gap:8px;margin:8px 0}
+.checklistImportToggle input{width:20px;height:20px;flex:none}
+#checklistImportHistory{margin-top:12px;padding:10px;border:1px solid #3c4759;border-radius:8px}
+#checklistImportHistory summary{cursor:pointer;font-weight:700}
+.checklistHistoryControls{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,12rem),1fr));gap:8px;margin:8px 0}
+.checklistHistoryControls input,.checklistHistoryControls select{display:block;width:100%;min-width:0}
+#checklistImportHistory p{margin:6px 0;overflow-wrap:anywhere}
+#checklistHistoryRows{max-height:16rem;overflow:auto;padding-inline-start:1.4rem}
+#checklistHistoryRows li{margin:6px 0;overflow-wrap:anywhere}
+#checklistHistoryRows small{display:block;color:#b8c9e0}
+
+#checklistRestoreFields{min-width:0;margin:10px 0 0;border:1px solid #3c4759;border-radius:8px}
+#checklistRestoreRows{display:grid;gap:6px;max-height:16rem;overflow:auto;margin:6px 0}
+.checklistRestoreRow{display:flex;gap:8px;align-items:center;min-height:36px;overflow-wrap:anywhere}
+.checklistRestoreRow small{display:block;color:#b8c9e0}
+.checklistRestoreRow input{width:20px;height:20px;flex:none}
+
+/* Compact Live list and local playback settings. */
+#showLayoutDialog{max-height:calc(100vh - 24px);overflow:auto}
+.pilotSettingInline{display:flex;align-items:center;gap:8px}
+#pilotGoGuard{width:7ch;box-sizing:content-box}
+body.locked.showLayoutCompact #showCueOverviewRows{display:block;padding:8px}
+body.locked.showLayoutCompact .showTransportHeader>.showNextCountdown{min-width:0;padding:5px 10px;gap:2px}
+body.locked.showLayoutCompact .showCountdownClock{font-size:clamp(1rem,2.5vw,1.5rem)}
+body.manualConduct.locked.showLayoutCompact #showCueOverviewRows .overviewKind{display:inline;margin:0 6px 0 0}
+body.locked.showLayoutCompact #showCueOverviewRows .showOverviewRow{
+ grid-template-columns:3.5ch 44px 6ch minmax(0,1fr);gap:6px;min-height:42px;margin-bottom:5px;padding:7px 8px;border-radius:8px
+}
+body.locked.showLayoutCompact #showCueOverviewRows .overviewNumber{grid-column:1;grid-row:1;font-size:11px}
+body.locked.showLayoutCompact #showCueOverviewRows .overviewVisual{grid-column:2;grid-row:1;width:44px;height:25px;border-radius:4px}
+body.locked.showLayoutCompact #showCueOverviewRows .showOverviewPlaceholder{visibility:hidden}
+body.locked.showLayoutCompact #showCueOverviewRows .overviewTime{grid-column:3;grid-row:1;font-size:11px}
+body.locked.showLayoutCompact #showCueOverviewRows .overviewContent{display:block;grid-column:4;grid-row:1}
+body.locked.showLayoutCompact #showCueOverviewRows .overviewName{font-size:15px;line-height:1.25}
+body.locked.showLayoutCompact #showCueOverviewRows .overviewDescription{margin-top:3px;font-size:13px;line-height:1.35}
+
+/* Checklist workspace. */
+#checklistDialog{--checklist-accent:#b79af3}
+#checklistDialog .checklistIntro{padding:12px 14px;border:1px solid #443858;border-radius:14px;background:linear-gradient(135deg,#272139,#1a202d 75%)}
+#checklistDialog .checklistNameField{display:grid;gap:4px;font-size:.8rem;color:#d1c5e7}
+#checklistDialog #checklistName{font-size:1.12rem;font-weight:700}
+#checklistDialog .checklistProgress{font-variant-numeric:tabular-nums;margin:8px 0 3px}
+#checklistDialog .checklistProgress progress{accent-color:var(--checklist-accent)}
+#checklistDialog .checklistActions,#checklistDialog .checklistDocuments{display:flex;flex-wrap:wrap;align-items:start;gap:8px;margin:10px 0}
+#checklistDialog .checklistDocuments{padding-top:12px;border-top:1px solid #394253}
+#checklistDialog summary{cursor:pointer}
+#checklistDialog #checklistPreparation>summary,#checklistDialog #checklistPdfMenu>summary{
+ padding:10px 12px;min-height:42px;border:1px solid #45536a;border-radius:9px;background:#202836;color:#dbe7f9;font-size:.88rem
+}
+#checklistDialog .checklistActions details[open],#checklistDialog .checklistDocuments details[open]{flex:1 1 100%}
+#checklistPdfMenu .toolInline{flex-wrap:wrap;margin-top:8px}
+#checklistDialog .checklistEmpty{color:#b8c8e0;margin:14px 0 8px;font-size:.9rem}
+#checklistDialog .checklistToolSection{border-radius:14px;padding:10px 12px;background:#1a202b;border-color:#394355}
+#checklistDialog .checklistSectionHeader{align-items:center;gap:5px}
+#checklistDialog .checklistSectionTitle{font-weight:720;min-width:0}
+#checklistDialog .checklistIconCaption{display:none}
+#checklistDialog .checklistIconTrigger{padding-inline:7px}
+#checklistDialog .checklistItem{padding:3px 0;border-bottom:1px solid #303a4b;row-gap:3px}
+#checklistDialog .checklistItem input[type=checkbox]{accent-color:var(--checklist-accent);margin:8px 4px}
+#checklistDialog .checklistItem input[type=text]{background:transparent;border-color:transparent;min-width:0}
+#checklistDialog .checklistItem input[type=text]:focus{background:#131925;border-color:#8269b0}
+#checklistDialog .checklistItem.isChecked input[type=text]:not(:focus){color:#a9b9ae;text-decoration:line-through}
+#checklistDialog .checklistDelete{color:#b5bed1;background:transparent;border-color:transparent;min-width:36px}
+#checklistDialog .checklistDelete:hover,#checklistDialog .checklistDelete:focus-visible{color:#ffafb8;border-color:#6d4b5a}
+#checklistDialog .checklistAddItem,#checklistDialog #checklistAddSection{color:#e1d0ff;border-color:#695489;background:#29223b}
+#checklistDialog #checklistToolStatus:empty{display:none}
+@media(max-width:540px){
+ #checklistDialog .checklistIntro,#checklistDialog .checklistToolSection{padding:9px}
+ #checklistDialog .checklistItem input[type=text],#checklistDialog .checklistSectionTitle,#checklistDialog #checklistName{font-size:16px}
+ #checklistDialog .checklistDocuments>button,#checklistDialog .checklistDocuments details{flex:1 1 100%}
+}
+#checklistDialog #checklistActFilter{min-height:42px;padding:6px 9px;border:1px solid #45536a;border-radius:9px;background:#171d28;color:#e2eaf7}
+#checklistDialog .checklistItem input[type=text]::placeholder{color:#9daac0}
+
+.showCheckCards{display:grid;gap:10px}
+.showCheckCards section{padding:12px;border:1px solid #39475c;border-radius:12px;background:#1a202c;overflow-wrap:anywhere}
+.showCheckCards h3{margin:0 0 6px}
+.showCheckCards p{margin:0 0 10px;color:#c3d0e4}
+.showCheckCards #showCheckStatus{margin:8px 0 0}
+.showCheckCards #showCheckStatus:empty{display:none}
+#showCheckFailures{padding-inline-start:20px;color:#ffd0ac;max-height:14rem;overflow:auto}
+
+#liveFinishEstimate{margin:4px 0 0;color:#bbcae1;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+#actLibraryUpdatePanel{border:1px solid #67558c;background:#201c30;border-radius:12px;padding:12px;margin:12px 0}
+#actLibraryUpdatePanel select{margin:5px 0 10px}
+#actLibraryUpdatePanel h3{margin:8px 0;overflow-wrap:anywhere}
+#actLibraryUpdateChanges{max-height:14rem;overflow:auto;padding-inline-start:20px;overflow-wrap:anywhere}
+#actLibraryUpdatePanel .toolInline{flex-wrap:wrap}
+
+.cueOscEditor{margin:8px 0;padding:8px 10px;border:1px solid #46536a;border-radius:9px}
+.cueOscEditor textarea{display:block;width:100%;margin:6px 0;resize:vertical;font-family:monospace}
+.cueOscEditor small{display:block}
+#pilotOscForm{display:grid;gap:9px;margin-bottom:10px}
+#pilotOscForm .toolInline{flex-wrap:wrap}
+#pilotOscHistory{max-height:12rem;overflow:auto}
+#pilotOscStatus{overflow-wrap:anywhere}
+
+/* Host-only PIN controls, kept on one row where possible. */
+.copilotPinControls{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-top:10px}
+.copilotPinControls label{margin:0!important}.copilotPinControls input{width:5.5em;letter-spacing:.22em;text-align:center;padding:8px!important}
+#copilotPinStatus{font-size:.8rem;margin:4px 0 8px;color:#b7c9df}#copilotPinStatus:empty{display:none}

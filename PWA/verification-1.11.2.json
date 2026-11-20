@@ -1,0 +1,39 @@
+{
+  "pilot": "1.11.2",
+  "bridge": "1.6.29",
+  "checks": {
+    "api_php_sqlite": "passed",
+    "pin_required_join_and_role_change": "passed",
+    "pin_rotation_cancels_pending_commands": "passed",
+    "pin_lockout": "passed",
+    "legacy_session_closed_without_pin": "passed",
+    "pin_absent_from_shared_snapshot_and_qr": "passed",
+    "copilot_playback_halo": "passed",
+    "qlab_selection_does_not_rebuild_list": "passed",
+    "follow_gap_pixels": 20,
+    "bridge_iceman_all_conducts": "passed",
+    "modern_and_es5_project_roundtrip": "passed",
+    "translations": [
+      "fr",
+      "en",
+      "es",
+      "de"
+    ],
+    "bridge_signature_hashes": [
+      "x86_64",
+      "arm64"
+    ],
+    "bridge_resource_seal": "passed",
+    "copilot_single_halo_child_priority": "passed",
+    "follow_only_when_active_id_changes": "passed",
+    "no_follow_on_clock_selection_redraw_resize_or_layout": "passed"
+  },
+  "native_macos_qlab_and_physical_phone_tested": false,
+  "sha256": {
+    "app.js": "393555a4a7bacfeaf6f35bceefc28b594110203d59b7e698847b14ba7375007d",
+    "copilot-host.js": "738aad5e8648fcc5b7730c3f2f5a8a4a61e687235fa146fde5e7518fc1abb8b1",
+    "copilot/api.php": "abc55023c5b34cd37460c88d9230b81482e39b002fe0f0633ec7b429adec6cd8",
+    "copilot/viewer.js": "67dc4a3a4541b5b1b3c0a10bd7c01a205c5613ad642be18b99ed72f4f318ef6b"
+  },
+  "bridge_remote_control_implemented": false
+}

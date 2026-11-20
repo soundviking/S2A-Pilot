@@ -95,6 +95,8 @@ struct BridgeShowWebView: NSViewRepresentable {
             let host: String
             let invite: String
             let backstage: Bool?
+            let bridgeRemoteProtocol: Int?
+            let remotePinRevision: Int?
         }
         private static let relay = URL(string:"https://pilot.s2a-production.com/copilot/")!
         private var share: Share?
@@ -110,6 +112,71 @@ struct BridgeShowWebView: NSViewRepresentable {
         private var topsFile: URL?
         private var remoteState: [String:Any]?
         private var remoteSample = ProcessInfo.processInfo.systemUptime
+        private var remotePin = ""
+        private var remotePinRevision = 0
+        private var remoteEnabled = false
+        private var remoteInstance = UUID().uuidString
+        private var remoteSettingsBusy = false
+        private var remoteGate = BridgeRemoteGate()
+
+        private func remoteReady() -> Bool {
+            remoteEnabled && remotePinRevision > 0 && !remoteSettingsBusy && !stoppingShare && !closed &&
+                model?.workspace?.id == sharedWorkspace && model?.synchronizationLost == false
+        }
+
+        private func saveRemoteSettings(pin: String, enabled: Bool) {
+            guard let current = share, !remoteSettingsBusy, !stoppingShare else { return }
+            guard pin.range(of:"^[0-9]{4}$",options:.regularExpression) != nil else {
+                shareUI(L("Saisissez exactement 4 chiffres."),link:shareLink(current)); return
+            }
+            // Invalidate queued work before awaiting any network response.
+            remoteEnabled = false
+            remoteSettingsBusy = true
+            remoteInstance = UUID().uuidString
+            shareUI(L("Enregistrement du code…"),link:shareLink(current))
+            Task { @MainActor [self] in
+                defer {
+                    remoteSettingsBusy = false
+                    shareUI(lastRelayMessage,link:share.map(shareLink) ?? "")
+                }
+                do {
+                    let data = try await Self.relayRequest("set_remote_pin",token:current.host,
+                        body:["id":current.id,"remotePin":pin])
+                    let result = try JSONSerialization.jsonObject(with:data) as? [String:Any]
+                    guard share?.id == current.id,model?.workspace?.id == sharedWorkspace,
+                          let revision = result?["remotePinRevision"] as? Int, revision > 0 else { return }
+                    remotePin = pin; remotePinRevision = revision; remoteEnabled = enabled
+                    shareUI(L("Code télécommande enregistré."),link:shareLink(current))
+                } catch { shareUI(error.localizedDescription,link:shareLink(current)) }
+            }
+        }
+
+        private func applyRemoteCommands(_ data: Data, current: Share, instance: String,
+                                         workspace: String, playhead: String, sent: Double) async throws {
+            struct Reply: Decodable { let commands: [BridgeRemoteRequest] }
+            let reply = try JSONDecoder().decode(Reply.self,from:data)
+            for request in reply.commands {
+                let now = ProcessInfo.processInfo.systemUptime
+                let age = request.age + now - sent
+                var status = "rejected"
+                if share?.id == current.id && remoteInstance == instance && remoteReady() &&
+                    model?.workspace?.id == workspace && age.isFinite && age >= 0 && age < 3 {
+                    if let guarded = remoteGate.accept(request,now:now) { status = guarded }
+                    else if let model {
+                        status = await model.performBridgeRemote(request,workspaceID:workspace,
+                            playheadID:playhead,deadline:now+3-age,permitted:{ [weak self] in
+                                guard let self else { return false }
+                                return self.share?.id == current.id && self.remoteInstance == instance && self.remoteReady()
+                            })
+                    }
+                }
+                // Never retry the QLab operation after an uncertain acknowledgement.
+                _ = try await Self.relayRequest("remote_ack",token:current.host,
+                    body:["id":current.id,"commandId":request.id,"status":status])
+            }
+        }
+
+
         private let thumbnails = NSCache<NSURL,NSString>()
 
         private static func relayRequest(_ action:String, token:String? = nil, body:[String:Any]) async throws -> Data {
@@ -129,13 +196,13 @@ struct BridgeShowWebView: NSViewRepresentable {
         }
         private func shareUI(_ message:String, link:String = "") {
             lastRelayMessage = message
-            webView?.evaluateJavaScript("window.S2ABridge.shareStatus(\(json(["message":message,"link":link,"active":share != nil])))")
+            webView?.evaluateJavaScript("window.S2ABridge.shareStatus(\(json(["message":message,"link":link,"active":share != nil,"remotePin":remotePin,"remoteEnabled":remoteEnabled,"remoteSettingsBusy":remoteSettingsBusy])))")
         }
         private func shareLink(_ share:Share) -> String {
             Self.relay.appendingPathComponent("index.php").absoluteString+"#s="+share.id+"&i="+share.invite+"&bridge=1"
         }
         private func startShare() {
-            if let share { shareUI(stoppingShare ? "Arrêt du partage…" : "Partage actif · Régie et Backstage",link:shareLink(share)); return }
+            if let share { shareUI(stoppingShare ? "Arrêt du partage…" : "Partage actif · Régie, Backstage et Télécommande",link:shareLink(share)); return }
             guard !openingShare,!closed,let workspace = model?.workspace,let folder = workspace.projectFolder,remoteState != nil else {
                 if !openingShare { shareUI("Connectez Bridge à un workspace QLab.") }
                 return
@@ -155,20 +222,23 @@ struct BridgeShowWebView: NSViewRepresentable {
                         }
                         tops = saved
                     } else { tops = [] }
-                    let data = try await Self.relayRequest("create",body:["bridge":true,"backstage":true,"tops":tops])
+                    let pin = String(format:"%04d",Int.random(in:0...9999))
+                    let data = try await Self.relayRequest("create",body:["bridge":true,"backstage":true,"bridgeRemoteProtocol":1,"remotePin":pin,"tops":tops])
                     let created = try JSONDecoder().decode(Share.self,from:data)
-                    guard !closed,model?.workspace?.id == workspace.id,created.backstage == true else {
+                    guard !closed,model?.workspace?.id == workspace.id,created.backstage == true,created.bridgeRemoteProtocol == 1,(created.remotePinRevision ?? 0) > 0 else {
                         _ = try? await Self.relayRequest("stop",token:created.host,body:["id":created.id])
-                        if !closed { shareUI(created.backstage == true ? "Le workspace QLab a changé." : "Mettez le relais Copilot à jour pour activer Backstage.") }
+                        if !closed { shareUI(created.bridgeRemoteProtocol != 1 ? "Mettez le relais Copilot à jour pour activer les télécommandes Bridge." : "Le workspace QLab a changé.") }
                         return
                     }
+                    remotePin = pin; remotePinRevision = created.remotePinRevision ?? 0
+                    remoteEnabled = true; remoteInstance = UUID().uuidString; remoteGate = BridgeRemoteGate()
                     share = created
                     sharedWorkspace = workspace.id
                     topsFile = file
                     lastTopSync = .distantPast
                     shareLocked = false
                     webView?.evaluateJavaScript("window.S2ABridge.shareMembers({viewers:[],locked:false,now:0})",completionHandler:nil)
-                    shareUI("Partage actif · Régie et Backstage",link:shareLink(created))
+                    shareUI("Partage actif · Régie, Backstage et Télécommande",link:shareLink(created))
                     shareTask = Task { @MainActor [weak self] in
                         while !Task.isCancelled {
                             await self?.publishShare()
@@ -181,8 +251,16 @@ struct BridgeShowWebView: NSViewRepresentable {
         private func publishShare() async {
             guard !stoppingShare,let share,var state = remoteState else { return }
             state["sampleAge"] = ProcessInfo.processInfo.systemUptime - remoteSample
+            let instance = remoteInstance
+            let workspace = sharedWorkspace
+            let playhead = state["queued"] as? String ?? ""
+            state["remoteEnabled"] = remoteReady()
+            state["remoteInstance"] = instance
+            state["remoteArmed"] = playhead
             do {
-                _ = try await Self.relayRequest("publish",token:share.host,body:["id":share.id,"state":state])
+                let sent = ProcessInfo.processInfo.systemUptime
+                let response = try await Self.relayRequest("publish",token:share.host,body:["id":share.id,"state":state])
+                try await applyRemoteCommands(response,current:share,instance:instance,workspace:workspace,playhead:playhead,sent:sent)
                 guard self.share?.id == share.id else { return }
                 if Date().timeIntervalSince(lastTopSync) >= 3 {
                     let members = try await Self.relayRequest("members",token:share.host,body:["id":share.id])
@@ -191,8 +269,9 @@ struct BridgeShowWebView: NSViewRepresentable {
                     showMembers(members)
                     lastTopSync = Date()
                 }
-                shareUI("Partage actif · Régie et Backstage",link:shareLink(share))
+                shareUI("Partage actif · Régie, Backstage et Télécommande",link:shareLink(share))
             } catch {
+                remoteInstance = UUID().uuidString
                 guard !Task.isCancelled,self.share?.id == share.id else { return }
                 if (error as NSError).domain == "Copilot", (error as NSError).code == 410 {
                     stopShare()
@@ -202,6 +281,7 @@ struct BridgeShowWebView: NSViewRepresentable {
             }
         }
         private func stopShare() {
+            remoteEnabled = false; remoteInstance = UUID().uuidString
             shareTask?.cancel()
             shareTask = nil
             guard !stoppingShare,let share else { return }
@@ -288,6 +368,7 @@ struct BridgeShowWebView: NSViewRepresentable {
             let current = state["currentID"] as? String ?? ""
             let elapsed = state["elapsed"] as? Double ?? 0
             let selected = state["selectedID"] as? String ?? ""
+            let queued = state["standbyID"] as? String ?? ""
             let running = state["running"] as? Bool == true && state["lost"] as? Bool != true
             var display:[[String:Any]] = []
             var active = "", next = "", imageBytes = 0
@@ -305,6 +386,7 @@ struct BridgeShowWebView: NSViewRepresentable {
                     var child = cue
                     child["id"] = childID
                     child["child"] = true
+                    child["parentCueId"] = id
                     child["image"] = ""
                     if share != nil, let key = cue["image"] as? String, let url = mapped[key] {
                         let image = thumbnail(url)
@@ -320,7 +402,7 @@ struct BridgeShowWebView: NSViewRepresentable {
             }
             remoteSample = ProcessInfo.processInfo.systemUptime
             remoteState = ["schema":1,"show":!workspace.isEmpty,"playing":running,"title":title,
-                           "selected":selected,"current":current,"sourceLost":state["lost"] ?? false,"time":elapsed,"duration":content["duration"] ?? 0,
+                           "selected":selected,"queued":queued,"current":current,"sourceLost":state["lost"] ?? false,"time":elapsed,"duration":content["duration"] ?? 0,
                            "active":active,"next":next,"cues":display,"images":images]
         }
 
@@ -345,8 +427,8 @@ struct BridgeShowWebView: NSViewRepresentable {
                 cues.append(["id":standby.id,"number":standby.number,"time":NSNull(),"name":standby.name,"description":standby.notes,"editName":standby.qName,"editDescription":standby.notes,"image":""])
             }
             if !model.synchronizationLost { images.urls = mapped }
-            let content:[String:Any] = ["id":imported?.groupID ?? current?.id ?? "", "title":imported.flatMap { show in snapshot?.roots.first(where: { $0.id == show.groupID })?.name } ?? imported?.title ?? current?.name ?? model.workspace?.name ?? "S2A Pilot Bridge", "duration":imported?.showDuration ?? current?.duration ?? 0,"generic":imported == nil,"manual":imported?.conductType == "manual","showLayout":imported?.showLayout ?? "maverick","cues":cues]
-            let labels:[String:String] = ["flow":L("Déroulé du spectacle"),"filter":L("Type de Cue"),"allTypes":L("Tous les types"),"noTypes":L("Aucun type sélectionné"),"audio":L("Audio"),"video":L("Vidéo"),"pilot":"S2A Pilot","network":"Network","other":L("Autres"),"noMatch":L("Aucune Cue pour ce filtre."),"selectionHidden":L("La Cue sélectionnée est masquée par le filtre."),"showAll":L("Tout afficher"),"wait":L("En attente d’un numéro S2A Pilot"),"close":L("Fermer"),"zoomBack":L("Cliquer / toucher pour revenir"),"zoom":L("Agrandir le visuel"),"noVisual":L("Aucun visuel"),"countdown":L("Décompte"),"native":L("Cue QLab — déclenchement suivant au GO"),"edit":L("Modifier"),"editTitle":L("Modifier la Cue"),"name":L("Nom"),"description":L("Description / indication de conduite"),"save":L("Enregistrer"),"cancel":L("Annuler"),"saving":L("Enregistrement…"),"pilotEdit":L("Repère Pilot : titre et description sauvegardés dans Bridge."),"qlabEdit":L("Nom et notes synchronisés avec QLab."),"workspaceChanged":L("Le workspace a changé. Rouvre l’édition de la Cue."),"changed":L("La Cue a été modifiée ailleurs. Rouvre l’édition avant de réessayer.")]
+            let content:[String:Any] = ["id":imported?.groupID ?? current?.id ?? "", "title":imported.flatMap { show in snapshot?.roots.first(where: { $0.id == show.groupID })?.name } ?? imported?.title ?? current?.name ?? model.workspace?.name ?? "S2A Pilot Bridge", "duration":imported?.showDuration ?? current?.duration ?? 0,"generic":imported == nil,"manual":imported?.conductType == "manual","showLayout":"iceman","cues":cues]
+            let labels:[String:String] = ["finishEstimate":L("Fin estimée : {time}"),"finishUnknown":L("Fin indéterminée"),"ifResume":L("si reprise maintenant"),"excludingGO":L("hors attente GO"),"allowRemote":L("Autoriser les télécommandes"),"remoteCode":L("Code télécommande"),"apply":L("Appliquer"),"flow":L("Déroulé du spectacle"),"filter":L("Type de Cue"),"allTypes":L("Tous les types"),"noTypes":L("Aucun type sélectionné"),"audio":L("Audio"),"video":L("Vidéo"),"pilot":"S2A Pilot","network":"Network","other":L("Autres"),"noMatch":L("Aucune Cue pour ce filtre."),"selectionHidden":L("La Cue sélectionnée est masquée par le filtre."),"showAll":L("Tout afficher"),"wait":L("En attente d’un numéro S2A Pilot"),"close":L("Fermer"),"zoomBack":L("Cliquer / toucher pour revenir"),"zoom":L("Agrandir le visuel"),"noVisual":L("Aucun visuel"),"countdown":L("Décompte"),"native":L("Cue QLab — déclenchement suivant au GO"),"edit":L("Modifier"),"editTitle":L("Modifier la Cue"),"name":L("Nom"),"description":L("Description / indication de conduite"),"save":L("Enregistrer"),"cancel":L("Annuler"),"saving":L("Enregistrement…"),"pilotEdit":L("Repère Pilot : titre et description sauvegardés dans Bridge."),"qlabEdit":L("Nom et notes synchronisés avec QLab."),"workspaceChanged":L("Le workspace a changé. Rouvre l’édition de la Cue."),"changed":L("La Cue a été modifiée ailleurs. Rouvre l’édition avant de réessayer.")]
             let state:[String:Any] = ["language":language,"workspaceID":model.workspace?.id ?? "","filters":model.visualCueFilters.map(\.rawValue).sorted(),"editBusy":model.bridgeEditInFlight,"editReply":model.bridgeEditReply?.json ?? [:],"status":model.visualStatus.localized,"lost":model.synchronizationLost,"elapsed":model.visualElapsed,"running":model.visualRunning,"currentID":model.currentRuntimeID ?? "","standbyID":snapshot?.standbyID ?? "","selectedID":model.selectedBridgeID ?? "","labels":labels,"roots":snapshot?.roots.map { cue in ["id":cue.id,"name":cue.name,"qName":cue.qName,"notes":cue.notes,"kind":cue.kind,"duration":model.savedShows.first(where:{$0.groupID == cue.id})?.showDuration ?? cue.duration,"number":cue.number,"category":BridgeFlowFilter.category(kind:cue.kind,pilot:model.savedShows.contains(where:{$0.groupID == cue.id})).rawValue,"running":cue.running,"paused":cue.paused,"pilot":model.savedShows.contains(where:{$0.groupID == cue.id})] } ?? []]
             updateRemoteState(state:state,content:content,cues:cues,mapped:mapped,hasImport:imported != nil,title:model.workspace?.name ?? "S2A Pilot Bridge")
             let serialized = model.synchronizationLost && !contentKey.isEmpty ? contentKey : json(content)
@@ -373,6 +455,10 @@ struct BridgeShowWebView: NSViewRepresentable {
         }
         func userContentController(_ userContentController:WKUserContentController,didReceive message:WKScriptMessage) {
             guard message.frameInfo.isMainFrame, let body = message.body as? [String:Any] else { return }
+            if body["type"] as? String == "remoteSettings",
+               let pin = body["pin"] as? String,let enabled = body["enabled"] as? Bool {
+                saveRemoteSettings(pin:pin,enabled:enabled); return
+            }
             if body["type"] as? String == "share" { startShare(); return }
             if body["type"] as? String == "lockShare" { manageShare("lock"); return }
             if body["type"] as? String == "revokeShare",let id = body["id"] as? String { manageShare("revoke",viewerID:id); return }
