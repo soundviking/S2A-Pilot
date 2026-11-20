@@ -1,5 +1,6 @@
 # Pilot 1.11.6 bêta / Bridge 1.6.33 bêta
 
+- Bridge : le champ de description générale est masqué lorsque les indications par type sont disponibles, sans suppression des textes enregistrés.
 - En préparation d’un numéro Bridge, Copilot déplie la première sous-cue visible, y compris si elle commence à 00:00. La cue 2 n’est plus sélectionnée à tort.
 - Les filtres de types restent respectés. En lecture et en pause, le décompte continue de viser la cue suivante ; la préparation ne modifie aucune commande QLab.
 - Bridge Show : fin probable du spectacle entre parenthèses après la fin du numéro, calculée à partir du temps restant puis des numéros Pilot et musiques/vidéos QLab suivants ; les contrôles et musiques déjà passées sont exclus.

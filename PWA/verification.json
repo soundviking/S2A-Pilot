@@ -44,13 +44,15 @@
     "show_finish_remaining_music_projection": "passed",
     "finish_line_no_go_or_resume_suffix": "passed"
   },
-  "native_macos_build": "pending",
+  "native_macos_build": "passed",
   "real_qlab_show_executed": false,
   "physical_phone_tested": false,
   "sha256": {
-    "app.js": "0f99bf91b1ca8178ce462a2764db814157c382d17c6f47696c7ebe4782f9a000",
+    "app.js": "a425bcd3b56884e5063730612300c3c53461e68077345b0c09054a6f282f1f0a",
     "copilot-host.js": "738aad5e8648fcc5b7730c3f2f5a8a4a61e687235fa146fde5e7518fc1abb8b1",
     "copilot/api.php": "6eb8c714f5b14d7f5e489fe6de1ad2e162ef2729d4524abfdfc46e92d110e57f",
     "copilot/viewer.js": "9b59f5fba225941b64c4875632dc4f2d9e26fb6f37eb7970c4aeb9a031a62b28"
-  }
+  },
+  "native_ci_commit": "b56e634406aabfd46e5cbb1bc804a3965f71a878",
+  "native_ci_run": "https://github.com/soundviking/S2A-Pilot/actions/runs/44744541962"
 }
