@@ -225,7 +225,7 @@ $('remoteCueTypeFilter').addEventListener('toggle',()=>{
  updateStickyDeckHeight();
 });
 function remoteCueTypeBadge(type){
- const badge=document.createElement('span');badge.className='remoteCueTypeBadge';badge.textContent=pinText(type.name);
+ const badge=document.createElement('span');badge.className='remoteCueTypeBadge';badge.textContent=pinText(({none:'Sans type',sound:'Son',light:'Lumière',effect:'FX'})[type.id]||type.name);
  if(/^#[0-9a-f]{6}$/i.test(type.color))badge.style.color=type.color;
  return badge;
 }

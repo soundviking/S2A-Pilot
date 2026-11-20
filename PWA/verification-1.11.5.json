@@ -1,0 +1,52 @@
+{
+  "pilot": "1.11.5",
+  "bridge": "1.6.32",
+  "bridge_remote_control_implemented": true,
+  "checks": {
+    "relay_pin_admission_rotation_lockout": "passed",
+    "legacy_bridge_read_only": "passed",
+    "bridge_root_only_commands_and_instance_validation": "passed",
+    "single_child_priority_halo": "passed",
+    "live_clock_child_refresh": "passed",
+    "cue_change_only_follow_20px": "passed",
+    "pin_not_in_qr_or_shared_state": "passed",
+    "iceman_all_show_modes": "passed",
+    "finish_projection_pause_unknown_and_source_loss": "passed",
+    "translations": [
+      "fr",
+      "en",
+      "es",
+      "de"
+    ],
+    "universal_compile_arm64_x86_64": "passed",
+    "apple_codesign_strict": "passed",
+    "native_regressions": "passed",
+    "remote_applescript_compiled_with_qlab_dictionary": "passed",
+    "packaged_bridge_popup_pin_controls": "passed",
+    "countdown_one_pulse_per_second_shared_phase": "passed",
+    "countdown_stable_on_poll_pause_and_source_loss": "passed",
+    "bridge_idle_selection_only_without_current_cue": "passed",
+    "pilot_selection_behavior_unchanged": "passed",
+    "finish_current_number_screenshot_42_seconds": "passed",
+    "modern_macos_icon_catalog": "passed",
+    "marker_time_editor": "passed",
+    "marker_time_persistence": "passed",
+    "escape_prepares_armed_next_go": "passed",
+    "bridge_cue_type_filters": "passed",
+    "bridge_copilot_colored_descriptions_and_timeline": "passed",
+    "pilot_placeholder_dimensions_preserved": "passed",
+    "bridge_types_persistence": "passed",
+    "pilot_aligned_bridge_timing_layout": "passed"
+  },
+  "native_macos_build": "passed",
+  "real_qlab_show_executed": false,
+  "physical_phone_tested": false,
+  "sha256": {
+    "app.js": "5a8ea5d0938ba24629b3f4e6ec1737272c841ce1dd4f8ba1f5bb85b8888ab8ce",
+    "copilot-host.js": "738aad5e8648fcc5b7730c3f2f5a8a4a61e687235fa146fde5e7518fc1abb8b1",
+    "copilot/api.php": "6eb8c714f5b14d7f5e489fe6de1ad2e162ef2729d4524abfdfc46e92d110e57f",
+    "copilot/viewer.js": "acade12b597539231916c4b226431c11e7b4496ed76277fab1a3cbc26ea34929"
+  },
+  "native_ci_commit": "17ebc41da787513868ca87c88312c1fa38e590dd",
+  "native_ci_run": "https://github.com/soundviking/S2A-Pilot/actions/runs/44738011869"
+}

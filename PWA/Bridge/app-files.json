@@ -1,6 +1,6 @@
 {
-  "version": "1.6.31",
-  "build": "18804",
+  "version": "1.6.32",
+  "build": "18805",
   "channel": "beta",
   "architectures": [
     "arm64",
@@ -15,7 +15,7 @@
     {
       "path": "S2A Pilot Bridge.app/Contents/MacOS/S2A Pilot Bridge",
       "mode": 33261,
-      "size": 4148256
+      "size": 4233664
     },
     {
       "path": "S2A Pilot Bridge.app/Contents/Resources/Assets.car",
@@ -50,12 +50,17 @@
     {
       "path": "S2A Pilot Bridge.app/Contents/Resources/Show/index.html",
       "mode": 33188,
-      "size": 9755
+      "size": 10072
+    },
+    {
+      "path": "S2A Pilot Bridge.app/Contents/Resources/Show/pilot-placeholder.png",
+      "mode": 33188,
+      "size": 314305
     },
     {
       "path": "S2A Pilot Bridge.app/Contents/Resources/Show/pilot-show.css",
       "mode": 33188,
-      "size": 104801
+      "size": 105100
     },
     {
       "path": "S2A Pilot Bridge.app/Contents/Resources/Show/qrcode.js",
@@ -65,17 +70,17 @@
     {
       "path": "S2A Pilot Bridge.app/Contents/Resources/Show/shell.js",
       "mode": 33188,
-      "size": 14263
+      "size": 17299
     },
     {
       "path": "S2A Pilot Bridge.app/Contents/Resources/Show/show.html",
       "mode": 33188,
-      "size": 3824
+      "size": 5373
     },
     {
       "path": "S2A Pilot Bridge.app/Contents/Resources/Show/show.js",
       "mode": 33188,
-      "size": 6641
+      "size": 9462
     },
     {
       "path": "S2A Pilot Bridge.app/Contents/Resources/de.lproj/InfoPlist.strings",
@@ -100,12 +105,12 @@
     {
       "path": "S2A Pilot Bridge.app/Contents/Resources/interface.json",
       "mode": 33188,
-      "size": 180196
+      "size": 181063
     },
     {
       "path": "S2A Pilot Bridge.app/Contents/_CodeSignature/CodeResources",
       "mode": 33188,
-      "size": 6762
+      "size": 7020
     }
   ]
 }
