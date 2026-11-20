@@ -15,10 +15,7 @@ function renderFinish(s){
  if(!projection)return;
  if(projection.remaining===null){label.textContent=s.labels.finishUnknown||'Fin indéterminée';return;}
  const time=new Intl.DateTimeFormat(s.language,{hour:'numeric',minute:'2-digit'}).format(Date.now()+projection.remaining*1000);
- const notes=[(s.labels.finishEstimate||'Fin estimée : {time}').replace('{time}',time)];
- if(!s.running)notes.push(s.labels.ifResume||'si reprise maintenant');
- notes.push(s.labels.excludingGO||'hors attente GO');
- label.textContent=notes.join(' · ');
+ label.textContent=(s.labels.finishEstimate||'Fin estimée : {time}').replace('{time}',time);
 }
 function countdownPulse(now){
  const sample=pulseSample;

@@ -13,7 +13,7 @@ assert.equal(context.qa.finishProjection({...state,currentID:'',elapsed:0},conte
 assert.equal(context.qa.finishProjection({...state,lost:true},content),null);
 assert.equal(context.qa.finishProjection(state,{id:'solo',duration:0}).remaining,null);
 assert.equal(context.qa.finishProjection({...state,elapsed:373},content),null);
-context.qa.finish(state,content);assert.match(elements.liveFinishEstimate.textContent,/Estimated finish: .*excluding GO waits/);assert.equal(elements.liveFinishEstimate.hidden,false);
-context.qa.finish({...state,running:false},content);assert.match(elements.liveFinishEstimate.textContent,/if resumed now/);
+context.qa.finish(state,content);assert.match(elements.liveFinishEstimate.textContent,/^Estimated finish: /);assert.equal(elements.liveFinishEstimate.hidden,false);
+context.qa.finish({...state,running:false},content);assert.match(elements.liveFinishEstimate.textContent,/^Estimated finish: /);assert.ok(!elements.liveFinishEstimate.textContent.includes('if resumed now'));assert.ok(!elements.liveFinishEstimate.textContent.includes('excluding GO waits'));
 context.qa.finish({...state,lost:true},content);assert.equal(elements.liveFinishEstimate.hidden,true);
 console.log('PASS Bridge finish: displayed number only, 42-second screenshot case, cue/selection changes, standby, pause, completion, unknown duration and source loss');
