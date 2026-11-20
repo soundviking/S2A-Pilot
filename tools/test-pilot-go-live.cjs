@@ -33,7 +33,7 @@ async function verify(legacy){
   const row=id=>cueList.querySelector('[data-cue-id="'+id+'"]');
   const picker=id=>document.querySelector('[data-go-cue="'+id+'"] input[type=color]');
   const color=(id,value)=>{const input=picker(id);input.value=value;input.dispatchEvent(new Event('change',{bubbles:true}));};
-  assert(APP_VERSION==='1.11.9','wrong version');
+  assert(APP_VERSION==='1.11.10','wrong version');
   assert(picker('parent')&&picker('other')&&!picker('child'),'only root pickers');
   assert(!card('parent').style.backgroundImage&&!row('child').classList.contains('goCueColored'),'old project default');
   color('parent','#ffdd00');
@@ -66,7 +66,7 @@ async function verify(legacy){
   const packageData=await buildProjectPackage();
   const entries=readStoredZip(await packageData.blob.arrayBuffer());
   const manifest=JSON.parse(new TextDecoder().decode(entries.get('conduite.json')));
-  assert(manifest.applicationVersion==='1.11.9'&&manifest.cues[0].goColor==='#1378cc','export color/version');
+  assert(manifest.applicationVersion==='1.11.10'&&manifest.cues[0].goColor==='#1378cc','export color/version');
   assert(String(entries.get(manifest.cues[0].mediaActions[0].path))===String(audioBytes),'media bytes exported');
   assert(!manifest.cues[1].goColor&&manifest.cues[1].parentMusicId==='parent','export hierarchy');
   rebuildMediaAtTime=async()=>{};
@@ -124,7 +124,12 @@ async function verify(legacy){
   Object.defineProperty(timelineCard,'offsetHeight',{configurable:true,value:100});timelineCard.style.top='0px';
   activeRow.getBoundingClientRect=()=>({top:400,bottom:500,height:100});
   let scrollTarget=null;window.scrollTo=options=>{scrollTarget=options.top;};const previousRAF=window.requestAnimationFrame;
-  window.requestAnimationFrame=cb=>{cb();return 1;};scheduleLiveCueFollow(true);window.requestAnimationFrame=previousRAF;
+  window.requestAnimationFrame=cb=>{cb();return 1;};liveFollowSignature='';scheduleLiveCueFollow(true);
+  const afterGO=scrollTarget;scrollTarget=null;armManualCue(songB.id);scheduleLiveCueFollow(true);assert(scrollTarget===null,'selection and forced resize do not steal focus');
+  scheduleLiveCueFollow();assert(scrollTarget===null,'clock redraw preserves manual scroll');
+  manualLastGO=performance.now();scheduleLiveCueFollow();assert(scrollTarget!==null,'new GO recenters');
+  scrollTarget=null;manualCurrentID=songB.id;transportTime=300;redraw();scheduleLiveCueFollow();assert(liveFollowSignature.includes(songB.id),'Follow updates active cue signature');
+  scrollTarget=afterGO;window.requestAnimationFrame=previousRAF;
   assert(scrollTarget===280,'active cue follows 20px below timeline');
   const tcAction={id:'tc-action',kind:'audio',ltc:true,ltcLead:3,inPoint:0,outPoint:100},tcItem={cue:songA,action:tcAction};
   const originalContext=audioContext;audioContext={destination:{maxChannelCount:2,channelCount:2}};

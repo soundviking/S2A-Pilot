@@ -5935,7 +5935,7 @@ if(typeof ResizeObserver==='function'){
 }
 
 // This manifest is requested from the network, outside the service-worker cache.
-const APP_VERSION='1.11.9',BRIDGE_VERSION='1.6.33';document.querySelector('.appVersion').textContent='Version '+APP_VERSION+' bêta';let lastVersionCheck=0,versionCheckRunning=false;
+const APP_VERSION='1.11.10',BRIDGE_VERSION='1.6.33';document.querySelector('.appVersion').textContent='Version '+APP_VERSION+' bêta';let lastVersionCheck=0,versionCheckRunning=false;
 const updateNotice=document.createElement('div');updateNotice.id='updateNotice';updateNotice.hidden=true;updateNotice.setAttribute('role','status');const updateText=document.createElement('span'),updateButton=document.createElement('button'),updateSummary=document.createElement('p');updateSummary.className='updateSummary';updateSummary.hidden=true;updateButton.type='button';updateButton.textContent=tr('Ouvrir la nouvelle version');updateText.className='updateVersionText';const updateContent=document.createElement('div');updateContent.className='updateContent';updateContent.append(updateText,updateSummary);updateNotice.append(updateContent,updateButton);const updateMain=document.querySelector('main');updateMain.insertBefore(updateNotice,updateMain.firstChild);
 function updateVersionButton(){const b=document.getElementById('updateNotice')?.querySelector('button');if(!b)return;b.disabled=locked||transportPlaying;b.title=b.disabled?tr('Quitter le mode Show et mettre la lecture en pause pour actualiser.'):'';}
 function versionIsNewer(a,b){const x=a.split('.').map(Number),y=b.split('.').map(Number);for(let i=0;i<3;i++){if(x[i]!==y[i])return x[i]>y[i];}return false;}
@@ -6077,16 +6077,15 @@ if(window.S2AQuickHelp)S2AQuickHelp.start();
 function scheduleLiveCueFollow(force=false){
  const host=$('showCueOverviewRows');
  if(!locked){liveFollowSignature='';cancelAnimationFrame(liveFollowFrame);host.style.removeProperty('padding-bottom');return;}
- const active=host.querySelector('.isActive')||host.querySelector('.isKeyboardSelected,.isArmed');
- const next=host.querySelector('.isNext');
- const signature=JSON.stringify([showLayout,active?.dataset.cueId,next?.dataset.cueId]);
- if(!force&&signature===liveFollowSignature)return;
+ const active=getActiveCue();
+ const signature=JSON.stringify([conductType,active?.id,conductType==='manual'?manualCurrentID:null,conductType==='manual'?manualLastGO:null]);
+ if(signature===liveFollowSignature)return;
  liveFollowSignature=signature;
  cancelAnimationFrame(liveFollowFrame);
  liveFollowFrame=requestAnimationFrame(()=>{
   if(!locked)return;
   const following=host.querySelector('.isNext'),current=host.querySelector('.isActive');
-  const first=current||host.querySelector('.isKeyboardSelected,.isArmed')||following;
+  const first=current||following;
   if(!first)return;
   const card=$('preflightCard'),viewport=window.visualViewport;
   const inset=parseFloat(getComputedStyle(card).top)||0,top=Math.max(inset,viewport?.offsetTop||0)+card.offsetHeight+20;
@@ -6244,14 +6243,14 @@ function fitShowCueList(){
  if(!locked)return;const host=$('showCueOverviewRows'),rows=Array.from(host.children).filter(row=>row.classList.contains('showOverviewRow'));
  const start=showCueWindowStart(rows);
  rows.forEach((row,index)=>{const shown=showLayout!=='maverick'||(index>=start&&index<start+5)||row.classList.contains('isActive')||row.classList.contains('isNext');row.style.display=shown?'':'none';row.style.visibility=shown?'visible':'hidden';});
- host.style.height='auto';host.scrollTop=0;if(!rows.length){host.parentElement.classList.remove('hasHiddenCues');return;}
+ host.style.height='auto';if(!rows.length){host.parentElement.classList.remove('hasHiddenCues');return;}
  updateShowListOverflow();scheduleLiveCueFollow();
 }
 function updateShowListOverflow(){
  if(!locked)return;const host=$('showCueOverviewRows'),rows=Array.from(host.children).filter(row=>row.classList.contains('showOverviewRow')),start=showCueWindowStart(rows);
  host.parentElement.classList.toggle('hasHiddenCues',showLayout==='maverick'&&rows.length-start>5);
 }
-window.addEventListener('resize',()=>{requestAnimationFrame(fitShowCueList);scheduleLiveCueFollow(true);});
+window.addEventListener('resize',()=>{requestAnimationFrame(fitShowCueList);});
 
 function setShowText(element,text){if(element.textContent!==text)element.textContent=text;}
 

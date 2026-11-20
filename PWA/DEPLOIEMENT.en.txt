@@ -1,8 +1,8 @@
-S2A PILOT 1.11.9 BETA / BRIDGE 1.6.33 BETA — UPDATE
+S2A PILOT 1.11.10 BETA / BRIDGE 1.6.33 BETA — UPDATE
 
 Back up the installed files and preserve previous release archives. Extract the Pilot ZIP and copy its contents into the existing Pilot directory, replacing matching files. Preserve copilot/config.php and the relay's private storage. Private configuration and server logs are excluded.
 
-Update copilot/ and Bridge 1.6.33 together. Clear any CDN cache if needed, then refresh Pilot while playback is stopped. Pilot must display 1.11.9 beta. Install Bridge from its separate ZIP or the copy bundled with Pilot.
+Update copilot/ and Bridge 1.6.33 together. Clear any CDN cache if needed, then refresh Pilot while playback is stopped. Pilot must display 1.11.10 beta. Install Bridge from its separate ZIP or the copy bundled with Pilot.
 
 In Bridge Show, open Copilot. Enable remote controls, change the four-digit code if needed, then select Apply. Pilot does not need to be open. On a phone, scan the QR code and choose Remote control; enter the code to access QLab GO, play/pause, previous/next and root-cue selection. Selection alone does not start playback.
 

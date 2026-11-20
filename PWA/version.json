@@ -1,11 +1,11 @@
 {
-  "version": "1.11.9",
+  "version": "1.11.10",
   "releaseNotes": {
-    "fr": "TC hors ligne sans bloquer la musique, sortie stéréo autorisée ; mêmes pastilles que dans Edit et suivi à 20 px.",
-    "en": "TC offline without blocking music, stereo output allowed; Edit media badges and 20px cue follow margin.",
-    "es": "TC sin conexión sin bloquear la música, salida estéreo permitida; distintivos de Edit y margen de 20 px.",
-    "de": "TC offline ohne Musikblockade, Stereoausgabe möglich; Edit-Medienanzeigen und 20 px Folgeabstand."
+    "fr": "Suivi Live uniquement au GO ou au changement de cue active : la sélection et le défilement restent libres.",
+    "en": "Live follow only on GO or active cue changes: selection and manual scrolling remain free.",
+    "es": "Seguimiento Live solo con GO o al cambiar la cue activa: selección y desplazamiento libres.",
+    "de": "Live folgt nur bei GO oder aktivem Cue-Wechsel: Auswahl und manuelles Scrollen bleiben frei."
   },
   "channel": "beta",
-  "revision": "ltc-offline-live-polish"
+  "revision": "live-follow-go-only"
 }
