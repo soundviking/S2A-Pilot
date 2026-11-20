@@ -52,6 +52,14 @@ struct BridgeRuntimeSnapshot {
         return roots.first(where:{$0.running && !$0.paused}) ?? roots.first(where:{$0.paused})
     }
 
+    // QLab selection may still point at the cue just stopped with Escape.
+    // Preview what the next GO will launch; never rewind that stopped number.
+    func displayCue(currentID: String?) -> BridgeRuntimeCue? {
+        current(previousID:currentID)
+            ?? roots.first(where: { $0.id == standbyID })
+            ?? roots.first(where: { $0.id == selectedID })
+    }
+
     static func script(workspaceID: String, shows: [SavedShowCue]) -> String {
         func quote(_ s:String) -> String { "\""+s.replacingOccurrences(of:"\\",with:"\\\\").replacingOccurrences(of:"\"",with:"\\\"")+"\"" }
         let clocks = shows.map { show in

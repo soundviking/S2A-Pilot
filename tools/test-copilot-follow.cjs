@@ -36,4 +36,5 @@ w.qa.render({...state,playing:false,selected:'following'});assert.deepEqual(acti
 w.qa.render({...state,selected:'following'});assert.deepEqual(active(),['child3'],'Playback keeps child priority');
 w.qa.render({...idle,bridge:false,manual:true});assert.deepEqual(active(),[],'Pilot-only never follows the QLab selection');
 w.qa.render({...idle,sourceLost:true});assert.deepEqual(active(),[],'A lost source cannot invent an idle selection');
+w.qa.render({...idle,preview:'',queued:'following',selected:'root'});assert.deepEqual(active(),['following'],'Idle Bridge uses the armed next GO when selection stays on the stopped root');
 assert.deepEqual(errors,[]);w.close();console.log('PASS Single child-priority halo; cue-change-only follow; no reset for selection, clock, redraw, resize or compact view.');

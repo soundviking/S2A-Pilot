@@ -34,7 +34,7 @@ function openRootEditor(id){const cue=latest.roots.find(x=>x.id===id);if(cue&&!l
 function openShowEditor(id,contentID){
  if(!content||contentID!==content.id)return;const cue=content.cues.find(x=>x.id===id);if(!cue)return;
  if(content.generic){openRootEditor(id);return;}
- openEditor({kind:'pilot',groupID:content.id,cueID:id,name:cue.editName??cue.name,description:cue.editDescription??cue.description??'',time:cue.time});
+ openEditor({kind:'pilot',groupID:content.id,cueID:id,name:cue.editName??cue.name,description:cue.editDescription??cue.description??'',time:cue.time,duration:content.duration});
 }
 function updateEditor(state){
  if(!editing)return;
@@ -57,8 +57,8 @@ function updateEditor(state){
 }
 document.getElementById('editForm').addEventListener('submit',event=>{
  event.preventDefault();if(!editing||editPending||document.getElementById('editSave').disabled)return;
- const time=editing.kind==='pilot'?parseCueTime(editTime.value):null;
- if(editing.kind==='pilot'&&(time===null||Number(content?.duration)>0&&time>Number(content.duration))){document.getElementById('editError').textContent=latest.labels.invalidTime||'Temps invalide : utilisez un repère entre le début et la fin du numéro.';editTime.focus();return;}
+ const time=editing.kind==='pilot'?(editTime.value===formatCueTime(editing.time)?editing.time:parseCueTime(editTime.value)):null;
+ if(editing.kind==='pilot'&&(time===null||Number(editing.duration)>0&&time>Number(editing.duration))){document.getElementById('editError').textContent=latest.labels.invalidTime||'Temps invalide : utilisez un repère entre le début et la fin du numéro.';editTime.focus();return;}
  editPending=Date.now().toString(36)+'-'+Math.random().toString(36).slice(2);
  updateEditorControls(true);document.getElementById('editError').textContent=latest.labels.saving||'Enregistrement…';
  notify({type:'edit',requestID:editPending,workspaceID:editing.workspaceID,kind:editing.kind,cueID:editing.cueID,groupID:editing.groupID??null,
@@ -88,16 +88,17 @@ window.S2ABridge={closeZoom,render(state,newContent){latest=state;if(newContent)
  document.getElementById('filterSummary').textContent=filters.length===filterTypes.length?(state.labels.allTypes||'Tous les types'):filters.length?filters.map(type=>optionLabels[type]).join(', '):(state.labels.noTypes||'Aucun type sélectionné');
  document.getElementById('allTypes').textContent=state.labels.showAll||'Tout afficher';
  const visible=state.roots.filter(item=>filters.length===filterTypes.length||filters.includes(item.category));
- const hiddenSelection=!!state.selectedID&&state.roots.some(item=>item.id===state.selectedID)&&!visible.some(item=>item.id===state.selectedID);
+ const focusID=[state.currentID,state.standbyID,state.selectedID].find(id=>state.roots.some(item=>item.id===id))||'';
+ const hiddenSelection=!!focusID&&!visible.some(item=>item.id===focusID);
  const notice=document.getElementById('filterNotice');notice.hidden=!hiddenSelection;
  notice.querySelector('span').textContent=state.labels.selectionHidden||'La Cue sélectionnée est masquée par le filtre.';
  document.getElementById('showAll').textContent=state.labels.showAll||'Tout afficher';
- const key=JSON.stringify([visible,state.selectedID,state.lost,state.editBusy,filter,state.language]);
+ const key=JSON.stringify([visible,focusID,state.lost,state.editBusy,filter,state.language]);
  if(key!==lastFlow){
   lastFlow=key;const host=document.getElementById('flow');if(host.dataset.filter!==filter){delete host.dataset.follow;host.dataset.filter=filter;}const focused=document.activeElement?.dataset?.id;host.replaceChildren();
   for(const item of visible){
    const row=document.createElement('button');row.type='button';row.disabled=state.lost;
-   const selected=item.id===state.selectedID;
+   const selected=item.id===focusID;
    row.className='flowItem'+(selected?' active':'')+(item.paused?' paused':'');row.dataset.id=item.id;
    row.setAttribute('aria-pressed',String(selected));
    const kind=document.createElement('div');kind.className='kind';kind.textContent=item.pilot?'S2A Pilot':item.kind;
@@ -112,7 +113,7 @@ window.S2ABridge={closeZoom,render(state,newContent){latest=state;if(newContent)
    wrapper.append(row,edit);host.append(wrapper);
    if(focused===item.id)row.focus({preventScroll:true});
   }
-  const selected=host.querySelector('.active');if(selected&&host.dataset.follow!==state.selectedID){host.dataset.follow=state.selectedID;selected.scrollIntoView({block:'center',behavior:'instant'});}
+  const selected=host.querySelector('.active');if(selected&&host.dataset.follow!==focusID){host.dataset.follow=focusID;selected.scrollIntoView({block:'center',behavior:'instant'});}
   if(!selected)delete host.dataset.follow;
   if(!visible.length)host.textContent=state.roots.length?(state.labels.noMatch||'Aucune Cue pour ce filtre.'):state.labels.wait;
  }

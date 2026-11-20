@@ -30,7 +30,8 @@
     "finish_current_number_screenshot_42_seconds": "passed",
     "modern_macos_icon_catalog": "passed",
     "marker_time_editor": "passed",
-    "marker_time_persistence": "pending"
+    "marker_time_persistence": "pending",
+    "escape_prepares_armed_next_go": "pending"
   },
   "native_macos_build": "pending",
   "real_qlab_show_executed": false,

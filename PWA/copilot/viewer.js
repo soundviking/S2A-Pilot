@@ -180,7 +180,7 @@ function highlightedCueId(state){
  // Bridge retains its parent QLab cue while a timed child is active. Highlight one row.
  if(state.bridge&&!state.current){
   if(state.sourceLost)return '';
-  const preview=state.preview||state.selected||'';
+  const preview=state.preview||state.queued||state.selected||'';
   return (state.cues||[]).some(cue=>cue.id===preview&&!cue.child)?preview:'';
  }
  const active=(state.cues||[]).find(cue=>cue.id===state.active);

@@ -10,6 +10,10 @@ import Foundation
   precondition(snapshot.roots[0].notes=="Consigne\nmultiligne")
   let paused=try BridgeRuntimeSnapshot.parse("S2A_RUNTIME_V3\u{1e}next\u{1e}selected\u{1e}"+row("R","show","65,25",false,true))
   precondition(paused.current(previousID:"show")?.paused==true)
+  let idle=try BridgeRuntimeSnapshot.parse("S2A_RUNTIME_V3\u{1e}next\u{1e}show\u{1e}"+row("R","show","0",false,false)+row("R","next","0",false,false))
+  precondition(idle.displayCue(currentID:"show")?.id == "next", "Escape must prepare the next GO, not rewind the stopped show")
+  precondition(snapshot.displayCue(currentID:"show")?.id == "show")
+  precondition(paused.displayCue(currentID:"show")?.id == "show")
   let backwards=try BridgeRuntimeSnapshot.parse("S2A_RUNTIME_V3\u{1e}next\u{1e}selected\u{1e}"+row("R","show","20,0",true,false))
   precondition(backwards.current(previousID:"show")?.elapsed==20)
   for broken in ["",source.replacingOccurrences(of:"65,25",with:"invalid"),String(source.dropLast()),source.replacingOccurrences(of:"65,25",with:"nan")] {
