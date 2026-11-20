@@ -1,0 +1,36 @@
+{
+  "fill-specializations": [
+    {
+      "value": {
+        "solid": "srgb:0.35000,0.12000,0.01500,1.00000"
+      }
+    }
+  ],
+  "groups": [
+    {
+      "blur-material": null,
+      "layers": [
+        {
+          "glass": false,
+          "image-name": "Bridge.png",
+          "name": "Bridge"
+        }
+      ],
+      "name": "Bridge",
+      "shadow": {
+        "kind": "neutral",
+        "opacity": 0
+      },
+      "specular": false,
+      "translucency": {
+        "enabled": false,
+        "value": 0
+      }
+    }
+  ],
+  "supported-platforms": {
+    "squares": [
+      "macOS"
+    ]
+  }
+}

@@ -8,6 +8,8 @@ app=repo/'S2A-Copilot/build-beta/S2A Pilot Bridge.app'
 info=plistlib.loads((app/'Contents/Info.plist').read_bytes())
 meta=json.loads((repo/'S2A-Copilot/version.json').read_text())
 assert info['CFBundleShortVersionString']==meta['version']=='1.6.31'
+assert info['CFBundleIconName']=='S2APilotBridgeIcon'
+assert (app/'Contents/Resources/Assets.car').stat().st_size > 0
 out=repo/'dist/bridge-remote';out.mkdir(parents=True,exist_ok=True)
 archive=out/f"S2A-Pilot-Bridge-{meta['version']}-app.zip"
 files=[]

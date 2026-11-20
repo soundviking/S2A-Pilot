@@ -36,6 +36,17 @@ mkdir -p "$ICONSET"
 /usr/bin/sips -z 1024 1024 "$ROOT/Resources/S2APilotBridgeIcon.png" --out "$ICONSET/icon_512x512@2x.png" >/dev/null
 /usr/bin/iconutil -c icns "$ICONSET" -o "$RESOURCES/S2APilotBridgeIcon.icns"
 
+# Native icon catalog for modern macOS; retain the generated ICNS fallback.
+MODERN_ICON="$BUILD/S2APilotBridgeIcon.icon"
+mkdir -p "$MODERN_ICON/Assets"
+cp "$ROOT/Resources/S2APilotBridgeIcon.icon/icon.json" "$MODERN_ICON/icon.json"
+/usr/bin/sips -z 1024 1024 "$ROOT/Resources/S2APilotBridgeIcon.png" --out "$MODERN_ICON/Assets/Bridge.png" >/dev/null
+xcrun actool "$MODERN_ICON" --compile "$RESOURCES" --platform macosx \
+  --minimum-deployment-target 13.0 --app-icon S2APilotBridgeIcon --include-all-app-icons \
+  --output-partial-info-plist "$BUILD/icon-partial.plist"
+test -s "$RESOURCES/Assets.car"
+
+
 cat > "$APP/Contents/Info.plist" <<'PLIST'
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
@@ -53,6 +64,8 @@ cat > "$APP/Contents/Info.plist" <<'PLIST'
   <string>1.6.31</string>
   <key>CFBundleExecutable</key>
   <string>S2A Pilot Bridge</string>
+  <key>CFBundleIconName</key>
+  <string>S2APilotBridgeIcon</string>
   <key>CFBundleIconFile</key>
   <string>S2APilotBridgeIcon</string>
   <key>LSMinimumSystemVersion</key>
