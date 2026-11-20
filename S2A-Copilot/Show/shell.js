@@ -23,7 +23,7 @@ function openEditor(target){
  document.getElementById('editCancel').textContent=l.cancel||'Annuler';document.getElementById('editSave').textContent=l.save||'Enregistrer';
  document.getElementById('editError').textContent='';editName.value=target.name;editDescription.value=target.description;
  const typedHost=document.getElementById('editTypedFields');typedHost.replaceChildren();
- const typed=target.kind==='pilot'&&target.typeDescriptions&&Object.keys(target.typeDescriptions).length>0;
+ const typed=target.kind==='pilot'&&target.typeDescriptions&&(target.cueTypeIds||[]).some(id=>id!=='none');
  editDescription.hidden=!!typed;document.getElementById('editDescriptionLabel').hidden=!!typed;
  if(typed)for(const type of content?.cueTypes||[]){
   if(!(target.cueTypeIds||[]).includes(type.id))continue;
@@ -73,7 +73,7 @@ document.getElementById('editForm').addEventListener('submit',event=>{
  const typeDescriptions=editing.typeDescriptions?{...editing.typeDescriptions}:null;
  if(typeDescriptions)for(const input of document.querySelectorAll('#editTypedFields textarea'))typeDescriptions[input.dataset.typeId]=input.value;
  notify({type:'edit',requestID:editPending,workspaceID:editing.workspaceID,kind:editing.kind,cueID:editing.cueID,groupID:editing.groupID??null,
- name:editName.value,description:editDescription.value,expectedName:editing.name,expectedDescription:editing.description,...(editing.kind==='pilot'?{time,expectedTime:editing.time}:{}),...(typeDescriptions?{typeDescriptions,expectedTypeDescriptions:editing.typeDescriptions}:{})});
+ name:editName.value,description:editDescription.value,expectedName:editing.name,expectedDescription:editing.description,...(editing.kind==='pilot'?{time,expectedTime:editing.time}:{}),...(typeDescriptions&&JSON.stringify(typeDescriptions)!==JSON.stringify(editing.typeDescriptions)?{typeDescriptions,expectedTypeDescriptions:editing.typeDescriptions}:{})});
 });
 document.getElementById('editCancel').onclick=closeEditor;
 editor.addEventListener('cancel',event=>{event.preventDefault();closeEditor();});

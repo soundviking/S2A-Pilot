@@ -18,6 +18,7 @@ $('editCancel').click();const typedCue={...cue,cueTypeIds:['light','sound'],type
 w.S2ABridge.render(state,typedContent);w.qa.openShowEditor('7','group');assert.equal($('editDescription').hidden,true);assert.equal($('editTypedFields').querySelectorAll('textarea').length,2);
 $('editTypedFields').querySelector('[data-type-id="light"]').value='New LX';$('editForm').dispatchEvent(new w.Event('submit',{cancelable:true}));const typedRequest=requests.at(-1);assert.equal(typedRequest.typeDescriptions.light,'New LX');assert.equal(typedRequest.typeDescriptions.sound,'Audio');assert.equal(typedRequest.expectedTypeDescriptions.light,'LX');
 w.S2ABridge.render({...state,editReply:{requestID:typedRequest.requestID,success:true}},typedContent);
+const untyped={...cue,cueTypeIds:[],typeDescriptions:{none:'General'}};w.S2ABridge.render(state,{...content,cues:[untyped]});w.qa.openShowEditor('7','group');assert.equal($('editDescription').hidden,false,'Untyped descriptions remain editable');$('editCancel').click();
 const flowState={...state,roots:[{id:'old',name:'Old',category:'pilot'},{id:'next',name:'Next',category:'pilot'}],currentID:'old',standbyID:'next',selectedID:'next'};
 w.S2ABridge.render(flowState,content);assert.equal(w.document.querySelector('.flowItem.active').dataset.id,'old','Playing cue owns Bridge flow focus');
 w.S2ABridge.render({...flowState,currentID:'',selectedID:'old'},content);assert.equal(w.document.querySelector('.flowItem.active').dataset.id,'next','Escape prepares the armed next GO even if selection stays on old show');
