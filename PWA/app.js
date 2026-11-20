@@ -221,7 +221,7 @@ document.addEventListener('visibilitychange',()=>scheduleMediaMaintenance());
 function waitMediaReady(el,kind,timeout=10000){return new Promise((resolve,reject)=>{let done=false;const finish=(ok,err)=>{if(done)return;done=true;clearTimeout(timer);el.removeEventListener('loadeddata',ready);el.removeEventListener('canplay',ready);el.removeEventListener('error',fail);ok?resolve():reject(err||new Error(tr('Média non décodable')));};const ready=()=>finish(true);const fail=()=>finish(false,new Error(tr('Média non décodable par ce navigateur')));const timer=setTimeout(()=>{if(el.readyState>=2)finish(true);else finish(false,new Error(tr('Délai de préchargement dépassé')));},timeout);el.addEventListener('loadeddata',ready,{once:true});el.addEventListener('canplay',ready,{once:true});el.addEventListener('error',fail,{once:true});if(el.readyState>=2)finish(true);else el.load();});}
 async function prepareOneMedia(item){let existing=preparedMedia.get(item.action.id);if(existing?.ready)return existing;if(existing?.pending)return existing.pending;if(existing){releasePrepared(existing);preparedMedia.delete(item.action.id);}
 const rec={item,ltcKey:ltcPreparationKey(item),el:document.createElement(item.action.kind==='video'?'video':'audio'),ready:false,error:null};preparedMedia.set(item.action.id,rec);rec.el.addEventListener('timeupdate',backgroundTransportTick);rec.el.addEventListener('ended',backgroundTransportTick);
-rec.pending=(async()=>{try{if(pilotOutputChangeTask)await pilotOutputChangeTask;const url=rec.ltcKey?await prepareLtcMedia(rec,item):await assetUrl(item.action.assetKey);if(preparedMedia.get(item.action.id)!==rec){releasePrepared(rec);throw new Error(tr('Préchargement annulé'));}if(!url){const error=new Error(`${tr("Média introuvable : ")}${item.action.name}`);error.missingMedia=true;throw error;}rec.url=url;const el=rec.el;if(pilotOutputChangeTask)await pilotOutputChangeTask;await routePilotElement(el);el.preload='auto';el.src=url;el.playsInline=true;el.controls=false;el.loop=false;if(item.action.kind==='video')el.muted=true;preloadBin.appendChild(el);el.addEventListener('ended',()=>handleRuntimeMediaEnded(item.action.id,item.action.kind));await waitMediaReady(el,item.action.kind);if(preparedMedia.get(item.action.id)!==rec){releasePrepared(rec);throw new Error(tr('Préchargement annulé'));}rec.ready=true;try{el.currentTime=Number(item.action.inPoint)||0;}catch{}return rec;}catch(e){releasePrepared(rec);rec.error=e;throw e;}finally{rec.pending=null;}})();return rec.pending;}
+rec.pending=(async()=>{try{if(pilotOutputChangeTask)await pilotOutputChangeTask;let url;if(rec.ltcKey){try{url=await prepareLtcMedia(rec,item);}catch(error){if(preparedMedia.get(item.action.id)!==rec)throw error;releasePrepared(rec);ltcUnavailableActions.add(item.action.id);rec.ltcKey='';rec.el=document.createElement('audio');rec.el.addEventListener('timeupdate',backgroundTransportTick);rec.el.addEventListener('ended',backgroundTransportTick);url=await assetUrl(item.action.assetKey);updateLtcOfflineNotice();}}else url=await assetUrl(item.action.assetKey);if(preparedMedia.get(item.action.id)!==rec){releasePrepared(rec);throw new Error(tr('Préchargement annulé'));}if(!url){const error=new Error(`${tr("Média introuvable : ")}${item.action.name}`);error.missingMedia=true;throw error;}rec.url=url;const el=rec.el;if(pilotOutputChangeTask)await pilotOutputChangeTask;await routePilotElement(el);el.preload='auto';el.src=url;el.playsInline=true;el.controls=false;el.loop=false;if(item.action.kind==='video')el.muted=true;preloadBin.appendChild(el);el.addEventListener('ended',()=>handleRuntimeMediaEnded(item.action.id,item.action.kind));await waitMediaReady(el,item.action.kind);if(preparedMedia.get(item.action.id)!==rec){releasePrepared(rec);throw new Error(tr('Préchargement annulé'));}rec.ready=true;try{el.currentTime=Number(item.action.inPoint)||0;}catch{}return rec;}catch(e){releasePrepared(rec);rec.error=e;throw e;}finally{rec.pending=null;}})();return rec.pending;}
 async function prepareShowMedia(){if(preflightPromise){await preflightPromise;return prepareShowMedia();}const items=allMediaActions();if(items.every(x=>preparedMedia.get(x.action.id)?.ready)){preflightState='ready';return true;}preflightState='preparing';preflightErrors=[];
 preflightPromise=(async()=>{for(const item of items){if(!allMediaActions().some(x=>x.action.id===item.action.id))continue;try{await prepareOneMedia(item);}catch(error){preflightErrors.push({item,error});window.S2APilotDiagnostics?.report('media',error);}}preflightState=preflightErrors.length?'error':'ready';updatePreflightUI();return preflightState==='ready';})();try{return await preflightPromise;}finally{preflightPromise=null;}}
 function preparedRecord(item){const p=preparedMedia.get(item.action.id);return p?.ready?p:null;}
@@ -331,13 +331,27 @@ async function seekTransport(t){
 
 function allActions(kind){return indexedActions(kind);}
 let audioContext=null;async function ensureAudioContext(){const context=pilotOutputContext();if(context.state==='suspended')await context.resume();return context;}
+let ltcOffline=false;
+const ltcUnavailableActions=new Set();
+function ltcAvailable(){
+ try{if(ltcOffline||pilotOutputChanging)return false;return pilotOutputContext().destination.maxChannelCount>=4;}catch{return false;}
+}
+function updateLtcOfflineNotice(){
+ const requested=allMediaActions().some(item=>item.action.ltc);
+ const unavailable=requested&&(!ltcAvailable()||ltcUnavailableActions.size>0);
+ for(const id of ['ltcOfflineNotice','liveLtcOfflineNotice']){
+  const label=$(id);if(!label)continue;label.hidden=!unavailable;
+  if(unavailable)label.textContent=tr('TC hors ligne — la musique reste disponible.');
+ }
+ const control=$('ltcOffline');if(control){control.checked=ltcOffline;control.disabled=pilotOutputInUse()||pilotOutputChanging;}
+}
 function normalizeLtcLead(value){return Number.isInteger(value)&&value>=0&&value<=5?value:0;}
 function plannedLtcLead({cue,action}){
- return conductType==='manual'&&isManualMainCue(cue)&&!cue.visualNumber?normalizeLtcLead(action.ltcLead):0;
+ return action.ltc&&ltcAvailable()&&!ltcUnavailableActions.has(action.id)&&conductType==='manual'&&isManualMainCue(cue)&&!cue.visualNumber?normalizeLtcLead(action.ltcLead):0;
 }
 function ltcPreparationKey(item){
  const {action}=item;
- return action.kind==='audio'&&action.ltc?[action.inPoint,action.outPoint,normalizeLtcStartFrame(action.ltcStartFrame),plannedLtcLead(item)].join(':'):'';
+ return action.kind==='audio'&&action.ltc&&ltcAvailable()&&!ltcUnavailableActions.has(action.id)?[action.inPoint,action.outPoint,normalizeLtcStartFrame(action.ltcStartFrame),plannedLtcLead(item)].join(':'):'';
 }
 // The four-channel PCM stream shares one decoder and clock with the music.
 // Channels 1–2 are music, 3 is LTC, and 4 is silent.
@@ -421,8 +435,7 @@ function createLtcWave(buffer,startTime,endTime,startFrame,isCurrent,lead=0){
 }
 function ltcOutputContext(){
  pilotOutputContext();
- if(audioContext.destination.maxChannelCount<4)throw new Error(tr('LTC : sélectionnez une sortie USB avec au moins 4 canaux, puis rechargez Pilot.'));
- audioContext.destination.channelCount=4;
+ audioContext.destination.channelCount=ltcAvailable()?4:2;
  return audioContext;
 }
 async function prepareLtcMedia(rec,item){
@@ -464,7 +477,8 @@ function updateLtcRouting(){
  const current=conductType==='manual'
   ?(staged&&!staged.el.paused&&!staged.el.seeking?staged:tracks.filter(rt=>rt.item.cue.id===manualCurrentID||rt.item.cue.parentMusicId===manualCurrentID).at(-1))
   :tracks.reduce((latest,rt)=>!latest||rt.item.start>=latest.item.start?rt:latest,null);
- const available=audioContext?.destination.maxChannelCount>=4&&audioContext.destination.channelCount===4;
+ updateLtcOfflineNotice();
+ const available=ltcAvailable()&&audioContext?.destination.maxChannelCount>=4&&audioContext.destination.channelCount===4;
  for(const rt of tracks){
   const route=ltcRoutes.get(rt.el);
   if(!route)continue;
@@ -5341,14 +5355,12 @@ async function applyPilotOutput(id,name,restore,authorize){
   }
   context=pilotOutputContext();
   channelCount=context.destination.channelCount;
+  for(const rec of preparedMedia.values()){const route=ltcRoutes.get(rec.el);if(route)route.ltc.gain.value=0;}
   // LTC playback and tests enable their extra channels only when needed.
   if(channelCount>2)context.destination.channelCount=2;
   if(context.sinkId!==id)await context.setSinkId(id);
   const needsLtc=allMediaActions().some(item=>ltcPreparationKey(item));
-  if(needsLtc&&id&&context.destination.maxChannelCount<4){
-   throw new DOMException('LTC requires four output channels','LtcChannelError');
-  }
-  if(needsLtc&&context.destination.maxChannelCount>=4)context.destination.channelCount=4;
+  if(needsLtc&&!ltcOffline&&context.destination.maxChannelCount>=4)context.destination.channelCount=4;
   await Promise.all(elements.map(el=>routePilotElement(el,id)));
   pilotOutputId=id;pilotOutputName=name;pilotOutputReady=true;pilotOutputRetry=null;
   try{
@@ -5375,7 +5387,7 @@ async function applyPilotOutput(id,name,restore,authorize){
    'Impossible de sélectionner cette sortie. Vérifiez le branchement et les autorisations.';
  }finally{
   if(stream)stream.getTracks().forEach(track=>track.stop());
-  pilotOutputChanging=false;renderPilotOutput();
+  pilotOutputChanging=false;ltcUnavailableActions.clear();reconcilePreparedMedia();updateLtcRouting();renderPilotOutput();
  }
 }
 async function refreshPilotOutputs(deviceChanged=false){
@@ -5397,6 +5409,7 @@ function authorizePilotOutputs(){
  const nativePicker=pilotAudioDevices.selectAudioOutput;
  return choosePilotOutput(retry?.id||(nativePicker?pilotOutputId:''),retry?.name||pilotOutputName,false,true);
 }
+$('ltcOffline').onchange=event=>{if(pilotOutputInUse()){event.target.checked=ltcOffline;return;}ltcOffline=event.target.checked;ltcUnavailableActions.clear();for(const rec of preparedMedia.values()){const route=ltcRoutes.get(rec.el);if(route)route.ltc.gain.value=0;}reconcilePreparedMedia();invalidatePreflight();scheduleMediaMaintenance(0);updateLtcRouting();};
 $('pilotAudioOutput').onchange=event=>{
  const id=event.currentTarget.value;
  pilotOutputRetry=null;
@@ -5922,7 +5935,7 @@ if(typeof ResizeObserver==='function'){
 }
 
 // This manifest is requested from the network, outside the service-worker cache.
-const APP_VERSION='1.11.8',BRIDGE_VERSION='1.6.33';document.querySelector('.appVersion').textContent='Version '+APP_VERSION+' bêta';let lastVersionCheck=0,versionCheckRunning=false;
+const APP_VERSION='1.11.9',BRIDGE_VERSION='1.6.33';document.querySelector('.appVersion').textContent='Version '+APP_VERSION+' bêta';let lastVersionCheck=0,versionCheckRunning=false;
 const updateNotice=document.createElement('div');updateNotice.id='updateNotice';updateNotice.hidden=true;updateNotice.setAttribute('role','status');const updateText=document.createElement('span'),updateButton=document.createElement('button'),updateSummary=document.createElement('p');updateSummary.className='updateSummary';updateSummary.hidden=true;updateButton.type='button';updateButton.textContent=tr('Ouvrir la nouvelle version');updateText.className='updateVersionText';const updateContent=document.createElement('div');updateContent.className='updateContent';updateContent.append(updateText,updateSummary);updateNotice.append(updateContent,updateButton);const updateMain=document.querySelector('main');updateMain.insertBefore(updateNotice,updateMain.firstChild);
 function updateVersionButton(){const b=document.getElementById('updateNotice')?.querySelector('button');if(!b)return;b.disabled=locked||transportPlaying;b.title=b.disabled?tr('Quitter le mode Show et mettre la lecture en pause pour actualiser.'):'';}
 function versionIsNewer(a,b){const x=a.split('.').map(Number),y=b.split('.').map(Number);for(let i=0;i<3;i++){if(x[i]!==y[i])return x[i]>y[i];}return false;}
@@ -6076,7 +6089,7 @@ function scheduleLiveCueFollow(force=false){
   const first=current||host.querySelector('.isKeyboardSelected,.isArmed')||following;
   if(!first)return;
   const card=$('preflightCard'),viewport=window.visualViewport;
-  const inset=parseFloat(getComputedStyle(card).top)||0,top=Math.max(inset,viewport?.offsetTop||0)+card.offsetHeight+6;
+  const inset=parseFloat(getComputedStyle(card).top)||0,top=Math.max(inset,viewport?.offsetTop||0)+card.offsetHeight+20;
   const bottom=(viewport?viewport.offsetTop+viewport.height:window.innerHeight)-12;
   const space=bottom-top;if(space<=0)return;
   const a=first.getBoundingClientRect();
@@ -6168,9 +6181,9 @@ function updateShowOverview(){
    row.classList.add('hasLiveMediaBadges');
    const badges=document.createElement('div');badges.className='liveMediaBadges';
    for(const kind of mediaKinds){
-    const badge=document.createElement('span');badge.className='cueMediaChip '+kind;
-    const icon=document.createElement('span');icon.setAttribute('aria-hidden','true');S2AMaterial.set(icon,kind==='audio'?'volume_up':'videocam');
-    const label=document.createElement('span');label.className='liveMediaBadgeLabel';label.textContent=tr(kind==='audio'?'Audio':'Vidéo');badge.setAttribute('aria-label',label.textContent);badge.append(icon,label);badges.append(badge);
+    const count=(cue.mediaActions||[]).filter(action=>action.kind===kind).length;
+    const badge=document.createElement('span');badge.className='cueMediaChip '+kind+' '+cuePreparationClass(cue);
+    badge.textContent=(kind==='audio'?'AUDIO':tr('VIDÉO'))+(count>1?' ×'+count:'');badges.append(badge);
    }
    row.append(badges);
   }

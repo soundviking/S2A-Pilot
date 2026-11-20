@@ -1,11 +1,11 @@
 {
-  "version": "1.11.8",
+  "version": "1.11.9",
   "releaseNotes": {
-    "fr": "Mode spectacle : fin de la musique en cours et fin probable du spectacle entre parenthèses, calculée sur les durées restantes.",
-    "en": "Show mode: current music finish and estimated show finish in parentheses, based on remaining durations.",
-    "es": "Modo espectáculo: fin de la música actual y fin probable del espectáculo entre paréntesis, según las duraciones restantes.",
-    "de": "Show-Modus: Ende der aktuellen Musik und voraussichtliches Show-Ende in Klammern anhand der verbleibenden Dauer."
+    "fr": "TC hors ligne sans bloquer la musique, sortie stéréo autorisée ; mêmes pastilles que dans Edit et suivi à 20 px.",
+    "en": "TC offline without blocking music, stereo output allowed; Edit media badges and 20px cue follow margin.",
+    "es": "TC sin conexión sin bloquear la música, salida estéreo permitida; distintivos de Edit y margen de 20 px.",
+    "de": "TC offline ohne Musikblockade, Stereoausgabe möglich; Edit-Medienanzeigen und 20 px Folgeabstand."
   },
   "channel": "beta",
-  "revision": "live-show-finish"
+  "revision": "ltc-offline-live-polish"
 }

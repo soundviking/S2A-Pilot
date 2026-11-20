@@ -5292,5 +5292,15 @@
     "en": "show finish unknown",
     "es": "fin del espectáculo indeterminado",
     "de": "Show-Endzeit unbekannt"
+  },
+  "TC hors ligne — la musique reste disponible.": {
+    "en": "TC offline — music remains available.",
+    "es": "TC sin conexión — la música sigue disponible.",
+    "de": "TC offline — Musik bleibt verfügbar."
+  },
+  "TC hors ligne sur cet appareil": {
+    "en": "TC offline on this device",
+    "es": "TC sin conexión en este dispositivo",
+    "de": "TC auf diesem Gerät offline"
   }
 }

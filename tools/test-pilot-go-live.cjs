@@ -16,8 +16,9 @@ async function verify(legacy){
  w.HTMLDialogElement.prototype.close=function(){this.open=false;};w.HTMLDialogElement.prototype.showModal=function(){this.open=true;};
  w.HTMLElement.prototype.scrollIntoView=function(){};
  w.HTMLCanvasElement.prototype.getContext=function(){return new Proxy({},{get:(target,key)=>target[key]??(key==='measureText'?(()=>({width:10})):(()=>{}))});};
- w.HTMLMediaElement.prototype.pause=function(){};
+ w.HTMLMediaElement.prototype.pause=function(){};w.HTMLMediaElement.prototype.load=function(){};
  w.fetch=async url=>{const local=new URL(url,w.location.href).pathname.slice(1);if(fs.existsSync(root+local)&&fs.statSync(root+local).isFile())return new Response(fs.readFileSync(root+local));return new Response(null,{status:404});};
+ Object.defineProperty(w.navigator,'mediaDevices',{value:{enumerateDevices:async()=>[],addEventListener(){}},configurable:true});
  w.open=()=>null;
  for(const name of ['i18n-catalog.js','material-ui.js','zip-assets/pako_inflate.min.js','technical-header-data.js','technical-qr-data.js',legacy?'compat/i18n.es5.js':'i18n.js',legacy?'compat/app.es5.js':'app.js'])run(read(name));
  await new Promise(r=>setTimeout(r,70));
@@ -32,7 +33,7 @@ async function verify(legacy){
   const row=id=>cueList.querySelector('[data-cue-id="'+id+'"]');
   const picker=id=>document.querySelector('[data-go-cue="'+id+'"] input[type=color]');
   const color=(id,value)=>{const input=picker(id);input.value=value;input.dispatchEvent(new Event('change',{bubbles:true}));};
-  assert(APP_VERSION==='1.11.8','wrong version');
+  assert(APP_VERSION==='1.11.9','wrong version');
   assert(picker('parent')&&picker('other')&&!picker('child'),'only root pickers');
   assert(!card('parent').style.backgroundImage&&!row('child').classList.contains('goCueColored'),'old project default');
   color('parent','#ffdd00');
@@ -65,7 +66,7 @@ async function verify(legacy){
   const packageData=await buildProjectPackage();
   const entries=readStoredZip(await packageData.blob.arrayBuffer());
   const manifest=JSON.parse(new TextDecoder().decode(entries.get('conduite.json')));
-  assert(manifest.applicationVersion==='1.11.8'&&manifest.cues[0].goColor==='#1378cc','export color/version');
+  assert(manifest.applicationVersion==='1.11.9'&&manifest.cues[0].goColor==='#1378cc','export color/version');
   assert(String(entries.get(manifest.cues[0].mediaActions[0].path))===String(audioBytes),'media bytes exported');
   assert(!manifest.cues[1].goColor&&manifest.cues[1].parentMusicId==='parent','export hierarchy');
   rebuildMediaAtTime=async()=>{};
@@ -101,7 +102,7 @@ async function verify(legacy){
   resetManualRuntime();transportPlaying=false;
   a.mediaActions=[{kind:'audio'},{kind:'video'},{kind:'audio'}];invalidateComputationCaches();redraw();
   const badges=document.querySelectorAll('[data-cue-id="go-a"] .liveMediaBadges .cueMediaChip');
-  assert(badges.length===2,'one badge per media kind');assert(badges[0].querySelector('svg')&&badges[1].querySelector('svg'),'international media pictograms');
+  assert(badges.length===2,'one badge per media kind');assert(badges[0].textContent==='AUDIO ×2'&&badges[1].textContent===tr('VIDÉO'),'same labels and counts as Edit');assert(!badges[0].querySelector('svg'),'same text-only pills as Edit');assert(badges[0].className.includes(cuePreparationClass(a)),'same preparation status as Edit');
   assert(!document.querySelector('[data-cue-id="go-b"] .liveMediaBadges'),'no media badge for silent cue');
 
   const songA={id:'song-a',name:'Song A',time:0,mediaActions:[{id:'audio-a',kind:'audio',duration:100,inPoint:0,outPoint:100}]};
@@ -118,6 +119,31 @@ async function verify(legacy){
   manualCurrentID=null;manualCompletedID=null;manualPausedAt=null;transportTime=0;assert(liveShowFinishProjection().remaining===220,'before show sums all music');
   locked=false;assert(liveShowFinishProjection()===null,'show forecast only in spectacle mode');locked=true;
   conductType='autopilot';assert(liveShowFinishProjection()===null,'automatic timeline calculation preserved');
+  conductType='manual';manualCurrentID=songA.id;transportTime=5;redraw();
+  const activeRow=$('showCueOverviewRows').querySelector('.isActive'),timelineCard=$('preflightCard');
+  Object.defineProperty(timelineCard,'offsetHeight',{configurable:true,value:100});timelineCard.style.top='0px';
+  activeRow.getBoundingClientRect=()=>({top:400,bottom:500,height:100});
+  let scrollTarget=null;window.scrollTo=options=>{scrollTarget=options.top;};const previousRAF=window.requestAnimationFrame;
+  window.requestAnimationFrame=cb=>{cb();return 1;};scheduleLiveCueFollow(true);window.requestAnimationFrame=previousRAF;
+  assert(scrollTarget===280,'active cue follows 20px below timeline');
+  const tcAction={id:'tc-action',kind:'audio',ltc:true,ltcLead:3,inPoint:0,outPoint:100},tcItem={cue:songA,action:tcAction};
+  const originalContext=audioContext;audioContext={destination:{maxChannelCount:2,channelCount:2}};
+  ltcOffline=false;assert(ltcPreparationKey(tcItem)===''&&plannedLtcLead(tcItem)===0,'stereo/tablet bypasses TC and pre-roll');assert(ltcOutputContext()===audioContext,'stereo TC context does not block audio');
+  audioContext.destination.maxChannelCount=4;assert(ltcPreparationKey(tcItem)!=='','four channels permit TC');
+  ltcOffline=true;assert(ltcPreparationKey(tcItem)===''&&plannedLtcLead(tcItem)===0,'manual TC offline bypasses generated TC');
+  cues=[{...songA,mediaActions:[tcAction]}];invalidateComputationCaches();updateLtcOfflineNotice();assert(!$('liveLtcOfflineNotice').hidden,'red offline notice in Live');
+  ltcOffline=false;ltcUnavailableActions.add(tcAction.id);assert(ltcPreparationKey(tcItem)==='','unsupported TC generation falls back to original music');ltcUnavailableActions.clear();
+  runtimeAudio.clear();runtimeVideo=null;preparedMedia.clear();mediaPreviewSessions.clear();resetManualRuntime();transportPlaying=false;spaceTransportPending=false;
+  const previousSupport=pilotOutputSupported;pilotOutputSupported=()=>true;
+  audioContext={sinkId:'four',destination:{maxChannelCount:4,channelCount:4},setSinkId:async function(id){this.sinkId=id;this.destination.maxChannelCount=id==='stereo'?2:4;}};
+  pilotOutputId='four';pilotOutputReady=true;
+  await applyPilotOutput('stereo','Stereo',false,false);assert(pilotOutputId==='stereo'&&pilotOutputReady,'stereo output selection succeeds with attached TC');
+  audioContext.destination.maxChannelCount=4;pilotOutputId='';audioContext.sinkId='';
+  const originalPrepare=prepareLtcMedia,originalAsset=assetUrl,originalReady=waitMediaReady;
+  prepareLtcMedia=async()=>{throw Error('Unsupported TC decoder');};assetUrl=async()=>'/original-song.mp3';waitMediaReady=async()=>{};
+  const fallback=await prepareOneMedia(tcItem);assert(fallback.ready&&fallback.ltcKey===''&&fallback.url==='/original-song.mp3','TC preparation failure plays original audio');
+  prepareLtcMedia=originalPrepare;assetUrl=originalAsset;waitMediaReady=originalReady;pilotOutputSupported=previousSupport;
+  audioContext=originalContext;
   return {version:APP_VERSION,localeLabels};
  })()`);
  try { console.log(legacy?'ES5':'Modern',await tests,errors);assert.equal(errors.length,0,'No uncaught DOM errors'); } finally{w.close();}
