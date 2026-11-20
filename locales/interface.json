@@ -5263,10 +5263,10 @@
     "es": "Actualiza el relé Copilot para activar los mandos de Bridge.",
     "de": "Copilot-Relay aktualisieren, um Bridge-Fernbedienungen zu aktivieren."
   },
-  "Conduite Spectacle : utilisez Bridge 1.6.32 bêta inclus dans ce ZIP. Bridge 1.4.5 ne connaît pas le mode Spectacle.": {
-    "en": "Show rundown: use Bridge 1.6.32 beta included in this ZIP. Bridge 1.4.5 does not support Show mode.",
-    "es": "Guion de espectáculo: usa Bridge 1.6.32 beta incluido en este ZIP. Bridge 1.4.5 no admite el modo Espectáculo.",
-    "de": "Show-Ablauf: Verwende die in diesem ZIP enthaltene Bridge 1.6.32 Beta. Bridge 1.4.5 unterstützt den Show-Modus nicht."
+  "Conduite Spectacle : utilisez Bridge 1.6.33 bêta inclus dans ce ZIP. Bridge 1.4.5 ne connaît pas le mode Spectacle.": {
+    "en": "Show rundown: use Bridge 1.6.33 beta included in this ZIP. Bridge 1.4.5 does not support Show mode.",
+    "es": "Guion de espectáculo: usa Bridge 1.6.33 beta incluido en este ZIP. Bridge 1.4.5 no admite el modo Espectáculo.",
+    "de": "Show-Ablauf: Verwende die in diesem ZIP enthaltene Bridge 1.6.33 Beta. Bridge 1.4.5 unterstützt den Show-Modus nicht."
   },
   "Temps du repère": {
     "en": "Marker time",

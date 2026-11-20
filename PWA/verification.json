@@ -1,6 +1,6 @@
 {
   "pilot": "1.11.6",
-  "bridge": "1.6.32",
+  "bridge": "1.6.33",
   "bridge_remote_control_implemented": true,
   "checks": {
     "relay_pin_admission_rotation_lockout": "passed",
@@ -39,9 +39,10 @@
     "pilot_aligned_bridge_timing_layout": "passed",
     "bridge_idle_preview_first_visible_cue_including_zero": "passed",
     "bridge_idle_preview_stale_next_pointer": "passed",
-    "bridge_idle_preview_filters_playback_pause": "passed"
+    "bridge_idle_preview_filters_playback_pause": "passed",
+    "bridge_pencil_top_right_countdown_and_other_cards": "passed"
   },
-  "native_macos_build": "passed",
+  "native_macos_build": "pending",
   "real_qlab_show_executed": false,
   "physical_phone_tested": false,
   "sha256": {
@@ -49,8 +50,5 @@
     "copilot-host.js": "738aad5e8648fcc5b7730c3f2f5a8a4a61e687235fa146fde5e7518fc1abb8b1",
     "copilot/api.php": "6eb8c714f5b14d7f5e489fe6de1ad2e162ef2729d4524abfdfc46e92d110e57f",
     "copilot/viewer.js": "9b59f5fba225941b64c4875632dc4f2d9e26fb6f37eb7970c4aeb9a031a62b28"
-  },
-  "native_ci_commit": "17ebc41da787513868ca87c88312c1fa38e590dd",
-  "native_ci_run": "https://github.com/soundviking/S2A-Pilot/actions/runs/44738011869",
-  "bridge_reused_unchanged_from_pilot": "1.11.5"
+  }
 }

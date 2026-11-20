@@ -44,6 +44,6 @@ jobs:
         run: python3 tools/package-bridge-remote.py
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: Bridge-1.6.32
+          name: Bridge-1.6.33
           path: dist/bridge-remote/
           retention-days: 14

@@ -12,4 +12,6 @@ assert.deepEqual([...$('showCueOverviewRows').children].map(x=>x.dataset.id),['a
 $('cueTypeAll').click();assert.equal($('showCueOverviewRows').children.length,4);
 assert.equal($('title').parentElement,$('liveFinishEstimate').parentElement,'Finish estimate sits under the title');assert.ok($('title').compareDocumentPosition($('liveFinishEstimate'))&w.Node.DOCUMENT_POSITION_FOLLOWING);
 assert.ok(fs.readFileSync('S2A-Copilot/Show/show.html','utf8').includes('.transportClock{margin-left:auto;justify-content:flex-end;text-align:right'));
+for(const button of w.document.querySelectorAll('.editCue'))assert.ok(button.parentElement.classList.contains('showOverviewRow'),'Pencils anchor to the whole card, including the next/countdown card');
+const css=fs.readFileSync('S2A-Copilot/Show/show.html','utf8');assert.ok(css.includes('.showOverviewRow>.editCue{position:absolute;top:10px;right:10px;'));
 w.close();console.log('PASS Bridge categories: defaults/custom, per-type colors and descriptions, visible-cue countdown, colored timeline, clear filter and Pilot-aligned heading/clock');

@@ -73,7 +73,7 @@ function render(s,c){
    row.append(visual,make('time','overviewTime',content.generic?(isNext?'GO':''):(cue.time===null?'GO':fmt(cue.time))));
    const text=make('div','overviewContent'),heading=make('div','overviewHeading'),name=make('div','overviewName');
    for(const id of typeIds(cue,types)){const badge=make('span','bridgeTypeBadge','● '+types.get(id).name);badge.style.color=types.get(id).color;name.append(badge);}name.append(cue.name);heading.append(name);
-   const edit=make('button','editCue','✎');edit.type='button';edit.disabled=s.editBusy||s.lost;edit.setAttribute('aria-label',(s.labels.edit||'Modifier')+' — '+cue.name);edit.onclick=()=>parent.postMessage({type:'s2a-show-edit',id:cue.id,contentID:content.id},'*');heading.append(edit);text.append(heading);
+   const edit=make('button','editCue','✎');edit.type='button';edit.disabled=s.editBusy||s.lost;edit.setAttribute('aria-label',(s.labels.edit||'Modifier')+' — '+cue.name);edit.onclick=()=>parent.postMessage({type:'s2a-show-edit',id:cue.id,contentID:content.id},'*');row.append(edit);text.append(heading);
    if(isActive||isNext){const desc=make('div','overviewDescription');for(const line of descriptionLines(cue,types)){const node=make('div','',line.text);if(types.has(line.id))node.style.color=types.get(line.id).color;desc.append(node);}if(desc.hasChildNodes())text.append(desc);}
    row.append(text);if(isNext)row.append(make('span','overviewBeat'));host.append(row);
   }
