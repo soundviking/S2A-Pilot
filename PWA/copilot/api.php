@@ -242,6 +242,7 @@ try {
     if($clean['bridge']){
      if($clean['remoteCapable'])$clean['queued']=textValue($state['queued']??'',80);
      $clean['current']=textValue($state['current']??'',80);
+     $clean['preview']=textValue($state['preview']??'',80);
      $clean['selected']=textValue($state['selected']??'',80);
      $clean['sourceLost']=($state['sourceLost']??false)===true;
     }

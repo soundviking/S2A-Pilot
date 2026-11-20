@@ -25,6 +25,7 @@ jobs:
           node tools/test-bridge-finish.cjs
           npm install --prefix "$RUNNER_TEMP/bridge-ui-test" --no-audit --no-fund jsdom@26.1.0
           NODE_PATH="$RUNNER_TEMP/bridge-ui-test/node_modules" node tools/test-bridge-countdown.cjs
+          NODE_PATH="$RUNNER_TEMP/bridge-ui-test/node_modules" node tools/test-copilot-follow.cjs
       - name: Validate AppleScript with the official QLab dictionary
         run: |
           curl --fail --location --retry 2 https://qlab.app/downloads/QLab.dmg -o "$RUNNER_TEMP/QLab.dmg"

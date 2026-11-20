@@ -178,7 +178,11 @@ function pulse(element,urgent,remaining){element.classList.toggle('urgent',urgen
 let centerFrame=0,lastActiveTop=null,dragTop=null,dragSaving=false,topsSignature='',lastFollowedCue=null;
 function highlightedCueId(state){
  // Bridge retains its parent QLab cue while a timed child is active. Highlight one row.
- if(state.bridge&&!state.current)return '';
+ if(state.bridge&&!state.current){
+  if(state.sourceLost)return '';
+  const preview=state.preview||state.selected||'';
+  return (state.cues||[]).some(cue=>cue.id===preview&&!cue.child)?preview:'';
+ }
  const active=(state.cues||[]).find(cue=>cue.id===state.active);
  return active?.child?active.id:(state.bridge?state.current:state.active)||'';
 }
@@ -352,7 +356,7 @@ function renderRemoteGroup(group,folded,forced){
  return body;
 }
 function renderRows(state,display,next,automatic,groupFor){
- const key=JSON.stringify([state.manual,state.active,state.next,next,automatic,state.waiting,state.cueGroups,display.cues,remoteCueTypeSignature,display.filtered?Array.from(cueTypeSelection):null,state.images,state.bridge,state.current,isRemote(),isRemote()?state.remoteArmed:null]);if(key===signature)return;signature=key;
+ const key=JSON.stringify([state.manual,state.active,state.next,next,automatic,state.waiting,state.cueGroups,display.cues,remoteCueTypeSignature,display.filtered?Array.from(cueTypeSelection):null,state.images,state.bridge,state.current,state.bridge&&!state.current?(state.preview||state.selected):null,isRemote(),isRemote()?state.remoteArmed:null]);if(key===signature)return;signature=key;
  const rows=$('rows'),activeId=highlightedCueId(state),previousScroll=rows.scrollTop;rows.replaceChildren();
  let children=null,previousGroup=null,container=rows;
  const activeGroup=groupFor(state.active),nextGroup=groupFor(next),preparedGroup=isRemote()?groupFor(state.remoteArmed):null;
@@ -588,8 +592,8 @@ function paint(){
  updateRemoteNextCue(nextSummary,transition,remaining,running&&transition?.running);
  const timelineCues=state.bridge?cues.filter(c=>c.child):display.cues;
  const durationCues=state.bridge?timelineCues:cues;
- const currentCue=roots.find(c=>c.id===state.current);
- if(state.bridge)$('transport').textContent=currentCue?[currentCue.number,currentCue.name].filter(Boolean).join(' · '):'En attente du GO';
+ const currentCue=roots.find(c=>c.id===(state.current||state.preview||state.selected));
+ if(state.bridge)$('transport').textContent=currentCue?[currentCue.number,currentCue.name,...(!state.current?[pinText('En attente du GO')]:[])].filter(Boolean).join(' · '):'En attente du GO';
  $('addTop').disabled=!!state.bridge&&!roots.length;
  if(backstage){$('noTops').hidden=allTops.length>0;renderTopList(allTops,roots);}
  const countdown=$('backstageCountdown');

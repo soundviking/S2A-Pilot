@@ -370,6 +370,9 @@ struct BridgeShowWebView: NSViewRepresentable {
             let selected = state["selectedID"] as? String ?? ""
             let queued = state["standbyID"] as? String ?? ""
             let running = state["running"] as? Bool == true && state["lost"] as? Bool != true
+            // A paused cue still owns playback. Selection is a preview only with no current cue.
+            let preview = current.isEmpty ? (roots.contains(where: { $0["id"] as? String == selected }) ? selected : queued) : ""
+            let displayedID = current.isEmpty ? preview : current
             var display:[[String:Any]] = []
             var active = "", next = "", imageBytes = 0
             var images:[String:String] = [:]
@@ -377,11 +380,11 @@ struct BridgeShowWebView: NSViewRepresentable {
                 guard let id = root["id"] as? String else { continue }
                 display.append(["id":id,"name":root["name"] ?? "","number":root["number"] ?? "",
                                 "description":root["notes"] ?? "","duration":root["duration"] ?? 0,"running":root["running"] as? Bool == true && root["paused"] as? Bool != true && state["lost"] as? Bool != true])
-                guard hasImport,id == current else { continue }
+                guard hasImport,id == displayedID else { continue }
                 for cue in cues.prefix(max(0,300-roots.count)) {
                     guard let cueID = cue["id"] as? String,let time = cue["time"] as? Double else { continue }
                     let childID = id+":"+cueID
-                    if time <= elapsed+0.0001 { active = childID }
+                    if !current.isEmpty && time <= elapsed+0.0001 { active = childID }
                     else if next.isEmpty && running { next = childID }
                     var child = cue
                     child["id"] = childID
@@ -402,7 +405,7 @@ struct BridgeShowWebView: NSViewRepresentable {
             }
             remoteSample = ProcessInfo.processInfo.systemUptime
             remoteState = ["schema":1,"show":!workspace.isEmpty,"playing":running,"title":title,
-                           "selected":selected,"queued":queued,"current":current,"sourceLost":state["lost"] ?? false,"time":elapsed,"duration":content["duration"] ?? 0,
+                           "selected":selected,"queued":queued,"current":current,"preview":preview,"sourceLost":state["lost"] ?? false,"time":elapsed,"duration":content["duration"] ?? 0,
                            "active":active,"next":next,"cues":display,"images":images]
         }
 
@@ -414,7 +417,8 @@ struct BridgeShowWebView: NSViewRepresentable {
             self.model = model
             let snapshot = model.runtimeSnapshot
             let current = snapshot?.roots.first(where:{$0.id == model.currentRuntimeID})
-            let imported = model.activeShow
+            let displayed = current ?? snapshot?.roots.first(where: { $0.id == snapshot?.selectedID }) ?? snapshot?.roots.first(where: { $0.id == snapshot?.standbyID })
+            let imported = model.savedShows.first(where: { $0.groupID == displayed?.id })
             var mapped:[String:URL] = [:]
             var cues:[[String:Any]] = imported?.cues.sorted(by:{$0.time<$1.time}).map { cue in
                 let imageKey = "bridge-image://asset/\(imported?.groupID ?? "pending")/\(cue.index)"
@@ -422,12 +426,12 @@ struct BridgeShowWebView: NSViewRepresentable {
                     mapped[imageKey] = path.hasPrefix("/") ? URL(fileURLWithPath:path) : folder.appendingPathComponent(path)
                 }
                 return ["id":String(cue.index),"number":String(cue.index),"time":cue.time,"name":cue.name,"description":cue.monitorDescription ?? "","editName":cue.name,"editDescription":cue.description ?? "","image":mapped[imageKey] == nil ? "" : imageKey]
-            } ?? current.map { [["id":$0.id,"number":$0.number,"time":0,"name":$0.name,"description":$0.notes,"editName":$0.qName,"editDescription":$0.notes,"image":""]] } ?? []
+            } ?? displayed.map { [["id":$0.id,"number":$0.number,"time":0,"name":$0.name,"description":$0.notes,"editName":$0.qName,"editDescription":$0.notes,"image":""]] } ?? []
             if imported == nil, current != nil, let standby = snapshot?.roots.first(where:{$0.id == snapshot?.standbyID}), standby.id != current?.id {
                 cues.append(["id":standby.id,"number":standby.number,"time":NSNull(),"name":standby.name,"description":standby.notes,"editName":standby.qName,"editDescription":standby.notes,"image":""])
             }
             if !model.synchronizationLost { images.urls = mapped }
-            let content:[String:Any] = ["id":imported?.groupID ?? current?.id ?? "", "title":imported.flatMap { show in snapshot?.roots.first(where: { $0.id == show.groupID })?.name } ?? imported?.title ?? current?.name ?? model.workspace?.name ?? "S2A Pilot Bridge", "duration":imported?.showDuration ?? current?.duration ?? 0,"generic":imported == nil,"manual":imported?.conductType == "manual","showLayout":"iceman","cues":cues]
+            let content:[String:Any] = ["id":imported?.groupID ?? displayed?.id ?? "", "title":imported.flatMap { show in snapshot?.roots.first(where: { $0.id == show.groupID })?.name } ?? imported?.title ?? displayed?.name ?? model.workspace?.name ?? "S2A Pilot Bridge", "duration":imported?.showDuration ?? displayed?.duration ?? 0,"generic":imported == nil,"manual":imported?.conductType == "manual","showLayout":"iceman","cues":cues]
             let labels:[String:String] = ["finishEstimate":L("Fin estimée : {time}"),"finishUnknown":L("Fin indéterminée"),"ifResume":L("si reprise maintenant"),"excludingGO":L("hors attente GO"),"allowRemote":L("Autoriser les télécommandes"),"remoteCode":L("Code télécommande"),"apply":L("Appliquer"),"flow":L("Déroulé du spectacle"),"filter":L("Type de Cue"),"allTypes":L("Tous les types"),"noTypes":L("Aucun type sélectionné"),"audio":L("Audio"),"video":L("Vidéo"),"pilot":"S2A Pilot","network":"Network","other":L("Autres"),"noMatch":L("Aucune Cue pour ce filtre."),"selectionHidden":L("La Cue sélectionnée est masquée par le filtre."),"showAll":L("Tout afficher"),"wait":L("En attente d’un numéro S2A Pilot"),"close":L("Fermer"),"zoomBack":L("Cliquer / toucher pour revenir"),"zoom":L("Agrandir le visuel"),"noVisual":L("Aucun visuel"),"countdown":L("Décompte"),"native":L("Cue QLab — déclenchement suivant au GO"),"edit":L("Modifier"),"editTitle":L("Modifier la Cue"),"name":L("Nom"),"description":L("Description / indication de conduite"),"save":L("Enregistrer"),"cancel":L("Annuler"),"saving":L("Enregistrement…"),"pilotEdit":L("Repère Pilot : titre et description sauvegardés dans Bridge."),"qlabEdit":L("Nom et notes synchronisés avec QLab."),"workspaceChanged":L("Le workspace a changé. Rouvre l’édition de la Cue."),"changed":L("La Cue a été modifiée ailleurs. Rouvre l’édition avant de réessayer.")]
             let state:[String:Any] = ["language":language,"workspaceID":model.workspace?.id ?? "","filters":model.visualCueFilters.map(\.rawValue).sorted(),"editBusy":model.bridgeEditInFlight,"editReply":model.bridgeEditReply?.json ?? [:],"status":model.visualStatus.localized,"lost":model.synchronizationLost,"elapsed":model.visualElapsed,"running":model.visualRunning,"currentID":model.currentRuntimeID ?? "","standbyID":snapshot?.standbyID ?? "","selectedID":model.selectedBridgeID ?? "","labels":labels,"roots":snapshot?.roots.map { cue in ["id":cue.id,"name":cue.name,"qName":cue.qName,"notes":cue.notes,"kind":cue.kind,"duration":model.savedShows.first(where:{$0.groupID == cue.id})?.showDuration ?? cue.duration,"number":cue.number,"category":BridgeFlowFilter.category(kind:cue.kind,pilot:model.savedShows.contains(where:{$0.groupID == cue.id})).rawValue,"running":cue.running,"paused":cue.paused,"pilot":model.savedShows.contains(where:{$0.groupID == cue.id})] } ?? []]
             updateRemoteState(state:state,content:content,cues:cues,mapped:mapped,hasImport:imported != nil,title:model.workspace?.name ?? "S2A Pilot Bridge")

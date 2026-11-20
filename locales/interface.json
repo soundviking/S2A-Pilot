@@ -5208,11 +5208,6 @@
     "es": "Código guardado. Los mandos deben volver a conectarse.",
     "de": "Code gespeichert. Fernbedienungen müssen sich erneut verbinden."
   },
-  "Conduite Spectacle : utilisez Bridge 1.6.30 bêta inclus dans ce ZIP. Bridge 1.4.5 ne connaît pas le mode Spectacle.": {
-    "en": "Show rundown: use Bridge 1.6.30 beta included in this ZIP. Bridge 1.4.5 does not support Show mode.",
-    "es": "Guion de espectáculo: usa Bridge 1.6.30 beta incluido en este ZIP. Bridge 1.4.5 no admite el modo Espectáculo.",
-    "de": "Show-Ablauf: Verwende die in diesem ZIP enthaltene Bridge 1.6.30 Beta. Bridge 1.4.5 unterstützt den Show-Modus nicht."
-  },
   "Enregistrement du code…": {
     "en": "Saving the code…",
     "es": "Guardando el código…",
@@ -5267,5 +5262,10 @@
     "en": "Update the Copilot relay to enable Bridge remote controls.",
     "es": "Actualiza el relé Copilot para activar los mandos de Bridge.",
     "de": "Copilot-Relay aktualisieren, um Bridge-Fernbedienungen zu aktivieren."
+  },
+  "Conduite Spectacle : utilisez Bridge 1.6.31 bêta inclus dans ce ZIP. Bridge 1.4.5 ne connaît pas le mode Spectacle.": {
+    "en": "Show rundown: use Bridge 1.6.31 beta included in this ZIP. Bridge 1.4.5 does not support Show mode.",
+    "es": "Guion de espectáculo: usa Bridge 1.6.31 beta incluido en este ZIP. Bridge 1.4.5 no admite el modo Espectáculo.",
+    "de": "Show-Ablauf: Verwende die in diesem ZIP enthaltene Bridge 1.6.31 Beta. Bridge 1.4.5 unterstützt den Show-Modus nicht."
   }
 }

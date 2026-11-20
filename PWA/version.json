@@ -1,10 +1,10 @@
 {
   "version": "1.11.4",
   "releaseNotes": {
-    "fr": "Clignotement du décompte Bridge régulier et synchronisé avec le halo de la cue suivante.",
-    "en": "Bridge countdown pulses steadily and in sync with the next cue halo.",
-    "es": "El parpadeo de Bridge se sincroniza con el halo de la siguiente cue.",
-    "de": "Bridge-Countdown und Halo des nächsten Cues pulsieren synchron."
+    "fr": "Bridge : pulsation calée sur les secondes, fin du numéro affiché et prévisualisation QLab à l’arrêt.",
+    "en": "Bridge: second-aligned pulses, displayed-number finish time and idle QLab selection preview.",
+    "es": "Bridge: pulsos por segundo, fin del número mostrado y vista previa QLab en reposo.",
+    "de": "Bridge: Sekundentakt, Endzeit der angezeigten Nummer und QLab-Vorschau im Leerlauf."
   },
   "channel": "beta",
   "revision": "bridge-countdown-pulse"
